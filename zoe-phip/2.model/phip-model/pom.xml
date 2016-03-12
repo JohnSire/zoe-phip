@@ -13,4 +13,11 @@
     <artifactId>phip-model</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>${persistence.version}</version>
+        </dependency>
+    </dependencies>
 </project>

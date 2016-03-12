@@ -13,4 +13,11 @@
     <artifactId>phip-service</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>com.zoe</groupId>
+            <artifactId>phip-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
