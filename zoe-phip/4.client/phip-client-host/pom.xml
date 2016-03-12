@@ -13,4 +13,11 @@
     <artifactId>phip-client-host</artifactId>
 
 
+    <dependencies>
+        <dependency>
+            <groupId>com.zoe</groupId>
+            <artifactId>phip-service-impl</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

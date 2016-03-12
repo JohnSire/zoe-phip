@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	   ">
+	<dubbo:application name="zoe-phip" />
+
+	<dubbo:registry address="N/A" />
+
+	<!--地址：本地测试时用localhost 部署时要换成Ip地址-->
+	<dubbo:reference id="DeptService" interface="com.zoe.phip.service.in.demo.DeptService" version="1.0.0"
+				   url="dubbo://localhost:20080/com.zoe.phip.service.in.demo.DeptService"/>
+	<dubbo:reference id="CountryService" interface="com.zoe.phip.service.in.demo.CountryService" version="1.0.0"
+					 url="dubbo://localhost:20080/com.zoe.phip.service.in.demo.CountryService"/>
+</beans>

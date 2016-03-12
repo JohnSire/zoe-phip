@@ -63,7 +63,7 @@
             </array>
         </property>
     </bean>
-    
+
     <!--mybatis 通用mapper-->
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.zoe.phip.dao.mapper"/>

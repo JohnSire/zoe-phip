@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	   ">
+<dubbo:application name="zoe-phip" />
+
+<dubbo:registry address="N/A" />
+
+<dubbo:protocol name="dubbo" port="20080"  />
+
+<dubbo:service interface="com.zoe.phip.service.in.demo.DeptService" version="1.0.0"
+               ref="DeptServiceImpl"/>
+<dubbo:service interface="com.zoe.phip.service.in.demo.CountryService" version="1.0.0"
+               ref="CountryServiceImpl"/>
+</beans>
