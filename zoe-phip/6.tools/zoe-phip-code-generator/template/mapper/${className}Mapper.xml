@@ -1,0 +1,14 @@
+<#assign className = table.className>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${basepackage}.dao.mapper.${className}">
+   <resultMap id="BaseResultMap" type="${basepackage}.model.${className}">
+    <#list table.columns as field>
+     <#if field == table.columns?first>
+      <id column="${field.sqlName}" property="${field.sqlName}" javaType="${field.javaType}" jdbcType="${field.sqlTypeName?upper_case}"/>
+     <#else>
+      <result column="${field.sqlName}" property="${field.sqlName}" javaType="${field.javaType}" jdbcType="${field.sqlTypeName?upper_case}"/>
+     </#if>
+    </#list>
+   </resultMap>
+</mapper>
