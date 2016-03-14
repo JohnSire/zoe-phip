@@ -1,15 +1,20 @@
 package com.zoe.phip.service.impl.in;
 
+import com.zoe.phip.model.base.PageList;
+import com.zoe.phip.model.base.QueryPage;
 import com.zoe.phip.model.base.ServiceResult;
-import com.zoe.phip.model.demo.Country;
+import com.zoe.phip.model.base.ServiceResultT;
 import com.zoe.phip.model.demo.Dept;
-import com.zoe.phip.service.in.BaseInService;
+import com.zoe.phip.service.in.demo.CountryService;
 import com.zoe.phip.service.in.demo.DeptService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 
 /**
@@ -24,17 +29,21 @@ public class BaseInServiceImplTest {
     private DeptService deptBaseInService;
 
     @Autowired
-    private BaseInService<Country> countryBaseInService;
+    private CountryService countryBaseInService;
 
     @Test
     public void testAdd() throws Exception {
+        ServiceResultT<List<Dept>> resultT=deptBaseInService.getList();
+        QueryPage page=new QueryPage(1,5);
+        ServiceResultT<PageList<Dept>> pageResult= deptBaseInService.getList(page);
 
-        ServiceResult result=deptBaseInService.deleteById("01d75140b4844e159407be2ebf62973a");
+        ServiceResult result=deptBaseInService.getById("1");
+        Assert.assertTrue(result!=null);
     }
 
     @Test
     public void testCountry() throws Exception {
 
-        ServiceResult result=countryBaseInService.deleteById("1");
+        ServiceResult result=countryBaseInService.getById("2");
     }
 }

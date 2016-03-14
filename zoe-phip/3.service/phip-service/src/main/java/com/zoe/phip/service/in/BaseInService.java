@@ -85,6 +85,6 @@ public interface BaseInService<T> {
      * @param queryPage
      * @return
      */
-    ServiceResultT<PageList> getList(QueryPage queryPage);
+    ServiceResultT<PageList<T>> getList(QueryPage queryPage);
 
 }

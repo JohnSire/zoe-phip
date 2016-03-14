@@ -12,30 +12,48 @@ import java.util.function.Supplier;
 /**
  * Created by zhangwenbin on 2016/2/29.
  */
-public final class SafeExecuteUtil {
+public final class SafeExecuteUtil<T> {
     public static ServiceResult execute(Logger logger, Supplier<Object> invoker) {
         ServiceResult executeResult = new ServiceResult();
+        List<Message> messageList=new ArrayList<Message>();
         try {
             Object result = invoker.get();
             executeResult.setIsSuccess(result != null);
-//            executeResult.setResult(result);
         } catch (Exception e) {
-/*            DbError error = new DbError();
-            error.setNumber(ex.getStackTrace()[ex.getStackTrace().length - 1].getLineNumber());
-            executeResult.setDbError(error);
-            executeResult.setErrorMessage(ex.getMessage());*/
             //错误消息
-            List<Message> messageList=new ArrayList<Message>();
             Message message=new Message();
             message.setId("1001");
             message.setContent(e.getMessage());
             messageList.add(message);
             executeResult.setIsSuccess(false);
-            executeResult.setMessages(messageList);
             e.printStackTrace();
             logger.error("方法执行报错:",e);
         }
+        executeResult.setMessages(messageList);
+        return executeResult;
+    }
+
+    public ServiceResultT<T> executeT(Logger logger, Supplier<Object> invoker){
+        ServiceResultT<T> executeResult=new ServiceResultT<T>();
+        List<Message> messageList=new ArrayList<Message>();
+        try {
+            T result = (T)invoker.get();
+            executeResult.setResult(result);
+            executeResult.setIsSuccess(result != null);
+        }catch (Exception e){
+            executeResult.setIsSuccess(false);
+            Message message=new Message();
+            //todo 如何定义错误ID
+            message.setId("1001");
+            message.setContent(e.getMessage());
+            messageList.add(message);
+            executeResult.setIsSuccess(false);
+            e.printStackTrace();
+            logger.error("方法执行报错:",e);
+        }
+        executeResult.setMessages(messageList);
         return executeResult;
     }
 
 }
+
