@@ -82,11 +82,11 @@
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
-    <!--<aop:aspectj-autoproxy/>
+    <aop:aspectj-autoproxy/>
     <aop:config>
-        <aop:pointcut id="appService" expression="execution(* com.zoe.aop.service.out.*.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="appService"/>
-    </aop:config>-->
+        <aop:pointcut id="inServicePointcut" expression="execution(* com.zoe.phip.service.in.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="inServicePointcut"/>
+    </aop:config>
     <!--设定哪些方法需要事务 如果有try-catch事务不起作用?-->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
@@ -109,7 +109,5 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!--
-        <bean id="testAspect" class="com.zoe.aop.service.aop.AopTest"></bean>
-    -->
+    <bean id="inServiceAspect" class="com.zoe.phip.service.impl.aop.OperationBehavior"></bean>
 </beans>

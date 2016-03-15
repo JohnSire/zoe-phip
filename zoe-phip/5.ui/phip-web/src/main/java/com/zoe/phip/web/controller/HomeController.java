@@ -18,7 +18,7 @@ public class HomeController {
     @RequestMapping("/test")
     public String toIndex(HttpServletRequest request, Model model){
         DeptService deptService = (DeptService) BeanFactory.getBean("DeptService");
-        ServiceResult serviceResult= deptService.deleteById("d4b87a02a7f349a3b5afd2758ad3d294");
+        ServiceResult serviceResult= deptService.getById("3");
         return "test";
     }
 }

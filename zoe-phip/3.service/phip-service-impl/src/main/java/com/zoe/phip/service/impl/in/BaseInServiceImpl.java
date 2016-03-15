@@ -26,8 +26,6 @@ public abstract class BaseInServiceImpl<T> implements BaseInService<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(BaseInServiceImpl.class);
 
-
-
     @Autowired
     @SuppressWarnings("all")
     protected MyMapper<T> mapper;
@@ -38,8 +36,7 @@ public abstract class BaseInServiceImpl<T> implements BaseInService<T> {
 
     @Override
     public ServiceResult add(T entity) {
-        return SafeExecuteUtil.execute(logger,
-                () -> mapper.insert(entity));
+        return SafeExecuteUtil.execute(logger, () -> mapper.insert(entity));
     }
 
     @Override
