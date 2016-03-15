@@ -3,12 +3,13 @@ package com.zoe.phip.model.base;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by linqinghuang on 2016/1/26.
  */
-public class BaseEntity {
+public class BaseEntity implements Serializable {
     /**
      * 主键id
      */
