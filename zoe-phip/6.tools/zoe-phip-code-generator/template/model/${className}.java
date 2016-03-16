@@ -10,7 +10,7 @@ import javax.persistence.*;
  * @date ${now?string("yyyy-MM-dd")}
  * @version 1.0
  */
-public class ${className} extends CoreModel {
+public class ${className} extends BaseEntity {
 <#list table.columns as field>
     /** ${field.remarks} */
     @Column(name = "${field.sqlName}")

@@ -7,6 +7,8 @@ import com.zoe.phip.model.base.ServiceResultT;
 import com.zoe.phip.model.demo.Dept;
 import com.zoe.phip.service.in.demo.CountryService;
 import com.zoe.phip.service.in.demo.DeptService;
+import com.zoe.phip.service.in.demo.OrdersService;
+import com.zoe.phip.service.in.demo.PersonService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +33,12 @@ public class BaseInServiceImplTest {
     @Autowired
     private CountryService countryBaseInService;
 
+    @Autowired
+    private PersonService personService;
+
+    @Autowired
+    private OrdersService ordersService;
+
     @Test
     public void testAdd() throws Exception {
         ServiceResultT<List<Dept>> resultT=deptBaseInService.getList();
@@ -45,5 +53,13 @@ public class BaseInServiceImplTest {
     public void testCountry() throws Exception {
 
         ServiceResult result=countryBaseInService.getById("2");
+    }
+
+    @Test
+    public void orderTest(){
+        try {
+            ServiceResult result=ordersService.getList();
+        }catch (Exception e){
+        }
     }
 }

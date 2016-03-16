@@ -16,4 +16,12 @@ public class GeneratorTest {
         facade.deleteOutRootDir();
         facade.generateByAllTable();
     }
+
+    @Test
+    public void stringUtil(){
+        String aa="java.lang.string";
+        int index= aa.lastIndexOf(".");
+        String b= aa.substring(index+1);
+        System.out.println(b);
+    }
 }
