@@ -5,19 +5,17 @@
 
 package com.zoe.phip.model.demo;
 
-import com.zoe.phip.model.base.BaseEntity;
-
 import javax.persistence.*;
 
 /**
  * @author
- * @date 2016-03-15
+ * @date 2016-03-16
  * @version 1.0
  */
 public class Person {
     /**  */
-    @Column(name = "PERSONID")
-    private String personid;
+    @Column(name = "ID")
+    private String id;
 
     /**  */
     @Column(name = "PERSONNAME")
@@ -32,12 +30,12 @@ public class Person {
     private String persontel;
 
 
-    public String getPersonid(){
-        return  this.personid;
+    public String getId(){
+        return  this.id;
     }
 
-    public void setPersonid(String personid){
-        this.personid = personid;
+    public void setId(String id){
+        this.id = id;
     }
 
     public String getPersonname(){

@@ -15,5 +15,5 @@ import com.zoe.phip.model.demo.Person;
  * @version 1.0
  */
 public interface PersonMapper extends MyMapper<Person> {
-
+      Person selectPersonById(String id);
  }

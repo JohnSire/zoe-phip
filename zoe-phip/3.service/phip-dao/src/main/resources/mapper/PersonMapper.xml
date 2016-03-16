@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.dao.mapper.demo.PersonMapper">
    <resultMap id="BaseResultMap" type="com.zoe.phip.model.demo.Person">
-      <id column="PERSONID" property="PERSONID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <id column="ID" property="ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
       <result column="PERSONNAME" property="PERSONNAME" javaType="java.lang.String" jdbcType="VARCHAR"/>
       <result column="PERSONADDRESS" property="PERSONADDRESS" javaType="java.lang.String" jdbcType="VARCHAR"/>
       <result column="PERSONTEL" property="PERSONTEL" javaType="java.lang.String" jdbcType="VARCHAR"/>

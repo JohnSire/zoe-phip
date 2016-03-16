@@ -16,5 +16,5 @@ import com.zoe.phip.service.in.BaseInService;
  * @version 1.0
  */
 public interface PersonService extends BaseInService<Person> {
-
+   Person selectPersonById(String id);
 }

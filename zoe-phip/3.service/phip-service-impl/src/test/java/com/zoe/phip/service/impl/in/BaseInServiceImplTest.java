@@ -5,10 +5,13 @@ import com.zoe.phip.model.base.QueryPage;
 import com.zoe.phip.model.base.ServiceResult;
 import com.zoe.phip.model.base.ServiceResultT;
 import com.zoe.phip.model.demo.Dept;
+import com.zoe.phip.model.demo.Person;
 import com.zoe.phip.service.in.demo.CountryService;
 import com.zoe.phip.service.in.demo.DeptService;
 import com.zoe.phip.service.in.demo.OrdersService;
 import com.zoe.phip.service.in.demo.PersonService;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +42,9 @@ public class BaseInServiceImplTest {
     @Autowired
     private OrdersService ordersService;
 
+    @Autowired
+    private SqlSessionFactory sqlSessionFactory;
+
     @Test
     public void testAdd() throws Exception {
         ServiceResultT<List<Dept>> resultT=deptBaseInService.getList();
@@ -52,14 +58,19 @@ public class BaseInServiceImplTest {
     @Test
     public void testCountry() throws Exception {
 
-        ServiceResult result=countryBaseInService.getById("2");
+        ServiceResult result=personService.getById("001");
+
+
+//        Person result=personService.selectPersonById("001");
     }
 
     @Test
     public void orderTest(){
         try {
-            ServiceResult result=ordersService.getList();
-        }catch (Exception e){
+            SqlSession session=sqlSessionFactory.openSession(false);
+            Person person=session.selectOne("com.zoe.phip.dao.mapper.demo.PersonMapper.selectPersonById", "001");
+        }
+        catch (Exception e){
         }
     }
 }

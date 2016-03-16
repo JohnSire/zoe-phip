@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.dao.mapper.demo.OrdersMapper">
    <resultMap id="BaseResultMap" type="com.zoe.phip.model.demo.Orders">
-      <id column="ORDERID" property="ORDERID" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <id column="ID" property="ID" javaType="java.lang.String" jdbcType="VARCHAR"/>
       <result column="ORDERNUMBER" property="ORDERNUMBER" javaType="java.lang.String" jdbcType="VARCHAR"/>
       <result column="ORDERPRICE" property="ORDERPRICE" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
       <result column="PID" property="PID" javaType="java.lang.String" jdbcType="VARCHAR"/>
