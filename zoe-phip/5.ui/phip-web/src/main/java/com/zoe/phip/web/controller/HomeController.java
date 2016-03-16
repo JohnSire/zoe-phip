@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 public class HomeController {
     @RequestMapping("/test")
     public String toIndex(HttpServletRequest request, Model model){
-        DeptService deptService = (DeptService) BeanFactory.getBean("DeptService");
+        DeptService deptService = BeanFactory.getBean("DeptService");
         ServiceResult serviceResult= deptService.getById("3");
         return "test";
     }
