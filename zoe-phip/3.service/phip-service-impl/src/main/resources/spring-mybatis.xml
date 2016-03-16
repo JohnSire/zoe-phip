@@ -83,10 +83,21 @@
     </bean>
 
     <aop:aspectj-autoproxy/>
+
+    <bean id="LoggerInterceptor" class="com.zoe.phip.infrastructure.aop.LoggerInterceptor"></bean>
+
     <aop:config>
-        <aop:pointcut id="inServicePointcut" expression="execution(* com.zoe.phip.service.in.*.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="inServicePointcut"/>
+        <aop:aspect ref="LoggerInterceptor">
+            <aop:pointcut id="LoggerInterceptorCut" expression="execution(* com.zoe.phip.service.in.*.*(..))"/>
+            <aop:around pointcut-ref="LoggerInterceptorCut" method="doAround"/>
+        </aop:aspect>
     </aop:config>
+
+
+    <!-- <aop:config>
+         <aop:pointcut id="inServicePointcut" expression="execution(* com.zoe.phip.service.in.*.*(..))"/>
+         <aop:advisor advice-ref="txAdvice" pointcut-ref="inServicePointcut"/>
+     </aop:config>-->
     <!--设定哪些方法需要事务 如果有try-catch事务不起作用?-->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
@@ -109,5 +120,4 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="inServiceAspect" class="com.zoe.phip.service.impl.aop.OperationBehavior"></bean>
 </beans>
