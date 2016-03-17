@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        var webRoot='${ctxPath}',seajsRoot='/';
+    </script>
+    <% var staticPath='http://localhost:8082';%>
+    <!--静态资源样式部分-->
+    <link href="${staticPath}/lib/jqueryui/jquery-ui-1.11.4.custom/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="${staticPath}/lib/ligerui/V1.3.2/skins/Aqua/css/ligerui-all.css" rel="stylesheet"/>
+    <link href="${staticPath}/lib/ligerui/V1.3.2/skins/Gray/css/all.css" rel="stylesheet"/>
+    <link href="${staticPath}/assets/src/style/style.css" rel="stylesheet">
+    ${styleSection}
+</head>
+<body>
+     ${bodySection}
+     <!--静态资源脚本部分-->
+     <script src="${staticPath}/lib/jquery/jquery-1.11.1.js"></script>
+     <script src="${staticPath}/lib/cookie/jquery.cookie.js"></script>
+     <script src="${staticPath}/lib/seajs/2.3.0/sea-debug.js"></script>
+     <script src="${ctxPath}/assets/config.js"></script>
+     <script src="${staticPath}/lib/ligerui/V1.3.2/js/ligerui.all.js"></script>
+     <script src="${staticPath}/lib/validform/Validform_v5.3.2.min.js"></script>
+     <script src="${staticPath}/lib/scroll/jquery.nicescroll.js"></script>
+     <script src="${staticPath}/lib/jqueryui/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+     <script src="${staticPath}/lib/guid/guid.js"></script>
+     <script src="${staticPath}/lib/custom/unit.js"></script>
+     <script src="${staticPath}/lib/custom/thirdExtend.js"></script>
+     <script src="${staticPath}/lib/custom/class.js"></script>
+     <script src="${staticPath}/lib/custom/request.js"></script>
+     <script src="${staticPath}/lib/custom/plugin.js"></script>
+     ${scriptSection}
+</body>
+</html>

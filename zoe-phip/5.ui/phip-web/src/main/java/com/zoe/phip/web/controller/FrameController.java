@@ -13,18 +13,14 @@ import javax.servlet.http.HttpServletRequest;
  * Created by zengjiyang on 2016/3/11.
  */
 @Controller
-@RequestMapping("/home")
-public class HomeController {
-    @RequestMapping("/test")
-    public String toIndex(HttpServletRequest request, Model model){
+@RequestMapping("/frame")
+public class FrameController {
+    @RequestMapping("/login")
+    public String ToLogin(HttpServletRequest request, Model model){
 //        DeptService deptService = BeanFactory.getBean("DeptService");
 //        ServiceResult serviceResult= deptService.getById("3");
-        return "test";
-    }
-    @RequestMapping("/home")
-    public String toUserIndex(HttpServletRequest request, Model model){
-        model.addAttribute("hello", "hello world");
-        model.addAttribute("a");
-        return "/index";
+//        model.addAttribute("hello", "hello world");
+//        model.addAttribute("a");
+        return "/frame/login";
     }
 }

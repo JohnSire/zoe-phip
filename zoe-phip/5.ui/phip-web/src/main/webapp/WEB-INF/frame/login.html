@@ -1,0 +1,19 @@
+<%
+var styleSection = {
+%>
+<!--<link href="/assets/src/style/style1.css" rel="stylesheet">-->
+<%};%>
+<%
+var bodySection = {
+%>
+web页面html部分
+<%};%>
+<%
+var scriptSection={
+%>
+web 页面js部分
+<%};%>
+
+<%
+include("/WEB-INF/shared/_default.html",{styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+%>
