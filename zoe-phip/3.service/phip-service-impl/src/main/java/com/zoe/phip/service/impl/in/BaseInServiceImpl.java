@@ -96,7 +96,7 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
         SafeExecuteUtil<PageList<T>> safeExecute = new SafeExecuteUtil<PageList<T>>();
         return safeExecute.executeT(logger, () ->
         {
-            ServiceResultT<PageList<T>> resultT = new ServiceResultT<PageList<T>>();
+            PageList<T> pageList = new PageList<T>();
             Example example = new Example(Dept.class);
             if (queryPage.getOrderBy() != null) {
                 PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize(), queryPage.getOrderBy());
@@ -105,11 +105,9 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
             }
             List<T> results = mapper.selectByExample(example);
             PageInfo<T> pageInfo = new PageInfo<T>(results);
-            PageList<T> pageList = new PageList<T>();
             pageList.setTotal((int) pageInfo.getTotal());
             pageList.setRows(results);
-            resultT.setResult(pageList);
-            return resultT;
+            return pageList;
         });
     }
 }

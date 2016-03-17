@@ -94,9 +94,14 @@ public class BaseInServiceImplTest {
     @Test
     public void deleteByIdsTest(){
         QueryPage queryPage=new QueryPage(1,10);
+
+        ServiceResultT<PageList<Dept>> serviceResultT= deptBaseInService.getList(queryPage);
+
+        PageList<Dept> pageList= serviceResultT.getResult();
+
         List<Dept> list=new ArrayList<>();
         Dept dept=new Dept();
-        dept.setId("900");
+        dept.setId("905");
         list.add(dept);
         ServiceResult result= deptBaseInService.deleteByList(list);
 
