@@ -43,11 +43,14 @@
         <property name="configFileResource" value="/WEB-INF/beetl.properties"/>
     </bean>
     <bean name="beetlViewResolver" class="org.beetl.ext.spring.BeetlSpringViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/" />
+     <!-- <property name="viewNames">
+          <value>/**</value>
+      </property>-->
+        <property name="prefix" value="jsp/" />
         <property name="suffix" value=".html"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <!-- 多GroupTemplate，需要指定使用的bean -->
-        <property name="config" ref="beetlConfig"/>
+        <!--<property name="config" ref="beetlConfig"/>-->
 
     </bean>
     <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
