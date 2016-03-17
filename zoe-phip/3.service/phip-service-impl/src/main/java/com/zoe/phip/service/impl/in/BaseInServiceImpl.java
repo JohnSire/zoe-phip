@@ -3,10 +3,8 @@ package com.zoe.phip.service.impl.in;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.dao.MyMapper;
-import com.zoe.phip.model.base.PageList;
-import com.zoe.phip.model.base.QueryPage;
-import com.zoe.phip.model.base.ServiceResult;
-import com.zoe.phip.model.base.ServiceResultT;
+import com.zoe.phip.infrastructure.util.StringUtil;
+import com.zoe.phip.model.base.*;
 import com.zoe.phip.model.demo.Dept;
 import com.zoe.phip.service.impl.util.SafeExecuteUtil;
 import com.zoe.phip.service.in.BaseInService;
@@ -22,7 +20,7 @@ import java.util.List;
 /**
  * Created by zengjiyang on 2016/3/12.
  */
-public abstract class BaseInServiceImpl<T> implements BaseInService<T> {
+public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInService<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(BaseInServiceImpl.class);
 
@@ -42,13 +40,25 @@ public abstract class BaseInServiceImpl<T> implements BaseInService<T> {
     @Override
     public ServiceResult addList(List<T> entities) {
         return SafeExecuteUtil.execute(logger,
-                () -> mapper.addList(entities));
+                () -> {
+                    entities.forEach(e -> {
+                        //设置主键
+                        e.setId(StringUtil.getUUID());
+                    });
+                    return mapper.addList(entities);
+                });
     }
 
     @Override
     public ServiceResult deleteById(String id) {
         return SafeExecuteUtil.execute(logger,
                 () -> mapper.deleteByPrimaryKey(id));
+    }
+
+    @Override
+    public ServiceResult deleteByList(List<T> entities) {
+        return SafeExecuteUtil.execute(logger,
+                () -> mapper.deleteByList(entities));
     }
 
     @Override
@@ -59,7 +69,7 @@ public abstract class BaseInServiceImpl<T> implements BaseInService<T> {
 
     @Override
     public ServiceResult update(T entity) {
-        return  SafeExecuteUtil.execute(logger,
+        return SafeExecuteUtil.execute(logger,
                 () -> mapper.updateByPrimaryKeySelective(entity));
     }
 
@@ -76,16 +86,15 @@ public abstract class BaseInServiceImpl<T> implements BaseInService<T> {
     }
 
     @Override
-    public ServiceResultT<List<T>> getList()
-    {
-        SafeExecuteUtil<List<T>> safeExecute=new SafeExecuteUtil<List<T>>();
-        return safeExecute.executeT(logger,()->mapper.selectAll());
+    public ServiceResultT<List<T>> getList() {
+        SafeExecuteUtil<List<T>> safeExecute = new SafeExecuteUtil<List<T>>();
+        return safeExecute.executeT(logger, () -> mapper.selectAll());
     }
 
     @Override
     public ServiceResultT<PageList<T>> getList(QueryPage queryPage) {
         SafeExecuteUtil<PageList<T>> safeExecute = new SafeExecuteUtil<PageList<T>>();
-        return safeExecute.executeT(logger,()->
+        return safeExecute.executeT(logger, () ->
         {
             ServiceResultT<PageList<T>> resultT = new ServiceResultT<PageList<T>>();
             Example example = new Example(Dept.class);

@@ -5,6 +5,8 @@
 
 package com.zoe.phip.model.demo;
 
+import com.zoe.phip.model.base.BaseEntity;
+
 import javax.persistence.*;
 
 /**
@@ -12,8 +14,9 @@ import javax.persistence.*;
  * @date 2016-03-16
  * @version 1.0
  */
-public class Orders {
+public class Orders extends BaseEntity {
     /**  */
+    @Id
     @Column(name = "ID")
     private String id;
 

@@ -11,4 +11,26 @@
      </#if>
     </#list>
    </resultMap>
+    <insert id="addList" parameterType="java.util.List">
+     INSERT INTO ${table.sqlName} (<#list table.columns as field>${field.sqlName}<#if field_index<table.columns?size-1>,</#if></#list>)
+     <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+      SELECT
+       <#list table.columns as field>
+       ${r'#'}{item.${field.entityName?uncap_first},jdbcType=${field.jdbcType?upper_case}}<#if field_index<table.columns?size-1>,</#if>
+       </#list>
+       FROM DUAL
+      </foreach>
+    </insert>
+    <delete id="deleteByIds" parameterType="java.util.List">
+       delete from ${table.sqlName} where ID in
+     <foreach collection="list" item="item" open="(" separator="," close=")">
+       ${r'#{item}'}
+     </foreach>
+    </delete>
+    <delete id="deleteByList" parameterType="java.util.List">
+       delete from ${table.sqlName} where ID in
+      <foreach collection="list" item="item" open="(" separator="," close=")">
+       ${r'#{item.id}'}
+      </foreach>
+    </delete>
 </mapper>

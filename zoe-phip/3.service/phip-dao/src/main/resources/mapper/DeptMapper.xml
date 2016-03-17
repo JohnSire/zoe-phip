@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zoe.phip.dao.mapper.demo.DeptMapper" >
-  <resultMap id="BaseResultMap" type="com.zoe.phip.model.demo.Dept" >
-    <id column="ID" property="id" jdbcType="VARCHAR" />
-    <result column="NAME" property="name" jdbcType="VARCHAR" />
-    <result column="CODE" property="code" jdbcType="INTEGER" />
-    <result column="STATUS" property="status" jdbcType="INTEGER" />
-  </resultMap>
+<mapper namespace="com.zoe.phip.dao.mapper.demo.DeptMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.model.demo.Dept">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="CODE" property="code" jdbcType="INTEGER"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="ADD_TIME" property="addTime" jdbcType="INTEGER"/>
 
-  <update id="updateDeptName" parameterType="java.lang.String">
+    </resultMap>
+    <insert id="addList" parameterType="java.util.List">
+        insert into DEMO_DEPT(ID,NAME,CODE,STATUS,ADD_TIME)
+        <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+            select #{item.id,jdbcType= VARCHAR },#{item.name,jdbcType= VARCHAR },#{item.code,jdbcType= INTEGER },
+            #{item.status,jdbcType= INTEGER },#{item.addTime ,jdbcType= TIMESTAMP }
+            from dual
+        </foreach>
+    </insert>
+
+    <delete id="deleteByIds" parameterType="java.util.List">
+       delete from DEMO_DEPT where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByList" parameterType="java.util.List">
+        delete from DEMO_DEPT where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+
+    <update id="updateDeptName" parameterType="java.lang.String">
      UPDATE DEMO_DEPT set NAME =#{name,jdbcType=VARCHAR} where id ='2'
   </update>
 
-  <select id="countDept"  resultType="java.lang.Integer">
+    <select id="countDept" resultType="java.lang.Integer">
     select count(*) from DEMO_DEPT
   </select>
 </mapper>
