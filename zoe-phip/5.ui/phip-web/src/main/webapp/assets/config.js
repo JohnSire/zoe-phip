@@ -12,5 +12,7 @@ seajs.config({
     // 调试模式，测试环境开启
     debug: false,
     // 文件编码
-    charset: 'utf-8'
+    charset: 'utf-8',
+
+    map: [[/^(.*\.(?:css|js))(.*)$/i, '$1?version=' + version]],  //map,批量更新时间戳
 });
