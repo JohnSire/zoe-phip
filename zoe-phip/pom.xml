@@ -32,6 +32,8 @@
         <spring.version>4.2.4.RELEASE</spring.version>
         <aspectj.version>1.8.6</aspectj.version>
         <fastjson.version>1.2.7</fastjson.version>
+        <!--beetl版本号 2.2.5-->
+        <beetl.version>2.2.5</beetl.version>
         <!--mybatis 相关-->
         <mybatis.version>3.3.0</mybatis.version>
         <mybatis-spring.version>1.2.3</mybatis-spring.version>
