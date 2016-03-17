@@ -1,5 +1,6 @@
 package com.zoe.phip.service.impl.in;
 
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.base.PageList;
 import com.zoe.phip.model.base.QueryPage;
 import com.zoe.phip.model.base.ServiceResult;
@@ -19,7 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -60,8 +64,6 @@ public class BaseInServiceImplTest {
 
         ServiceResult result=personService.getById("001");
 
-
-//        Person result=personService.selectPersonById("001");
     }
 
     @Test
@@ -72,5 +74,31 @@ public class BaseInServiceImplTest {
         }
         catch (Exception e){
         }
+    }
+
+    @Test
+    public void insertListTest(){
+        List<Dept> list=new ArrayList<>();
+        for(int i=0;i<10;i++){
+            Dept dept=new Dept();
+            dept.setName("B"+Integer.toString(i));
+            dept.setCode(i);
+            dept.setStatus(1);
+            dept.setAddTime(new Date());
+            dept.setUpdateTime(new Date());
+            list.add(dept);
+        }
+        ServiceResult result= deptBaseInService.addList(list);
+    }
+
+    @Test
+    public void deleteByIdsTest(){
+        QueryPage queryPage=new QueryPage(1,10);
+        List<Dept> list=new ArrayList<>();
+        Dept dept=new Dept();
+        dept.setId("900");
+        list.add(dept);
+        ServiceResult result= deptBaseInService.deleteByList(list);
+
     }
 }

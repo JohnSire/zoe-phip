@@ -1,10 +1,7 @@
 package com.zoe.phip.service.in;
 
 
-import com.zoe.phip.model.base.PageList;
-import com.zoe.phip.model.base.QueryPage;
-import com.zoe.phip.model.base.ServiceResult;
-import com.zoe.phip.model.base.ServiceResultT;
+import com.zoe.phip.model.base.*;
 
 import java.util.List;
 
@@ -12,7 +9,7 @@ import java.util.List;
  * 内部服务基接口
  * Created by zengjiyang on 2016/1/25.
  */
-public interface BaseInService<T> {
+public interface BaseInService<T extends BaseEntity> {
 
     /**
      * 新增
@@ -37,6 +34,15 @@ public interface BaseInService<T> {
      * @return
      */
     ServiceResult deleteById(String id);
+
+    /**
+     * 批量删除
+     *
+     * @param entities
+     * @return
+     */
+    ServiceResult deleteByList(List<T> entities);
+
 
     /**
      * 批量删除

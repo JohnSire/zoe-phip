@@ -6,6 +6,7 @@ import java.io.*;
 import java.security.MessageDigest;
 import java.util.Base64;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by 张文彬 on 2016/2/22.
@@ -182,5 +183,9 @@ public final class StringUtil {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static String getUUID(){
+        return UUID.randomUUID().toString().replace("-","");
     }
 }
