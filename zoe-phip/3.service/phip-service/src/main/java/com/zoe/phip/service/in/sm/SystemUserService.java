@@ -4,6 +4,7 @@
  */
 package com.zoe.phip.service.in.sm;
 
+import com.zoe.phip.model.base.ServiceResult;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.in.BaseInService;
 
@@ -16,4 +17,12 @@ import com.zoe.phip.service.in.BaseInService;
  */
 public interface SystemUserService extends BaseInService<SystemUser> {
 
+    /**
+     * 用户登录操作
+     *
+     * @param loginName
+     * @param passWord
+     * @return
+     */
+    ServiceResult login(String loginName, String passWord);
 }

@@ -1,23 +1,27 @@
 package com.zoe.phip.service.impl.util;
 
+import com.zoe.phip.infrastructure.function.Function;
 import com.zoe.phip.model.base.Message;
 import com.zoe.phip.model.base.ServiceResult;
 import com.zoe.phip.model.base.ServiceResultT;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * Created by zhangwenbin on 2016/2/29.
  */
 public final class SafeExecuteUtil<T> {
-    public static ServiceResult execute(Logger logger, Supplier<Object> invoker) {
+
+    private static final Logger logger = LoggerFactory.getLogger(SafeExecuteUtil.class);
+
+    public static ServiceResult execute(Function<Object> invoker) {
         ServiceResult executeResult = new ServiceResult();
         List<Message> messageList=new ArrayList<Message>();
         try {
-            Object result = invoker.get();
+            Object result = invoker.apply();
             executeResult.setIsSuccess(result != null);
         } catch (Exception e) {
             //错误消息
@@ -33,11 +37,11 @@ public final class SafeExecuteUtil<T> {
         return executeResult;
     }
 
-    public ServiceResultT<T> executeT(Logger logger, Supplier<Object> invoker){
+    public ServiceResultT<T> executeT(Function<Object> invoker){
         ServiceResultT<T> executeResult=new ServiceResultT<T>();
         List<Message> messageList=new ArrayList<Message>();
         try {
-            T result = (T)invoker.get();
+            T result = (T)invoker.apply();
             executeResult.setResult(result);
             executeResult.setIsSuccess(result != null);
         }catch (Exception e){

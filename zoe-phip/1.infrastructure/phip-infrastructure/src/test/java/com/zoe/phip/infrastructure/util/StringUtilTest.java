@@ -19,6 +19,13 @@ public class StringUtilTest {
     }
 
     @Test
+    public void md5Test(){
+        String result=StringUtil.toMD5("admin");
+        result=StringUtil.toMD5("123"+result+"admin");
+        System.out.println(result);
+    }
+
+    @Test
     public void doLogger() {
         com.zoe.phip.infrastructure.logger.Logger logger = new LoggerImpl();
         logger.debug("{}","debug");

@@ -1,6 +1,9 @@
 package com.zoe.phip.service.impl.in.sm;
 
+import com.zoe.phip.model.base.PageList;
+import com.zoe.phip.model.base.QueryPage;
 import com.zoe.phip.model.base.ServiceResult;
+import com.zoe.phip.model.base.ServiceResultT;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.impl.BaseTest;
 import com.zoe.phip.service.in.sm.SystemUserService;
@@ -36,14 +39,27 @@ public class SystemUserServiceImplTest extends BaseTest {
         ServiceResult result= systemUserService.addList(list);
     }
 
+
+    @Test
+    public void pageQueryTest(){
+        ServiceResultT<PageList<SystemUser>> resultT= systemUserService.getList(new QueryPage(),SystemUser.class);
+        List<SystemUser> list= resultT.getResult().getRows();
+
+    }
+
     private SystemUser creteUser(String name,String loginName,String passWord,int state){
         SystemUser user=new SystemUser();
         user.setName(name);
         user.setLoginName(loginName);
-        user.setState(1);
+        user.setState(state);
         user.setPassword(passWord);
         user.setCreateAt(new Date());
         user.setCreateBy(loginName);
         return user;
+    }
+
+    @Test
+    public void testLogin() throws Exception {
+        ServiceResult result= systemUserService.login("zjy","zjy");
     }
 }

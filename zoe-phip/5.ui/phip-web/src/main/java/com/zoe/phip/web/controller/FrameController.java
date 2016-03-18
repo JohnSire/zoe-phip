@@ -1,7 +1,6 @@
 package com.zoe.phip.web.controller;
 
 import com.zoe.phip.model.base.ServiceResult;
-import com.zoe.phip.service.in.demo.DeptService;
 import com.zoe.phip.web.bean.BeanFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
