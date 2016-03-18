@@ -1,6 +1,7 @@
 package com.zoe.phip.web.controller;
 
 import com.zoe.phip.model.base.ServiceResult;
+import com.zoe.phip.service.in.sm.SystemUserService;
 import com.zoe.phip.web.bean.BeanFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +28,10 @@ public class FrameController {
     //登录界面
     @RequestMapping("/login")
     public String ToLogin(HttpServletRequest request, Model model){
-//        DeptService deptService = BeanFactory.getBean("DeptService");
-//        ServiceResult serviceResult= deptService.getById("3");
-//        model.addAttribute("hello", "hello world");
-//        model.addAttribute("a");
+        SystemUserService deptService = BeanFactory.getBean("SystemUserService");
+        ServiceResult serviceResult= deptService.login("zjy","zjy");
+        model.addAttribute("hello", "hello world");
+        model.addAttribute("a");
         return "/frame/login";
     }
     //未登录界面或着登录超时跳转中间界面
