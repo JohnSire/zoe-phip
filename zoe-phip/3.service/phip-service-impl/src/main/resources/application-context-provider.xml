@@ -11,8 +11,6 @@
 
 <dubbo:protocol name="dubbo" port="20080"  />
 
-<dubbo:service interface="com.zoe.phip.service.in.demo.DeptService" version="1.0.0"
-               ref="DeptServiceImpl"/>
-<dubbo:service interface="com.zoe.phip.service.in.demo.CountryService" version="1.0.0"
-               ref="CountryServiceImpl"/>
+<dubbo:service interface="com.zoe.phip.service.in.sm.SystemUserService" version="1.0.0"
+               ref="SystemUserService"/>
 </beans>

@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.zoe.phip.dao.MyMapper;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.base.*;
-import com.zoe.phip.model.demo.Dept;
 import com.zoe.phip.service.impl.util.SafeExecuteUtil;
 import com.zoe.phip.service.in.BaseInService;
 import org.slf4j.Logger;
@@ -34,7 +33,7 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
 
     @Override
     public ServiceResult add(T entity) {
-        return SafeExecuteUtil.execute(logger, () -> mapper.insert(entity));
+        return SafeExecuteUtil.execute(logger, () -> mapper.insertSelective(entity));
     }
 
     @Override
@@ -92,12 +91,12 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
     }
 
     @Override
-    public ServiceResultT<PageList<T>> getList(QueryPage queryPage) {
+    public ServiceResultT<PageList<T>> getList(QueryPage queryPage,Class<T> cls) {
         SafeExecuteUtil<PageList<T>> safeExecute = new SafeExecuteUtil<PageList<T>>();
         return safeExecute.executeT(logger, () ->
         {
             PageList<T> pageList = new PageList<T>();
-            Example example = new Example(Dept.class);
+            Example example = new Example(cls);
             if (queryPage.getOrderBy() != null) {
                 PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize(), queryPage.getOrderBy());
             } else {

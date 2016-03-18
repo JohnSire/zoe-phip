@@ -3,6 +3,7 @@ package com.zoe.phip.infrastructure.aop;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +37,7 @@ public class LoggerInterceptor {
         if (!StringUtil.isNullOrWhiteSpace(methodName)) {
             if (!(methodName.startsWith("set") || methodName.startsWith("get") || methodName.startsWith("query"))) {
                 Class clazz = joinPoint.getTarget().getClass();
-                Method method = clazz.getMethod(methodName);
+                Method method = clazz.getMethod(methodName,((MethodSignature)joinPoint.getSignature()).getParameterTypes());
                 if (method != null) {
                     boolean hasAnnotation = method.isAnnotationPresent(Action.class);
                     if (hasAnnotation) {

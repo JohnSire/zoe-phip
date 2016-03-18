@@ -15,8 +15,8 @@
     <entry key="outRoot">generator-output</entry>
 
     <!--数据库相关设置-->
-    <entry key="jdbc_username">ZOEAOP</entry>
-    <entry key="jdbc_password">ZOEAOP</entry>
+    <entry key="jdbc_username">PHIP</entry>
+    <entry key="jdbc_password">PHIP</entry>
     <entry key="databaseType">oracle</entry>
     <!--Mysql-->
     <!--<entry key="jdbc_url">jdbc:mysql://192.168.2.39:3306/demo?useUnicode=true&amp;characterEncoding=UTF-8</entry>-->
@@ -24,11 +24,11 @@
 
 
     <!--Oracle jdbc:oracle:thin:@192.168.1.54:1521:ORA11G-->
-    <entry key="jdbc_url">jdbc:oracle:thin:@192.168.1.54:1521:ORA11G</entry>
+    <entry key="jdbc_url">jdbc:oracle:thin:@192.168.2.234:1521:ORA11G</entry>
     <entry key="jdbc_driver">oracle.jdbc.driver.OracleDriver</entry>
 
     <!--oracle需要指定jdbc.schema,其它数据库忽略此项配置-->
-    <entry key="jdbc_schema">ZOEAOP</entry>
+    <entry key="jdbc_schema">PHIP</entry>
     <entry key="jdbc_catalog">ORA11G</entry>
 
     <!-- 数据库类型映射  -->
