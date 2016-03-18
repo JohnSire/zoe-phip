@@ -1,0 +1,28 @@
+﻿<%
+var styleSection = {
+%>
+<%};%>
+<%
+var bodySection = {
+%>
+<form id="baseAttrForm" onsubmit="return false;">
+    <span class="text-up-tips tips-error" style="display:none;"><i class="text-up-tips-arrow arrow-red"></i><span class="msg"></span></span>
+    <%
+    var bodySection = {
+    %>
+    <%};%>
+</form>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        common.validformObj = common.validform();
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_default.html",{title:"",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+%>
+
