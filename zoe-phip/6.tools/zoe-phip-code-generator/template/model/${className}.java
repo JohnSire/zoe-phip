@@ -11,6 +11,7 @@ import ${basepackage}.base.BaseEntity;
  * @date ${now?string("yyyy-MM-dd")}
  * @version 1.0
  */
+@Table(name = "${table.sqlName}")
 public class ${className} extends BaseEntity {
 <#list table.columns as field>
     /** ${field.remarks} */
