@@ -1,9 +1,14 @@
 package com.zoe.phip.service.in;
 
 
-import com.zoe.phip.model.base.*;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.model.base.BaseEntity;
 
 import java.util.List;
+
 
 /**
  * 内部服务基接口
@@ -91,6 +96,6 @@ public interface BaseInService<T extends BaseEntity> {
      * @param queryPage
      * @return
      */
-    ServiceResultT<PageList<T>> getList(QueryPage queryPage,Class<T> cls );
+    ServiceResultT<PageList<T>> getList(QueryPage queryPage, Class<T> cls );
 
 }

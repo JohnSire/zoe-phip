@@ -1,18 +1,10 @@
 package com.zoe.phip.service.impl.aop;
 
-import com.zoe.phip.model.base.Message;
-import com.zoe.phip.model.base.ServiceResult;
-import com.zoe.phip.model.base.ServiceResultT;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by zengjiyang on 2016/3/14.

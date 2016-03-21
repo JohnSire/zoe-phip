@@ -1,4 +1,4 @@
-package com.zoe.phip.model.base;
+package com.zoe.phip.infrastructure.entity;
 
 import java.io.Serializable;
 
