@@ -5,6 +5,8 @@
 package com.zoe.phip.service.in.sm;
 
 import com.zoe.phip.model.base.ServiceResult;
+import com.zoe.phip.model.base.ServiceResultT;
+import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.in.BaseInService;
 
@@ -22,7 +24,8 @@ public interface SystemUserService extends BaseInService<SystemUser> {
      *
      * @param loginName
      * @param passWord
+     * @param expiresTime session过期时间 毫秒
      * @return
      */
-    ServiceResult login(String loginName, String passWord);
+    ServiceResultT<LoginCredentials> login(String loginName, String passWord,int expiresTime);
 }

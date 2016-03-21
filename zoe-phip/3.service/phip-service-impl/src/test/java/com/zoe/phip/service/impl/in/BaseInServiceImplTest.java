@@ -1,5 +1,6 @@
 package com.zoe.phip.service.impl.in;
 
+import com.zoe.phip.infrastructure.logger.Logger;
 import com.zoe.phip.model.base.PageList;
 import com.zoe.phip.model.base.QueryPage;
 import com.zoe.phip.model.base.ServiceResult;
@@ -9,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,12 +28,21 @@ import java.util.List;
 public class BaseInServiceImplTest {
 
 
+//    @Autowired
+//    private Logger logger;
+
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(BaseInServiceImplTest.class);
+
+
     @Autowired
     private SqlSessionFactory sqlSessionFactory;
 
     @Test
     public void testAdd() throws Exception {
-
+        logger.info("info123");
+        logger.debug("debug456");
+        logger.error("error");
+        logger.warn("warn");
     }
 
     @Test
