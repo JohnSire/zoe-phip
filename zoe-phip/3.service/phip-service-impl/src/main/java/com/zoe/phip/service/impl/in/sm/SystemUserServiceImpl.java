@@ -6,14 +6,12 @@
 
 package com.zoe.phip.service.impl.in.sm;
 
-import com.zoe.phip.dao.MyMapper;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.base.ServiceResult;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.impl.util.SafeExecuteUtil;
 import com.zoe.phip.service.in.sm.SystemUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 

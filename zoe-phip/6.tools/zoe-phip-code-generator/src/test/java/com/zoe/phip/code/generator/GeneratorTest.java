@@ -14,6 +14,6 @@ public class GeneratorTest {
         GeneratorFacade facade = new GeneratorFacade();
         facade.getGenerator().addTemplateRootDir(new File("template"));
         facade.deleteOutRootDir();
-        facade.generateByTable("SYS_SYSTEM_USER");
+        facade.generateByTable("SYS_MENU_DATA");
     }
 }

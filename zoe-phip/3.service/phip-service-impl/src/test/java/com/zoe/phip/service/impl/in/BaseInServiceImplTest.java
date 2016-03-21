@@ -1,21 +1,11 @@
 package com.zoe.phip.service.impl.in;
 
-import com.zoe.phip.model.base.PageList;
-import com.zoe.phip.model.base.QueryPage;
-import com.zoe.phip.model.base.ServiceResult;
-import com.zoe.phip.model.base.ServiceResultT;
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 /**
