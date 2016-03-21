@@ -29,6 +29,7 @@ public class FrameController {
     @RequestMapping("/login")
     public String ToLogin(HttpServletRequest request, Model model){
         SystemUserService deptService = BeanFactory.getBean("SystemUserService");
+
         ServiceResult serviceResult= deptService.login("zjy","zjy");
         model.addAttribute("hello", "hello world");
         model.addAttribute("a");

@@ -1,0 +1,37 @@
+﻿<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-title">
+        <h4 class="title">选择列表</h4>
+    </div>
+    <div class="y-dialog-form clearfix">
+            <p class="column">
+                <label for="txb-name" class="label">关键字：</label>
+                <span class="text-outer">
+                    <input type="text" name="txb-name" class="text" />
+                    <input class="btn-text-search" type="button" value="搜索" />
+                </span>
+            </p>
+
+    </div>
+    <div class="y-dialog-table">
+        用户列表
+    </div>
+</div>
+
+<div class="y-dialog-content">
+    <div class="y-dialog-title">
+        <h4 class="title">已选内容</h4>
+    </div>
+    <div class="y-dialog-select clearfix">
+        <ul class="lists">
+            <li class="list">已选择项</li>
+            <li class="list">已选择项</li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"用户详细信息",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

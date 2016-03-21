@@ -1,0 +1,14 @@
+﻿<%
+var scriptSection={
+%>
+<script type="text/javascript">
+	$(function () {
+		seajs.use('{dir}/SystemManager/SysUser/list', function (a) {
+			a.init();
+		});
+	})
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseGrid.html",{title:"用户列表",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+%>
