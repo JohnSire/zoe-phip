@@ -25,12 +25,4 @@ public class StringUtilTest {
         System.out.println(result);
     }
 
-    @Test
-    public void doLogger() {
-        com.zoe.phip.infrastructure.logger.Logger logger = new LoggerImpl();
-        logger.debug("{}","debug");
-        logger.info("info");
-        logger.warn("warn");
-        logger.error("error");
-    }
 }
