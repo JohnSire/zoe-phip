@@ -1,5 +1,7 @@
 package com.zoe.phip.infrastructure.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 
 /**
@@ -7,8 +9,11 @@ import java.io.Serializable;
  */
 public class QueryPage implements Serializable {
 
+    @JSONField(name = "PageNum")
     private int pageNum;
+    @JSONField(name = "PageSize")
     private int pageSize;
+    @JSONField(name = "OrderBy")
     private String orderBy;
 
     public QueryPage() {
