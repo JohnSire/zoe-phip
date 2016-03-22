@@ -1,5 +1,7 @@
 package com.zoe.phip.infrastructure.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,10 +12,12 @@ public class PageList<T> implements Serializable {
     /**
      * 分页列表条数
      */
+    @JSONField(name = "Total")
     private int total;
     /**
      * 行内容对象
      */
+    @JSONField(name = "Rows")
     private List<T> rows;
 
     /**
