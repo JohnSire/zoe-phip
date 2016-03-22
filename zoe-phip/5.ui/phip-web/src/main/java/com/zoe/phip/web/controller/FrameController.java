@@ -1,6 +1,6 @@
 package com.zoe.phip.web.controller;
 
-import com.zoe.phip.model.base.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.service.in.sm.SystemUserService;
 import com.zoe.phip.web.bean.BeanFactory;
 import org.springframework.stereotype.Controller;
@@ -29,8 +29,7 @@ public class FrameController {
     @RequestMapping("/login")
     public String ToLogin(HttpServletRequest request, Model model){
         SystemUserService deptService = BeanFactory.getBean("SystemUserService");
-
-        ServiceResult serviceResult= deptService.login("zjy","zjy");
+        ServiceResult serviceResult= deptService.login("zjy","zjy",1000*10);
         model.addAttribute("hello", "hello world");
         model.addAttribute("a");
         return "/frame/login";

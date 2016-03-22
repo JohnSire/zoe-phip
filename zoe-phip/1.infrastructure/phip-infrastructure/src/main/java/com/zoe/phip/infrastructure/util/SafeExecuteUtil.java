@@ -1,9 +1,9 @@
-package com.zoe.phip.service.impl.util;
+package com.zoe.phip.infrastructure.util;
 
 import com.zoe.phip.infrastructure.function.Function;
-import com.zoe.phip.model.base.Message;
-import com.zoe.phip.model.base.ServiceResult;
-import com.zoe.phip.model.base.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.Message;
+import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

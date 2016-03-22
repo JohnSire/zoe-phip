@@ -1,5 +1,7 @@
 package com.zoe.phip.infrastructure.aop;
 
+import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -52,7 +54,16 @@ public class LoggerInterceptor {
                 }
             }
         }
-        return joinPoint.proceed();
+        Object result=joinPoint.proceed();
+        if(result instanceof ServiceResultT){
+//            ((ServiceResultT) result).setIsSuccess(true);
+        }else if(result instanceof ServiceResult){
+//            ((ServiceResult) result).setIsSuccess(true);
+        }else {
+            throw new Exception("方法的返回类型只能为ServiceResult或ServiceResultT");
+        }
+
+        return result;
     }
 
     public void doAfterThrowing(JoinPoint joinPoint, Throwable ex) {

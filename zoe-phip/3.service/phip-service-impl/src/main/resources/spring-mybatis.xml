@@ -88,7 +88,7 @@
 
     <aop:config>
         <aop:aspect ref="LoggerInterceptor">
-            <aop:pointcut id="LoggerInterceptorCut" expression="execution(* com.zoe.phip.service.in.*.*(..))"/>
+            <aop:pointcut id="LoggerInterceptorCut" expression="execution(* com.zoe.phip.service.in..*.*(..))"/>
             <aop:before pointcut-ref="LoggerInterceptorCut" method="doBefore"></aop:before>
             <aop:after  pointcut-ref="LoggerInterceptorCut" method="doAfter"></aop:after>
             <aop:around pointcut-ref="LoggerInterceptorCut" method="doAround"></aop:around>

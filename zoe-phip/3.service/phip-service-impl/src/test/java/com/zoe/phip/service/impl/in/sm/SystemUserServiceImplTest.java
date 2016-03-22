@@ -1,9 +1,9 @@
 package com.zoe.phip.service.impl.in.sm;
 
-import com.zoe.phip.model.base.PageList;
-import com.zoe.phip.model.base.QueryPage;
-import com.zoe.phip.model.base.ServiceResult;
-import com.zoe.phip.model.base.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.impl.BaseTest;
 import com.zoe.phip.service.in.sm.SystemUserService;
@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by zengjiyang on 2016/3/18.
@@ -44,7 +42,7 @@ public class SystemUserServiceImplTest extends BaseTest {
     public void pageQueryTest(){
         ServiceResultT<PageList<SystemUser>> resultT= systemUserService.getList(new QueryPage(),SystemUser.class);
         List<SystemUser> list= resultT.getResult().getRows();
-
+        System.out.println(list.size());
     }
 
     private SystemUser creteUser(String name,String loginName,String passWord,int state){
@@ -60,6 +58,6 @@ public class SystemUserServiceImplTest extends BaseTest {
 
     @Test
     public void testLogin() throws Exception {
-        ServiceResult result= systemUserService.login("zjy","zjy");
+        ServiceResult result= systemUserService.login("zjy","zjy",1000*10);
     }
 }
