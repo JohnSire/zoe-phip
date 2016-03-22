@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.dao.sm.SystemDictCategoryMapper">
+   <resultMap id="BaseResultMap" type="com.zoe.phip.model.sm.SystemDictCategory">
+      <id column="ID" property="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result column="CODE" property="code" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result column="DESCR" property="descr" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result column="CREATE_AT" property="createAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+      <result column="CREATE_BY" property="createBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <result column="MODIFY_AT" property="modifyAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+      <result column="MODIFY_BY" property="modifyBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
+   </resultMap>
+    <insert id="addList" parameterType="java.util.List">
+     INSERT INTO SYS_SYSTEM_DICT_CATEGORY (ID,NAME,CODE,DESCR,CREATE_AT,CREATE_BY,MODIFY_AT,MODIFY_BY)
+     <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+      SELECT
+       #{item.id,jdbcType=VARCHAR},
+       #{item.name,jdbcType=VARCHAR},
+       #{item.code,jdbcType=VARCHAR},
+       #{item.descr,jdbcType=VARCHAR},
+       #{item.createAt,jdbcType=TIMESTAMP},
+       #{item.createBy,jdbcType=VARCHAR},
+       #{item.modifyAt,jdbcType=TIMESTAMP},
+       #{item.modifyBy,jdbcType=VARCHAR}
+       FROM DUAL
+      </foreach>
+    </insert>
+    <delete id="deleteByIds" parameterType="java.util.List">
+       delete from SYS_SYSTEM_DICT_CATEGORY where ID in
+     <foreach collection="list" item="item" open="(" separator="," close=")">
+       #{item}
+     </foreach>
+    </delete>
+    <delete id="deleteByList" parameterType="java.util.List">
+       delete from SYS_SYSTEM_DICT_CATEGORY where ID in
+      <foreach collection="list" item="item" open="(" separator="," close=")">
+       #{item.id}
+      </foreach>
+    </delete>
+</mapper>

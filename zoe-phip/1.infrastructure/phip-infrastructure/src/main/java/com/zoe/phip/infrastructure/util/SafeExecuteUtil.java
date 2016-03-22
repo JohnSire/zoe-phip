@@ -1,5 +1,6 @@
 package com.zoe.phip.infrastructure.util;
 
+import com.zoe.phip.infrastructure.entity.BusinessException;
 import com.zoe.phip.infrastructure.function.Function;
 import com.zoe.phip.infrastructure.entity.Message;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
@@ -19,41 +20,47 @@ public final class SafeExecuteUtil<T> {
 
     public static ServiceResult execute(Function<Object> invoker) {
         ServiceResult executeResult = new ServiceResult();
-        List<Message> messageList=new ArrayList<Message>();
+        List<Message> messageList = new ArrayList<Message>();
         try {
             Object result = invoker.apply();
             executeResult.setIsSuccess(result != null);
+        } catch (BusinessException ex) {
+            Message message = new Message();
+            message.setId("1001");
+            message.setContent(ex.getMessage());
+            messageList.add(message);
+            executeResult.setIsSuccess(false);
         } catch (Exception e) {
             //错误消息
-            Message message=new Message();
+            Message message = new Message();
             message.setId("1001");
             message.setContent(e.getMessage());
             messageList.add(message);
             executeResult.setIsSuccess(false);
             e.printStackTrace();
-            logger.error("方法执行报错:",e);
+            logger.error("方法执行报错:", e);
         }
         executeResult.setMessages(messageList);
         return executeResult;
     }
 
-    public ServiceResultT<T> executeT(Function<Object> invoker){
-        ServiceResultT<T> executeResult=new ServiceResultT<T>();
-        List<Message> messageList=new ArrayList<Message>();
+    public ServiceResultT<T> executeT(Function<Object> invoker) {
+        ServiceResultT<T> executeResult = new ServiceResultT<T>();
+        List<Message> messageList = new ArrayList<Message>();
         try {
-            T result = (T)invoker.apply();
+            T result = (T) invoker.apply();
             executeResult.setResult(result);
             executeResult.setIsSuccess(result != null);
-        }catch (Exception e){
+        } catch (Exception e) {
             executeResult.setIsSuccess(false);
-            Message message=new Message();
+            Message message = new Message();
             //todo 如何定义错误ID
             message.setId("1001");
             message.setContent(e.getMessage());
             messageList.add(message);
             executeResult.setIsSuccess(false);
             e.printStackTrace();
-            logger.error("方法执行报错:",e);
+            logger.error("方法执行报错:", e);
         }
         executeResult.setMessages(messageList);
         return executeResult;
