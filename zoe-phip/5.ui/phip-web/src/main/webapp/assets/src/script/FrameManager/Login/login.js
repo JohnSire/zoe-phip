@@ -24,7 +24,7 @@ define(function (require, exports, module) {
                         userPwd: $("#input-password").val(),
                         rememberPwd: rememberPwd
                     };
-                    var req = new Request("Frame/Login");
+                    var req = new Request("/frame/login/auth");
                     req.post({
                         isTip: false,
                         data: param,
@@ -32,8 +32,9 @@ define(function (require, exports, module) {
                             internal.showMsg("正在登录中。。。");
                         },
                         success: function (data) {
+                            data= $.parseJSON(data);
                             if (data.IsSuccess) {
-                                window.location.href = webRoot + "Frame/Index";
+                                window.location.href = webRoot + "/frame/index";
                             } else {
                                 internal.showMsg(data.Message[0].Content);
                             }

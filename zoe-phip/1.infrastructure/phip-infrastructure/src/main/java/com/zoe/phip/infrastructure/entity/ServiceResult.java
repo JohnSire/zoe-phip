@@ -1,5 +1,7 @@
 package com.zoe.phip.infrastructure.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,12 +14,13 @@ public class ServiceResult implements Serializable {
     /**
      * 操作是否成功
      */
-
+    @JSONField(name = "IsSuccess")
     private boolean isSuccess;
 
     /**
      * 消息列表
      */
+    @JSONField(name = "Message")
     private List<Message> messages;
 
     /**

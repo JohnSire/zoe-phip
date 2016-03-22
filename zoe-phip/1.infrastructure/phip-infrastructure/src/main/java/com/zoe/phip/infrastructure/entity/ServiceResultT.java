@@ -1,5 +1,7 @@
 package com.zoe.phip.infrastructure.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 
 /**
@@ -10,6 +12,7 @@ public class ServiceResultT<T> extends ServiceResult implements Serializable {
     /**
      * 返回回来的结果实体（集合）
      */
+    @JSONField(name = "Result")
     private T result;
 
     /**

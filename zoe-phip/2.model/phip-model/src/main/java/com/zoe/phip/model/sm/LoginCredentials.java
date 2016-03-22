@@ -1,9 +1,11 @@
 package com.zoe.phip.model.sm;
 
+import java.io.Serializable;
+
 /**
  * Created by zengjiyang on 2016/3/21.
  */
-public class LoginCredentials {
+public class LoginCredentials implements Serializable {
 
     /**
      * 用户标识
