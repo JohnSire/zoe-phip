@@ -16,5 +16,6 @@ public interface MyMapper<T extends BaseEntity> extends Mapper<T> {
 
     int deleteByList(List<T> entities);
     //todo 批量更新？
+    @Deprecated
     int updateList(List<T> entities);
 }

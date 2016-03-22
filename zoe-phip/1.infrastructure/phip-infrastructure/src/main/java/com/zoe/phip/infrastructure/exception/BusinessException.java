@@ -1,5 +1,6 @@
-package com.zoe.phip.infrastructure.entity;
+package com.zoe.phip.infrastructure.exception;
 
+import java.text.MessageFormat;
 import java.util.Objects;
 
 /**
@@ -12,6 +13,6 @@ public class BusinessException extends Exception {
     }
 
     public BusinessException(String message, Object... args) {
-        super(String.format(message, args));
+        super(MessageFormat.format(message,args));
     }
 }

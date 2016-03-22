@@ -58,6 +58,8 @@ public class SystemUserServiceImplTest extends BaseTest {
 
     @Test
     public void testLogin() throws Exception {
-        ServiceResult result= systemUserService.login("zjy","zjy",1000*10);
+
+        ServiceResult result= systemUserService.login("admin1","zjy",1000*10);
+
     }
 }

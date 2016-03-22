@@ -8,7 +8,7 @@ package com.zoe.phip.service.impl.in.sm;
 
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
-import com.zoe.phip.infrastructure.entity.BusinessException;
+import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.in.sm.SystemDictCategoryService;
@@ -31,14 +31,13 @@ public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictC
                 () -> {
                     Example example = new Example(SystemDictCategory.class);
                     example.createCriteria().andEqualTo("code", entity.getCode());
-                    List<SystemDictCategory> list = mapper.selectByExample(example);
+                    List<SystemDictCategory> list = getMapper().selectByExample(example);
                     if (list != null && list.size() > 0) {
                         // TODO: 2016/3/22 错误消息
-                        throw new BusinessException("该字典类别({0})已经存在", entity.getCode());
+                        throw new BusinessException("该字典类别(%s)已经存在", entity.getCode());
                     } else
-                        return super.add(entity);
+                        return getMapper().insertSelective(entity);
                 });
-
     }
 
     @Override
@@ -48,12 +47,12 @@ public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictC
                     Example example = new Example(SystemDictCategory.class);
                     example.createCriteria().andEqualTo("code", entity.getCode())
                             .andNotEqualTo("id", entity.getId());
-                    List<SystemDictCategory> list = mapper.selectByExample(example);
+                    List<SystemDictCategory> list = getMapper().selectByExample(example);
                     if (list != null && list.size() > 0) {
                         // TODO: 2016/3/22 错误消息
                         return null;
                     } else
-                        return super.update(entity);
+                        return getMapper().updateByPrimaryKeySelective(entity);
                 });
     }
 }
