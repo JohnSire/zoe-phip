@@ -1,0 +1,73 @@
+<%
+var styleSection = {
+%>
+<link href="/assets/dist/style/common.css" rel="stylesheet" />
+<%};%>
+<%
+var bodySection = {
+%>
+<!--左边栏-->
+<div class="y-layout-column-left">
+    <div class="y-layout-header">
+        <h1 class="title">字典类别列表</h1>
+    </div>
+    <div class="y-layout-header">
+        <ul class="y-layout-form clearfix">
+            @*<li class="list"><input type="button" class="btn btn-add" value="新增" /></li>
+            <li class="list"><input type="button" class="btn btn-change" value="修改" /></li>*@
+            <li class="list">
+                <label class="label">关键字:</label>
+                <input id="txtDictCategoryKeyWod" type="text" class="text" />
+                <input id="btnDictCategorySearch" type="button" class="btn btn-search" value="搜索" />
+            </li>
+        </ul>
+    </div>
+    <div class="y-layout-content">
+        <!--主要内容-->
+        <div>
+            <div id="dictCategoryGrid" style="border:0;"></div>
+        </div>
+        <!--主要内容-->
+    </div>
+</div>
+<!--左边栏-->
+<!--右边栏-->
+<div class="y-layout-column-right">
+    <div class="y-layout-header">
+        <h1 class="title">字典项列表</h1>
+    </div>
+    <div class="y-layout-header">
+        <ul class="y-layout-form clearfix">
+            <li class="list" id="btnDictItemAdd"><input type="button" class="btn btn-add" value="新增" /></li>
+            <li class="list" id="btnDictItemDelete"><input type="button" class="btn btn-del" value="删除" /></li>
+            <li class="list">
+                <label class="label">关键字:</label>
+                <input type="text" id="txtDictItemKeyWord" class="text" />
+                <input type="button" id="btnDictItemSearch" class="btn btn-search" value="搜索" />
+            </li>
+        </ul>
+    </div>
+    <div class="y-layout-content">
+        <!--主要内容-->
+        <div>
+            <div id="dictItemGrid" style="border:0;"></div>
+        </div>
+        <!--主要内容-->
+    </div>
+</div>
+<!--右边栏-->
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/SystemManager/SysDict/list', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_default.html",{title:"菜单配置管理",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

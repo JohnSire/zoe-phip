@@ -3,9 +3,9 @@
         init: function () {
             var BaseAttr = require("../../BaseAttr/baseAttr.js");
             var baseAttr = new BaseAttr({
-                getUrl: 'GetUserInfo',//获取实例的接口
-                addUrl: 'AddUserInfo',//新增的接口Url
-                updateUrl: 'UpdateUserInfo',//修改的接口Url
+                getUrl: 'SystemUser/GetUserInfo',//获取实例的接口
+                addUrl: 'SystemUser/AddUserInfo',//新增的接口Url
+                updateUrl: 'SystemUser/UpdateUserInfo',//修改的接口Url
                 loadPageEvent: function () {
                     var type = common.getParamFormUrl("type");
                     var id = common.getParamFormUrl("id")
