@@ -6,7 +6,7 @@
 
 package com.zoe.phip.service.impl.in.sm;
 
-import com.zoe.phip.model.base.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.in.sm.MenuDataService;
