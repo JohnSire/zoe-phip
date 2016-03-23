@@ -24,7 +24,8 @@ import java.util.List;
  * @version 1.0
  * @date 2016-03-18
  */
-@Service("SystemUserService")
+//@Service("SystemUserService")
+@com.alibaba.dubbo.config.annotation.Service
 public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> implements SystemUserService {
 
     @Override
