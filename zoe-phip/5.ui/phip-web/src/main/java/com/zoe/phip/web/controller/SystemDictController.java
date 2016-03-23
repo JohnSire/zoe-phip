@@ -1,30 +1,33 @@
 package com.zoe.phip.web.controller;
 
-import org.springframework.http.HttpRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by zhangxingcai on 2016/3/22 0022.
  */
 @Controller
-@RequestMapping("/SysManage")
+@RequestMapping("/dictm")
 public class SystemDictController {
     //系统字典列表
-    @RequestMapping("/sysDictList")
-    public String ToDictList(HttpRequest request, Model model) {
-        return "/SysManage/sysDictList";
+    @RequestMapping("/list")
+    public String ToDictList(HttpServletRequest request, Model model) {
+        return "/dictm/list";
     }
 
     //字典项详情
-    @RequestMapping("/sysDictItemDetail")
-    public String ToDictItemDetail(HttpRequest request, Model model) {
-        return "/SysDict/sysDictItemDetail";
+    @RequestMapping("/item")
+    public String ToDictItemDetail(HttpServletRequest request, Model model) {
+        return "/dict/item";
     }
 
     //字典类别详情
-    public String ToDictCategoryDetail(HttpRequest request, Model model) {
-        return "/SysDict/sysDictCategoryDetail";
+    @RequestMapping("/category")
+    public String ToDictCategoryDetail(HttpServletRequest request, Model model) {
+        return "/dict/category";
     }
 }
