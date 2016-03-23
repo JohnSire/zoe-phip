@@ -6,6 +6,7 @@
 
 package com.zoe.phip.service.impl.in.sm;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
@@ -15,7 +16,7 @@ import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.service.in.sm.SystemUserService;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
@@ -26,7 +27,9 @@ import java.util.List;
  * @version 1.0
  * @date 2016-03-18
  */
-@Service("SystemUserService")
+
+@Component
+@Service
 public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> implements SystemUserService {
 
 

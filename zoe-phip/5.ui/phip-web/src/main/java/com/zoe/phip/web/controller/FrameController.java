@@ -34,9 +34,6 @@ public class FrameController {
     //登录界面
     @RequestMapping("/login")
     public String ToLogin(HttpServletRequest request, Model model){
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-                new String[]{"application-context-consumer.xml"});
-        context.start();
         return "/frame/login";
     }
 
@@ -51,7 +48,7 @@ public class FrameController {
             result.setIsSuccess(serviceResult.getIsSuccess());
             result.setMessages(serviceResult.getMessages());
             HttpSession session= request.getSession();
-            
+
         }
         return result;
     }
@@ -73,7 +70,7 @@ public class FrameController {
     public String ToError(HttpServletRequest request, Model model){
         return "/frame/error";
     }
-    //无权限访问提醒界�
+    //无权限访问提醒界�
     @RequestMapping("/noPower")
     public String ToNoPower(HttpServletRequest request, Model model){
         return "/frame/noPower";
