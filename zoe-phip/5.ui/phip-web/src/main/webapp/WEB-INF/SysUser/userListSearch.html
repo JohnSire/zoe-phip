@@ -1,3 +1,16 @@
 ﻿<%
-include("/WEB-INF/shared/_list.html",{title:"用户列表",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+var styleSection = {
+%>
+<%};%>
+<%
+var bodySectionInner = {
+%>
+<%};%>
+<%
+var scriptSection={
+%>
+web 页面js部分
+<%};%>
+<%
+include("/WEB-INF/shared/_list.html",{title:"用户列表",styleSection:styleSection,bodySectionInner:bodySectionInner,scriptSection:scriptSection}){}
 %>

@@ -1,4 +1,12 @@
 ﻿<%
+var styleSection={
+%>
+<%};%>
+<%
+var bodySectionInner={
+%>
+<%};%>
+<%
 var scriptSection={
 %>
 <script type="text/javascript">
@@ -10,5 +18,5 @@ var scriptSection={
 </script>
 <%};%>
 <%
-include("/WEB-INF/shared/_baseGrid.html",{title:"用户列表",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_baseGrid.html",{title:"用户管理",styleSection:styleSection,bodySectionInner:bodySectionInner,scriptSection:scriptSection}){}
 %>

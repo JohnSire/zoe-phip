@@ -1,5 +1,9 @@
 ﻿<%
-var bodySection = {
+var styleSection = {
+%>
+<%};%>
+<%
+var bodySectionInner = {
 %>
 <div class="y-dialog-content">
     <div class="y-dialog-title">
@@ -16,7 +20,7 @@ var bodySection = {
 
     </div>
     <div class="y-dialog-table">
-        用户列表
+
     </div>
 </div>
 
@@ -33,5 +37,9 @@ var bodySection = {
 </div>
 <%};%>
 <%
-include("/WEB-INF/shared/_baseAttr.html",{title:"用户详细信息",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+var scriptSection={
+%>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"用户选择器",styleSection:styleSection,bodySectionInner:bodySectionInner,scriptSection:scriptSection}){}
 %>
