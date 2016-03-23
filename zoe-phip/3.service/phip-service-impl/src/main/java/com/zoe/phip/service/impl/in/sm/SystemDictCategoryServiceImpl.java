@@ -28,7 +28,7 @@ import java.util.List;
 
 
 @Component("SystemDictCategoryService")
-@com.alibaba.dubbo.config.annotation.Service
+@com.alibaba.dubbo.config.annotation.Service(version = "1.0.0")
 public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory> implements SystemDictCategoryService {
 
     @Override

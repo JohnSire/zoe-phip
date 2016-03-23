@@ -1,6 +1,5 @@
 package com.zoe.phip.web.controller;
 
-import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.model.sm.SystemUser;
@@ -43,9 +42,11 @@ public class SystemUserController {
         return "/SysUser/userSelector";
     }
 
+
+
     @RequestMapping(value = "/GetLoginUserInfo",method = RequestMethod.POST)
     public ServiceResultT<SystemUser> getUserInfo(HttpServletRequest request, Model model){
-        SystemData userInfo= DataContext.Session.get(Constant.USER_INFO);
+        SystemData userInfo= DataContext.Session.get(Constant.USER_SESSION);
         SystemUserService systemUserService = BeanFactory.getBean(Constant.SYSTEM_USER_SERVICE);
         ServiceResultT<SystemUser> user= systemUserService.getById(userInfo.getUserId());
         return user;

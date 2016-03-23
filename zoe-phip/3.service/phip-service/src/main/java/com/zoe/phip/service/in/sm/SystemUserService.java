@@ -4,6 +4,7 @@
  */
 package com.zoe.phip.service.in.sm;
 
+import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
@@ -28,4 +29,28 @@ public interface SystemUserService extends BaseInService<SystemUser> {
      */
     ServiceResultT<LoginCredentials> login(String loginName, String passWord, int expiresTime);
 
+    /**
+     * 修改密码
+     * @param id
+     * @param oldPwd
+     * @param newPwd
+     * @return
+     */
+    ServiceResult updatePassword(String id, String oldPwd, String newPwd);
+
+    /**
+     * 重设密码
+     * @param id
+     * @param newPwd
+     * @return
+     */
+    ServiceResult resetPassword(String id,String newPwd);
+
+    /**
+     * 更新用户状态
+     * @param id
+     * @param state
+     * @return
+     */
+    ServiceResult updateState(String id,int state);
 }

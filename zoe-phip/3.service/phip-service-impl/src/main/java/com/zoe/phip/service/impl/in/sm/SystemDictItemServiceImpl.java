@@ -29,7 +29,7 @@ import java.util.List;
  * @date 2016-03-22
  */
 @Component("SystemDictItemService")
-@com.alibaba.dubbo.config.annotation.Service
+@com.alibaba.dubbo.config.annotation.Service(version = "1.0.0")
 public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem> implements SystemDictItemService {
 
     @Autowired

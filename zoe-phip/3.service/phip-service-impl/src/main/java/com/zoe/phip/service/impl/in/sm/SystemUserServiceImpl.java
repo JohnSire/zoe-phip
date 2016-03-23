@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +52,49 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
             }
             LoginCredentials credentials = createLoginCredentials(user.getId(),user.getName());
             return credentials;
+        });
+    }
+
+    @Override
+    public ServiceResult updatePassword(String id, String oldPwd, String newPwd) {
+        return SafeExecuteUtil.execute(()->{
+            SystemUser user=getMapper().selectByPrimaryKey(id);
+            if(user==null){
+                throw new BusinessException("未找到该用户!");
+            }
+            String oldPassword=createPassword(user.getLoginName(),oldPwd);
+            if(!user.getPassword().equals(oldPassword)){
+                throw new BusinessException("旧密码错误!");
+            }
+            user.setPassword(createPassword(user.getLoginName(),newPwd));
+            user.setModifyAt(new Date());
+            return getMapper().updateByPrimaryKeySelective(user);
+        });
+    }
+
+    @Override
+    public ServiceResult resetPassword(String id, String newPwd) {
+        return SafeExecuteUtil.execute(()->{
+            SystemUser user=getMapper().selectByPrimaryKey(id);
+            if(user==null){
+                throw new BusinessException("未找到该用户!");
+            }
+            user.setPassword(createPassword(user.getLoginName(),newPwd));
+            user.setModifyAt(new Date());
+            return getMapper().updateByPrimaryKeySelective(user);
+        });
+    }
+
+    @Override
+    public ServiceResult updateState(String id, int state) {
+        return SafeExecuteUtil.execute(()->{
+            SystemUser user=getMapper().selectByPrimaryKey(id);
+            if(user==null){
+                throw new BusinessException("未找到该用户!");
+            }
+            user.setState(state);
+            user.setModifyAt(new Date());
+            return getMapper().updateByPrimaryKeySelective(user);
         });
     }
 
