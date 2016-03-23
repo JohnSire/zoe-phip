@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
+import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
@@ -34,7 +35,7 @@ public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictC
                     example.createCriteria().andEqualTo("code", entity.getCode());
                     List<SystemDictCategory> list = getMapper().selectByExample(example);
                     if (list != null && list.size() > 0) {
-                        throw new BusinessException("该字典类别({0})已经存在", entity.getCode());
+                        throw new BusinessException("该字典类�%s)已经存在", entity.getCode());
                     } else
                         return getMapper().insertSelective(entity);
                 });
@@ -60,7 +61,6 @@ public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictC
                         throw new BusinessException(stringBuffer.toString());
                     }
                 });
-
     }
 
     @Override
@@ -72,7 +72,7 @@ public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictC
                             .andNotEqualTo("id", entity.getId());
                     List<SystemDictCategory> list = getMapper().selectByExample(example);
                     if (list != null && list.size() > 0) {
-                        throw new BusinessException("该字典类别({0})已经存在", entity.getCode());
+                        throw new BusinessException("该字典类�{0})已经存在", entity.getCode());
                     } else
                         return getMapper().updateByPrimaryKeySelective(entity);
                 });
@@ -110,7 +110,7 @@ public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictC
             example.createCriteria().andEqualTo("code", code);
             List<SystemDictCategory> list = getMapper().selectByExample(example);
             if (list != null && list.size() <= 0) {
-                throw new BusinessException("该字典类别({0})不存在!", code);
+                throw new BusinessException("该字典类�{0})不存�", code);
             } else
                 return list.get(0);
         });

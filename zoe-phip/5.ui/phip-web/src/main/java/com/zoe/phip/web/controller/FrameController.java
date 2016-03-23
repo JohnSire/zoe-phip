@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by zengjiyang on 2016/3/11.
@@ -33,17 +34,9 @@ public class FrameController {
     //登录界面
     @RequestMapping("/login")
     public String ToLogin(HttpServletRequest request, Model model){
-        if(request.getParameter("userCode")!=null&&request.getParameter("userPwd")!=null){
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
                 new String[]{"application-context-consumer.xml"});
         context.start();
-            SystemUserService deptService = BeanFactory.getBean("SystemUserService");
-            ServiceResult serviceResult= deptService.login(request.getParameter("userCode"),
-                    request.getParameter("userPwd"),1000*10);
-            if(serviceResult.getIsSuccess()){
-                return "/frame/index";
-            }
-        }
         return "/frame/login";
     }
 
@@ -57,6 +50,8 @@ public class FrameController {
                     request.getParameter("userPwd"),1000*10);
             result.setIsSuccess(serviceResult.getIsSuccess());
             result.setMessages(serviceResult.getMessages());
+            HttpSession session= request.getSession();
+            
         }
         return result;
     }

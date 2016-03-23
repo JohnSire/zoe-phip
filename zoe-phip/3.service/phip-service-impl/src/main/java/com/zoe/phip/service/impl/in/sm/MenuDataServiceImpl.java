@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @date 2016-03-21
  * @version 1.0
  */
-//@Service("menuDataService")
+@Service("menuDataService")
 @com.alibaba.dubbo.config.annotation.Service
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements MenuDataService {
 
