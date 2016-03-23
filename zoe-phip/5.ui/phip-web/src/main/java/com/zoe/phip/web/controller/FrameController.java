@@ -2,9 +2,12 @@ package com.zoe.phip.web.controller;
 
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.service.in.sm.SystemUserService;
 import com.zoe.phip.web.bean.BeanFactory;
+import com.zoe.phip.web.bean.Constant;
+import com.zoe.phip.web.context.DataContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,9 +37,7 @@ public class FrameController {
     //登录界面
     @RequestMapping("/login")
     public String ToLogin(HttpServletRequest request, Model model){
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-                new String[]{"application-context-consumer.xml"});
-        context.start();
+
         return "/frame/login";
     }
 
@@ -45,13 +46,20 @@ public class FrameController {
     public ServiceResult loginAuth(HttpServletRequest request, Model model){
         ServiceResult result=new ServiceResult();
         if(request.getParameter("userCode")!=null&&request.getParameter("userPwd")!=null){
-            SystemUserService deptService = BeanFactory.getBean("SystemUserService");
-            ServiceResultT<LoginCredentials> serviceResult= deptService.login(request.getParameter("userCode"),
+            SystemUserService systemUserService = BeanFactory.getBean(Constant.SYSTEM_USER_SERVICE);
+            ServiceResultT<LoginCredentials> serviceResult= systemUserService.login(request.getParameter("userCode"),
                     request.getParameter("userPwd"),1000*10);
             result.setIsSuccess(serviceResult.getIsSuccess());
             result.setMessages(serviceResult.getMessages());
-            HttpSession session= request.getSession();
-            
+            //存储用户session
+            if(serviceResult.getIsSuccess())
+            {
+                SystemData systemData=new SystemData();
+                systemData.setUserId(serviceResult.getResult().getUserId());
+                systemData.setCredential(serviceResult.getResult().getCredential());
+                DataContext.Session.put(Constant.USER_INFO,systemData);
+            }
+
         }
         return result;
     }
@@ -73,7 +81,7 @@ public class FrameController {
     public String ToError(HttpServletRequest request, Model model){
         return "/frame/error";
     }
-    //无权限访问提醒界�
+    //无权限访问提醒界�
     @RequestMapping("/noPower")
     public String ToNoPower(HttpServletRequest request, Model model){
         return "/frame/noPower";

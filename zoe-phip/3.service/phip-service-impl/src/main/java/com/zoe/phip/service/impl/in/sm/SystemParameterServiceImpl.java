@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  */
 @Service("systemParameterService")
+@com.alibaba.dubbo.config.annotation.Service
 public class SystemParameterServiceImpl extends BaseInServiceImpl<SystemParameter> implements SystemParameterService {
 
 }

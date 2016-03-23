@@ -27,6 +27,7 @@ import java.util.List;
  * @date 2016-03-18
  */
 @Service("SystemUserService")
+@com.alibaba.dubbo.config.annotation.Service(version = "1.0.0")
 public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> implements SystemUserService {
 
 
