@@ -14,6 +14,7 @@ import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.service.in.sm.SystemUserService;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -25,7 +26,7 @@ import java.util.List;
  * @date 2016-03-18
  */
 //@Service("SystemUserService")
-@com.alibaba.dubbo.config.annotation.Service
+@Component("SystemUserService")
 public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> implements SystemUserService {
 
     @Override
@@ -47,7 +48,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
                 throw new Exception("用户密码错误!");
             }
 
-            LoginCredentials credentials = createLoginCredentials(user.getId(),user.getName());
+            LoginCredentials credentials = createLoginCredentials(user.getId(), user.getName());
             return credentials;
         });
     }

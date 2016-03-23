@@ -16,6 +16,7 @@ import com.zoe.phip.model.sm.SystemDictItem;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.in.sm.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -26,7 +27,8 @@ import java.util.List;
  * @version 1.0
  * @date 2016-03-22
  */
-@Service("systemDictItemService")
+@Component("SystemDictItemService")
+@com.alibaba.dubbo.config.annotation.Service
 public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem> implements SystemDictItemService {
 
     @Autowired

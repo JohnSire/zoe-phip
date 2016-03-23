@@ -14,6 +14,7 @@ import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.in.sm.SystemDictCategoryService;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import java.util.List;
@@ -23,7 +24,10 @@ import java.util.List;
  * @version 1.0
  * @date 2016-03-22
  */
-@Service("SystemDictCategoryService")
+
+
+@Component("SystemDictCategoryService")
+@com.alibaba.dubbo.config.annotation.Service
 public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory> implements SystemDictCategoryService {
 
     @Override

@@ -5,12 +5,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 	   ">
-    <dubbo:application name="zoe-phip"/>
+    <dubbo:application name="zoe-phip-provider"/>
 
     <dubbo:registry address="N/A"/>
 
     <dubbo:protocol name="dubbo" port="20080"/>
-    <dubbo:annotation package="com.zoe.phip.service.in.sm"></dubbo:annotation>
+    <dubbo:annotation package="com.zoe.phip"></dubbo:annotation>
 
     <!--  <dubbo:service interface="com.zoe.phip.service.in.sm.SystemUserService" version="1.0.0"
                      ref="SystemUserService"/>-->
