@@ -6,6 +6,7 @@
 
 package com.zoe.phip.service.impl.in.sm;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.entity.*;
@@ -17,8 +18,7 @@ import com.zoe.phip.model.sm.SystemDictItem;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.in.sm.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -28,8 +28,8 @@ import java.util.List;
  * @version 1.0
  * @date 2016-03-22
  */
-@Component("SystemDictItemService")
-@com.alibaba.dubbo.config.annotation.Service(version = "1.0.0")
+@Repository("SystemDictItemService")
+@Service(version = "1.0.0")
 public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem> implements SystemDictItemService {
 
     @Autowired

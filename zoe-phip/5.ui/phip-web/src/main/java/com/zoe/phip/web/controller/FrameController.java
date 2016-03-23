@@ -79,7 +79,7 @@ public class FrameController {
     public String ToError(HttpServletRequest request, Model model){
         return "/frame/error";
     }
-    //无权限访问提醒界�
+    //无权限访问提醒界
     @RequestMapping("/noPower")
     public String ToNoPower(HttpServletRequest request, Model model){
         return "/frame/noPower";

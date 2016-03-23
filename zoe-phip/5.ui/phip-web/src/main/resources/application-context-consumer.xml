@@ -13,8 +13,13 @@
     <dubbo:reference id="SystemUserService" interface="com.zoe.phip.service.in.sm.SystemUserService" version="1.0.0"
                      url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemUserService"/>
     <dubbo:reference id="SystemDictCategoryService" interface="com.zoe.phip.service.in.sm.SystemDictCategoryService"
-                     version="1.0.0"
-                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemDictCategoryService"/>
+                     version="1.0.0" url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemDictCategoryService"/>
+    <dubbo:reference id="SystemDictItemService" interface="com.zoe.phip.service.in.sm.SystemDictItemService"
+                     version="1.0.0" url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemDictItemService"/>
+    <dubbo:reference id="MenuDataService" interface="com.zoe.phip.service.in.sm.MenuDataService"
+                     version="1.0.0" url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemDictItemService"/>
+    <dubbo:reference id="SystemParameterService" interface="com.zoe.phip.service.in.sm.SystemParameterService"
+                     version="1.0.0" url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemDictItemService"/>
 
-    <!-- <dubbo:annotation package="com.zoe.phip"></dubbo:annotation>-->
+    <!--<dubbo:annotation package="com.zoe.phip.service.in.sm"></dubbo:annotation>-->
 </beans>
