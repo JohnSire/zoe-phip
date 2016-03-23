@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  */
 @Service("menuDataService")
+@com.alibaba.dubbo.config.annotation.Service
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements MenuDataService {
 
     @Override

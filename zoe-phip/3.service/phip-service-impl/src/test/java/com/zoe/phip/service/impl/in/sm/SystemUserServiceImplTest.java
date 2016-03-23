@@ -25,7 +25,7 @@ public class SystemUserServiceImplTest extends BaseTest {
 
     @Test
     public void addTest(){
-        SystemUser user=creteUser("管理员","admin","admin",1);
+        SystemUser user=creteUser("管理员","admin","1",1);
         ServiceResult result= systemUserService.add(user);
     }
 
@@ -58,6 +58,8 @@ public class SystemUserServiceImplTest extends BaseTest {
 
     @Test
     public void testLogin() throws Exception {
-        ServiceResult result= systemUserService.login("zjy","zjy",1000*10);
+
+        ServiceResult result= systemUserService.login("admin1","zjy",1000*10);
+
     }
 }

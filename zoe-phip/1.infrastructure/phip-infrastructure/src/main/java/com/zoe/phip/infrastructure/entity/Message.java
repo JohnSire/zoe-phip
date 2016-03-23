@@ -1,19 +1,22 @@
 package com.zoe.phip.infrastructure.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 
 /**
  * Created by linqinghuang on 2016/1/26.
  */
-
 public class Message implements Serializable {
     /**
      * 消息id
      */
+    @JSONField(name = "Id")
     private String id;
     /**
      * 消息内容 content
      */
+    @JSONField(name = "Content")
     private String content;
 
     /**

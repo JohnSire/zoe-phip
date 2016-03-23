@@ -20,7 +20,7 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
 
     @Autowired
     @SuppressWarnings("all")
-    protected MyMapper<T> mapper;
+    private MyMapper<T> mapper;
 
     public MyMapper<T> getMapper() {
         return mapper;
@@ -28,6 +28,7 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
 
     @Override
     public ServiceResult add(T entity) {
+
         return SafeExecuteUtil.execute(() -> mapper.insertSelective(entity));
     }
 

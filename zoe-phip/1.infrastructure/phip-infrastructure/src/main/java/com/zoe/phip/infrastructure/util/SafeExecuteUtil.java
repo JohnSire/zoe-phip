@@ -1,6 +1,7 @@
 package com.zoe.phip.infrastructure.util;
 
-import com.zoe.phip.infrastructure.entity.BusinessException;
+import com.zoe.phip.infrastructure.entity.LogMessage;
+import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.function.Function;
 import com.zoe.phip.infrastructure.entity.Message;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
@@ -20,50 +21,57 @@ public final class SafeExecuteUtil<T> {
 
     public static ServiceResult execute(Function<Object> invoker) {
         ServiceResult executeResult = new ServiceResult();
-        List<Message> messageList = new ArrayList<Message>();
         try {
             Object result = invoker.apply();
             executeResult.setIsSuccess(result != null);
         } catch (BusinessException ex) {
-            Message message = new Message();
-            message.setId("1001");
-            message.setContent(ex.getMessage());
-            messageList.add(message);
+            //日志消息
+            executeResult.addMessage("", ex.getMessage());
             executeResult.setIsSuccess(false);
+            logger.error(ex.getMessage());
         } catch (Exception e) {
             //错误消息
-            Message message = new Message();
-            message.setId("1001");
-            message.setContent(e.getMessage());
-            messageList.add(message);
             executeResult.setIsSuccess(false);
-            e.printStackTrace();
+            executeResult.addLogData(e.toString());
+            executeResult.addLogData(getStackMsg(e));
             logger.error("方法执行报错:", e);
         }
-        executeResult.setMessages(messageList);
         return executeResult;
     }
 
     public ServiceResultT<T> executeT(Function<Object> invoker) {
         ServiceResultT<T> executeResult = new ServiceResultT<T>();
-        List<Message> messageList = new ArrayList<Message>();
         try {
             T result = (T) invoker.apply();
             executeResult.setResult(result);
             executeResult.setIsSuccess(result != null);
+        } catch (BusinessException ex) {
+            //日志消息
+            //todo 如何定义错误ID
+            executeResult.addMessage("1001", ex.getMessage());
+            executeResult.setIsSuccess(false);
+            logger.error(ex.getMessage());
         } catch (Exception e) {
             executeResult.setIsSuccess(false);
-            Message message = new Message();
-            //todo 如何定义错误ID
-            message.setId("1001");
-            message.setContent(e.getMessage());
-            messageList.add(message);
-            executeResult.setIsSuccess(false);
-            e.printStackTrace();
+            executeResult.addLogData(e.toString());
+            executeResult.addLogData(getStackMsg(e));
             logger.error("方法执行报错:", e);
         }
-        executeResult.setMessages(messageList);
         return executeResult;
+    }
+
+    private static String getStackMsg(Exception e) {
+
+        StringBuffer sb = new StringBuffer();
+        StackTraceElement[] stackArray = e.getStackTrace();
+        for (int i = 0; i < stackArray.length; i++) {
+            StackTraceElement element = stackArray[i];
+            String msg = element.toString();
+            if (msg.startsWith("com.zoe")) {
+                sb.append(element.toString() + "\n");
+            }
+        }
+        return sb.toString();
     }
 
 }

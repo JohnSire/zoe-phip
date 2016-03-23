@@ -18,4 +18,22 @@ import com.zoe.phip.service.in.BaseInService;
  */
 public interface MenuDataService extends BaseInService<MenuData> {
 
+
+//    /**
+//     * 获取菜单列表
+//     * @param key
+//     * @return
+//     */
+//    List<MenuData> getMenus(String key);
+//
+//
+//    /**
+//     *
+//     * @param state
+//     * @param key
+//     * @param page
+//     * @return
+//     */
+//    PageList<MenuData> getMenuPages(int state, String key, QueryPage page);
+
 }
