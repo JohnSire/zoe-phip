@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 public class SystemParamController {
     //系统参数界面
     @RequestMapping("/sysparam")
-    public String ToParam(HttpServletRequest request, Model model){
+    public String ToParam(HttpServletRequest request, Model model) {
         return "/param/sysparam";
     }
 }

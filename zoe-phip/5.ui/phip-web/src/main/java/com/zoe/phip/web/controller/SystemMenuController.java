@@ -14,23 +14,25 @@ import javax.servlet.http.HttpServletRequest;
 public class SystemMenuController {
     //菜单页面
     @RequestMapping("/list")
-    public String  ToMenuList(HttpServletRequest request, Model model)
-    {
+    public String ToMenuList(HttpServletRequest request, Model model) {
         return "/menu/list";
     }
+
     //修改菜单信息
     @RequestMapping("/detail")
-    public String ToMenuDetail(HttpServletRequest request,Model model){
+    public String ToMenuDetail(HttpServletRequest request, Model model) {
         return "/menu/detail";
     }
+
     //菜单结构调整
     @RequestMapping("/tree")
-    public String ToMenuTree(HttpServletRequest request ,Model model){
+    public String ToMenuTree(HttpServletRequest request, Model model) {
         return "/menu/tree";
     }
+
     //菜单权限
     @RequestMapping("/acc")
-    public String ToMenuAcc(HttpServletRequest request,Model model){
+    public String ToMenuAcc(HttpServletRequest request, Model model) {
         return "/menu/acc";
     }
 }

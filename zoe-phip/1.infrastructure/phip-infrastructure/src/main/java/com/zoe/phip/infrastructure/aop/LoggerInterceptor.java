@@ -39,7 +39,7 @@ public class LoggerInterceptor {
         if (!StringUtil.isNullOrWhiteSpace(methodName)) {
             if (!(methodName.startsWith("set") || methodName.startsWith("get") || methodName.startsWith("query"))) {
                 Class clazz = joinPoint.getTarget().getClass();
-                Method method = clazz.getMethod(methodName,((MethodSignature)joinPoint.getSignature()).getParameterTypes());
+                Method method = clazz.getMethod(methodName, ((MethodSignature) joinPoint.getSignature()).getParameterTypes());
                 if (method != null) {
                     boolean hasAnnotation = method.isAnnotationPresent(Action.class);
                     if (hasAnnotation) {
@@ -54,12 +54,12 @@ public class LoggerInterceptor {
                 }
             }
         }
-        Object result=joinPoint.proceed();
-        if(result instanceof ServiceResultT){
+        Object result = joinPoint.proceed();
+        if (result instanceof ServiceResultT) {
 //            ((ServiceResultT) result).setIsSuccess(true);
-        }else if(result instanceof ServiceResult){
+        } else if (result instanceof ServiceResult) {
 //            ((ServiceResult) result).setIsSuccess(true);
-        }else {
+        } else {
             throw new Exception("方法的返回类型只能为ServiceResult或ServiceResultT");
         }
 

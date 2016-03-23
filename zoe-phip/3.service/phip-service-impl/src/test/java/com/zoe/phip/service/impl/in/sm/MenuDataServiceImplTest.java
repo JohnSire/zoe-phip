@@ -19,7 +19,7 @@ public class MenuDataServiceImplTest extends BaseTest {
     private MenuDataService menuDataService;
 
     @Test
-    public void addTest(){
+    public void addTest() {
         MenuData menuData = new MenuData();
         menuData.setId("123456");
         menuData.setName("测试");

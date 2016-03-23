@@ -15,8 +15,8 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author
- * @date 2016-03-21
  * @version 1.0
+ * @date 2016-03-21
  */
 @Repository("menuDataService")
 @Service(version = "1.0.0")

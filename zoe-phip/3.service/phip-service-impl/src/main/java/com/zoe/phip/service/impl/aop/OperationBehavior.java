@@ -46,9 +46,9 @@ public class OperationBehavior {
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
         //todo 是否记录方法执行时间
         Class cl = ((MethodSignature) pjp.getSignature()).getReturnType();
-        logger.info("进入方法:"+pjp.getSignature().getName());
+        logger.info("进入方法:" + pjp.getSignature().getName());
         Object result = pjp.proceed();
-        logger.info("方法:"+pjp.getSignature().getName()+"执行完成！");
+        logger.info("方法:" + pjp.getSignature().getName() + "执行完成！");
         return result;
     }
 }

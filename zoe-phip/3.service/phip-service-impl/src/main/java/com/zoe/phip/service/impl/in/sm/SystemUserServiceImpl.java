@@ -33,14 +33,12 @@ import java.util.List;
 public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> implements SystemUserService {
 
 
-
-
     @Override
     public ServiceResultT<LoginCredentials> login(String loginName, String passWord, int expiresTime) {
         SafeExecuteUtil<LoginCredentials> safeExecute = new SafeExecuteUtil<LoginCredentials>();
         return safeExecute.executeT(() -> {
-            List<SystemUser> list =getUserByLoginName(loginName);
-            if(list==null||list.size()==0){
+            List<SystemUser> list = getUserByLoginName(loginName);
+            if (list == null || list.size() == 0) {
                 throw new BusinessException("用户名错误!");
             }
             SystemUser user = list.get(0);
@@ -51,23 +49,23 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
             if (!psd.equals(user.getPassword())) {
                 throw new BusinessException("密码错误!");
             }
-            LoginCredentials credentials = createLoginCredentials(user.getId(),user.getName());
+            LoginCredentials credentials = createLoginCredentials(user.getId(), user.getName());
             return credentials;
         });
     }
 
     @Override
     public ServiceResult updatePassword(String id, String oldPwd, String newPwd) {
-        return SafeExecuteUtil.execute(()->{
-            SystemUser user=getMapper().selectByPrimaryKey(id);
-            if(user==null){
+        return SafeExecuteUtil.execute(() -> {
+            SystemUser user = getMapper().selectByPrimaryKey(id);
+            if (user == null) {
                 throw new BusinessException("未找到该用户!");
             }
-            String oldPassword=createPassword(user.getLoginName(),oldPwd);
-            if(!user.getPassword().equals(oldPassword)){
+            String oldPassword = createPassword(user.getLoginName(), oldPwd);
+            if (!user.getPassword().equals(oldPassword)) {
                 throw new BusinessException("旧密码错误!");
             }
-            user.setPassword(createPassword(user.getLoginName(),newPwd));
+            user.setPassword(createPassword(user.getLoginName(), newPwd));
             user.setModifyAt(new Date());
             return getMapper().updateByPrimaryKeySelective(user);
         });
@@ -75,12 +73,12 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
 
     @Override
     public ServiceResult resetPassword(String id, String newPwd) {
-        return SafeExecuteUtil.execute(()->{
-            SystemUser user=getMapper().selectByPrimaryKey(id);
-            if(user==null){
+        return SafeExecuteUtil.execute(() -> {
+            SystemUser user = getMapper().selectByPrimaryKey(id);
+            if (user == null) {
                 throw new BusinessException("未找到该用户!");
             }
-            user.setPassword(createPassword(user.getLoginName(),newPwd));
+            user.setPassword(createPassword(user.getLoginName(), newPwd));
             user.setModifyAt(new Date());
             return getMapper().updateByPrimaryKeySelective(user);
         });
@@ -88,9 +86,9 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
 
     @Override
     public ServiceResult updateState(String id, int state) {
-        return SafeExecuteUtil.execute(()->{
-            SystemUser user=getMapper().selectByPrimaryKey(id);
-            if(user==null){
+        return SafeExecuteUtil.execute(() -> {
+            SystemUser user = getMapper().selectByPrimaryKey(id);
+            if (user == null) {
                 throw new BusinessException("未找到该用户!");
             }
             user.setState(state);
@@ -101,11 +99,11 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
 
     @Override
     public ServiceResult add(SystemUser entity) {
-        return SafeExecuteUtil.execute(()->{
+        return SafeExecuteUtil.execute(() -> {
             //判断是否存在用户名
-            List<SystemUser> list =getUserByLoginName(entity.getLoginName());
-            if(list!=null&&list.size()>0){
-                throw new BusinessException("已存在登录名为({0})的用户!",entity.getLoginName());
+            List<SystemUser> list = getUserByLoginName(entity.getLoginName());
+            if (list != null && list.size() > 0) {
+                throw new BusinessException("已存在登录名为({0})的用户!", entity.getLoginName());
             }
             String password = createPassword(entity.getLoginName(), entity.getPassword());
             entity.setPassword(password);
@@ -116,22 +114,22 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
 
     @Override
     public ServiceResult addList(List<SystemUser> entities) {
-        return SafeExecuteUtil.execute(()->
+        return SafeExecuteUtil.execute(() ->
         {
-            List<String> loginNames=new ArrayList<String>();
-            entities.forEach(e->{
+            List<String> loginNames = new ArrayList<String>();
+            entities.forEach(e -> {
                 loginNames.add(e.getLoginName());
             });
             //判断是否重名
             Example example = new Example(SystemUser.class);
-            example.createCriteria().andIn("loginName",loginNames);
+            example.createCriteria().andIn("loginName", loginNames);
             List<SystemUser> list = getMapper().selectByExample(example);
-            if(list.size()>0){
+            if (list.size() > 0) {
                 loginNames.clear();
-                list.forEach(l->{
+                list.forEach(l -> {
                     loginNames.add(l.getLoginName());
                 });
-                throw new BusinessException("已存在登录名为({0})的用户",loginNames.toString());
+                throw new BusinessException("已存在登录名为({0})的用户", loginNames.toString());
             }
             entities.forEach(e -> {
                 String password = createPassword(e.getLoginName(), e.getPassword());

@@ -1,17 +1,19 @@
-<#include "/java_copyright.include">
-<#assign className = table.className>
-<#assign classNameLower = className?uncap_first>
+<#include"/java_copyright.include">
+<#assign className=table.className>
+<#assign classNameLower=className?uncap_first>
 
-package ${basepackage}.dto;
+        package ${basepackage}.dto;
 
-import ${basepackage}.dao.MyMapper;
-import ${basepackage}.model.${className};
+        import ${basepackage}.dao.MyMapper;
+        import ${basepackage}.model.${className};
 
 /**
  * @author
- * @date ${now?string("yyyy-MM-dd")}
  * @version 1.0
+ * @date ${now?string("yyyy-MM-dd")}
  */
-public interface ${className}Mapper extends MyMapper<${className}> {
+public interface $ {
+    className
+}Mapper extends MyMapper<${className}>{
 
- }
+        }

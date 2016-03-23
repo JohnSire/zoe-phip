@@ -24,38 +24,39 @@ import javax.servlet.http.HttpServletRequest;
 public class FrameController {
     //平台首页
     @RequestMapping("/index")
-    public String ToIndex(HttpServletRequest request, Model model){
+    public String ToIndex(HttpServletRequest request, Model model) {
         return "/frame/index";
     }
+
     //管理中心
     @RequestMapping("/center")
-    public String ToCenter(HttpServletRequest request, Model model){
+    public String ToCenter(HttpServletRequest request, Model model) {
         return "/frame/center";
     }
+
     //登录界面
     @RequestMapping("/login")
-    public String ToLogin(HttpServletRequest request, Model model){
+    public String ToLogin(HttpServletRequest request, Model model) {
 
         return "/frame/login";
     }
 
-    @RequestMapping(value = "/login/auth",method = RequestMethod.POST)
+    @RequestMapping(value = "/login/auth", method = RequestMethod.POST)
     @ResponseBody
-    public ServiceResult loginAuth(HttpServletRequest request, Model model){
-        ServiceResult result=new ServiceResult();
-        if(request.getParameter("userCode")!=null&&request.getParameter("userPwd")!=null){
+    public ServiceResult loginAuth(HttpServletRequest request, Model model) {
+        ServiceResult result = new ServiceResult();
+        if (request.getParameter("userCode") != null && request.getParameter("userPwd") != null) {
             SystemUserService systemUserService = BeanFactory.getBean(Constant.SYSTEM_USER_SERVICE);
-            ServiceResultT<LoginCredentials> serviceResult= systemUserService.login(request.getParameter("userCode"),
-                    request.getParameter("userPwd"),1000*10);
+            ServiceResultT<LoginCredentials> serviceResult = systemUserService.login(request.getParameter("userCode"),
+                    request.getParameter("userPwd"), 1000 * 10);
             result.setIsSuccess(serviceResult.getIsSuccess());
             result.setMessages(serviceResult.getMessages());
             //存储用户session
-            if(serviceResult.getIsSuccess())
-            {
-                SystemData systemData=new SystemData();
+            if (serviceResult.getIsSuccess()) {
+                SystemData systemData = new SystemData();
                 systemData.setUserId(serviceResult.getResult().getUserId());
                 systemData.setCredential(serviceResult.getResult().getCredential());
-                DataContext.Session.put(Constant.USER_SESSION,systemData);
+                DataContext.Session.put(Constant.USER_SESSION, systemData);
             }
 
         }
@@ -63,25 +64,27 @@ public class FrameController {
     }
 
 
-
     //未登录界面或着登录超时跳转中间界面
     @RequestMapping("/skip")
-    public String ToSkip(HttpServletRequest request, Model model){
+    public String ToSkip(HttpServletRequest request, Model model) {
         return "/frame/skip";
     }
+
     // 注销用户登录
     @RequestMapping("/loginOut")
-    public String ToLoginOut(HttpServletRequest request, Model model){
+    public String ToLoginOut(HttpServletRequest request, Model model) {
         return "/frame/loginOut";
     }
+
     //404界面
     @RequestMapping("/error")
-    public String ToError(HttpServletRequest request, Model model){
+    public String ToError(HttpServletRequest request, Model model) {
         return "/frame/error";
     }
+
     //无权限访问提醒界
     @RequestMapping("/noPower")
-    public String ToNoPower(HttpServletRequest request, Model model){
+    public String ToNoPower(HttpServletRequest request, Model model) {
         return "/frame/noPower";
     }
 }

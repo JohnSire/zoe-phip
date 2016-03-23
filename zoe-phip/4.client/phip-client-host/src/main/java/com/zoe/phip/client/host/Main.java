@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
     public static void main(String[] args) throws Exception {
         ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext(new String[] {"application-context-provider.xml", "spring-mybatis.xml"});
+                new ClassPathXmlApplicationContext(new String[]{"application-context-provider.xml", "spring-mybatis.xml"});
         context.start();
         System.out.println("按任意键退出");
         System.in.read();

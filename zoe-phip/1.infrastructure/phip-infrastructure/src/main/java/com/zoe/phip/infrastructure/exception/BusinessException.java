@@ -12,6 +12,6 @@ public class BusinessException extends Exception {
     }
 
     public BusinessException(String message, Object... args) {
-        super(MessageFormat.format(message,args));
+        super(MessageFormat.format(message, args));
     }
 }

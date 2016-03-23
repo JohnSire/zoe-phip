@@ -11,9 +11,9 @@ import com.zoe.phip.model.sm.MenuData;
 
 /**
  * @author zhanghao
- * @date 2016-03-21
  * @version 1.0
+ * @date 2016-03-21
  */
 public interface MenuDataMapper extends MyMapper<MenuData> {
 
- }
+}

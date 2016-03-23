@@ -31,6 +31,7 @@ public interface SystemUserService extends BaseInService<SystemUser> {
 
     /**
      * 修改密码
+     *
      * @param id
      * @param oldPwd
      * @param newPwd
@@ -40,17 +41,19 @@ public interface SystemUserService extends BaseInService<SystemUser> {
 
     /**
      * 重设密码
+     *
      * @param id
      * @param newPwd
      * @return
      */
-    ServiceResult resetPassword(String id,String newPwd);
+    ServiceResult resetPassword(String id, String newPwd);
 
     /**
      * 更新用户状态
+     *
      * @param id
      * @param state
      * @return
      */
-    ServiceResult updateState(String id,int state);
+    ServiceResult updateState(String id, int state);
 }

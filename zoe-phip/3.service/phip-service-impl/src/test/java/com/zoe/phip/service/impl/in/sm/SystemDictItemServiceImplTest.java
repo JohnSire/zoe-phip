@@ -27,7 +27,7 @@ public class SystemDictItemServiceImplTest extends BaseTest {
 
     @Test
     public void getDictItems() throws Exception {
-        ServiceResult sr = service.getDictItems("1", "%5%",new QueryPage(1,5));
+        ServiceResult sr = service.getDictItems("1", "%5%", new QueryPage(1, 5));
         System.out.println(com.alibaba.fastjson.JSON.toJSON(sr));
     }
 

@@ -42,10 +42,10 @@ public class SystemDictController {
 
     @RequestMapping("/test")
     @ResponseBody
-    public ServiceResultT<PageList<SystemUser>> getDict(HttpServletRequest request, Model model){
+    public ServiceResultT<PageList<SystemUser>> getDict(HttpServletRequest request, Model model) {
         SystemUserService systemUserService = BeanFactory.getBean(Constant.SYSTEM_USER_SERVICE);
-        QueryPage page=new QueryPage(1,30);
-        ServiceResultT<PageList<SystemUser>> resultT= systemUserService.getList(page, SystemUser.class);
+        QueryPage page = new QueryPage(1, 30);
+        ServiceResultT<PageList<SystemUser>> resultT = systemUserService.getList(page, SystemUser.class);
         return resultT;
     }
 }
