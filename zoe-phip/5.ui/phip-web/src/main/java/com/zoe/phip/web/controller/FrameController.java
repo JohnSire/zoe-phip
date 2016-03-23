@@ -5,6 +5,7 @@ import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.service.in.sm.SystemUserService;
 import com.zoe.phip.web.bean.BeanFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,9 @@ public class FrameController {
     @RequestMapping("/login")
     public String ToLogin(HttpServletRequest request, Model model){
         if(request.getParameter("userCode")!=null&&request.getParameter("userPwd")!=null){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+                new String[]{"application-context-consumer.xml"});
+        context.start();
             SystemUserService deptService = BeanFactory.getBean("SystemUserService");
             ServiceResult serviceResult= deptService.login(request.getParameter("userCode"),
                     request.getParameter("userPwd"),1000*10);
@@ -74,7 +78,7 @@ public class FrameController {
     public String ToError(HttpServletRequest request, Model model){
         return "/frame/error";
     }
-    //无权限访问提醒界面
+    //无权限访问提醒界�
     @RequestMapping("/noPower")
     public String ToNoPower(HttpServletRequest request, Model model){
         return "/frame/noPower";
