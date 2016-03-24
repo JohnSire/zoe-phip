@@ -3,7 +3,7 @@ package com.zoe.phip.web.bean;
 /**
  * Created by zengjiyang on 2016/3/23.
  */
-public class Constant {
+public final class Constant {
     public static final String USER_SESSION = "USER_SESSION";
     public static final String SYSTEM_USER_SERVICE = "SystemUserService";
     public static final String SYSTEM_DICT_CATEGORY_SERVICE = "SystemDictCategoryService";

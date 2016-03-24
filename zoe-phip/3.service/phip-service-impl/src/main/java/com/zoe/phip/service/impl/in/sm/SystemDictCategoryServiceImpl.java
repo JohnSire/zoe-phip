@@ -29,9 +29,8 @@ import java.util.List;
 
 
 @Repository("SystemDictCategoryService")
-@Service
-public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory> implements SystemDictCategoryService {
-
+@Service(version = "1.0.0")
+public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory> implements SystemDictCategoryService {
     @Override
     public ServiceResult add(SystemDictCategory entity) {
         return SafeExecuteUtil.execute(

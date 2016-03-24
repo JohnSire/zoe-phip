@@ -19,9 +19,14 @@ public class LoggerInterceptor {
 
     private Logger logger = LoggerFactory.getLogger(LoggerInterceptor.class);
 
-    public void doBefore(JoinPoint point) {
+    public void doBefore(JoinPoint joinPoint) {
         // TODO: 2016/3/17 相关权限验证
 
+        Object[] params = joinPoint.getArgs();
+        String methodName = joinPoint.getSignature().getName();
+        if(!StringUtil.isNullOrWhiteSpace(methodName)){
+
+        }
     }
 
     public void doAfter(JoinPoint joinPoint) {
