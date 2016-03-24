@@ -7,6 +7,7 @@ package com.zoe.phip.model.sm;
 
 import javax.persistence.*;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.model.base.BaseEntity;
 
 /**
@@ -20,16 +21,19 @@ public class SystemDictItem extends BaseEntity {
      * 字典类别
      */
     @Column(name = "FK_SYSTEM_DICT_CATEGORY_ID")
+    @JSONField(name = "FkSystemDictCategoryId")
     private String fkSystemDictCategoryId;
     /**
      * 名称
      */
     @Column(name = "NAME")
+    @JSONField(name = "Name")
     private String name;
     /**
      * 编码
      */
     @Column(name = "CODE")
+    @JSONField(name = "Code")
     private String code;
 
     public String getFkSystemDictCategoryId() {

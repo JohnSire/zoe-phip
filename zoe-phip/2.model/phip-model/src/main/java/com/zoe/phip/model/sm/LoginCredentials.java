@@ -1,5 +1,7 @@
 package com.zoe.phip.model.sm;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 
 /**
@@ -10,17 +12,20 @@ public class LoginCredentials implements Serializable {
     /**
      * 用户标识
      */
+    @JSONField(name = "UserId")
     public String userId;
 
     /**
      * 用户名
      */
-    public String UserName;
+    @JSONField(name = "UserName")
+    public String userName;
 
     /**
      * 凭据
      */
-    public String Credential;
+    @JSONField(name = "Credential")
+    public String credential;
 
     public String getUserId() {
         return userId;
@@ -31,18 +36,18 @@ public class LoginCredentials implements Serializable {
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
     public String getCredential() {
-        return Credential;
+        return credential;
     }
 
     public void setCredential(String credential) {
-        Credential = credential;
+        this.credential = credential;
     }
 }
