@@ -18,7 +18,11 @@
                 },
                 //表格参数
                 gridParam: {
+<<<<<<< HEAD
                     url: webRoot + '/user/list',
+=======
+                    url: webRoot + 'user/get/list',
+>>>>>>> origin/dev_yzx
                     columns: [
                     { display: '名称', name: 'Name', width: 120, align: 'left' },
                     { display: '登录名', name: 'LoginName', width: 120, align: 'left' },
