@@ -1,12 +1,15 @@
 package com.zoe.phip.web.controller;
 
 import com.zoe.phip.infrastructure.entity.*;
+import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.model.sm.SystemUser;
+import com.zoe.phip.service.in.sm.MenuDataService;
 import com.zoe.phip.service.in.sm.SystemUserService;
 import com.zoe.phip.web.bean.BeanFactory;
 import com.zoe.phip.web.bean.Constant;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.DataContext;
+import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,32 +27,31 @@ import java.util.List;
 @RequestMapping("/user")
 public class SystemUserController extends BaseController {
 
-    private SystemUserService systemUserService;
 
     //region 视图
 
     //用户列表
-    @RequestMapping("/list")
+    @RequestMapping("/view/list")
     public String ToList(HttpServletRequest request, Model model) {
 
         return "/user/list";
     }
 
     //用户详细信息
-    @RequestMapping("/detail")
+    @RequestMapping("/view/detail")
     public String ToDetail(HttpServletRequest request, Model model) {
 
         return "/user/detail";
     }
 
     //修改密码
-    @RequestMapping("/pwd")
+    @RequestMapping("/view/pwd")
     public String ToPwd(HttpServletRequest request, Model model) {
         return "/user/pwd";
     }
 
     //用户选择器
-    @RequestMapping("/selector")
+    @RequestMapping("/view/selector")
     public String ToSelector(HttpServletRequest request, Model model) {
         return "/user/selector";
     }
@@ -65,11 +67,11 @@ public class SystemUserController extends BaseController {
      * 获取用户列表
      * @return
      */
-    @RequestMapping(value = "/get/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResultT<PageList<SystemUser>>  GetUserList(){
-        ServiceResultT<PageList<SystemUser>> result=
-                getSystemUserService().getList(getQueryPage(),SystemUser.class);
+        ServiceResultT<PageList<SystemUser>> result= ServiceFactory.getUserService()
+                .getList(getQueryPage(),SystemUser.class);
         return result;
     }
 
@@ -85,7 +87,7 @@ public class SystemUserController extends BaseController {
     @ResponseBody
     public ServiceResultT<SystemUser> getUserInfo(HttpServletRequest request, Model model) {
         SystemData userInfo = ComSession.getUserInfo();
-        ServiceResultT<SystemUser> user = getSystemUserService().getById(userInfo.getUserId());
+        ServiceResultT<SystemUser> user = ServiceFactory.getUserService().getById(userInfo.getUserId());
         return user;
     }
 
@@ -99,7 +101,7 @@ public class SystemUserController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult addUserInfo(SystemUser userInfo) {
-        return getSystemUserService().add(userInfo);
+        return ServiceFactory.getUserService().add(userInfo);
     }
 
     /**
@@ -111,7 +113,7 @@ public class SystemUserController extends BaseController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult updateUserInfo(SystemUser userInfo) {
-        return getSystemUserService().update(userInfo);
+        return ServiceFactory.getUserService().update(userInfo);
     }
 
     /**
@@ -123,7 +125,7 @@ public class SystemUserController extends BaseController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult deleteUserInfo(String id) {
-        return getSystemUserService().deleteById(id);
+        return ServiceFactory.getUserService().deleteById(id);
     }
 
     /**
@@ -136,15 +138,19 @@ public class SystemUserController extends BaseController {
     @ResponseBody
     public ServiceResult deleteUserList(String ids) {
         List<String> list = Arrays.asList(ids.split(","));
-        return getSystemUserService().deleteByIds(list);
+        return ServiceFactory.getUserService().deleteByIds(list);
+    }
+
+    /**
+     * 获取用户关联菜单
+     * @return
+     */
+    @RequestMapping("/menu")
+    @ResponseBody
+    public ServiceResultT<List<MenuData>> getUserMenu(){
+        return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(),ComSession.getUserInfo().getUserId());
     }
 
     //endregion
 
-    private SystemUserService getSystemUserService() {
-        if (systemUserService == null) {
-            return BeanFactory.getBean(Constant.SYSTEM_USER_SERVICE);
-        } else
-            return systemUserService;
-    }
 }

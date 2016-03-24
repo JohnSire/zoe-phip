@@ -9799,10 +9799,10 @@
                     //}
 
                     //2015年10月27日 by lqh data.Result 在SQL下返回的是字符串
-                    if (typeof (data.result) == "string") {
-                        data = $.parseJSON(data.result);
+                    if (typeof (data.Result) == "string") {
+                        data = $.parseJSON(data.Result);
                     } else {
-                        data = data.result;
+                        data = data.Result;
                     }
 
 

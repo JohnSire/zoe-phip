@@ -18,7 +18,7 @@
                 },
                 //表格参数
                 gridParam: {
-                    url: webRoot + 'SystemUser/GetUserList',
+                    url: webRoot + '/user/list',
                     columns: [
                     { display: '名称', name: 'Name', width: 120, align: 'left' },
                     { display: '登录名', name: 'LoginName', width: 120, align: 'left' },
