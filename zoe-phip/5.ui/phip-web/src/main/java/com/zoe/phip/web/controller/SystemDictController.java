@@ -12,6 +12,7 @@ import com.zoe.phip.service.in.sm.SystemDictItemService;
 import com.zoe.phip.service.in.sm.SystemUserService;
 import com.zoe.phip.web.bean.BeanFactory;
 import com.zoe.phip.web.bean.Constant;
+import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,10 +62,8 @@ public class SystemDictController extends BaseController {
     @RequestMapping("/getCategoryList")
     @ResponseBody
     public ServiceResultT<PageList<SystemDictCategory>> getSysDictCategoryList(HttpServletRequest request, Model model) {
-
-        categoryService = BeanFactory.getBean(Constant.SYSTEM_DICT_CATEGORY_SERVICE);
         String key = request.getParameter("keyWord");
-        return categoryService.getDictCategories(key, getQueryPage());
+        return ServiceFactory.getDictCategoryService().getDictCategories(key, getQueryPage());
     }
 
     /**
@@ -77,9 +76,7 @@ public class SystemDictController extends BaseController {
     @RequestMapping("/getCategoryInfo")
     @ResponseBody
     public ServiceResultT<SystemDictCategory> getSysDictCategoryInfo(HttpServletRequest request, Model model) {
-        categoryService = BeanFactory.getBean(Constant.SYSTEM_DICT_CATEGORY_SERVICE);
-
-        return  categoryService.getById(request.getParameter("id"));
+        return  ServiceFactory.getDictCategoryService().getById(request.getParameter("id"));
     }
 
     /**
@@ -92,9 +89,7 @@ public class SystemDictController extends BaseController {
     @RequestMapping("/addCategory")
     @ResponseBody
     public ServiceResult addCategoryInfo(SystemDictCategory info, HttpServletRequest request) {
-        categoryService = BeanFactory.getBean(Constant.SYSTEM_DICT_CATEGORY_SERVICE);
-
-        return categoryService.add(info);
+        return ServiceFactory.getDictCategoryService().add(info);
     }
 
     /**
@@ -107,9 +102,7 @@ public class SystemDictController extends BaseController {
     @RequestMapping("/updateCategory")
     @ResponseBody
     public ServiceResult updateCategoryInfo(SystemDictCategory info, HttpServletRequest request) {
-        categoryService = BeanFactory.getBean(Constant.SYSTEM_DICT_CATEGORY_SERVICE);
-
-        return categoryService.update(info);
+        return ServiceFactory.getDictCategoryService().update(info);
     }
 
     /**
@@ -121,10 +114,8 @@ public class SystemDictController extends BaseController {
     @RequestMapping("/deleteCategory")
     @ResponseBody
     public ServiceResult deleteCategoryInfo(HttpServletRequest request) {
-        categoryService = BeanFactory.getBean(Constant.SYSTEM_DICT_CATEGORY_SERVICE);
-
         String id = request.getParameter("id");
-        return categoryService.deleteById(id);
+        return ServiceFactory.getDictCategoryService().deleteById(id);
     }
 
     /**
@@ -136,9 +127,8 @@ public class SystemDictController extends BaseController {
     @RequestMapping("/deleteCategoryList")
     @ResponseBody
     public ServiceResult deleteSysDictCategoryList(HttpServletRequest request) {
-        categoryService = BeanFactory.getBean(Constant.SYSTEM_DICT_CATEGORY_SERVICE);
         String id = request.getParameter("ids");
-        return categoryService.deleteByIds(Arrays.asList(id.split(",")));
+        return ServiceFactory.getDictCategoryService().deleteByIds(Arrays.asList(id.split(",")));
     }
 
     /**
@@ -150,26 +140,22 @@ public class SystemDictController extends BaseController {
     @RequestMapping("/getItemPageList")
     @ResponseBody
     public ServiceResultT<PageList<SystemDictItem>> getSysDictItemList(HttpServletRequest request) {
-
-        itemService = BeanFactory.getBean(Constant.SYSTEM_DICT_ITEM_SERVICE);
         String key = request.getParameter("keyWord");
         String categoryId = request.getParameter("categoryId");
-        return itemService.getDictItems(categoryId, key, getQueryPage());
+        return ServiceFactory.getDictItemService().getDictItems(categoryId, key, getQueryPage());
     }
 
     @RequestMapping("/getItemList")
     @ResponseBody
     public ServiceResultT<List<SystemDictItem>> getSysDictItemListByCode(HttpServletRequest request) {
-        itemService = BeanFactory.getBean(Constant.SYSTEM_DICT_ITEM_SERVICE);
         String catalog = request.getParameter("catalogCode");
-        return itemService.getDictItemsByCategoryCode(catalog);
+        return ServiceFactory.getDictItemService().getDictItemsByCategoryCode(catalog);
     }
 
     @RequestMapping("/getItemInfo")
     @ResponseBody
     public ServiceResultT<SystemDictItem> getSysDictItemInfo(HttpServletRequest request) {
-        itemService = BeanFactory.getBean(Constant.SYSTEM_DICT_ITEM_SERVICE);
-        return itemService.getById(request.getParameter("id"));
+        return ServiceFactory.getDictItemService().getById(request.getParameter("id"));
     }
 
 
@@ -183,8 +169,7 @@ public class SystemDictController extends BaseController {
     @RequestMapping("/addItem")
     @ResponseBody
     public ServiceResult addSysDictItemInfo(SystemDictItem info, HttpServletRequest request) {
-        itemService = BeanFactory.getBean(Constant.SYSTEM_DICT_ITEM_SERVICE);
-        return itemService.add(info);
+        return ServiceFactory.getDictItemService().add(info);
     }
 
     /**
@@ -197,8 +182,7 @@ public class SystemDictController extends BaseController {
     @RequestMapping("/updateItem")
     @ResponseBody
     public ServiceResult updateSysDictItemInfo(SystemDictItem info, HttpServletRequest request) {
-        itemService = BeanFactory.getBean(Constant.SYSTEM_DICT_ITEM_SERVICE);
-        return itemService.update(info);
+        return ServiceFactory.getDictItemService().update(info);
     }
 
     /**
@@ -210,21 +194,18 @@ public class SystemDictController extends BaseController {
     @RequestMapping("/deleteItem")
     @ResponseBody
     public ServiceResult deleteSysDictItemInfo(String id) {
-        itemService = BeanFactory.getBean(Constant.SYSTEM_DICT_ITEM_SERVICE);
-        return itemService.deleteById(id);
+        return ServiceFactory.getDictItemService().deleteById(id);
     }
 
     @RequestMapping("/deleteItemList")
     @ResponseBody
     public ServiceResult deleteSysDictItemList(HttpServletRequest request) {
-        itemService = BeanFactory.getBean(Constant.SYSTEM_DICT_ITEM_SERVICE);
-        return itemService.deleteByIds(Arrays.asList(request.getParameter("ids").split(",")));
+        return ServiceFactory.getDictItemService().deleteByIds(Arrays.asList(request.getParameter("ids").split(",")));
     }
 
     @RequestMapping("/categoryExists")
     @ResponseBody
     public ServiceResult categoryExists(HttpServletRequest request) {
-        itemService = BeanFactory.getBean(Constant.SYSTEM_DICT_ITEM_SERVICE);
-        return itemService.categoryExists(request.getParameter("catalogId"));
+        return ServiceFactory.getDictItemService().categoryExists(request.getParameter("catalogId"));
     }
 }

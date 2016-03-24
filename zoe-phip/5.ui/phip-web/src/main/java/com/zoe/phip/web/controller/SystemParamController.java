@@ -7,6 +7,7 @@ import com.zoe.phip.model.sm.SystemParameter;
 import com.zoe.phip.service.in.sm.SystemParameterService;
 import com.zoe.phip.web.bean.BeanFactory;
 import com.zoe.phip.web.bean.Constant;
+import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +31,8 @@ public class SystemParamController extends BaseController {
     @RequestMapping(value="/getSysParamList",method = RequestMethod.GET)
     @ResponseBody
     public ServiceResultT<PageList<SystemParameter>> getSysParamList(HttpServletRequest request, Model model) {
-        SystemParameterService systemParameterService = BeanFactory.getBean(Constant.SYSTEM_PARAMETER_SERVICE);
         QueryPage page = new QueryPage(1, 30);
-        ServiceResultT<PageList<SystemParameter>> param = systemParameterService.getList(page, SystemParameter.class);
+        ServiceResultT<PageList<SystemParameter>> param = ServiceFactory.getParameterService().getList(page, SystemParameter.class);
         return param;
     }
 }

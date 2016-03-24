@@ -9,6 +9,7 @@ import com.zoe.phip.web.bean.BeanFactory;
 import com.zoe.phip.web.bean.Constant;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.DataContext;
+import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,8 +48,7 @@ public class FrameController extends BaseController {
     public ServiceResult loginAuth(HttpServletRequest request, Model model) {
         ServiceResult result = new ServiceResult();
         if (request.getParameter("userCode") != null && request.getParameter("userPwd") != null) {
-            SystemUserService systemUserService = BeanFactory.getBean(Constant.SYSTEM_USER_SERVICE);
-            ServiceResultT<LoginCredentials> serviceResult = systemUserService.login(request.getParameter("userCode"),
+            ServiceResultT<LoginCredentials> serviceResult = ServiceFactory.getUserService().login(request.getParameter("userCode"),
                     request.getParameter("userPwd"), 1000 * 10);
             result.setIsSuccess(serviceResult.getIsSuccess());
             result.setMessages(serviceResult.getMessages());

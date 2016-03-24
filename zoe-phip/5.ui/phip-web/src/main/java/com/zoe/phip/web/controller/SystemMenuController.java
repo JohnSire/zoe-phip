@@ -10,6 +10,7 @@ import com.zoe.phip.service.in.sm.SystemDictCategoryService;
 import com.zoe.phip.web.bean.BeanFactory;
 import com.zoe.phip.web.bean.Constant;
 import com.zoe.phip.web.context.ComSession;
+import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,15 +57,13 @@ public class SystemMenuController extends BaseController {
     @RequestMapping("/user")
     @ResponseBody
     public ServiceResultT<List<MenuData>> getMenuUser(){
-        MenuDataService menuDataService = BeanFactory.getBean(Constant.MENU_DATA_SERVICE);
-        return menuDataService.getCompetenceMenuByUser(ComSession.getUserInfo(),ComSession.getUserInfo().getUserId());
+        return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(),ComSession.getUserInfo().getUserId());
     }
     @RequestMapping(value = "/getMenuList",method = RequestMethod.GET)
     @ResponseBody
     public ServiceResultT<PageList<MenuData>> getMenuList(HttpServletRequest request, Model model) {
-        MenuDataService menuDataService = BeanFactory.getBean(Constant.MENU_DATA_SERVICE);
         QueryPage page = new QueryPage(1, 30);
-        ServiceResultT<PageList<MenuData>> menu = menuDataService.getList(page, MenuData.class);
+        ServiceResultT<PageList<MenuData>> menu = ServiceFactory.getMenuDataService().getList(page, MenuData.class);
         return menu;
     }
 }
