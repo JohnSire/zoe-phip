@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Repository("SystemDictItemService")
 @Service(version = "1.0.0")
-public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem> implements SystemDictItemService {
+public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem> implements SystemDictItemService {
 
     @Autowired
     private SystemDictCategoryService service;
