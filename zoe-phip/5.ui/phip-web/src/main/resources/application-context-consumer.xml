@@ -10,13 +10,13 @@
     <dubbo:registry address="N/A"/>
 
     <!--地址：本地测试时用localhost 部署时要换成Ip地址-->
-    <dubbo:reference id="SystemUserService" interface="com.zoe.phip.service.in.sm.SystemUserService" version="1.0.0"
+    <dubbo:reference id="SystemUserService" interface="com.zoe.phip.service.in.sm.SystemUserService"
                      url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemUserService"/>
+
     <dubbo:reference id="SystemDictCategoryService" interface="com.zoe.phip.service.in.sm.SystemDictCategoryService"
-                     version="1.0.0"
                      url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemDictCategoryService"/>
+
     <dubbo:reference id="SystemDictItemService" interface="com.zoe.phip.service.in.sm.SystemDictItemService"
-                     version="1.0.0"
                      url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemDictItemService"/>
-    <!--<dubbo:annotation package="com.zoe.phip.service.in.sm"></dubbo:annotation>-->
+
 </beans>

@@ -29,7 +29,7 @@ import java.util.List;
 
 @Component("SystemDictCategoryService")
 @com.alibaba.dubbo.config.annotation.Service
-public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory> implements SystemDictCategoryService {
+public  class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory> implements SystemDictCategoryService {
 
     @Override
     public ServiceResult add(SystemDictCategory entity) {
