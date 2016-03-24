@@ -124,7 +124,7 @@ public class SystemUserController extends BaseController {
     @RequestMapping(value = "/update/state", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult updateState(String id,int state) {
-        return ServiceFactory.getUserService().updateState(id,state);
+        return ServiceFactory.getUserService().updateState(ComSession.getUserInfo(),id,state);
     }
 
     /**
