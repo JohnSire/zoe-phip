@@ -8,16 +8,19 @@ package com.zoe.phip.service.impl.in.sm;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zoe.phip.infrastructure.entity.*;
-import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
+import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.in.sm.SystemDictCategoryService;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 
 /**
@@ -119,4 +122,6 @@ public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictC
                 return list.get(0);
         });
     }
+
+
 }
