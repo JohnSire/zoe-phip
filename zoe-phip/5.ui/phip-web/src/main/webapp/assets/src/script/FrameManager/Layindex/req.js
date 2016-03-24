@@ -1,7 +1,7 @@
 ﻿define(function (require, exports, module) {
     var internal = {
         getMenuList: function (callback) {
-            var req = new Request("SystemMenu/user");
+            var req = new Request("/menu/user");
             req.post({
                 async: false,
                 isTip:false,
