@@ -17,7 +17,7 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     <!-- 自动扫描 -->
     <context:component-scan base-package="com.zoe.phip"/>
-    <context:annotation-config  />
+    <context:annotation-config/>
     <!-- 引入配置文件 -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -91,7 +91,7 @@
         <aop:aspect ref="LoggerInterceptor">
             <aop:pointcut id="LoggerInterceptorCut" expression="execution(* com.zoe.phip.service.in..*.*(..))"/>
             <aop:before pointcut-ref="LoggerInterceptorCut" method="doBefore"></aop:before>
-            <aop:after  pointcut-ref="LoggerInterceptorCut" method="doAfter"></aop:after>
+            <aop:after pointcut-ref="LoggerInterceptorCut" method="doAfter"></aop:after>
             <aop:around pointcut-ref="LoggerInterceptorCut" method="doAround"></aop:around>
             <aop:after-returning pointcut-ref="LoggerInterceptorCut" method="doAfterReturn" returning="result"/>
             <aop:after-throwing pointcut-ref="LoggerInterceptorCut" method="doAfterThrowing" throwing="ex"/>

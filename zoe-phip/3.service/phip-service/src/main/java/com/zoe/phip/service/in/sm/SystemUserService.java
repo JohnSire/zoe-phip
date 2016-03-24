@@ -6,6 +6,7 @@ package com.zoe.phip.service.in.sm;
 
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.in.BaseInService;
@@ -38,7 +39,7 @@ public interface SystemUserService extends BaseInService<SystemUser> {
      * @param newPwd
      * @return
      */
-    ServiceResult updatePassword(String id, String oldPwd, String newPwd);
+    ServiceResult updatePassword(SystemData systemData, String id, String oldPwd, String newPwd);
 
     /**
      * 重设密码
@@ -47,7 +48,7 @@ public interface SystemUserService extends BaseInService<SystemUser> {
      * @param newPwd
      * @return
      */
-    ServiceResult resetPassword(String id, String newPwd);
+    ServiceResult resetPassword(SystemData systemData, String id, String newPwd);
 
     /**
      * 更新用户状态
@@ -56,5 +57,5 @@ public interface SystemUserService extends BaseInService<SystemUser> {
      * @param state
      * @return
      */
-    ServiceResult updateState(String id, int state);
+    ServiceResult updateState(SystemData systemData, String id, int state);
 }

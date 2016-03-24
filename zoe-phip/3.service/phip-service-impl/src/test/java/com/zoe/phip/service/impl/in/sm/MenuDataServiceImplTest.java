@@ -29,17 +29,17 @@ public class MenuDataServiceImplTest extends BaseTest {
         menuData.setCode(51);
         menuData.setName("注册管理");
         menuData.setId("12345677");
-        ServiceResult result = menuDataService.add(menuData);
+        ServiceResult result = menuDataService.add(null, menuData);
     }
 
     @Test
     public void testGetMenuByCode() {
-        ServiceResultT<List<MenuData>> menuByCode = menuDataService.getMenuByCode("61");
+        ServiceResultT<List<MenuData>> menuByCode = menuDataService.getMenuByCode(null, "61");
     }
 
     @Test
     public void testGetMenuChild() {
-        ServiceResultT<List<MenuData>> childMenus = menuDataService.getChildMenus("39ec692d-bc21-4f29-bc61-47fffe63ae4e");
+        ServiceResultT<List<MenuData>> childMenus = menuDataService.getChildMenus(null, "39ec692d-bc21-4f29-bc61-47fffe63ae4e");
         childMenus.getResult().forEach(System.out::println);
 
     }
@@ -54,6 +54,6 @@ public class MenuDataServiceImplTest extends BaseTest {
         QueryPage page = new QueryPage();
         page.setPageNum(1);
         page.setPageSize(10);
-        ServiceResultT<PageList<MenuData>> resultT = menuDataService.getMenuPages("%管理%", page);
+        ServiceResultT<PageList<MenuData>> resultT = menuDataService.getMenuPages(null, "%管理%", page);
     }
 }

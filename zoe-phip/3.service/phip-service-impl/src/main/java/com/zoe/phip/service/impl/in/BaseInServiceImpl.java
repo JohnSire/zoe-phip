@@ -29,13 +29,13 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
     }
 
     @Override
-    public ServiceResult add(T entity) {
+    public ServiceResult add(SystemData systemData, T entity) {
 
         return SafeExecuteUtil.execute(() -> mapper.insertSelective(entity));
     }
 
     @Override
-    public ServiceResult addList(List<T> entities) {
+    public ServiceResult addList(SystemData systemData, List<T> entities) {
         return SafeExecuteUtil.execute(
                 () -> {
                     entities.forEach(e -> {
@@ -48,19 +48,19 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
     }
 
     @Override
-    public ServiceResult deleteById(String id) {
+    public ServiceResult deleteById(SystemData systemData, String id) {
         return SafeExecuteUtil.execute(
                 () -> mapper.deleteByPrimaryKey(id));
     }
 
     @Override
-    public ServiceResult deleteByList(List<T> entities) {
+    public ServiceResult deleteByList(SystemData systemData, List<T> entities) {
         return SafeExecuteUtil.execute(
                 () -> mapper.deleteByList(entities));
     }
 
     @Override
-    public ServiceResult deleteByIds(List<String> ids) {
+    public ServiceResult deleteByIds(SystemData systemData, List<String> ids) {
         return SafeExecuteUtil.execute(
                 () -> {
                     if (ids == null || ids.size() <= 0)
@@ -70,19 +70,19 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
     }
 
     @Override
-    public ServiceResult update(T entity) {
+    public ServiceResult update(SystemData systemData, T entity) {
         return SafeExecuteUtil.execute(
                 () -> mapper.updateByPrimaryKeySelective(entity));
     }
 
     @Override
-    public ServiceResult updateList(List<T> entities) {
+    public ServiceResult updateList(SystemData systemData, List<T> entities) {
         return SafeExecuteUtil.execute(
                 () -> mapper.updateList(entities));
     }
 
     @Override
-    public ServiceResultT<T> getById(String id) {
+    public ServiceResultT<T> getById(SystemData systemData, String id) {
         SafeExecuteUtil<T> safeExecute = new SafeExecuteUtil<T>();
         return safeExecute.executeT(() -> {
                     if (StringUtil.isNullOrWhiteSpace(id))
@@ -93,13 +93,13 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
     }
 
     @Override
-    public ServiceResultT<List<T>> getList() {
+    public ServiceResultT<List<T>> getList(SystemData systemData) {
         SafeExecuteUtil<List<T>> safeExecute = new SafeExecuteUtil<List<T>>();
         return safeExecute.executeT(() -> mapper.selectAll());
     }
 
     @Override
-    public ServiceResultT<PageList<T>> getList(QueryPage queryPage, Class<T> cls) {
+    public ServiceResultT<PageList<T>> getList(SystemData systemData, QueryPage queryPage, Class<T> cls) {
         SafeExecuteUtil<PageList<T>> safeExecute = new SafeExecuteUtil<PageList<T>>();
         return safeExecute.executeT(() ->
         {

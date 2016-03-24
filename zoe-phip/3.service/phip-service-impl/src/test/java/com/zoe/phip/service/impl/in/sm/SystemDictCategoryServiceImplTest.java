@@ -25,11 +25,11 @@ public class SystemDictCategoryServiceImplTest extends BaseTest {
         QueryPage page = new QueryPage();
         page.setPageNum(1);
         page.setPageSize(10);
-        ServiceResult sr = service.getDictCategories("%分类%", page);
+        ServiceResult sr = service.getDictCategories(null, "%分类%", page);
     }
 
     @Test
     public void getDictCategory() throws Exception {
-        ServiceResult sr = service.getDictCategory("DICTIONARY_SOURCE");
+        ServiceResult sr = service.getDictCategory(null, "DICTIONARY_SOURCE");
     }
 }

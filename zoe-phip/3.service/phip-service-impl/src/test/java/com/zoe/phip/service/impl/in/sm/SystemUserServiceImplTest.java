@@ -26,7 +26,7 @@ public class SystemUserServiceImplTest extends BaseTest {
     @Test
     public void addTest() {
         SystemUser user = creteUser("管理员", "admin", "1", 1);
-        ServiceResult result = systemUserService.add(user);
+        ServiceResult result = systemUserService.add(null, user);
     }
 
     @Test
@@ -34,13 +34,13 @@ public class SystemUserServiceImplTest extends BaseTest {
         List<SystemUser> list = new ArrayList<>();
         SystemUser user = creteUser("zjy", "zjy", "zjy", 1);
         list.add(user);
-        ServiceResult result = systemUserService.addList(list);
+        ServiceResult result = systemUserService.addList(null, list);
     }
 
 
     @Test
     public void pageQueryTest() {
-        ServiceResultT<PageList<SystemUser>> resultT = systemUserService.getList(new QueryPage(), SystemUser.class);
+        ServiceResultT<PageList<SystemUser>> resultT = systemUserService.getList(null, new QueryPage(), SystemUser.class);
         List<SystemUser> list = resultT.getResult().getRows();
         System.out.println(list.size());
     }
@@ -65,6 +65,6 @@ public class SystemUserServiceImplTest extends BaseTest {
 
     @Test
     public void testUpdatePassword() throws Exception {
-        ServiceResult result = systemUserService.resetPassword("e24398fa69844859a39faa53dcbaa852", "1");
+        ServiceResult result = systemUserService.resetPassword(null, "e24398fa69844859a39faa53dcbaa852", "1");
     }
 }

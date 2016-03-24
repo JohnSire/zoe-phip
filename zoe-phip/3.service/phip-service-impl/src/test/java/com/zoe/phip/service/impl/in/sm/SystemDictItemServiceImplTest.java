@@ -27,13 +27,13 @@ public class SystemDictItemServiceImplTest extends BaseTest {
 
     @Test
     public void getDictItems() throws Exception {
-        ServiceResult sr = service.getDictItems("1", "%5%", new QueryPage(1, 5));
+        ServiceResult sr = service.getDictItems(null, "1", "%5%", new QueryPage(1, 5));
         System.out.println(com.alibaba.fastjson.JSON.toJSON(sr));
     }
 
     @Test
     public void getDictItems1() throws Exception {
-        ServiceResult sr = service.getDictItems("1", "%GB/T%");
+        ServiceResult sr = service.getDictItems(null, "1", "%GB/T%");
         System.out.println(com.alibaba.fastjson.JSON.toJSON(sr));
     }
 
@@ -42,25 +42,25 @@ public class SystemDictItemServiceImplTest extends BaseTest {
         QueryPage page = new QueryPage();
         page.setPageNum(1);
         page.setPageSize(5);
-        ServiceResult sr = service.getDictItemsByCategoryCode("DICTIONARY_SOURCE111", page);
+        ServiceResult sr = service.getDictItemsByCategoryCode(null, "DICTIONARY_SOURCE111", page);
         System.out.println(com.alibaba.fastjson.JSON.toJSON(sr));
     }
 
     @Test
     public void getDictItemByCategoryId() throws Exception {
-        ServiceResult sr = service.getDictItemByCategoryId("1", "11");
+        ServiceResult sr = service.getDictItemByCategoryId(null, "1", "11");
         System.out.println(com.alibaba.fastjson.JSON.toJSON(sr));
     }
 
     @Test
     public void getDictItemByCategoryCode() throws Exception {
-        ServiceResult sr = service.getDictItemsByCategoryCode("DICTIONARY_SOURCE");
+        ServiceResult sr = service.getDictItemsByCategoryCode(null, "DICTIONARY_SOURCE");
         System.out.println(com.alibaba.fastjson.JSON.toJSON(sr));
     }
 
     @Test
     public void getDictItemsByCategoryCode1() throws Exception {
-        ServiceResult sr = service.getDictItemByCategoryCode("DICTIONARY_SOURCE", "12");
+        ServiceResult sr = service.getDictItemByCategoryCode(null, "DICTIONARY_SOURCE", "12");
         System.out.println(com.alibaba.fastjson.JSON.toJSON(sr));
     }
 }

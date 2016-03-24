@@ -1,7 +1,7 @@
 <%
 var styleSection = {
 %>
-<link href="/assets/dist/style/login.css" rel="stylesheet" />
+<link href="/assets/dist/style/login.css" rel="stylesheet"/>
 <%};%>
 <%
 var bodySection = {
@@ -15,7 +15,7 @@ var bodySection = {
         </div>
         <div class="header-logo left">
             <a href="#">
-                <img class="img-login-logo" src="/assets/dist/images/login/logo.png" />
+                <img class="img-login-logo" src="/assets/dist/images/login/logo.png"/>
             </a>
         </div>
     </div>
@@ -26,7 +26,7 @@ var bodySection = {
                     <div class="static-bg">
                         <div class="dynamic-bg">
                             <div class="text">
-                                <img class="img-login-logo" src="/assets/dist/images/login/text.png" alt="简介" />
+                                <img class="img-login-logo" src="/assets/dist/images/login/text.png" alt="简介"/>
                             </div>
                         </div>
                     </div>
@@ -39,20 +39,20 @@ var bodySection = {
             <!--登录窗口-->
             <div class="login">
                 <div class="tit">
-                    <span class="bq"><img src="/assets/dist/images/login/yy.png" /></span>
+                    <span class="bq"><img src="/assets/dist/images/login/yy.png"/></span>
                 </div>
                 <div class="form-login">
                     <div class="form-login-inner">
                         <p class="bd-text login-icon">
-                            <input id="input-username" type="text" class="inp-yh" placeholder="请输入用户名" />
+                            <input id="input-username" type="text" class="inp-yh" placeholder="请输入用户名"/>
                         </p>
                         <p class="bd-text icon-suo">
-                            <input id="input-password" type="password" class="inp-yh" placeholder="请输入密码" />
+                            <input id="input-password" type="password" class="inp-yh" placeholder="请输入密码"/>
                         </p>
 
                         <p class="tips">
                                 <span class="tips-span">
-                                    <input id="remember-password" class="tips-input" type="checkbox" value="" />
+                                    <input id="remember-password" class="tips-input" type="checkbox" value=""/>
                                 </span>
                             <span class="tips-span">7天内免登录</span>
                         </p>
@@ -61,7 +61,7 @@ var bodySection = {
                         </p>
                         <p class="bd-login">
                             <input class="dl" id="btn-login" type="button" value=""
-                                   onmouseout="this.className ='dl'" onmouseover="this.className ='dl-hover'" />
+                                   onmouseout="this.className ='dl'" onmouseover="this.className ='dl-hover'"/>
                         </p>
                     </div>
                 </div>
@@ -83,7 +83,7 @@ var scriptSection={
         //背景动画效果
         $('#slides div.dynamic-bg').css("background-position", "50% 571px")
                 .stop()
-                .animate({ backgroundPositionY: 0 }, 57100, this.scrollbackground);
+                .animate({backgroundPositionY: 0}, 57100, this.scrollbackground);
 
         //加载js
         seajs.use('{dir}/FrameManager/Login/login', function (a) {

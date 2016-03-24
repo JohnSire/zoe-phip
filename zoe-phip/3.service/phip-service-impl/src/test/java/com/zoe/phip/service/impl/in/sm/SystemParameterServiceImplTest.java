@@ -25,6 +25,6 @@ public class SystemParameterServiceImplTest extends BaseTest {
         systemParameter.setDescr("测试数据");
         systemParameter.setCreateAt(new Date());
         systemParameter.setName("测试");
-        ServiceResult serviceResult = systemParameterService.add(systemParameter);
+        ServiceResult serviceResult = systemParameterService.add(null, systemParameter);
     }
 }

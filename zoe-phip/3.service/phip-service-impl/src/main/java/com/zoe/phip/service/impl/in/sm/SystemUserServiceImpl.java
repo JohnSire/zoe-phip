@@ -7,6 +7,7 @@
 package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
@@ -37,13 +38,13 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     public ServiceResultT<LoginCredentials> login(String loginName, String passWord, int expiresTime) {
         SafeExecuteUtil<LoginCredentials> safeExecute = new SafeExecuteUtil<LoginCredentials>();
         return safeExecute.executeT(() -> {
-            List<SystemUser> list = getUserByLoginName(loginName);
+            List<SystemUser> list = getUserByLoginName(null, loginName);
             if (list == null || list.size() == 0) {
-                throw new BusinessException("用户名错");
+                throw new BusinessException("用户名错误!");
             }
             SystemUser user = list.get(0);
             if (user.getState() == 0) {
-                throw new BusinessException("用户不可");
+                throw new BusinessException("用户不可用");
             }
             String psd = createPassword(user.getLoginName(), passWord);
             if (!psd.equals(user.getPassword())) {
@@ -55,7 +56,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     }
 
     @Override
-    public ServiceResult updatePassword(String id, String oldPwd, String newPwd) {
+    public ServiceResult updatePassword(SystemData systemData, String id, String oldPwd, String newPwd) {
         return SafeExecuteUtil.execute(() -> {
             SystemUser user = getMapper().selectByPrimaryKey(id);
             if (user == null) {
@@ -72,7 +73,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     }
 
     @Override
-    public ServiceResult resetPassword(String id, String newPwd) {
+    public ServiceResult resetPassword(SystemData systemData, String id, String newPwd) {
         return SafeExecuteUtil.execute(() -> {
             SystemUser user = getMapper().selectByPrimaryKey(id);
             if (user == null) {
@@ -85,7 +86,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     }
 
     @Override
-    public ServiceResult updateState(String id, int state) {
+    public ServiceResult updateState(SystemData systemData, String id, int state) {
         return SafeExecuteUtil.execute(() -> {
             SystemUser user = getMapper().selectByPrimaryKey(id);
             if (user == null) {
@@ -98,10 +99,10 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     }
 
     @Override
-    public ServiceResult add(SystemUser entity) {
+    public ServiceResult add(SystemData systemData, SystemUser entity) {
         return SafeExecuteUtil.execute(() -> {
             //判断是否存在用户
-            List<SystemUser> list = getUserByLoginName(entity.getLoginName());
+            List<SystemUser> list = getUserByLoginName(systemData, entity.getLoginName());
             if (list != null && list.size() > 0) {
                 throw new BusinessException("已存在登录名{0})的用", entity.getLoginName());
             }
@@ -113,7 +114,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     }
 
     @Override
-    public ServiceResult addList(List<SystemUser> entities) {
+    public ServiceResult addList(SystemData systemData, List<SystemUser> entities) {
         return SafeExecuteUtil.execute(() ->
         {
             List<String> loginNames = new ArrayList<String>();
@@ -129,7 +130,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
                 list.forEach(l -> {
                     loginNames.add(l.getLoginName());
                 });
-                throw new BusinessException("已存在登录名{0})的用", loginNames.toString());
+                throw new BusinessException("已存在登录名{0})的用户", loginNames.toString());
             }
             entities.forEach(e -> {
                 String password = createPassword(e.getLoginName(), e.getPassword());
@@ -155,7 +156,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
         return credentials;
     }
 
-    private List<SystemUser> getUserByLoginName(String loginName) {
+    private List<SystemUser> getUserByLoginName(SystemData systemData, String loginName) {
         Example example = new Example(SystemUser.class);
         example.createCriteria().andEqualTo("loginName", loginName);
         List<SystemUser> list = getMapper().selectByExample(example);
