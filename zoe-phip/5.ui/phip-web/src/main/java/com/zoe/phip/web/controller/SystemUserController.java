@@ -30,28 +30,28 @@ public class SystemUserController {
 
     //用户列表
     @RequestMapping("/list")
-    public String ToUserList(HttpServletRequest request, Model model) {
+    public String ToList(HttpServletRequest request, Model model) {
 
-        return "/SysUser/userList";
+        return "/user/list";
     }
 
     //用户详细信息
     @RequestMapping("/detail")
-    public String ToUserDetail(HttpServletRequest request, Model model) {
+    public String ToDetail(HttpServletRequest request, Model model) {
 
-        return "/SysUser/userDetail";
+        return "/user/detail";
     }
 
     //修改密码
     @RequestMapping("/pwd")
-    public String ToUserPwd(HttpServletRequest request, Model model) {
-        return "/SysUser/userPwd";
+    public String ToPwd(HttpServletRequest request, Model model) {
+        return "/user/pwd";
     }
 
     //用户选择器
     @RequestMapping("/selector")
-    public String ToUserSelector(HttpServletRequest request, Model model) {
-        return "/SysUser/userSelector";
+    public String ToSelector(HttpServletRequest request, Model model) {
+        return "/user/selector";
     }
 
     //endregion

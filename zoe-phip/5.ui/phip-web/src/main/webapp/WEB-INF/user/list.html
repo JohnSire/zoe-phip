@@ -1,9 +1,10 @@
 ﻿<%
 var styleSection={
 %>
+<link href="/assets/dist/style/layout.css" rel="stylesheet" />
 <%};%>
 <%
-var bodySectionInner={
+var bodySection={
 %>
 <%};%>
 <%
@@ -18,5 +19,5 @@ var scriptSection={
 </script>
 <%};%>
 <%
-include("/WEB-INF/shared/_baseGrid.html",{title:"用户管理",styleSection:styleSection,bodySectionInner:bodySectionInner,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_baseGrid.html",{title:"用户管理",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
 %>

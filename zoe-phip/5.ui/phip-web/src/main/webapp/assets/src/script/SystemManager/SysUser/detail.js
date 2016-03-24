@@ -61,7 +61,7 @@
                 if ($(".Validform_error").length == 0) {
                     $.ligerDialog.confirm('是否重置密码？', function (yes) {
                         if (yes) {
-                            var req = new Request("SysUser/ResetUserPwd");
+                            var req = new Request("SystemUser/ResetUserPwd");
                             var data = $("#baseAttrForm").form2json();
                             data["Password"] = "123456";
                             data["Id"] = id;
