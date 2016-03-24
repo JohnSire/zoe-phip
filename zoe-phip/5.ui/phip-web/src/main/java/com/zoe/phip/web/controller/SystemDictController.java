@@ -52,16 +52,6 @@ public class SystemDictController {
     public String ToDictCategoryDetail(HttpServletRequest request, Model model) {
         return "/dict/category";
     }
-
-    @RequestMapping("/test")
-    @ResponseBody
-    public ServiceResultT<PageList<SystemUser>> getDict(HttpServletRequest request, Model model) {
-        SystemUserService systemUserService = BeanFactory.getBean(Constant.SYSTEM_USER_SERVICE);
-        QueryPage page = new QueryPage(1, 30);
-        ServiceResultT<PageList<SystemUser>> resultT = systemUserService.getList(page, SystemUser.class);
-        return resultT;
-    }
-
     /**
      * 根据关键字获取字典分类列表
      *
