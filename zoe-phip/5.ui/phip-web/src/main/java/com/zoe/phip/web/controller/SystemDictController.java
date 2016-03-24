@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/dict")
-public class SystemDictController extends BaseController  {
+public class SystemDictController extends BaseController {
 
     private SystemDictCategoryService categoryService;
 
@@ -67,9 +67,7 @@ public class SystemDictController extends BaseController  {
 
         categoryService = BeanFactory.getBean(Constant.SYSTEM_DICT_CATEGORY_SERVICE);
         String key = request.getParameter("keyWord");
-        int pageIndex = StringUtil.isNullOrWhiteSpace(request.getParameter("page")) ? 1 : Integer.valueOf(request.getParameter("page"));
-        int pageSize = StringUtil.isNullOrWhiteSpace(request.getParameter("pagesize")) ? Integer.MAX_VALUE : Integer.valueOf(request.getParameter("pagesize"));
-        return categoryService.getDictCategories(key, new QueryPage(pageIndex, pageSize));
+        return categoryService.getDictCategories(key, getQueryPage());
     }
 
     /**
@@ -159,9 +157,7 @@ public class SystemDictController extends BaseController  {
         itemService = BeanFactory.getBean(Constant.SYSTEM_DICT_ITEM_SERVICE);
         String key = request.getParameter("keyWord");
         String categoryId = request.getParameter("categoryId");
-        int pageIndex = StringUtil.isNullOrWhiteSpace(request.getParameter("page")) ? 1 : Integer.valueOf(request.getParameter("page"));
-        int pageSize = StringUtil.isNullOrWhiteSpace(request.getParameter("pagesize")) ? Integer.MAX_VALUE : Integer.valueOf(request.getParameter("pagesize"));
-        return itemService.getDictItems(categoryId, key, new QueryPage(pageIndex, pageSize));
+        return itemService.getDictItems(categoryId, key, getQueryPage());
     }
 
     @RequestMapping("/getItemList")

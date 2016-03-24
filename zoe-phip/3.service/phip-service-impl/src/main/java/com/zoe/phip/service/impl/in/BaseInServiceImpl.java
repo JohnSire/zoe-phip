@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.dao.MyMapper;
 import com.zoe.phip.infrastructure.entity.*;
+import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.base.BaseEntity;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
@@ -61,7 +62,11 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
     @Override
     public ServiceResult deleteByIds(List<String> ids) {
         return SafeExecuteUtil.execute(
-                () -> mapper.deleteByIds(ids));
+                () -> {
+                    if (ids == null || ids.size() <= 0)
+                        throw new BusinessException("批量删除参数不能为空");
+                    return mapper.deleteByIds(ids);
+                });
     }
 
     @Override
@@ -79,7 +84,12 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
     @Override
     public ServiceResultT<T> getById(String id) {
         SafeExecuteUtil<T> safeExecute = new SafeExecuteUtil<T>();
-        return safeExecute.executeT(() -> mapper.selectByPrimaryKey(id));
+        return safeExecute.executeT(() -> {
+                    if (StringUtil.isNullOrWhiteSpace(id))
+                        throw new BusinessException("Id不能为空!");
+                    return mapper.selectByPrimaryKey(id);
+                }
+        );
     }
 
     @Override
