@@ -27,6 +27,7 @@ public interface SystemUserService extends BaseInService<SystemUser> {
      * @param expiresTime session过期时间 毫秒
      * @return
      */
+
     ServiceResultT<LoginCredentials> login(String loginName, String passWord, int expiresTime);
 
     /**
