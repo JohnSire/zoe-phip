@@ -14,6 +14,7 @@
                      url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemUserService"/>
 
     <dubbo:reference id="SystemDictCategoryService" interface="com.zoe.phip.service.in.sm.SystemDictCategoryService"
+
                      url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemDictCategoryService"/>
 
     <dubbo:reference id="SystemDictItemService" interface="com.zoe.phip.service.in.sm.SystemDictItemService"
