@@ -29,7 +29,7 @@ import java.util.List;
  * @date 2016-03-22
  */
 @Repository("SystemDictItemService")
-@Service(version = "1.0.0")
+@Service()
 public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem> implements SystemDictItemService {
 
     @Autowired
