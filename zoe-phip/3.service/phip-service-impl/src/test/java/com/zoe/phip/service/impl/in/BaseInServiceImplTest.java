@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Created by zengjiyang on 2016/3/12.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations ={"classpath:spring-mybatis.xml"})
+@ContextConfiguration(locations = {"classpath:spring-mybatis.xml"})
 public class BaseInServiceImplTest {
 
 
@@ -41,17 +41,17 @@ public class BaseInServiceImplTest {
     }
 
     @Test
-    public void orderTest(){
+    public void orderTest() {
 
     }
 
     @Test
-    public void insertListTest(){
+    public void insertListTest() {
 
     }
 
     @Test
-    public void deleteByIdsTest(){
+    public void deleteByIdsTest() {
 
     }
 }

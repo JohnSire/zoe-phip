@@ -10,7 +10,7 @@ import java.io.File;
  */
 public class GeneratorTest {
     @Test
-    public void test() throws Exception{
+    public void test() throws Exception {
         GeneratorFacade facade = new GeneratorFacade();
         facade.getGenerator().addTemplateRootDir(new File("template"));
         facade.deleteOutRootDir();

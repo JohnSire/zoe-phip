@@ -1,5 +1,9 @@
 ﻿<%
-var bodySection = {
+var styleSection = {
+%>
+<%};%>
+<%
+var bodySectionInner = {
 %>
 <div class="y-dialog-content ">
     <div class="y-dialog-title">
@@ -46,5 +50,5 @@ var scriptSection={
 </script>
 <%};%>
 <%
-include("/WEB-INF/shared/_baseAttr.html",{title:"用户详细信息",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_baseAttr.html",{title:"修改密码",styleSection:styleSection,bodySectionInner:bodySectionInner,scriptSection:scriptSection}){}
 %>

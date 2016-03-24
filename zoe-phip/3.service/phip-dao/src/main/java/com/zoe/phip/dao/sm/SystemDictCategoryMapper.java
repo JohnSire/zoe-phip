@@ -11,9 +11,9 @@ import com.zoe.phip.model.sm.SystemDictCategory;
 
 /**
  * @author
- * @date 2016-03-22
  * @version 1.0
+ * @date 2016-03-22
  */
 public interface SystemDictCategoryMapper extends MyMapper<SystemDictCategory> {
 
- }
+}

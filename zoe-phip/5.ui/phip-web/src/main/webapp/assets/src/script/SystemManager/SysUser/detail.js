@@ -1,7 +1,7 @@
 ﻿define(function (require, exports, module) {
     var internal = {
         init: function () {
-            var BaseAttr = require("../../BaseAttr/baseAttr.js");
+            var BaseAttr = require("../../baseAttr/baseAttr.js");
             var baseAttr = new BaseAttr({
                 getUrl: 'SystemUser/GetUserInfo',//获取实例的接口
                 addUrl: 'SystemUser/AddUserInfo',//新增的接口Url
@@ -61,7 +61,7 @@
                 if ($(".Validform_error").length == 0) {
                     $.ligerDialog.confirm('是否重置密码？', function (yes) {
                         if (yes) {
-                            var req = new Request("SystemUser/ResetUserPwd");
+                            var req = new Request("SysUser/ResetUserPwd");
                             var data = $("#baseAttrForm").form2json();
                             data["Password"] = "123456";
                             data["Id"] = id;

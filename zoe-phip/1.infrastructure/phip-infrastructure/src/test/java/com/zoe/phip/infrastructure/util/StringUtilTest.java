@@ -22,12 +22,12 @@ public class StringUtilTest {
     }
 
     @Test
-    public void md5Test(){
-        Calendar cl=Calendar.getInstance();
-        cl.add(Calendar.MINUTE,10);
+    public void md5Test() {
+        Calendar cl = Calendar.getInstance();
+        cl.add(Calendar.MINUTE, 10);
         System.out.println(cl.getTime());
-        String result=StringUtil.toMD5("admin");
-        result=StringUtil.toMD5("123"+result+"admin");
+        String result = StringUtil.toMD5("admin");
+        result = StringUtil.toMD5("123" + result + "admin");
         System.out.println(result);
     }
 

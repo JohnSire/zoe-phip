@@ -11,10 +11,11 @@ import com.zoe.phip.service.in.BaseInService;
 
 /**
  * 对外发布的服务接口
+ *
  * @author
- * @date 2016-03-22
  * @version 1.0
+ * @date 2016-03-22
  */
-public interface SystemParameterService extends BaseInService<SystemParameter>  {
+public interface SystemParameterService extends BaseInService<SystemParameter> {
 
 }

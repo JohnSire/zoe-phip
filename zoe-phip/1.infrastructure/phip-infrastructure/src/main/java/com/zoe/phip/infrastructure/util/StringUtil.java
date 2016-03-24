@@ -185,7 +185,7 @@ public final class StringUtil {
         return result;
     }
 
-    public static String getUUID(){
-        return UUID.randomUUID().toString().replace("-","");
+    public static String getUUID() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 }

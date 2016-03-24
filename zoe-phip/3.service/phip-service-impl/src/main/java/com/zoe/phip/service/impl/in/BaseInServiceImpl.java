@@ -11,6 +11,7 @@ import com.zoe.phip.service.in.BaseInService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +40,7 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
                     entities.forEach(e -> {
                         //设置主键
                         e.setId(StringUtil.getUUID());
+                        e.setModifyAt(new Date());
                     });
                     return mapper.addList(entities);
                 });

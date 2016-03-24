@@ -96,6 +96,6 @@ public interface BaseInService<T extends BaseEntity> {
      * @param queryPage
      * @return
      */
-    ServiceResultT<PageList<T>> getList(QueryPage queryPage, Class<T> cls );
+    ServiceResultT<PageList<T>> getList(QueryPage queryPage, Class<T> cls);
 
 }

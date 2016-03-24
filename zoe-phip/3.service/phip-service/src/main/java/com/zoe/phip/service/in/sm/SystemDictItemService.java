@@ -37,11 +37,11 @@ public interface SystemDictItemService extends BaseInService<SystemDictItem> {
 
     ServiceResultT<PageList<SystemDictItem>> getDictItemsByCategoryCode(String categoryCode, QueryPage page);
 
-    ServiceResultT<SystemDictItem>  getDictItemByCategoryId(String categoryId, String code);
+    ServiceResultT<SystemDictItem> getDictItemByCategoryId(String categoryId, String code);
 
-    ServiceResultT<SystemDictItem>  getDictItemByCategoryCode(String categoryCode, String code);
+    ServiceResultT<SystemDictItem> getDictItemByCategoryCode(String categoryCode, String code);
 
-    ServiceResultT<List<SystemDictItem>>  getDictItemsByCategoryCode(String categoryCode);
+    ServiceResultT<List<SystemDictItem>> getDictItemsByCategoryCode(String categoryCode);
 
 
 }

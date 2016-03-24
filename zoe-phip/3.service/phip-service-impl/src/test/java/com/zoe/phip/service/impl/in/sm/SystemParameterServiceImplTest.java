@@ -12,13 +12,13 @@ import java.util.Date;
 /**
  * Created by Administrator on 2016/3/22.
  */
-public class SystemParameterServiceImplTest extends BaseTest{
+public class SystemParameterServiceImplTest extends BaseTest {
 
     @Autowired
     private SystemParameterService systemParameterService;
 
     @Test
-    public void testAdd(){
+    public void testAdd() {
         SystemParameter systemParameter = new SystemParameter();
         systemParameter.setId("123");
         systemParameter.setCode("123");

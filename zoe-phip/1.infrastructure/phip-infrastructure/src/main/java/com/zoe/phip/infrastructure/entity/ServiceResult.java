@@ -76,19 +76,19 @@ public class ServiceResult implements Serializable {
     }
 
     public void setLogData(List<LogMessage> logMessages) {
-         this.logData=logMessages;
+        this.logData = logMessages;
     }
 
 
-    public void addMessage(String messageId,String content) {
-        Message message=new Message();
+    public void addMessage(String messageId, String content) {
+        Message message = new Message();
         message.setId(messageId);
         message.setContent(content);
         messages.add(message);
     }
 
     public void addLogData(String content) {
-        LogMessage logMessage=new LogMessage();
+        LogMessage logMessage = new LogMessage();
         logMessage.setContent(content);
         logData.add(logMessage);
     }
