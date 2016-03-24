@@ -6,6 +6,7 @@
 
 package com.zoe.phip.service.impl.in.sm;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.entity.*;
@@ -15,9 +16,9 @@ import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.in.sm.SystemDictCategoryService;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
+
 import java.util.List;
 
 /**
@@ -27,9 +28,9 @@ import java.util.List;
  */
 
 
-@Component("SystemDictCategoryService")
-@com.alibaba.dubbo.config.annotation.Service
-public  class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory> implements SystemDictCategoryService {
+@Repository("SystemDictCategoryService")
+@Service(version = "1.0.0")
+public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory> implements SystemDictCategoryService {
 
     @Override
     public ServiceResult add(SystemDictCategory entity) {
