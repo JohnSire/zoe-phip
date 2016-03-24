@@ -6,8 +6,8 @@
         init: function () {
             internal.__grid = new BaseGrid({
                 deleteUrl: {
-                    deleteInfo: "SystemUser/DeleteUserInfo",
-                    deleteList: "SystemUser/DeleteUserList"
+                    deleteInfo: "user/delete",
+                    deleteList: "user/delete/all"
                 },
                 //工具条
                 tools: {
@@ -18,7 +18,7 @@
                 },
                 //表格参数
                 gridParam: {
-                    url: webRoot + 'SystemUser/GetUserList',
+                    url: webRoot + 'user/get/list',
                     columns: [
                     { display: '名称', name: 'Name', width: 120, align: 'left' },
                     { display: '登录名', name: 'LoginName', width: 120, align: 'left' },
@@ -43,7 +43,7 @@
                     common: {
                         width: 390,
                         height: 250,
-                        url: webRoot + 'user/UserDetail'
+                        url: webRoot + 'detail'
                     },
                     add: {
                         title: '新增用户信息'
