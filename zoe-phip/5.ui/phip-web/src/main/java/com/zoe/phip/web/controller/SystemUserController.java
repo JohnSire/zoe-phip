@@ -20,6 +20,7 @@ import java.util.List;
 /**
  * Created by yinzhixing on 2016/3/21.
  */
+@Controller
 @RequestMapping("/user")
 public class SystemUserController extends BaseController {
 

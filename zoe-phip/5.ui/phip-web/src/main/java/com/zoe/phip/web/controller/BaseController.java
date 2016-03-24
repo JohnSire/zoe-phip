@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 /**
  * Created by zengjiyang on 2016/3/24.
  */
-@Controller
 public abstract class BaseController {
     protected int getPageSize(){
         return Integer.parseInt(DataContext.getRequest().getParameter("pagesize"));

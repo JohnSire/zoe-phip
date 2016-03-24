@@ -39,7 +39,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
                     example.createCriteria().andEqualTo("code", entity.getCode());
                     List<SystemDictCategory> list = getMapper().selectByExample(example);
                     if (list != null && list.size() > 0) {
-                        throw new BusinessException("该字典类�%s)已经存在", entity.getCode());
+                        throw new BusinessException("该字典类({0})已经存在", entity.getCode());
                     } else
                         return getMapper().insertSelective(entity);
                 });
@@ -76,7 +76,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
                             .andNotEqualTo("id", entity.getId());
                     List<SystemDictCategory> list = getMapper().selectByExample(example);
                     if (list != null && list.size() > 0) {
-                        throw new BusinessException("该字典类�{0})已经存在", entity.getCode());
+                        throw new BusinessException("该字典类{0})已经存在", entity.getCode());
                     } else
                         return getMapper().updateByPrimaryKeySelective(entity);
                 });
@@ -114,7 +114,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
             example.createCriteria().andEqualTo("code", code);
             List<SystemDictCategory> list = getMapper().selectByExample(example);
             if (list != null && list.size() <= 0) {
-                throw new BusinessException("该字典类�{0})不存�", code);
+                throw new BusinessException("该字典类{0})不存", code);
             } else
                 return list.get(0);
         });

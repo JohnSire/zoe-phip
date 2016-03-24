@@ -39,11 +39,11 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
         return safeExecute.executeT(() -> {
             List<SystemUser> list = getUserByLoginName(loginName);
             if (list == null || list.size() == 0) {
-                throw new BusinessException("用户名错�");
+                throw new BusinessException("用户名错");
             }
             SystemUser user = list.get(0);
             if (user.getState() == 0) {
-                throw new BusinessException("用户不可�");
+                throw new BusinessException("用户不可");
             }
             String psd = createPassword(user.getLoginName(), passWord);
             if (!psd.equals(user.getPassword())) {
@@ -63,7 +63,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
             }
             String oldPassword = createPassword(user.getLoginName(), oldPwd);
             if (!user.getPassword().equals(oldPassword)) {
-                throw new BusinessException("旧密码错�");
+                throw new BusinessException("旧密码错");
             }
             user.setPassword(createPassword(user.getLoginName(), newPwd));
             user.setModifyAt(new Date());
@@ -100,10 +100,10 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     @Override
     public ServiceResult add(SystemUser entity) {
         return SafeExecuteUtil.execute(() -> {
-            //判断是否存在用户�
+            //判断是否存在用户
             List<SystemUser> list = getUserByLoginName(entity.getLoginName());
             if (list != null && list.size() > 0) {
-                throw new BusinessException("已存在登录名�{0})的用�", entity.getLoginName());
+                throw new BusinessException("已存在登录名{0})的用", entity.getLoginName());
             }
             String password = createPassword(entity.getLoginName(), entity.getPassword());
             entity.setPassword(password);
@@ -129,7 +129,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
                 list.forEach(l -> {
                     loginNames.add(l.getLoginName());
                 });
-                throw new BusinessException("已存在登录名�{0})的用�, loginNames.toString());
+                throw new BusinessException("已存在登录名{0})的用", loginNames.toString());
             }
             entities.forEach(e -> {
                 String password = createPassword(e.getLoginName(), e.getPassword());

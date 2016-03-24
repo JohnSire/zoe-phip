@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by zengjiyang on 2016/3/11.
  */
+@Controller
 @RequestMapping("/frame")
 public class FrameController extends BaseController {
     //平台首页
