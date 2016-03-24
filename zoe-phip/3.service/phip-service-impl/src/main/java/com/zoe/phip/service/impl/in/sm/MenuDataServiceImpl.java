@@ -38,8 +38,18 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
 
     @Override
     public ServiceResult add(MenuData entity) {
+        return SafeExecuteUtil.execute(() ->
+        {
+            Example example = new Example(MenuData.class);
+            example.createCriteria().andEqualTo("code", entity.getCode());
+            List<MenuData> dataList = getMapper().selectByExample(example);
+            if (dataList != null || dataList.size() > 0) {
+                throw new BusinessException("该菜单{0}已存在", entity.getCode());
+            } else {
+                return getMapper().insertSelective(entity);
+            }
 
-        return super.add(entity);
+        });
     }
 
 
