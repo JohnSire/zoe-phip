@@ -28,7 +28,7 @@ public class SystemParamController extends BaseController {
         return "/param/sysparam";
     }
 
-    @RequestMapping(value="/getSysParamList",method = RequestMethod.GET)
+    @RequestMapping(value = "/getSysParamList", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResultT<PageList<SystemParameter>> getSysParamList(HttpServletRequest request, Model model) {
         QueryPage page = new QueryPage(1, 30);

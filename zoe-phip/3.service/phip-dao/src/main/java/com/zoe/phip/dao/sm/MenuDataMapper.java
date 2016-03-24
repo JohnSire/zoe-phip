@@ -13,9 +13,9 @@ import java.util.List;
 
 /**
  * @author zhanghao
- * @date 2016-03-21
  * @version 1.0
+ * @date 2016-03-21
  */
 public interface MenuDataMapper extends MyMapper<MenuData> {
     List<MenuData> GetCompetenceMenuByUser(String userId);
- }
+}

@@ -76,7 +76,7 @@ public class SystemDictController extends BaseController {
     @RequestMapping("/getCategoryInfo")
     @ResponseBody
     public ServiceResultT<SystemDictCategory> getSysDictCategoryInfo(HttpServletRequest request, Model model) {
-        return  ServiceFactory.getDictCategoryService().getById(request.getParameter("id"));
+        return ServiceFactory.getDictCategoryService().getById(request.getParameter("id"));
     }
 
     /**

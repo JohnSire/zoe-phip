@@ -59,19 +59,18 @@ public class SystemUserController extends BaseController {
     //endregion
 
 
-
-
     //region 方法
 
     /**
      * 获取用户列表
+     *
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
-    public ServiceResultT<PageList<SystemUser>>  GetUserList(){
-        ServiceResultT<PageList<SystemUser>> result= ServiceFactory.getUserService()
-                .getList(getQueryPage(),SystemUser.class);
+    public ServiceResultT<PageList<SystemUser>> GetUserList() {
+        ServiceResultT<PageList<SystemUser>> result = ServiceFactory.getUserService()
+                .getList(getQueryPage(), SystemUser.class);
         return result;
     }
 
@@ -143,12 +142,13 @@ public class SystemUserController extends BaseController {
 
     /**
      * 获取用户关联菜单
+     *
      * @return
      */
     @RequestMapping("/menu")
     @ResponseBody
-    public ServiceResultT<List<MenuData>> getUserMenu(){
-        return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(),ComSession.getUserInfo().getUserId());
+    public ServiceResultT<List<MenuData>> getUserMenu() {
+        return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(), ComSession.getUserInfo().getUserId());
     }
 
     //endregion

@@ -14,6 +14,6 @@ public final class ComSession {
     }
 
     public static void setUserInfo(SystemData userInfo) {
-        DataContext.Session.put(Constant.USER_SESSION,userInfo);
+        DataContext.Session.put(Constant.USER_SESSION, userInfo);
     }
 }

@@ -24,7 +24,7 @@ public class LoggerInterceptor {
 
         Object[] params = joinPoint.getArgs();
         String methodName = joinPoint.getSignature().getName();
-        if(!StringUtil.isNullOrWhiteSpace(methodName)){
+        if (!StringUtil.isNullOrWhiteSpace(methodName)) {
 
         }
     }

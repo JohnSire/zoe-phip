@@ -52,14 +52,16 @@ public class SystemMenuController extends BaseController {
 
     /**
      * 获取用户关联菜单
+     *
      * @return
      */
     @RequestMapping("/user")
     @ResponseBody
-    public ServiceResultT<List<MenuData>> getMenuUser(){
-        return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(),ComSession.getUserInfo().getUserId());
+    public ServiceResultT<List<MenuData>> getMenuUser() {
+        return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(), ComSession.getUserInfo().getUserId());
     }
-    @RequestMapping(value = "/getMenuList",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/getMenuList", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResultT<PageList<MenuData>> getMenuList(HttpServletRequest request, Model model) {
         QueryPage page = new QueryPage(1, 30);

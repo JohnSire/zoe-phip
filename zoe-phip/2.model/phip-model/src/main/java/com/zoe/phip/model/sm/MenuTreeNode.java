@@ -5,7 +5,7 @@ import com.zoe.phip.model.base.BaseEntity;
 /**
  * Created by Administrator on 2016/3/23.
  */
-public class MenuTreeNode extends BaseEntity{
+public class MenuTreeNode extends BaseEntity {
 
     private String name;
 
