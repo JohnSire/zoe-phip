@@ -7,6 +7,7 @@ import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.service.in.sm.SystemUserService;
 import com.zoe.phip.web.bean.BeanFactory;
 import com.zoe.phip.web.bean.Constant;
+import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.DataContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,7 +57,8 @@ public class FrameController {
                 SystemData systemData = new SystemData();
                 systemData.setUserId(serviceResult.getResult().getUserId());
                 systemData.setCredential(serviceResult.getResult().getCredential());
-                DataContext.Session.put(Constant.USER_SESSION, systemData);
+                //设置session
+                ComSession.setUserInfo(systemData);
             }
 
         }

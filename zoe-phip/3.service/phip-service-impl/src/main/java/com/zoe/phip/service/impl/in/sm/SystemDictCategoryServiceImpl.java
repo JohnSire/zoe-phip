@@ -29,7 +29,7 @@ import java.util.List;
 
 
 @Repository("SystemDictCategoryService")
-@Service(version = "1.0.0")
+@Service
 public class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory> implements SystemDictCategoryService {
 
     @Override

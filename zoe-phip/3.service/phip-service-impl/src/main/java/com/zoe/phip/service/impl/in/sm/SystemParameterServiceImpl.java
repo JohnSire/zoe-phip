@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
  * @date 2016-03-22
  */
 @Repository("systemParameterService")
-@Service(version = "1.0.0")
+@Service
 public class SystemParameterServiceImpl extends BaseInServiceImpl<SystemParameter> implements SystemParameterService {
 
 }

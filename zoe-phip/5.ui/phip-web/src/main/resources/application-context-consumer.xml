@@ -12,11 +12,14 @@
     <!--地址：本地测试时用localhost 部署时要换成Ip地址-->
     <dubbo:reference id="SystemUserService" interface="com.zoe.phip.service.in.sm.SystemUserService"
                      url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemUserService"/>
-
     <dubbo:reference id="SystemDictCategoryService" interface="com.zoe.phip.service.in.sm.SystemDictCategoryService"
                      url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemDictCategoryService"/>
-
     <dubbo:reference id="SystemDictItemService" interface="com.zoe.phip.service.in.sm.SystemDictItemService"
                      url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemDictItemService"/>
+    <dubbo:reference id="MenuDataService" interface="com.zoe.phip.service.in.sm.MenuDataService"
+                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.MenuDataService"/>
+    <dubbo:reference id="SystemParameterService" interface="com.zoe.phip.service.in.sm.SystemParameterService"
+                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemParameterService"/>
+
 
 </beans>

@@ -6,13 +6,14 @@
 
 package com.zoe.phip.service.impl.in.sm;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.model.sm.MenuTreeNode;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.in.sm.MenuDataService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -22,9 +23,8 @@ import java.util.List;
  * @version 1.0
  * @date 2016-03-21
  */
-//@Service("menuDataService")
-@com.alibaba.dubbo.config.annotation.Service
-@Component
+@Repository("menuDataService")
+@Service
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements MenuDataService {
 
 

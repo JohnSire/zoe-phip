@@ -29,7 +29,7 @@ import java.util.List;
  * @date 2016-03-18
  */
 @Repository("SystemUserService")
-@Service(version = "1.0.0")
+@Service
 public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> implements SystemUserService {
 
 
