@@ -2,9 +2,9 @@ package com.zoe.phip.web.context;
 
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.web.bean.Constant;
-import org.springframework.jca.cci.CciOperationNotSupportedException;
 
 /**
+ * 封闭用户session
  * Created by zengjiyang on 2016/3/24.
  */
 public final class ComSession {

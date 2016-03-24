@@ -7,7 +7,9 @@
 package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.dao.sm.MenuDataMapper;
 import com.zoe.phip.infrastructure.entity.*;
+import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.model.sm.MenuTreeNode;
@@ -16,7 +18,10 @@ import com.zoe.phip.service.in.sm.MenuDataService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author
@@ -87,13 +92,53 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
     }
 
     @Override
-    public ServiceResultT<List<MenuTreeNode>> getCompentenceMenuByUser(SystemData systemData, String userId) {
+    public ServiceResultT<List<MenuData>> getCompetenceMenuByUser(SystemData systemData, String userId) {
+        SafeExecuteUtil<List<MenuData>> safeExecute = new SafeExecuteUtil<>();
+        return safeExecute.executeT(()->
+        {
+            List<MenuData> menus=((MenuDataMapper)getMapper()).GetCompetenceMenuByUser(userId);
+            if(menus.size()==0)
+            {
+                throw new BusinessException("还没有为该用户分配菜单!");
+            }
+            Map<String,List<MenuData>> map=new HashMap<>();
+            menus.forEach(m->{
+                if(map.containsKey(m.getFkParentMenuId())){
+                    map.get(m.getFkParentMenuId()).add(m);
+                }else {
+                    List<MenuData> menuList=new ArrayList<MenuData>();
+                    menuList.add(m);
+                    map.put(m.getFkParentMenuId(),menuList);
+                }
+            });
+            List<MenuData> topMenus= map.get("0");
+            List<MenuData> data=new ArrayList<>();
+            topMenus.forEach(t->{
+                findChildNodes(t,map);
+                data.add(t);
+            });
 
-        return null;
+            map.clear();
+            System.out.println(menus.size());
+            return data;
+        });
+    }
+
+    private void findChildNodes(MenuData node, Map<String,List<MenuData>>  cache)
+    {
+        if (!cache.containsKey(node.getId()))
+            return;
+        List<MenuData> menus = cache.get(node.getId());
+        node.setChildren(menus);
+        if(node.getChildren()!=null){
+            node.getChildren().forEach(n->{
+                findChildNodes(n,cache);
+            });
+        }
     }
 
     @Override
-    public ServiceResultT<List<MenuData>> getCompentenceMenuByUser(String userId) {
+    public ServiceResultT<List<MenuData>> getCompetenceMenuByUser(String userId) {
         SafeExecuteUtil<List<MenuData>> safeExcute = new SafeExecuteUtil<>();
         return safeExcute.executeT(() ->
         {

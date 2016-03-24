@@ -11,7 +11,7 @@ import java.util.Map;
  * 数据上下文
  * Created by zengjiyang on 2016/3/22.
  */
-public class DataContext {
+public final class DataContext {
 
     /**
      * 使每个线程拥有各自的 DataContext 实例

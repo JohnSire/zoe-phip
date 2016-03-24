@@ -1,10 +1,18 @@
 package com.zoe.phip.web.controller;
 
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.model.sm.MenuData;
+import com.zoe.phip.service.in.sm.MenuDataService;
+import com.zoe.phip.web.bean.BeanFactory;
+import com.zoe.phip.web.bean.Constant;
+import com.zoe.phip.web.context.ComSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by zhangxingcai on 2016/3/22 0022.
@@ -34,5 +42,16 @@ public class SystemMenuController {
     @RequestMapping("/acc")
     public String ToMenuAcc(HttpServletRequest request, Model model) {
         return "/menu/acc";
+    }
+
+    /**
+     * 获取用户关联菜单
+     * @return
+     */
+    @RequestMapping("/user")
+    @ResponseBody
+    public ServiceResultT<List<MenuData>> getMenuUser(){
+        MenuDataService menuDataService = BeanFactory.getBean(Constant.MENU_DATA_SERVICE);
+        return menuDataService.getCompetenceMenuByUser(null,ComSession.getUserInfo().getUserId());
     }
 }

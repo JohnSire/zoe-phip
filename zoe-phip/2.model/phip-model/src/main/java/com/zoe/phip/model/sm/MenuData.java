@@ -9,6 +9,8 @@ import com.zoe.phip.model.base.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.util.List;
 
 /**
  * @author
@@ -50,6 +52,19 @@ public class MenuData extends BaseEntity {
     @Column(name = "STATE")
     private int state;
 
+    /**
+     * 子节点
+     */
+    @Transient
+    public List<MenuData> children;
+
+    public List<MenuData> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<MenuData> children) {
+        this.children = children;
+    }
 
     public String getName() {
         return this.name;

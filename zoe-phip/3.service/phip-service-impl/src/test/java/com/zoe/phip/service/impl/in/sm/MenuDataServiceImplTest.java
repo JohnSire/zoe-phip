@@ -45,4 +45,8 @@ public class MenuDataServiceImplTest extends BaseTest {
 
     }
 
+    @Test
+    public void testGetCompetenceMenuByUser() throws Exception {
+        ServiceResultT<List<MenuData>> resultT= menuDataService.getCompetenceMenuByUser(null,"1761543318e744f781427ab325e6a45b");
+    }
 }

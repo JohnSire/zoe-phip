@@ -34,7 +34,7 @@ public interface MenuDataService extends BaseInService<MenuData> {
 
     ServiceResult updateState(String id, int state);
 
-    ServiceResultT<List<MenuTreeNode>> getCompentenceMenuByUser(SystemData systemData, String userId);
+    ServiceResultT<List<MenuData>> getCompetenceMenuByUser(SystemData systemData, String userId);
 
-    ServiceResultT<List<MenuData>> getCompentenceMenuByUser(String userId);
+    ServiceResultT<List<MenuData>> getCompetenceMenuByUser(String userId);
 }
