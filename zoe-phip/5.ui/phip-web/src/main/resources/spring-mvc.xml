@@ -11,7 +11,7 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     <context:annotation-config/>
     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-    <context:component-scan base-package="com.zoe.phip.web.controller" />
+    <context:component-scan base-package="com.zoe.phip.web.controller"/>
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="mappingFastJsonHttpMessageConverter"
           class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
@@ -29,11 +29,11 @@
         </property>
     </bean>
     <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>
-                <ref bean="mappingFastJsonHttpMessageConverter" /> <!-- JSON转换器 -->
+                <ref bean="mappingFastJsonHttpMessageConverter"/> <!-- JSON转换器 -->
             </list>
         </property>
     </bean>
@@ -42,10 +42,10 @@
     <bean name="beetlConfig" class="org.beetl.ext.spring.BeetlGroupUtilConfiguration" init-method="init">
     </bean>
     <bean name="beetlViewResolver" class="org.beetl.ext.spring.BeetlSpringViewResolver">
-     <!-- <property name="viewNames">
-          <value>/**</value>
-      </property>-->
-        <property name="prefix" value="/WEB-INF/" />
+        <!-- <property name="viewNames">
+             <value>/**</value>
+         </property>-->
+        <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".html"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <!-- 多GroupTemplate，需要指定使用的bean -->
@@ -55,8 +55,8 @@
     <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
-        <property name="prefix" value="/WEB-INF/" />
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/"/>
+        <property name="suffix" value=".jsp"/>
 
     </bean>
     <mvc:resources mapping="/assets/**" location="assets/"/>
@@ -64,11 +64,11 @@
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 默认编码 -->
-        <property name="defaultEncoding" value="utf-8" />
+        <property name="defaultEncoding" value="utf-8"/>
         <!-- 文件大小最大值 -->
-        <property name="maxUploadSize" value="10485760000" />
+        <property name="maxUploadSize" value="10485760000"/>
         <!-- 内存中的最大值 -->
-        <property name="maxInMemorySize" value="40960" />
+        <property name="maxInMemorySize" value="40960"/>
     </bean>
 
     <bean id="beanFactory" class="com.zoe.phip.web.bean.BeanFactory"></bean>

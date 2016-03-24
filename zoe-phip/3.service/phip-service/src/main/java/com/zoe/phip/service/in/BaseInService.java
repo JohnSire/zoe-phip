@@ -27,7 +27,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param entities
      * @return
      */
-    ServiceResult addList(SystemData systemData,List<T> entities);
+    ServiceResult addList(SystemData systemData, List<T> entities);
 
     /**
      * 删除
@@ -35,7 +35,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param id
      * @return
      */
-    ServiceResult deleteById(SystemData systemData,String id);
+    ServiceResult deleteById(SystemData systemData, String id);
 
     /**
      * 批量删除
@@ -43,7 +43,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param entities
      * @return
      */
-    ServiceResult deleteByList(SystemData systemData,List<T> entities);
+    ServiceResult deleteByList(SystemData systemData, List<T> entities);
 
 
     /**
@@ -52,7 +52,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param idList
      * @return
      */
-    ServiceResult deleteByIds(SystemData systemData,List<String> idList);
+    ServiceResult deleteByIds(SystemData systemData, List<String> idList);
 
     /**
      * 更新
@@ -60,7 +60,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param entity
      * @return
      */
-    ServiceResult update(SystemData systemData,T entity);
+    ServiceResult update(SystemData systemData, T entity);
 
     /**
      * 批量更新
@@ -68,7 +68,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param entities
      * @return
      */
-    ServiceResult updateList(SystemData systemData,List<T> entities);
+    ServiceResult updateList(SystemData systemData, List<T> entities);
 
     /**
      * 获取单个对象
@@ -76,7 +76,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param id
      * @return
      */
-    ServiceResultT<T> getById(SystemData systemData,String id);
+    ServiceResultT<T> getById(SystemData systemData, String id);
 
 
     /**
@@ -93,6 +93,6 @@ public interface BaseInService<T extends BaseEntity> {
      * @param queryPage
      * @return
      */
-    ServiceResultT<PageList<T>> getList(SystemData systemData,QueryPage queryPage, Class<T> cls);
+    ServiceResultT<PageList<T>> getList(SystemData systemData, QueryPage queryPage, Class<T> cls);
 
 }

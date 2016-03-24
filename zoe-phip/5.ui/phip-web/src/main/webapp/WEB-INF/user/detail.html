@@ -1,31 +1,33 @@
 ﻿<%
 var styleSection = {
 %>
-<link href="/assets/dist/style/layout.css" rel="stylesheet" />
+<link href="/assets/dist/style/layout.css" rel="stylesheet"/>
 <%};%>
 <%
 var bodySection = {
 %>
 <form id="baseAttrForm" onsubmit="return false;">
-    <span class="text-up-tips tips-error" style="display:none;"><i class="text-up-tips-arrow arrow-red"></i><span class="msg"></span></span>
+    <span class="text-up-tips tips-error" style="display:none;"><i class="text-up-tips-arrow arrow-red"></i><span
+            class="msg"></span></span>
     <div class="y-dialog-content">
         <div class="y-dialog-form form-little">
             <ul class="y-dialog-lists clearfix">
                 <li class="list">
                     <p class="column-one">
                         <label class="label" for="Name"><span class="text-mark">*</span>名称：</label>
-                        <input type="text" name="Name" class="text" datatype="*1-30" errormsg="名称长度应为1-30位！" nullmsg="请填写名称！" />
+                        <input type="text" name="Name" class="text" datatype="*1-30" errormsg="名称长度应为1-30位！"
+                               nullmsg="请填写名称！"/>
                     </p>
                     <p class="column-one">
                         <label class="label" for="LoginName"><span class="text-mark">*</span>登录名：</label>
-                        <input type="text" name="LoginName" class="text" datatype="*1-30" errormsg="登录名长度应为1-30位！" />
+                        <input type="text" name="LoginName" class="text" datatype="*1-30" errormsg="登录名长度应为1-30位！"/>
 
                     </p>
                 </li>
                 <li class="list" id="userpwd-box" style="display:none;">
                     <p class="column-one">
                         <label class="label" for="Password"><span class="text-mark">*</span>密码：</label>
-                        <input type="password" name="Password" class="text" datatype="*" errormsg="请填写密码！" />
+                        <input type="password" name="Password" class="text" datatype="*" errormsg="请填写密码！"/>
                     </p>
                 </li>
                 <li class="list">
@@ -41,7 +43,7 @@ var bodySection = {
                 <li class="list" id="reset-userpwd" style="display:none;">
                     <p class="column-one">
                         <label class="label" for="">重置密码：</label>
-                        <input id="resetuserpwd" class="btn-dialog-gray l-dialog-btn-inner" type="button" value="重置密码" />
+                        <input id="resetuserpwd" class="btn-dialog-gray l-dialog-btn-inner" type="button" value="重置密码"/>
                         <input id="savenewpwd" type="text" style="display:none;">
                     </p>
                 </li>
@@ -54,12 +56,12 @@ var bodySection = {
 var scriptSection={
 %>
 <script type="text/javascript">
-	$(function () {
+    $(function () {
         //common.validformObj = common.validform();
-		seajs.use('{dir}/SystemManager/SysUser/detail', function (a) {
-			a.init();
-		});
-	})
+        seajs.use('{dir}/SystemManager/SysUser/detail', function (a) {
+            a.init();
+        });
+    })
 </script>
 <%};%>
 <%

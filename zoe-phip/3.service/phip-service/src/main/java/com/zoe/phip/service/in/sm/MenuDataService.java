@@ -24,15 +24,15 @@ import java.util.List;
 public interface MenuDataService extends BaseInService<MenuData> {
 
 
-    ServiceResultT<PageList<MenuData>> getMenuPages(SystemData systemData,String key, QueryPage page);
+    ServiceResultT<PageList<MenuData>> getMenuPages(SystemData systemData, String key, QueryPage page);
 
-    ServiceResultT<List<MenuData>> getMenus(SystemData systemData,String key);
+    ServiceResultT<List<MenuData>> getMenus(SystemData systemData, String key);
 
-    ServiceResultT<List<MenuData>> getMenuByCode(SystemData systemData,String code);
+    ServiceResultT<List<MenuData>> getMenuByCode(SystemData systemData, String code);
 
-    ServiceResultT<List<MenuData>> getChildMenus(SystemData systemData,String parentMenuId);
+    ServiceResultT<List<MenuData>> getChildMenus(SystemData systemData, String parentMenuId);
 
-    ServiceResult updateState(SystemData systemData,String id, int state);
+    ServiceResult updateState(SystemData systemData, String id, int state);
 
     ServiceResultT<List<MenuData>> getCompetenceMenuByUser(SystemData systemData, String userId);
 

@@ -32,7 +32,7 @@ import java.util.List;
 @Service()
 public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory> implements SystemDictCategoryService {
     @Override
-    public ServiceResult add(SystemData systemData,SystemDictCategory entity) {
+    public ServiceResult add(SystemData systemData, SystemDictCategory entity) {
         return SafeExecuteUtil.execute(
                 () -> {
                     Example example = new Example(SystemDictCategory.class);
@@ -47,7 +47,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
     }
 
     @Override
-    public ServiceResult addList(SystemData systemData,List<SystemDictCategory> entities) {
+    public ServiceResult addList(SystemData systemData, List<SystemDictCategory> entities) {
         StringBuffer stringBuffer = new StringBuffer();
         return SafeExecuteUtil.execute(
                 () -> {
@@ -68,7 +68,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
     }
 
     @Override
-    public ServiceResult update(SystemData systemData,SystemDictCategory entity) {
+    public ServiceResult update(SystemData systemData, SystemDictCategory entity) {
         return SafeExecuteUtil.execute(
                 () -> {
                     Example example = new Example(SystemDictCategory.class);
@@ -82,7 +82,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
                 });
     }
 
-    public ServiceResultT<PageList<SystemDictCategory>> getDictCategories(SystemData systemData,String key, QueryPage queryPage) {
+    public ServiceResultT<PageList<SystemDictCategory>> getDictCategories(SystemData systemData, String key, QueryPage queryPage) {
         SafeExecuteUtil<PageList<SystemDictCategory>> safeExecute = new SafeExecuteUtil<>();
         return safeExecute.executeT(() ->
         {
@@ -107,7 +107,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
         });
     }
 
-    public ServiceResultT<SystemDictCategory> getDictCategory(SystemData systemData,String code) {
+    public ServiceResultT<SystemDictCategory> getDictCategory(SystemData systemData, String code) {
 
         SafeExecuteUtil<SystemDictCategory> sr = new SafeExecuteUtil<>();
         return sr.executeT(() -> {

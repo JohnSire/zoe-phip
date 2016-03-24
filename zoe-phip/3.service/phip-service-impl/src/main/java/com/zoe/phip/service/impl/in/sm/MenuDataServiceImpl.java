@@ -37,7 +37,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
 
 
     @Override
-    public ServiceResult add(SystemData systemData,MenuData entity) {
+    public ServiceResult add(SystemData systemData, MenuData entity) {
         return SafeExecuteUtil.execute(() ->
         {
             Example example = new Example(MenuData.class);
@@ -54,7 +54,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
 
 
     @Override
-    public ServiceResultT<PageList<MenuData>> getMenuPages(SystemData systemData,String key, QueryPage queryPage) {
+    public ServiceResultT<PageList<MenuData>> getMenuPages(SystemData systemData, String key, QueryPage queryPage) {
         SafeExecuteUtil<PageList<MenuData>> safeExecute = new SafeExecuteUtil<>();
         return safeExecute.executeT(() ->
         {
@@ -78,7 +78,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
     }
 
     @Override
-    public ServiceResultT<List<MenuData>> getMenus(SystemData systemData,String key) {
+    public ServiceResultT<List<MenuData>> getMenus(SystemData systemData, String key) {
         SafeExecuteUtil<List<MenuData>> safeExecute = new SafeExecuteUtil<>();
         return safeExecute.executeT(() ->
         {
@@ -90,7 +90,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
     }
 
     @Override
-    public ServiceResultT<List<MenuData>> getMenuByCode(SystemData systemData,String code) {
+    public ServiceResultT<List<MenuData>> getMenuByCode(SystemData systemData, String code) {
         SafeExecuteUtil<List<MenuData>> safeExecute = new SafeExecuteUtil<>();
         return safeExecute.executeT(() ->
         {
@@ -102,7 +102,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
     }
 
     @Override
-    public ServiceResultT<List<MenuData>> getChildMenus(SystemData systemData,String parentMenuId) {
+    public ServiceResultT<List<MenuData>> getChildMenus(SystemData systemData, String parentMenuId) {
         SafeExecuteUtil<List<MenuData>> safeExecute = new SafeExecuteUtil<>();
         return safeExecute.executeT(() ->
         {
@@ -118,7 +118,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
     }
 
     @Override
-    public ServiceResult updateState(SystemData systemData,String id, int state) {
+    public ServiceResult updateState(SystemData systemData, String id, int state) {
         return null;
     }
 

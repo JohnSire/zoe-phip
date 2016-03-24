@@ -48,7 +48,7 @@ public interface SystemUserService extends BaseInService<SystemUser> {
      * @param newPwd
      * @return
      */
-    ServiceResult resetPassword(SystemData systemData,String id, String newPwd);
+    ServiceResult resetPassword(SystemData systemData, String id, String newPwd);
 
     /**
      * 更新用户状态
@@ -57,5 +57,5 @@ public interface SystemUserService extends BaseInService<SystemUser> {
      * @param state
      * @return
      */
-    ServiceResult updateState(SystemData systemData,String id, int state);
+    ServiceResult updateState(SystemData systemData, String id, int state);
 }

@@ -65,7 +65,7 @@ public class SystemMenuController extends BaseController {
     @ResponseBody
     public ServiceResultT<PageList<MenuData>> getMenuList(HttpServletRequest request, Model model) {
         QueryPage page = new QueryPage(1, 30);
-        ServiceResultT<PageList<MenuData>> menu = ServiceFactory.getMenuDataService().getList(ComSession.getUserInfo(),page, MenuData.class);
+        ServiceResultT<PageList<MenuData>> menu = ServiceFactory.getMenuDataService().getList(ComSession.getUserInfo(), page, MenuData.class);
         return menu;
     }
 }

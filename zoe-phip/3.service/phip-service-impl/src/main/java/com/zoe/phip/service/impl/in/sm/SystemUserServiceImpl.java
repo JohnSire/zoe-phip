@@ -38,7 +38,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     public ServiceResultT<LoginCredentials> login(String loginName, String passWord, int expiresTime) {
         SafeExecuteUtil<LoginCredentials> safeExecute = new SafeExecuteUtil<LoginCredentials>();
         return safeExecute.executeT(() -> {
-            List<SystemUser> list = getUserByLoginName(null,loginName);
+            List<SystemUser> list = getUserByLoginName(null, loginName);
             if (list == null || list.size() == 0) {
                 throw new BusinessException("用户名错误!");
             }
@@ -73,7 +73,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     }
 
     @Override
-    public ServiceResult resetPassword(SystemData systemData,String id, String newPwd) {
+    public ServiceResult resetPassword(SystemData systemData, String id, String newPwd) {
         return SafeExecuteUtil.execute(() -> {
             SystemUser user = getMapper().selectByPrimaryKey(id);
             if (user == null) {
@@ -86,7 +86,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     }
 
     @Override
-    public ServiceResult updateState(SystemData systemData,String id, int state) {
+    public ServiceResult updateState(SystemData systemData, String id, int state) {
         return SafeExecuteUtil.execute(() -> {
             SystemUser user = getMapper().selectByPrimaryKey(id);
             if (user == null) {
@@ -99,10 +99,10 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     }
 
     @Override
-    public ServiceResult add(SystemData systemData,SystemUser entity) {
+    public ServiceResult add(SystemData systemData, SystemUser entity) {
         return SafeExecuteUtil.execute(() -> {
             //判断是否存在用户
-            List<SystemUser> list = getUserByLoginName(systemData,entity.getLoginName());
+            List<SystemUser> list = getUserByLoginName(systemData, entity.getLoginName());
             if (list != null && list.size() > 0) {
                 throw new BusinessException("已存在登录名{0})的用", entity.getLoginName());
             }
@@ -114,7 +114,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     }
 
     @Override
-    public ServiceResult addList(SystemData systemData,List<SystemUser> entities) {
+    public ServiceResult addList(SystemData systemData, List<SystemUser> entities) {
         return SafeExecuteUtil.execute(() ->
         {
             List<String> loginNames = new ArrayList<String>();
@@ -156,7 +156,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
         return credentials;
     }
 
-    private List<SystemUser> getUserByLoginName(SystemData systemData,String loginName) {
+    private List<SystemUser> getUserByLoginName(SystemData systemData, String loginName) {
         Example example = new Example(SystemUser.class);
         example.createCriteria().andEqualTo("loginName", loginName);
         List<SystemUser> list = getMapper().selectByExample(example);

@@ -24,5 +24,5 @@ public interface SystemDictCategoryService extends BaseInService<SystemDictCateg
 
     ServiceResultT<PageList<SystemDictCategory>> getDictCategories(SystemData systemData, String key, QueryPage queryPage);
 
-    ServiceResultT<SystemDictCategory> getDictCategory(SystemData systemData,String code);
+    ServiceResultT<SystemDictCategory> getDictCategory(SystemData systemData, String code);
 }

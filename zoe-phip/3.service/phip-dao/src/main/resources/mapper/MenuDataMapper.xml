@@ -12,10 +12,10 @@
         <result column="MODIFY_AT" property="modifyAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
         <result column="MODIFY_BY" property="modifyBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="STATE" property="state" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-       <!-- <association property="SYS_SYSTEM_USER" javaType="com.zoe.phip.model.sm.SystemUser">
-            <id property="USER_ID" column="ID"/>
+        <!-- <association property="SYS_SYSTEM_USER" javaType="com.zoe.phip.model.sm.SystemUser">
+             <id property="USER_ID" column="ID"/>
 
-        </association>-->
+         </association>-->
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO SYS_MENU_DATA (ID,NAME,CODE,ADDRESS,FK_PARENT_MENU_ID,CREATE_AT,CREATE_BY,MODIFY_AT,MODIFY_BY,STATE)
@@ -48,7 +48,8 @@
     </delete>
 
     <select id="GetCompetenceMenuByUser" parameterType="java.lang.String" resultMap="BaseResultMap">
-        SELECT DISTINCT t.ID, t.NAME, t.CODE, t.ADDRESS, t.FK_PARENT_MENU_ID, t.CREATE_AT, t.CREATE_BY, t.MODIFY_AT, t.MODIFY_BY, t.STATE, NULL COMPETENCE_ID, NULL NAME_PATH
+        SELECT DISTINCT t.ID, t.NAME, t.CODE, t.ADDRESS, t.FK_PARENT_MENU_ID, t.CREATE_AT, t.CREATE_BY, t.MODIFY_AT,
+        t.MODIFY_BY, t.STATE, NULL COMPETENCE_ID, NULL NAME_PATH
         FROM SYS_MENU_DATA t
         INNER JOIN SYS_MENU_COMPETENCE MC ON MC.FK_MENU_ID = T.ID
         INNER JOIN SYS_USER_COMPETENCE UC ON UC.FK_COMPETENCE_CATEGORY_ID = MC.FK_COMPETENCE_CATEGORY_ID
