@@ -1,10 +1,7 @@
 package com.zoe.phip.service.in;
 
 
-import com.zoe.phip.infrastructure.entity.PageList;
-import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.model.base.BaseEntity;
 
 import java.util.List;
@@ -22,7 +19,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param entity
      * @return
      */
-    ServiceResult add(T entity);
+    ServiceResult add(SystemData systemData, T entity);
 
     /**
      * 批量新增
@@ -30,7 +27,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param entities
      * @return
      */
-    ServiceResult addList(List<T> entities);
+    ServiceResult addList(SystemData systemData,List<T> entities);
 
     /**
      * 删除
@@ -38,7 +35,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param id
      * @return
      */
-    ServiceResult deleteById(String id);
+    ServiceResult deleteById(SystemData systemData,String id);
 
     /**
      * 批量删除
@@ -46,7 +43,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param entities
      * @return
      */
-    ServiceResult deleteByList(List<T> entities);
+    ServiceResult deleteByList(SystemData systemData,List<T> entities);
 
 
     /**
@@ -55,7 +52,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param idList
      * @return
      */
-    ServiceResult deleteByIds(List<String> idList);
+    ServiceResult deleteByIds(SystemData systemData,List<String> idList);
 
     /**
      * 更新
@@ -63,7 +60,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param entity
      * @return
      */
-    ServiceResult update(T entity);
+    ServiceResult update(SystemData systemData,T entity);
 
     /**
      * 批量更新
@@ -71,7 +68,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param entities
      * @return
      */
-    ServiceResult updateList(List<T> entities);
+    ServiceResult updateList(SystemData systemData,List<T> entities);
 
     /**
      * 获取单个对象
@@ -79,7 +76,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param id
      * @return
      */
-    ServiceResultT<T> getById(String id);
+    ServiceResultT<T> getById(SystemData systemData,String id);
 
 
     /**
@@ -87,7 +84,7 @@ public interface BaseInService<T extends BaseEntity> {
      *
      * @return
      */
-    ServiceResultT<List<T>> getList();
+    ServiceResultT<List<T>> getList(SystemData systemData);
 
 
     /**
@@ -96,6 +93,6 @@ public interface BaseInService<T extends BaseEntity> {
      * @param queryPage
      * @return
      */
-    ServiceResultT<PageList<T>> getList(QueryPage queryPage, Class<T> cls);
+    ServiceResultT<PageList<T>> getList(SystemData systemData,QueryPage queryPage, Class<T> cls);
 
 }

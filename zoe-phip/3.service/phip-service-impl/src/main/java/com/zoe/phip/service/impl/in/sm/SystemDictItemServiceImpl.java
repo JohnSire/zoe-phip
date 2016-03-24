@@ -36,7 +36,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     private SystemDictCategoryService service;
 
     @Override
-    public ServiceResult categoryExists(String categoryId) {
+    public ServiceResult categoryExists(SystemData systemData,String categoryId) {
         return SafeExecuteUtil.execute(
                 () -> {
                     Example example = new Example(SystemDictItem.class);
@@ -49,7 +49,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
-    public ServiceResultT<PageList<SystemDictItem>> getDictItems(String categoryId, String key, QueryPage page) {
+    public ServiceResultT<PageList<SystemDictItem>> getDictItems(SystemData systemData,String categoryId, String key, QueryPage page) {
         SafeExecuteUtil<PageList<SystemDictItem>> safeExecute = new SafeExecuteUtil<>();
         return safeExecute.executeT(() ->
         {
@@ -75,7 +75,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
-    public ServiceResultT<List<SystemDictItem>> getDictItems(String categoryId, String key) {
+    public ServiceResultT<List<SystemDictItem>> getDictItems(SystemData systemData,String categoryId, String key) {
         SafeExecuteUtil<List<SystemDictItem>> safeExecute = new SafeExecuteUtil<>();
         return safeExecute.executeT(() ->
         {
@@ -91,7 +91,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
-    public ServiceResultT<PageList<SystemDictItem>> getDictItemsByCategoryCode(String categoryCode, QueryPage page) {
+    public ServiceResultT<PageList<SystemDictItem>> getDictItemsByCategoryCode(SystemData systemData,String categoryCode, QueryPage page) {
         SafeExecuteUtil<PageList<SystemDictItem>> safeExecute = new SafeExecuteUtil<>();
         return safeExecute.executeT(() ->
         {
@@ -103,7 +103,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
             } else {
                 PageHelper.startPage(page.getPageNum(), page.getPageSize());
             }
-            String categoryId = getCategoryId(categoryCode);
+            String categoryId = getCategoryId(systemData,categoryCode);
             if (StringUtil.isNullOrWhiteSpace(categoryId))
                 throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
             List<SystemDictItem> results = getMapper().selectByExample(example);
@@ -115,7 +115,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
-    public ServiceResultT<SystemDictItem> getDictItemByCategoryId(String categoryId, String code) {
+    public ServiceResultT<SystemDictItem> getDictItemByCategoryId(SystemData systemData,String categoryId, String code) {
 
         SafeExecuteUtil<SystemDictItem> safeExecute = new SafeExecuteUtil<>();
         return safeExecute.executeT(() ->
@@ -124,34 +124,34 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
                 throw new BusinessException("字典项代码不能为空!");
             Example example = new Example(SystemDictItem.class);
             Example.Criteria criteria = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
-            criteria.andLike("code", code);
+            criteria.andLike("code", "%" + code + "%");
             return getMapper().selectByExample(example);
         });
     }
 
     @Override
-    public ServiceResultT<SystemDictItem> getDictItemByCategoryCode(String categoryCode, String code) {
+    public ServiceResultT<SystemDictItem> getDictItemByCategoryCode(SystemData systemData,String categoryCode, String code) {
         SafeExecuteUtil<SystemDictItem> safeExecute = new SafeExecuteUtil<>();
         return safeExecute.executeT(() ->
         {
-            String categoryId = getCategoryId(categoryCode);
+            String categoryId = getCategoryId(systemData,categoryCode);
             if (StringUtil.isNullOrWhiteSpace(categoryId))
                 throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
             if (StringUtil.isNullOrWhiteSpace(code))
                 throw new BusinessException("字典项代码不能为空!");
             Example example = new Example(SystemDictItem.class);
             Example.Criteria criteria = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
-            criteria.andLike("code", code);
+            criteria.andLike("code", "%" + code + "%");
             return getMapper().selectByExample(example);
         });
     }
 
     @Override
-    public ServiceResultT<List<SystemDictItem>> getDictItemsByCategoryCode(String categoryCode) {
+    public ServiceResultT<List<SystemDictItem>> getDictItemsByCategoryCode(SystemData systemData,String categoryCode) {
         SafeExecuteUtil<List<SystemDictItem>> safeExecute = new SafeExecuteUtil<>();
         return safeExecute.executeT(() ->
         {
-            String categoryId = getCategoryId(categoryCode);
+            String categoryId = getCategoryId(systemData,categoryCode);
             if (StringUtil.isNullOrWhiteSpace(categoryId))
                 throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
             Example example = new Example(SystemDictItem.class);
@@ -160,8 +160,8 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
         });
     }
 
-    private String getCategoryId(String categoryCode) {
-        ServiceResultT sr = service.getDictCategory(categoryCode);
+    private String getCategoryId(SystemData systemData,String categoryCode) {
+        ServiceResultT sr = service.getDictCategory(systemData,categoryCode);
         if (sr.getIsSuccess() && sr.getResult() != null)
             return ((SystemDictCategory) sr.getResult()).getId();
         return null;

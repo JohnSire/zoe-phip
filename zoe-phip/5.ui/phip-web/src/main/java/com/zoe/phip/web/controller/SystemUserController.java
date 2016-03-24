@@ -70,7 +70,7 @@ public class SystemUserController extends BaseController {
     @ResponseBody
     public ServiceResultT<PageList<SystemUser>> GetUserList() {
         ServiceResultT<PageList<SystemUser>> result = ServiceFactory.getUserService()
-                .getList(getQueryPage(), SystemUser.class);
+                .getList(ComSession.getUserInfo(),getQueryPage(), SystemUser.class);
         return result;
     }
 
@@ -86,7 +86,7 @@ public class SystemUserController extends BaseController {
     @ResponseBody
     public ServiceResultT<SystemUser> getUserInfo(HttpServletRequest request, Model model) {
         SystemData userInfo = ComSession.getUserInfo();
-        ServiceResultT<SystemUser> user = ServiceFactory.getUserService().getById(userInfo.getUserId());
+        ServiceResultT<SystemUser> user = ServiceFactory.getUserService().getById(ComSession.getUserInfo(),userInfo.getUserId());
         return user;
     }
 
@@ -100,7 +100,7 @@ public class SystemUserController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult addUserInfo(SystemUser userInfo) {
-        return ServiceFactory.getUserService().add(userInfo);
+        return ServiceFactory.getUserService().add(ComSession.getUserInfo(),userInfo);
     }
 
     /**
@@ -112,7 +112,7 @@ public class SystemUserController extends BaseController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult updateUserInfo(SystemUser userInfo) {
-        return ServiceFactory.getUserService().update(userInfo);
+        return ServiceFactory.getUserService().update(ComSession.getUserInfo(),userInfo);
     }
 
     /**
@@ -124,7 +124,7 @@ public class SystemUserController extends BaseController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult deleteUserInfo(String id) {
-        return ServiceFactory.getUserService().deleteById(id);
+        return ServiceFactory.getUserService().deleteById(ComSession.getUserInfo(),id);
     }
 
     /**
@@ -137,7 +137,7 @@ public class SystemUserController extends BaseController {
     @ResponseBody
     public ServiceResult deleteUserList(String ids) {
         List<String> list = Arrays.asList(ids.split(","));
-        return ServiceFactory.getUserService().deleteByIds(list);
+        return ServiceFactory.getUserService().deleteByIds(ComSession.getUserInfo(),list);
     }
 
     /**

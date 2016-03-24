@@ -9,6 +9,7 @@ package com.zoe.phip.service.in.sm;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.service.in.BaseInService;
 
@@ -21,7 +22,7 @@ import com.zoe.phip.service.in.BaseInService;
  */
 public interface SystemDictCategoryService extends BaseInService<SystemDictCategory> {
 
-    ServiceResultT<PageList<SystemDictCategory>> getDictCategories(String key, QueryPage queryPage);
+    ServiceResultT<PageList<SystemDictCategory>> getDictCategories(SystemData systemData, String key, QueryPage queryPage);
 
-    ServiceResultT<SystemDictCategory> getDictCategory(String code);
+    ServiceResultT<SystemDictCategory> getDictCategory(SystemData systemData,String code);
 }
