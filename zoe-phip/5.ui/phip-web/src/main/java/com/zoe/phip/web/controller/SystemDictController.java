@@ -27,9 +27,8 @@ import java.util.List;
 /**
  * Created by zhangxingcai on 2016/3/22 0022.
  */
-@Controller
 @RequestMapping("/dict")
-public class SystemDictController {
+public class SystemDictController extends BaseController  {
 
     private SystemDictCategoryService categoryService;
 

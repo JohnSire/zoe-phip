@@ -22,9 +22,8 @@ import java.util.List;
 /**
  * Created by zhangxingcai on 2016/3/22 0022.
  */
-@Controller
 @RequestMapping("/menu")
-public class SystemMenuController {
+public class SystemMenuController extends BaseController {
     //菜单页面
     @RequestMapping("/list")
     public String ToMenuList(HttpServletRequest request, Model model) {

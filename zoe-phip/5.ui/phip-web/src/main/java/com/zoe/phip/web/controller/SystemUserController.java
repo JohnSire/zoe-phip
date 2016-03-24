@@ -20,9 +20,8 @@ import java.util.List;
 /**
  * Created by yinzhixing on 2016/3/21.
  */
-@Controller
 @RequestMapping("/user")
-public class SystemUserController {
+public class SystemUserController extends BaseController {
 
     private SystemUserService systemUserService;
 
@@ -57,17 +56,7 @@ public class SystemUserController {
     //endregion
 
 
-    private int getPageSize(){
-        return Integer.parseInt(DataContext.getRequest().getParameter("pagesize"));
-    }
 
-    private int getPageNum(){
-        return Integer.parseInt(DataContext.getRequest().getParameter("page"));
-    }
-
-    private QueryPage getQueryPage(){
-        return new QueryPage(getPageNum(),getPageSize());
-    }
 
     //region 方法
 

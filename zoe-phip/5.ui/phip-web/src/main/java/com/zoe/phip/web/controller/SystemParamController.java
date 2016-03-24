@@ -18,9 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by zhangxingcai on 2016/3/23 0023.
  */
-@Controller
 @RequestMapping("/param")
-public class SystemParamController {
+public class SystemParamController extends BaseController {
     //系统参数界面
     @RequestMapping("/sysparam")
     public String ToParam(HttpServletRequest request, Model model) {
