@@ -7,10 +7,13 @@
 package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zoe.phip.dao.sm.MenuDataMapper;
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.model.sm.MenuTreeNode;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
@@ -39,11 +42,29 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
         return super.add(entity);
     }
 
+
     @Override
-    public ServiceResultT<PageList<MenuData>> getMenuPages(int state, String key, QueryPage page) {
-
-
-        return null;
+    public ServiceResultT<PageList<MenuData>> getMenuPages(String key, QueryPage queryPage) {
+        SafeExecuteUtil<PageList<MenuData>> safeExecute = new SafeExecuteUtil<>();
+        return safeExecute.executeT(() ->
+        {
+            PageList<MenuData> pageList = new PageList<MenuData>();
+            Example example = new Example(MenuData.class);
+            if (queryPage.getOrderBy() != null) {
+                PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize(), queryPage.getOrderBy());
+            } else {
+                PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize());
+            }
+            if (!StringUtil.isNullOrWhiteSpace(key)) {
+                example.createCriteria().andLike("code", key);
+                example.or(example.createCriteria().andLike("name", key));
+            }
+            List<MenuData> results = getMapper().selectByExample(example);
+            PageInfo<MenuData> pageInfo = new PageInfo<>(results);
+            pageList.setTotal((int) pageInfo.getTotal());
+            pageList.setRows(results);
+            return pageList;
+        });
     }
 
     @Override
@@ -64,7 +85,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
         return safeExecute.executeT(() ->
         {
             Example example = new Example(MenuData.class);
-            Example.Criteria criteria = example.createCriteria().andEqualTo("code",code);
+            Example.Criteria criteria = example.createCriteria().andEqualTo("code", code);
             example.or(criteria);
             return getMapper().selectByExample(example);
         });
@@ -94,27 +115,26 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
     @Override
     public ServiceResultT<List<MenuData>> getCompetenceMenuByUser(SystemData systemData, String userId) {
         SafeExecuteUtil<List<MenuData>> safeExecute = new SafeExecuteUtil<>();
-        return safeExecute.executeT(()->
+        return safeExecute.executeT(() ->
         {
-            List<MenuData> menus=((MenuDataMapper)getMapper()).GetCompetenceMenuByUser(userId);
-            if(menus.size()==0)
-            {
+            List<MenuData> menus = ((MenuDataMapper) getMapper()).GetCompetenceMenuByUser(userId);
+            if (menus.size() == 0) {
                 throw new BusinessException("还没有为该用户分配菜单!");
             }
-            Map<String,List<MenuData>> map=new HashMap<>();
-            menus.forEach(m->{
-                if(map.containsKey(m.getFkParentMenuId())){
+            Map<String, List<MenuData>> map = new HashMap<>();
+            menus.forEach(m -> {
+                if (map.containsKey(m.getFkParentMenuId())) {
                     map.get(m.getFkParentMenuId()).add(m);
-                }else {
-                    List<MenuData> menuList=new ArrayList<MenuData>();
+                } else {
+                    List<MenuData> menuList = new ArrayList<MenuData>();
                     menuList.add(m);
-                    map.put(m.getFkParentMenuId(),menuList);
+                    map.put(m.getFkParentMenuId(), menuList);
                 }
             });
-            List<MenuData> topMenus= map.get("0");
-            List<MenuData> data=new ArrayList<>();
-            topMenus.forEach(t->{
-                findChildNodes(t,map);
+            List<MenuData> topMenus = map.get("0");
+            List<MenuData> data = new ArrayList<>();
+            topMenus.forEach(t -> {
+                findChildNodes(t, map);
                 data.add(t);
             });
 
@@ -124,15 +144,14 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
         });
     }
 
-    private void findChildNodes(MenuData node, Map<String,List<MenuData>>  cache)
-    {
+    private void findChildNodes(MenuData node, Map<String, List<MenuData>> cache) {
         if (!cache.containsKey(node.getId()))
             return;
         List<MenuData> menus = cache.get(node.getId());
         node.setChildren(menus);
-        if(node.getChildren()!=null){
-            node.getChildren().forEach(n->{
-                findChildNodes(n,cache);
+        if (node.getChildren() != null) {
+            node.getChildren().forEach(n -> {
+                findChildNodes(n, cache);
             });
         }
     }

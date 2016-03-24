@@ -24,7 +24,7 @@ import java.util.List;
 public interface MenuDataService extends BaseInService<MenuData> {
 
 
-    ServiceResultT<PageList<MenuData>> getMenuPages(int state, String key, QueryPage page);
+    ServiceResultT<PageList<MenuData>> getMenuPages(String key, QueryPage page);
 
     ServiceResultT<List<MenuData>> getMenus(String key);
 

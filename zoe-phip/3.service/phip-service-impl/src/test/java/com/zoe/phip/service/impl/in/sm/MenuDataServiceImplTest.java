@@ -1,5 +1,7 @@
 package com.zoe.phip.service.impl.in.sm;
 
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.model.sm.MenuData;
@@ -20,18 +22,7 @@ public class MenuDataServiceImplTest extends BaseTest {
     @Autowired
     private MenuDataService menuDataService;
 
-    @Test
-    public void addTest() {
-        MenuData menuData = new MenuData();
-        menuData.setId("123456");
-        menuData.setName("测试");
-        menuData.setCode(1111);
-        menuData.setFkParentMenuId("0000");
-        menuData.setState(1);
-        menuData.setCreateAt(new Date());
-        menuData.setCreateBy("abc");
-        ServiceResult serviceResult = menuDataService.add(menuData);
-    }
+
 
     @Test
     public void testGetMenuByCode() {
@@ -48,5 +39,13 @@ public class MenuDataServiceImplTest extends BaseTest {
     @Test
     public void testGetCompetenceMenuByUser() throws Exception {
         ServiceResultT<List<MenuData>> resultT= menuDataService.getCompetenceMenuByUser(null,"1761543318e744f781427ab325e6a45b");
+    }
+
+    @Test
+    public void testGetMenuPages() throws Exception {
+        QueryPage page = new QueryPage();
+        page.setPageNum(1);
+        page.setPageSize(10);
+        ServiceResultT<PageList<MenuData>> resultT = menuDataService.getMenuPages("%管理%", page);
     }
 }
