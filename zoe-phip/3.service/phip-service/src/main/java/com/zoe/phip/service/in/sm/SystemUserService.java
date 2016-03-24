@@ -4,9 +4,7 @@
  */
 package com.zoe.phip.service.in.sm;
 
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
-import com.zoe.phip.infrastructure.entity.SystemData;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.in.BaseInService;
@@ -58,4 +56,15 @@ public interface SystemUserService extends BaseInService<SystemUser> {
      * @return
      */
     ServiceResult updateState(SystemData systemData, String id, int state);
+
+    /**
+     * 用户查询
+     * @param systemData
+     * @param state
+     * @param key
+     * @param page
+     * @return
+     */
+    ServiceResultT<PageList<SystemUser>> getUserList(SystemData systemData, Integer state, String key, QueryPage page);
+
 }

@@ -11,12 +11,12 @@ import org.springframework.stereotype.Controller;
 public abstract class BaseController {
     protected int getPageSize() {
         String pageSize = DataContext.getRequest().getParameter("pagesize");
-        return StringUtil.isNullOrWhiteSpace(pageSize) ? Integer.MAX_VALUE : Integer.valueOf(pageSize);
+        return StringUtil.isNullOrWhiteSpace(pageSize) ? 30 : Integer.valueOf(pageSize);
     }
 
     protected int getPageNum() {
         String pageNum = DataContext.getRequest().getParameter("page");
-        return StringUtil.isNullOrWhiteSpace(pageNum) ? Integer.MAX_VALUE : Integer.valueOf(pageNum);
+        return StringUtil.isNullOrWhiteSpace(pageNum) ? 1 : Integer.valueOf(pageNum);
     }
 
     protected QueryPage getQueryPage() {
