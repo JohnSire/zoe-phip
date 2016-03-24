@@ -21,7 +21,7 @@ define(function (require, exports, module) {
         //获取登录用户数据
         GetUserInfo: function () {
             //获取用户基本信息
-            var req = new Request("/SystemUser/info")
+            var req = new Request("/user/info")
             //$.ajax({
             //    type: "post",
             //    url: webRoot + "SystemUser/GetLoginUserInfo",
