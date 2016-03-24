@@ -7,11 +7,11 @@
 package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.zoe.phip.infrastructure.entity.SystemData;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
@@ -99,12 +99,39 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
     }
 
     @Override
+    public ServiceResultT<PageList<SystemUser>> getUserList(SystemData systemData, Integer state, String key, QueryPage queryPage) {
+        SafeExecuteUtil<PageList<SystemUser>> safeExecute = new SafeExecuteUtil<PageList<SystemUser>>();
+        return safeExecute.executeT(() ->
+        {
+            PageList<SystemUser> pageList = new PageList<SystemUser>();
+            Example example = new Example(SystemUser.class);
+            if (queryPage.getOrderBy() != null) {
+                PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize(), queryPage.getOrderBy());
+            } else {
+                PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize());
+            }
+            String likeKey="%"+key+"%";
+            example.createCriteria().andLike("name",likeKey);
+            Example.Criteria criteria2= example.createCriteria().andLike("loginName",likeKey);
+            example.or(criteria2);
+            if(state!=null){
+                example.createCriteria().andEqualTo("state",state);
+            }
+            List<SystemUser> results = getMapper().selectByExample(example);
+            PageInfo<SystemUser> pageInfo = new PageInfo<SystemUser>(results);
+            pageList.setTotal((int) pageInfo.getTotal());
+            pageList.setRows(results);
+            return pageList;
+        });
+    }
+
+    @Override
     public ServiceResult add(SystemData systemData, SystemUser entity) {
         return SafeExecuteUtil.execute(() -> {
             //判断是否存在用户
             List<SystemUser> list = getUserByLoginName(systemData, entity.getLoginName());
             if (list != null && list.size() > 0) {
-                throw new BusinessException("已存在登录名{0})的用", entity.getLoginName());
+                throw new BusinessException("已存在登录名({0})的用", entity.getLoginName());
             }
             String password = createPassword(entity.getLoginName(), entity.getPassword());
             entity.setPassword(password);
@@ -130,7 +157,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
                 list.forEach(l -> {
                     loginNames.add(l.getLoginName());
                 });
-                throw new BusinessException("已存在登录名{0})的用户", loginNames.toString());
+                throw new BusinessException("已存在登录名({0})的用户", loginNames.toString());
             }
             entities.forEach(e -> {
                 String password = createPassword(e.getLoginName(), e.getPassword());

@@ -4,7 +4,7 @@
         //vaildform: null,
         init: function (param) {
             //获取id:实体的主键//type:edit编辑,否则为添加
-            var id = common.getParamFormUrl("id"), type = common.getParamFormUrl("type");
+            var id = common.getParamFromUrl("id"), type = common.getParamFromUrl("type");
             if (typeof (param.loadPageEvent) == "function") {
                 param.loadPageEvent();
             }
@@ -14,7 +14,7 @@
         //绑定界面实体
         onBindInfo: function (id, type, param) {
             //编辑
-            $("#baseAttrForm").formInitDate();
+            //$("#baseAttrForm").formInitDate();
             if (type == "edit") {
                 param["url"] = param.getUrl;
                 internal.req.getInfo(id, param, function (data) {

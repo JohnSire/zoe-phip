@@ -681,7 +681,7 @@
             FkVersionId = item.FkVersionId;
             FkSourceId = item.FkSourceId;
         })
-        var dictId = common.getParamFormUrl("id") ? common.getParamFormUrl("id") : "";
+        var dictId = common.getParamFromUrl("id") ? common.getParamFromUrl("id") : "";
 
         if (dictId) {
             top.list_dict_storage = [];
@@ -769,8 +769,8 @@
             }
         });
 
-        //  var multiple = common.getParamFormUrl("multiple")=="true" ? true : false;
-        var uniqueField = common.getParamFormUrl("uniqueField") == "DictCode" ? "DictCode" : "Id";
+        //  var multiple = common.getParamFromUrl("multiple")=="true" ? true : false;
+        var uniqueField = common.getParamFromUrl("uniqueField") == "DictCode" ? "DictCode" : "Id";
         if (FkVersionId) {
             $("#chooseVersion").val(FkVersionId);
             $("#chooseSource").val(FkSourceId);
@@ -812,9 +812,9 @@
 
     //质控模板-预期值选择
     list.exceptValue = function () {
-        var fkTemplateId = common.getParamFormUrl("fkTemplateId");
-        var FkSetId = common.getParamFormUrl("FkSetId");
-        var FkElementId = common.getParamFormUrl("FkElementId");
+        var fkTemplateId = common.getParamFromUrl("fkTemplateId");
+        var FkSetId = common.getParamFromUrl("FkSetId");
+        var FkElementId = common.getParamFromUrl("FkElementId");
         ExpectTypeValue = [
           { "Code": "0", "Name": "区间" },
           { "Code": "1", "Name": "固定值" },

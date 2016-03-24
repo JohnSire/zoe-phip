@@ -4,11 +4,11 @@
             var BaseAttr = require("../../baseAttr/baseAttr.js");
             var baseAttr = new BaseAttr({
                 getUrl: 'user/get/list',//获取实例的接口
-                addUrl: 'user/add',//新增的接口Url
-                updateUrl: 'user/update',//修改的接口Url
+                addUrl: '/user/add',//新增的接口Url
+                updateUrl: '/user/update',//修改的接口Url
                 loadPageEvent: function () {
-                    var type = common.getParamFormUrl("type");
-                    var id = common.getParamFormUrl("id")
+                    var type = common.getParamFromUrl("type");
+                    var id = common.getParamFromUrl("id")
                     internal.onResetPwd(id);
                     if (type != "edit") {
                         $("#userpwd-box").show();
