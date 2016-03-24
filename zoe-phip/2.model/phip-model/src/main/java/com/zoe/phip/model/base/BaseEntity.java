@@ -1,5 +1,7 @@
 package com.zoe.phip.model.base;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,25 +19,30 @@ public class BaseEntity implements Serializable {
     @Id
     @Column(name = "ID")
     @GeneratedValue(generator = "UUID")
+    @JSONField(name = "Id")
     private String id;
 
     /**
      * 创建人
      */
+    @JSONField(name = "CreateBy")
     private String createBy;
 
     /**
      * 修改人
      */
+    @JSONField(name = "ModifyBy")
     private String modifyBy;
 
     /**
      * 实体（数据记录）创建时间
      */
+    @JSONField(name = "CreateAt")
     private Date createAt;
     /**
      * 实体（数据记录）修改时间
      */
+    @JSONField(name = "ModifyAt")
     private Date modifyAt;
 
     /**

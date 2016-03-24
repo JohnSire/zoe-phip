@@ -5,6 +5,7 @@
 
 package com.zoe.phip.model.sm;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.model.base.BaseEntity;
 
 import javax.persistence.Column;
@@ -25,24 +26,28 @@ public class MenuData extends BaseEntity {
      * 名称
      */
     @Column(name = "NAME")
+    @JSONField(name = "Name")
     private String name;
 
     /**
      * 编码
      */
     @Column(name = "CODE")
+    @JSONField(name = "Code")
     private int code;
 
     /**
      * 地址
      */
     @Column(name = "ADDRESS")
+    @JSONField(name = "Address")
     private String address;
 
     /**
      * 上级菜单
      */
     @Column(name = "FK_PARENT_MENU_ID")
+    @JSONField(name = "FkParentMenuId")
     private String fkParentMenuId;
 
 
@@ -50,12 +55,14 @@ public class MenuData extends BaseEntity {
      * 状态
      */
     @Column(name = "STATE")
+    @JSONField(name = "State")
     private int state;
 
     /**
      * 子节点
      */
     @Transient
+    @JSONField(name = "Childrens")
     public List<MenuData> children;
 
     public List<MenuData> getChildren() {

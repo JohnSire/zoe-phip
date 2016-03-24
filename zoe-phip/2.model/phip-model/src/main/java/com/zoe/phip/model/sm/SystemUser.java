@@ -4,6 +4,7 @@
  */
 package com.zoe.phip.model.sm;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.model.base.BaseEntity;
 
 import javax.persistence.*;
@@ -20,24 +21,28 @@ public class SystemUser extends BaseEntity {
      * 名称
      */
     @Column(name = "NAME")
+    @JSONField(name = "Name")
     private String name;
 
     /**
      * 登陆名
      */
     @Column(name = "LOGIN_NAME")
+    @JSONField(name = "LoginName")
     private String loginName;
 
     /**
      * 密码
      */
     @Column(name = "PASSWORD")
+    @JSONField(name = "Password")
     private String password;
 
     /**
      * 状态
      */
     @Column(name = "STATE")
+    @JSONField(name = "State")
     private int state;
 
     public String getName() {
