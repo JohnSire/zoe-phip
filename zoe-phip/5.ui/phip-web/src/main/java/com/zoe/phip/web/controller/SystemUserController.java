@@ -1,7 +1,6 @@
 package com.zoe.phip.web.controller;
 
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
-import com.zoe.phip.infrastructure.entity.SystemData;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.in.sm.SystemUserService;
 import com.zoe.phip.web.bean.BeanFactory;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by yinzhixing on 2016/3/21.
@@ -22,6 +23,11 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/user")
 public class SystemUserController {
+
+    private SystemUserService systemUserService;
+
+    //region 视图
+
     //用户列表
     @RequestMapping("/list")
     public String ToUserList(HttpServletRequest request, Model model) {
@@ -48,9 +54,39 @@ public class SystemUserController {
         return "/SysUser/userSelector";
     }
 
+    //endregion
+
+
+    private int getPageSize(){
+        return Integer.parseInt(DataContext.getRequest().getParameter("pagesize"));
+    }
+
+    private int getPageNum(){
+        return Integer.parseInt(DataContext.getRequest().getParameter("page"));
+    }
+
+    private QueryPage getQueryPage(){
+        return new QueryPage(getPageNum(),getPageSize());
+    }
+
+    //region 方法
+
+    /**
+     * 获取用户列表
+     * @return
+     */
+    @RequestMapping(value = "/get/list", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResultT<PageList<SystemUser>>  GetUserList(){
+        ServiceResultT<PageList<SystemUser>> result=
+                getSystemUserService().getList(getQueryPage(),SystemUser.class);
+        return result;
+    }
+
 
     /**
      * 获取当前登录用户信息
+     *
      * @param request
      * @param model
      * @return
@@ -59,8 +95,66 @@ public class SystemUserController {
     @ResponseBody
     public ServiceResultT<SystemUser> getUserInfo(HttpServletRequest request, Model model) {
         SystemData userInfo = ComSession.getUserInfo();
-        SystemUserService systemUserService = BeanFactory.getBean(Constant.SYSTEM_USER_SERVICE);
-        ServiceResultT<SystemUser> user = systemUserService.getById(userInfo.getUserId());
+        ServiceResultT<SystemUser> user = getSystemUserService().getById(userInfo.getUserId());
         return user;
+    }
+
+
+    /**
+     * 新增用户
+     *
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public ServiceResult addUserInfo(SystemUser userInfo) {
+        return getSystemUserService().add(userInfo);
+    }
+
+    /**
+     * 更新用户
+     *
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public ServiceResult updateUserInfo(SystemUser userInfo) {
+        return getSystemUserService().update(userInfo);
+    }
+
+    /**
+     * 删除用户信息
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public ServiceResult deleteUserInfo(String id) {
+        return getSystemUserService().deleteById(id);
+    }
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/delete/all", method = RequestMethod.POST)
+    @ResponseBody
+    public ServiceResult deleteUserList(String ids) {
+        List<String> list = Arrays.asList(ids.split(","));
+        return getSystemUserService().deleteByIds(list);
+    }
+
+    //endregion
+
+    private SystemUserService getSystemUserService() {
+        if (systemUserService == null) {
+            return BeanFactory.getBean(Constant.SYSTEM_USER_SERVICE);
+        } else
+            return systemUserService;
     }
 }

@@ -52,6 +52,6 @@ public class SystemMenuController {
     @ResponseBody
     public ServiceResultT<List<MenuData>> getMenuUser(){
         MenuDataService menuDataService = BeanFactory.getBean(Constant.MENU_DATA_SERVICE);
-        return menuDataService.getCompetenceMenuByUser(null,ComSession.getUserInfo().getUserId());
+        return menuDataService.getCompetenceMenuByUser(ComSession.getUserInfo(),ComSession.getUserInfo().getUserId());
     }
 }
