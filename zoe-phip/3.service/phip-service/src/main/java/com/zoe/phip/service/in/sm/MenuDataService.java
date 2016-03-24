@@ -6,8 +6,12 @@
 
 package com.zoe.phip.service.in.sm;
 
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.model.sm.MenuData;
+import com.zoe.phip.model.sm.MenuTreeNode;
 import com.zoe.phip.service.in.BaseInService;
+
+import java.util.List;
 
 
 /**
@@ -20,21 +24,17 @@ import com.zoe.phip.service.in.BaseInService;
 public interface MenuDataService extends BaseInService<MenuData> {
 
 
-//    /**
-//     * 获取菜单列表
-//     * @param key
-//     * @return
-//     */
-//    List<MenuData> getMenus(String key);
-//
-//
-//    /**
-//     *
-//     * @param state
-//     * @param key
-//     * @param page
-//     * @return
-//     */
-//    PageList<MenuData> getMenuPages(int state, String key, QueryPage page);
+    ServiceResultT<PageList<MenuData>> getMenuPages(int state, String key, QueryPage page);
 
+    ServiceResultT<List<MenuData>> getMenus(String key);
+
+    ServiceResultT<List<MenuData>> getMenuByCode(String code);
+
+    ServiceResultT<List<MenuData>> getChildMenus(String parentMenuId);
+
+    ServiceResult updateState(String id, int state);
+
+    ServiceResultT<List<MenuTreeNode>> getCompentenceMenuByUser(SystemData systemData, String userId);
+
+    ServiceResultT<List<MenuData>> getCompentenceMenuByUser(String userId);
 }

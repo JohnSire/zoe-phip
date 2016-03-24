@@ -1,45 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.dao.sm.MenuDataMapper">
-   <resultMap id="BaseResultMap" type="com.zoe.phip.model.sm.MenuData">
-      <id column="ID" property="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <result column="CODE" property="code" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-      <result column="ADDRESS" property="address" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <result column="FK_PARENT_MENU_ID" property="fkParentMenuId" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <result column="CREATE_AT" property="createAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
-      <result column="CREATE_BY" property="createBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <result column="MODIFY_AT" property="modifyAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
-      <result column="MODIFY_BY" property="modifyBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <result column="STATE" property="state" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-   </resultMap>
+    <resultMap id="BaseResultMap" type="com.zoe.phip.model.sm.MenuData">
+        <id column="ID" property="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CODE" property="code" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result column="ADDRESS" property="address" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="FK_PARENT_MENU_ID" property="fkParentMenuId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CREATE_AT" property="createAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_BY" property="createBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="MODIFY_AT" property="modifyAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        <result column="MODIFY_BY" property="modifyBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="STATE" property="state" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <association property="SYS_SYSTEM_USER" javaType="com.zoe.phip.model.sm.SystemUser">
+            <id property="USER_ID" column="ID"/>
+
+        </association>
+    </resultMap>
     <insert id="addList" parameterType="java.util.List">
-     INSERT INTO SYS_MENU_DATA (ID,NAME,CODE,ADDRESS,FK_PARENT_MENU_ID,CREATE_AT,CREATE_BY,MODIFY_AT,MODIFY_BY,STATE)
-     <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
-      SELECT
-       #{item.id,jdbcType=VARCHAR},
-       #{item.name,jdbcType=VARCHAR},
-       #{item.code,jdbcType=INTEGER},
-       #{item.address,jdbcType=VARCHAR},
-       #{item.fkParentMenuId,jdbcType=VARCHAR},
-       #{item.createAt,jdbcType=TIMESTAMP},
-       #{item.createBy,jdbcType=VARCHAR},
-       #{item.modifyAt,jdbcType=TIMESTAMP},
-       #{item.modifyBy,jdbcType=VARCHAR},
-       #{item.state,jdbcType=INTEGER}
-       FROM DUAL
-      </foreach>
+        INSERT INTO SYS_MENU_DATA (ID,NAME,CODE,ADDRESS,FK_PARENT_MENU_ID,CREATE_AT,CREATE_BY,MODIFY_AT,MODIFY_BY,STATE)
+        <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+            SELECT
+            #{item.id,jdbcType=VARCHAR},
+            #{item.name,jdbcType=VARCHAR},
+            #{item.code,jdbcType=INTEGER},
+            #{item.address,jdbcType=VARCHAR},
+            #{item.fkParentMenuId,jdbcType=VARCHAR},
+            #{item.createAt,jdbcType=TIMESTAMP},
+            #{item.createBy,jdbcType=VARCHAR},
+            #{item.modifyAt,jdbcType=TIMESTAMP},
+            #{item.modifyBy,jdbcType=VARCHAR},
+            #{item.state,jdbcType=INTEGER}
+            FROM DUAL
+        </foreach>
     </insert>
     <delete id="deleteByIds" parameterType="java.util.List">
-       delete from SYS_MENU_DATA where ID in
-     <foreach collection="list" item="item" open="(" separator="," close=")">
-       #{item}
-     </foreach>
+        delete from SYS_MENU_DATA where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </delete>
     <delete id="deleteByList" parameterType="java.util.List">
-       delete from SYS_MENU_DATA where ID in
-      <foreach collection="list" item="item" open="(" separator="," close=")">
-       #{item.id}
-      </foreach>
+        delete from SYS_MENU_DATA where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
     </delete>
+
+    <select id="GetCompentenceMenuByUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT DISTINCT t.ID, t.NAME, t.CODE, t.ADDRESS, t.FK_PARENT_MENU_ID, t.CREATE_AT, t.CREATE_BY, t.MODIFY_AT, t.MODIFY_BY, t.STATE, NULL COMPETENCE_ID, NULL NAME_PATH
+        FROM PHIP_SYS_MENU_DATA t
+        INNER JOIN PHIP_SYS_MENU_COMPETENCE MC ON MC.FK_MENU_ID = T.ID
+        INNER JOIN PHIP_SYS_USER_COMPETENCE UC ON UC.FK_COMPETENCE_CATEGORY_ID = MC.FK_COMPETENCE_CATEGORY_ID
+        INNER JOIN SYS_SYSTEM_USER U ON U.ID = UC.FK_USER_ID
+        WHERE t.STATE = 1 AND U.STATE = 1 AND UC.FK_USER_ID = #{USER_ID}
+        order by t.CODE
+    </select>
 </mapper>

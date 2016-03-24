@@ -92,4 +92,15 @@ public class MenuData extends BaseEntity {
         this.state = state;
     }
 
+
+    @Override
+    public String toString() {
+        return "MenuData{" +
+                "name='" + name + '\'' +
+                ", code=" + code +
+                ", address='" + address + '\'' +
+                ", fkParentMenuId='" + fkParentMenuId + '\'' +
+                ", state=" + state +
+                '}';
+    }
 }
