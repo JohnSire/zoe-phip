@@ -33,11 +33,11 @@
             },
             callback: {
                 beforeDrag: function () {
-                    var isDrag = common.getParamFormUrl("noDrag") == 1 ? false : true
+                    var isDrag = common.getParamFromUrl("noDrag") == 1 ? false : true
                     return isDrag;
                 },
                 onClick: function (event, treeId, treeNode) {
-                    var isDrag = common.getParamFormUrl("noDrag") == 1 ? false : true;
+                    var isDrag = common.getParamFromUrl("noDrag") == 1 ? false : true;
                     if (!isDrag) {
                         var top = common.getTopWindowDom();
                         if ($.isFunction(top.win_menu_tree_select_callback)) {

@@ -1,7 +1,7 @@
 ﻿define(function (require, exports, module) {
     var internal = {
         updateState: function (id, state, callback) {
-            var req = new Request('user/update');
+            var req = new Request('/user/update/state');
             req.post({
                 isTip: false,
                 data: { id: id, state: state },

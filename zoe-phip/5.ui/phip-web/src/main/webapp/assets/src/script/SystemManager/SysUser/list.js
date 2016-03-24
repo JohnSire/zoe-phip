@@ -6,8 +6,8 @@
         init: function () {
             internal.__grid = new BaseGrid({
                 deleteUrl: {
-                    deleteInfo: "user/delete",
-                    deleteList: "user/delete/all"
+                    deleteInfo: "/user/delete",
+                    deleteList: "/user/delete/all"
                 },
                 //工具条
                 tools: {
@@ -55,7 +55,7 @@
             });
         },
         changeState: function (id, state) {
-            common.confirm('您确定切换状态吗?', '系统用户', function () {
+            common.confirm('您确定切换状态吗?', function () {
 
                 request.updateState(id, state, function () {
                     common.jsmsgSuccess('状态切换成功!');

@@ -4,7 +4,7 @@
         vaildform: null,
         init: function () {
             //获取id:实体的主键//type:edit编辑,否则为添加
-            var id = common.getParamFormUrl("id"), type = common.getParamFormUrl("type"), categoryId = common.getParamFormUrl("categoryId");
+            var id = common.getParamFromUrl("id"), type = common.getParamFromUrl("type"), categoryId = common.getParamFromUrl("categoryId");
             internal.vaildform = $("#baseAttrForm").Validform({ tiptype: 5 });
             internal.onBindInfo(id, type);
             internal.onSave(id, type, categoryId);

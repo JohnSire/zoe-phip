@@ -116,12 +116,24 @@ public class SystemUserController extends BaseController {
     }
 
     /**
+     * 更新用户
+     *
+     * @param
+     * @return
+     */
+    @RequestMapping(value = "/update/state", method = RequestMethod.POST)
+    @ResponseBody
+    public ServiceResult updateState(String id,int state) {
+        return ServiceFactory.getUserService().updateState(id,state);
+    }
+
+    /**
      * 删除用户信息
      *
      * @param id
      * @return
      */
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResult deleteUserInfo(String id) {
         return ServiceFactory.getUserService().deleteById(id);
