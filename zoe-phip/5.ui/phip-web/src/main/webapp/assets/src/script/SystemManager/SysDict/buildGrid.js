@@ -13,7 +13,7 @@
 
             var gridParam = $.extend(true, {}, internal.gridParam());
             gridParam.checkbox = false;
-            gridParam.url = "getCategoryList";
+            gridParam.url = webRoot + '/dict/getCategoryList';
             gridParam.parms = {keyWord: $("#txtDictCategoryKeyWod").val() || ""};
             gridParam.onUnSelectRow = function (rowdata, rowid, rowobj) {
                 internal.buildSysDictItemGrid('', "");
@@ -46,11 +46,11 @@
                 return;
             }
             var gridParam = $.extend(true, {}, internal.gridParam());
-            gridParam.url = webRoot + "SystemDict/GetSysDictItemList";
+            gridParam.url =    webRoot + '/dict/getItemPageList';
             gridParam.parms = {categoryId: categoryId, keyWord: keyWord};
             gridParam.columns = [
-                {display: '项编码', name: 'code', width: 150, align: 'left'},
-                {display: '项名称', name: 'name', width: 400, align: 'left'},
+                {display: '项编码', name: 'Code', width: 150, align: 'left'},
+                {display: '项名称', name: 'Name', width: 400, align: 'left'},
                 {
                     display: '操作', isSort: false, width: 120, render: function (rowdata, rowindex, value) {
                     var h = "";

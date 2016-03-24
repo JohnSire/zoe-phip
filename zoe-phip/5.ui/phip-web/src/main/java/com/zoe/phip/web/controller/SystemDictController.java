@@ -35,19 +35,19 @@ public class SystemDictController extends BaseController {
     private SystemDictItemService itemService;
 
     //系统字典列表
-    @RequestMapping("/list")
+    @RequestMapping("/view/list")
     public String ToDictList(HttpServletRequest request, Model model) {
         return "/dict/list";
     }
 
     //字典项详情
-    @RequestMapping("/item")
+    @RequestMapping("/view/item")
     public String ToDictItemDetail(HttpServletRequest request, Model model) {
         return "/dict/item";
     }
 
     //字典类别详情
-    @RequestMapping("/category")
+    @RequestMapping("/view/category")
     public String ToDictCategoryDetail(HttpServletRequest request, Model model) {
         return "/dict/category";
     }
@@ -60,7 +60,7 @@ public class SystemDictController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping("/getCategoryList")
+    @RequestMapping(value = "/getCategoryList")
     @ResponseBody
     public ServiceResultT<PageList<SystemDictCategory>> getSysDictCategoryList(HttpServletRequest request, Model model) {
         String key = request.getParameter("keyWord");
@@ -74,7 +74,7 @@ public class SystemDictController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping("/getCategoryInfo")
+    @RequestMapping(value = "/getCategoryInfo")
     @ResponseBody
     public ServiceResultT<SystemDictCategory> getSysDictCategoryInfo(HttpServletRequest request, Model model) {
         return ServiceFactory.getDictCategoryService().getById(ComSession.getUserInfo(), request.getParameter("id"));
@@ -87,7 +87,7 @@ public class SystemDictController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping("/addCategory")
+    @RequestMapping(value = "/addCategory")
     @ResponseBody
     public ServiceResult addCategoryInfo(SystemDictCategory info, HttpServletRequest request) {
         return ServiceFactory.getDictCategoryService().add(ComSession.getUserInfo(), info);
@@ -100,7 +100,7 @@ public class SystemDictController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping("/updateCategory")
+    @RequestMapping(value = "/updateCategory")
     @ResponseBody
     public ServiceResult updateCategoryInfo(SystemDictCategory info, HttpServletRequest request) {
         return ServiceFactory.getDictCategoryService().update(ComSession.getUserInfo(), info);
@@ -112,7 +112,7 @@ public class SystemDictController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping("/deleteCategory")
+    @RequestMapping(value = "/deleteCategory")
     @ResponseBody
     public ServiceResult deleteCategoryInfo(HttpServletRequest request) {
         String id = request.getParameter("id");
@@ -125,7 +125,7 @@ public class SystemDictController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping("/deleteCategoryList")
+    @RequestMapping(value = "/deleteCategoryList")
     @ResponseBody
     public ServiceResult deleteSysDictCategoryList(HttpServletRequest request) {
         String id = request.getParameter("ids");
@@ -138,7 +138,7 @@ public class SystemDictController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping("/getItemPageList")
+    @RequestMapping(value = "/getItemPageList")
     @ResponseBody
     public ServiceResultT<PageList<SystemDictItem>> getSysDictItemList(HttpServletRequest request) {
         String key = request.getParameter("keyWord");
@@ -146,14 +146,14 @@ public class SystemDictController extends BaseController {
         return ServiceFactory.getDictItemService().getDictItems(ComSession.getUserInfo(), categoryId, key, getQueryPage());
     }
 
-    @RequestMapping("/getItemList")
+    @RequestMapping(value = "/getItemList")
     @ResponseBody
     public ServiceResultT<List<SystemDictItem>> getSysDictItemListByCode(HttpServletRequest request) {
         String catalog = request.getParameter("catalogCode");
         return ServiceFactory.getDictItemService().getDictItemsByCategoryCode(ComSession.getUserInfo(), catalog);
     }
 
-    @RequestMapping("/getItemInfo")
+    @RequestMapping(value = "/getItemInfo")
     @ResponseBody
     public ServiceResultT<SystemDictItem> getSysDictItemInfo(HttpServletRequest request) {
         return ServiceFactory.getDictItemService().getById(ComSession.getUserInfo(), request.getParameter("id"));
@@ -167,7 +167,7 @@ public class SystemDictController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping("/addItem")
+    @RequestMapping(value = "/addItem")
     @ResponseBody
     public ServiceResult addSysDictItemInfo(SystemDictItem info, HttpServletRequest request) {
         return ServiceFactory.getDictItemService().add(ComSession.getUserInfo(), info);
@@ -180,7 +180,7 @@ public class SystemDictController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping("/updateItem")
+    @RequestMapping(value = "/updateItem")
     @ResponseBody
     public ServiceResult updateSysDictItemInfo(SystemDictItem info, HttpServletRequest request) {
         return ServiceFactory.getDictItemService().update(ComSession.getUserInfo(), info);
@@ -192,19 +192,19 @@ public class SystemDictController extends BaseController {
      * @param id
      * @return
      */
-    @RequestMapping("/deleteItem")
+    @RequestMapping(value = "/deleteItem")
     @ResponseBody
     public ServiceResult deleteSysDictItemInfo(String id) {
         return ServiceFactory.getDictItemService().deleteById(ComSession.getUserInfo(), id);
     }
 
-    @RequestMapping("/deleteItemList")
+    @RequestMapping(value = "/deleteItemList")
     @ResponseBody
     public ServiceResult deleteSysDictItemList(HttpServletRequest request) {
         return ServiceFactory.getDictItemService().deleteByIds(ComSession.getUserInfo(), Arrays.asList(request.getParameter("ids").split(",")));
     }
 
-    @RequestMapping("/categoryExists")
+    @RequestMapping(value = "/categoryExists")
     @ResponseBody
     public ServiceResult categoryExists(HttpServletRequest request) {
         return ServiceFactory.getDictItemService().categoryExists(ComSession.getUserInfo(), request.getParameter("catalogId"));

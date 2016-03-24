@@ -62,8 +62,8 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
             }
             Example.Criteria criteria = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
             if (!StringUtil.isNullOrWhiteSpace(key)) {
-                criteria.andLike("code", key);
-                Example.Criteria criteria2 = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId).andLike("name", key);
+                criteria.andLike("code", "%" + key + "%");
+                Example.Criteria criteria2 = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId).andLike("name", "%" + key + "%");
                 example.or(criteria2);
             }
             List<SystemDictItem> results = getMapper().selectByExample(example);
