@@ -2,10 +2,7 @@ package com.zoe.phip.web.controller;
 
 
 import com.sun.org.apache.bcel.internal.generic.RETURN;
-import com.zoe.phip.infrastructure.entity.PageList;
-import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.model.sm.SystemDictItem;
@@ -82,7 +79,7 @@ public class SystemDictController extends BaseController {
     public ServiceResultT<SystemDictCategory> getSysDictCategoryInfo(HttpServletRequest request, Model model) {
         categoryService = BeanFactory.getBean(Constant.SYSTEM_DICT_CATEGORY_SERVICE);
 
-        return categoryService.getById(request.getParameter("id"));
+        return  categoryService.getById(request.getParameter("id"));
     }
 
     /**
