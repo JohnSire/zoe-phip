@@ -81,7 +81,7 @@ public class SystemUserController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    @RequestMapping(value = "/info", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResultT<SystemUser> getUserInfo(HttpServletRequest request, Model model) {
         SystemData userInfo = ComSession.getUserInfo();
