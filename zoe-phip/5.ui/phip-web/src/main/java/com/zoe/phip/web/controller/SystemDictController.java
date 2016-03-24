@@ -2,10 +2,7 @@ package com.zoe.phip.web.controller;
 
 
 import com.sun.org.apache.bcel.internal.generic.RETURN;
-import com.zoe.phip.infrastructure.entity.PageList;
-import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.model.sm.SystemDictItem;
@@ -29,7 +26,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/dict")
-public class SystemDictController extends BaseController  {
+public class SystemDictController extends BaseController {
 
     private SystemDictCategoryService categoryService;
 
@@ -67,9 +64,7 @@ public class SystemDictController extends BaseController  {
 
         categoryService = BeanFactory.getBean(Constant.SYSTEM_DICT_CATEGORY_SERVICE);
         String key = request.getParameter("keyWord");
-        int pageIndex = StringUtil.isNullOrWhiteSpace(request.getParameter("page")) ? 1 : Integer.valueOf(request.getParameter("page"));
-        int pageSize = StringUtil.isNullOrWhiteSpace(request.getParameter("pagesize")) ? Integer.MAX_VALUE : Integer.valueOf(request.getParameter("pagesize"));
-        return categoryService.getDictCategories(key, new QueryPage(pageIndex, pageSize));
+        return categoryService.getDictCategories(key, getQueryPage());
     }
 
     /**
@@ -84,7 +79,7 @@ public class SystemDictController extends BaseController  {
     public ServiceResultT<SystemDictCategory> getSysDictCategoryInfo(HttpServletRequest request, Model model) {
         categoryService = BeanFactory.getBean(Constant.SYSTEM_DICT_CATEGORY_SERVICE);
 
-        return categoryService.getById(request.getParameter("id"));
+        return  categoryService.getById(request.getParameter("id"));
     }
 
     /**
@@ -159,9 +154,7 @@ public class SystemDictController extends BaseController  {
         itemService = BeanFactory.getBean(Constant.SYSTEM_DICT_ITEM_SERVICE);
         String key = request.getParameter("keyWord");
         String categoryId = request.getParameter("categoryId");
-        int pageIndex = StringUtil.isNullOrWhiteSpace(request.getParameter("page")) ? 1 : Integer.valueOf(request.getParameter("page"));
-        int pageSize = StringUtil.isNullOrWhiteSpace(request.getParameter("pagesize")) ? Integer.MAX_VALUE : Integer.valueOf(request.getParameter("pagesize"));
-        return itemService.getDictItems(categoryId, key, new QueryPage(pageIndex, pageSize));
+        return itemService.getDictItems(categoryId, key, getQueryPage());
     }
 
     @RequestMapping("/getItemList")
