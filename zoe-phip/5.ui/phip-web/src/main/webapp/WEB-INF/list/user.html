@@ -40,8 +40,13 @@ var bodySection = {
 <%
 var scriptSection={
 %>
-
+<script src="/assets/src/script/BaseList/baseList.js"></script>
+<script type="text/javascript">
+    $(function () {
+        list.user();
+    })
+</script>
 <%};%>
 <%
-include("/WEB-INF/shared/_default.html",{title:"查询",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_default.html",{title:"用户搜索",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
 %>
