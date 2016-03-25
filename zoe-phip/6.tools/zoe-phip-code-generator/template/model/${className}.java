@@ -4,6 +4,8 @@
         package ${basepackage}.model;
 
         import javax.persistence.*;
+
+
         import ${basepackage}.base.BaseEntity;
 
 
