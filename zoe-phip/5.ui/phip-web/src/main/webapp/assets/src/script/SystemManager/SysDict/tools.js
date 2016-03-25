@@ -43,7 +43,7 @@
                         var top = common.getTopWindowDom();
                         top.win_dict_item_dialog = $.ligerDialog.open({
                             title: '新增字典项',
-                            url: webRoot + 'SystemDict/SysDictItemDetail?type=add&&categoryId=' + rowdata["Id"],
+                            url: webRoot + '/dict/view/item?type=add&&categoryId=' + rowdata["Id"],
                             width: 590,
                             height: 200,
                             buttons: [

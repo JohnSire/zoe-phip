@@ -54,8 +54,8 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
                     entities.forEach(v -> {
                         Example example = new Example(SystemDictCategory.class);
                         example.createCriteria().andEqualTo("code", v.getCode());
-                        List<SystemDictCategory> list = getMapper().selectByExample(example);
-                        if (list != null && list.size() > 0) {
+                        int count = getMapper().selectCountByExample(example);
+                        if (count > 0) {
                             stringBuffer.append("字典类别(" + v.getCode() + ")已经存在" + "\r\n");
                         }
                     });
@@ -74,8 +74,8 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
                     Example example = new Example(SystemDictCategory.class);
                     example.createCriteria().andEqualTo("code", entity.getCode())
                             .andNotEqualTo("id", entity.getId());
-                    List<SystemDictCategory> list = getMapper().selectByExample(example);
-                    if (list != null && list.size() > 0) {
+                    int count = getMapper().selectCountByExample(example);
+                    if (count > 0) {
                         throw new BusinessException("该字典类{0})已经存在", entity.getCode());
                     } else
                         return getMapper().updateByPrimaryKeySelective(entity);

@@ -46,7 +46,7 @@
                 return;
             }
             var gridParam = $.extend(true, {}, internal.gridParam());
-            gridParam.url =    webRoot + '/dict/getItemPageList';
+            gridParam.url = webRoot + '/dict/getItemPageList';
             gridParam.parms = {categoryId: categoryId, keyWord: keyWord};
             gridParam.columns = [
                 {display: '项编码', name: 'Code', width: 150, align: 'left'},
@@ -77,11 +77,9 @@
             return gridParam;
         },
         dictCategoryReload: function () {
-            //$("#dictCategoryGrid").removeAttr("ligeruiid").empty();
             internal.buildSysDictCategoryGrid();
         },
         dictItemReload: function (categoryId, keyWord) {
-            //$("#dictItemGrid").removeAttr("ligeruiid").empty();
             internal.buildSysDictItemGrid(categoryId, keyWord);
         }
     };
@@ -99,9 +97,10 @@
         var gridObj = liger.get("dictCategoryGrid");
         var rowdata = gridObj.getSelected();
         var top = common.getTopWindowDom();
+        var url = webRoot + '/dict/view/item?type=edit&&categoryId=' + rowdata["Id"] + '&&id=' + id
         top.win_dict_item_dialog = $.ligerDialog.open({
             title: '新增字典项',
-            url: webRoot + 'SystemDict/SysDictItemDetail?type=edit&&categoryId=' + rowdata["Id"] + '&&id=' + id,
+            url: url,
             width: 590,
             height: 200,
             buttons: [
