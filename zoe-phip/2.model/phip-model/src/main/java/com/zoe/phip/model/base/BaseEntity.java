@@ -19,30 +19,30 @@ public class BaseEntity implements Serializable {
     @Id
     @Column(name = "ID")
     @GeneratedValue(generator = "UUID")
-    @JSONField(name = "Id")
+//    @JSONField(name = "Id")
     private String id;
 
     /**
      * 创建人
      */
-    @JSONField(name = "CreateBy")
+//    @JSONField(name = "CreateBy")
     private String createBy;
 
     /**
      * 修改人
      */
-    @JSONField(name = "ModifyBy")
+//    @JSONField(name = "ModifyBy")
     private String modifyBy;
 
     /**
      * 实体（数据记录）创建时间
      */
-    @JSONField(name = "CreateAt")
+//    @JSONField(name = "CreateAt")
     private Date createAt;
     /**
      * 实体（数据记录）修改时间
      */
-    @JSONField(name = "ModifyAt")
+//    @JSONField(name = "ModifyAt")
     private Date modifyAt;
 
     /**

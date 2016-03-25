@@ -21,14 +21,14 @@
                     heightDiff:29,
                     url: webRoot + 'menu/getMenuList',
                     columns: [
-                    { display: '名称', name: 'Name', width: 120, align: 'left' },
-                    { display: '编码', name: 'Code', width: 100, align: 'left' },
-                    { display: '地址', name: 'Address', align: 'left' },
-                    { display: '创建时间', name: 'CreateAt', width: 120, align: 'left', type: 'date' },
-                    { display: '创建人', name: 'CreateBy', width: 120, align: 'left' },
+                    { display: '名称', name: 'name', width: 120, align: 'left' },
+                    { display: '编码', name: 'code', width: 100, align: 'left' },
+                    { display: '地址', name: 'address', align: 'left' },
+                    { display: '创建时间', name: 'createAt', width: 120, align: 'left', type: 'date' },
+                    { display: '创建人', name: 'createBy', width: 120, align: 'left' },
                     {
                         display: '状态',
-                        name: 'State',
+                        name: 'state',
                         width: 80,
                         align: "center",
                         render: function (rowdata, index, value) {
@@ -43,10 +43,10 @@
                     usePager: false,
                     //alternatingRow: false,
                     tree: {
-                        columnId: 'Id',
-                        columnName: 'Name',
-                        idField: 'Id',
-                        parentIDField: 'FkParentMenuId'
+                        columnId: 'id',
+                        columnName: 'name',
+                        idField: 'id',
+                        parentIDField: 'fkParentMenuId'
                     }
 
                 },

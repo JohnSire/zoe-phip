@@ -32,8 +32,7 @@ define(function (require, exports, module) {
                             internal.showMsg("正在登录中。。。");
                         },
                         success: function (data) {
-                            data= $.parseJSON(data);
-                            if (data.IsSuccess) {
+                            if (data.isSuccess) {
                                 window.location.href = webRoot + "/frame/index";
                             } else {
                                 internal.showMsg(data.Message[0].Content);

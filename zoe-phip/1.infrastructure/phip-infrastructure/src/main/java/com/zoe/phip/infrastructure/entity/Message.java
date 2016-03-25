@@ -11,12 +11,12 @@ public class Message implements Serializable {
     /**
      * 消息id
      */
-    @JSONField(name = "Id")
+//    @JSONField(name = "Id")
     private String id;
     /**
      * 消息内容 content
      */
-    @JSONField(name = "Content")
+//    @JSONField(name = "Content")
     private String content;
 
     /**

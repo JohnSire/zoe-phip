@@ -250,11 +250,11 @@
         base.init({
             storage: top.list_user_storage,
             multiple: true,
-            uniqueField: "Id",
-            displayField: "Name",
+            uniqueField: "id",
+            displayField: "name",
             columns: [
-                { display: '名称', name: 'Name', width: 180, align: 'left' },
-                { display: '登录名', name: 'LoginName', width: 265, align: 'left' }
+                { display: '名称', name: 'name', width: 180, align: 'left' },
+                { display: '登录名', name: 'loginName', width: 265, align: 'left' }
             ],
             get: function (key, callback) {
                 var url = "SystemUser/GetUserList";
@@ -262,10 +262,10 @@
                 req.post({
                     data: { "keyWord": key },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -281,19 +281,19 @@
         base.init({
             storage: top.list_menu_storage,
             multiple: true,
-            uniqueField: "Id",
-            displayField: "Name",
+            uniqueField: "id",
+            displayField: "name",
             tree: {
-                columnId: 'Id',
-                columnName: 'Name',
-                idField: 'Id',
-                parentIDField: 'FkParentMenuId'
+                columnId: 'id',
+                columnName: 'name',
+                idField: 'id',
+                parentIDField: 'fkParentMenuId'
             },
             columns: [
-                { display: '菜单名称', name: 'Name', width: 310, align: 'left' },
+                { display: '菜单名称', name: 'name', width: 310, align: 'left' },
                 {
                     display: '状态',
-                    name: 'State',
+                    name: 'state',
                     width: 71,
                     align: "center",
                     render: function (rowdata, index, value) {
@@ -313,10 +313,10 @@
                 req.post({
                     data: { "KeyWord": key },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -347,10 +347,10 @@
                 req.post({
                     data: { "key_word": key },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -381,10 +381,10 @@
                 req.post({
                     data: { "KeyWord": key },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -415,10 +415,10 @@
                 req.post({
                     data: { "fkStandardId": $("#hid_standardId").val(), "key": key },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -449,10 +449,10 @@
                 req.post({
                     data: { "KeyWord": key },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -483,10 +483,10 @@
                 req.post({
                     data: { "key": key },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -516,10 +516,10 @@
                 req.post({
                     data: { "fkStandardId": $("#hid_standardId").val(), "fkSetId": $("#hid_standardSetId").val(), "key": key },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -548,10 +548,10 @@
                 req.post({
                     data: { "key": key, page: 1, pageSize: 1000 },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -583,10 +583,10 @@
                 req.post({
                     data: $.extend({}, listData, { "keyWord": key }),
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -622,8 +622,8 @@
                     data: { "key": key, clientTaskId: jobPushId, "pagesize": 999999},
                     success: function (data) {
                         var enableData = [];
-                        for (var i = 0; i < data.Result.Total; i++) {
-                            enableData.push(data.Result.Rows[i]);
+                        for (var i = 0; i < data.result.total; i++) {
+                            enableData.push(data.result.rows[i]);
                         }
                         callback(enableData);
                     }
@@ -654,10 +654,10 @@
                 req.post({
                     data: { "key": key },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -692,8 +692,8 @@
 
                 data: { "id": dictId },
                 success: function (data) {
-                    if (!data.Result) return false;
-                    var info = data.Result;
+                    if (!data.result) return false;
+                    var info = data.result;
                     FkVersionId = info.FkVersionId;
                     FkSourceId = info.FkSourceId;
                     var list = [];
@@ -737,7 +737,7 @@
         req.post({
             async: false,
             success: function (data) {
-                var list = data.Result;
+                var list = data.result;
                 if (list) {
                     var option = "";
                     $.each(list, function (index, item) {
@@ -756,7 +756,7 @@
 
             data: { "catalogCode": "DICTIONARY_SOURCE" },
             success: function (data) {
-                var list = data.Result;
+                var list = data.result;
 
                 if (list) {
                     var option = "";
@@ -796,10 +796,10 @@
                         "fkSourceId": $("#chooseSource").val()
                     },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -872,10 +872,10 @@
                 req.post({
                     data: { "fkTemplateId": fkTemplateId, "key": key, "FkSetId": FkSetId, "fkColumnId": FkElementId },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -984,10 +984,10 @@
                 req.post({
                     data: { "key": key, page: 1, pageSize: 1000 },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -1016,10 +1016,10 @@
                 req.post({
                     data: $.extend({}, listData, { "key": key }),
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -1051,10 +1051,10 @@
                 req.post({
                     data: $.extend({}, listData, { "keyWord": key }),
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }
@@ -1083,10 +1083,10 @@
                 req.post({
                     data: { "keyWord": key },
                     success: function (data) {
-                        if (data.Result) {
+                        if (data.result) {
                             var enableData = [];
-                            for (var i = 0; i < data.Result.Total; i++) {
-                                enableData.push(data.Result.Rows[i]);
+                            for (var i = 0; i < data.result.total; i++) {
+                                enableData.push(data.result.rows[i]);
                             }
                             callback(enableData);
                         }

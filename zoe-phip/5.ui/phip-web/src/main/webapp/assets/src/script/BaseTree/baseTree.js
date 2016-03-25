@@ -21,14 +21,14 @@
             req.getTreeList({ url: options.treeUrl }, function (data) {
                 //#region 待优化提取代码
                 var treeData = [];
-                $.each(data.Result, function (index, item) {
+                $.each(data.result, function (index, item) {
                     var treeItem = {};
                     treeItem.text = item.Name;
                     treeItem.Id = item.Id;
                     treeItem.children = [];
-                    if (item.Childrens) {
-                        for (var i = 0; i < item.Childrens.length; i++) {
-                            var children = { text: item.Childrens[i].Name, Id: item.Childrens[i].Id };
+                    if (item.children) {
+                        for (var i = 0; i < item.children.length; i++) {
+                            var children = { text: item.children[i].Name, Id: item.children[i].Id };
                             treeItem.children.push(children);
                         }
                     }

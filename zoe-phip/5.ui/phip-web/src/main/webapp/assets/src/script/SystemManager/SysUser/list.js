@@ -20,12 +20,12 @@
                 gridParam: {
                     url: webRoot + '/user/list',
                     columns: [
-                    { display: '名称', name: 'Name', width: 120, align: 'left' },
-                    { display: '登录名', name: 'LoginName', width: 120, align: 'left' },
-                    { display: '注册时间', name: 'CreateAt', width: 120, align: 'left', type: 'date' },
+                    { display: '名称', name: 'name', width: 120, align: 'left' },
+                    { display: '登录名', name: 'loginName', width: 120, align: 'left' },
+                    { display: '注册时间', name: 'createAt', width: 120, align: 'left', type: 'date' },
                         {
                             display: '状态',
-                            name: 'State',
+                            name: 'state',
                             width: 80,
                             align: "center",
                             render: function (rowdata, index, value) {

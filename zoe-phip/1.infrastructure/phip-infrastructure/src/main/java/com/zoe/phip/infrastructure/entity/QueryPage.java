@@ -9,11 +9,11 @@ import java.io.Serializable;
  */
 public class QueryPage implements Serializable {
 
-    @JSONField(name = "PageNum")
+//    @JSONField(name = "PageNum")
     private int pageNum;
-    @JSONField(name = "PageSize")
+//    @JSONField(name = "PageSize")
     private int pageSize;
-    @JSONField(name = "OrderBy")
+//    @JSONField(name = "OrderBy")
     private String orderBy;
 
     public QueryPage() {

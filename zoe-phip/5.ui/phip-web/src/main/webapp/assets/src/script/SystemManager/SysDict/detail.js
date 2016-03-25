@@ -14,7 +14,7 @@
             //编辑
             if (type == "edit") {
                 internal.req.dictItem.getInfo(id, function (data) {
-                    $("#baseAttrForm").json2form($.parseJSON(data).Result);
+                    $("#baseAttrForm").json2form(data.result);
                 });
             }
         },

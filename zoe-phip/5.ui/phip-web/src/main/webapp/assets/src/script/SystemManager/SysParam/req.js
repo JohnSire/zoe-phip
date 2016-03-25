@@ -18,7 +18,7 @@
                     req.post({
                         data: param,
                         success: function (data) {
-                            if (data.IsSuccess) {
+                            if (data.isSuccess) {
                                 common.jsmsgSuccess('保存成功!');
                             }
                             if (typeof (callback) == "function") {

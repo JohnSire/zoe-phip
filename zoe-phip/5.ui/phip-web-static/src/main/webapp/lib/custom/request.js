@@ -50,7 +50,6 @@
                 if (this.param.isTip) {
                     var successObj = $.extend(true, {}, { success: arguments[0].success });
                     var success = function (data) {
-                        var data= $.parseJSON(data);
                         var msgCss = data.isSuccess ? "Success" : "Error";
 
                         var msgContext = "操作成功";

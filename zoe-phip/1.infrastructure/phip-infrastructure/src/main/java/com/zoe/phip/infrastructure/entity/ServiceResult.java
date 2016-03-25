@@ -15,19 +15,19 @@ public class ServiceResult implements Serializable {
     /**
      * 操作是否成功
      */
-    @JSONField(name = "IsSuccess")
+//    @JSONField(name = "IsSuccess")
     private boolean isSuccess;
 
     /**
      * 消息列表
      */
-    @JSONField(name = "Message")
+//    @JSONField(name = "Message")
     private List<Message> messages;
 
     /**
      * 日志消息
      */
-    @JSONField(name = "LogData")
+//    @JSONField(name = "LogData")
     private List<LogMessage> logData;
 
     public ServiceResult() {

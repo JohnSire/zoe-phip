@@ -130,20 +130,20 @@ define(function (require, exports, module) {
         },
         GetMenuHtml: function (data) {
             var dataHtml = "";
-            if (data.Result && data.Result.length > 0) {
-                for (var i = 0 ; i < data.Result.length; i++) {
+            if (data.result && data.result.length > 0) {
+                for (var i = 0 ; i < data.result.length; i++) {
                     dataHtml += "<div class='y-layout-menu'>";
-                    dataHtml += "<h1 class='menu-title' title=" + data.Result[i].Name + "></h1>";
-                    if (data.Result[i].Childrens != null && data.Result[i].Childrens.length > 0) {
+                    dataHtml += "<h1 class='menu-title' title=" + data.result[i].name + "></h1>";
+                    if (data.result[i].children != null && data.result[i].children.length > 0) {
                         dataHtml += "<div class='list-wrap'>";
-                        for (var j = 0; j < data.Result[i].Childrens.length; j++) {
+                        for (var j = 0; j < data.result[i].children.length; j++) {
                             dataHtml += "<ul class='lists clearfix' class='lists clearfix'>";
                             dataHtml += "<li class='list' id='menu-li-a'> ";
-                            dataHtml += "<a class='link' navid='" + data.Result[i].Childrens[j]["Id"] + "' href=" + webRoot + data.Result[i].Childrens[j].Address + " target='mainframe'>" + data.Result[i].Childrens[j].Name + "</a><hr class='y-line' />";
-                            if (data.Result[i].Childrens[j].Childrens != null && data.Result[i].Childrens[j].Childrens.length > 0) {
+                            dataHtml += "<a class='link' navid='" + data.result[i].children[j]["Id"] + "' href=" + webRoot + data.result[i].children[j].address + " target='mainframe'>" + data.result[i].children[j].name + "</a><hr class='y-line' />";
+                            if (data.result[i].children[j].children != null && data.result[i].children[j].children.length > 0) {
                                 dataHtml += "<ul class='lists clearfix'>";
-                                for (var k = 0; k < data.Result[i].Childrens[j].Childrens.length; k++) {
-                                    dataHtml += "<li class='list'><a class='link' navid='" + data.Result[i].Childrens[j].Childrens[k].Id + "' href=" + webRoot + data.Result[i].Childrens[j].Childrens[k].Address + " target='mainframe'>" + data.Result[i].Childrens[j].Childrens[k].Name + "</a><hr class='y-line' /></li>";
+                                for (var k = 0; k < data.result[i].children[j].children.length; k++) {
+                                    dataHtml += "<li class='list'><a class='link' navid='" + data.result[i].children[j].children[k].Id + "' href=" + webRoot + data.result[i].children[j].children[k].address + " target='mainframe'>" + data.result[i].children[j].children[k].name + "</a><hr class='y-line' /></li>";
                                 }
                                 dataHtml += "</ul>";
                             }
