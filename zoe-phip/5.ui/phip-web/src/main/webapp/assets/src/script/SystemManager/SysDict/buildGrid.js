@@ -24,7 +24,7 @@
                     gridObj.set("page", 1);
                     gridObj.set("newPage", 1);
                 }
-                internal.buildSysDictItemGrid(data.Id, "");
+                internal.buildSysDictItemGrid(data.id, "");
             };
             gridParam.columns = [
                 {display: '字典编码', name: 'code', isSort: false, width: 180, align: 'left'},

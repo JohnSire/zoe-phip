@@ -1,0 +1,46 @@
+﻿<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/SystemManager/SysParam/index', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+var styleSection = {
+%>
+<link href="/assets/dist/style/layout.css" rel="stylesheet"/>
+<style type="text/css">
+    .y-form-big .column-one .label {
+        width: 125px;
+    }
+</style>
+<%};%>
+<%
+var bodySection = {
+%>
+<form id="baseAttrForm" onsubmit="false">
+    <div class="y-dialog-content">
+        <div class="y-dialog-form y-form-big">
+            <ul class="y-dialog-lists clearfix">
+                <li class="list" id="sysParamList">
+                </li>
+                <li class="list">
+                    <p class="column-one">
+                        <input type="button" class="btn-green btn-green-save" style="margin-left:128px;" id="btnSave"
+                               value="保存"/>
+                    </p>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</form>
+
+<%};%>
+<%
+include("/WEB-INF/shared/_default.html",{title:"系统参数",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

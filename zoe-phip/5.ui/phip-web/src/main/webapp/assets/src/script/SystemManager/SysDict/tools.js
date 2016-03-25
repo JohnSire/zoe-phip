@@ -28,8 +28,8 @@
                     var keyWord = $("#txtDictItemKeyWord").val();
                     var gridObj = liger.get("dictCategoryGrid");
                     var rowdata = gridObj.getSelected();
-                    if (rowdata && rowdata["Id"]) {
-                        internal.grid.dictItemReload(rowdata["Id"], keyWord);
+                    if (rowdata && rowdata["id"]) {
+                        internal.grid.dictItemReload(rowdata["id"], keyWord);
                     } else {
                         common.jsmsg("请先选择相关字典分类！", "Error");
                     }
@@ -43,7 +43,7 @@
                         var top = common.getTopWindowDom();
                         top.win_dict_item_dialog = $.ligerDialog.open({
                             title: '新增字典项',
-                            url: webRoot + '/dict/view/item?type=add&&categoryId=' + rowdata["Id"],
+                            url: webRoot + '/dict/view/item?type=add&&categoryId=' + rowdata["id"],
                             width: 590,
                             height: 200,
                             buttons: [
