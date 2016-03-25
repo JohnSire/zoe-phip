@@ -117,10 +117,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
         });
     }
 
-    @Override
-    public ServiceResult updateState(SystemData systemData, String id, int state) {
-        return null;
-    }
+
 
     @Override
     public ServiceResultT<List<MenuData>> getCompetenceMenuByUser(SystemData systemData, String userId) {

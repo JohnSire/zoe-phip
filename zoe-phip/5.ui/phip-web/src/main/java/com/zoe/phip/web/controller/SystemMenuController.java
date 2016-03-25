@@ -2,6 +2,7 @@ package com.zoe.phip.web.controller;
 
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.web.context.ComSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,11 +58,80 @@ public class SystemMenuController extends BaseController {
         return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(), ComSession.getUserInfo().getUserId());
     }
 
-    @RequestMapping(value = "/getMenuList", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResultT<PageList<MenuData>> getMenuList(HttpServletRequest request, Model model) {
-        QueryPage page = new QueryPage(1, 30);
-        ServiceResultT<PageList<MenuData>> menu = ServiceFactory.getMenuDataService().getList(ComSession.getUserInfo(), page, MenuData.class);
+        ServiceResultT<PageList<MenuData>> menu = ServiceFactory.getMenuDataService().getList(ComSession.getUserInfo(), getQueryPage(), MenuData.class);
         return menu;
     }
+
+
+    /**
+     * 根据菜单id获取菜单信息
+     *
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/getMenuInfo", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResultT<MenuData> getMenuInfo(HttpServletRequest request, Model model) {
+
+        return ServiceFactory.getMenuDataService().getById(ComSession.getUserInfo(), request.getParameter("id"));
+    }
+
+    /**
+     * 根据关键字获取菜单列表
+     *
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/getMenuList", method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResultT<PageList<MenuData>> getMenuPageList(HttpServletRequest request, Model model) {
+        String key = request.getParameter("key");
+        return ServiceFactory.getMenuDataService().getMenuPages(ComSession.getUserInfo(), key, getQueryPage());
+    }
+
+    /**
+     * 修改菜单信息
+     *
+     * @param request
+     * @param menuData
+     * @return
+     */
+    @RequestMapping(value = "/updateMenuInfo")
+    @ResponseBody
+    public ServiceResult updateMenuInfo(HttpServletRequest request, MenuData menuData) {
+        return ServiceFactory.getMenuDataService().update(ComSession.getUserInfo(), menuData);
+    }
+
+
+    /**
+     * 添加菜单
+     *
+     * @param request
+     * @param menuData
+     * @return
+     */
+    @RequestMapping(value = "/addMenuInfo")
+    @ResponseBody
+    public ServiceResult addMenuInfo(MenuData menuData) {
+        return ServiceFactory.getMenuDataService().add(ComSession.getUserInfo(), menuData);
+    }
+
+
+    @RequestMapping(value = "getMenuUser",method = RequestMethod.GET)
+    @ResponseBody
+    public ServiceResultT<List<MenuData>> getMenuUser(HttpServletRequest request,String id){
+        return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(),id);
+    }
+
+
+
+
+
+
+
 }
