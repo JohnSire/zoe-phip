@@ -96,7 +96,7 @@ define(function (require, exports, module) {
                 internal.req.getSQLData({
                     url: url, data: data
                 }, function (data) {
-                    var result = data.Result;
+                    var result = data.result;
                     if (typeof (result) == "string") {
                         result = $.parseJSON(result);
                     }

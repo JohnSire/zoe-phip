@@ -21,28 +21,28 @@ public class SystemUser extends BaseEntity {
      * 名称
      */
     @Column(name = "NAME")
-    @JSONField(name = "Name")
+//    @JSONField(name = "Name")
     private String name;
 
     /**
      * 登陆名
      */
     @Column(name = "LOGIN_NAME")
-    @JSONField(name = "LoginName")
+//    @JSONField(name = "LoginName")
     private String loginName;
 
     /**
      * 密码
      */
     @Column(name = "PASSWORD")
-    @JSONField(name = "Password")
+//    @JSONField(name = "Password")
     private String password;
 
     /**
      * 状态
      */
     @Column(name = "STATE")
-    @JSONField(name = "State")
+//    @JSONField(name = "State")
     private int state;
 
     public String getName() {

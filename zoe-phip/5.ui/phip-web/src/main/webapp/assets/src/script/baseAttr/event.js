@@ -22,7 +22,7 @@
                         param.beforeBindEvent(data);
                     }
                     //根据id获取数据，然后绑定上
-                    $("#baseAttrForm").json2form(data.Result);
+                    $("#baseAttrForm").json2form(data.result);
                     if (typeof (param.afterBindEvent) == "function") {
                         param.afterBindEvent(data);
                     }

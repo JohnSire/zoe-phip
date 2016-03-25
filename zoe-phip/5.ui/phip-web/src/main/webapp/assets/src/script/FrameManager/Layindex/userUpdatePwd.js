@@ -13,7 +13,7 @@
                         data: data,
                         isTip: false,
                         success: function (data) {
-                            if (data.IsSuccess) {
+                            if (data.isSuccess) {
                                 common.jsmsgSuccess('密码修改成功，请重新登录！');
                                 setTimeout(function () { internal.top.location.href = webRoot + "Frame/Skip"; }, 1000)
                             } else {

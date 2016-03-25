@@ -9791,18 +9791,18 @@
                 },
                 success: function (data)
                 {
-                    //if (!data.IsSuccess) {
+                    //if (!data.isSuccess) {
                     //    if (data.Message && data.Message.length > 0 && data.Message[0]["Content"]) {
                     //        common.jsmsgError(data.Message[0]["Content"]);
                     //    }
                     //    return;
                     //}
 
-                    //2015年10月27日 by lqh data.Result 在SQL下返回的是字符串
-                    if (typeof (data.Result) == "string") {
-                        data = $.parseJSON(data.Result);
+                    //2015年10月27日 by lqh data.result 在SQL下返回的是字符串
+                    if (typeof (data.result) == "string") {
+                        data = $.parseJSON(data.result);
                     } else {
-                        data = data.Result;
+                        data = data.result;
                     }
 
 

@@ -7,7 +7,7 @@
         },
         buildList: function () {
             internal.req.getList(function (data) {
-                $.each(data.Result, function (index, item) {
+                $.each(data.result, function (index, item) {
                     internal.buildItem(item)
                 })
                 common.validformObj.config({ tiptype: 3 })

@@ -5,7 +5,6 @@
 
         import javax.persistence.*;
         import ${basepackage}.base.BaseEntity;
-        import com.alibaba.fastjson.annotation.JSONField;
 
 
 /**
@@ -23,7 +22,6 @@ public class $ {
  * ${field.remarks}
  */
 @Column(name = "${field.sqlName}")
-@JSONField(name = "${field.entityName?cap_first}")
 private ${field.javaType}${field.entityName?uncap_first};
 </#if>
 </#list>

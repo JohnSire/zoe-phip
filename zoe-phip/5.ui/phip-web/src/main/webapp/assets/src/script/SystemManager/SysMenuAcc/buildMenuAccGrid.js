@@ -26,19 +26,19 @@
                 dataAction: "server",
                 delayLoad:true,
                 tree: {
-                    columnId: 'Id',
-                    columnName: 'Name',
-                    idField: 'Id',
-                    parentIDField: 'FkParentMenuId'
+                    columnId: 'id',
+                    columnName: 'name',
+                    idField: 'id',
+                    parentIDField: 'fkParentMenuId'
                 },
                 columns: [
-                { display: '菜单名称', name: 'Name', isSort: false, align: 'left' },
+                { display: '菜单名称', name: 'name', isSort: false, align: 'left' },
                 //{ display: '菜单路径', name: 'Address', isSort: false, align: 'left' },
-                { display: '授权时间', name: 'CreateAt', width: 120, isSort: false, align: 'left', type: 'date' },
-                { display: '授权人', name: 'CreateBy', width: 150, isSort: false, align: 'left' },
+                { display: '授权时间', name: 'createAt', width: 120, isSort: false, align: 'left', type: 'date' },
+                { display: '授权人', name: 'createBy', width: 150, isSort: false, align: 'left' },
                 {
                     display: '状态',
-                    name: 'State',
+                    name: 'state',
                     width: 71,
                     align: "center",
                     render: function (rowdata, index, value) {

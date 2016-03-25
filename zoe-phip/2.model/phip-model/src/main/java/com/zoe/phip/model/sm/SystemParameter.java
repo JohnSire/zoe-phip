@@ -22,49 +22,49 @@ public class SystemParameter extends BaseEntity {
      * 名称
      */
     @Column(name = "NAME")
-    @JSONField(name = "Name")
+//    @JSONField(name = "Name")
     private String name;
     /**
      * 编码
      */
     @Column(name = "CODE")
-    @JSONField(name = "Code")
+//    @JSONField(name = "Code")
     private String code;
     /**
      * 值
      */
     @Column(name = "VALUE")
-    @JSONField(name = "Value")
+//    @JSONField(name = "Value")
     private String value;
     /**
      * 值定义
      */
     @Column(name = "VALUE_DEFINITION")
-    @JSONField(name = "ValueDefinition")
+//    @JSONField(name = "ValueDefinition")
     private String valueDefinition;
     /**
      * 描述
      */
     @Column(name = "DESCR")
-    @JSONField(name = "Descr")
+//    @JSONField(name = "Descr")
     private String descr;
     /**
      * 类型
      */
     @Column(name = "TYPE")
-    @JSONField(name = "Type")
+//    @JSONField(name = "Type")
     private java.math.BigDecimal type;
     /**
      * 正则表达式
      */
     @Column(name = "VALIDATE_REGULAR")
-    @JSONField(name = "ValidateRegular")
+//    @JSONField(name = "ValidateRegular")
     private String validateRegular;
     /**
      * 错误提示消息
      */
     @Column(name = "VALIDATE_MESSAGE")
-    @JSONField(name = "ValidateMessage")
+//    @JSONField(name = "ValidateMessage")
     private String validateMessage;
 
     public String getName() {

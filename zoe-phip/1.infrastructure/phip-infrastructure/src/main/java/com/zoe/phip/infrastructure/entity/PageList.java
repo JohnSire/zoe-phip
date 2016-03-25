@@ -12,12 +12,12 @@ public class PageList<T> implements Serializable {
     /**
      * 分页列表条数
      */
-    @JSONField(name = "Total")
+//    @JSONField(name = "Total")
     private int total;
     /**
      * 行内容对象
      */
-    @JSONField(name = "Rows")
+//    @JSONField(name = "Rows")
     private List<T> rows;
 
     /**
