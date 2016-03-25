@@ -19,7 +19,7 @@
                     checkbox: false,
                     height: "100%",
                     heightDiff:29,
-                    url: webRoot + 'menu/getMenuList',
+                    url: webRoot + '/menu/getMenuList',
                     columns: [
                     { display: '名称', name: 'Name', width: 120, align: 'left' },
                     { display: '编码', name: 'Code', width: 100, align: 'left' },
@@ -55,7 +55,7 @@
                     common: {
                         width: 390,
                         height: 288,
-                        url: webRoot + 'menu/detail'
+                        url: webRoot + '/menu/detail'
                     },
                     add: {
                         title: '新增菜单信息'
