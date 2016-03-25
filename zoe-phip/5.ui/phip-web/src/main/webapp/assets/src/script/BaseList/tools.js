@@ -69,7 +69,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "用户关联管理",
-                url: webRoot + "list/user",
+                url: webRoot + "/list/user",
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -90,7 +90,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "菜单关联管理",
-                url: webRoot + "list/menu",
+                url: webRoot + "/list/menu",
                 width: parms.width,
                 buttons: [{
                     text: '确定',
