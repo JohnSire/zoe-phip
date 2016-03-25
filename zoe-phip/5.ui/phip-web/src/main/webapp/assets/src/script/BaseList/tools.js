@@ -6,7 +6,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "提交路径",
-                url: webRoot + "list/submitPath",
+                url: webRoot + "/list/submitPath",
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -27,7 +27,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "质控模板",
-                url: webRoot + "list/QualityTemp?standardId=" + (parms.standardId || ''),
+                url: webRoot + "/list/QualityTemp?standardId=" + (parms.standardId || ''),
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -48,7 +48,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "采集模板",
-                url: webRoot + "list/CollentTemp?standardId=" + (parms.standardId || '') + '&&taskType=' + (parms.taskType || 0),
+                url: webRoot + "/list/CollentTemp?standardId=" + (parms.standardId || '') + '&&taskType=' + (parms.taskType || 0),
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -69,7 +69,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "用户关联管理",
-                url: webRoot + "list/user",
+                url: webRoot + "/list/user",
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -90,7 +90,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "菜单关联管理",
-                url: webRoot + "list/menu",
+                url: webRoot + "/list/menu",
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -111,7 +111,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "采集路径",
-                url: webRoot + "list/CollectPath",
+                url: webRoot + "/list/CollectPath",
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -132,7 +132,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "数据集选择",
-                url: webRoot + "list/Set",
+                url: webRoot + "/list/Set",
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -174,7 +174,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "数据元选择",
-                url: webRoot + "list/Element",
+                url: webRoot + "/list/Element",
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -264,7 +264,7 @@
 
                 height: parms.height + 75,
                 title: "值域选择",
-                url: webRoot + "list/standardDict?id=" + id,
+                url: webRoot + "/list/standardDict?id=" + id,
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -293,7 +293,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "预期值选择",
-                url: webRoot + "list/ExceptValue?FkSetId=" + FkSetId + "&FkElementId=" + FkElementId + "&fkTemplateId=" + fkTemplateId,
+                url: webRoot + "/list/ExceptValue?FkSetId=" + FkSetId + "&FkElementId=" + FkElementId + "&fkTemplateId=" + fkTemplateId,
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -319,7 +319,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "正则表达式选择",
-                url: webRoot + "list/Regex",
+                url: webRoot + "/list/Regex",
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -340,7 +340,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "表名选择",
-                url: webRoot + "List/ClientJobTable?jobPushId=" + parms.jobPushId + "&&multiple=" + parms.multiple,
+                url: webRoot + "/List/ClientJobTable?jobPushId=" + parms.jobPushId + "&&multiple=" + parms.multiple,
                 width: parms.width,
                 buttons: [{
                     text: '确定',
@@ -361,7 +361,7 @@
             var dialog = $.ligerDialog.open({
                 height: parms.height,
                 title: "主题视图",
-                url: webRoot + "List/ThemeTemplate?multiple=" + parms.multiple,
+                url: webRoot + "/List/ThemeTemplate?multiple=" + parms.multiple,
                 width: parms.width,
                 buttons: [{
                     text: '确定',
