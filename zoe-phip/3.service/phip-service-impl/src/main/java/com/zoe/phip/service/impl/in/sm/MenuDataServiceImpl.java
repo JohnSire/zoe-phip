@@ -7,7 +7,6 @@
 package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.dao.sm.MenuDataMapper;
 import com.zoe.phip.infrastructure.entity.*;
@@ -17,6 +16,7 @@ import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.model.sm.MenuTreeNode;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
+import com.zoe.phip.service.impl.util.Page;
 import com.zoe.phip.service.in.sm.MenuDataService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
@@ -60,11 +60,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
         {
             PageList<MenuData> pageList = new PageList<MenuData>();
             Example example = new Example(MenuData.class);
-            if (queryPage.getOrderBy() != null) {
-                PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize(), queryPage.getOrderBy());
-            } else {
-                PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize());
-            }
+            Page.startPage(queryPage);
             if (!StringUtil.isNullOrWhiteSpace(key)) {
                 example.createCriteria().andLike("code", key);
                 example.or(example.createCriteria().andLike("name", key));

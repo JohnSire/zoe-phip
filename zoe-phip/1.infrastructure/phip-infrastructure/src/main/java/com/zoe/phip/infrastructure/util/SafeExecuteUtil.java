@@ -60,6 +60,27 @@ public final class SafeExecuteUtil<T> {
         return executeResult;
     }
 
+    public static <R> ServiceResultT<R> execute0(Function<Object> invoker) {
+        ServiceResultT<R> executeResult = new ServiceResultT<R>();
+        try {
+            R result = (R) invoker.apply();
+            executeResult.setResult(result);
+            executeResult.setIsSuccess(result != null);
+        } catch (BusinessException ex) {
+            //日志消息
+            //todo 如何定义错误ID
+            executeResult.addMessage("1001", ex.getMessage());
+            executeResult.setIsSuccess(false);
+            logger.error(ex.getMessage());
+        } catch (Exception e) {
+            executeResult.setIsSuccess(false);
+            executeResult.addLogData(e.toString());
+            executeResult.addLogData(getStackMsg(e));
+            logger.error("方法执行报错:", e);
+        }
+        return executeResult;
+    }
+
     private static String getStackMsg(Exception e) {
 
         StringBuffer sb = new StringBuffer();

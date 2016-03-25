@@ -32,7 +32,9 @@ public class SystemUserServiceImplTest extends BaseTest {
     @Test
     public void addListTest() {
         List<SystemUser> list = new ArrayList<>();
-        SystemUser user = creteUser("zjy", "zjy", "zjy", 1);
+        SystemUser user = creteUser("abc", "abc", "1", 1);
+        list.add(user);
+        user = creteUser("abd", "ced", "1", 1);
         list.add(user);
         ServiceResult result = systemUserService.addList(null, list);
     }
@@ -40,7 +42,7 @@ public class SystemUserServiceImplTest extends BaseTest {
 
     @Test
     public void pageQueryTest() {
-        ServiceResultT<PageList<SystemUser>> resultT = systemUserService.getList(null, new QueryPage(), SystemUser.class);
+        ServiceResultT<PageList<SystemUser>> resultT = systemUserService.getList(null, new QueryPage(1,2), SystemUser.class);
         List<SystemUser> list = resultT.getResult().getRows();
         System.out.println(list.size());
     }
@@ -61,6 +63,12 @@ public class SystemUserServiceImplTest extends BaseTest {
 
         ServiceResult result = systemUserService.login("admin1", "zjy", 1000 * 10);
 
+    }
+
+    @Test
+    public void testGetUsers(){
+        ServiceResultT<PageList<SystemUser>> resultT=
+                systemUserService.getUserList(null,1,"a",new QueryPage());
     }
 
     @Test

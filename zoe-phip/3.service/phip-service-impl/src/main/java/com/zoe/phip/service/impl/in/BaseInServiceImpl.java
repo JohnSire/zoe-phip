@@ -1,6 +1,5 @@
 package com.zoe.phip.service.impl.in;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.dao.MyMapper;
 import com.zoe.phip.infrastructure.entity.*;
@@ -8,6 +7,7 @@ import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.base.BaseEntity;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
+import com.zoe.phip.service.impl.util.Page;
 import com.zoe.phip.service.in.BaseInService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
@@ -105,11 +105,7 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
         {
             PageList<T> pageList = new PageList<T>();
             Example example = new Example(cls);
-            if (queryPage.getOrderBy() != null) {
-                PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize(), queryPage.getOrderBy());
-            } else {
-                PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize());
-            }
+            Page.startPage(queryPage);
             List<T> results = mapper.selectByExample(example);
             PageInfo<T> pageInfo = new PageInfo<T>(results);
             pageList.setTotal((int) pageInfo.getTotal());
