@@ -1,49 +1,55 @@
 ﻿<%
 var styleSection = {
 %>
+<link href="/assets/dist/style/layout.css" rel="stylesheet"/>
 <%};%>
 <%
-var bodySectionInner = {
+var bodySection = {
 %>
-<div class="y-dialog-content ">
-    <div class="y-dialog-title">
-        <h1 class="title">基本信息</h1>
+<form id="baseAttrForm" onsubmit="return false;">
+    <span class="text-up-tips tips-error" style="display:none;"><i class="text-up-tips-arrow arrow-red"></i><span
+            class="msg"></span></span>
+    <div class="y-dialog-content ">
+        <div class="y-dialog-title">
+            <h1 class="title">基本信息</h1>
+        </div>
+        <div class="y-dialog-form form-little">
+            <ul class="y-dialog-lists clearfix">
+                <li class="list">
+                    <p class="column">
+                        <label class="label">名称：</label>
+                        <span class="span">阿根</span>
+                    </p>
+                    <p class="column">
+                        <label class="label">原始密码：</label>
+                        <input type="password" class="text" name="oldPwd" datatype="*" errormsg="原始密码不能为空！"/>
+                    </p>
+                </li>
+                <li class="list">
+                    <p class="column">
+                        <label class="label">新密码：</label>
+                        <input id="txb-newPwd" type="password" datatype="*" class="text" name="newPwd" errormsg="密码不能为空！"/>
+                    </p>
+                    <p class="column">
+                        <label class="label">确认密码：</label>
+                        <input id="txb-reNewPwd" type="password" class="text" datatype="*" recheck="newPwd"
+                               errormsg="您两次输入的账号密码不一致！"/>
+                    </p>
+                </li>
+                <li class="list">
+                    <input name="id" type="text" style="display:none;"/>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="y-dialog-form form-little">
-        <ul class="y-dialog-lists clearfix">
-            <li class="list">
-                <p class="column">
-                    <label class="label">名称：</label>
-                    <span class="span">阿根</span>
-                </p>
-                <p class="column">
-                    <label class="label">原始密码：</label>
-                    <input type="password" class="text" name="oldPwd" datatype="*" errormsg="原始密码不能为空！"/>
-                </p>
-            </li>
-            <li class="list">
-                <p class="column">
-                    <label class="label">新密码：</label>
-                    <input id="txb-newPwd" type="password" datatype="*" class="text" name="newPwd" errormsg="密码不能为空！"/>
-                </p>
-                <p class="column">
-                    <label class="label">确认密码：</label>
-                    <input id="txb-reNewPwd" type="password" class="text" datatype="*" recheck="newPwd"
-                           errormsg="您两次输入的账号密码不一致！"/>
-                </p>
-            </li>
-            <li class="list">
-                <input name="id" type="text" style="display:none;"/>
-            </li>
-        </ul>
-    </div>
-</div>
+</form>
 <%};%>
 <%
 var scriptSection={
 %>
 <script type="text/javascript">
     $(function () {
+        common.validformObj = common.validform();
         seajs.use('{dir}/FrameManager/Layindex/userUpdatePwd', function (a) {
             a.init();
         });
@@ -51,5 +57,5 @@ var scriptSection={
 </script>
 <%};%>
 <%
-include("/WEB-INF/shared/_baseAttr.html",{title:"修改密码",styleSection:styleSection,bodySectionInner:bodySectionInner,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_default.html",{title:"修改密码",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
 %>
