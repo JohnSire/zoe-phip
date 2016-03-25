@@ -7,7 +7,6 @@
 package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
@@ -15,6 +14,7 @@ import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
+import com.zoe.phip.service.impl.util.Page;
 import com.zoe.phip.service.in.sm.SystemDictCategoryService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
@@ -88,11 +88,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
         {
             PageList<SystemDictCategory> pageList = new PageList<>();
             Example example = new Example(SystemDictCategory.class);
-            if (queryPage.getOrderBy() != null) {
-                PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize(), queryPage.getOrderBy());
-            } else {
-                PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize());
-            }
+            Page.startPage(queryPage);
             if (!StringUtil.isNullOrWhiteSpace(key)) {
 
                 example.createCriteria().andLike("code", "%" + key + "%");

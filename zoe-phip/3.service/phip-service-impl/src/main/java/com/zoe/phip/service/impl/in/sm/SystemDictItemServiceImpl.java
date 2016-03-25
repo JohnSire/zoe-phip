@@ -7,7 +7,6 @@
 package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -16,6 +15,7 @@ import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.model.sm.SystemDictItem;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
+import com.zoe.phip.service.impl.util.Page;
 import com.zoe.phip.service.in.sm.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -84,11 +84,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
         {
             PageList<SystemDictItem> pageList = new PageList<>();
             Example example = new Example(SystemDictItem.class);
-            if (page.getOrderBy() != null) {
-                PageHelper.startPage(page.getPageNum(), page.getPageSize(), page.getOrderBy());
-            } else {
-                PageHelper.startPage(page.getPageNum(), page.getPageSize());
-            }
+            Page.startPage(page);
             Example.Criteria criteria = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
             if (!StringUtil.isNullOrWhiteSpace(key)) {
                 criteria.andLike("code", "%" + key + "%");
@@ -126,12 +122,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
         {
             PageList<SystemDictItem> pageList = new PageList<>();
             Example example = new Example(SystemDictItem.class);
-
-            if (page.getOrderBy() != null) {
-                PageHelper.startPage(page.getPageNum(), page.getPageSize(), page.getOrderBy());
-            } else {
-                PageHelper.startPage(page.getPageNum(), page.getPageSize());
-            }
+            Page.startPage(page);
             String categoryId = getCategoryId(systemData, categoryCode);
             if (StringUtil.isNullOrWhiteSpace(categoryId))
                 throw new BusinessException("字典分类({0})已经被删除!", categoryCode);

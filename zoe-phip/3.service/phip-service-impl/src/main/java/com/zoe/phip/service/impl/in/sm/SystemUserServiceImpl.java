@@ -7,7 +7,6 @@
 package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -16,6 +15,7 @@ import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
+import com.zoe.phip.service.impl.util.Page;
 import com.zoe.phip.service.in.sm.SystemUserService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
@@ -105,17 +105,14 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
         {
             PageList<SystemUser> pageList = new PageList<SystemUser>();
             Example example = new Example(SystemUser.class);
-            if (queryPage.getOrderBy() != null) {
-                PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize(), queryPage.getOrderBy());
-            } else {
-                PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize());
-            }
+            //分页
+            Page.startPage(queryPage);
             String likeKey="%"+key+"%";
             example.createCriteria().andLike("name",likeKey);
             Example.Criteria criteria2= example.createCriteria().andLike("loginName",likeKey);
             example.or(criteria2);
             if(state!=null){
-                example.createCriteria().andEqualTo("state",state);
+                example.getOredCriteria().add(example.createCriteria().andEqualTo("state",state));
             }
             List<SystemUser> results = getMapper().selectByExample(example);
             PageInfo<SystemUser> pageInfo = new PageInfo<SystemUser>(results);
