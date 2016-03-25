@@ -36,13 +36,42 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     private SystemDictCategoryService service;
 
     @Override
+    public ServiceResult add(SystemData systemData, SystemDictItem entity) {
+        return SafeExecuteUtil.execute(
+                () -> {
+                    Example example = new Example(SystemDictItem.class);
+                    example.createCriteria().andEqualTo("code", entity.getCode());
+                    int count = getMapper().selectCountByExample(example);
+                    if (count > 0) {
+                        throw new BusinessException("该字典类({0})已经存在!", entity.getCode());
+                    } else
+                        return getMapper().insertSelective(entity);
+                });
+    }
+
+    @Override
+    public ServiceResult update(SystemData systemData, SystemDictItem entity) {
+        return SafeExecuteUtil.execute(
+                () -> {
+                    Example example = new Example(SystemDictItem.class);
+                    example.createCriteria().andEqualTo("code", entity.getCode());
+                    example.createCriteria().andNotEqualTo("id",entity.getId());
+                    int count = getMapper().selectCountByExample(example);
+                    if (count > 0) {
+                        throw new BusinessException("该字典类({0})已经存在!", entity.getCode());
+                    } else
+                        return getMapper().updateByPrimaryKeySelective(entity);
+                });
+    }
+
+    @Override
     public ServiceResult categoryExists(SystemData systemData, String categoryId) {
         return SafeExecuteUtil.execute(
                 () -> {
                     Example example = new Example(SystemDictItem.class);
                     example.createCriteria().andLike("", categoryId);
-                    List<SystemDictItem> items = getMapper().selectByExample(example);
-                    if (items != null && items.size() > 0)
+                    int count = getMapper().selectCountByExample(example);
+                    if (count > 0)
                         return true;
                     return false;
                 });
@@ -166,4 +195,6 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
             return ((SystemDictCategory) sr.getResult()).getId();
         return null;
     }
+
+
 }

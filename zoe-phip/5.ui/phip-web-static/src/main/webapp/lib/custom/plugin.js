@@ -263,7 +263,7 @@
                         data = $.parseJSON(data);
                     }
                     if ($.isFunction(callback) && data.isSuccess) {
-                        callback(data.Result);
+                        callback(data.result);
                     }
                 }
                 var req = new Request(options["ajaxParam"]["url"]);

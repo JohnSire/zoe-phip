@@ -18,7 +18,7 @@
                     }
                 },
                 beforeBindEvent: function (data) {
-                    if (data.Result.State == 1) {
+                    if (data.result.State == 1) {
                         $('.btn-switch').removeClass("btn-switch-off").addClass("btn-switch-on");
                     } else {
                         $('.btn-switch').addClass("btn-switch-off").removeClass("btn-switch-on");
@@ -70,7 +70,7 @@
                                 isTip: false,
                                 data: data,
                                 success: function (data) {
-                                    if (data.IsSuccess) {
+                                    if (data.isSuccess) {
                                         common.jsmsgSuccess('密码重置成功!');
                                         setTimeout(function () { top.win_base_attr_dialog.close() }, 1000);
                                     } else {

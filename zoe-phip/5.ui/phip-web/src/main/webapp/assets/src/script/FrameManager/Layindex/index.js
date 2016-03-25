@@ -28,8 +28,8 @@ define(function (require, exports, module) {
             req.post({
                 isTip: false,
                 success: function (data) {
-                    if (data.Result != null) {
-                        $("#LoginName").html(data.Result.LoginName); //显示登陆的用户名
+                    if (data.result != null) {
+                        $("#LoginName").html(data.result.LoginName); //显示登陆的用户名
                     }
                 }
             });

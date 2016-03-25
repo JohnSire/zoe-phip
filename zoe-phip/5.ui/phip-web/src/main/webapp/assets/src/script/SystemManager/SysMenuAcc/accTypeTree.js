@@ -35,7 +35,7 @@
                             req.post({
                                 data: { catalogId: internal.catalogId, ids: listData.join(",") },
                                 success: function (data) {
-                                    if (data.IsSuccess) {
+                                    if (data.isSuccess) {
                                         internal.userGrid.loadData(internal.catalogId);
                                     }
                                 }
@@ -73,7 +73,7 @@
                             req.post({
                                 data: { catalogId: internal.catalogId, ids: listData.join(",") },
                                 success: function (data) {
-                                    if (data.IsSuccess) {
+                                    if (data.isSuccess) {
                                         internal.grid.loadData(internal.catalogId);
                                     }
                                 }
@@ -101,7 +101,7 @@
         },
         buildTree: function (data) {
             var treeData = [];
-            $.each(data.Result, function (index, item) {
+            $.each(data.result, function (index, item) {
                 var treeItem = {};
                 treeItem.text = item.Name;
                 treeItem.Id = item.Id;

@@ -26,28 +26,25 @@
                 dataAction: "server",
                 delayLoad:true,
                 tree: {
-                    columnId: 'Id',
-                    columnName: 'Name',
-                    idField: 'Id',
-                    parentIDField: 'FkParentMenuId'
+                    columnId: 'id',
+                    columnName: 'name',
+                    idField: 'id',
+                    parentIDField: 'fkParentMenuId'
                 },
                 columns: [
-                { display: '菜单名称', name: 'Name', isSort: false, align: 'left' },
-                //{ display: '菜单路径', name: 'Address', isSort: false, align: 'left' },
-                { display: '授权时间', name: 'CreateAt', width: 120, isSort: false, align: 'left', type: 'date' },
-                { display: '授权人', name: 'CreateBy', width: 150, isSort: false, align: 'left' },
+                { display: '菜单名称', name: 'name', isSort: false, align: 'left' },
+                { display: '授权时间', name: 'createAt', width: 120, isSort: false, align: 'left', type: 'date' },
+                { display: '授权人', name: 'createBy', width: 150, isSort: false, align: 'left' },
                 {
                     display: '状态',
-                    name: 'State',
+                    name: 'state',
                     width: 71,
                     align: "center",
                     render: function (rowdata, index, value) {
                         if (value == 1) {
                             return "<span>启用</span>";
-                            //return '<span class="btn-switch btn-switch-on"><b class="btn-switch-inner"></b></span>';
                         } else {
                             return "<span style='color:red;'>禁用</span>"
-                            //return '<span class="btn-switch btn-switch-off"><b class="btn-switch-inner"></b></span>';
                         }
                     }
                 },
@@ -59,13 +56,10 @@
                     align: 'center',
                     render: function (rowdata, rowindex, value) {
                         var h = "";
-                        //if (rowdata && rowdata["children"] && rowdata["children"].length > 0)
-                        //    return "";
                         h += "<a class='icon-grid icon-grid-del' title='取消关联' onclick='javascript:delMenu(\"" + rowdata.CompetenceId + "\",\"" + rowindex + "\")'></a> ";
                         return h;
                     }
                 }],
-                // allowAdjustColWidth:false,
                 width: "100%",
                 height: "49.5%",
                 heightDiff: 29,

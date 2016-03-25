@@ -6,9 +6,6 @@
                 async: false,
                 isTip:false,
                 success: function (data) {
-                    if(typeof(data)=="string"){
-                        var data= $.parseJSON(data);
-                    }
                     if (typeof (callback) == "function") {
                         callback(data);
                     }

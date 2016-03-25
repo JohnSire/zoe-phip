@@ -28,7 +28,6 @@
                 }
             ];
             internal.grid = $("#userGrid").ligerGrid(gridParam);
-            //top.list_user_storage = internal.grid.data;
         },
         loadData: function (id) {
             if (internal.grid) {

@@ -27,9 +27,9 @@
                 internal.buildSysDictItemGrid(data.Id, "");
             };
             gridParam.columns = [
-                {display: '字典编码', name: 'Code', isSort: false, width: 180, align: 'left'},
-                {display: '字典名称', name: 'Name', isSort: false, width: 220, align: 'left'},
-                {display: '描述', name: 'Descr', isSort: false, align: 'left'}
+                {display: '字典编码', name: 'code', isSort: false, width: 180, align: 'left'},
+                {display: '字典名称', name: 'name', isSort: false, width: 220, align: 'left'},
+                {display: '描述', name: 'descr', isSort: false, align: 'left'}
             ];
             gridParam.isSelected = function (rowdata) {
                 if (rowdata["__id"] == 'r1001')
@@ -46,11 +46,11 @@
                 return;
             }
             var gridParam = $.extend(true, {}, internal.gridParam());
-            gridParam.url =    webRoot + '/dict/getItemPageList';
+            gridParam.url = webRoot + '/dict/getItemPageList';
             gridParam.parms = {categoryId: categoryId, keyWord: keyWord};
             gridParam.columns = [
-                {display: '项编码', name: 'Code', width: 150, align: 'left'},
-                {display: '项名称', name: 'Name', width: 400, align: 'left'},
+                {display: '项编码', name: 'code', width: 150, align: 'left'},
+                {display: '项名称', name: 'name', width: 400, align: 'left'},
                 {
                     display: '操作', isSort: false, width: 120, render: function (rowdata, rowindex, value) {
                     var h = "";
@@ -77,11 +77,9 @@
             return gridParam;
         },
         dictCategoryReload: function () {
-            //$("#dictCategoryGrid").removeAttr("ligeruiid").empty();
             internal.buildSysDictCategoryGrid();
         },
         dictItemReload: function (categoryId, keyWord) {
-            //$("#dictItemGrid").removeAttr("ligeruiid").empty();
             internal.buildSysDictItemGrid(categoryId, keyWord);
         }
     };
@@ -99,9 +97,10 @@
         var gridObj = liger.get("dictCategoryGrid");
         var rowdata = gridObj.getSelected();
         var top = common.getTopWindowDom();
+        var url = webRoot + '/dict/view/item?type=edit&&categoryId=' + rowdata["Id"] + '&&id=' + id
         top.win_dict_item_dialog = $.ligerDialog.open({
             title: '新增字典项',
-            url: webRoot + 'SystemDict/SysDictItemDetail?type=edit&&categoryId=' + rowdata["Id"] + '&&id=' + id,
+            url: url,
             width: 590,
             height: 200,
             buttons: [

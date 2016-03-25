@@ -153,7 +153,7 @@ public class SystemDictController extends BaseController {
         return ServiceFactory.getDictItemService().getDictItemsByCategoryCode(ComSession.getUserInfo(), catalog);
     }
 
-    @RequestMapping(value = "/getItemInfo")
+    @RequestMapping(value = "/getSysDictItemInfo")
     @ResponseBody
     public ServiceResultT<SystemDictItem> getSysDictItemInfo(HttpServletRequest request) {
         return ServiceFactory.getDictItemService().getById(ComSession.getUserInfo(), request.getParameter("id"));

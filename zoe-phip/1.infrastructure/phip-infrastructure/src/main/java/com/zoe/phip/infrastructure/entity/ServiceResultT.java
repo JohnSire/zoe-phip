@@ -12,7 +12,7 @@ public class ServiceResultT<T> extends ServiceResult implements Serializable {
     /**
      * 返回回来的结果实体（集合）
      */
-    @JSONField(name = "Result")
+//    @JSONField(name = "Result")
     private T result;
 
     /**

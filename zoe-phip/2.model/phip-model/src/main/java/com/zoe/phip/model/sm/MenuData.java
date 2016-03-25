@@ -26,28 +26,28 @@ public class MenuData extends BaseEntity {
      * 名称
      */
     @Column(name = "NAME")
-    @JSONField(name = "Name")
+//    @JSONField(name = "Name")
     private String name;
 
     /**
      * 编码
      */
     @Column(name = "CODE")
-    @JSONField(name = "Code")
+//    @JSONField(name = "Code")
     private int code;
 
     /**
      * 地址
      */
     @Column(name = "ADDRESS")
-    @JSONField(name = "Address")
+//    @JSONField(name = "Address")
     private String address;
 
     /**
      * 上级菜单
      */
     @Column(name = "FK_PARENT_MENU_ID")
-    @JSONField(name = "FkParentMenuId")
+//    @JSONField(name = "FkParentMenuId")
     private String fkParentMenuId;
 
 
@@ -55,14 +55,14 @@ public class MenuData extends BaseEntity {
      * 状态
      */
     @Column(name = "STATE")
-    @JSONField(name = "State")
+//    @JSONField(name = "State")
     private int state;
 
     /**
      * 子节点
      */
     @Transient
-    @JSONField(name = "Childrens")
+//    @JSONField(name = "Childrens")
     public List<MenuData> children;
 
     public List<MenuData> getChildren() {

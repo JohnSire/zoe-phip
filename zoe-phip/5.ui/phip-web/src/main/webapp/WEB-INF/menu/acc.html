@@ -1,17 +1,15 @@
-﻿@{
-ViewBag.Title = "MenuAcc";
-Layout = "~/Views/Shared/_Default.cshtml";
-}
-
-
-
+﻿<%
+var styleSection={
+%>
+<link href="/assets/dist/style/layout.css" rel="stylesheet"/>
+<%};%>
 <%
-var bodySection = {
+var bodySection={
 %>
 <!--左边栏begin-->
-<div class="y-layout-sidebar" style="display:none;">
+<div class="y-layout-sidebar">
     <div class="y-layout-header">
-        <ul class="y-layout-form clearfix"></ul>
+            <ul class="y-layout-form clearfix"></ul>
     </div>
     <div class="y-layout-tree" style="border:0;">
         <ul id="tree"></ul>
@@ -20,7 +18,7 @@ var bodySection = {
 <!--左边栏end-->
 <!--右边栏begin-->
 <div class="y-layout-main-two">
-    <div class="y-layout-content" style="display:none;">
+    <div class="y-layout-content">
         <div class="y-layout-header">
             <ul class="y-layout-form clearfix">
                 <li class="list" id="addMenu" style=""><a class="btn-little btn-little-blue"><span class="text-outer">菜单关联管理<span class="text-inner">菜单关联管理</span></span></a></li>
@@ -30,7 +28,7 @@ var bodySection = {
         <div id="catalogGrid" style="border:0;"></div>
         <!--主要内容-->
     </div>
-    <div class="y-layout-content" style="display:none;">
+    <div class="y-layout-content">
         <div class="y-layout-header" style="border-top: 1px solid #dcdcdc;">
             <ul class="y-layout-form clearfix">
                 <li class="list" id="addUser" style=""><a class="btn-little btn-little-blue"><span class="text-outer">用户关联管理<span class="text-inner">用户关联管理</span></span></a></li>
@@ -44,9 +42,6 @@ var bodySection = {
 </div>
 <!--右边栏end-->
 <%};%>
-
-
-
 <%
 var scriptSection={
 %>
@@ -58,8 +53,7 @@ var scriptSection={
     })
 </script>
 <%};%>
-
-
 <%
-include("/WEB-INF/shared/_default.html",{title:"用户详细信息",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_default.html",{title:"权限管理",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
 %>
+

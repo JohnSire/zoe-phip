@@ -13,13 +13,13 @@
                     parent: true
                 },
                 key: {
-                    name: 'Name'
+                    name: 'name'
                 },
                 simpleData: {
                     enable: true,
-                    idKey: 'Id',
-                    name: "Name",
-                    pIdKey: 'FkParentMenuId',
+                    idKey: 'id',
+                    name: "name",
+                    pIdKey: 'fkParentMenuId',
                     rootPId: "root"
                 }
             },
@@ -52,7 +52,7 @@
         },
         buildTree: function () {
             internal.req.getList(null, function (data) {
-                var treeData = $.merge([{ Id: 0, Name: '菜单根节点', FkParentMenuId: "root" }], data.Result.Rows);
+                var treeData = $.merge([{ id: 0, name: '菜单根节点', fkParentMenuId: "root" }], data.result.rows);
                 var treeObj = $.fn.zTree.init($("#tree"), internal.setting, treeData);
                 treeObj.expandAll(true);
             })

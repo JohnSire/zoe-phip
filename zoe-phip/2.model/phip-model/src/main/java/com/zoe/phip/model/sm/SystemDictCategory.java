@@ -21,19 +21,19 @@ public class SystemDictCategory extends BaseEntity {
      * 名称
      */
     @Column(name = "NAME")
-    @JSONField(name = "Name")
+//    @JSONField(name = "Name")
     private String name;
     /**
      * 编码
      */
     @Column(name = "CODE")
-    @JSONField(name = "Code")
+//    @JSONField(name = "Code")
     private String code;
     /**
      * 描述
      */
     @Column(name = "DESCR")
-    @JSONField(name = "Descr")
+//    @JSONField(name = "Descr")
     private String descr;
 
     public String getName() {

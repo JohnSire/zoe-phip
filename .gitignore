@@ -6,3 +6,5 @@
 target/
 zoe-phip/6.tools/zoe-phip-code-generator/generator-output/
 *.log
+*.log*
+

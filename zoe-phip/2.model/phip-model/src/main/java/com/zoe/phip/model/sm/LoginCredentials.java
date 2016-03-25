@@ -12,19 +12,19 @@ public class LoginCredentials implements Serializable {
     /**
      * 用户标识
      */
-    @JSONField(name = "UserId")
+//    @JSONField(name = "UserId")
     public String userId;
 
     /**
      * 用户名
      */
-    @JSONField(name = "UserName")
+//    @JSONField(name = "UserName")
     public String userName;
 
     /**
      * 凭据
      */
-    @JSONField(name = "Credential")
+//    @JSONField(name = "Credential")
     public String credential;
 
     public String getUserId() {

@@ -37,7 +37,6 @@ define(function (require, exports, module) {
                 url: param["getUrl"]
             }
             internal.req.getInfo(ajaxParam, function (data) {
-                data= $.parseJSON(data);
                 if (typeof (param["beforeBindEvent"]) == "function") {
                     param["beforeBindEvent"](data.result);
                 }

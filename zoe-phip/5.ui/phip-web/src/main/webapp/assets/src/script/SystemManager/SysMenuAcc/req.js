@@ -8,11 +8,11 @@
                 async: false,
                 data: { catalogId: catalogId, keyWord: keyWord, page: 1, pagesize: 999999999 },
                 success: function (data) {
-                    if (data && data.Result && data.Result.Total > 0) {
-                        for (var item in data.Result.Rows) {
+                    if (data && data.result && data.result.total > 0) {
+                        for (var item in data.result.rows) {
                             var menuItem = {
-                                Id: data.Result.Rows[item].Id,
-                                Name: data.Result.Rows[item].Name
+                                Id: data.result.rows[item].Id,
+                                Name: data.result.rows[item].Name
                             }
                             list.push(menuItem);
                         }

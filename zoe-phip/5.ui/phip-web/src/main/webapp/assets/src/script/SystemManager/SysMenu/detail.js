@@ -12,19 +12,19 @@
                 },
                 //绑定事件前执行||服务器相应获取数据后，绑定到界面前执行
                 beforeBindEvent: function (data) {
-                    if (data.IsSuccess) {
-                        if (data.Result.State == 1) {
+                    if (data.isSuccess) {
+                        if (data.result.state == 1) {
                             $('.btn-switch').removeClass("btn-switch-off").addClass("btn-switch-on");
                         } else {
                             $('.btn-switch').addClass("btn-switch-off").removeClass("btn-switch-on");
                         }
-                        if (data.Result.FkParentMenuId == "0") {
+                        if (data.result.fkParentMenuId == "0") {
                             $("#btnFkParent").find("span.text-line-content").text("菜单根节点");
                             $("#btnFkParent").find("input.text-line").val("0");
                         } else {
-                            internal.req.getInfo(data.Result.FkParentMenuId, function (result) {
-                                $("#btnFkParent").find("span.text-line-content").text(result.Result.Name);
-                                $("#btnFkParent").find("input.text-line").val(data.Result.FkParentMenuId);
+                            internal.req.getInfo(data.result.fkParentMenuId, function (result) {
+                                $("#btnFkParent").find("span.text-line-content").text(result.Result.name);
+                                $("#btnFkParent").find("input.text-line").val(data.result.fkParentMenuId);
                             })
                         }
 
@@ -72,8 +72,8 @@
                     height: 580
                 });
                 top.win_menu_tree_select_callback = function (data) {
-                    $("#btnFkParent").find("span.text-line-content").text(data.Name);
-                    $("#btnFkParent").find("input.text-line").val(data.Id);
+                    $("#btnFkParent").find("span.text-line-content").text(data.name);
+                    $("#btnFkParent").find("input.text-line").val(data.id);
                     return true;
                 }
             });
