@@ -58,7 +58,7 @@ public class SystemMenuController extends BaseController {
         return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(), ComSession.getUserInfo().getUserId());
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResultT<PageList<MenuData>> getMenuList(HttpServletRequest request, Model model) {
         ServiceResultT<PageList<MenuData>> menu = ServiceFactory.getMenuDataService().getList(ComSession.getUserInfo(), getQueryPage(), MenuData.class);
@@ -101,7 +101,7 @@ public class SystemMenuController extends BaseController {
      * @param menuData
      * @return
      */
-    @RequestMapping(value = "/updateMenuInfo")
+    @RequestMapping(value = "/updateMenuInfo",method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult updateMenuInfo(HttpServletRequest request, MenuData menuData) {
         return ServiceFactory.getMenuDataService().update(ComSession.getUserInfo(), menuData);
@@ -122,7 +122,7 @@ public class SystemMenuController extends BaseController {
     }
 
 
-    @RequestMapping(value = "getMenuUser",method = RequestMethod.GET)
+    @RequestMapping(value = "getMenuUser",method = RequestMethod.POST)
     @ResponseBody
     public ServiceResultT<List<MenuData>> getMenuUser(HttpServletRequest request,String id){
         return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(),id);
