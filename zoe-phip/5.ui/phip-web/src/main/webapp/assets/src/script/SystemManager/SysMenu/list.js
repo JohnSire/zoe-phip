@@ -55,7 +55,7 @@
                     common: {
                         width: 390,
                         height: 288,
-                        url: webRoot + '/menu/detail'
+                        url: webRoot + 'detail'
                     },
                     add: {
                         title: '新增菜单信息'
@@ -81,7 +81,7 @@
             var top = common.getTopWindowDom();
             top.win_menu_tree_dialog = $.ligerDialog.open({
                 title: '调整菜单结构',
-                url: webRoot + 'menu/tree',
+                url: webRoot + 'tree',
                 width: 460,
                 height: 500,
                 buttons: [

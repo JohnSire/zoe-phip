@@ -85,7 +85,7 @@ public class SystemMenuController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/getMenuList", method = RequestMethod.POST)
+    @RequestMapping(value = "/getMenuList")
     @ResponseBody
     public ServiceResultT<PageList<MenuData>> getMenuPageList( HttpServletRequest request, Model model) {
         String keyWord = request.getParameter("keyWord");

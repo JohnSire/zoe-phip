@@ -1,7 +1,7 @@
 ﻿define(function (require, exports, module) {
     var internal = {
         updateState: function (id, state, callback) {
-            var req = new Request('SystemMenu/UpdateState');
+            var req = new Request('/menu/updateState');
             req.post({
                 isTip: false,
                 data: { id: id, state: state },
@@ -13,7 +13,7 @@
             });
         },
         getList: function (param, callback) {
-            var req = new Request("SystemMenu/GetMenuList");
+            var req = new Request("/menu/getMenuList");
             req.get({
                 isTip: false,
                 data: { keyWord: "" },
@@ -25,7 +25,7 @@
             });
         },
         updateList: function (param, callback) {
-            var req = new Request("SystemMenu/UpdateMenuList");
+            var req = new Request("/menu/updateMenuList");
             req.post({
                 data: param,
                 success: function(data) {
@@ -36,7 +36,7 @@
             });
         },
         getInfo: function (id, callback) {
-            var req = new Request("SystemMenu/GetMenuInfo");
+            var req = new Request("/menu/getMenuInfo");
             req.get({
                 isTip: false,
                 //async: false,
