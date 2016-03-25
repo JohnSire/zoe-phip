@@ -4,11 +4,6 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.model.sm.MenuData;
-import com.zoe.phip.model.sm.SystemDictCategory;
-import com.zoe.phip.service.in.sm.MenuDataService;
-import com.zoe.phip.service.in.sm.SystemDictCategoryService;
-import com.zoe.phip.web.bean.BeanFactory;
-import com.zoe.phip.web.bean.Constant;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
@@ -27,25 +22,25 @@ import java.util.List;
 @RequestMapping("/menu")
 public class SystemMenuController extends BaseController {
     //菜单页面
-    @RequestMapping("/list")
+    @RequestMapping("/view/list")
     public String ToMenuList(HttpServletRequest request, Model model) {
         return "/menu/list";
     }
 
     //修改菜单信息
-    @RequestMapping("/detail")
+    @RequestMapping("/view/detail")
     public String ToMenuDetail(HttpServletRequest request, Model model) {
         return "/menu/detail";
     }
 
     //菜单结构调整
-    @RequestMapping("/tree")
+    @RequestMapping("/view/tree")
     public String ToMenuTree(HttpServletRequest request, Model model) {
         return "/menu/tree";
     }
 
     //菜单权限
-    @RequestMapping("/acc")
+    @RequestMapping("/view/acc")
     public String ToMenuAcc(HttpServletRequest request, Model model) {
         return "/menu/acc";
     }

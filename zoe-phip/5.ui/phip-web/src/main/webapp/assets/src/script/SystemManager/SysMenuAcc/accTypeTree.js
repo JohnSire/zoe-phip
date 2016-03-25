@@ -31,7 +31,7 @@
                                     listData.push(data[i].Id);
                                 }
                             }
-                            var req = new Request("systemuser/AddUserAcc");
+                            var req = new Request("user/addAcc");
                             req.post({
                                 data: { catalogId: internal.catalogId, ids: listData.join(",") },
                                 success: function (data) {
@@ -69,7 +69,7 @@
                                     listData.push(item["Id"]);
                                 })
                             }
-                            var req = new Request("systemmenu/AddMenuAcc");
+                            var req = new Request("menu/addAcc");
                             req.post({
                                 data: { catalogId: internal.catalogId, ids: listData.join(",") },
                                 success: function (data) {
@@ -89,7 +89,7 @@
     }
     var menuTypeTree = {
         init: function () {
-            var req = new Request("SystemDict/GetSysDictItemListByCode");
+            var req = new Request("dict/getItemList");
             req.post({
                 isTip: false,
                 async: true,

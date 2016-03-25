@@ -4,9 +4,9 @@
         init: function () {
             var BaseAttr = require("../../baseAttr/baseAttr.js");
             var baseAttr = new BaseAttr({
-                getUrl: 'SystemMenu/GetMenuInfo',//获取实例的接口
-                addUrl: 'SystemMenu/AddMenuInfo',//新增的接口Url
-                updateUrl: 'SystemMenu/UpdateMenuInfo',//修改的接口Url
+                getUrl: 'menu/getMenuInfo',//获取实例的接口
+                addUrl: 'menu/addMenuInfo',//新增的接口Url
+                updateUrl: 'menu/updateMenuInfo',//修改的接口Url
                 loadPageEvent: function () {
                     internal.parentNodes();
                 },
@@ -67,7 +67,7 @@
                 var top = common.getTopWindowDom();
                 top.win_menu_tree_dialog = top.$.ligerDialog.open({
                     title: '选择父级菜单节点',
-                    url: webRoot + 'SystemMenu/MenuTree?noDrag=1',
+                    url: webRoot + 'menu/tree?noDrag=1',
                     width: 500,
                     height: 580
                 });

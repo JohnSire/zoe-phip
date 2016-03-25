@@ -1,0 +1,65 @@
+﻿@{
+ViewBag.Title = "MenuAcc";
+Layout = "~/Views/Shared/_Default.cshtml";
+}
+
+
+
+<%
+var bodySection = {
+%>
+<!--左边栏begin-->
+<div class="y-layout-sidebar" style="display:none;">
+    <div class="y-layout-header">
+        <ul class="y-layout-form clearfix"></ul>
+    </div>
+    <div class="y-layout-tree" style="border:0;">
+        <ul id="tree"></ul>
+    </div>
+</div>
+<!--左边栏end-->
+<!--右边栏begin-->
+<div class="y-layout-main-two">
+    <div class="y-layout-content" style="display:none;">
+        <div class="y-layout-header">
+            <ul class="y-layout-form clearfix">
+                <li class="list" id="addMenu" style=""><a class="btn-little btn-little-blue"><span class="text-outer">菜单关联管理<span class="text-inner">菜单关联管理</span></span></a></li>
+            </ul>
+        </div>
+        <!--主要内容-->
+        <div id="catalogGrid" style="border:0;"></div>
+        <!--主要内容-->
+    </div>
+    <div class="y-layout-content" style="display:none;">
+        <div class="y-layout-header" style="border-top: 1px solid #dcdcdc;">
+            <ul class="y-layout-form clearfix">
+                <li class="list" id="addUser" style=""><a class="btn-little btn-little-blue"><span class="text-outer">用户关联管理<span class="text-inner">用户关联管理</span></span></a></li>
+                <li class="list"><label class="label">关键字:</label><input type="text" name="keyWord" id="txtKeyword" class="text"/><input class="btn btn-search" type="button" value="搜索"/></li>
+            </ul>
+        </div>
+        <!--主要内容-->
+        <div id="userGrid" style="border:0;"></div>
+        <!--主要内容-->
+    </div>
+</div>
+<!--右边栏end-->
+<%};%>
+
+
+
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/SystemManager/SysMenuAcc/accTypeTree', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+
+
+<%
+include("/WEB-INF/shared/_default.html",{title:"用户详细信息",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

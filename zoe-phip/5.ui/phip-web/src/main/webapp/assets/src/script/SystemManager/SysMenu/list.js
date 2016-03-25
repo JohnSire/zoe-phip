@@ -19,7 +19,7 @@
                     checkbox: false,
                     height: "100%",
                     heightDiff:29,
-                    url: webRoot + 'SystemMenu/GetMenuList',
+                    url: webRoot + 'menu/getMenuList',
                     columns: [
                     { display: '名称', name: 'Name', width: 120, align: 'left' },
                     { display: '编码', name: 'Code', width: 100, align: 'left' },
@@ -55,7 +55,7 @@
                     common: {
                         width: 390,
                         height: 288,
-                        url: webRoot + 'SystemMenu/menuDetail'
+                        url: webRoot + 'menu/detail'
                     },
                     add: {
                         title: '新增菜单信息'
@@ -81,7 +81,7 @@
             var top = common.getTopWindowDom();
             top.win_menu_tree_dialog = $.ligerDialog.open({
                 title: '调整菜单结构',
-                url: webRoot + 'SystemMenu/MenuTree',
+                url: webRoot + 'menu/tree',
                 width: 460,
                 height: 500,
                 buttons: [

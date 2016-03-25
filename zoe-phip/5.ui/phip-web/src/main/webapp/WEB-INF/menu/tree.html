@@ -1,0 +1,30 @@
+﻿<%
+var styleSection = {
+%>
+<link href="/assets/dist/style/layout.css" rel="stylesheet"/>
+<%};%>
+
+
+
+
+<%
+var bodySection={
+%>
+<ul id="tree" class="ztree"></ul>
+<%};%>
+
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/SystemManager/SysMenu/menuTree', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+
+<%
+include("/WEB-INF/shared/_default.html",{title:"菜单树",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+%>
