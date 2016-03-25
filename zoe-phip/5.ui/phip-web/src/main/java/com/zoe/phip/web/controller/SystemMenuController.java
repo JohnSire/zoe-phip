@@ -92,7 +92,7 @@ public class SystemMenuController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/getMenuPageList", method = RequestMethod.GET)
+    @RequestMapping(value = "/getMenuList", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResultT<PageList<MenuData>> getMenuPageList(HttpServletRequest request, Model model) {
         String key = request.getParameter("key");
@@ -106,7 +106,7 @@ public class SystemMenuController extends BaseController {
      * @param menuData
      * @return
      */
-    @RequestMapping(value = "/updateMenu")
+    @RequestMapping(value = "/updateMenuInfo")
     @ResponseBody
     public ServiceResult updateMenuInfo(HttpServletRequest request, MenuData menuData) {
         return ServiceFactory.getMenuDataService().update(ComSession.getUserInfo(), menuData);
@@ -120,29 +120,20 @@ public class SystemMenuController extends BaseController {
      * @param menuData
      * @return
      */
-    @RequestMapping(value = "/addMenu")
+    @RequestMapping(value = "/addMenuInfo")
     @ResponseBody
-    public ServiceResult addMenuInfo(HttpServletRequest request, MenuData menuData) {
+    public ServiceResult addMenuInfo(MenuData menuData) {
         return ServiceFactory.getMenuDataService().add(ComSession.getUserInfo(), menuData);
     }
 
-    /**
-     * 删除菜单
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "deleteMenu")
+
+    @RequestMapping(value = "getMenuUser",method = RequestMethod.GET)
     @ResponseBody
-    public ServiceResult deleteMenuInfo(String id) {
-        return ServiceFactory.getMenuDataService().deleteById(ComSession.getUserInfo(), id);
+    public ServiceResultT<List<MenuData>> getMenuUser(HttpServletRequest request,String id){
+        return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(),id);
     }
 
-    @RequestMapping(value = "deleteMenuList")
-    @ResponseBody
-    public ServiceResult deleteMenuInfoList(HttpServletRequest request) {
-        return ServiceFactory.getMenuDataService().deleteByIds(ComSession.getUserInfo(), Arrays.asList(request.getParameter("ids").split(",")));
-    }
+
 
 
 
