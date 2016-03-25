@@ -27,9 +27,9 @@
                 internal.buildSysDictItemGrid(data.Id, "");
             };
             gridParam.columns = [
-                {display: '字典编码', name: 'Code', isSort: false, width: 180, align: 'left'},
-                {display: '字典名称', name: 'Name', isSort: false, width: 220, align: 'left'},
-                {display: '描述', name: 'Descr', isSort: false, align: 'left'}
+                {display: '字典编码', name: 'code', isSort: false, width: 180, align: 'left'},
+                {display: '字典名称', name: 'name', isSort: false, width: 220, align: 'left'},
+                {display: '描述', name: 'descr', isSort: false, align: 'left'}
             ];
             gridParam.isSelected = function (rowdata) {
                 if (rowdata["__id"] == 'r1001')
@@ -49,8 +49,8 @@
             gridParam.url = webRoot + '/dict/getItemPageList';
             gridParam.parms = {categoryId: categoryId, keyWord: keyWord};
             gridParam.columns = [
-                {display: '项编码', name: 'Code', width: 150, align: 'left'},
-                {display: '项名称', name: 'Name', width: 400, align: 'left'},
+                {display: '项编码', name: 'code', width: 150, align: 'left'},
+                {display: '项名称', name: 'name', width: 400, align: 'left'},
                 {
                     display: '操作', isSort: false, width: 120, render: function (rowdata, rowindex, value) {
                     var h = "";
