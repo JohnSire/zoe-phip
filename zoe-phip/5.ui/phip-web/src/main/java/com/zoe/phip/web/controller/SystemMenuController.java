@@ -1,7 +1,6 @@
 package com.zoe.phip.web.controller;
 
 import com.zoe.phip.infrastructure.entity.PageList;
-import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.model.sm.MenuData;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -87,11 +85,11 @@ public class SystemMenuController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/getMenuList", method = RequestMethod.GET)
+    @RequestMapping(value = "/getMenuList")
     @ResponseBody
-    public ServiceResultT<PageList<MenuData>> getMenuPageList(HttpServletRequest request, Model model) {
-        String key = request.getParameter("key");
-        return ServiceFactory.getMenuDataService().getMenuPages(ComSession.getUserInfo(), key, getQueryPage());
+    public ServiceResultT<PageList<MenuData>> getMenuPageList( HttpServletRequest request, Model model) {
+        String keyWord = request.getParameter("keyWord");
+        return ServiceFactory.getMenuDataService().getMenuPages(ComSession.getUserInfo(), keyWord, getQueryPage());
     }
 
     /**
@@ -111,7 +109,6 @@ public class SystemMenuController extends BaseController {
     /**
      * 添加菜单
      *
-     * @param request
      * @param menuData
      * @return
      */
