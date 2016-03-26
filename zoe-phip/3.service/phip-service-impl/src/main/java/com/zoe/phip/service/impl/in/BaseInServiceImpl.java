@@ -7,7 +7,7 @@ import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.base.BaseEntity;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
-import com.zoe.phip.service.impl.util.Page;
+import com.zoe.phip.service.impl.util.SqlHelper;
 import com.zoe.phip.service.in.BaseInService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
@@ -105,7 +105,7 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
         {
             PageList<T> pageList = new PageList<T>();
             Example example = new Example(cls);
-            Page.startPage(queryPage);
+            SqlHelper.startPage(queryPage);
             List<T> results = mapper.selectByExample(example);
             PageInfo<T> pageInfo = new PageInfo<T>(results);
             pageList.setTotal((int) pageInfo.getTotal());

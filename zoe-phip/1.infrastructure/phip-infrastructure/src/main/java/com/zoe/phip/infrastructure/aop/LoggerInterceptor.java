@@ -2,6 +2,8 @@ package com.zoe.phip.infrastructure.aop;
 
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.SystemData;
+import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -20,10 +22,21 @@ public class LoggerInterceptor {
     private Logger logger = LoggerFactory.getLogger(LoggerInterceptor.class);
 
     public void doBefore(JoinPoint joinPoint) {
+        //如果方法的第一个参数不是SystemData，则报异常
+        String methodName = joinPoint.getSignature().getName();
+        if(!methodName.equals("login")){
+            Class[] cls = ((MethodSignature) joinPoint.getSignature()).getParameterTypes();
+            if(cls.length==0){
+                throw new RuntimeException("该方法没有SystemData类型的参数!");
+            }
+            if(!cls[0].getName().equals(SystemData.class.getName())){
+                throw new RuntimeException("方法的第一个参数必须为SystemData类型");
+            }
+        }
         // TODO: 2016/3/17 相关权限验证
 
         Object[] params = joinPoint.getArgs();
-        String methodName = joinPoint.getSignature().getName();
+
         if (!StringUtil.isNullOrWhiteSpace(methodName)) {
 
         }
