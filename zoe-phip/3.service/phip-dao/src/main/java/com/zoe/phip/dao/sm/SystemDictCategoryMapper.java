@@ -7,7 +7,11 @@
 package com.zoe.phip.dao.sm;
 
 import com.zoe.phip.dao.MyMapper;
+import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.model.sm.SystemDictCategory;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author
@@ -16,4 +20,7 @@ import com.zoe.phip.model.sm.SystemDictCategory;
  */
 public interface SystemDictCategoryMapper extends MyMapper<SystemDictCategory> {
 
+    List<SystemDictCategory> getDictCategories(Map map);
+
+    SystemDictCategory getDictCategory(Map map);
 }

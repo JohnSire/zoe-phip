@@ -3,7 +3,7 @@ package com.zoe.phip.client.host;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * Created by zengjiyang on 2016/1/22.
+ * Created by  on 2016/1/22.
  */
 public class Main {
     public static void main(String[] args) throws Exception {
