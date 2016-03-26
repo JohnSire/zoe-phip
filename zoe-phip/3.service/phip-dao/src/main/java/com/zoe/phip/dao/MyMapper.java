@@ -10,14 +10,14 @@ import java.util.List;
  */
 public interface MyMapper<T extends BaseEntity> extends Mapper<T> {
 
-    int addList(List<T> entities);
+    int addList(List<T> entities) throws Exception;
 
-    int deleteByIds(List<String> ids);
+    int deleteByIds(List<String> ids) throws Exception;
 
-    int deleteByList(List<T> entities);
+    int deleteByList(List<T> entities) throws Exception;
 
     //todo 批量更新？
     @Deprecated
-    int updateList(List<T> entities);
+    int updateList(List<T> entities) throws Exception;
 
 }

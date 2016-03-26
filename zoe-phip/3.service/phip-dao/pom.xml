@@ -14,6 +14,11 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>com.zoe</groupId>
+            <artifactId>phip-infrastructure</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!--通用mapper-->
         <dependency>
             <groupId>com.zoe</groupId>

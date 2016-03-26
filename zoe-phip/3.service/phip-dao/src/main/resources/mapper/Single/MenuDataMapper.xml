@@ -47,7 +47,7 @@
         </foreach>
     </delete>
 
-    <select id="GetCompetenceMenuByUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="getCompetenceMenuByUser" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT DISTINCT t.ID, t.NAME, t.CODE, t.ADDRESS, t.FK_PARENT_MENU_ID, t.CREATE_AT, t.CREATE_BY, t.MODIFY_AT,
         t.MODIFY_BY, t.STATE, NULL COMPETENCE_ID, NULL NAME_PATH
         FROM SYS_MENU_DATA t
