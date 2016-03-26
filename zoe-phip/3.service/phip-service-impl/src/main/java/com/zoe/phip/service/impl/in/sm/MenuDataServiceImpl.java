@@ -30,8 +30,8 @@ import java.util.Map;
  * @version 1.0
  * @date 2016-03-21
  */
-@Repository("menuDataService")
-@Service
+//@Repository("menuDataService")
+//@Service
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements MenuDataService {
 
 
@@ -119,7 +119,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
         SafeExecuteUtil<List<MenuData>> safeExecute = new SafeExecuteUtil<>();
         return safeExecute.executeT(() ->
         {
-            List<MenuData> menus = ((MenuDataMapper) getMapper()).GetCompetenceMenuByUser(userId);
+            List<MenuData> menus = ((MenuDataMapper) getMapper()).getCompetenceMenuByUser(userId);
             if (menus.size() == 0) {
                 throw new BusinessException("还没有为该用户分配菜单!");
             }

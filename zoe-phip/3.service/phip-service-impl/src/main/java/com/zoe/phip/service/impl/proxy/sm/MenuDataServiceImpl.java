@@ -14,7 +14,7 @@ import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.service.impl.proxy.BaseInServiceImpl;
-import com.zoe.phip.service.impl.util.Page;
+import com.zoe.phip.service.impl.util.SqlHelper;
 import com.zoe.phip.service.in.sm.MenuDataService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
@@ -36,7 +36,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
     public PageList<MenuData> getMenuPages(String key, QueryPage page) throws Exception {
         PageList<MenuData> pageList = new PageList<MenuData>();
         Example example = new Example(MenuData.class);
-        Page.startPage(page);
+        SqlHelper.startPage(page);
         if (!StringUtil.isNullOrWhiteSpace(key)) {
             example.createCriteria().andLike("code", key);
             example.or(example.createCriteria().andLike("name", key));

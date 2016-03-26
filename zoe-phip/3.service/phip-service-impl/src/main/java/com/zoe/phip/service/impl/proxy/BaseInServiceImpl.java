@@ -8,7 +8,7 @@ import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.base.BaseEntity;
-import com.zoe.phip.service.impl.util.Page;
+import com.zoe.phip.service.impl.util.SqlHelper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,7 +103,7 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
     public PageList<T> getList(QueryPage queryPage, Class<T> cls) throws Exception {
         PageList<T> pageList = new PageList<T>();
         Example example = new Example(cls);
-        Page.startPage(queryPage);
+        SqlHelper.startPage(queryPage);
         List<T> results = mapper.selectByExample(example);
         PageInfo<T> pageInfo = new PageInfo<T>(results);
         pageList.setTotal((int) pageInfo.getTotal());
