@@ -16,9 +16,9 @@
                     var h = "";
 
                     if (internal.param.gridParam.editBtn)
-                        h += "<a class='icon-grid icon-grid-edit' title='编辑' onclick='javascript:editLigerGridRow(\"" + rowdata.Id + "\")'></a> ";
+                        h += "<a class='icon-grid icon-grid-edit' title='编辑' onclick='javascript:editLigerGridRow(\"" + rowdata.id + "\")'></a> ";
                     if (internal.param.deleteUrl)
-                        h += "<a class='icon-grid icon-grid-del' title='删除' onclick='javascript:deleteLigerGridRow(\"" + rowdata.Id + "\")'></a> ";
+                        h += "<a class='icon-grid icon-grid-del' title='删除' onclick='javascript:deleteLigerGridRow(\"" + rowdata.id + "\")'></a> ";
                     return h;
                 }
             }

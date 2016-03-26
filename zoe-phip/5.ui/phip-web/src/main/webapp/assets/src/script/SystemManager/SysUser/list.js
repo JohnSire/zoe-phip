@@ -30,9 +30,9 @@
                             align: "center",
                             render: function (rowdata, index, value) {
                                 if (value == 1) {
-                                    return '<a href="javascript:changeState(\'' + rowdata.Id + '\', 0);" class="btn-switch-outer"><span class="btn-switch btn-switch-on"><b class="btn-switch-inner"></b></span></a>';
+                                    return '<a href="javascript:changeState(\'' + rowdata.id + '\', 0);" class="btn-switch-outer"><span class="btn-switch btn-switch-on"><b class="btn-switch-inner"></b></span></a>';
                                 } else {
-                                    return '<a href="javascript:changeState(\'' + rowdata.Id + '\', 1);" class="btn-switch-outer"><span class="btn-switch btn-switch-off"><b class="btn-switch-inner"></b></span></a>';
+                                    return '<a href="javascript:changeState(\'' + rowdata.id + '\', 1);" class="btn-switch-outer"><span class="btn-switch btn-switch-off"><b class="btn-switch-inner"></b></span></a>';
                                 }
                             }
                         }

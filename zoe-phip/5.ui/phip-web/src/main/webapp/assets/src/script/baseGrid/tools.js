@@ -64,7 +64,7 @@
                 var rowArray = gridObj.getSelectedRows();
                 var ids = "";
                 $.each(rowArray, function (index, item) {
-                    ids += "," + item["Id"];
+                    ids += "," + item["id"];
                 });
                 if (ids.length > 0) {
                     ids = ids.slice(1, ids.length);

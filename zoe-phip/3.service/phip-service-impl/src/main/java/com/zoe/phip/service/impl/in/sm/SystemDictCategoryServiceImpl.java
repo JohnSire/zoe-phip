@@ -14,7 +14,7 @@ import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
-import com.zoe.phip.service.impl.util.Page;
+import com.zoe.phip.service.impl.util.SqlHelper;
 import com.zoe.phip.service.in.sm.SystemDictCategoryService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
@@ -88,7 +88,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
         {
             PageList<SystemDictCategory> pageList = new PageList<>();
             Example example = new Example(SystemDictCategory.class);
-            Page.startPage(queryPage);
+            SqlHelper.startPage(queryPage);
             if (!StringUtil.isNullOrWhiteSpace(key)) {
 
                 example.createCriteria().andLike("code", "%" + key + "%");

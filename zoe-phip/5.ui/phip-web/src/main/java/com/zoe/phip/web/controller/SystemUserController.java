@@ -1,6 +1,7 @@
 package com.zoe.phip.web.controller;
 
 import com.zoe.phip.infrastructure.entity.*;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.in.sm.MenuDataService;
@@ -68,12 +69,15 @@ public class SystemUserController extends BaseController {
      */
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
-    public ServiceResultT<PageList<SystemUser>> GetUserList() {
-        ServiceResultT<PageList<SystemUser>> result = ServiceFactory.getUserService()
-                .getList(ComSession.getUserInfo(), getQueryPage(), SystemUser.class);
-        return result;
+    public ServiceResultT<PageList<SystemUser>> getUserList(HttpServletRequest request) {
+        if(StringUtil.isNullOrWhiteSpace(request.getParameter("keyWord"))){
+            return ServiceFactory.getUserService()
+                    .getList(ComSession.getUserInfo(), getQueryPage(), SystemUser.class);
+        }else {
+            return ServiceFactory.getUserService()
+                    .getUserList(ComSession.getUserInfo(),null,request.getParameter("keyWord"), getQueryPage());
+        }
     }
-
 
     /**
      * 获取当前登录用户信息
