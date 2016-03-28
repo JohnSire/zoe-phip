@@ -34,7 +34,7 @@ import java.util.Map;
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMapper> implements MenuDataMapper {
 
     @Override
-    public int add(MenuData entity)throws Exception{
+    public int add(MenuData entity) throws Exception {
         Example example = new Example(MenuData.class);
         example.createCriteria().andEqualTo("code", entity.getCode());
         List<MenuData> dataList = getMapper().selectByExample(example);
@@ -50,9 +50,13 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
         PageList<MenuData> pageList = new PageList<MenuData>();
         Example example = new Example(MenuData.class);
         SqlHelper.startPage(page);
+
         if (!StringUtil.isNullOrWhiteSpace(key)) {
-            example.createCriteria().andLike("code", key);
-            example.or(example.createCriteria().andLike("name", key));
+
+            example.createCriteria().andLike("code","%" + key + "%");
+            example.or(example.createCriteria().andLike("name", "%" + key + "%"));
+            example.or(example.createCriteria().andLike("address", "%" + key + "%"));
+
         }
         List<MenuData> results = getMapper().selectByExample(example);
         PageInfo<MenuData> pageInfo = new PageInfo<>(results);

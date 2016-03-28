@@ -50,6 +50,8 @@ public class MenuDataServiceImplTest extends BaseTest {
         QueryPage page = new QueryPage();
         page.setPageNum(1);
         page.setPageSize(10);
-        PageList<MenuData> resultT = menuDataService.getMenuPages("%管理%", page);
+        PageList<MenuData> resultT = menuDataService.getMenuPages("%list%", page);
+        System.out.println();
+        System.out.println(resultT.getTotal());
     }
 }

@@ -29,4 +29,6 @@ public interface MenuDataMapper extends MyMapper<MenuData> {
     List<MenuData> getChildMenus(String parentMenuId) throws Exception;
 
     List<MenuData> getCompetenceMenuByUser(String userId) throws Exception;
+
+
 }
