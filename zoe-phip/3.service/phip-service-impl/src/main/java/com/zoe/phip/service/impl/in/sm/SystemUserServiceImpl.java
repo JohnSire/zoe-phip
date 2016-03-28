@@ -12,6 +12,7 @@ import com.zoe.phip.dao.sm.SystemUserMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
+import com.zoe.phip.infrastructure.security.SystemCredential;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
@@ -53,7 +54,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, SystemU
         if (!psd.equals(user.getPassword())) {
             throw new BusinessException("密码错误!");
         }
-        LoginCredentials credentials = createLoginCredentials(user.getId(), user.getName());
+        LoginCredentials credentials = createLoginCredentials(user.getId(), user.getName(),expiresTime);
         return credentials;
     }
 
@@ -105,7 +106,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, SystemU
         if (state != null) {
             paras.put("state", state);
         }
-        List<SystemUser> results = ((SystemUserMapper) getMapper()).getUserList(paras);
+        List<SystemUser> results = getMapper().getUserList(paras);
         PageInfo<SystemUser> pageInfo = new PageInfo<SystemUser>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
@@ -155,12 +156,12 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, SystemU
         return StringUtil.toMD5(String.join("zoe", loginName, StringUtil.toMD5(password), loginName));
     }
 
-    private LoginCredentials createLoginCredentials(String userId, String userName) {
+    private LoginCredentials createLoginCredentials(String userId, String userName,int expiresTime) {
         LoginCredentials credentials = new LoginCredentials();
         credentials.setUserId(userId);
         credentials.setUserName(userName);
-        //todo 设置LoginCredentials
-        credentials.setCredential("");
+        String credential=SystemCredential.createCredential(userId,userName,expiresTime);
+        credentials.setCredential(credential);
         return credentials;
     }
 

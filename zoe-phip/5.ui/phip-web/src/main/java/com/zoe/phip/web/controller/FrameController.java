@@ -56,6 +56,7 @@ public class FrameController extends BaseController {
             if (serviceResult.getIsSuccess()) {
                 SystemData systemData = new SystemData();
                 systemData.setUserId(serviceResult.getResult().getUserId());
+                systemData.setUserName(serviceResult.getResult().getUserName());
                 systemData.setCredential(serviceResult.getResult().getCredential());
                 //设置session
                 ComSession.setUserInfo(systemData);

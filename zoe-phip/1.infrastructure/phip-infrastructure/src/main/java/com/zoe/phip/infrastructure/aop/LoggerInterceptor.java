@@ -4,6 +4,7 @@ import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.exception.BusinessException;
+import com.zoe.phip.infrastructure.security.SystemCredential;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -31,6 +32,11 @@ public class LoggerInterceptor {
             }
             if(!cls[0].getName().equals(SystemData.class.getName())){
                 throw new RuntimeException("方法的第一个参数必须为SystemData类型");
+            }
+            SystemData token= (SystemData)joinPoint.getArgs()[0];
+            boolean isAuth=SystemCredential.checkCredential(token.getUserId(),token.getUserName(),token.getCredential());
+            if(!isAuth){
+                throw  new RuntimeException("Session过期,请重新登录!");
             }
         }
         // TODO: 2016/3/17 相关权限验证
