@@ -1,4 +1,4 @@
-﻿.l-scroll {
+﻿/*.l-scroll {
 scrollbar-face-color: white;
 scrollbar-highlight-color: #D6D6D6;
 scrollbar-shadow-color: #D6D6D6;
@@ -7,7 +7,7 @@ scrollbar-arrow-color: #D6D6D6;
 scrollbar-track-color: white;
 scrollbar-darkshadow-color: white; 
 SCROLLBAR-BASE-COLOR:#F1F1F1;
-}
+}*/
 
 
 /* -----------------------
@@ -28,7 +28,6 @@ color: #333333;
 font-size: 12px;
 font-weight: bold;
 height: 28px;
-line-height:28px;
 }
 .l-panel-header-text {
 line-height: 24px;
@@ -38,7 +37,7 @@ padding-left: 15px;
 .l-grid-header
 {
     border-bottom:1px solid #D6D6D6;  
-   height:24px; line-height:28px; background:#F1F1F1 url('../images/ui/gridalt.gif') top repeat-x;
+   height:24px; line-height:22px; background:#F1F1F1 url('../images/ui/gridalt.gif') top repeat-x;
 } 
 .l-grid-hd-cell-mul
 {
@@ -136,14 +135,14 @@ padding-left: 15px;
 }
 .l-panel-bar
 {
-    background:white  url('../images/ui/gridbar.jpg') repeat-x; height:31px;  line-height:26px;overflow:hidden;
+    /*background:white  url('../images/ui/gridbar.jpg') repeat-x;*/ height:28px;  line-height:28px;overflow:hidden;
     border-top:1px solid #D6D6D6;
 }
 .l-panel-bbar-inner
 {
     margin-top: 3px;
     padding-left: -2px;
-    width:100%;  position:relative; min-width:530px;_width:530px;
+    width:100%;  position:relative;min-width:330px;_width:330px;/*min-width:530px;_width:530px*/;
 }
 .l-bar-message
 {
@@ -257,7 +256,7 @@ border-left: 1px solid #D6D6D6;
 border-right: 1px solid white;
 float: left;
 height: 13px;
-margin: 2px; margin-top:6px;
+margin: 2px; margin-top:9px;
 }
 /*
     工具条
