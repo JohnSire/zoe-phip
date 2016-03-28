@@ -6,10 +6,7 @@
 
 package com.zoe.phip.service.in.sm;
 
-import com.zoe.phip.infrastructure.entity.PageList;
-import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
-import com.zoe.phip.infrastructure.entity.SystemData;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.service.in.BaseInService;
 

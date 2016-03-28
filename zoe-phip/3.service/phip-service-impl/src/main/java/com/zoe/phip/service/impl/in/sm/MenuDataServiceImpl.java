@@ -33,9 +33,12 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
     @Override
     public int add(MenuData entity) throws Exception {
         Example example = new Example(MenuData.class);
+        entity.setCreateAt(new Date());
+        entity.setModifyAt(new Date());
+
         example.createCriteria().andEqualTo("code", entity.getCode());
         List<MenuData> dataList = getMapper().selectByExample(example);
-        if (dataList != null || dataList.size() > 0) {
+        if (dataList != null && dataList.size() > 0) {
             throw new BusinessException("该菜单{0}已存在", entity.getCode());
         } else {
             return getMapper().insertSelective(entity);
@@ -126,6 +129,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
         }
         menuData.setState(state);
         menuData.setModifyAt(new Date());
+        menuData.setModifyBy(getSystemData().getUserId());
         return getMapper().updateByPrimaryKeySelective(menuData);
     }
 
