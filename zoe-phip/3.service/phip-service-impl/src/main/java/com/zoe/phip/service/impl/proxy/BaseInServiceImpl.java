@@ -1,5 +1,7 @@
 package com.zoe.phip.service.impl.proxy;
 
+import com.alibaba.dubbo.rpc.service.GenericException;
+import com.alibaba.dubbo.rpc.service.GenericService;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.dao.MyMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
@@ -21,7 +23,7 @@ import java.util.List;
 /**
  * Created by qiuyungen on 2016/3/26.
  */
-public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInService<T>, Mapper<T> {
+public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInService<T>, Mapper<T>, GenericService {
 
     private SystemData systemData;
 
@@ -201,6 +203,11 @@ public abstract class BaseInServiceImpl<T extends BaseEntity> implements BaseInS
     @Override
     public int updateByPrimaryKeySelective(T t) {
         return getMapper().updateByPrimaryKeySelective(t);
+    }
+
+    @Override
+    public Object $invoke(String s, String[] strings, Object[] objects) throws GenericException {
+        return null;
     }
 
     //endregion

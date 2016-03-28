@@ -30,7 +30,7 @@ import java.util.Map;
  * @date 2016-03-21
  */
 @Repository("MenuDataService")
-//@Service(interfaceClass = MenuDataService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = MenuDataService.class, proxy = "sdpf", dynamic = true)
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements MenuDataMapper {
     @Override
     public PageList<MenuData> getMenuPages(String key, QueryPage page) throws Exception {
