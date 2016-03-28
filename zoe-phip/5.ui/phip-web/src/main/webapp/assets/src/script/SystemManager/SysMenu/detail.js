@@ -67,7 +67,7 @@
                 var top = common.getTopWindowDom();
                 top.win_menu_tree_dialog = top.$.ligerDialog.open({
                     title: '选择父级菜单节点',
-                    url: webRoot + 'menu/tree?noDrag=1',
+                    url: webRoot + 'menu/view/tree?noDrag=1',
                     width: 500,
                     height: 580
                 });
