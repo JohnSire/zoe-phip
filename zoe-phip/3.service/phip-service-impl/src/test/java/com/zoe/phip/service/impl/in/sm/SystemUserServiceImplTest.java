@@ -2,11 +2,9 @@ package com.zoe.phip.service.impl.in.sm;
 
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.impl.BaseTest;
-import com.zoe.phip.service.in.sm.SystemUserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,29 +19,29 @@ public class SystemUserServiceImplTest extends BaseTest {
 
 
     @Autowired
-    private SystemUserService systemUserService;
+    private SystemUserServiceImpl systemUserService;
 
     @Test
-    public void addTest() {
+    public void addTest() throws Exception {
         SystemUser user = creteUser("管理员", "admin", "1", 1);
-        ServiceResult result = systemUserService.add(null, user);
+        int result = systemUserService.add(user);
     }
 
     @Test
-    public void addListTest() {
+    public void addListTest() throws Exception {
         List<SystemUser> list = new ArrayList<>();
         SystemUser user = creteUser("abc", "abc", "1", 1);
         list.add(user);
         user = creteUser("abd", "ced", "1", 1);
         list.add(user);
-        ServiceResult result = systemUserService.addList(null, list);
+        int result = systemUserService.addList(list);
     }
 
 
     @Test
-    public void pageQueryTest() {
-        ServiceResultT<PageList<SystemUser>> resultT = systemUserService.getList(null, new QueryPage(1,2), SystemUser.class);
-        List<SystemUser> list = resultT.getResult().getRows();
+    public void pageQueryTest() throws Exception {
+        PageList<SystemUser> resultT = systemUserService.getList(new QueryPage(1, 2), SystemUser.class);
+        List<SystemUser> list = resultT.getRows();
         System.out.println(list.size());
     }
 
@@ -61,18 +59,18 @@ public class SystemUserServiceImplTest extends BaseTest {
     @Test
     public void testLogin() throws Exception {
 
-        ServiceResult result = systemUserService.login("admin1", "zjy", 1000 * 10);
+        LoginCredentials result = systemUserService.login("admin1", "zjy", 1000 * 10);
 
     }
 
     @Test
-    public void testGetUsers(){
-        ServiceResultT<PageList<SystemUser>> resultT=
-                systemUserService.getUserList(null,1,"a",new QueryPage());
+    public void testGetUsers() throws Exception {
+        PageList<SystemUser> resultT =
+                systemUserService.getUserList(1, "a", new QueryPage());
     }
 
     @Test
     public void testUpdatePassword() throws Exception {
-        ServiceResult result = systemUserService.resetPassword(null, "e24398fa69844859a39faa53dcbaa852", "1");
+        int result = systemUserService.resetPassword("e24398fa69844859a39faa53dcbaa852", "1");
     }
 }

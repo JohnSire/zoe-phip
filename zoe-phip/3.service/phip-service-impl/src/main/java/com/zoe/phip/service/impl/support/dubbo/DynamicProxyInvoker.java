@@ -5,7 +5,7 @@ import com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker;
 import com.zoe.phip.infrastructure.bean.BeanFactory;
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
-import com.zoe.phip.service.impl.proxy.BaseInService;
+import com.zoe.phip.service.impl.in.BaseInService;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -32,15 +32,17 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
         if (parameterTypes.length != 0) {
             List<Class<?>> parameterTypeList = new ArrayList<Class<?>>();
             boolean first = true;
+            int offset = 0;
             for (Class<?> parameterType : parameterTypes) {
-                if (first) {
+                if (first && parameterType == SystemData.class) {
                     firstClass = parameterType;
+                    offset = 1;
                     first = false;
                     continue;
                 }
                 parameterTypeList.add(parameterType);
             }
-            types = new Class<?>[parameterTypes.length - 1];
+            types = new Class<?>[parameterTypes.length - offset];
             parameterTypeList.toArray(types);
             parameterTypeList.clear();
             parameterTypeList = null;
@@ -56,14 +58,14 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
             List<Object> argumentList = new ArrayList<Object>();
             boolean first = true;
             for (Object argument : arguments) {
-                if (first) {
+                if (first && firstClass != null) {
                     firstData = argument;
                     first = false;
                     continue;
                 }
                 argumentList.add(argument);
             }
-            objects = new Object[arguments.length - 1];
+            objects = new Object[arguments.length - (firstClass != null ? 1 : 0)];
             argumentList.toArray(objects);
             argumentList.clear();
             argumentList = null;

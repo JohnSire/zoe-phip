@@ -1,9 +1,7 @@
 package com.zoe.phip.service.impl.in.sm;
 
-import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.model.sm.SystemParameter;
 import com.zoe.phip.service.impl.BaseTest;
-import com.zoe.phip.service.in.sm.SystemParameterService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,16 +13,16 @@ import java.util.Date;
 public class SystemParameterServiceImplTest extends BaseTest {
 
     @Autowired
-    private SystemParameterService systemParameterService;
+    private SystemParameterServiceImpl systemParameterService;
 
     @Test
-    public void testAdd() {
+    public void testAdd() throws Exception {
         SystemParameter systemParameter = new SystemParameter();
         systemParameter.setId("123");
         systemParameter.setCode("123");
         systemParameter.setDescr("测试数据");
         systemParameter.setCreateAt(new Date());
         systemParameter.setName("测试");
-        ServiceResult serviceResult = systemParameterService.add(null, systemParameter);
+        int serviceResult = systemParameterService.add(systemParameter);
     }
 }
