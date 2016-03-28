@@ -20,6 +20,8 @@ import java.util.Map;
  * @date 2016-03-22
  */
 public interface SystemDictItemMapper extends MyMapper<SystemDictItem> {
+
+
     List<SystemDictItem> getDataItemList(Map map);
 
     /// <summary>
