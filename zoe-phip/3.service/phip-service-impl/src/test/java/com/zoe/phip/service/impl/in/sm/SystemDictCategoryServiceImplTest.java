@@ -1,5 +1,6 @@
 package com.zoe.phip.service.impl.in.sm;
 
+import com.alibaba.dubbo.common.json.JSON;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
@@ -24,12 +25,13 @@ public class SystemDictCategoryServiceImplTest extends BaseTest {
     public void getDictCategories() throws Exception {
         QueryPage page = new QueryPage();
         page.setPageNum(1);
-        page.setPageSize(10);
-        ServiceResult sr = service.getDictCategories(null, "%分类%", page);
+        page.setPageSize(2);
+        ServiceResult sr = service.getDictCategories(null, "", page);
     }
 
     @Test
     public void getDictCategory() throws Exception {
         ServiceResult sr = service.getDictCategory(null, "DICTIONARY_SOURCE");
+        System.out.print(JSON.json(sr));
     }
 }
