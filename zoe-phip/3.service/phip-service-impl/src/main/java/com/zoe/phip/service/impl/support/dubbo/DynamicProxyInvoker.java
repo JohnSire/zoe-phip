@@ -91,8 +91,11 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
         if (isFirstSystemDataClass)
             ((BaseInService) instance).setSystemData((SystemData) firstData);
 
+        if (method.getReturnType() == Boolean.class && !withResult) {
+            return SafeExecuteUtil.execute(() -> (Boolean) method.invoke(instance, objects));
+        }
         if (method.getReturnType() == int.class && !withResult) {
-            return SafeExecuteUtil.execute(() -> method.invoke(instance, objects));
+            return SafeExecuteUtil.execute(() -> ((int) method.invoke(instance, objects) >= 0));
         }
         return SafeExecuteUtil.execute0(() -> method.invoke(instance, objects));
     }
