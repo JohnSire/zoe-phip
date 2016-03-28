@@ -4,9 +4,9 @@
         init: function () {
             var BaseAttr = require("../../baseAttr/baseAttr.js");
             var baseAttr = new BaseAttr({
-                getUrl: 'menu/getMenuInfo',//获取实例的接口
-                addUrl: 'menu/addMenuInfo',//新增的接口Url
-                updateUrl: 'menu/updateMenuInfo',//修改的接口Url
+                getUrl: '/menu/getMenuInfo',//获取实例的接口
+                addUrl: '/menu/addMenuInfo',//新增的接口Url
+                updateUrl: '/menu/updateMenuInfo',//修改的接口Url
                 loadPageEvent: function () {
                     internal.parentNodes();
                 },
@@ -23,7 +23,8 @@
                             $("#btnFkParent").find("input.text-line").val("0");
                         } else {
                             internal.req.getInfo(data.result.fkParentMenuId, function (result) {
-                                $("#btnFkParent").find("span.text-line-content").text(result.Result.name);
+                                console.log(result);
+                                $("#btnFkParent").find("span.text-line-content").text(data.result.name);
                                 $("#btnFkParent").find("input.text-line").val(data.result.fkParentMenuId);
                             })
                         }
@@ -67,7 +68,7 @@
                 var top = common.getTopWindowDom();
                 top.win_menu_tree_dialog = top.$.ligerDialog.open({
                     title: '选择父级菜单节点',
-                    url: webRoot + 'menu/view/tree?noDrag=1',
+                    url: webRoot + '/menu/view/tree?noDrag=1',
                     width: 500,
                     height: 580
                 });

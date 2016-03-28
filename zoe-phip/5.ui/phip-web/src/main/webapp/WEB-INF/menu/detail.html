@@ -6,32 +6,32 @@ var styleSection = {
 <%
 var bodySection = {
 %>
-
+<form id="baseAttrForm" onsubmit="return false;">
 <div class="y-dialog-content">
     <div class="y-dialog-form form-little">
         <ul class="y-dialog-lists clearfix">
             <li class="list">
                 <p class="column-one">
-                    <label class="label" for="Name"><span class="text-mark">*</span>名称：</label>
-                    <input type="text" name="Name" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！" nullmsg="请填写名称！" />
+                    <label class="label" for="name"><span class="text-mark">*</span>名称：</label>
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！" nullmsg="请填写名称！" />
 
                 </p>
                 <p class="column-one">
-                    <label class="label" for="Code"><span class="text-mark">*</span>编码：</label>
-                    <input type="text" name="Code" class="text" datatype="n" errormsg="编码不能为空且只能为数字！" />
+                    <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
+                    <input type="text" name="code" class="text" datatype="n" errormsg="编码不能为空且只能为数字！" />
                 </p>
             </li>
             <li class="list">
                 <p class="column-one">
-                    <label class="label" for="Address">地址：</label>
-                    <input type="text" name="Address" class="text" datatype="*1-512" errormsg="地址长度应为1~512位！" nullmsg="请填写地址！" />
+                    <label class="label" for="address">地址：</label>
+                    <input type="text" name="address" class="text" datatype="*1-512" errormsg="地址长度应为1~512位！" nullmsg="请填写地址！" />
                 </p>
             </li>
             <li class="list">
                 <p class="column-one">
-                    <label class="label" for="FkParentMenuId">父节点：</label>
+                    <label class="label" for="fkParentMenuId">父节点：</label>
                         <span class="text-line-outer" id="btnFkParent">
-                            <input type="text" name="FkParentMenuId" class="text-line" datatype="*" errormsg="菜单父节点不能为空" />
+                            <input type="text" name="fkParentMenuId" class="text-line" datatype="*" errormsg="菜单父节点不能为空" />
                             <span class="text-line-setting">
                                 <span class="icon-grid icon-grid-setting" title="配置"></span>
                                 <span class="text-line-content"></span>
@@ -41,7 +41,7 @@ var bodySection = {
             </li>
             <li class="list">
                 <p class="column-one">
-                    <label class="label" for="UserState">是否有效：</label>
+                    <label class="label" for="userState">是否有效：</label>
                     <a class="btn-switch-outer">
                             <span class="btn-switch btn-switch-on">
                                 <b class="btn-switch-inner"></b>
@@ -52,6 +52,7 @@ var bodySection = {
         </ul>
     </div>
 </div>
+</form>
 <%};%>
 
 <%
