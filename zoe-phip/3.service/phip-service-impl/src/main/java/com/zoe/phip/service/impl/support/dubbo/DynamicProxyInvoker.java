@@ -4,6 +4,7 @@ import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker;
 import com.zoe.phip.infrastructure.entity.SystemData;
+import com.zoe.phip.infrastructure.function.Function;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.service.impl.in.BaseInService;
 import com.zoe.phip.service.impl.support.annotation.WithResult;
@@ -70,6 +71,15 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
         return objects;
     }
 
+    // 解出真实异常对象
+    private static <R> R execute(Function<R> invoker) throws Exception {
+        try {
+            return invoker.apply();
+        } catch (Exception ex) {
+            throw (Exception) ex.getCause();
+        }
+    }
+
     public Class getInterfaceClass() {
         return interfaceClass;
     }
@@ -91,9 +101,18 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
         if (isFirstSystemDataClass)
             ((BaseInService) instance).setSystemData((SystemData) firstData);
 
-        if (method.getReturnType() == int.class && !withResult) {
-            return SafeExecuteUtil.execute(() -> method.invoke(instance, objects));
+        if (method.getReturnType() == Boolean.class && !withResult) {
+            return SafeExecuteUtil.execute(() ->
+                    execute(() -> (Boolean) method.invoke(instance, objects))
+            );
         }
-        return SafeExecuteUtil.execute0(() -> method.invoke(instance, objects));
+        if (method.getReturnType() == int.class && !withResult) {
+            return SafeExecuteUtil.execute(() ->
+                    execute(() -> ((int) method.invoke(instance, objects) >= 0))
+            );
+        }
+        return SafeExecuteUtil.execute0(() ->
+                execute(() -> method.invoke(instance, objects))
+        );
     }
 }
