@@ -29,5 +29,6 @@
         <if test="_parameter.containsKey('code')">
             AND UPPER (concat(SSDI.code) ) LIKE UPPER (CONCAT(CONCAT('%', #{code, jdbcType=VARCHAR}),'%'))
         </if>
+        ORDER BY SSDI.CODE
     </select>
 </mapper>

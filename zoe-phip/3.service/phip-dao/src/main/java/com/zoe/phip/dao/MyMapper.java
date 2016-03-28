@@ -20,4 +20,5 @@ public interface MyMapper<T extends BaseEntity> extends Mapper<T> {
     @Deprecated
     int updateList(List<T> entities) throws Exception;
 
+
 }

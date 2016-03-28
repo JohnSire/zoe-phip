@@ -42,7 +42,9 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     @Override
     public int add(SystemDictItem entity) throws Exception {
         Example example = new Example(SystemDictItem.class);
-        example.createCriteria().andEqualTo("code", entity.getCode());
+        example.createCriteria().andEqualTo("fkSystemDictCategoryId", entity.getFkSystemDictCategoryId())
+                .andEqualTo("code",entity.getCode());
+        //example.createCriteria().andEqualTo("code", entity.getCode());
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
             throw new BusinessException("该字典类({0})已经存在!", entity.getCode());
@@ -129,9 +131,9 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     public SystemDictItem getDictItemByCategoryId(String categoryId, String code) throws Exception {
         if (StringUtil.isNullOrWhiteSpace(code))
             throw new BusinessException("字典项代码不能为空!");
-        return getMapper().getDataItemList(MapUtil.createMap(m->{
-            m.put("categoryId",categoryId);
-            m.put("code",code);
+        return getMapper().getDataItemList(MapUtil.createMap(m -> {
+            m.put("categoryId", categoryId);
+            m.put("code", code);
         })).stream().findFirst().orElseGet(null);
     }
 
@@ -142,9 +144,9 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
             throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
         if (StringUtil.isNullOrWhiteSpace(code))
             throw new BusinessException("字典项代码不能为空!");
-        return getMapper().getDataItemList(MapUtil.createMap(m->{
-            m.put("categoryId",categoryId);
-            m.put("code",code);
+        return getMapper().getDataItemList(MapUtil.createMap(m -> {
+            m.put("categoryId", categoryId);
+            m.put("code", code);
         })).stream().findFirst().orElseGet(null);
     }
 

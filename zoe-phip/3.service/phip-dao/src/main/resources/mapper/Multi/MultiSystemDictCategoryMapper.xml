@@ -18,8 +18,10 @@
                 UPPER (concat(ssdc.NAME,ssdc.code) ) LIKE UPPER (CONCAT(CONCAT('%', #{key, jdbcType=VARCHAR}),'%'))
             </if>
         </where>
+        ORDER BY ssdc.CODE
     </select>
     <select id="getDictCategory" resultMap="MultiResultMap" parameterType="java.util.Map">
         select * from sys_system_dict_category ssdc where UPPER (ssdc.CODE) = #{code, jdbcType=VARCHAR}
+        ORDER  by ssdc.CODE
     </select>
 </mapper>

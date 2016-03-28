@@ -39,7 +39,7 @@
                 $("#btnDictItemAdd").on("click", function () {
                     var gridObj = liger.get("dictCategoryGrid");
                     var rowdata = gridObj.getSelected();
-                    if (rowdata && rowdata["Id"]) {
+                    if (rowdata && rowdata["id"]) {
                         var top = common.getTopWindowDom();
                         top.win_dict_item_dialog = $.ligerDialog.open({
                             title: '新增字典项',
@@ -75,7 +75,7 @@
                     var rowArray = gridObj.getSelectedRows();
                     var ids = "";
                     $.each(rowArray, function (index, item) {
-                        ids += "," + item["Id"];
+                        ids += "," + item["id"];
                     });
                     if (ids.length > 0) {
                         ids = ids.slice(1, ids.length);
