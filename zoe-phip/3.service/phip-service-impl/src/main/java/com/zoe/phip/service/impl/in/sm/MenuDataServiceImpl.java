@@ -19,10 +19,7 @@ import com.zoe.phip.service.in.sm.MenuDataService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author
@@ -119,6 +116,17 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
         map.clear();
         System.out.println(menus.size());
         return data;
+    }
+
+    @Override
+    public int updateState(String id, int state) throws Exception {
+        MenuData menuData = getMapper().selectByPrimaryKey(id);
+        if(menuData == null){
+            throw new BusinessException("未找到该菜单！");
+        }
+        menuData.setState(state);
+        menuData.setModifyAt(new Date());
+        return getMapper().updateByPrimaryKeySelective(menuData);
     }
 
     private void findChildNodes(MenuData node, Map<String, List<MenuData>> cache) {
