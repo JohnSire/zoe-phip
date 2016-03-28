@@ -19,12 +19,6 @@ public final class ServiceDynamicProxyFactory extends JdkProxyFactory {
 
     @Override
     public <T> Invoker<T> getInvoker(T proxy, Class<T> type, URL url) throws RpcException {
-        try {
-            Class clazz = Class.forName(url.getPath());
-            return new DynamicProxyInvoker(proxy, type, url, clazz);
-        } catch (ClassNotFoundException e) {
-
-        }
-        return null;
+        return new DynamicProxyInvoker(proxy, type, url);
     }
 }
