@@ -40,11 +40,4 @@
             #{item.id}
         </foreach>
     </delete>
-    <select id="getUserList" resultMap="BaseResultMap" parameterType="java.util.Map">
-        select * from SYS_SYSTEM_USER WHERE (UPPER(NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(LOGIN_NAME) LIKE
-        #{key,jdbcType=VARCHAR})
-        <if test="_parameter.containsKey('state')">
-            AND STATE = #{state,jdbcType=INTEGER}
-        </if>
-    </select>
 </mapper>
