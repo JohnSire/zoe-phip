@@ -14,11 +14,10 @@ public final class SafeExecuteUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(SafeExecuteUtil.class);
 
-    public static ServiceResult execute(Function<Object> invoker) {
+    public static ServiceResult execute(Function<Boolean> invoker) {
         ServiceResult executeResult = new ServiceResult();
         try {
-            Object result = invoker.apply();
-            executeResult.setIsSuccess(result != null);
+            executeResult.setIsSuccess(invoker.apply());
         } catch (BusinessException ex) {
             //日志消息
             executeResult.addMessage("", ex.getMessage());
