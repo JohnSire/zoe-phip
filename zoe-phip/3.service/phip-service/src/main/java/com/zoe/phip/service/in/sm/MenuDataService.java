@@ -26,16 +26,55 @@ import java.util.List;
 public interface MenuDataService extends BaseInService<MenuData> {
 
 
+    /**
+     * 通过关键字分页获取菜单列表
+     * @param systemData
+     * @param key
+     * @param page
+     * @return
+     */
     ServiceResultT<PageList<MenuData>> getMenuPages(SystemData systemData, String key, QueryPage page);
 
+    /**
+     * 通过关键字获取菜单列表
+     * @param systemData
+     * @param key
+     * @return
+     */
     ServiceResultT<List<MenuData>> getMenus(SystemData systemData, String key);
 
+    /**
+     * 通过编码获得菜单列表
+     * @param systemData
+     * @param code
+     * @return
+     */
     ServiceResultT<List<MenuData>> getMenuByCode(SystemData systemData, String code);
 
+    /**
+     * 获取子菜单列表
+     * @param systemData
+     * @param parentMenuId
+     * @return
+     */
     ServiceResultT<List<MenuData>> getChildMenus(SystemData systemData, String parentMenuId);
 
-
+    /**
+     * 获取用户的菜单权限
+     * @param systemData
+     * @param userId
+     * @return
+     */
     ServiceResultT<List<MenuData>> getCompetenceMenuByUser(SystemData systemData, String userId);
 
-    ServiceResultT<List<MenuData>> getCompetenceMenuByUser(String userId);
+
+
+    /**
+     * 更新用户状态
+     * @param systemData
+     * @param id
+     * @param state
+     * @return
+     */
+    ServiceResult updateState(SystemData systemData, String id, int state);
 }

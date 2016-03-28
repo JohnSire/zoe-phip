@@ -81,7 +81,7 @@ public class SystemMenuController extends BaseController {
     }
 
     /**
-     * 根据关键字获取菜单列表
+     * 根据关键字获取菜单列�
      *
      * @param request
      * @param model
@@ -89,7 +89,7 @@ public class SystemMenuController extends BaseController {
      */
     @RequestMapping(value = "/getMenuList")
     @ResponseBody
-    public ServiceResultT<PageList<MenuData>> getMenuPageList( HttpServletRequest request, Model model) {
+    public ServiceResultT<PageList<MenuData>> getMenuPageList(HttpServletRequest request, Model model) {
         String keyWord = request.getParameter("keyWord");
         return ServiceFactory.getMenuDataService().getMenuPages(ComSession.getUserInfo(), keyWord, getQueryPage());
     }
@@ -101,7 +101,7 @@ public class SystemMenuController extends BaseController {
      * @param menuData
      * @return
      */
-    @RequestMapping(value = "/updateMenuInfo",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateMenuInfo", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult updateMenuInfo(HttpServletRequest request, MenuData menuData) {
         return ServiceFactory.getMenuDataService().update(ComSession.getUserInfo(), menuData);
@@ -121,10 +121,10 @@ public class SystemMenuController extends BaseController {
     }
 
 
-    @RequestMapping(value = "getMenuUser",method = RequestMethod.POST)
+    @RequestMapping(value = "getMenuUser", method = RequestMethod.POST)
     @ResponseBody
-    public ServiceResultT<List<MenuData>> getMenuUser(HttpServletRequest request,String id){
-        return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(),id);
+    public ServiceResultT<List<MenuData>> getMenuUser(HttpServletRequest request, String id) {
+        return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(), id);
     }
 
 
@@ -137,7 +137,7 @@ public class SystemMenuController extends BaseController {
         if(!StringUtil.isNullOrWhiteSpace(strList)){
             list = StringUtil.parseJsonArray(strList,MenuData.class);
         }
-        //to do  等纪洋底层批量的方法实现。
+        //to do  等纪洋底层批量的方法实现�
         /*return ServiceFactory.getMenuDataService().updateList(ComSession.getUserInfo(), list);*/
         for (MenuData menuData:list) {
             ServiceFactory.getMenuDataService().update(ComSession.getUserInfo(),menuData);
@@ -148,9 +148,11 @@ public class SystemMenuController extends BaseController {
     }
 
 
-
-
-
+    @RequestMapping(value = "updateState")
+    @ResponseBody
+    public ServiceResult updateState(String id, int state) {
+        return ServiceFactory.getMenuDataService().updateState(ComSession.getUserInfo(),id,state);
+    }
 
 
 }
