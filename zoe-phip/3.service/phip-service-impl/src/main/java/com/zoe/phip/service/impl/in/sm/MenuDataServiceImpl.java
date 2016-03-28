@@ -19,10 +19,7 @@ import com.zoe.phip.service.in.sm.MenuDataService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author
@@ -34,7 +31,7 @@ import java.util.Map;
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMapper> implements MenuDataMapper {
 
     @Override
-    public int add(MenuData entity)throws Exception{
+    public int add(MenuData entity) throws Exception {
         Example example = new Example(MenuData.class);
         example.createCriteria().andEqualTo("code", entity.getCode());
         List<MenuData> dataList = getMapper().selectByExample(example);
@@ -50,9 +47,13 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
         PageList<MenuData> pageList = new PageList<MenuData>();
         Example example = new Example(MenuData.class);
         SqlHelper.startPage(page);
+
         if (!StringUtil.isNullOrWhiteSpace(key)) {
-            example.createCriteria().andLike("code", key);
-            example.or(example.createCriteria().andLike("name", key));
+
+            example.createCriteria().andLike("code","%" + key + "%");
+            example.or(example.createCriteria().andLike("name", "%" + key + "%"));
+            example.or(example.createCriteria().andLike("address", "%" + key + "%"));
+
         }
         List<MenuData> results = getMapper().selectByExample(example);
         PageInfo<MenuData> pageInfo = new PageInfo<>(results);
@@ -115,6 +116,17 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
         map.clear();
         System.out.println(menus.size());
         return data;
+    }
+
+    @Override
+    public int updateState(String id, int state) throws Exception {
+        MenuData menuData = getMapper().selectByPrimaryKey(id);
+        if(menuData == null){
+            throw new BusinessException("未找到该菜单！");
+        }
+        menuData.setState(state);
+        menuData.setModifyAt(new Date());
+        return getMapper().updateByPrimaryKeySelective(menuData);
     }
 
     private void findChildNodes(MenuData node, Map<String, List<MenuData>> cache) {

@@ -17,6 +17,8 @@ public final class SystemData implements Serializable {
      */
     public int menuCode;
 
+    public String userName;
+
     /**
      * 登陆凭据
      */
@@ -44,5 +46,13 @@ public final class SystemData implements Serializable {
 
     public void setCredential(String credential) {
         this.credential = credential;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
