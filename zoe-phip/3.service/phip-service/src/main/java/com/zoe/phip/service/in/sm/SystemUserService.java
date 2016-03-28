@@ -66,5 +66,4 @@ public interface SystemUserService extends BaseInService<SystemUser> {
      * @return
      */
     ServiceResultT<PageList<SystemUser>> getUserList(SystemData systemData, Integer state, String key, QueryPage page);
-
 }

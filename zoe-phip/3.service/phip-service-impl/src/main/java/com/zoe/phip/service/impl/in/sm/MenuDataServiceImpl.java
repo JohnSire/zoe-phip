@@ -3,7 +3,7 @@
  * Since 2008 - 2016
  */
 
-package com.zoe.phip.service.impl.proxy.sm;
+package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
@@ -13,7 +13,7 @@ import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.MenuData;
-import com.zoe.phip.service.impl.proxy.BaseInServiceImpl;
+import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.impl.util.SqlHelper;
 import com.zoe.phip.service.in.sm.MenuDataService;
 import org.springframework.stereotype.Repository;
@@ -31,7 +31,20 @@ import java.util.Map;
  */
 @Repository("MenuDataService")
 @Service(interfaceClass = MenuDataService.class, proxy = "sdpf", dynamic = true)
-public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements MenuDataMapper {
+public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMapper> implements MenuDataMapper {
+
+    @Override
+    public int add(MenuData entity)throws Exception{
+        Example example = new Example(MenuData.class);
+        example.createCriteria().andEqualTo("code", entity.getCode());
+        List<MenuData> dataList = getMapper().selectByExample(example);
+        if (dataList != null || dataList.size() > 0) {
+            throw new BusinessException("该菜单{0}已存在", entity.getCode());
+        } else {
+            return getMapper().insertSelective(entity);
+        }
+    }
+
     @Override
     public PageList<MenuData> getMenuPages(String key, QueryPage page) throws Exception {
         PageList<MenuData> pageList = new PageList<MenuData>();
@@ -78,7 +91,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData> implements 
 
     @Override
     public List<MenuData> getCompetenceMenuByUser(String userId) throws Exception {
-        List<MenuData> menus = ((MenuDataMapper) getMapper()).getCompetenceMenuByUser(userId);
+        List<MenuData> menus = getMapper().getCompetenceMenuByUser(userId);
         if (menus.size() == 0) {
             throw new BusinessException("还没有为该用户分配菜单!");
         }

@@ -8,20 +8,22 @@ package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
-import com.zoe.phip.infrastructure.entity.*;
+import com.zoe.phip.dao.sm.SystemDictItemMapper;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
-import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.model.sm.SystemDictItem;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.impl.util.SqlHelper;
-import com.zoe.phip.service.in.sm.*;
+import com.zoe.phip.service.in.sm.SystemDictItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author
@@ -29,163 +31,139 @@ import java.util.List;
  * @date 2016-03-22
  */
 @Repository("SystemDictItemService")
-@Service()
-public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem> implements SystemDictItemService {
+@Service(interfaceClass = SystemDictItemService.class, proxy = "sdpf", dynamic = true)
+public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem, SystemDictItemMapper> implements SystemDictItemMapper {
 
     @Autowired
-    private SystemDictCategoryService service;
+    private SystemDictCategoryServiceImpl service;
 
     @Override
-    public ServiceResult add(SystemData systemData, SystemDictItem entity) {
-        return SafeExecuteUtil.execute(
-                () -> {
-                    Example example = new Example(SystemDictItem.class);
-                    example.createCriteria().andEqualTo("code", entity.getCode());
-                    int count = getMapper().selectCountByExample(example);
-                    if (count > 0) {
-                        throw new BusinessException("该字典类({0})已经存在!", entity.getCode());
-                    } else
-                        return getMapper().insertSelective(entity);
-                });
+    public int add(SystemDictItem entity) throws Exception {
+        Example example = new Example(SystemDictItem.class);
+        example.createCriteria().andEqualTo("code", entity.getCode());
+        int count = getMapper().selectCountByExample(example);
+        if (count > 0) {
+            throw new BusinessException("该字典类({0})已经存在!", entity.getCode());
+        } else
+            return getMapper().insertSelective(entity);
     }
 
     @Override
-    public ServiceResult update(SystemData systemData, SystemDictItem entity) {
-        return SafeExecuteUtil.execute(
-                () -> {
-                    Example example = new Example(SystemDictItem.class);
-                    example.createCriteria().andEqualTo("code", entity.getCode());
-                    example.createCriteria().andNotEqualTo("id",entity.getId());
-                    int count = getMapper().selectCountByExample(example);
-                    if (count > 0) {
-                        throw new BusinessException("该字典类({0})已经存在!", entity.getCode());
-                    } else
-                        return getMapper().updateByPrimaryKeySelective(entity);
-                });
+    public int update(SystemDictItem entity) throws Exception {
+
+        Example example = new Example(SystemDictItem.class);
+        example.createCriteria().andEqualTo("code", entity.getCode());
+        example.createCriteria().andNotEqualTo("id", entity.getId());
+        int count = getMapper().selectCountByExample(example);
+        if (count > 0) {
+            throw new BusinessException("该字典类({0})已经存在!", entity.getCode());
+        } else
+            return getMapper().updateByPrimaryKeySelective(entity);
+
     }
 
     @Override
-    public ServiceResult categoryExists(SystemData systemData, String categoryId) {
-        return SafeExecuteUtil.execute(
-                () -> {
-                    Example example = new Example(SystemDictItem.class);
-                    example.createCriteria().andLike("", categoryId);
-                    int count = getMapper().selectCountByExample(example);
-                    if (count > 0)
-                        return true;
-                    return false;
-                });
+    public int categoryExists(String categoryId) throws Exception {
+
+        Example example = new Example(SystemDictItem.class);
+        example.createCriteria().andLike("", categoryId);
+        int count = getMapper().selectCountByExample(example);
+        return count;
     }
 
     @Override
-    public ServiceResultT<PageList<SystemDictItem>> getDictItems(SystemData systemData, String categoryId, String key, QueryPage page) {
-        SafeExecuteUtil<PageList<SystemDictItem>> safeExecute = new SafeExecuteUtil<>();
-        return safeExecute.executeT(() ->
-        {
-            PageList<SystemDictItem> pageList = new PageList<>();
-            Example example = new Example(SystemDictItem.class);
-            SqlHelper.startPage(page);
-            Example.Criteria criteria = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
-            if (!StringUtil.isNullOrWhiteSpace(key)) {
-                criteria.andLike("code", "%" + key + "%");
-                Example.Criteria criteria2 = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId).andLike("name", "%" + key + "%");
-                example.or(criteria2);
-            }
-            List<SystemDictItem> results = getMapper().selectByExample(example);
-            PageInfo<SystemDictItem> pageInfo = new PageInfo<>(results);
-            pageList.setTotal((int) pageInfo.getTotal());
-            pageList.setRows(results);
-            return pageList;
-        });
+    public PageList<SystemDictItem> getDictItems(String categoryId, String key, QueryPage page) {
+
+        PageList<SystemDictItem> pageList = new PageList<>();
+        Example example = new Example(SystemDictItem.class);
+        SqlHelper.startPage(page);
+        Example.Criteria criteria = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            criteria.andLike("code", "%" + key + "%");
+            Example.Criteria criteria2 = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId).andLike("name", "%" + key + "%");
+            example.or(criteria2);
+        }
+        List<SystemDictItem> results = getMapper().selectByExample(example);
+        PageInfo<SystemDictItem> pageInfo = new PageInfo<>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
     }
 
     @Override
-    public ServiceResultT<List<SystemDictItem>> getDictItems(SystemData systemData, String categoryId, String key) {
-        SafeExecuteUtil<List<SystemDictItem>> safeExecute = new SafeExecuteUtil<>();
-        return safeExecute.executeT(() ->
-        {
-            Example example = new Example(SystemDictItem.class);
-            Example.Criteria criteria = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
-            if (!StringUtil.isNullOrWhiteSpace(key)) {
-                criteria.andLike("code", key);
-                Example.Criteria criteria2 = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId).andLike("name", key);
-                example.or(criteria2);
-            }
-            return getMapper().selectByExample(example);
-        });
+    public List<SystemDictItem> getDictItems(String categoryId, String key) {
+
+        Example example = new Example(SystemDictItem.class);
+        Example.Criteria criteria = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            criteria.andLike("code", key);
+            Example.Criteria criteria2 = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId).andLike("name", key);
+            example.or(criteria2);
+        }
+        return getMapper().selectByExample(example);
+
     }
 
     @Override
-    public ServiceResultT<PageList<SystemDictItem>> getDictItemsByCategoryCode(SystemData systemData, String categoryCode, QueryPage page) {
-        SafeExecuteUtil<PageList<SystemDictItem>> safeExecute = new SafeExecuteUtil<>();
-        return safeExecute.executeT(() ->
-        {
-            PageList<SystemDictItem> pageList = new PageList<>();
-            Example example = new Example(SystemDictItem.class);
-            SqlHelper.startPage(page);
-            String categoryId = getCategoryId(systemData, categoryCode);
-            if (StringUtil.isNullOrWhiteSpace(categoryId))
-                throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
-            List<SystemDictItem> results = getMapper().selectByExample(example);
-            PageInfo<SystemDictItem> pageInfo = new PageInfo<>(results);
-            pageList.setTotal((int) pageInfo.getTotal());
-            pageList.setRows(results);
-            return pageList;
-        });
+    public PageList<SystemDictItem> getDictItemsByCategoryCode(String categoryCode, QueryPage page) throws Exception {
+
+        PageList<SystemDictItem> pageList = new PageList<>();
+        Example example = new Example(SystemDictItem.class);
+        SqlHelper.startPage(page);
+        String categoryId = getCategoryId(categoryCode);
+        if (StringUtil.isNullOrWhiteSpace(categoryId))
+            throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
+        List<SystemDictItem> results = getMapper().selectByExample(example);
+        PageInfo<SystemDictItem> pageInfo = new PageInfo<>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
     }
 
     @Override
-    public ServiceResultT<SystemDictItem> getDictItemByCategoryId(SystemData systemData, String categoryId, String code) {
+    public SystemDictItem getDictItemByCategoryId(String categoryId, String code) throws Exception {
 
-        SafeExecuteUtil<SystemDictItem> safeExecute = new SafeExecuteUtil<>();
-        return safeExecute.executeT(() ->
-        {
-            if (StringUtil.isNullOrWhiteSpace(code))
-                throw new BusinessException("字典项代码不能为空!");
-            Example example = new Example(SystemDictItem.class);
-            Example.Criteria criteria = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
-            criteria.andLike("code", "%" + code + "%");
-            return getMapper().selectByExample(example);
-        });
+        if (StringUtil.isNullOrWhiteSpace(code))
+            throw new BusinessException("字典项代码不能为空!");
+        Example example = new Example(SystemDictItem.class);
+        Example.Criteria criteria = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
+        criteria.andLike("code", "%" + code + "%");
+        return getMapper().selectByExample(example).stream().findFirst().orElseGet(null);
     }
 
     @Override
-    public ServiceResultT<SystemDictItem> getDictItemByCategoryCode(SystemData systemData, String categoryCode, String code) {
-        SafeExecuteUtil<SystemDictItem> safeExecute = new SafeExecuteUtil<>();
-        return safeExecute.executeT(() ->
-        {
-            String categoryId = getCategoryId(systemData, categoryCode);
-            if (StringUtil.isNullOrWhiteSpace(categoryId))
-                throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
-            if (StringUtil.isNullOrWhiteSpace(code))
-                throw new BusinessException("字典项代码不能为空!");
-            Example example = new Example(SystemDictItem.class);
-            Example.Criteria criteria = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
-            criteria.andLike("code", "%" + code + "%");
-            return getMapper().selectByExample(example);
-        });
+    public SystemDictItem getDictItemByCategoryCode(String categoryCode, String code) throws Exception {
+        String categoryId = getCategoryId(categoryCode);
+        if (StringUtil.isNullOrWhiteSpace(categoryId))
+            throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
+        if (StringUtil.isNullOrWhiteSpace(code))
+            throw new BusinessException("字典项代码不能为空!");
+        Example example = new Example(SystemDictItem.class);
+        Example.Criteria criteria = example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
+        criteria.andLike("code", "%" + code + "%");
+        return getMapper().selectByExample(example).stream().findFirst().orElseGet(null);
     }
 
     @Override
-    public ServiceResultT<List<SystemDictItem>> getDictItemsByCategoryCode(SystemData systemData, String categoryCode) {
-        SafeExecuteUtil<List<SystemDictItem>> safeExecute = new SafeExecuteUtil<>();
-        return safeExecute.executeT(() ->
-        {
-            String categoryId = getCategoryId(systemData, categoryCode);
-            if (StringUtil.isNullOrWhiteSpace(categoryId))
-                throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
-            Example example = new Example(SystemDictItem.class);
-            example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
-            return getMapper().selectByExample(example);
-        });
+    public List<SystemDictItem> getDictItemsByCategoryCode(String categoryCode) throws Exception {
+
+        String categoryId = getCategoryId(categoryCode);
+        if (StringUtil.isNullOrWhiteSpace(categoryId))
+            throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
+        Example example = new Example(SystemDictItem.class);
+        example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
+        return getMapper().selectByExample(example);
     }
 
-    private String getCategoryId(SystemData systemData, String categoryCode) {
-        ServiceResultT sr = service.getDictCategory(systemData, categoryCode);
-        if (sr.getIsSuccess() && sr.getResult() != null)
-            return ((SystemDictCategory) sr.getResult()).getId();
+    private String getCategoryId(String categoryCode) throws Exception {
+        SystemDictCategory sr = service.getDictCategory(categoryCode);
+        if (sr != null)
+            return sr.getId();
         return null;
     }
 
-
+    @Override
+    public List<SystemDictItem> getDataItemList(Map map) {
+        return getMapper().getDataItemList(map);
+    }
 }

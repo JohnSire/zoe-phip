@@ -9,13 +9,13 @@ package com.zoe.phip.service.impl.in.sm;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.dao.sm.SystemUserMapper;
-import com.zoe.phip.infrastructure.entity.*;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
-import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.service.impl.util.SqlHelper;
 import com.zoe.phip.service.in.sm.SystemUserService;
 import org.springframework.stereotype.Repository;
@@ -29,139 +29,126 @@ import java.util.*;
  * @date 2016-03-18
  */
 @Repository("SystemUserService")
-@Service
-public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> implements SystemUserService {
+@Service(interfaceClass = SystemUserService.class, proxy = "sdpf", dynamic = true)
+public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, SystemUserMapper> implements SystemUserMapper {
 
 
     @Override
-    public ServiceResultT<LoginCredentials> login(String loginName, String passWord, int expiresTime) {
-        SafeExecuteUtil<LoginCredentials> safeExecute = new SafeExecuteUtil<LoginCredentials>();
-        return safeExecute.executeT(() -> {
-            List<SystemUser> list = getUserByLoginName(null, loginName);
-            if (list == null || list.size() == 0) {
-                throw new BusinessException("用户名错误!");
-            }
-            SystemUser user = list.get(0);
-            if (user.getState() == 0) {
-                throw new BusinessException("用户不可用");
-            }
-            String psd = createPassword(user.getLoginName(), passWord);
-            if (!psd.equals(user.getPassword())) {
-                throw new BusinessException("密码错误!");
-            }
-            LoginCredentials credentials = createLoginCredentials(user.getId(), user.getName());
-            return credentials;
-        });
+    public List<SystemUser> getUserList(Map<String, Object> args) {
+        return getMapper().getUserList(args);
     }
 
     @Override
-    public ServiceResult updatePassword(SystemData systemData, String id, String oldPwd, String newPwd) {
-        return SafeExecuteUtil.execute(() -> {
-            SystemUser user = getMapper().selectByPrimaryKey(id);
-            if (user == null) {
-                throw new BusinessException("未找到该用户!");
-            }
-            String oldPassword = createPassword(user.getLoginName(), oldPwd);
-            if (!user.getPassword().equals(oldPassword)) {
-                throw new BusinessException("旧密码错");
-            }
-            user.setPassword(createPassword(user.getLoginName(), newPwd));
-            user.setModifyAt(new Date());
-            return getMapper().updateByPrimaryKeySelective(user);
-        });
+    public LoginCredentials login(String loginName, String passWord, int expiresTime) throws Exception {
+
+        List<SystemUser> list = getUserByLoginName(loginName);
+        if (list == null || list.size() == 0) {
+            throw new BusinessException("用户名错误!");
+        }
+        SystemUser user = list.get(0);
+        if (user.getState() == 0) {
+            throw new BusinessException("用户不可用");
+        }
+        String psd = createPassword(user.getLoginName(), passWord);
+        if (!psd.equals(user.getPassword())) {
+            throw new BusinessException("密码错误!");
+        }
+        LoginCredentials credentials = createLoginCredentials(user.getId(), user.getName());
+        return credentials;
     }
 
     @Override
-    public ServiceResult resetPassword(SystemData systemData, String id, String newPwd) {
-        return SafeExecuteUtil.execute(() -> {
-            SystemUser user = getMapper().selectByPrimaryKey(id);
-            if (user == null) {
-                throw new BusinessException("未找到该用户!");
-            }
-            user.setPassword(createPassword(user.getLoginName(), newPwd));
-            user.setModifyAt(new Date());
-            return getMapper().updateByPrimaryKeySelective(user);
-        });
+    public int updatePassword(String id, String oldPwd, String newPwd) throws Exception {
+        SystemUser user = getMapper().selectByPrimaryKey(id);
+        if (user == null) {
+            throw new BusinessException("未找到该用户!");
+        }
+        String oldPassword = createPassword(user.getLoginName(), oldPwd);
+        if (!user.getPassword().equals(oldPassword)) {
+            throw new BusinessException("旧密码错");
+        }
+        user.setPassword(createPassword(user.getLoginName(), newPwd));
+        user.setModifyAt(new Date());
+        return getMapper().updateByPrimaryKeySelective(user);
     }
 
     @Override
-    public ServiceResult updateState(SystemData systemData, String id, int state) {
-        return SafeExecuteUtil.execute(() -> {
-            SystemUser user = getMapper().selectByPrimaryKey(id);
-            if (user == null) {
-                throw new BusinessException("未找到该用户!");
-            }
-            user.setState(state);
-            user.setModifyAt(new Date());
-            return getMapper().updateByPrimaryKeySelective(user);
-        });
+    public int resetPassword(String id, String newPwd) throws Exception {
+        SystemUser user = getMapper().selectByPrimaryKey(id);
+        if (user == null) {
+            throw new BusinessException("未找到该用户!");
+        }
+        user.setPassword(createPassword(user.getLoginName(), newPwd));
+        user.setModifyAt(new Date());
+        return getMapper().updateByPrimaryKeySelective(user);
     }
 
     @Override
-    public ServiceResultT<PageList<SystemUser>> getUserList(SystemData systemData, Integer state, String key, QueryPage queryPage) {
-        SafeExecuteUtil<PageList<SystemUser>> safeExecute = new SafeExecuteUtil<PageList<SystemUser>>();
-        return safeExecute.executeT(() ->
-        {
-            PageList<SystemUser> pageList = new PageList<SystemUser>();
-            Example example = new Example(SystemUser.class);
-            //分页
-            SqlHelper.startPage(queryPage);
-            Map<String,Object> paras=new HashMap<String, Object>();
-            paras.put("key",SqlHelper.getLikeStr(key.toUpperCase()));
-            if(state!=null){
-                paras.put("state",state);
-            }
-            List<SystemUser> results = ((SystemUserMapper)getMapper()).getUserList(paras);
-            PageInfo<SystemUser> pageInfo = new PageInfo<SystemUser>(results);
-            pageList.setTotal((int) pageInfo.getTotal());
-            pageList.setRows(results);
-            return pageList;
-        });
+    public int updateState(String id, int state) throws Exception {
+        SystemUser user = getMapper().selectByPrimaryKey(id);
+        if (user == null) {
+            throw new BusinessException("未找到该用户!");
+        }
+        user.setState(state);
+        user.setModifyAt(new Date());
+        return getMapper().updateByPrimaryKeySelective(user);
     }
 
     @Override
-    public ServiceResult add(SystemData systemData, SystemUser entity) {
-        return SafeExecuteUtil.execute(() -> {
-            //判断是否存在用户
-            List<SystemUser> list = getUserByLoginName(systemData, entity.getLoginName());
-            if (list != null && list.size() > 0) {
-                throw new BusinessException("已存在登录名({0})的用户", entity.getLoginName());
-            }
-            String password = createPassword(entity.getLoginName(), entity.getPassword());
-            entity.setPassword(password);
-            return getMapper().insertSelective(entity);
-        });
-
+    public PageList<SystemUser> getUserList(Integer state, String key, QueryPage queryPage) throws Exception {
+        PageList<SystemUser> pageList = new PageList<SystemUser>();
+        Example example = new Example(SystemUser.class);
+        //分页
+        SqlHelper.startPage(queryPage);
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        if (state != null) {
+            paras.put("state", state);
+        }
+        List<SystemUser> results = ((SystemUserMapper) getMapper()).getUserList(paras);
+        PageInfo<SystemUser> pageInfo = new PageInfo<SystemUser>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
     }
 
     @Override
-    public ServiceResult addList(SystemData systemData, List<SystemUser> entities) {
-        return SafeExecuteUtil.execute(() ->
-        {
-            List<String> loginNames = new ArrayList<String>();
-            entities.forEach(e -> {
-                loginNames.add(e.getLoginName());
+    public int add(SystemUser entity) throws Exception {
+        //判断是否存在用户
+        List<SystemUser> list = getUserByLoginName(entity.getLoginName());
+        if (list != null && list.size() > 0) {
+            throw new BusinessException("已存在登录名({0})的用户", entity.getLoginName());
+        }
+        String password = createPassword(entity.getLoginName(), entity.getPassword());
+        entity.setPassword(password);
+        return getMapper().insertSelective(entity);
+    }
+
+    @Override
+    public int addList(List<SystemUser> entities) throws Exception {
+
+        List<String> loginNames = new ArrayList<String>();
+        entities.forEach(e -> {
+            loginNames.add(e.getLoginName());
+        });
+        //判断是否重名
+        Example example = new Example(SystemUser.class);
+        example.createCriteria().andIn("loginName", loginNames);
+        List<SystemUser> list = getMapper().selectByExample(example);
+        if (list.size() > 0) {
+            loginNames.clear();
+            list.forEach(l -> {
+                loginNames.add(l.getLoginName());
             });
-            //判断是否重名
-            Example example = new Example(SystemUser.class);
-            example.createCriteria().andIn("loginName", loginNames);
-            List<SystemUser> list = getMapper().selectByExample(example);
-            if (list.size() > 0) {
-                loginNames.clear();
-                list.forEach(l -> {
-                    loginNames.add(l.getLoginName());
-                });
-                throw new BusinessException("已存在登录名({0})的用户", loginNames.toString());
-            }
-            entities.forEach(e -> {
-                String password = createPassword(e.getLoginName(), e.getPassword());
-                e.setPassword(password);
-                e.setId(StringUtil.getUUID());
-            });
-
-            return getMapper().addList(entities);
+            throw new BusinessException("已存在登录名({0})的用户", loginNames.toString());
+        }
+        entities.forEach(e -> {
+            String password = createPassword(e.getLoginName(), e.getPassword());
+            e.setPassword(password);
+            e.setId(StringUtil.getUUID());
         });
 
+        return getMapper().addList(entities);
     }
 
     private String createPassword(String loginName, String password) {
@@ -177,11 +164,10 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser> impleme
         return credentials;
     }
 
-    private List<SystemUser> getUserByLoginName(SystemData systemData, String loginName) {
+    private List<SystemUser> getUserByLoginName(String loginName) {
         Example example = new Example(SystemUser.class);
         example.createCriteria().andEqualTo("loginName", loginName);
         List<SystemUser> list = getMapper().selectByExample(example);
         return list;
     }
-
 }
