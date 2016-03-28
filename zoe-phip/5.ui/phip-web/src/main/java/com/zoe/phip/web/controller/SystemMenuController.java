@@ -3,6 +3,7 @@ package com.zoe.phip.web.controller;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -123,6 +125,26 @@ public class SystemMenuController extends BaseController {
     @ResponseBody
     public ServiceResultT<List<MenuData>> getMenuUser(HttpServletRequest request,String id){
         return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(),id);
+    }
+
+
+
+    @RequestMapping(value = "/updateMenuInfo",method = RequestMethod.POST)
+    @ResponseBody
+    public ServiceResult updateMenuList(HttpServletRequest request) {
+        String strList = request.getParameter("lits");
+        List<MenuData> list = new ArrayList<MenuData>();
+        if(!StringUtil.isNullOrWhiteSpace(strList)){
+            list = StringUtil.parseJsonArray(strList,MenuData.class);
+        }
+        //to do  等纪洋底层批量的方法实现。
+        /*return ServiceFactory.getMenuDataService().updateList(ComSession.getUserInfo(), list);*/
+        for (MenuData menuData:list) {
+            ServiceFactory.getMenuDataService().update(ComSession.getUserInfo(),menuData);
+        }
+        ServiceResult s= new ServiceResult();
+        s.setIsSuccess(true);
+        return s;
     }
 
 
