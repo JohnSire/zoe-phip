@@ -15,4 +15,14 @@
         order by t.CODE
     </select>
 
+    <select id="getMenuPages" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
+--         SELECT *
+--         FROM SYS_MENU_DATA t
+--         where 1=1 and UPPER (t.ADDRESS) LIKE UPPER (CONCAT(CONCAT('%',#{key,jdbcType=VARCHAR}),'%'))
+--
+      SELECT * FROM SYS_MENU_DATA t
+      where regexp_like(t.address,'+#{key,jdbcType=VARCHAR}+','i')
+
+    </select>
+
 </mapper>

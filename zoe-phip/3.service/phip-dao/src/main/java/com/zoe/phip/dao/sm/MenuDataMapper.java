@@ -20,13 +20,53 @@ import java.util.List;
  */
 public interface MenuDataMapper extends MyMapper<MenuData> {
 
+    /**
+     * 通过关键字分页获取菜单列表
+     * @param key
+     * @param page
+     * @return
+     * @throws Exception
+     */
     PageList<MenuData> getMenuPages(String key, QueryPage page) throws Exception;
 
+    /**
+     * 通过关键字获取菜单列表
+     * @param key
+     * @return
+     * @throws Exception
+     */
     List<MenuData> getMenus(String key) throws Exception;
 
+    /**
+     * 通过code获取菜单列表
+     * @param code
+     * @return
+     * @throws Exception
+     */
     List<MenuData> getMenuByCode(String code) throws Exception;
 
+    /**
+     * 获取子菜单
+     * @param parentMenuId
+     * @return
+     * @throws Exception
+     */
     List<MenuData> getChildMenus(String parentMenuId) throws Exception;
 
+    /**
+     * 获取用户的菜单权限
+     * @param userId
+     * @return
+     * @throws Exception
+     */
     List<MenuData> getCompetenceMenuByUser(String userId) throws Exception;
+
+    /**
+     * 更新菜单状态
+     * @param id
+     * @param state
+     * @return
+     * @throws Exception
+     */
+    int updateState(String id,int state) throws Exception;
 }

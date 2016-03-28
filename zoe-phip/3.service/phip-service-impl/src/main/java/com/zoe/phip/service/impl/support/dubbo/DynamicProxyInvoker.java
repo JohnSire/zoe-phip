@@ -1,11 +1,12 @@
 package com.zoe.phip.service.impl.support.dubbo;
 
 import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker;
-import com.zoe.phip.infrastructure.bean.BeanFactory;
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.service.impl.in.BaseInService;
+import com.zoe.phip.service.impl.support.annotation.WithResult;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -17,25 +18,19 @@ import java.util.List;
 public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
     private final Class interfaceClass;
 
-    public DynamicProxyInvoker(T proxy, Class<T> type, URL url, Class clazz) {
+    public DynamicProxyInvoker(T proxy, Class<T> type, URL url) {
         super(proxy, type, url);
-        this.interfaceClass = clazz;
+        this.interfaceClass = proxy.getClass().getAnnotation(Service.class).interfaceClass();
     }
 
-    @Override
-    protected Object doInvoke(T proxy, String methodName, Class<?>[] parameterTypes, Object[] arguments) throws Throwable {
-
-        Object instance = BeanFactory.getBean(interfaceClass.getSimpleName());
-
+    private final static Class<?>[] makeClass(final Class<?>[] parameterTypes) {
         Class<?>[] types;
-        Class firstClass = null;
         if (parameterTypes.length != 0) {
             List<Class<?>> parameterTypeList = new ArrayList<Class<?>>();
             boolean first = true;
             int offset = 0;
             for (Class<?> parameterType : parameterTypes) {
                 if (first && parameterType == SystemData.class) {
-                    firstClass = parameterType;
                     offset = 1;
                     first = false;
                     continue;
@@ -49,41 +44,59 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
         } else {
             types = parameterTypes;
         }
-        Method method = instance.getClass().getMethod(methodName, types);
+        return types;
+    }
 
-        // arguments
+    private final static Object[] makeArgument(final Object[] arguments, final boolean isFirstSystemDataClass, Object firstData) {
         Object[] objects;
-        Object firstData = null;
         if (arguments.length != 0) {
             List<Object> argumentList = new ArrayList<Object>();
             boolean first = true;
             for (Object argument : arguments) {
-                if (first && firstClass != null) {
+                if (first && isFirstSystemDataClass) {
                     firstData = argument;
                     first = false;
                     continue;
                 }
                 argumentList.add(argument);
             }
-            objects = new Object[arguments.length - (firstClass != null ? 1 : 0)];
+            objects = new Object[arguments.length - (isFirstSystemDataClass ? 1 : 0)];
             argumentList.toArray(objects);
             argumentList.clear();
             argumentList = null;
         } else {
             objects = arguments;
         }
+        return objects;
+    }
 
-        if (firstClass != null && firstClass == SystemData.class)
+    public Class getInterfaceClass() {
+        return interfaceClass;
+    }
+
+    @Override
+    protected Object doInvoke(T proxy, String methodName, Class<?>[] parameterTypes, Object[] arguments) throws Throwable {
+
+        Object instance = proxy;
+
+        final Class<?>[] types = makeClass(parameterTypes);
+        Method method = instance.getClass().getMethod(methodName, types);
+
+        final boolean withResult = method.getAnnotation(WithResult.class) != null;
+
+        // arguments
+        final boolean isFirstSystemDataClass = parameterTypes.length != 0 && parameterTypes[0] == SystemData.class;
+        Object firstData = null;
+        final Object[] objects = makeArgument(arguments, isFirstSystemDataClass, firstData);
+        if (isFirstSystemDataClass)
             ((BaseInService) instance).setSystemData((SystemData) firstData);
 
-        if (method.getReturnType() == int.class) {
-            return SafeExecuteUtil.execute(() -> {
-                return method.invoke(instance, objects);
-            });
+        if (method.getReturnType() == Boolean.class && !withResult) {
+            return SafeExecuteUtil.execute(() -> (Boolean) method.invoke(instance, objects));
         }
-        SafeExecuteUtil<Object> executeUtil = new SafeExecuteUtil<Object>();
-        return executeUtil.executeT(() -> {
-            return method.invoke(instance, objects);
-        });
+        if (method.getReturnType() == int.class && !withResult) {
+            return SafeExecuteUtil.execute(() -> ((int) method.invoke(instance, objects) >= 0));
+        }
+        return SafeExecuteUtil.execute0(() -> method.invoke(instance, objects));
     }
 }
