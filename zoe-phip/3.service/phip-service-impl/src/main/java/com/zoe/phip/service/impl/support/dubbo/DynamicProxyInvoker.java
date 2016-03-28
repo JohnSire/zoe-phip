@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker;
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.function.Function;
+import com.zoe.phip.infrastructure.security.SystemCredential;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.service.impl.in.BaseInService;
 import com.zoe.phip.service.impl.support.annotation.WithResult;
@@ -48,14 +49,13 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
         return types;
     }
 
-    private final static Object[] makeArgument(final Object[] arguments, final boolean isFirstSystemDataClass, Object firstData) {
+    private final static Object[] makeArgument(final Object[] arguments, final boolean isFirstSystemDataClass) {
         Object[] objects;
         if (arguments.length != 0) {
             List<Object> argumentList = new ArrayList<Object>();
             boolean first = true;
             for (Object argument : arguments) {
                 if (first && isFirstSystemDataClass) {
-                    firstData = argument;
                     first = false;
                     continue;
                 }
@@ -89,17 +89,28 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
 
         Object instance = proxy;
 
+        // arguments
+        final boolean isFirstSystemDataClass = parameterTypes.length != 0 && parameterTypes[0] == SystemData.class;
+        Object firstData = isFirstSystemDataClass ? arguments[0] : null;
+        final Object[] objects = makeArgument(arguments, isFirstSystemDataClass);
+
+        if(!methodName.equals("login")){
+            if (isFirstSystemDataClass) {
+                SystemData token= (SystemData)firstData;
+                ((BaseInService) instance).setSystemData(token);
+                boolean isAuth= SystemCredential.checkCredential(token.getUserId(),token.getUserName(),token.getCredential());
+                if(!isAuth){
+                    throw  new RuntimeException("Session过期,请重新登录!");
+                }
+            }else {
+                throw new RuntimeException("方法的第一个参数必须为SystemData类型");
+            }
+        }
+
         final Class<?>[] types = makeClass(parameterTypes);
         Method method = instance.getClass().getMethod(methodName, types);
 
         final boolean withResult = method.getAnnotation(WithResult.class) != null;
-
-        // arguments
-        final boolean isFirstSystemDataClass = parameterTypes.length != 0 && parameterTypes[0] == SystemData.class;
-        Object firstData = null;
-        final Object[] objects = makeArgument(arguments, isFirstSystemDataClass, firstData);
-        if (isFirstSystemDataClass)
-            ((BaseInService) instance).setSystemData((SystemData) firstData);
 
         if (method.getReturnType() == Boolean.class && !withResult) {
             return SafeExecuteUtil.execute(() ->
