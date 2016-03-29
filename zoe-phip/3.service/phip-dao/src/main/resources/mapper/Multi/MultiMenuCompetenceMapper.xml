@@ -4,4 +4,51 @@
     <resultMap id="MultiResultMap" type="com.zoe.phip.model.sm.MenuCompetence" extends="BaseResultMap">
 
     </resultMap>
+    <resultMap id="MenuDataResultMap" type="com.zoe.phip.model.sm.MenuData">
+        <id column="ID" property="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CODE" property="code" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result column="ADDRESS" property="address" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="FK_PARENT_MENU_ID" property="fkParentMenuId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CREATE_AT" property="createAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_BY" property="createBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="MODIFY_AT" property="modifyAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        <result column="MODIFY_BY" property="modifyBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="COMPETENCE_ID" property="competenceId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="NAME_PATH" property="namePath" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getMenuListByCompetenceCategory" resultMap="MenuDataResultMap" parameterType="java.util.Map">
+ SELECT MC.ID COMPETENCE_ID,
+      t.ID,
+      t.NAME,
+      t.NAME_PATH,
+      t.CODE,
+      t.ADDRESS,
+      t.FK_PARENT_MENU_ID,
+      mc.CREATE_AT,
+      mc.CREATE_BY,
+      t.MODIFY_AT,
+      t.MODIFY_BY,
+      t.STATE,
+      row_number() over(ORDER BY t.ID) AS NUM_INDEX
+      FROM (
+      SELECT ID, NAME,
+      CODE, ADDRESS,
+      FK_PARENT_MENU_ID,
+      CREATE_AT,
+      CREATE_BY,
+      MODIFY_AT,
+      MODIFY_BY,
+      STATE,
+      MIN(SUBSTR(SYS_CONNECT_BY_PATH(NAME, '->'), 3)) NAME_PATH
+      FROM SYS_MENU_DATA
+      START WITH 1 = 1
+      CONNECT BY PRIOR ID = FK_PARENT_MENU_ID
+      GROUP BY ID,NAME,CODE,ADDRESS,FK_PARENT_MENU_ID,CREATE_AT,CREATE_BY,MODIFY_AT,MODIFY_BY,STATE
+      ) t
+      INNER JOIN SYS_MENU_COMPETENCE MC ON MC.FK_MENU_ID = T.ID
+      WHERE MC.FK_COMPETENCE_CATEGORY_ID = #{C_ID,jdbcType=VARCHAR}
+      AND (t.NAME LIKE '%' || #{KEY ,jdbcType=VARCHAR} || '%' OR t.CODE LIKE '%' || #{KEY,jdbcType=VARCHAR} || '%')
+    </select>
 </mapper>

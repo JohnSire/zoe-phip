@@ -6,10 +6,7 @@
 
 package com.zoe.phip.service.in.sm;
 
-import com.zoe.phip.infrastructure.entity.PageList;
-import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.model.sm.MenuCompetence;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.service.in.BaseInService;
@@ -25,17 +22,17 @@ import java.util.List;
  */
 public interface MenuCompetenceService extends BaseInService<MenuCompetence> {
 
-    ServiceResult saveList(String competenceCategoryId, List<MenuCompetence> list);
+    ServiceResult saveList(SystemData systemData, String competenceCategoryId, List<MenuCompetence> list);
 
-    ServiceResultT<PageList<MenuData>> getMenuListByCompetenceCategory(String categoryId, String key, QueryPage page);
+    ServiceResultT<PageList<MenuData>> getMenuListByCompetenceCategory(SystemData systemData, String categoryId, String key, QueryPage page);
 
-    ServiceResultT<List<String>> getMenuCompetenceIdList(String categoryId);
+    ServiceResultT<List<String>> getMenuCompetenceIdList(SystemData systemData, String categoryId);
 
-    ServiceResult cancelMenuCompetence(String id);
+    ServiceResult cancelMenuCompetence(SystemData systemData, String id);
 
-    ServiceResult checkExists(String categoryId, String menuId);
+    ServiceResult checkExists(SystemData systemData, String categoryId, String menuId);
 
-    ServiceResult checkExists(String categoryId, int menuCode);
+    ServiceResult checkExists(SystemData systemData, String categoryId, int menuCode);
 
-    ServiceResultT<List<String>> getCategoriesByMenuId(String menuId);
+    ServiceResultT<List<String>> getCategoriesByMenuId(SystemData systemData, String menuId);
 }
