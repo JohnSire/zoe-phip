@@ -44,4 +44,29 @@ public class UserCompetence extends BaseEntity {
     public void setFkUserId(java.lang.String fkUserId) {
         this.fkUserId = fkUserId;
     }
+
+    @Transient
+    @Column(name = "NAME")
+    public String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Transient
+    @Column(name = "LOGIN_NAME")
+    public String loginName;
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
 }

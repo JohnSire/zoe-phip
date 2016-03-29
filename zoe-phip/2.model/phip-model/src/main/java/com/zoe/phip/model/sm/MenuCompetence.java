@@ -1,9 +1,14 @@
+/*
+ * Powered By zoe
+ * Since 2008 - 2016
+ */
+
 package com.zoe.phip.model.sm;
 
-import com.zoe.phip.model.base.BaseEntity;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
+
+import com.zoe.phip.model.base.BaseEntity;
 
 
 /**
@@ -11,7 +16,7 @@ import javax.persistence.Table;
  * @version 1.0
  * @date 2016-03-29
  */
-@Table(name = "SYS_USER_COMPETENCE")
+@Table(name = "SYS_MENU_COMPETENCE")
 public class MenuCompetence extends BaseEntity {
     /**
      * 权限分类设计
@@ -19,28 +24,24 @@ public class MenuCompetence extends BaseEntity {
     @Column(name = "FK_COMPETENCE_CATEGORY_ID")
     private String fkCompetenceCategoryId;
     /**
-     * 用户主键
+     * 菜单主键
      */
-    @Column(name = "FK_USER_ID")
-    private String fkUserId;
+    @Column(name = "FK_MENU_ID")
+    private String fkMenuId;
 
-    public String getFkCompetenceCategoryId()
-
-    {
+    public String getFkCompetenceCategoryId() {
         return this.fkCompetenceCategoryId;
     }
 
-    public void setFkCompetenceCategoryId(String fkCompetenceCategoryId) {
+    public void setFkCompetenceCategoryId(java.lang.String fkCompetenceCategoryId) {
         this.fkCompetenceCategoryId = fkCompetenceCategoryId;
     }
 
-    public String getFkUserId()
-
-    {
-        return this.fkUserId;
+    public String getFkMenuId() {
+        return this.fkMenuId;
     }
 
-    public void setFkUserId(String fkUserId) {
-        this.fkUserId = fkUserId;
+    public void setFkMenuId(java.lang.String fkMenuId) {
+        this.fkMenuId = fkMenuId;
     }
 }
