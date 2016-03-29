@@ -1,4 +1,4 @@
-<#include"/java_copyright.include">
+<#include "/java_copyright.include">
 <#assign className=table.className>
 <#assign classNameLower=className?uncap_first>
 
@@ -14,8 +14,6 @@
  * @version 1.0
  * @date ${now?string("yyyy-MM-dd")}
  */
-public interface $ {
-    className
-}Service extends BaseInService<${className}>{
+public interface ${className}Service extends BaseInService<${className}>{
 
         }

@@ -16,9 +16,7 @@
  * @date ${now?string("yyyy-MM-dd")}
  */
 @Repository("${className?uncap_first}Service")
-@Service(version = "1.0.0")
-public class $ {
-    className
-}ServiceImpl extends BaseInServiceImpl<${className}>implements ${className}Service{
+@Service(interfaceClass = ${className}Service.class, proxy = "sdpf", dynamic = true)
+public class ${className}ServiceImpl extends BaseInServiceImpl<${className},${className}Mapper>implements ${className}Mapper{
 
         }
