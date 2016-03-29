@@ -8,9 +8,7 @@
  * @version 1.0
  * @date ${now?string("yyyy-MM-dd")}
  */
-public class $ {
-    className
-}extends CoreModel{
+public class ${className} extends CoreModel{
 <#list table.columns as field>
 /**
  * ${field.remarks}

@@ -14,8 +14,6 @@
  * @version 1.0
  * @date ${now?string("yyyy-MM-dd")}
  */
-public interface $ {
-    className
-}Service extends BaseOutService<${className}Dto>{
+public interface ${className}Service extends BaseOutService<${className}Dto>{
 
         }
