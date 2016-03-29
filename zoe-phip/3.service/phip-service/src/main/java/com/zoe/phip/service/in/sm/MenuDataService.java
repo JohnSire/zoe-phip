@@ -74,4 +74,14 @@ public interface MenuDataService extends BaseInService<MenuData> {
      * @return
      */
     ServiceResult updateState(SystemData systemData, String id, int state);
+
+
+    /**
+     * 通过关键字查询菜单数据
+     * @param systemData
+     * @param key
+     * @param page
+     * @return
+     */
+    ServiceResultT<PageList<MenuData>> getMenuList(SystemData systemData, String key, QueryPage page);
 }

@@ -19,6 +19,7 @@ import java.util.List;
 
 /**
  * Created by zhangxingcai on 2016/3/22 0022.
+ * updated by hyf
  */
 @Controller
 @RequestMapping("/menu")
@@ -93,7 +94,8 @@ public class SystemMenuController extends BaseController {
     @ResponseBody
     public ServiceResultT<PageList<MenuData>> getMenuPageList(HttpServletRequest request, Model model) {
         String keyWord = request.getParameter("keyWord");
-        return ServiceFactory.getMenuDataService().getMenuPages(ComSession.getUserInfo(), keyWord, getQueryPage());
+        if(null==keyWord)keyWord="";
+        return ServiceFactory.getMenuDataService().getMenuList(ComSession.getUserInfo(), keyWord, getQueryPage());
     }
 
     /**

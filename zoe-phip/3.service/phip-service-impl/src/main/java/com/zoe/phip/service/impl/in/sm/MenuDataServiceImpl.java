@@ -46,6 +46,12 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
     }
 
     @Override
+    public List<MenuData> getMenuDataList(Map<String, Object> args) {
+        return getMapper().getMenuDataList(args);
+
+    }
+
+    @Override
     public PageList<MenuData> getMenuPages(String key, QueryPage page) throws Exception {
         PageList<MenuData> pageList = new PageList<MenuData>();
         Example example = new Example(MenuData.class);
@@ -60,6 +66,23 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
         }
         List<MenuData> results = getMapper().selectByExample(example);
         PageInfo<MenuData> pageInfo = new PageInfo<>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
+
+
+    @Override
+    public PageList<MenuData> getMenuList( String key, QueryPage queryPage) throws Exception {
+        PageList<MenuData> pageList = new PageList<MenuData>();
+        Example example = new Example(MenuData.class);
+        //分页
+        SqlHelper.startPage(queryPage);
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        List<MenuData> results= ((MenuDataMapper) getMapper()).getMenuDataList(paras);
+        PageInfo<MenuData> pageInfo = new PageInfo<MenuData>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
         return pageList;
