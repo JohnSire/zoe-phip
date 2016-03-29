@@ -38,7 +38,7 @@ public interface MenuCompetenceMapper extends MyMapper<MenuCompetence> {
 
     List<String> getCategoriesByMenuId(String menuId);
 
-    int checkExists(Map<Object, Object> map);
+    int checkExists(Map map);
 
     List<MenuData> getMenuListByCompetenceCategory(Map map);
 }

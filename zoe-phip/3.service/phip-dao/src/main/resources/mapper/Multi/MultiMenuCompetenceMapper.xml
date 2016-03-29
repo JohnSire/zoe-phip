@@ -51,4 +51,16 @@
       WHERE MC.FK_COMPETENCE_CATEGORY_ID = #{C_ID,jdbcType=VARCHAR}
       AND (t.NAME LIKE '%' || #{KEY ,jdbcType=VARCHAR} || '%' OR t.CODE LIKE '%' || #{KEY,jdbcType=VARCHAR} || '%')
     </select>
+    <select id="checkExists" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT COUNT(1)
+        FROM SYS_MENU_DATA t
+        INNER JOIN SYS_MENU_COMPETENCE MC ON MC.FK_MENU_ID = T.ID
+        WHERE T.STATE = 1 AND MC.FK_COMPETENCE_CATEGORY_ID =#{CATEGORY_ID,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('MENU_ID')">
+            AND T.ID = #{MENU_ID ,jdbcType=VARCHAR}
+        </if>
+        <if test="_parameter.containsKey('MENU_CODE')">
+            AND T.CODE = #{MENU_CODE ,jdbcType=INTEGER}
+        </if>
+    </select>
 </mapper>

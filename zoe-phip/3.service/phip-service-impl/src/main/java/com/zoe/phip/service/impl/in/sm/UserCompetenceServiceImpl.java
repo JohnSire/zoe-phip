@@ -62,6 +62,7 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
             if (addCache.size() > 0) {
                 List<UserCompetence> addUserList = new ArrayList<>(addCache.values());
                 addCache.clear();//清空缓存
+
                 addList(addUserList);
             }
             if (deleteUserIdStr.size() > 0) {
@@ -79,13 +80,16 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
     public PageList<SystemUser> getUserListByCompetenceCategory(String categoryId, String key, QueryPage page) {
         PageList<SystemUser> pageList = new PageList<>();
         SqlHelper.startPage(page);
-        Map map = new HashMap<>();
-        map.put("C_ID", categoryId);
-        map.put("KEY", key);
+        Map map = MapUtil.createMap(m -> {
+            m.put("C_ID", categoryId);
+            m.put("KEY", key);
+        });
         List<SystemUser> results = getMapper().getUserListByCompetenceCategory(map);
         PageInfo<SystemUser> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
+        map.clear();
+        map = null;
         return pageList;
     }
 
@@ -96,10 +100,14 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
 
     @Override
     public boolean checkExists(String categoryId, String userId) {
-        return getMapper().checkExists(MapUtil.createMap(m -> {
+        Map map = MapUtil.createMap(m -> {
             m.put("CATEGORY_ID", categoryId);
             m.put("USER_ID", userId);
-        })) > 0;
+        });
+        Integer integer = getMapper().checkExists(map);
+        map.clear();
+        map = null;
+        return integer > 0;
     }
 
     @Override

@@ -33,7 +33,7 @@ public class MenuCompetenceServiceImplTest extends BaseTest {
 
     @Test
     public void getMenuCompetenceIdList() throws Exception {
-
+        System.out.println(impl.getCategoriesByMenuId("21df1428-0ff7-4182-b81f-cbf2cb347c55"));
     }
 
     @Test
@@ -43,17 +43,17 @@ public class MenuCompetenceServiceImplTest extends BaseTest {
 
     @Test
     public void checkExists() throws Exception {
-
+        System.out.println(impl.checkExists("b202b8ba-0f93-4f22-a6b7-6e12379bb26f", "21df1428-0ff7-4182-b81f-cbf2cb347c55"));
     }
 
     @Test
     public void checkExists1() throws Exception {
-
+        System.out.println(impl.checkExists("b202b8ba-0f93-4f22-a6b7-6e12379bb26f", 1111));
     }
 
     @Test
     public void getCategoriesByMenuId() throws Exception {
-
+        impl.getCategoriesByMenuId("");
     }
 
     @Test

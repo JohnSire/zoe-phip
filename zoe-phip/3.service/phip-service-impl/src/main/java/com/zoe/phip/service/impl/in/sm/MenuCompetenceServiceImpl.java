@@ -88,13 +88,16 @@ public class MenuCompetenceServiceImpl extends BaseInServiceImpl<MenuCompetence,
     public PageList<MenuData> getMenuListByCompetenceCategory(String categoryId, String key, QueryPage page) {
         PageList<MenuData> pageList = new PageList<>();
         SqlHelper.startPage(page);
-        Map map = new HashMap<>();
-        map.put("C_ID", categoryId);
-        map.put("KEY", key);
+        Map map = MapUtil.createMap(m -> {
+            m.put("C_ID", categoryId);
+            m.put("KEY", key);
+        });
         List<MenuData> results = getMapper().getMenuListByCompetenceCategory(map);
         PageInfo<MenuData> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
+        map.clear();
+        map = null;
         return pageList;
     }
 
@@ -114,19 +117,27 @@ public class MenuCompetenceServiceImpl extends BaseInServiceImpl<MenuCompetence,
 
     @Override
     public boolean checkExists(String categoryId, String menuId) {
-        return getMapper().checkExists(MapUtil.createMap(m -> {
+        Map<String, Object> map = MapUtil.createMap(m -> {
             m.put("CATEGORY_ID", categoryId);
             m.put("MENU_ID", menuId);
-        })) > 0;
+        });
 
+        Integer integer = getMapper().checkExists(map);
+        map.clear();
+        map = null;
+        return integer > 0;
     }
 
     @Override
     public boolean checkExists(String categoryId, int menuCode) {
-        return getMapper().checkExists(MapUtil.createMap(m -> {
+        Map<String, Object> map = MapUtil.createMap(m -> {
             m.put("CATEGORY_ID", categoryId);
             m.put("MENU_CODE", menuCode);
-        })) > 0;
+        });
+        Integer integer = getMapper().checkExists(map);
+        map.clear();
+        map = null;
+        return integer > 0;
     }
 
     @Override
@@ -143,7 +154,7 @@ public class MenuCompetenceServiceImpl extends BaseInServiceImpl<MenuCompetence,
     }
 
     @Override
-    public int checkExists(Map<Object, Object> map) {
+    public int checkExists(Map map) {
         return getMapper().checkExists(map);
     }
 
