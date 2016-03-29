@@ -49,7 +49,7 @@
     <select id="getMenuDataList" resultMap="BaseResultMap" parameterType="java.util.Map">
         select * from SYS_MENU_DATA WHERE 1=1
         <if test="key !=null and key !=''">AND (UPPER(NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(CODE) LIKE
-            #{key,jdbcType=VARCHAR})</if>
+            #{key,jdbcType=VARCHAR} OR UPPER(ADDRESS) LIKE #{key,jdbcType=VARCHAR})</if>
     </select>
 
 </mapper>
