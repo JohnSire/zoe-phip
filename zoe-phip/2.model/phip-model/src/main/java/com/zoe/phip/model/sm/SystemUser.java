@@ -77,4 +77,19 @@ public class SystemUser extends BaseEntity {
         this.state = state;
     }
 
+
+    public String getCompetenceId() {
+        return competenceId;
+    }
+
+    public void setCompetenceId(String competenceId) {
+        this.competenceId = competenceId;
+    }
+
+    /// <summary>
+    /// 对应的权限标识
+    /// </summary>
+    @Transient
+    @Column(name = "COMPETENCE_ID")
+    public String competenceId;
 }

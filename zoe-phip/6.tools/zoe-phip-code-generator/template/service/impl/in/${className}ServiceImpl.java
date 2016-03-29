@@ -1,9 +1,7 @@
-<#include"/java_copyright.include">
+<#include "/java_copyright.include">
 <#assign className=table.className>
 <#assign classNameLower=className?uncap_first>
-
         package ${basepackage}.service.impl.in;
-
         import ${basepackage}.model.${className};
         import ${basepackage}.service.impl.in.BaseInServiceImpl;
         import ${basepackage}.service.in.${className}Service;
@@ -17,6 +15,6 @@
  */
 @Repository("${className?uncap_first}Service")
 @Service(interfaceClass = ${className}Service.class, proxy = "sdpf", dynamic = true)
-public class ${className}ServiceImpl extends BaseInServiceImpl<${className},${className}Mapper>implements ${className}Mapper{
+public class ${className}ServiceImpl extends BaseInServiceImpl<${className},${className}Mapper> implements ${className}Mapper{
 
         }
