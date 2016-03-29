@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/3/22.
@@ -24,5 +25,12 @@ public class SystemParameterServiceImplTest extends BaseTest {
         systemParameter.setCreateAt(new Date());
         systemParameter.setName("测试");
         int serviceResult = systemParameterService.add(systemParameter);
+    }
+
+    @Test
+    public void updateListTest() throws Exception{
+        List<SystemParameter> list= systemParameterService.getList(null);
+
+        systemParameterService.updateList(list);
     }
 }
