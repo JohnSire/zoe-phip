@@ -4,6 +4,7 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.util.StringUtil;
+import com.zoe.phip.model.sm.MenuCompetence;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.model.sm.UserCompetence;
 import com.zoe.phip.web.context.ComSession;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -182,8 +184,8 @@ public class SystemMenuController extends BaseController {
      * @param catalogId
      * @param ids
      * @return
-            */
-/**  @RequestMapping(value = "/addMenuAcc")
+     */
+    @RequestMapping(value = "/addMenuAcc")
     @ResponseBody
     public ServiceResult addMenuAcc(@RequestParam("catalogId") String catalogId, @RequestParam("ids") String ids) {
         List<MenuCompetence> models = new ArrayList<MenuCompetence>();
@@ -197,6 +199,32 @@ public class SystemMenuController extends BaseController {
         }
         return ServiceFactory.getMenuCompetenceService().saveList(catalogId,models);
     }
- */
+
+
+
+    /**
+     * 菜单配置
+     * @param catalogId
+     * @param keyWord
+     * @return
+     */
+    @RequestMapping(value = "/getMenuCfg")
+    @ResponseBody
+    public ServiceResultT<PageList<MenuData>> getMenuCfg(@RequestParam("catalogId") String catalogId, @RequestParam("keyWord") String keyWord) {
+        return ServiceFactory.getMenuCompetenceService().getMenuListByCompetenceCategory( catalogId,keyWord, getQueryPage());
+    }
+
+
+    /**
+     * 删除菜单权限
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/delMenuAcc")
+    @ResponseBody
+    public ServiceResult delMenuAcc( @RequestParam("ids") String ids) {
+      List<String> idList = Arrays.asList( ids.split(","));
+        return ServiceFactory.getMenuCompetenceService().deleteByIds(ComSession.getUserInfo(),idList);
+    }
 
 }

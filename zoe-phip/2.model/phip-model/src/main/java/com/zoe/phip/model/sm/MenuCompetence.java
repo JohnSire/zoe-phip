@@ -5,10 +5,10 @@
 
 package com.zoe.phip.model.sm;
 
-import javax.persistence.*;
-
-
 import com.zoe.phip.model.base.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Table;
 
 
 /**

@@ -192,7 +192,16 @@ public class SystemUserController extends BaseController {
         return ServiceFactory.getUserCompetenceService().saveList(catalogId,models);
     }
 
-
-
+    /**
+     * 删除用户权限
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/delUserAcc")
+    @ResponseBody
+    public ServiceResult delUserAcc( @RequestParam("ids") String ids) {
+        List<String> idList = Arrays.asList( ids.split(","));
+        return ServiceFactory.getUserCompetenceService().deleteByIds(ComSession.getUserInfo(),idList);
+    }
 
 }

@@ -32,4 +32,8 @@ public final class ServiceFactory {
     public static UserCompetenceService getUserCompetenceService() {
         return BeanFactory.getBean(Constant.USER_COMPETENCE_SERVICE);
     }
+
+    public static MenuCompetenceService getMenuCompetenceService() {
+        return BeanFactory.getBean(Constant.MENU_COMPETENCE_SERVICE);
+    }
 }

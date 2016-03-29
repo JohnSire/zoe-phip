@@ -38,4 +38,6 @@ public interface MenuCompetenceService extends BaseInService<MenuCompetence> {
     ServiceResult checkExists(String categoryId, int menuCode);
 
     ServiceResultT<List<String>> getCategoriesByMenuId(String menuId);
+
+    ServiceResult canceMenuCompetenceList(List<String> idList);
 }

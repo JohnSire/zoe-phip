@@ -89,7 +89,7 @@
     }
     var menuTypeTree = {
         init: function () {
-            var req = new Request("/dict/getItemList");
+            var req = new Request("/dict/getSysDictItemListByCode");
             req.post({
                 isTip: false,
                 async: true,
