@@ -1,9 +1,6 @@
 package com.zoe.phip.service.in.sm;
 
-import com.zoe.phip.infrastructure.entity.PageList;
-import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.model.sm.UserCompetence;
 import com.zoe.phip.service.in.BaseInService;
 
@@ -18,15 +15,15 @@ import java.util.List;
  */
 public interface UserCompetenceService extends BaseInService<UserCompetence> {
 
-    ServiceResult saveList(String competenceCategoryId, List<UserCompetence> list);
+    ServiceResult saveList(SystemData systemData, String competenceCategoryId, List<UserCompetence> list);
 
-    ServiceResultT<PageList<UserCompetence>> getUserListByCompetenceCategory(String categoryId, String key, QueryPage page);
+    ServiceResultT<PageList<UserCompetence>> getUserListByCompetenceCategory(SystemData systemData, String categoryId, String key, QueryPage page);
 
-    ServiceResultT<List<String>> getUserCompetenceIdList(String categoryId);
+    ServiceResultT<List<String>> getUserCompetenceIdList(SystemData systemData, String categoryId);
 
     ServiceResult canceUserCompetence(String id);
 
-    ServiceResult checkExists(String categoryId, String userId);
+    ServiceResult checkExists(SystemData systemData, String categoryId, String userId);
 
-    ServiceResultT<List<String>> getCategoriesByUserId(String userId);
+    ServiceResultT<List<String>> getCategoriesByUserId(SystemData systemData, String userId);
 }

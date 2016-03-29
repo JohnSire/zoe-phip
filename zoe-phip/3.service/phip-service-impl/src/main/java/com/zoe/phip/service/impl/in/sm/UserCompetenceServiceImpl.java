@@ -69,7 +69,7 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
                     Delete(userId, competenceCategoryId);
                 }
             }
-            return false;
+            return true;
         } else {
             return getMapper().addList(list) > 0;
         }

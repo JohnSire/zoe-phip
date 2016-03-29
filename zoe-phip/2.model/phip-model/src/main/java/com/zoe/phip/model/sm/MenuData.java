@@ -124,4 +124,34 @@ public class MenuData extends BaseEntity {
                 ", state=" + state +
                 '}';
     }
+
+    public String getCompetenceId() {
+        return competenceId;
+    }
+
+    public void setCompetenceId(String competenceId) {
+        this.competenceId = competenceId;
+    }
+
+    /// <summary>
+    /// 对应的权限标识
+    /// </summary>
+    @Transient
+    @Column(name = "COMPETENCE_ID")
+    public String competenceId;
+
+
+    public String getNamePath() {
+        return namePath;
+    }
+
+    public void setNamePath(String namePath) {
+        this.namePath = namePath;
+    }
+
+    /// <summary>
+    /// 菜单路径
+    /// </summary>
+    @Column(name = "NAME_PATH")
+    public String namePath;
 }
