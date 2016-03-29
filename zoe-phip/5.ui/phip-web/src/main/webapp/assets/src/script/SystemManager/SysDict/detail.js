@@ -5,7 +5,7 @@
         init: function () {
             //获取id:实体的主键//type:edit编辑,否则为添加
             var id = common.getParamFromUrl("id"), type = common.getParamFromUrl("type"), categoryId = common.getParamFromUrl("categoryId");
-            internal.vaildform = $("#baseAttrForm").Validform({ tiptype: 5 });
+            internal.vaildform = $("#baseAttrForm").Validform({tiptype: 5});
             internal.onBindInfo(id, type);
             internal.onSave(id, type, categoryId);
         },
@@ -24,11 +24,11 @@
             top.win_dict_item_callback = function (reloadGrid) {
                 //封装的方法，用来获取表单的数据
                 var data = $("#baseAttrForm").form2json();
-                data["FkSystemDictCategoryId"] = categoryId;
+                data["fkSystemDictCategoryId"] = categoryId;
                 if (internal.vaildform.check()) {
                     if (type == "edit") {
                         //修改
-                        data["Id"] = id;//要修改的数据的Id
+                        data["id"] = id;//要修改的数据的Id
                         internal.req.dictItem.updateInfo(data, function (result) {
                             if (result.IsSuccess) {
                                 var top = common.getTopWindowDom();

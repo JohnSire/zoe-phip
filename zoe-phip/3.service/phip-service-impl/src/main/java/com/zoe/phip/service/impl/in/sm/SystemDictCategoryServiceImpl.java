@@ -6,12 +6,14 @@
 
 package com.zoe.phip.service.impl.in.sm;
 
+import com.alibaba.dubbo.common.serialize.ObjectInput;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.dao.sm.SystemDictCategoryMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
+import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
@@ -20,6 +22,7 @@ import com.zoe.phip.service.in.sm.SystemDictCategoryService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,15 +81,11 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
 
     public PageList<SystemDictCategory> getDictCategories(String key, QueryPage queryPage) throws Exception {
         PageList<SystemDictCategory> pageList = new PageList<>();
-        Example example = new Example(SystemDictCategory.class);
         SqlHelper.startPage(queryPage);
-        if (!StringUtil.isNullOrWhiteSpace(key)) {
-
-            example.createCriteria().andLike("code", "%" + key + "%");
-            example.or(example.createCriteria().andLike("name", "%" + key + "%"));
-        }
-
-        List<SystemDictCategory> results = getMapper().selectByExample(example);
+        Map map = new HashMap<>();
+        if (!StringUtil.isNullOrWhiteSpace(key))
+            map.put("key", key);
+        List<SystemDictCategory> results = getMapper().getDictCategories(map);
         PageInfo<SystemDictCategory> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
@@ -94,13 +93,15 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
     }
 
     public SystemDictCategory getDictCategory(String code) throws Exception {
+        if (StringUtil.isNullOrWhiteSpace(code))
+            throw new BusinessException("字典项编码不能为空!");
         Example example = new Example(SystemDictCategory.class);
         example.createCriteria().andEqualTo("code", code);
-        List<SystemDictCategory> list = getMapper().selectByExample(example);
-        if (list != null && list.size() <= 0) {
-            throw new BusinessException("该字典类{0})不存", code);
+        SystemDictCategory model = getMapper().getDictCategory(MapUtil.createMap(m -> m.put("code", code)));
+        if (model == null) {
+            throw new BusinessException("该字典类{0})不存在!", code);
         } else
-            return list.get(0);
+            return model;
     }
 
     @Override

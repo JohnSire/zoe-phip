@@ -21,5 +21,4 @@ public interface MyMapper<T extends BaseEntity> extends Mapper<T> {
     int updateList(List<T> entities) throws Exception;
 
 
-
 }

@@ -54,8 +54,8 @@
                 {
                     display: '操作', isSort: false, width: 120, render: function (rowdata, rowindex, value) {
                     var h = "";
-                    h += "<a class='icon-grid icon-grid-edit' title='编辑'  onclick='javascript:editLigerGridRow(\"" + rowdata.Id + "\")'></a> ";
-                    h += "<a class='icon-grid icon-grid-del'  title='删除' onclick='javascript:deleteLigerGridRow(\"" + rowdata.Id + "\")'></a> ";
+                    h += "<a class='icon-grid icon-grid-edit' title='编辑'  onclick='javascript:editLigerGridRow(\"" + rowdata.id + "\")'></a> ";
+                    h += "<a class='icon-grid icon-grid-del'  title='删除' onclick='javascript:deleteLigerGridRow(\"" + rowdata.id + "\")'></a> ";
                     return h;
                 }
                 }
@@ -97,7 +97,7 @@
         var gridObj = liger.get("dictCategoryGrid");
         var rowdata = gridObj.getSelected();
         var top = common.getTopWindowDom();
-        var url = webRoot + '/dict/view/item?type=edit&&categoryId=' + rowdata["Id"] + '&&id=' + id
+        var url = webRoot + '/dict/view/item?type=edit&&categoryId=' + rowdata["id"] + '&&id=' + id
         top.win_dict_item_dialog = $.ligerDialog.open({
             title: '新增字典项',
             url: url,

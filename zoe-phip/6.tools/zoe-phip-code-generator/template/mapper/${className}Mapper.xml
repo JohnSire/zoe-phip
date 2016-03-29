@@ -38,4 +38,4 @@ delete from ${table.sqlName} where ID in
     ${r'#{item.id}'}
 </foreach>
 </delete>
-        </mapper>
+</mapper>

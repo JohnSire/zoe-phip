@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.dao.sm.SystemDictCategoryMapper">
-    <resultMap id="MultiResultMap" type="com.zoe.phip.model.sm.SystemDictCategory">
-        <id column="ID" property="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="CODE" property="code" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="DESCR" property="descr" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="CREATE_AT" property="createAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
-        <result column="CREATE_BY" property="createBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="MODIFY_AT" property="modifyAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
-        <result column="MODIFY_BY" property="modifyBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <resultMap id="MultiResultMap" type="com.zoe.phip.model.sm.SystemDictCategory" extends="BaseResultMap">
     </resultMap>
     <select id="getDictCategories" resultMap="MultiResultMap" parameterType="java.util.Map">
         select * from sys_system_dict_category ssdc
@@ -18,8 +10,10 @@
                 UPPER (concat(ssdc.NAME,ssdc.code) ) LIKE UPPER (CONCAT(CONCAT('%', #{key, jdbcType=VARCHAR}),'%'))
             </if>
         </where>
+        ORDER BY ssdc.CODE
     </select>
     <select id="getDictCategory" resultMap="MultiResultMap" parameterType="java.util.Map">
         select * from sys_system_dict_category ssdc where UPPER (ssdc.CODE) = #{code, jdbcType=VARCHAR}
+        ORDER  by ssdc.CODE
     </select>
 </mapper>

@@ -83,7 +83,7 @@
         },
         //表单验证
         vaildform: function (jqform) {
-            jqform = jqform || $("#NSS-BaseAttrForm");
+            jqform = jqform || $("#baseAttrForm");
             validformObj = $(jqform).Validform({
                 tiptype: function (msg, o, cssctl) {
                     //msg：提示信息;

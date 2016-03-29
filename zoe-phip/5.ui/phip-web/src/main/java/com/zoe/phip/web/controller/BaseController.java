@@ -22,4 +22,8 @@ public abstract class BaseController {
     protected QueryPage getQueryPage() {
         return new QueryPage(getPageNum(), getPageSize());
     }
+
+    protected String getKey() {
+        return DataContext.getRequest().getParameter("keyWord");
+    }
 }
