@@ -2,7 +2,7 @@
     var internal = {
         getCurrentUserList: function (catalogId, keyWord) {
             var list = [];
-            var req = new Request("SystemMenu/GetUserCfg");
+            var req = new Request("/menu/getUserCfg");
             req.post({
                 isTip: false,
                 async: false,
@@ -11,8 +11,8 @@
                     if (data && data.result && data.result.total > 0) {
                         for (var item in data.result.rows) {
                             var menuItem = {
-                                Id: data.result.rows[item].Id,
-                                Name: data.result.rows[item].Name
+                                Id: data.result.rows[item].id,
+                                Name: data.result.rows[item].name
                             }
                             list.push(menuItem);
                         }

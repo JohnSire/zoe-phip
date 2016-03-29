@@ -1,23 +1,24 @@
 package com.zoe.phip.web.controller;
 
-import com.zoe.phip.infrastructure.entity.*;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.model.sm.SystemUser;
-import com.zoe.phip.service.in.sm.MenuDataService;
-import com.zoe.phip.service.in.sm.SystemUserService;
-import com.zoe.phip.web.bean.BeanFactory;
-import com.zoe.phip.web.bean.Constant;
+import com.zoe.phip.model.sm.UserCompetence;
 import com.zoe.phip.web.context.ComSession;
-import com.zoe.phip.web.context.DataContext;
 import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -168,5 +169,30 @@ public class SystemUserController extends BaseController {
     }
 
     //endregion
+
+
+    /**
+     * 添加用户权限
+     * @param catalogId
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/addUserAcc")
+    @ResponseBody
+    public ServiceResult addUserAcc(@RequestParam("catalogId") String catalogId, @RequestParam("ids") String ids) {
+        List<UserCompetence> models = new ArrayList<UserCompetence>();
+        String [] arrayids = ids.split(",");
+        for(String  id:arrayids){
+            if(StringUtil.isNullOrWhiteSpace(id))continue;
+            UserCompetence menu = new UserCompetence();
+            menu.setFkCompetenceCategoryId(catalogId);
+            menu.setFkUserId(id);
+            models.add(menu);
+        }
+        return ServiceFactory.getUserCompetenceService().saveList(catalogId,models);
+    }
+
+
+
 
 }

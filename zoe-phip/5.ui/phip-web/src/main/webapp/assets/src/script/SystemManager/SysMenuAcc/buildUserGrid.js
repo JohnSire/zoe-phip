@@ -9,12 +9,12 @@
         catalogId: "",
         buildGrid: function () {
             var gridParam = $.extend(true, {}, internal.gridParam());
-            gridParam.url = webRoot + "SystemMenu/GetUserCfg";
+            gridParam.url = webRoot + "/menu/getUserCfg";
             gridParam.columns = [
-                { display: '名称', name: 'Name', isSort: false, align: 'left' },
-                { display: '登录名', name: 'LoginName', isSort: false, align: 'left' },
-                { display: '授权时间', name: 'CreateAt', width: 120, isSort: false, align: 'left', type: 'date' },
-                { display: '授权人', name: 'CreateBy', width: 150, isSort: false, align: 'left' },
+                { display: '名称', name: 'name', isSort: false, align: 'left' },
+                { display: '登录名', name: 'loginName', isSort: false, align: 'left' },
+                { display: '授权时间', name: 'createAt', width: 120, isSort: false, align: 'left', type: 'date' },
+                { display: '授权人', name: 'createBy', width: 150, isSort: false, align: 'left' },
                 {
                     display: '操作',
                     isSort: false,
@@ -22,7 +22,7 @@
                     align: 'center',
                     render: function (rowdata, rowindex, value) {
                         var h = "";
-                        h += "<a class='icon-grid icon-grid-del' title='取消关联' onclick='javascript:delUser(\"" + rowdata.CompetenceId + "\")'></a> ";
+                        h += "<a class='icon-grid icon-grid-del' title='取消关联' onclick='javascript:delUser(\"" + rowdata.competenceId + "\")'></a> ";
                         return h;
                     }
                 }
@@ -53,7 +53,7 @@
         delUser: function (id) {
             var param = {};
             param.id = id;
-            param.url = "SystemUser/DelUserAcc?ids=" + id;
+            param.url = "/user/delUserAcc?ids=" + id;
             internal.del.deleteInfo(param, function (data) {
                 internal.loadData(internal.catalogId);
             });

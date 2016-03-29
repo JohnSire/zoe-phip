@@ -10,4 +10,5 @@ public final class Constant {
     public static final String SYSTEM_DICT_ITEM_SERVICE = "SystemDictItemService";
     public static final String MENU_DATA_SERVICE = "MenuDataService";
     public static final String SYSTEM_PARAMETER_SERVICE = "SystemParameterService";
+    public static final String USER_COMPETENCE_SERVICE = "UserCompetenceService";
 }
