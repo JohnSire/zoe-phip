@@ -189,7 +189,7 @@ public class SystemUserController extends BaseController {
             menu.setFkUserId(id);
             models.add(menu);
         }
-        return ServiceFactory.getUserCompetenceService().saveList(catalogId,models);
+        return ServiceFactory.getUserCompetenceService().saveList(ComSession.getUserInfo(),catalogId,models);
     }
 
     /**

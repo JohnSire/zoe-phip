@@ -147,9 +147,12 @@ public class SystemMenuController extends BaseController {
         if(!StringUtil.isNullOrWhiteSpace(strList)){
             list = StringUtil.parseJsonArray(strList,MenuData.class);
         }
-        //to do  等纪洋底层批量的方法实现�
-        /*return ServiceFactory.getMenuDataService().updateList(ComSession.getUserInfo(), list);*/
-        for (MenuData menuData:list) {
+        // 等纪洋批量底层代码实现
+        /**
+         *
+
+        return ServiceFactory.getMenuDataService().updateList(ComSession.getUserInfo(), list);*/
+       for (MenuData menuData:list) {
             ServiceFactory.getMenuDataService().update(ComSession.getUserInfo(),menuData);
         }
         ServiceResult s= new ServiceResult();
@@ -175,7 +178,7 @@ public class SystemMenuController extends BaseController {
     @RequestMapping(value = "/getUserCfg")
     @ResponseBody
     public ServiceResultT<PageList<UserCompetence>> getUserCfg(@RequestParam("catalogId") String catalogId, @RequestParam("keyWord") String keyWord) {
-        return ServiceFactory.getUserCompetenceService().getUserListByCompetenceCategory( catalogId,keyWord, getQueryPage());
+        return ServiceFactory.getUserCompetenceService().getUserListByCompetenceCategory(ComSession.getUserInfo(),catalogId,keyWord, getQueryPage());
     }
 
 
@@ -197,7 +200,7 @@ public class SystemMenuController extends BaseController {
             menu.setFkMenuId(id);
             models.add(menu);
         }
-        return ServiceFactory.getMenuCompetenceService().saveList(catalogId,models);
+        return ServiceFactory.getMenuCompetenceService().saveList(ComSession.getUserInfo(),catalogId,models);
     }
 
 
@@ -211,7 +214,7 @@ public class SystemMenuController extends BaseController {
     @RequestMapping(value = "/getMenuCfg")
     @ResponseBody
     public ServiceResultT<PageList<MenuData>> getMenuCfg(@RequestParam("catalogId") String catalogId, @RequestParam("keyWord") String keyWord) {
-        return ServiceFactory.getMenuCompetenceService().getMenuListByCompetenceCategory( catalogId,keyWord, getQueryPage());
+        return ServiceFactory.getMenuCompetenceService().getMenuListByCompetenceCategory( ComSession.getUserInfo(),catalogId,keyWord, getQueryPage());
     }
 
 
