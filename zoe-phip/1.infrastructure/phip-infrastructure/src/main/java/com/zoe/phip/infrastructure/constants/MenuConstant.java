@@ -1,27 +1,18 @@
 package com.zoe.phip.infrastructure.constants;
 
-import com.zoe.phip.infrastructure.annotation.Menu;
+import com.zoe.phip.infrastructure.entity.Menu;
 import com.zoe.phip.infrastructure.security.MenuCode;
-import com.zoe.phip.infrastructure.security.Permission;
 
 /**
  * Created by zengjiyang on 2016/3/29.
  */
 public class MenuConstant {
-    @Menu(uri = "/user/view/list",code = "",order = 1)
-    public static final String SYSTEM_USER="用户管理";
+    public static final Menu SYSTEM_USER=new Menu("用户管理","/user/view/list", MenuCode.SystemUser,1,null);
 
-    @Menu(uri = "/menu/view/list",code = "",order = 1)
-    public static final String SYSTEM_MENU="菜单管理";
+    public static final Menu SYSTEM_MENU=new Menu("菜单管理","/menu/view/list",MenuCode.SystemMenu,1,null);
 
-    @Menu(uri = "/param/view/index",code = "",order = 1)
-    public static final String SYSTEM_PARAM="参数管理";
+    public static final Menu SYSTEM_PARAMETER=new Menu("参数管理","/param/view/index",MenuCode.SystemParameter,1,null);
 
-    @Menu(uri = "/dict/view/list",code = "",order = 1)
-    public static final String SYSTEM_DICT="字典管理";
-
-    @Menu(uri = "/user/view/list",code = "",order = 1)
-    public static final String SYSTEM_ACC="权限管理";
-
+    public static final Menu SYSTEM_DICT=new Menu("字典管理","/dict/view/list",MenuCode.SystemDict,1,null);
 
 }

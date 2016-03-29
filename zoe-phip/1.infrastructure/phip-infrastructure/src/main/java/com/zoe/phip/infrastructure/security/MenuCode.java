@@ -4,8 +4,10 @@ package com.zoe.phip.infrastructure.security;
  * Created by zengjiyang on 2016/3/29.
  */
 public enum MenuCode {
-    Menu(""),
-    Code("123");
+    SystemUser(""),
+    SystemMenu(""),
+    SystemParameter(""),
+    SystemDict("");
 
     String code;
 

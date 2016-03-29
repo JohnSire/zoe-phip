@@ -1,5 +1,6 @@
 package com.zoe.phip.infrastructure.annotation;
 
+import com.zoe.phip.infrastructure.security.MenuCode;
 import com.zoe.phip.infrastructure.security.Permission;
 
 import java.lang.annotation.*;
@@ -21,6 +22,6 @@ public @interface  Role {
      * 菜单编码
      * @return
      */
-    String code() default "";
+    MenuCode code();
 
 }
