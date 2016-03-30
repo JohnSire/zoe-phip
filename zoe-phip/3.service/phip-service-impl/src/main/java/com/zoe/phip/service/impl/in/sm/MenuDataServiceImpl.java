@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import com.zoe.phip.dao.sm.MenuDataMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.MenuData;
@@ -85,6 +86,14 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
         return pageList;
+    }
+
+    @Override
+    public MenuData getParentMenuById(SystemData systemData, String id) {
+        Example example = new Example(MenuData.class);
+        Example.Criteria criteria = example.createCriteria().andEqualTo("menuId", id);
+        example.or(criteria);
+        return getMapper().selectByPrimaryKey(example);
     }
 
     @Override
@@ -166,4 +175,6 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
             });
         }
     }
+
+
 }

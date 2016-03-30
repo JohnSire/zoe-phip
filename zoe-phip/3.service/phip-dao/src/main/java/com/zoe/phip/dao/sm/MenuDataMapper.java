@@ -9,6 +9,7 @@ package com.zoe.phip.dao.sm;
 import com.zoe.phip.dao.MyMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.model.sm.MenuData;
 
 import java.util.List;
@@ -83,4 +84,12 @@ public interface MenuDataMapper extends MyMapper<MenuData> {
      * @throws Exception
      */
     PageList<MenuData> getMenuList( String key, QueryPage page) throws Exception;
+
+    /**
+     * 获取父级菜单
+     * @param systemData
+     * @param id
+     * @return
+     */
+    MenuData getParentMenuById(SystemData systemData, String id);
 }

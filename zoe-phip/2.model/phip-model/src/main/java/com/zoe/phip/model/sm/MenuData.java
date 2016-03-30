@@ -55,6 +55,11 @@ public class MenuData extends BaseEntity {
     private String fkParentMenuId;
 
 
+    private MenuData parentMenu;
+
+
+
+
     /**
      * 状态
      */
@@ -117,6 +122,13 @@ public class MenuData extends BaseEntity {
         this.fkParentMenuId = fkParentMenuId;
     }
 
+    public MenuData getParentMenu() {
+        return parentMenu;
+    }
+
+    public void setParentMenu(MenuData parentMenu) {
+        this.parentMenu = parentMenu;
+    }
 
     public int getState() {
         return this.state;
