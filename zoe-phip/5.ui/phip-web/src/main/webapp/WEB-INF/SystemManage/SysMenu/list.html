@@ -1,34 +1,4 @@
 ﻿<%
-var styleSection={
-%>
-<link href="/assets/dist/style/layout.css" rel="stylesheet"/>
-<%};%>
-<%
-var bodySection={
-%>
-<!--工具栏-->
-<div class="y-layout-header">
-    <ul id="gridTools" class="y-layout-form clearfix">
-        <li class="list" id="btnMenuConfig" style="display:none;"><a class="btn-little btn-little-blue"><span
-                class="text-outer">菜单结构调整<span class="text-inner">菜单结构调整</span></span></a></li>
-        <li class="list" id="btnAdd"><input type="button" class="btn btn-add" value="新增"/></li>
-        <li class="list" id="btnDelete"><input type="button"  style="display:none;" class="btn btn-del" value="删除"/></li>
-        <li class="list" id="btnRefresh" style="display:none;"><input type="button" class="btn btn-refresh" value="刷新"/>
-        </li>
-        <li class="list" id="btnImport" style="display:none;"><input type="button" class="btn btn-import" value="导入"/>
-        </li>
-        <li class="list" id="btnExport" style="display:none;"><input type="button" class="btn btn-export" value="导出"/>
-        </li>
-    </ul>
-</div>
-<!--工具栏-->
-<!--主要内容-->
-<div>
-    <div id="grid" style="border:0;"></div>
-</div>
-<!--主要内容-->
-<%};%>
-<%
 var scriptSection={
 %>
 <script type="text/javascript">
@@ -40,5 +10,5 @@ var scriptSection={
 </script>
 <%};%>
 <%
-include("/WEB-INF/shared/_default.html",{title:"菜单管理",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/Shared/_baseGrid.html",{title:"菜单列表管理",styleSection:null,bodySection:null,scriptSection:scriptSection}){}
 %>

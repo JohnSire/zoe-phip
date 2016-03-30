@@ -5,7 +5,7 @@
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
                 deleteUrl: {
-                    deleteInfo: "/user/delUserInOF",
+                    deleteInfo: "/user/delUserInfo",
                     deleteList: "/user/delUserList"
                 },
                 tools: {

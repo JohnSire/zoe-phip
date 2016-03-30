@@ -1,24 +1,10 @@
 ﻿<%
-var baseScriptSection={
-%>
-<script type="text/javascript">
-    $(function () {
-        seajs.use('{dir}/SystemManager/SysParam/index', function (a) {
-            a.init();
-        });
-    })
-</script>
-<%};%>
-<%
 var styleSection = {
 %>
 <link href="/assets/dist/style/layout.css" rel="stylesheet"/>
-<style type="text/css">
-    .y-form-big .column-one .label {
-        width: 125px;
-    }
-</style>
 <%};%>
+
+
 <%
 var bodySection = {
 %>
@@ -41,6 +27,20 @@ var bodySection = {
 </form>
 
 <%};%>
+
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/SystemManager/SysParam/index', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+
+
 <%
 include("/WEB-INF/shared/_default.html",{baseTitle:"系统参数",baseStyleSection:styleSection,baseBodySection:bodySection,baseScriptSection:scriptSection}){}
 %>

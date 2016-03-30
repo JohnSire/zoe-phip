@@ -15,7 +15,7 @@ define(function (require, exports, module) {
             "import": '<li class="list"><input type="button" class="btn btn-import" value="导入"/></li>',
             "export": '<li class="list"><input type="button" class="btn btn-export" value="导出"/></li>',
             "custom": function (text) {
-                return '<li class="list"><a class="btn-little btn-little-blue"><spanclass="text-outer">' + text + '<span class="text-inner">' + text + '</span></span></a></li>';
+                return '<li class="list"><a class="btn-little btn-little-blue"><span class="text-outer">' + text + '<span class="text-inner">' + text + '</span></span></a></li>';
             }
         },
         btnBuild: function (options) {

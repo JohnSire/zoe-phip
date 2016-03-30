@@ -10,7 +10,7 @@ define(function (require, exports, module) {
         init: function () {
             internal.getMenuList();
             internal.buildMenu(true, internal.dataMenu);
-            internal.GetUserInfo();
+            //internal.GetUserInfo();
             internal.SafeExit();
             internal.togglePopMenu();
             internal.UpdateUserPwd();
@@ -19,21 +19,21 @@ define(function (require, exports, module) {
             };
         },
         //获取登录用户数据
-        GetUserInfo: function () {
-            //获取用户基本信息
-            var req = new Request("/user/info")
-            //$.ajax({
-            //    type: "post",
-            //    url: webRoot + "SystemUser/GetLoginUserInfo",
-            req.post({
-                isTip: false,
-                success: function (data) {
-                    if (data.result != null) {
-                        $("#LoginName").html(data.result.LoginName); //显示登陆的用户名
-                    }
-                }
-            });
-        },
+        //GetUserInfo: function () {
+        //    //获取用户基本信息
+        //    var req = new Request("/user/info")
+        //    //$.ajax({
+        //    //    type: "post",
+        //    //    url: webRoot + "SystemUser/GetLoginUserInfo",
+        //    req.post({
+        //        isTip: false,
+        //        success: function (data) {
+        //            if (data.result != null) {
+        //                $("#LoginName").html(data.result.LoginName); //显示登陆的用户名
+        //            }
+        //        }
+        //    });
+        //},
         //获取菜单数据
         getMenuList: function () {
             internal.req.getMenuList(function (data) {

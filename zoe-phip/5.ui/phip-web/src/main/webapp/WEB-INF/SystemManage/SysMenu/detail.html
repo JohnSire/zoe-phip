@@ -1,12 +1,6 @@
 ﻿<%
-var styleSection = {
-%>
-<link href="/assets/dist/style/layout.css" rel="stylesheet"/>
-<%};%>
-<%
 var bodySection = {
 %>
-<form id="baseAttrForm" onsubmit="return false;">
 <div class="y-dialog-content">
     <div class="y-dialog-form form-little">
         <ul class="y-dialog-lists clearfix">
@@ -52,9 +46,7 @@ var bodySection = {
         </ul>
     </div>
 </div>
-</form>
 <%};%>
-
 <%
 var scriptSection={
 %>
@@ -66,7 +58,6 @@ var scriptSection={
     })
 </script>
 <%};%>
-
 <%
-include("/WEB-INF/shared/_default.html",{title:"菜单详细信息",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_baseAttr.html",{title:"菜单详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
 %>
