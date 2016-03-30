@@ -3,7 +3,6 @@
         req: require("./req.js").req,
         treeObj: null,
         init: function () {
-
             internal.buildTree();
             internal.onSave();
         },

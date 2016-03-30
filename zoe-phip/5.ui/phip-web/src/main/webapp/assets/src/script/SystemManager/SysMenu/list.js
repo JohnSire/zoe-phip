@@ -8,7 +8,7 @@
                     btnbox: {
                         'custom': {
                             text: "调整菜单结构", click: function () {
-
+                                internal.menuTree();
                             }
                         },
                         'add': true
@@ -28,10 +28,8 @@
                         {display: '地址', name: 'address', width: 520, align: 'left'},
                         {display: '创建时间', name: 'createAt', width: 120, align: 'left', type: 'date'},
                         {display: '创建人', name: 'createBy', width: 120, align: 'left'},
-                        {display:'状态', name:'state', width:80, align:'center', icons:['switch'], iconsParam:{'switch':{switchOff: 0, switchOn: 1,confirmMeg:'确认修改状态',primaryKey:'id',url:''}}},
+                        {display:'状态', name:'state', width:80, align:'center', icons:['switch'], iconsParam:{'switch':{switchOff: 0, switchOn: 1,confirmMeg:'确认修改菜单状态？',primaryKey:'id',url:'/menu/updateState'}}},
                         {display: '操作', isSort: false, width: 120, icons: ['edit']}
-
-
                     ],
                     usePager: false,
                     tree: {
@@ -56,6 +54,36 @@
                     }
                 }
             })
+        },
+        menuTree: function () {
+            var top = common.getTopWindowDom();
+            top.win_menu_tree_dialog = $.ligerDialog.open({
+                title: '调整菜单结构',
+                url: webRoot + '/menu/menutree',
+                width: 460,
+                height: 500,
+                buttons: [
+                    {
+                        text: '确定',
+                        onclick: function (item, dialog) {
+                            var top = common.getTopWindowDom();
+                            if (typeof (top.win_menu_tree_callback) == "function") {
+                                var reloadGrid = function () {
+                                    var gridObj = liger.get("grid");
+                                    gridObj.reload();
+                                };
+                                top.win_menu_tree_callback(reloadGrid);
+                            }
+                        }
+                    },
+                    {
+                        text: '取消',
+                        onclick: function (item, dialog) {
+                            dialog.close();
+                        }
+                    }
+                ]
+            });
         }
     }
     exports.init = function () {

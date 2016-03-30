@@ -70,11 +70,13 @@ define(function (require, exports, module) {
                 return str;
             },
             switch: function (rowdata, iconParam, columnInfo) {
+                var b = new Base64();
+                var url = b.encode(iconParam["url"]);
                 if (rowdata[columnInfo["name"]] == iconParam["switchOn"]) {
-                    return '<a href="javascript:gridChangeSwitch(\'' + iconParam["primaryKey"] + '\',\'' + rowdata[iconParam["primaryKey"]] + '\',\'' + columnInfo["name"] + '\', \'' + iconParam["switchOff"] + '\');" class="btn-switch-outer"><span class="btn-switch btn-switch-on"><b class="btn-switch-inner"></b></span></a>';
+                    return '<a href="javascript:gridChangeSwitch(\'' + iconParam["primaryKey"] + '\',\'' + rowdata[iconParam["primaryKey"]] + '\',\'' + columnInfo["name"] + '\', \'' + iconParam["switchOff"] + '\', \'' + url + '\', \'' + iconParam["confirmMeg"] + '\');" class="btn-switch-outer"><span switch_id="' + rowdata[iconParam["primaryKey"]] + '" class="btn-switch btn-switch-on"><b class="btn-switch-inner"></b></span></a>';
                 }
                 else {
-                    return '<a href="javascript:gridChangeSwitch(\'' + iconParam["primaryKey"] + '\',\'' + rowdata[iconParam["primaryKey"]] + '\',\'' + columnInfo["name"] + '\', \'' + iconParam["switchOn"] + '\');" class="btn-switch-outer"><span class="btn-switch btn-switch-off"><b class="btn-switch-inner"></b></span></a>';
+                    return '<a href="javascript:gridChangeSwitch(\'' + iconParam["primaryKey"] + '\',\'' + rowdata[iconParam["primaryKey"]] + '\',\'' + columnInfo["name"] + '\', \'' + iconParam["switchOn"] + '\', \'' + url + '\', \'' + iconParam["confirmMeg"] + '\');" class="btn-switch-outer"><span switch_id="' + rowdata[iconParam["primaryKey"]] + '" class="btn-switch btn-switch-off"><b class="btn-switch-inner"></b></span></a>';
                 }
             }
 
@@ -110,19 +112,30 @@ define(function (require, exports, module) {
             gridObj.reload();
         })
     };
-    window.gridChangeSwitch = function (primaryKeyName, primaryKeyValue, switchName, switchValue) {
-        var param = {};
-        param[primaryKeyName] = primaryKeyValue;
-        param[switchName] = switchValue;
-        var req = new Request('/menu/updateState');
-        req.post({
-            isTip: true,
-            data: param,
-            success: function (data) {
-                //common.jsmsgSuccess('状态切换成功!');
-                //var gridObj = common.getGrid("grid");
-                //gridObj.reload();
-            }
+    window.gridChangeSwitch = function (primaryKeyName, primaryKeyValue, switchName, switchValue, url, confirmMeg) {
+        common.confirm(confirmMeg, function () {
+
+            var b = new Base64();
+            var ajaxUrl = b.decode(url);
+            var param = {};
+            param[primaryKeyName] = primaryKeyValue;
+            param[switchName] = switchValue;
+
+            var req = new Request(ajaxUrl);
+            req.post({
+                isTip: true,
+                data: param,
+                success: function (data) {
+                    if (data.isSuccess) {
+                        var jqBtnSwitch = $("[switch_id='" + primaryKeyValue + "']");
+                        if (jqBtnSwitch.hasClass("btn-switch-on")) {
+                            jqBtnSwitch.removeClass("btn-switch-on").addClass("btn-switch-off");
+                        } else {
+                            jqBtnSwitch.removeClass("btn-switch-off").addClass("btn-switch-on");
+                        }
+                    }
+                }
+            });
         });
 
     };

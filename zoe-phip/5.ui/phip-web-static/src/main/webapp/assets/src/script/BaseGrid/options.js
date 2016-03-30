@@ -30,6 +30,8 @@ define(function (require, exports, module) {
             url: "",
             columns: [],
             pageSize: 30,
+            root: "rows",
+            record: "total",
             //width: '100%',
             //height: '99%',
             usePager: true
