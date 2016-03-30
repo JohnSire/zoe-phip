@@ -28,7 +28,7 @@ public class UserCompetenceServiceImplTest extends BaseTest {
     @Test
     public void getUserListByCompetenceCategory() throws Exception {
         PageList<SystemUser> result = impl.getUserListByCompetenceCategory("b202b8ba-0f93-4f22-a6b7-6e12379bb26f", "", new QueryPage(1, 30));
-        System.out.print(JSON.toJSON(result));
+        System.out.println(JSON.toJSON(result));
     }
 
     @Test
@@ -38,7 +38,8 @@ public class UserCompetenceServiceImplTest extends BaseTest {
 
     @Test
     public void checkExists() throws Exception {
-
+        System.out.println();
+        System.out.println(impl.checkExists("b202b8ba-0f93-4f22-a6b7-6e12379bb26f", "1761543318e744f781427ab325e6a45b"));
     }
 
     @Test
@@ -48,12 +49,12 @@ public class UserCompetenceServiceImplTest extends BaseTest {
 
     @Test
     public void getUserCompetenceIdList() throws Exception {
-
+        System.out.println(impl.getUserCompetenceIdList("b202b8ba-0f93-4f22-a6b7-6e12379bb26f"));
     }
 
     @Test
     public void getCategoriesByUserId() throws Exception {
-
+        System.out.println(impl.getCategoriesByUserId("1761543318e744f781427ab325e6a45b"));
     }
 
     @Test
