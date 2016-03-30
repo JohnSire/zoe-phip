@@ -1,4 +1,4 @@
-package com.zoe.phip.service.impl;
+package com.zoe.phip.service.impl.bootstrapper;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -9,16 +9,17 @@ public final class Bootstrapper {
 
     public void start(){
         startSpring();
+//        initData();
     }
 
-    public void startSpring(){
+    private void startSpring(){
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext(new String[]{"application-context-provider.xml", "spring-mybatis.xml"});
         context.start();
     }
 
-    public void initData(){
-
+    private void initData(){
+        MenuInit.toDatabase();
     }
 
 }

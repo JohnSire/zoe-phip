@@ -74,7 +74,7 @@ public interface BaseInService<T extends BaseEntity> {
      * @param entities
      * @return
      */
-    int updateList(List<T> entities) throws Exception;
+    boolean updateList(List<T> entities) throws Exception;
 
     /**
      * 获取单个对象

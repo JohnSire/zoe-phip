@@ -31,6 +31,6 @@ public class SystemParameterServiceImplTest extends BaseTest {
     public void updateListTest() throws Exception{
         List<SystemParameter> list= systemParameterService.getList(null);
 
-        systemParameterService.updateList(list);
+        boolean b= systemParameterService.updateList(list);
     }
 }

@@ -6,7 +6,7 @@ import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.MenuCompetence;
 import com.zoe.phip.model.sm.MenuData;
-import com.zoe.phip.model.sm.UserCompetence;
+import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
@@ -166,7 +166,8 @@ public class SystemMenuController extends BaseController {
      */
     @RequestMapping(value = "/getUserCfg")
     @ResponseBody
-    public ServiceResultT<PageList<UserCompetence>> getUserCfg(@RequestParam("catalogId") String catalogId, @RequestParam("keyWord") String keyWord) {
+    public ServiceResultT<PageList<SystemUser>> getUserCfg(@RequestParam("catalogId") String catalogId, @RequestParam("keyWord") String keyWord) {
+
         return ServiceFactory.getUserCompetenceService().getUserListByCompetenceCategory(ComSession.getUserInfo(),catalogId,keyWord, getQueryPage());
     }
 
@@ -197,13 +198,12 @@ public class SystemMenuController extends BaseController {
     /**
      * 菜单配置
      * @param catalogId
-     * @param keyWord
      * @return
      */
     @RequestMapping(value = "/getMenuCfg")
     @ResponseBody
-    public ServiceResultT<PageList<MenuData>> getMenuCfg(@RequestParam("catalogId") String catalogId, @RequestParam("keyWord") String keyWord) {
-        return ServiceFactory.getMenuCompetenceService().getMenuListByCompetenceCategory( ComSession.getUserInfo(),catalogId,keyWord, getQueryPage());
+    public ServiceResultT<PageList<MenuData>> getMenuCfg(@RequestParam("catalogId") String catalogId) {
+        return ServiceFactory.getMenuCompetenceService().getMenuListByCompetenceCategory( ComSession.getUserInfo(),catalogId, "", getQueryPage());
     }
 
 

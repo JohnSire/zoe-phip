@@ -21,6 +21,10 @@
                      url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.MenuDataService"/>
     <dubbo:reference id="SystemParameterService" interface="com.zoe.phip.service.in.sm.SystemParameterService"
                      url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemParameterService"/>
+    <dubbo:reference id="UserCompetenceService" interface="com.zoe.phip.service.in.sm.UserCompetenceService"
+                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.UserCompetenceService"/>
+    <dubbo:reference id="MenuCompetenceService" interface="com.zoe.phip.service.in.sm.MenuCompetenceService"
+                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.MenuCompetenceService"/>
 
 
 </beans>

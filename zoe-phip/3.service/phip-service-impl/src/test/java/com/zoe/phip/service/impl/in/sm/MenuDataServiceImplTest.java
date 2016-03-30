@@ -54,4 +54,10 @@ public class MenuDataServiceImplTest extends BaseTest {
         System.out.println();
         System.out.println(resultT.getTotal());
     }
+
+    @Test
+    public void testGetParentMenuById() throws Exception {
+        MenuData menuData = menuDataService.getById("316230fef7664a58888a0e3f511df06a");
+        System.out.println(menuData.toString());
+    }
 }
