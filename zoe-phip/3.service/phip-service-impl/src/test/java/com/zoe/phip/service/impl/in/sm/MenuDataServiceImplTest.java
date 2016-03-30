@@ -57,7 +57,7 @@ public class MenuDataServiceImplTest extends BaseTest {
 
     @Test
     public void testGetParentMenuById() throws Exception {
-        MenuData menuData = menuDataService.getParentMenuById(null, "d8dc95b8a3be4cc886e58848c8d19975");
+        MenuData menuData = menuDataService.getById("316230fef7664a58888a0e3f511df06a");
         System.out.println(menuData.toString());
     }
 }

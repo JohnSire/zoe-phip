@@ -101,11 +101,16 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
     }
 
     @Override
-    public MenuData getParentMenuById(SystemData systemData, String id) {
-        Example example = new Example(MenuData.class);
+    public MenuData getMenuById(String id) {
+        return getMapper().getMenuById(id);
+    }
+
+    @Override
+    public MenuData getById(String id) {
+        /*Example example = new Example(MenuData.class);
         Example.Criteria criteria = example.createCriteria().andEqualTo("menuId", id);
-        example.or(criteria);
-        return getMapper().selectByPrimaryKey(example);
+        example.or(criteria);*/
+        return getMenuById(id);
     }
 
     @Override

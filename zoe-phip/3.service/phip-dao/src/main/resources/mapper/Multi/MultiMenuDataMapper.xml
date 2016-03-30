@@ -25,18 +25,14 @@
     <select id="getMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap" >
         SELECT *
         from SYS_MENU_DATA t
-        WHERE t.ID=#{menuId}
+        WHERE t.ID=#{id}
     </select>
 
 
     <select id="getParentMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
         SELECT *
         from SYS_MENU_DATA t
-        WHERE t.ID=#{menuId}
-      /*  SELECT *
-        from SYS_MENU_DATA t1,SYS_MENU_DATA t2
-        WHERE 1=1 AND t1.STATE = 1 AND t1.ID=t2.FK_PARENT_MENU_ID AND t1.ID=#{menuId}*/
-
+        WHERE t.ID=#{id}
     </select>
     <select id="getMenuPages" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
 --         SELECT *

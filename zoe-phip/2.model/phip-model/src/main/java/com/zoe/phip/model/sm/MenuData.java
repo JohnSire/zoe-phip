@@ -55,13 +55,14 @@ public class MenuData extends BaseEntity {
 //    @JSONField(name = "FkParentMenuId")
     private String fkParentMenuId;
 
+    @Transient
     private MenuData parentMenu;
 
 
 
 
     /**
-     * 状�
+     * 状�
      */
     @Column(name = "STATE")
 //    @JSONField(name = "State")
@@ -82,7 +83,7 @@ public class MenuData extends BaseEntity {
     }
 
     /**
-     * 子节�
+     * 子节�
      */
     @Transient
 //    @JSONField(name = "Childrens")
@@ -173,7 +174,7 @@ public class MenuData extends BaseEntity {
     }
 
     /// <summary>
-    /// 对应的权限标�
+    /// 对应的权限标�
     /// </summary>
     @Transient
     @Column(name = "COMPETENCE_ID")
