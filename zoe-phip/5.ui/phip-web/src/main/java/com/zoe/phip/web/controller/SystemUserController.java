@@ -28,49 +28,35 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class SystemUserController extends BaseController {
-
-
-    //region 视图
-
-    //用户列表
-    @RequestMapping("/view/list")
+    //region 用户管理视图开始
+    //用户管理列表
+    @RequestMapping("/list")
     public String ToList(HttpServletRequest request, Model model) {
-
-        return "/user/list";
+        return "SystemManage/SysUser/list";
     }
-
-    //用户详细信息
-    @RequestMapping("/view/detail")
+    //用户详详情
+    @RequestMapping("/detail")
     public String ToDetail(HttpServletRequest request, Model model) {
-
-        return "/user/detail";
+        return "SystemManage/SysUser/detail";
     }
 
     //修改密码
-    @RequestMapping("/view/pwd")
+    @RequestMapping("/update/pwd")
     public String ToPwd(HttpServletRequest request, Model model) {
-        return "/user/pwd";
+        return "SystemManage/SysUser/updatePwd";
     }
-
-    //用户选择器
-    @RequestMapping("/view/selector")
-    public String ToSelector(HttpServletRequest request, Model model) {
-        return "/user/selector";
-    }
-
-    //endregion
+    //endregion  用户管理视图结束
 
 
     //region 方法
-
     /**
      * 获取用户列表
-     *
      * @return
      */
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResultT<PageList<SystemUser>> getUserList(HttpServletRequest request) {
+
         if(StringUtil.isNullOrWhiteSpace(request.getParameter("keyWord"))){
             return ServiceFactory.getUserService()
                     .getList(ComSession.getUserInfo(), getQueryPage(), SystemUser.class);
@@ -81,52 +67,48 @@ public class SystemUserController extends BaseController {
     }
 
     /**
-     * 获取当前登录用户信息
+     * 获取单个用户信息
      *
      * @param request
      * @param model
      * @return
      */
-    @RequestMapping(value = "/info", method = RequestMethod.POST)
+    @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResultT<SystemUser> getUserInfo(HttpServletRequest request, Model model) {
-        SystemData userInfo = ComSession.getUserInfo();
-        ServiceResultT<SystemUser> user = ServiceFactory.getUserService().getById(ComSession.getUserInfo(), userInfo.getUserId());
+        String id = request.getParameter("id");
+        ServiceResultT<SystemUser> user = ServiceFactory.getUserService().getById(ComSession.getUserInfo(),id );
         return user;
     }
 
 
     /**
      * 新增用户
-     *
      * @param userInfo
      * @return
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/addUserInfo", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult addUserInfo(SystemUser userInfo) {
         return ServiceFactory.getUserService().add(ComSession.getUserInfo(), userInfo);
     }
-
     /**
      * 更新用户
-     *
      * @param userInfo
      * @return
      */
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult updateUserInfo(SystemUser userInfo) {
         return ServiceFactory.getUserService().update(ComSession.getUserInfo(), userInfo);
     }
 
     /**
-     * 更新用户
-     *
+     * 更新用户状态
      * @param
      * @return
      */
-    @RequestMapping(value = "/update/state", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateState", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult updateState(String id,int state) {
         return ServiceFactory.getUserService().updateState(ComSession.getUserInfo(),id,state);
@@ -138,7 +120,7 @@ public class SystemUserController extends BaseController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/delUserInfo", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResult deleteUserInfo(String id) {
         return ServiceFactory.getUserService().deleteById(ComSession.getUserInfo(), id);
@@ -146,11 +128,10 @@ public class SystemUserController extends BaseController {
 
     /**
      * 批量删除
-     *
      * @param ids
      * @return
      */
-    @RequestMapping(value = "/delete/all", method = RequestMethod.POST)
+    @RequestMapping(value = "/delUserList", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult deleteUserList(String ids) {
         List<String> list = Arrays.asList(ids.split(","));
@@ -159,7 +140,6 @@ public class SystemUserController extends BaseController {
 
     /**
      * 获取用户关联菜单
-     *
      * @return
      */
     @RequestMapping("/menu")
@@ -167,7 +147,6 @@ public class SystemUserController extends BaseController {
     public ServiceResultT<List<MenuData>> getUserMenu() {
         return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(), ComSession.getUserInfo().getUserId());
     }
-
     //endregion
 
 

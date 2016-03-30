@@ -21,7 +21,11 @@ define(function (require, exports, module) {
                     item["render"] = function (rowdata, rowindex, value) {
                         var h = "";
                         for (var i = 0; i < item["icons"].length; i++) {
-                            h += internal.columnBtn[item["icons"][i]](rowdata);
+                            var iconParam = {};
+                            if (item["iconsParam"] && item["iconsParam"][item["icons"][i]]) {
+                                iconParam = item["iconsParam"][item["icons"][i]];
+                            }
+                            h += internal.columnBtn[item["icons"][i]](rowdata, iconParam, item);
                         }
                         return h;
                     }
@@ -43,8 +47,7 @@ define(function (require, exports, module) {
                 if (ids.length > 0) {
                     ids = ids.substr(1, ids.length);
                 }
-                internal.req.deleteList({ url: options["deleteUrl"]["deleteList"], ids: ids }, function () {
-                    // var gridObj = liger.get("gridObj");
+                internal.req.deleteList({url: options["deleteUrl"]["deleteList"], ids: ids}, function () {
                     var gridId = options["gridId"];
                     var gridObj = common.getGrid(gridId);
                     gridObj.reload();
@@ -55,36 +58,44 @@ define(function (require, exports, module) {
         },
         columnBtn: {
             edit: function (rowdata) {
-                var titleDescr="";
-                if(internal.param["dialogParam"]["titleKey"]) {
-                    titleDescr  = rowdata[internal.param["dialogParam"]["titleKey"]];
+                var titleDescr = "";
+                if (internal.param["dialogParam"]["titleKey"]) {
+                    titleDescr = rowdata[internal.param["dialogParam"]["titleKey"]];
                 }
-                var str = "<a class='icon-grid icon-grid-edit' title='编辑' onclick='javascript:winEditGridRow(\"" + rowdata.id + "\",\""+titleDescr+"\")'></a> ";
+                var str = "<a class='icon-grid icon-grid-edit' title='编辑' onclick='javascript:winEditGridRow(\"" + rowdata.id + "\",\"" + titleDescr + "\")'></a> ";
                 return str;
             },
             del: function (rowdata) {
-                var str = "<a class='icon-grid icon-grid-del' title='删除' onclick='javascript:winDeleteGridRow(\"" + rowdata.id+ "\")'></a> ";
+                var str = "<a class='icon-grid icon-grid-del' title='删除' onclick='javascript:winDeleteGridRow(\"" + rowdata.id + "\")'></a> ";
                 return str;
+            },
+            switch: function (rowdata, iconParam, columnInfo) {
+                if (rowdata[columnInfo["name"]] == iconParam["switchOn"]) {
+                    return '<a href="javascript:gridChangeSwitch(\'' + iconParam["primaryKey"] + '\',\'' + rowdata[iconParam["primaryKey"]] + '\',\'' + columnInfo["name"] + '\', \'' + iconParam["switchOff"] + '\');" class="btn-switch-outer"><span class="btn-switch btn-switch-on"><b class="btn-switch-inner"></b></span></a>';
+                }
+                else {
+                    return '<a href="javascript:gridChangeSwitch(\'' + iconParam["primaryKey"] + '\',\'' + rowdata[iconParam["primaryKey"]] + '\',\'' + columnInfo["name"] + '\', \'' + iconParam["switchOn"] + '\');" class="btn-switch-outer"><span class="btn-switch btn-switch-off"><b class="btn-switch-inner"></b></span></a>';
+                }
             }
-        }
 
+        }
     }
-    window.winEditGridRow = function (id,titleDescr) {
+    window.winEditGridRow = function (id, titleDescr) {
         var dialogParam = internal.param["dialogParam"];
         var editParam = $.extend(true, {}, internal.param["dialogParam"]["common"], internal.param["dialogParam"]["edit"]);
-        if(titleDescr){
-            editParam["title"]=editParam["title"]+"--"+titleDescr;
+        if (titleDescr) {
+            editParam["title"] = editParam["title"] + "--" + titleDescr;
         }
         editParam["url"] = editParam["url"] + "?state=edit&&id=" + id;
         //submited(提交非进行时状态改变方法）
-        editParam.buttons[0]["onclick"] = function (item, dialog,submited) {
+        editParam.buttons[0]["onclick"] = function (item, dialog, submited) {
             var top = common.getTopWindowDom();
             var callback = function () {
                 var gridId = internal.param["gridId"];
                 var gridObj = common.getGrid(gridId);
                 gridObj.reload();
             }
-            top[internal.param["dialogParam"]["winCallback"]](callback,submited);
+            top[internal.param["dialogParam"]["winCallback"]](callback, submited);
         }
         top[internal.param["dialogParam"]["winName"]] = common.dialog(editParam);
     };
@@ -98,6 +109,22 @@ define(function (require, exports, module) {
             var gridObj = common.getGrid(gridId);
             gridObj.reload();
         })
+    };
+    window.gridChangeSwitch = function (primaryKeyName, primaryKeyValue, switchName, switchValue) {
+        var param = {};
+        param[primaryKeyName] = primaryKeyValue;
+        param[switchName] = switchValue;
+        var req = new Request('/menu/updateState');
+        req.post({
+            isTip: true,
+            data: param,
+            success: function (data) {
+                //common.jsmsgSuccess('状态切换成功!');
+                //var gridObj = common.getGrid("grid");
+                //gridObj.reload();
+            }
+        });
+
     };
     exports.grid = {
         build: internal.build,

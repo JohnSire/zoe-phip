@@ -100,11 +100,11 @@
                             if ($(this).hasClass("Validform_error")) {
                                 var postion = $(this).offset();
                                 var left = postion.left, top = postion.top;
-                                $(".NSS-text-up-tip").css({ left: left, top: top - 26, "z-index": 999 }).show().find(".msg").text(msg);
+                                $(".text-up-tips").css({ left: left, top: top - 26, "z-index": 999 }).show().find(".msg").text(msg);
                             }
                         });
                         $(o.obj).blur(function () {
-                            $(".NSS-text-up-tip").hide();
+                            $(".text-up-tips").hide();
                         })
 
                     }

@@ -12,7 +12,7 @@ define(function (require, exports, module) {
         },
         btnBuild: function (options) {
             var btnbox = options["tools"]["btnbox"];
-            var jqBtnBox = $(".NSS-Tree-Tools-Box");
+            var jqBtnBox = $("#gridTools");
             $.each(btnbox, function (index, item) {
                 switch (index) {
                     case "add":

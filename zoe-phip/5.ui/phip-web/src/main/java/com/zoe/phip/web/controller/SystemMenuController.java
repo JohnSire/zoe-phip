@@ -28,24 +28,21 @@ import java.util.List;
 @Controller
 @RequestMapping("/menu")
 public class SystemMenuController extends BaseController {
-
-
-    //菜单页面
-    @RequestMapping("/view/list")
+    //region 菜单管理视图
+    //菜单列表
+    @RequestMapping("/list")
     public String ToMenuList(HttpServletRequest request, Model model) {
-        return "/menu/list";
+        return "SystemManage/SysMenu/list";
     }
-
-    //修改菜单信息
-    @RequestMapping("/view/detail")
+    //菜单详情
+    @RequestMapping("/detail")
     public String ToMenuDetail(HttpServletRequest request, Model model) {
-        return "/menu/detail";
+        return "SystemManage/SysMenu/detail";
     }
-
-    //菜单结构调整
-    @RequestMapping("/view/tree")
+    //菜单树
+    @RequestMapping("/menutree")
     public String ToMenuTree(HttpServletRequest request, Model model) {
-        return "/menu/tree";
+        return "SystemManage/SysMenu/tree";
     }
 
     //菜单权限

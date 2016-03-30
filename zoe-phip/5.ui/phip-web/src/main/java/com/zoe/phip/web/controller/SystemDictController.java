@@ -59,7 +59,6 @@ public class SystemDictController extends BaseController {
     @RequestMapping(value = "/getSysDictCategoryList")
     @ResponseBody
     public ServiceResultT<PageList<SystemDictCategory>> getSysDictCategoryList(HttpServletRequest request, Model model) {
-
         return ServiceFactory.getDictCategoryService().getDictCategories(ComSession.getUserInfo(), super.getKey(), getQueryPage());
     }
 

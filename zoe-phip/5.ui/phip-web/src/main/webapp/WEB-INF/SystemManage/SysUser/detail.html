@@ -1,0 +1,59 @@
+﻿<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="name"><span class="text-mark">*</span>名称：</label>
+                    <input type="text" name="name" class="text" datatype="*1-30" errormsg="名称长度应为1-30位！"
+                           nullmsg="请填写名称！"/>
+                </p>
+                <p class="column-one">
+                    <label class="label" for="loginName"><span class="text-mark">*</span>登录名：</label>
+                    <input type="text" name="loginName" class="text" datatype="*1-30" errormsg="登录名长度应为1-30位！"/>
+
+                </p>
+            </li>
+            <li class="list" id="liPwd" style="display:none;">
+                <p class="column-one">
+                    <label class="label" for="password"><span class="text-mark">*</span>密码：</label>
+                    <input type="password" name="password" class="text" datatype="*" errormsg="请填写密码！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label">状态：</label>
+                    <a class="btn-switch-outer">
+                            <span class="btn-switch btn-switch-on">
+                                <b class="btn-switch-inner"></b>
+                            </span>
+                    </a>
+                </p>
+            </li>
+            <li class="list" id="liResetPwd" style="display:none;">
+                <p class="column-one">
+                    <label class="label" >重置密码：</label>
+                    <input id="resetuserpwd" class="btn-dialog-gray l-dialog-btn-inner" type="button" value="重置密码"/>
+                    <input id="savenewpwd" type="text" style="display:none;">
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/SystemManager/SysUser/detail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/Shared/_baseAttr.html",{title:"用户详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

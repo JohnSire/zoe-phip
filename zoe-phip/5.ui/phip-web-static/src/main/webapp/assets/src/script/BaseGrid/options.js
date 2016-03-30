@@ -6,7 +6,7 @@
  */
 define(function (require, exports, module) {
     var options = {
-        gridId: "gridObj",
+        gridId: "grid",
         /*工具条*/
         tools: {
             /* 'add': true, 'del': true, 'refresh': true, 'import': true, 'export': true 系统默认有的按钮，支持我们自定义进行扩展 */

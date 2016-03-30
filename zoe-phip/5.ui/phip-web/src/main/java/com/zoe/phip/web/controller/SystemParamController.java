@@ -29,9 +29,9 @@ import java.util.List;
 @RequestMapping("/param")
 public class SystemParamController extends BaseController {
     //系统参数界面
-    @RequestMapping("/view/index")
+    @RequestMapping("/detail")
     public String ToParam(HttpServletRequest request, Model model) {
-        return "/param/sysparam";
+        return "SystemManage/SysParam/detail";
     }
 
     @RequestMapping(value = "/getSysParamList", method = RequestMethod.GET)

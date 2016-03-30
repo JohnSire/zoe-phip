@@ -3,7 +3,8 @@ seajs.config({
     base: seajsRoot,
     // 变量配置
     vars: {
-        'dir': seajsRoot + 'assets/src/script'
+        'dir': seajsRoot + 'assets/src/script',
+        'staticDir':'http://localhost:8082/assets/src/script/'
     },
     // 路径配置
     paths: {
@@ -13,6 +14,6 @@ seajs.config({
     debug: false,
     // 文件编码
     charset: 'utf-8',
-
+    //版本管理
     map: [[/^(.*\.(?:css|js))(.*)$/i, '$1?version=' + version]],  //map,批量更新时间戳
 });

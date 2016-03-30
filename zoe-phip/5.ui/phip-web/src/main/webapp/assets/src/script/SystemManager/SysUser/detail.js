@@ -1,92 +1,28 @@
 ﻿define(function (require, exports, module) {
     var internal = {
         init: function () {
-            var BaseAttr = require("../../baseAttr/baseAttr.js");
+            var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
             var baseAttr = new BaseAttr({
-                getUrl: 'user/get/list',//获取实例的接口
-                addUrl: '/user/add',//新增的接口Url
-                updateUrl: '/user/update',//修改的接口Url
+                winName: "win_user_detail_dialog",//弹窗对象变量名称
+                winCallback: "win_user_detail_callback",//弹窗回调函数
+                getUrl: webRoot + '/user/info',//
+                addUrl: webRoot + '/user/add',//新增接口Url
+                updateUrl: webRoot + '/user/update',//修改接口Url
                 loadPageEvent: function () {
-                    var type = common.getParamFromUrl("type");
-                    var id = common.getParamFromUrl("id")
-                    internal.onResetPwd(id);
-                    if (type != "edit") {
-                        $("#userpwd-box").show();
+                    var type = common.getParamFromUrl("state");
+                    if (type == "edit") {
+                        $("#liPwd").remove();
+                        $("#liResetPwd").show();
                     }
                     else {
-                        $("#reset-userpwd").show();
+                        $("#liPwd").show();
+                        $("#liResetPwd").remove();
                     }
-                },
-                beforeBindEvent: function (data) {
-                    if (data.result.State == 1) {
-                        $('.btn-switch').removeClass("btn-switch-off").addClass("btn-switch-on");
-                    } else {
-                        $('.btn-switch').addClass("btn-switch-off").removeClass("btn-switch-on");
-                    }
-                },
-                beforeSaveEvent: function () {
-                    var extendState = { State: 0 };
-                    if ($('.btn-switch').hasClass("btn-switch-off")) {
-                        extendState = { State: 0 };
-                    } else {
-                        extendState = { State: 1 };
-                    }
-                    return extendState;
+
                 }
-            });
-            internal.btnSwitch();
-        },
-        btnSwitch: function () {
-            $('.btn-switch').click(function (e) {
-                var toggle = $(this);
-                if (toggle.hasClass("btn-switch-on")) {
-                    toggle.animate({
-                        "margin-left": -35
-                    }, 500, function () {
-                        toggle.removeClass("btn-switch-on").addClass("btn-switch-off");
-                    });
-                }
-                else if (toggle.hasClass("btn-switch-off")) {
-                    toggle.animate({
-                        "margin-left": 0
-                    }, 500, function () {
-                        toggle.removeClass("btn-switch-off").addClass("btn-switch-on");
-                    });
-                }
-            });
-        },
-        //重置密码
-        onResetPwd: function (id) {
-            $("#resetuserpwd").click(function () {
-                if ($(".Validform_error").length == 0) {
-                    $.ligerDialog.confirm('是否重置密码？', function (yes) {
-                        if (yes) {
-                            var req = new Request("SystemUser/ResetUserPwd");
-                            var data = $("#baseAttrForm").form2json();
-                            data["Password"] = "123456";
-                            data["Id"] = id;
-                            req.post({
-                                async: false,
-                                isTip: false,
-                                data: data,
-                                success: function (data) {
-                                    if (data.isSuccess) {
-                                        common.jsmsgSuccess('密码重置成功!');
-                                        setTimeout(function () { top.win_base_attr_dialog.close() }, 1000);
-                                    } else {
-                                        common.jsmsgError(data.Message[0].Content);
-                                    }
-                                }
-                            })
-                        }
-                    })
-                }
-                else {
-                    common.jsmsgError("信息不能为空！");
-                }
-            });
+            })
         }
-    };
+    }
     exports.init = function () {
         internal.init();
     }

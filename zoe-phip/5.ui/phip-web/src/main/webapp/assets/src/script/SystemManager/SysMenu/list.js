@@ -1,114 +1,63 @@
 ﻿define(function (require, exports, module) {
-    var request = require("./req.js").req;
-    var BaseGrid = require("../../baseGrid/baseGrid.js");
-
+    var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
     var internal = {
         init: function () {
-            internal.__grid = new BaseGrid({
-                //工具条
+            var baseGrid = new BaseGrid({
+                gridId: 'grid',
                 tools: {
-                    buttons: [{
-                        id: "btnMenuConfig", onClick: function () { internal.menuTree(); }//导入事件
-                    }],
+                    btnbox: {
+                        'custom': {
+                            text: "调整菜单结构", click: function () {
+
+                            }
+                        },
+                        'add': true
+                    },
                     searchbox: [
-                        { descr: '关键字', name: 'keyWord', type: 'text' }
+                        {label: '关键字', name: 'keyWord', type: 'text'}
                     ]
                 },
-                //表格参数
                 gridParam: {
                     checkbox: false,
                     height: "100%",
-                    heightDiff:29,
+                    heightDiff: 29,
                     url: webRoot + '/menu/getMenuList',
                     columns: [
-                    { display: '名称', name: 'name', width: 120, align: 'left' },
-                    { display: '编码', name: 'code', width: 100, align: 'left' },
-                    { display: '地址', name: 'address', align: 'left' },
-                    { display: '创建时间', name: 'createAt', width: 120, align: 'left', type: 'date' },
-                    { display: '创建人', name: 'createBy', width: 120, align: 'left' },
-                    {
-                        display: '状态',
-                        name: 'state',
-                        width: 80,
-                        align: "center",
-                        render: function (rowdata, index, value) {
-                            if (value == 1) {
-                                return '<a href="javascript:changeState(\'' + rowdata.id + '\', 0);" class="btn-switch-outer"><span class="btn-switch btn-switch-on"><b class="btn-switch-inner"></b></span></a>';
-                            } else {
-                                return '<a href="javascript:changeState(\'' + rowdata.id + '\', 1);" class="btn-switch-outer"><span class="btn-switch btn-switch-off"><b class="btn-switch-inner"></b></span></a>';
-                            }
-                        }
-                    }
+                        {display: '名称', name: 'name', width: 120, align: 'left'},
+                        {display: '编码', name: 'code', width: 100, align: 'left'},
+                        {display: '地址', name: 'address', width: 520, align: 'left'},
+                        {display: '创建时间', name: 'createAt', width: 120, align: 'left', type: 'date'},
+                        {display: '创建人', name: 'createBy', width: 120, align: 'left'},
+                        {display:'状态', name:'state', width:80, align:'center', icons:['switch'], iconsParam:{'switch':{switchOff: 0, switchOn: 1,confirmMeg:'确认修改状态',primaryKey:'id',url:''}}},
+                        {display: '操作', isSort: false, width: 120, icons: ['edit']}
+
+
                     ],
                     usePager: false,
-                    //alternatingRow: false,
                     tree: {
                         columnId: 'id',
                         columnName: 'name',
                         idField: 'id',
                         parentIDField: 'fkParentMenuId'
                     }
-
                 },
-                //弹出参数配置
                 dialogParam: {
+                    winName: "win_menu_detail_dialog",//弹窗对象变量名称
+                    winCallback: "win_menu_detail_callback",//弹窗回调函数
+                    titleKey: "name",
+                    //新增参数
+                    add: {title: "新增菜单"},
+                    //编辑参数
+                    edit: {title: "菜单信息"},
                     common: {
-                        width: 390,
-                        height: 288,
-                        url: webRoot + 'detail'
-                    },
-                    add: {
-                        title: '新增菜单信息'
-                    },
-                    edit: {
-                        title: '编辑菜单信息'
+                        url: webRoot + '/menu/detail',
+                        width: 360,
+                        height: 280
                     }
                 }
-            });
-            $("#btnDelete").hide();
-        },
-        changeState: function (id, state) {
-            common.confirm('您确定切换状态吗?', function () {
-                request.updateState(id, state, function () {
-                    common.jsmsgSuccess('状态切换成功!');
-                    internal.__grid.reload();
-                });
-
-            });
-        },
-        menuTree: function () {
-            var top = common.getTopWindowDom();
-            top.win_menu_tree_dialog = $.ligerDialog.open({
-                title: '调整菜单结构',
-                url: webRoot + 'tree',
-                width: 460,
-                height: 500,
-                buttons: [
-                    {
-                        text: '确定',
-                        onclick: function (item, dialog) {
-                            var top = common.getTopWindowDom();
-                            if (typeof (top.win_menu_tree_callback) == "function") {
-                                var reloadGrid = function () {
-                                    var gridObj = liger.get("grid");
-                                    gridObj.reload();
-                                };
-                                top.win_menu_tree_callback(reloadGrid);
-                            }
-                        }
-                    },
-                    {
-                        text: '取消',
-                        onclick: function (item, dialog) {
-                            dialog.close();
-                        }
-                    }
-                ]
-            });
+            })
         }
-    };
-    window.changeState = internal.changeState;
-
+    }
     exports.init = function () {
         internal.init();
     }
