@@ -22,7 +22,7 @@ public class MenuDataServiceImplTest extends BaseTest {
     @Test
     public void testAdd() throws Exception {
         MenuData menuData = new MenuData();
-        menuData.setCode(51);
+        menuData.setCode("51");
         menuData.setName("注册管理");
         menuData.setId("12345677");
         int result = menuDataService.add(menuData);

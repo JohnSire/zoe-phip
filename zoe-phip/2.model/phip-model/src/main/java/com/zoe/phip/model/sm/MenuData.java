@@ -28,12 +28,17 @@ public class MenuData extends BaseEntity {
 //    @JSONField(name = "Name")
     private String name;
 
+
     /**
      * 编码
      */
     @Column(name = "CODE")
-//    @JSONField(name = "Code")
-    private int code;
+    private String code;
+    /**
+     * 排序
+     */
+    @Column(name = "SORT")
+    private int sort;
 
     /**
      * 地址
@@ -80,12 +85,20 @@ public class MenuData extends BaseEntity {
         this.name = name;
     }
 
-    public int getCode() {
+    public String getCode() {
         return this.code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
+    }
+
+    public int getSort(){
+        return this.sort;
+    }
+
+    public void setSort(int sort){
+        this.sort=sort;
     }
 
     public String getAddress() {
