@@ -1,17 +1,13 @@
 package com.zoe.phip.web.controller;
 
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-import com.zoe.phip.infrastructure.entity.*;
-import com.zoe.phip.infrastructure.util.StringUtil;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.model.sm.SystemDictItem;
-import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.in.sm.SystemDictCategoryService;
 import com.zoe.phip.service.in.sm.SystemDictItemService;
-import com.zoe.phip.service.in.sm.SystemUserService;
-import com.zoe.phip.web.bean.BeanFactory;
-import com.zoe.phip.web.bean.Constant;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
@@ -60,7 +56,7 @@ public class SystemDictController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/getCategoryList")
+    @RequestMapping(value = "/getSysDictCategoryList")
     @ResponseBody
     public ServiceResultT<PageList<SystemDictCategory>> getSysDictCategoryList(HttpServletRequest request, Model model) {
 

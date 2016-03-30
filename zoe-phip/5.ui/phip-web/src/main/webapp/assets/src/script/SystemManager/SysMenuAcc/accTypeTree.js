@@ -31,7 +31,7 @@
                                     listData.push(data[i].Id);
                                 }
                             }
-                            var req = new Request("user/addAcc");
+                            var req = new Request("/user/addUserAcc");
                             req.post({
                                 data: { catalogId: internal.catalogId, ids: listData.join(",") },
                                 success: function (data) {
@@ -69,7 +69,7 @@
                                     listData.push(item["Id"]);
                                 })
                             }
-                            var req = new Request("menu/addAcc");
+                            var req = new Request("/menu/addMenuAcc");
                             req.post({
                                 data: { catalogId: internal.catalogId, ids: listData.join(",") },
                                 success: function (data) {
@@ -89,7 +89,7 @@
     }
     var menuTypeTree = {
         init: function () {
-            var req = new Request("dict/getItemList");
+            var req = new Request("/dict/getSysDictItemListByCode");
             req.post({
                 isTip: false,
                 async: true,
@@ -103,8 +103,8 @@
             var treeData = [];
             $.each(data.result, function (index, item) {
                 var treeItem = {};
-                treeItem.text = item.Name;
-                treeItem.Id = item.Id;
+                treeItem.text = item.name;
+                treeItem.Id = item.id;
                 treeData.push(treeItem);
             });
             var treeManager = $("#tree").ligerTree({

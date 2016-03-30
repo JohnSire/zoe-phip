@@ -20,7 +20,7 @@ public final class SafeExecuteUtil {
             executeResult.setIsSuccess(invoker.apply());
         } catch (BusinessException ex) {
             //日志消息
-            executeResult.addMessage("", ex.getMessage());
+            executeResult.addMessage(ex.getCode(), ex.getMessage());
             executeResult.setIsSuccess(false);
             logger.error(ex.getMessage());
         } catch (Exception e) {
@@ -41,8 +41,7 @@ public final class SafeExecuteUtil {
             executeResult.setIsSuccess(result != null);
         } catch (BusinessException ex) {
             //日志消息
-            //todo 如何定义错误ID
-            executeResult.addMessage("1001", ex.getMessage());
+            executeResult.addMessage(ex.getCode(), ex.getMessage());
             executeResult.setIsSuccess(false);
             logger.error(ex.getMessage());
         } catch (Exception e) {
@@ -54,7 +53,7 @@ public final class SafeExecuteUtil {
         return executeResult;
     }
 
-    private static String getStackMsg(Exception e) {
+    public static String getStackMsg(Throwable e) {
 
         StringBuffer sb = new StringBuffer();
         StackTraceElement[] stackArray = e.getStackTrace();

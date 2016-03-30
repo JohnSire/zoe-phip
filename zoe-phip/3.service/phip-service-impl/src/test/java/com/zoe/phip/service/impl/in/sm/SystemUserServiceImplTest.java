@@ -8,9 +8,7 @@ import com.zoe.phip.service.impl.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by zengjiyang on 2016/3/18.
@@ -23,6 +21,16 @@ public class SystemUserServiceImplTest extends BaseTest {
 
     @Test
     public void addTest() throws Exception {
+        Map<String,String> map=new HashMap<>();
+        map.put("test","1");
+        map.put("Test","2");
+
+        map.remove("test");
+
+        System.out.println(map.size());
+
+
+
         SystemUser user = creteUser("管理员", "admin", "1", 1);
         int result = systemUserService.add(user);
     }

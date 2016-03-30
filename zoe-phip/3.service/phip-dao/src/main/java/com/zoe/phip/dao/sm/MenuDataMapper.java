@@ -12,6 +12,7 @@ import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.model.sm.MenuData;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhanghao
@@ -19,6 +20,9 @@ import java.util.List;
  * @date 2016-03-21
  */
 public interface MenuDataMapper extends MyMapper<MenuData> {
+
+    List<MenuData> getMenuDataList(Map<String, Object> args);
+
 
     /**
      * 通过关键字分页获取菜单列表
@@ -69,4 +73,14 @@ public interface MenuDataMapper extends MyMapper<MenuData> {
      * @throws Exception
      */
     int updateState(String id,int state) throws Exception;
+
+
+    /**
+     * 关键字查询菜单数据
+     * @param key
+     * @param page
+     * @return
+     * @throws Exception
+     */
+    PageList<MenuData> getMenuList( String key, QueryPage page) throws Exception;
 }

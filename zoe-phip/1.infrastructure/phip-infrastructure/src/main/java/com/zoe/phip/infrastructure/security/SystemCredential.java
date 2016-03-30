@@ -1,6 +1,9 @@
 package com.zoe.phip.infrastructure.security;
 
 import com.zoe.phip.infrastructure.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,10 +15,13 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public final class SystemCredential {
 
-    private final static ConcurrentHashMap<String, CredentialItem> credentialMap = new ConcurrentHashMap<String, CredentialItem>();
+    private static final ConcurrentHashMap<String, CredentialItem> credentialMap = new ConcurrentHashMap<String, CredentialItem>();
+    private static final Logger logger = LoggerFactory.getLogger(SystemCredential.class);
+
 
     public static String createCredential(String userId, String userName, int expiresTime) {
         String credentialKey = getCredentialKey(userId, userName);
+        logger.info("add user session,userName:"+userName);
         credentialMap.put(credentialKey, new CredentialItem(userId, userName, credentialKey, expiresTime));
         return credentialKey;
     }
@@ -25,8 +31,12 @@ public final class SystemCredential {
         credentialMap.values().forEach(v -> {
             long timeDiff = new Date().getTime() - v.getActivateTime().getTime();
             if (timeDiff > v.getExpiresTime()) {
-                credentialMap.remove(v.getCredential());
+                expires.add(v.getCredential());
+                logger.info("remove user session,userName:"+v.getUserName());
             }
+        });
+        expires.forEach(e->{
+            credentialMap.remove(e);
         });
         return true;
     }
@@ -38,6 +48,7 @@ public final class SystemCredential {
         if (!credential.equals(getCredentialKey(userId, userName))) {
             return false;
         }
+        logger.info("check user credential success,userName:"+userName);
         //重新设置超时时间
         CredentialItem item = credentialMap.get(credential);
         item.setActivateTime(new Date());

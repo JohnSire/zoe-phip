@@ -65,7 +65,7 @@
                 var nodes = treeObj.transformToArray(ztreeNodes);
                 nodes.splice(0, 1);
                 internal.req.updateList({ list: JSON.stringify(nodes) }, function (result) {
-                    if (result.IsSuccess) {
+                    if (result.isSuccess) {
                         var top = common.getTopWindowDom();
                         reloadGrid();
                         top.win_menu_tree_dialog.close();

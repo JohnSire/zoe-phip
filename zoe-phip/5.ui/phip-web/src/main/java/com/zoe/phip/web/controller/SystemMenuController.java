@@ -4,21 +4,26 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.util.StringUtil;
+import com.zoe.phip.model.sm.MenuCompetence;
 import com.zoe.phip.model.sm.MenuData;
+import com.zoe.phip.model.sm.UserCompetence;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by zhangxingcai on 2016/3/22 0022.
+ * updated by hyf
  */
 @Controller
 @RequestMapping("/menu")
@@ -93,7 +98,8 @@ public class SystemMenuController extends BaseController {
     @ResponseBody
     public ServiceResultT<PageList<MenuData>> getMenuPageList(HttpServletRequest request, Model model) {
         String keyWord = request.getParameter("keyWord");
-        return ServiceFactory.getMenuDataService().getMenuPages(ComSession.getUserInfo(), keyWord, getQueryPage());
+        if(null==keyWord)keyWord="";
+        return ServiceFactory.getMenuDataService().getMenuList(ComSession.getUserInfo(), keyWord, getQueryPage());
     }
 
     /**
@@ -141,9 +147,12 @@ public class SystemMenuController extends BaseController {
         if(!StringUtil.isNullOrWhiteSpace(strList)){
             list = StringUtil.parseJsonArray(strList,MenuData.class);
         }
-        //to do  等纪洋底层批量的方法实现�
-        /*return ServiceFactory.getMenuDataService().updateList(ComSession.getUserInfo(), list);*/
-        for (MenuData menuData:list) {
+        // 等纪洋批量底层代码实现
+        /**
+         *
+
+        return ServiceFactory.getMenuDataService().updateList(ComSession.getUserInfo(), list);*/
+       for (MenuData menuData:list) {
             ServiceFactory.getMenuDataService().update(ComSession.getUserInfo(),menuData);
         }
         ServiceResult s= new ServiceResult();
@@ -159,5 +168,66 @@ public class SystemMenuController extends BaseController {
         return ServiceFactory.getMenuDataService().updateState(ComSession.getUserInfo(),id,state);
     }
 
+
+    /**
+     * 用户配置
+     * @param catalogId
+     * @param keyWord
+     * @return
+     */
+    @RequestMapping(value = "/getUserCfg")
+    @ResponseBody
+    public ServiceResultT<PageList<UserCompetence>> getUserCfg(@RequestParam("catalogId") String catalogId, @RequestParam("keyWord") String keyWord) {
+        return ServiceFactory.getUserCompetenceService().getUserListByCompetenceCategory(ComSession.getUserInfo(),catalogId,keyWord, getQueryPage());
+    }
+
+
+    /**
+     *添加菜单权限
+     * @param catalogId
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/addMenuAcc")
+    @ResponseBody
+    public ServiceResult addMenuAcc(@RequestParam("catalogId") String catalogId, @RequestParam("ids") String ids) {
+        List<MenuCompetence> models = new ArrayList<MenuCompetence>();
+        String [] arrayids = ids.split(",");
+        for(String  id:arrayids){
+            if(StringUtil.isNullOrWhiteSpace(id))continue;
+            MenuCompetence menu = new MenuCompetence();
+            menu.setFkCompetenceCategoryId(catalogId);
+            menu.setFkMenuId(id);
+            models.add(menu);
+        }
+        return ServiceFactory.getMenuCompetenceService().saveList(ComSession.getUserInfo(),catalogId,models);
+    }
+
+
+
+    /**
+     * 菜单配置
+     * @param catalogId
+     * @param keyWord
+     * @return
+     */
+    @RequestMapping(value = "/getMenuCfg")
+    @ResponseBody
+    public ServiceResultT<PageList<MenuData>> getMenuCfg(@RequestParam("catalogId") String catalogId, @RequestParam("keyWord") String keyWord) {
+        return ServiceFactory.getMenuCompetenceService().getMenuListByCompetenceCategory( ComSession.getUserInfo(),catalogId,keyWord, getQueryPage());
+    }
+
+
+    /**
+     * 删除菜单权限
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/delMenuAcc")
+    @ResponseBody
+    public ServiceResult delMenuAcc( @RequestParam("ids") String ids) {
+      List<String> idList = Arrays.asList( ids.split(","));
+        return ServiceFactory.getMenuCompetenceService().deleteByIds(ComSession.getUserInfo(),idList);
+    }
 
 }
