@@ -21,7 +21,11 @@ define(function (require, exports, module) {
                     item["render"] = function (rowdata, rowindex, value) {
                         var h = "";
                         for (var i = 0; i < item["icons"].length; i++) {
-                            h += internal.columnBtn[item["icons"][i]](rowdata);
+                            var iconParam = {};
+                            if (item["iconsParam"] && item["iconsParam"][item["icons"][i]]) {
+                                iconParam = item["iconsParam"][item["icons"][i]];
+                            }
+                            h += internal.columnBtn[item["icons"][i]](rowdata, iconParam, item);
                         }
                         return h;
                     }
@@ -65,19 +69,16 @@ define(function (require, exports, module) {
                 var str = "<a class='icon-grid icon-grid-del' title='删除' onclick='javascript:winDeleteGridRow(\"" + rowdata.id + "\")'></a> ";
                 return str;
             },
-            state: function (rowdata) {
-                //跟实体key对应的name（支持自动绑定）
-                // name: '',
-                //switchOff或switchOn为开关时的值：正常情况下值可以是：true,false;0,1;也可以是其他任意值
-                //switchOff: 0,
-                //switchOn: 1
-
-
-
+            switch: function (rowdata, iconParam, columnInfo) {
+                if (rowdata[columnInfo["name"]] == iconParam["switchOn"]) {
+                    return '<a href="javascript:gridChangeSwitch(\'' + iconParam["primaryKey"] + '\',\'' + rowdata[iconParam["primaryKey"]] + '\',\'' + columnInfo["name"] + '\', \'' + iconParam["switchOff"] + '\');" class="btn-switch-outer"><span class="btn-switch btn-switch-on"><b class="btn-switch-inner"></b></span></a>';
+                }
+                else {
+                    return '<a href="javascript:gridChangeSwitch(\'' + iconParam["primaryKey"] + '\',\'' + rowdata[iconParam["primaryKey"]] + '\',\'' + columnInfo["name"] + '\', \'' + iconParam["switchOn"] + '\');" class="btn-switch-outer"><span class="btn-switch btn-switch-off"><b class="btn-switch-inner"></b></span></a>';
+                }
             }
 
         }
-
     }
     window.winEditGridRow = function (id, titleDescr) {
         var dialogParam = internal.param["dialogParam"];
@@ -108,6 +109,22 @@ define(function (require, exports, module) {
             var gridObj = common.getGrid(gridId);
             gridObj.reload();
         })
+    };
+    window.gridChangeSwitch = function (primaryKeyName, primaryKeyValue, switchName, switchValue) {
+        var param = {};
+        param[primaryKeyName] = primaryKeyValue;
+        param[switchName] = switchValue;
+        var req = new Request('/menu/updateState');
+        req.post({
+            isTip: true,
+            data: param,
+            success: function (data) {
+                //common.jsmsgSuccess('状态切换成功!');
+                //var gridObj = common.getGrid("grid");
+                //gridObj.reload();
+            }
+        });
+
     };
     exports.grid = {
         build: internal.build,

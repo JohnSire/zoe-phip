@@ -28,20 +28,9 @@
                         {display: '地址', name: 'address', width: 520, align: 'left'},
                         {display: '创建时间', name: 'createAt', width: 120, align: 'left', type: 'date'},
                         {display: '创建人', name: 'createBy', width: 120, align: 'left'},
-                        {
-                            display: '状态',
-                            name: 'state',
-                            width: 80,
-                            align: "center",
-                            render: function (rowdata, index, value) {
-                                if (value == 1) {
-                                    return '<a href="javascript:changeState(\'' + rowdata.id + '\', 0);" class="btn-switch-outer"><span class="btn-switch btn-switch-on"><b class="btn-switch-inner"></b></span></a>';
-                                } else {
-                                    return '<a href="javascript:changeState(\'' + rowdata.id + '\', 1);" class="btn-switch-outer"><span class="btn-switch btn-switch-off"><b class="btn-switch-inner"></b></span></a>';
-                                }
-                            }
-                        },
+                        {display:'状态', name:'state', width:80, align:'center', icons:['switch'], iconsParam:{'switch':{switchOff: 0, switchOn: 1,confirmMeg:'确认修改状态',primaryKey:'id',url:''}}},
                         {display: '操作', isSort: false, width: 120, icons: ['edit']}
+
 
                     ],
                     usePager: false,
