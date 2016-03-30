@@ -16,6 +16,14 @@ public enum MenuCode {
         this.code=code;
     }
 
+    public static MenuCode forValue(String value) {
+        for (MenuCode type : values()) {
+            if (type.getCode() == value)
+                return type;
+        }
+        return null;
+    }
+
     public String getCode() {
         return this.code;
     }

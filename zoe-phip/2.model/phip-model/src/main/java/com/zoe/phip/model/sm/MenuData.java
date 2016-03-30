@@ -10,6 +10,7 @@ import com.zoe.phip.model.base.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,13 +55,26 @@ public class MenuData extends BaseEntity {
 //    @JSONField(name = "FkParentMenuId")
     private String fkParentMenuId;
 
-
     /**
      * 状态
      */
     @Column(name = "STATE")
 //    @JSONField(name = "State")
     private int state;
+
+
+    public MenuData(){
+
+    }
+
+    public MenuData(String name, String uri, String code,int state, int sort){
+        this.name=name;
+        this.address=uri;
+        this.code=code;
+        this.sort=sort;
+        this.state=state;
+        this.children=new ArrayList<>();
+    }
 
     /**
      * 子节点

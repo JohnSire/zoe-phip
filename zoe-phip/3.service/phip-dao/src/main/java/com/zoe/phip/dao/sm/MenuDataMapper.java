@@ -83,4 +83,11 @@ public interface MenuDataMapper extends MyMapper<MenuData> {
      * @throws Exception
      */
     PageList<MenuData> getMenuList( String key, QueryPage page) throws Exception;
+
+    /**
+     * 插入菜单及其子菜单
+     * @param menuData
+     * @return
+     */
+    boolean insertMenuData(List<MenuData> menuData);
 }

@@ -88,6 +88,17 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
     }
 
     @Override
+    public boolean insertMenuData(List<MenuData> menuData) {
+        menuData.forEach(e->{
+            e.setId(StringUtil.getUUID());
+            e.children.forEach(c->{
+                c.setId(StringUtil.getUUID());
+            });
+        });
+        return getMapper().insertMenuData(menuData);
+    }
+
+    @Override
     public List<MenuData> getMenus(String key) throws Exception {
         Example example = new Example(MenuData.class);
         Example.Criteria criteria = example.createCriteria().andLike("name", key);
@@ -137,9 +148,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
             findChildNodes(t, map);
             data.add(t);
         });
-
         map.clear();
-        System.out.println(menus.size());
         return data;
     }
 

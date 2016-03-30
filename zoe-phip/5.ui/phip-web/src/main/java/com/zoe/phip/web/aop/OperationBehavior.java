@@ -3,6 +3,7 @@ package com.zoe.phip.web.aop;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.zoe.phip.infrastructure.entity.ErrorCode;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -63,7 +64,13 @@ public class OperationBehavior {
             result = joinPoint.proceed();
         } catch (Throwable e) {
             logger.error("error:", e);
-            ServiceResult executeResult = new ServiceResult();
+            ServiceResult executeResult;
+            if(cl==ServiceResult.class){
+                executeResult = new ServiceResult();
+            }else {
+                executeResult = new ServiceResultT();
+            }
+            executeResult.addMessage("",e.toString());
             executeResult.addLogData(e.toString());
             executeResult.addLogData(SafeExecuteUtil.getStackMsg(e));
             executeResult.setIsSuccess(false);

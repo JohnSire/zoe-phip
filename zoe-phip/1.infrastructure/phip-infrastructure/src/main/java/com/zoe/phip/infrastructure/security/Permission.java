@@ -6,6 +6,7 @@ package com.zoe.phip.infrastructure.security;
  */
 public enum Permission {
 
+    View(0),
     Query(1),
     Add(2),
     Edit(3),
