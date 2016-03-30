@@ -52,4 +52,31 @@
             #{key,jdbcType=VARCHAR} OR UPPER(ADDRESS) LIKE #{key,jdbcType=VARCHAR})</if>
     </select>
 
+    <update id="updateList"  parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
+        update SYS_MENU_DATA
+        <set>
+            <if test="item.name != null">
+                NAME = #{item.name,jdbcType=VARCHAR},
+            </if>
+            <if test="item.code != null">
+                CODE = #{item.code,jdbcType=DECIMAL},
+            </if>
+            <if test="item.address != null">
+                ADDRESS = #{item.address,jdbcType=VARCHAR},
+            </if>
+            <if test="item.fkParentMenuId != null">
+                FK_PARENT_MENU_ID = #{item.fkParentMenuId,jdbcType=VARCHAR},
+            </if>
+            <if test="item.modifyBy != null">
+                MODIFY_BY = #{item.modifyBy,jdbcType=VARCHAR},
+            </if>
+            <if test="item.state != null">
+                STATE = #{item.state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{item.id};
+    </foreach>
+    </update>
 </mapper>

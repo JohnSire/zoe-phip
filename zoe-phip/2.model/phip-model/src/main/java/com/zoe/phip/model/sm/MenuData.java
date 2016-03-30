@@ -152,6 +152,6 @@ public class MenuData extends BaseEntity {
     /// <summary>
     /// 菜单路径
     /// </summary>
-    @Column(name = "NAME_PATH")
+    @Transient
     public String namePath;
 }
