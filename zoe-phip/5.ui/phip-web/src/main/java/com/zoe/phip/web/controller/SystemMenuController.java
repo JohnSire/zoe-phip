@@ -145,17 +145,9 @@ public class SystemMenuController extends BaseController {
         if(!StringUtil.isNullOrWhiteSpace(strList)){
             list = StringUtil.parseJsonArray(strList,MenuData.class);
         }
-        // 等纪洋批量底层代码实现
-        /**
-         *
 
-        return ServiceFactory.getMenuDataService().updateList(ComSession.getUserInfo(), list);*/
-       for (MenuData menuData:list) {
-            ServiceFactory.getMenuDataService().update(ComSession.getUserInfo(),menuData);
-        }
-        ServiceResult s= new ServiceResult();
-        s.setIsSuccess(true);
-        return s;
+        ServiceResult result =ServiceFactory.getMenuDataService().updateList(ComSession.getUserInfo(), list);
+        return result;
     }
 
 

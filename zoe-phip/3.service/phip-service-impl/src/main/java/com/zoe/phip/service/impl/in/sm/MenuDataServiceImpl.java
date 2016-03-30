@@ -76,7 +76,6 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
     @Override
     public PageList<MenuData> getMenuList( String key, QueryPage queryPage) throws Exception {
         PageList<MenuData> pageList = new PageList<MenuData>();
-        Example example = new Example(MenuData.class);
         //分页
         SqlHelper.startPage(queryPage);
         Map<String, Object> paras = new HashMap<String, Object>();
