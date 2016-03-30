@@ -9,7 +9,7 @@
         catalogId: "",
         buildGrid: function () {
             var gridParam = $.extend(true, {}, internal.gridParam());
-            gridParam.url = webRoot + "SystemMenu/GetMenuCfg";
+            gridParam.url = webRoot + "/menu/getMenuCfg";
             $("#catalogGrid").removeAttr("ligeruiid").empty();
             internal.grid = $("#catalogGrid").ligerGrid(gridParam);
         },
@@ -56,7 +56,7 @@
                     align: 'center',
                     render: function (rowdata, rowindex, value) {
                         var h = "";
-                        h += "<a class='icon-grid icon-grid-del' title='取消关联' onclick='javascript:delMenu(\"" + rowdata.CompetenceId + "\",\"" + rowindex + "\")'></a> ";
+                        h += "<a class='icon-grid icon-grid-del' title='取消关联' onclick='javascript:delMenu(\"" + rowdata.competenceId + "\",\"" + rowindex + "\")'></a> ";
                         return h;
                     }
                 }],
@@ -71,7 +71,7 @@
             var message = hasChildren ? "是否删除该菜单及下级菜单权限关联?" : "是否删除该菜单权限关联?";
             $.ligerDialog.confirm(message, function (yes) {
                 if (yes) {
-                    var req = new Request("systemMenu/DelMenuAcc");
+                    var req = new Request("/menu/delMenuAcc");
                     req.post({
                         data: { ids: ids },
                         success: function (data) {

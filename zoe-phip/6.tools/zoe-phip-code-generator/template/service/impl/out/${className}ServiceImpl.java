@@ -22,8 +22,6 @@
  * @date ${now?string("yyyy-MM-dd")}
  */
 @Service("out${className?cap_first}Service")
-public class $ {
-    className
-}Impl extends ${className}Service{
+public class ${className}Impl extends ${className}Service{
 
         }
