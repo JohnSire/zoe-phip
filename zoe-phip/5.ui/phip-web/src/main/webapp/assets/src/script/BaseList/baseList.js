@@ -311,6 +311,7 @@
                 var url = "/menu/getMenuList";
                 var req = new Request(url);
                 req.post({
+                    isTip:false,
                     data: { "keyWord": key },
                     success: function (data) {
                         if (data.result) {
