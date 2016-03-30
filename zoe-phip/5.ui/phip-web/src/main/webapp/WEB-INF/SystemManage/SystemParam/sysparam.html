@@ -1,5 +1,5 @@
 ﻿<%
-var scriptSection={
+var baseScriptSection={
 %>
 <script type="text/javascript">
     $(function () {
@@ -42,5 +42,5 @@ var bodySection = {
 
 <%};%>
 <%
-include("/WEB-INF/shared/_default.html",{title:"系统参数",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_default.html",{baseTitle:"系统参数",baseStyleSection:styleSection,baseBodySection:bodySection,baseScriptSection:scriptSection}){}
 %>
