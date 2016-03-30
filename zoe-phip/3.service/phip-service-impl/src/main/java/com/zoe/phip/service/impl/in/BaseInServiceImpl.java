@@ -85,8 +85,9 @@ public abstract class BaseInServiceImpl<T extends BaseEntity, TMapper extends My
     }
 
     @Override
-    public int updateList(List<T> entities) throws Exception {
-        return mapper.updateList(entities);
+    public boolean updateList(List<T> entities) throws Exception {
+        mapper.updateList(entities);
+        return true;
     }
 
     @Override

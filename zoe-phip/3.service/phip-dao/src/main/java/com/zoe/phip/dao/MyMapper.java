@@ -18,7 +18,7 @@ public interface MyMapper<T extends BaseEntity> extends Mapper<T> {
 
     //todo 批量更新？
     @Deprecated
-    int updateList(List<T> entities) throws Exception;
+    boolean updateList(List<T> entities) throws Exception;
 
 
 }

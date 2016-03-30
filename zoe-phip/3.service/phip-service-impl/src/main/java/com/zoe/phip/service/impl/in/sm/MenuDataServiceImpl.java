@@ -40,7 +40,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
         example.createCriteria().andEqualTo("code", entity.getCode());
         List<MenuData> dataList = getMapper().selectByExample(example);
         if (dataList != null && dataList.size() > 0) {
-            throw new BusinessException("该菜单{0}已存", entity.getCode());
+            throw new BusinessException("该菜单{0}已存在", entity.getCode());
         } else {
             return getMapper().insertSelective(entity);
         }
@@ -107,9 +107,6 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
 
     @Override
     public MenuData getById(String id) {
-        /*Example example = new Example(MenuData.class);
-        Example.Criteria criteria = example.createCriteria().andEqualTo("menuId", id);
-        example.or(criteria);*/
         return getMenuById(id);
     }
 
@@ -145,7 +142,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
     public List<MenuData> getCompetenceMenuByUser(String userId) throws Exception {
         List<MenuData> menus = getMapper().getCompetenceMenuByUser(userId);
         if (menus.size() == 0) {
-            throw new BusinessException("还没有为该用户分配菜�");
+            throw new BusinessException("还没有为该用户分配菜单");
         }
         Map<String, List<MenuData>> map = new HashMap<>();
         menus.forEach(m -> {
