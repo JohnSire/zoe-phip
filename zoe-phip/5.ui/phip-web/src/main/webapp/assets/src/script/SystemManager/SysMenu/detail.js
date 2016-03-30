@@ -9,15 +9,7 @@
                 addUrl: webRoot + '/menu/addMenuInfo',//新增接口Url
                 updateUrl: webRoot + '/menu/updateMenuInfo',//修改接口Url
                 loadPageEvent: function () {
-                    //var type = common.getParamFromUrl("state");
-                    //if (type == "edit") {
-                    //    $("#liPwd").remove();
-                    //    $("#liResetPwd").show();
-                    //}
-                    //else {
-                    //    $("#liPwd").show();
-                    //    $("#liResetPwd").remove();
-                    //}
+                    $(".btn-switch-outer").btnSwitch({name: 'state'});
                 }
             })
         }

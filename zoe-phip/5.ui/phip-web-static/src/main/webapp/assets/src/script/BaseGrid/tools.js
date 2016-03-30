@@ -67,7 +67,7 @@ define(function (require, exports, module) {
                 var jqLi = $("<li></li>").addClass("list").on("click", function () {
                     if (typeof (searchCallback) == "function") {
                         $.each(searchBoxParam, function (index, item) {
-                            data[item["name"]] = $(".tools-search-box").find("[name='" + item["name"] + "']").val();
+                            data[item["name"]] = $("#gridTools").find("[name='" + item["name"] + "']").val();
                         });
                         searchCallback(data);
                     }
