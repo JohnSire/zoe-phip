@@ -66,7 +66,7 @@
                             var listData = [];
                             if (data) {
                                 $.each(data, function (index, item) {
-                                    listData.push(item["Id"]);
+                                    listData.push(item["id"]);
                                 })
                             }
                             var req = new Request("/menu/addMenuAcc");
@@ -89,7 +89,7 @@
     }
     var menuTypeTree = {
         init: function () {
-            var req = new Request("/dict/getSysDictItemListByCode");
+            var req = new Request("/dict/getItemList");
             req.post({
                 isTip: false,
                 async: true,

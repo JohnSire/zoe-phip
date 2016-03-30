@@ -50,7 +50,7 @@
                 },
                 {
                     display: '操作',
-                    name: 'KeyCode',
+                    name: 'keyCode',
                     isSort: false,
                     width: 60,
                     align: 'center',

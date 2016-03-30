@@ -257,7 +257,7 @@
                 { display: '登录名', name: 'loginName', width: 265, align: 'left' }
             ],
             get: function (key, callback) {
-                var url = "SystemUser/GetUserList";
+                var url = "/user/list";
                 var req = new Request(url);
                 req.post({
                     data: { "keyWord": key },
@@ -308,10 +308,10 @@
                 }
             ],
             get: function (key, callback) {
-                var url = "SystemMenu/GetMenuList";
+                var url = "/menu/getMenuList";
                 var req = new Request(url);
                 req.post({
-                    data: { "KeyWord": key },
+                    data: { "keyWord": key },
                     success: function (data) {
                         if (data.result) {
                             var enableData = [];
