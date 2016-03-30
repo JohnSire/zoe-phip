@@ -1,10 +1,11 @@
-﻿var scriptSection={
+﻿<%
+var scriptSection={
 %>
 <script type="text/javascript">
     var top = common.getTopWindowDom();
     top.location.href = "${ctxPath}/frame/login";
 </script>
 <%};%>
-include("/WEB-INF/shared/_default.html",{title:"skip",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_default.html",{baseTitle:"skip",baseStyleSection:styleSection,baseBodySection:bodySection,baseScriptSection:scriptSection}){}
 %>
 

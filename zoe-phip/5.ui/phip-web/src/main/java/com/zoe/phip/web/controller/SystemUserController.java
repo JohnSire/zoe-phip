@@ -86,11 +86,11 @@ public class SystemUserController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/info", method = RequestMethod.POST)
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
     public ServiceResultT<SystemUser> getUserInfo(HttpServletRequest request, Model model) {
-        SystemData userInfo = ComSession.getUserInfo();
-        ServiceResultT<SystemUser> user = ServiceFactory.getUserService().getById(ComSession.getUserInfo(), userInfo.getUserId());
+        String id = request.getParameter("id");
+        ServiceResultT<SystemUser> user = ServiceFactory.getUserService().getById(ComSession.getUserInfo(),id );
         return user;
     }
 
@@ -166,7 +166,6 @@ public class SystemUserController extends BaseController {
     public ServiceResultT<List<MenuData>> getUserMenu() {
         return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(), ComSession.getUserInfo().getUserId());
     }
-
     //endregion
 
 }

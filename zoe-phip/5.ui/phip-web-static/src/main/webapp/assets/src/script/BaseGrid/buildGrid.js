@@ -44,7 +44,6 @@ define(function (require, exports, module) {
                     ids = ids.substr(1, ids.length);
                 }
                 internal.req.deleteList({ url: options["deleteUrl"]["deleteList"], ids: ids }, function () {
-                    // var gridObj = liger.get("gridObj");
                     var gridId = options["gridId"];
                     var gridObj = common.getGrid(gridId);
                     gridObj.reload();

@@ -23,8 +23,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/menu")
 public class SystemMenuController extends BaseController {
-
-
     //菜单页面
     @RequestMapping("/view/list")
     public String ToMenuList(HttpServletRequest request, Model model) {

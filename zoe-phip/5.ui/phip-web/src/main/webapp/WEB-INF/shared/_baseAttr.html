@@ -1,27 +1,29 @@
-﻿<%
-var styleSection = {
+<%
+var baseTitle={
 %>
-<link href="/assets/dist/style/layout.css" rel="stylesheet"/>
+${title}
 <%};%>
 <%
-var bodySection = {
+var baseStyleSection = {
+%>
+<link href="/assets/dist/style/layout.css" rel="stylesheet"/>
+${styleSection}
+<%};%>
+<%
+var baseBodySection = {
 %>
 <form id="baseAttrForm" onsubmit="return false;">
     <span class="text-up-tips tips-error" style="display:none;"><i class="text-up-tips-arrow arrow-red"></i><span
             class="msg"></span></span>
-    ${bodySectionInner}
+    ${bodySection}
 </form>
 <%};%>
 <%
-var scriptSection={
+var baseScriptSection={
 %>
-<script type="text/javascript">
-    $(function () {
-        //common.validformObj = common.validform();
-    })
-</script>
+${scriptSection}
 <%};%>
 <%
-include("/WEB-INF/shared/_default.html",{styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/Shared/_default.html",{baseTitle:baseTitle,baseStyleSection:baseStyleSection,baseBodySection:baseBodySection,baseScriptSection:baseScriptSection}){}
 %>
 
