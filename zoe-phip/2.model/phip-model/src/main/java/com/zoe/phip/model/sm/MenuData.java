@@ -55,8 +55,13 @@ public class MenuData extends BaseEntity {
 //    @JSONField(name = "FkParentMenuId")
     private String fkParentMenuId;
 
+    private MenuData parentMenu;
+
+
+
+
     /**
-     * 状态
+     * 状�
      */
     @Column(name = "STATE")
 //    @JSONField(name = "State")
@@ -77,7 +82,7 @@ public class MenuData extends BaseEntity {
     }
 
     /**
-     * 子节点
+     * 子节�
      */
     @Transient
 //    @JSONField(name = "Childrens")
@@ -131,6 +136,13 @@ public class MenuData extends BaseEntity {
         this.fkParentMenuId = fkParentMenuId;
     }
 
+    public MenuData getParentMenu() {
+        return parentMenu;
+    }
+
+    public void setParentMenu(MenuData parentMenu) {
+        this.parentMenu = parentMenu;
+    }
 
     public int getState() {
         return this.state;
@@ -161,7 +173,7 @@ public class MenuData extends BaseEntity {
     }
 
     /// <summary>
-    /// 对应的权限标识
+    /// 对应的权限标�
     /// </summary>
     @Transient
     @Column(name = "COMPETENCE_ID")

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.dao.sm.MenuDataMapper">
     <resultMap id="MultiBaseResultMap" type="com.zoe.phip.model.sm.MenuData" extends="BaseResultMap">
-        <!--<collection property="children" column="ID" select="getMenusByParentId" ></collection>-->
+        <association property="parentMenu" column="FK_PARENT_MENU_ID" select="getParentMenuById" fetchType="lazy"/>
     </resultMap>
 
     <!--<select id="getMenusByParentId" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
@@ -22,6 +22,22 @@
         order by t.CODE
     </select>
 
+    <select id="getMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap" >
+        SELECT *
+        from SYS_MENU_DATA t
+        WHERE t.ID=#{menuId}
+    </select>
+
+
+    <select id="getParentMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
+        SELECT *
+        from SYS_MENU_DATA t
+        WHERE t.ID=#{menuId}
+      /*  SELECT *
+        from SYS_MENU_DATA t1,SYS_MENU_DATA t2
+        WHERE 1=1 AND t1.STATE = 1 AND t1.ID=t2.FK_PARENT_MENU_ID AND t1.ID=#{menuId}*/
+
+    </select>
     <select id="getMenuPages" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
 --         SELECT *
 --         FROM SYS_MENU_DATA t

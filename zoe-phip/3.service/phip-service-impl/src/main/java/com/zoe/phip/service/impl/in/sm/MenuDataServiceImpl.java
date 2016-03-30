@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import com.zoe.phip.dao.sm.MenuDataMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.MenuData;
@@ -39,7 +40,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
         example.createCriteria().andEqualTo("code", entity.getCode());
         List<MenuData> dataList = getMapper().selectByExample(example);
         if (dataList != null && dataList.size() > 0) {
-            throw new BusinessException("该菜单{0}已存在", entity.getCode());
+            throw new BusinessException("该菜单{0}已存", entity.getCode());
         } else {
             return getMapper().insertSelective(entity);
         }
@@ -96,6 +97,15 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
             });
         });
         return getMapper().insertMenuData(menuData);
+
+    }
+
+    @Override
+    public MenuData getParentMenuById(SystemData systemData, String id) {
+        Example example = new Example(MenuData.class);
+        Example.Criteria criteria = example.createCriteria().andEqualTo("menuId", id);
+        example.or(criteria);
+        return getMapper().selectByPrimaryKey(example);
     }
 
     @Override
@@ -130,7 +140,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
     public List<MenuData> getCompetenceMenuByUser(String userId) throws Exception {
         List<MenuData> menus = getMapper().getCompetenceMenuByUser(userId);
         if (menus.size() == 0) {
-            throw new BusinessException("还没有为该用户分配菜单!");
+            throw new BusinessException("还没有为该用户分配菜�");
         }
         Map<String, List<MenuData>> map = new HashMap<>();
         menus.forEach(m -> {
@@ -156,7 +166,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
     public int updateState(String id, int state) throws Exception {
         MenuData menuData = getMapper().selectByPrimaryKey(id);
         if(menuData == null){
-            throw new BusinessException("未找到该菜单！");
+            throw new BusinessException("未找到该菜单");
         }
         menuData.setState(state);
         menuData.setModifyAt(new Date());
@@ -175,4 +185,6 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
             });
         }
     }
+
+
 }

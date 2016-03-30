@@ -84,4 +84,13 @@ public interface MenuDataService extends BaseInService<MenuData> {
      * @return
      */
     ServiceResultT<PageList<MenuData>> getMenuList(SystemData systemData, String key, QueryPage page);
+
+
+    /**
+     * 获取父级菜单
+     * @param systemData
+     * @param id
+     * @return
+     */
+    ServiceResultT<MenuData> getParentMenuById(SystemData systemData, String id);
 }
