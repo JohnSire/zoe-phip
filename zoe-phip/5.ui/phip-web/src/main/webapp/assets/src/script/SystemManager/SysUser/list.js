@@ -5,8 +5,8 @@
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
                 deleteUrl: {
-                    deleteInfo: "/user/delete",
-                    deleteList: "/user/delete/all"
+                    deleteInfo: "/user/delUserInOF",
+                    deleteList: "/user/delUserList"
                 },
                 tools: {
                     btnbox: {
@@ -18,7 +18,7 @@
                     ]
                 },
                 gridParam: {
-                    url: webRoot + '/user/list',
+                    url: webRoot + '/user/getUserList',
                     columns: [
                         {display: '名称', name: 'name', width: 120, align: 'left'},
                         {display: '登录名', name: 'loginName', width: 120, align: 'left'},
@@ -47,7 +47,7 @@
                     //编辑参数
                     edit: {title: "编辑用户"},
                     common: {
-                        url: webRoot + '/user/view/detail',
+                        url: webRoot + '/user/detail',
                         width: 360,
                         height: 260
                     }
