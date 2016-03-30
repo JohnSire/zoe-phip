@@ -58,7 +58,7 @@
                 NAME = #{item.name,jdbcType=VARCHAR},
             </if>
             <if test="item.code != null">
-                CODE = #{item.code,jdbcType=DECIMAL},
+                CODE = #{item.code,jdbcType=VARCHAR},
             </if>
             <if test="item.address != null">
                 ADDRESS = #{item.address,jdbcType=VARCHAR},
@@ -70,7 +70,10 @@
                 MODIFY_BY = #{item.modifyBy,jdbcType=VARCHAR},
             </if>
             <if test="item.state != null">
-                STATE = #{item.state,jdbcType=DECIMAL},
+                STATE = #{item.state,jdbcType=INTEGER},
+            </if>
+            <if test="item.sort != null">
+                SORT = #{item.sort,jdbcType=INTEGER},
             </if>
             MODIFY_AT=sysdate
         </set>
