@@ -25,7 +25,7 @@ public interface MenuDataMapper extends MyMapper<MenuData> {
 
 
     /**
-     * 通过关键字分页获取菜单列表
+     * 通过关键字分页获取菜单列�
      * @param key
      * @param page
      * @return
@@ -34,7 +34,7 @@ public interface MenuDataMapper extends MyMapper<MenuData> {
     PageList<MenuData> getMenuPages(String key, QueryPage page) throws Exception;
 
     /**
-     * 通过关键字获取菜单列表
+     * 通过关键字获取菜单列�
      * @param key
      * @return
      * @throws Exception
@@ -50,7 +50,7 @@ public interface MenuDataMapper extends MyMapper<MenuData> {
     List<MenuData> getMenuByCode(String code) throws Exception;
 
     /**
-     * 获取子菜单
+     * 获取子菜�
      * @param parentMenuId
      * @return
      * @throws Exception
@@ -58,7 +58,7 @@ public interface MenuDataMapper extends MyMapper<MenuData> {
     List<MenuData> getChildMenus(String parentMenuId) throws Exception;
 
     /**
-     * 获取用户的菜单权限
+     * 获取用户的菜单权�
      * @param userId
      * @return
      * @throws Exception
@@ -66,7 +66,7 @@ public interface MenuDataMapper extends MyMapper<MenuData> {
     List<MenuData> getCompetenceMenuByUser(String userId) throws Exception;
 
     /**
-     * 更新菜单状态
+     * 更新菜单状�
      * @param id
      * @param state
      * @return
@@ -76,11 +76,21 @@ public interface MenuDataMapper extends MyMapper<MenuData> {
 
 
     /**
-     * 关键字查询菜单数据
+     * 关键字查询菜单数�
      * @param key
      * @param page
      * @return
      * @throws Exception
      */
     PageList<MenuData> getMenuList( String key, QueryPage page) throws Exception;
+
+    /**
+     * 插入菜单及其子菜�
+     * @param menuData
+     * @return
+     */
+    boolean insertMenuData(List<MenuData> menuData);
+
+
+    MenuData getMenuById(String id);
 }

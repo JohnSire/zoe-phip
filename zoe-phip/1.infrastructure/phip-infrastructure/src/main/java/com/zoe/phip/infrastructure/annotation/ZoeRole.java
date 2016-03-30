@@ -8,10 +8,10 @@ import java.lang.annotation.*;
 /**
  * Created by zengjiyang on 2016/3/29.
  */
-@Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
+@Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface  Role {
+public @interface ZoeRole {
     /**
      * 权限
      * @return
@@ -22,6 +22,6 @@ public @interface  Role {
      * 菜单编码
      * @return
      */
-    MenuCode code();
+    MenuCode[] code();
 
 }

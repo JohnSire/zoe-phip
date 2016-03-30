@@ -9,6 +9,8 @@
         <result column="NAME_PATH" property="namePath" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
 
+
+
     <select id="getMenuListByCompetenceCategory" resultMap="MenuDataResultMap" parameterType="java.util.Map">
  SELECT MC.ID COMPETENCE_ID,
       t.ID,

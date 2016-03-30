@@ -2,7 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.dao.sm.MenuDataMapper">
     <resultMap id="MultiBaseResultMap" type="com.zoe.phip.model.sm.MenuData" extends="BaseResultMap">
+        <association property="parentMenu" column="FK_PARENT_MENU_ID" select="getParentMenuById" fetchType="lazy"/>
     </resultMap>
+
+    <!--<select id="getMenusByParentId" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
+        SELECT *
+        FROM SYS_MENU_DATA
+        WHERE STATE=1 AND FK_PARENT_MENU_ID=#{id,jdbcType=VARCHAR}
+    </select>-->
 
     <select id="getCompetenceMenuByUser" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
         SELECT DISTINCT t.ID, t.NAME, t.CODE, t.ADDRESS, t.FK_PARENT_MENU_ID, t.CREATE_AT, t.CREATE_BY, t.MODIFY_AT,
@@ -15,6 +22,18 @@
         order by t.CODE
     </select>
 
+    <select id="getMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap" >
+        SELECT *
+        from SYS_MENU_DATA t
+        WHERE t.ID=#{id}
+    </select>
+
+
+    <select id="getParentMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
+        SELECT *
+        from SYS_MENU_DATA t
+        WHERE t.ID=#{id}
+    </select>
     <select id="getMenuPages" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
 --         SELECT *
 --         FROM SYS_MENU_DATA t
@@ -24,5 +43,31 @@
       where regexp_like(t.address,'+#{key,jdbcType=VARCHAR}+','i')
 
     </select>
+
+    <insert id="insertMenuData" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="begin" close="end;">
+            insert into SYS_MENU_DATA(ID,NAME,CODE,ADDRESS,STATE,SORT)
+            values(
+            #{item.id,jdbcType=VARCHAR},
+            #{item.name,jdbcType=VARCHAR},
+            #{item.code,jdbcType=VARCHAR},
+            #{item.address,jdbcType=VARCHAR},
+            #{item.state,jdbcType=INTEGER},
+            #{item.sort,jdbcType=INTEGER}
+            );
+            <foreach collection="item.children" item="detail" index="index">
+                insert into SYS_MENU_DATA(ID,NAME ,CODE,ADDRESS,STATE,SORT,FK_PARENT_MENU_ID)
+                values(
+                #{detail.id,jdbcType=VARCHAR},
+                #{detail.name,jdbcType=VARCHAR},
+                #{detail.code,jdbcType=VARCHAR},
+                #{detail.address,jdbcType=VARCHAR},
+                #{detail.state,jdbcType=INTEGER},
+                #{detail.sort,jdbcType=INTEGER},
+                #{item.id,jdbcType=VARCHAR}
+                );
+            </foreach>
+        </foreach>
+    </insert>
 
 </mapper>

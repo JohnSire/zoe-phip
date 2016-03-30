@@ -10,6 +10,7 @@ import com.zoe.phip.model.base.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,16 +55,35 @@ public class MenuData extends BaseEntity {
 //    @JSONField(name = "FkParentMenuId")
     private String fkParentMenuId;
 
+    @Transient
+    private MenuData parentMenu;
+
+
+
 
     /**
-     * 状态
+     * 状�
      */
     @Column(name = "STATE")
 //    @JSONField(name = "State")
     private int state;
 
+
+    public MenuData(){
+
+    }
+
+    public MenuData(String name, String uri, String code,int state, int sort){
+        this.name=name;
+        this.address=uri;
+        this.code=code;
+        this.sort=sort;
+        this.state=state;
+        this.children=new ArrayList<>();
+    }
+
     /**
-     * 子节点
+     * 子节�
      */
     @Transient
 //    @JSONField(name = "Childrens")
@@ -117,6 +137,13 @@ public class MenuData extends BaseEntity {
         this.fkParentMenuId = fkParentMenuId;
     }
 
+    public MenuData getParentMenu() {
+        return parentMenu;
+    }
+
+    public void setParentMenu(MenuData parentMenu) {
+        this.parentMenu = parentMenu;
+    }
 
     public int getState() {
         return this.state;
@@ -147,7 +174,7 @@ public class MenuData extends BaseEntity {
     }
 
     /// <summary>
-    /// 对应的权限标识
+    /// 对应的权限标�
     /// </summary>
     @Transient
     @Column(name = "COMPETENCE_ID")
