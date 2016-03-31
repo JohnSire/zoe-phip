@@ -3,6 +3,7 @@ package com.zoe.phip.service.in;
 
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.model.base.BaseEntity;
+import com.zoe.phip.model.base.MasterEntity;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * 内部服务基接口
  * Created by zengjiyang on 2016/1/25.
  */
-public interface BaseInService<T extends BaseEntity> {
+public interface BaseInService<T extends MasterEntity> {
 
     /**
      * 新增

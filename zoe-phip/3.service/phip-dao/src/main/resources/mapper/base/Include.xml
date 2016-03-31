@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.dao">
+    <resultMap id="BaseEntityResultMap" type="com.zoe.phip.model.base.BaseEntity">
+        <id column="ID" property="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CREATE_AT" property="createAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_BY" property="createBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="MasterEntityResultMap" type="com.zoe.phip.model.base.MasterEntity" extends="BaseEntityResultMap">
+        <result column="MODIFY_AT" property="modifyAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        <result column="MODIFY_BY" property="modifyBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="STATE" property="state" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="baseEntitySelect">
+         #{item.id,jdbcType=VARCHAR},
+         #{item.createAt,jdbcType=TIMESTAMP},
+         #{item.createBy,jdbcType=VARCHAR}
+    </sql>
+    <sql id="baseMasterEntitySelect">
+         <include refid="com.zoe.phip.dao.baseEntitySelect"/>,
+         #{item.modifyAt,jdbcType=TIMESTAMP},
+         #{item.modifyBy,jdbcType=VARCHAR},
+         #{item.state,jdbcType=INTEGER}
+    </sql>
+    <sql id="baseEntityInsert">ID,CREATE_AT,CREATE_BY</sql>
+    <sql id="baseMasterEntityInsert">
+        <include refid="com.zoe.phip.dao.baseEntityInsert"/>,
+         MODIFY_AT,MODIFY_BY,STATE
+    </sql>
+    <sql id="orderSort">
+        <choose>
+            <when test="_parameter.containsKey('sortOrder')">
+                ${sortOrder}
+            </when>
+            <otherwise>
+                DESC
+            </otherwise>
+        </choose>
+    </sql>
+    <sql id="orderBy">
+        ORDER BY
+        <choose>
+            <when test="_parameter.containsKey('order')">
+                ${order}
+            </when>
+            <otherwise>
+                ${prefix}CREATE_AT
+            </otherwise>
+        </choose>
+        <choose>
+            <when test="_parameter.containsKey('sortOrder')">
+                ${sortOrder}
+            </when>
+            <otherwise>
+                DESC
+            </otherwise>
+        </choose>
+    </sql>
+    <sql id="selfWhere">
+    </sql>
+</mapper>

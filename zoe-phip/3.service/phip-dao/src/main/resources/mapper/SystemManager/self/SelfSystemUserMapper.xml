@@ -9,5 +9,7 @@
         <if test="_parameter.containsKey('state')">
             AND STATE = #{state,jdbcType=INTEGER}
         </if>
+        <include refid="com.zoe.phip.dao.selfWhere"/>
+        <include refid="com.zoe.phip.dao.orderBy"/>
     </select>
 </mapper>

@@ -6,6 +6,7 @@
 package com.zoe.phip.model.sm;
 
 import com.zoe.phip.model.base.BaseEntity;
+import com.zoe.phip.model.base.MasterEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -19,7 +20,7 @@ import java.util.List;
  * @date 2016-03-21
  */
 @Table(name = "SYS_MENU_DATA")
-public class MenuData extends BaseEntity {
+public class MenuData extends MasterEntity {
 
 
     /**

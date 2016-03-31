@@ -6,6 +6,7 @@ package com.zoe.phip.model.sm;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.model.base.BaseEntity;
+import com.zoe.phip.model.base.MasterEntity;
 
 import javax.persistence.*;
 
@@ -15,7 +16,7 @@ import javax.persistence.*;
  * @date 2016-03-18
  */
 @Table(name = "SYS_SYSTEM_USER")
-public class SystemUser extends BaseEntity {
+public class SystemUser extends MasterEntity {
 
     /**
      * 名称

@@ -106,6 +106,8 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, SystemU
         if (state != null) {
             paras.put("state", state);
         }
+        SqlHelper.setOrder(paras,queryPage);
+
         List<SystemUser> results = getMapper().getUserList(paras);
         PageInfo<SystemUser> pageInfo = new PageInfo<SystemUser>(results);
         pageList.setTotal((int) pageInfo.getTotal());

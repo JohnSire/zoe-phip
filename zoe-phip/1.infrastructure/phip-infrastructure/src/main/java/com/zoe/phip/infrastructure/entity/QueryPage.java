@@ -9,12 +9,14 @@ import java.io.Serializable;
  */
 public class QueryPage implements Serializable {
 
-//    @JSONField(name = "PageNum")
+    //    @JSONField(name = "PageNum")
     private int pageNum;
-//    @JSONField(name = "PageSize")
+    //    @JSONField(name = "PageSize")
     private int pageSize;
-//    @JSONField(name = "OrderBy")
+    //    @JSONField(name = "OrderBy")
     private String orderBy;
+
+    private SortOrder sortOrder;
 
     public QueryPage() {
         this.pageNum = 1;
@@ -39,6 +41,14 @@ public class QueryPage implements Serializable {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.orderBy = orderBy;
+        this.sortOrder = SortOrder.DESC;
+    }
+
+    public QueryPage(int pageNum, int pageSize, String orderBy, SortOrder sortOrder) {
+        this.pageNum = pageNum;
+        this.pageSize = pageSize;
+        this.orderBy = orderBy;
+        this.sortOrder = sortOrder;
     }
 
     public int getPageNum() {
@@ -63,5 +73,13 @@ public class QueryPage implements Serializable {
 
     public void setOrderBy(String orderBy) {
         this.orderBy = orderBy;
+    }
+
+    public SortOrder getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(SortOrder sortOrder) {
+        this.sortOrder = sortOrder;
     }
 }
