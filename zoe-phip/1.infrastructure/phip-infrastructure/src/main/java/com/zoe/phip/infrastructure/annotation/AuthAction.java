@@ -1,17 +1,16 @@
 package com.zoe.phip.infrastructure.annotation;
 
-import com.zoe.phip.infrastructure.security.MenuCode;
 import com.zoe.phip.infrastructure.security.Permission;
 
 import java.lang.annotation.*;
 
 /**
- * Created by zengjiyang on 2016/3/29.
+ * Created by zengjiyang on 2016/3/31.
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface ZoeRole {
+public @interface AuthAction {
     /**
      * 权限
      * @return
@@ -19,9 +18,8 @@ public @interface ZoeRole {
     Permission[] permission();
 
     /**
-     * 菜单编码
+     * 中文名称
      * @return
      */
-    MenuCode[] code();
-
+    String name();
 }
