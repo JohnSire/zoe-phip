@@ -30,14 +30,14 @@ define(function (require, exports, module) {
                             return true;
                         }
                     },
-                    onSelectRow:function(rowdata, rowid, rowobj){
-                        var itemGrid=liger.get("dictItemGrid");
-                        if(itemGrid) {
+                    onSelectRow: function (rowdata, rowid, rowobj) {
+                        var itemGrid = liger.get("dictItemGrid");
+                        if (itemGrid) {
                             itemGrid.set("page", 1);
                             itemGrid.set("newPage", 1);
                             itemGrid.setParm('categoryId', rowdata.id);
                             itemGrid.reload();
-                        }else{
+                        } else {
                             internal.itemList(rowdata.id);
                         }
                     },
@@ -51,6 +51,10 @@ define(function (require, exports, module) {
             var itemGrid = new BaseGrid({
                 gridId: 'dictItemGrid',
                 toolsBoxId: 'dictItemTools',
+                deleteUrl: {
+                    deleteInfo: "/dict/deleteItem",
+                    deleteList: "/dict/deleteItemList"
+                },
                 tools: {
                     btnbox: {
                         'add': true,
@@ -61,7 +65,7 @@ define(function (require, exports, module) {
                     ]
                 },
                 extendParam: function () {
-                    return { categoryId: categoryId };
+                    return {categoryId: categoryId};
                 },
                 gridParam: {
                     url: webRoot + '/dict/getItemPageList',
@@ -83,12 +87,21 @@ define(function (require, exports, module) {
                     //编辑参数
                     edit: {title: "编辑字典项信息"},
                     common: {
+                        otherUrlParam: {fkSystemDictCategoryId: internal.getCategoryId()},
                         url: webRoot + '/dict/view/item',
                         width: 590,
                         height: 200
                     }
                 }
             })
+        },
+        getCategoryId: function () {
+            var dictCategoryGrid = liger.get("dictCategoryGrid")
+            var categoryId = "";
+            if (dictCategoryGrid) {
+                categoryId = dictCategoryGrid.getSelectedRow().id;
+            }
+            return categoryId;
         }
     }
     exports.init = function () {

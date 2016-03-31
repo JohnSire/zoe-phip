@@ -1,17 +1,10 @@
 <%
-var styleSection = {
-%>
-<link href="/assets/dist/style/common.css" rel="stylesheet"/>
-<%};%>
-<%
 var bodySection = {
 %>
-<form id="baseAttrForm" onsubmit="return false;">
     <div class="y-dialog-content">
         <div class="y-dialog-form form-little">
             <ul class="y-dialog-lists clearfix">
                 <li class="list">
-
                     <p class="column-one">
                         <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
                         <input type="text" name="code" class="text-big" datatype="*1-36" errormsg="编码长度应为1~36位！"
@@ -26,19 +19,18 @@ var bodySection = {
             </ul>
         </div>
     </div>
-</form>
 <%};%>
 <%
 var scriptSection={
 %>
 <script type="text/javascript">
     $(function () {
-        seajs.use('{dir}/SystemManager/SysDict/detail', function (a) {
+        seajs.use('{dir}/SystemManager/SysDict/itemDetail', function (a) {
             a.init();
         });
     })
 </script>
 <%};%>
 <%
-include("/WEB-INF/shared/_default.html",{title:"系统字典项信息",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_baseAttr.html",{title:"系统字典项信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
 %>

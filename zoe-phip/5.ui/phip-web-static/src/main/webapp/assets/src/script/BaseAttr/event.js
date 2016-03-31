@@ -32,6 +32,7 @@ define(function (require, exports, module) {
             internal.onSave(ajaxData, state, param);
         },
         onBindInfo: function (ajaxData, param) {
+
             var ajaxParam = {
                 data: ajaxData,
                 url: param["getUrl"]
@@ -49,12 +50,21 @@ define(function (require, exports, module) {
             var top = common.getTopWindowDom();
             top[internal.param["winCallback"]] = function (callback,submited) {
                 var data = param["dialogParam"]["jqForm"].form2json();
+
+                $.each(param["dialogParam"]["otherUrlParam"],function(index,item){
+                    data[item]=common.getParamFromUrl(item);
+                })
+
                 var preOPData = {};
                 if (typeof (param["beforeSaveEvent"]) == "function") {
                     preOPData = param["beforeSave"](data);
                 }
                 data = $.extend(true, {}, data, preOPData || {});
                 var url = "";
+
+
+
+
                 if (state == "edit") {
                     data = $.extend(true, {}, data, ajaxData || {});
                     url = param["updateUrl"];

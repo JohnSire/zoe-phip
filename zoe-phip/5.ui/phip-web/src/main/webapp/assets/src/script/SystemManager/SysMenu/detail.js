@@ -10,6 +10,27 @@
                 updateUrl: webRoot + '/menu/updateMenuInfo',//修改接口Url
                 loadPageEvent: function () {
                     $(".btn-switch-outer").btnSwitch({name: 'state'});
+                    $("#btnFkParent").selectDialog({
+                        winName:'win_menu_tree_dialog',
+                        winCallback:'win_menu_tree_select_callback',
+                        name:'fkParentMenuId',
+                        fkObj:'parentMenu',
+                        dialogParam: {
+                            title:'选择父级菜单节点',
+                            url: '/menu/menutree?noDrag=1',//弹窗url
+                            width: 500,
+                            height: 580,
+                            buttons: [
+                                {
+                                    text: "关闭",
+                                    onclick: function (item, dialog) {
+                                        dialog.close();
+                                    }
+                                }
+                            ]
+                        }
+
+                    });
                 }
             })
         }

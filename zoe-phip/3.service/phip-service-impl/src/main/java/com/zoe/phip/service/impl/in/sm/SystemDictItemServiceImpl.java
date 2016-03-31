@@ -56,8 +56,8 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     public int update(SystemDictItem entity) throws Exception {
 
         Example example = new Example(SystemDictItem.class);
-        example.createCriteria().andEqualTo("code", entity.getCode());
-        example.createCriteria().andNotEqualTo("id", entity.getId());
+        example.createCriteria().andEqualTo("code", entity.getCode()).andNotEqualTo("id", entity.getId());
+
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
             throw new BusinessException("该字典类({0})已经存在!", entity.getCode());

@@ -33,19 +33,19 @@ public class SystemDictController extends BaseController {
     //系统字典列表
     @RequestMapping("/view/list")
     public String ToDictList(HttpServletRequest request, Model model) {
-        return "/dict/list";
+        return "/SystemManage/SysDict/list";
     }
 
     //字典项详情
     @RequestMapping("/view/item")
     public String ToDictItemDetail(HttpServletRequest request, Model model) {
-        return "/dict/item";
+        return "/SystemManage/SysDict/item";
     }
 
     //字典类别详情
     @RequestMapping("/view/category")
     public String ToDictCategoryDetail(HttpServletRequest request, Model model) {
-        return "/dict/category";
+        return "/SystemManage/SysDict/category";
     }
 
 
@@ -56,7 +56,7 @@ public class SystemDictController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/getSysDictCategoryList")
+    @RequestMapping(value = "/getCategoryList")
     @ResponseBody
     public ServiceResultT<PageList<SystemDictCategory>> getSysDictCategoryList(HttpServletRequest request, Model model) {
         return ServiceFactory.getDictCategoryService().getDictCategories(ComSession.getUserInfo(), super.getKey(), getQueryPage());

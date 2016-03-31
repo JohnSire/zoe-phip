@@ -89,6 +89,13 @@ define(function (require, exports, module) {
             editParam["title"] = editParam["title"] + "--" + titleDescr;
         }
         editParam["url"] = editParam["url"] + "?state=edit&&id=" + id;
+
+        var urlParam="";
+        $.each(editParam["otherUrlParam"],function(key,value){
+            urlParam+="&&"+key+"="+value;
+        });
+        editParam["url"]=editParam["url"]+urlParam;
+
         //submited(提交非进行时状态改变方法）
         editParam.buttons[0]["onclick"] = function (item, dialog, submited) {
             var top = common.getTopWindowDom();

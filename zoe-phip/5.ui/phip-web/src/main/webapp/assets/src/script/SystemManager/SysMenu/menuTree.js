@@ -40,10 +40,7 @@
                     if (!isDrag) {
                         var top = common.getTopWindowDom();
                         if ($.isFunction(top.win_menu_tree_select_callback)) {
-                            if (top.win_menu_tree_select_callback(treeNode) === true)
-                                setTimeout(function() {
-                                    top.win_menu_tree_dialog.close();
-                                }, 1);
+                            top.win_menu_tree_select_callback(treeNode);
                         }
                     }
                 }

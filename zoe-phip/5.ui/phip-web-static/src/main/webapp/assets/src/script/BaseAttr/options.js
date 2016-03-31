@@ -6,11 +6,11 @@
  */
 define(function (require, exports, module) {
     var options = {
+        winName: null,//窗体的变量标识
+        winCallback: null,//窗体的保存（确定）的回调函数
         dialogParam: {
-            winName: null,//窗体的变量标识
-            winCallback: null,//窗体的保存（确定）的回调函数
             jqForm:$("#baseAttrForm"),//弹窗所包含的的表单
-            allKeys: [],
+            otherUrlParam: [],
             primaryKey: 'id',//主键
             stateKey: 'state'//key：状态类型索引；value为"add" or "edit"
         },
