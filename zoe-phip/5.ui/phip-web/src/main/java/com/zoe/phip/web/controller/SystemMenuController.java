@@ -14,13 +14,11 @@ import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,26 +35,26 @@ public class SystemMenuController extends BaseController {
     //菜单列表
     @RequestMapping("/list")
     @AuthAction(permission = {Permission.View},name = "查看")
-    public String ToMenuList(HttpServletRequest request, Model model) {
+    public String ToMenuList() {
         return "SystemManage/SysMenu/list";
     }
     //菜单详情
     @RequestMapping("/detail")
     @AuthAction(permission = {Permission.View},name = "查看")
-    public String ToMenuDetail(HttpServletRequest request, Model model) {
+    public String ToMenuDetail() {
         return "SystemManage/SysMenu/detail";
     }
     //菜单树
     @RequestMapping("/menutree")
     @AuthAction(permission = {Permission.View},name = "查看")
-    public String ToMenuTree(HttpServletRequest request, Model model) {
+    public String ToMenuTree() {
         return "SystemManage/SysMenu/tree";
     }
 
     //菜单权限
     @RequestMapping("/view/acc")
     @AuthAction(permission = {Permission.View},name = "查看")
-    public String ToMenuAcc(HttpServletRequest request, Model model) {
+    public String ToMenuAcc() {
         return "/menu/acc";
     }
 
@@ -80,7 +78,7 @@ public class SystemMenuController extends BaseController {
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Query},name = "查询")
-    public ServiceResultT<PageList<MenuData>> getMenuList(HttpServletRequest request, Model model) {
+    public ServiceResultT<PageList<MenuData>> getMenuList() {
         ServiceResultT<PageList<MenuData>> menu = ServiceFactory.getMenuDataService().getList(ComSession.getUserInfo(), getQueryPage(), MenuData.class);
         return menu;
     }
@@ -89,45 +87,38 @@ public class SystemMenuController extends BaseController {
     /**
      * 根据菜单id获取菜单信息
      *
-     * @param request
-     * @param model
      * @return
      */
     @RequestMapping(value = "/getMenuInfo", method = RequestMethod.GET)
     @ResponseBody
     @AuthAction(permission = {Permission.Query},name = "查询")
-    public ServiceResultT<MenuData> getMenuInfo(HttpServletRequest request, Model model) {
+    public ServiceResultT<MenuData> getMenuInfo() {
 
-        return ServiceFactory.getMenuDataService().getById(ComSession.getUserInfo(), request.getParameter("id"));
+        return ServiceFactory.getMenuDataService().getById(ComSession.getUserInfo(), getPara("id"));
     }
 
     /**
      * 根据关键字获取菜单列�
      *
-     * @param request
-     * @param model
      * @return
      */
     @RequestMapping(value = "/getMenuList")
     @ResponseBody
     @AuthAction(permission = {Permission.Query},name = "查询")
-    public ServiceResultT<PageList<MenuData>> getMenuPageList(HttpServletRequest request, Model model) {
-        String keyWord = request.getParameter("keyWord");
-        if(null==keyWord)keyWord="";
-        return ServiceFactory.getMenuDataService().getMenuList(ComSession.getUserInfo(), keyWord, getQueryPage());
+    public ServiceResultT<PageList<MenuData>> getMenuPageList() {
+        return ServiceFactory.getMenuDataService().getMenuList(ComSession.getUserInfo(), getPara("keyWord",""), getQueryPage());
     }
 
     /**
      * 修改菜单信息
      *
-     * @param request
      * @param menuData
      * @return
      */
     @RequestMapping(value = "/updateMenuInfo", method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Update},name = "修改")
-    public ServiceResult updateMenuInfo(HttpServletRequest request, MenuData menuData) {
+    public ServiceResult updateMenuInfo(MenuData menuData) {
         menuData.setModifyBy(ComSession.getUserInfo().getUserId());
         return ServiceFactory.getMenuDataService().update(ComSession.getUserInfo(), menuData);
     }
@@ -151,7 +142,7 @@ public class SystemMenuController extends BaseController {
     @RequestMapping(value = "getMenuUser", method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Query},name = "查询")
-    public ServiceResultT<List<MenuData>> getMenuUser(HttpServletRequest request, String id) {
+    public ServiceResultT<List<MenuData>> getMenuUser(String id) {
         return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(), id);
     }
 
@@ -160,8 +151,8 @@ public class SystemMenuController extends BaseController {
     @RequestMapping(value = "/updateMenuList",method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Update},name = "修改")
-    public ServiceResult updateMenuList(HttpServletRequest request) {
-        String strList = request.getParameter("list");
+    public ServiceResult updateMenuList() {
+        String strList = getPara("list");
         List<MenuData> list = new ArrayList<MenuData>();
         if(!StringUtil.isNullOrWhiteSpace(strList)){
             list = StringUtil.parseJsonArray(strList,MenuData.class);
