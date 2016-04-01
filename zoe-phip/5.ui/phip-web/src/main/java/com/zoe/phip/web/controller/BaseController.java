@@ -5,23 +5,56 @@ import com.zoe.phip.infrastructure.entity.SortOrder;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.web.context.DataContext;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
 
 /**
  * Created by zengjiyang on 2016/3/24.
+ * updated by hyf on 2016/4/1
  */
 public abstract class BaseController {
+
+    protected int getPageSize() {
+        String pageSize = DataContext.getRequest().getParameter("pagesize");
+        return StringUtil.isNullOrWhiteSpace(pageSize) ? 30 : Integer.valueOf(pageSize);
+    }
+
+    protected int getPageNum() {
+        String pageNum = DataContext.getRequest().getParameter("page");
+        return StringUtil.isNullOrWhiteSpace(pageNum) ? 1 : Integer.valueOf(pageNum);
+    }
+
+    protected String getSort(){
+        return DataContext.getRequest().getParameter("sortname");
+    }
+
+    protected SortOrder getSortOrder(){
+        String sortOder=DataContext.getRequest().getParameter("sortname");
+        return SortOrder.forValue(sortOder);
+    }
+
+    protected QueryPage getQueryPage() {
+        return new QueryPage(getPageNum(), getPageSize(),getSort(),getSortOrder());
+    }
+
+
+    protected String getKey() {
+        return DataContext.getRequest().getParameter("keyWord");
+    }
+
+
+    /***********************************/
 
 
     public HttpServletRequest getRequest() {
         return DataContext.getRequest();
     }
 
-    //// TODO: 2016/3/31   hyf 后面再补？ 
     public HttpServletResponse getResponse() {
         return DataContext.getResponse();
     }
@@ -144,35 +177,130 @@ public abstract class BaseController {
     }
 
 
-    /***
-     *
-     *
-     */
-
-    protected int getPageSize() {
-        String pageSize = DataContext.getRequest().getParameter("pagesize");
-        return StringUtil.isNullOrWhiteSpace(pageSize) ? 30 : Integer.valueOf(pageSize);
+    public HttpSession getSession() {
+        return getRequest().getSession();
     }
 
-    protected int getPageNum() {
-        String pageNum = DataContext.getRequest().getParameter("page");
-        return StringUtil.isNullOrWhiteSpace(pageNum) ? 1 : Integer.valueOf(pageNum);
+
+    public HttpSession getSession(boolean create) {
+        return getRequest().getSession(create);
     }
 
-    protected String getSort(){
-        return DataContext.getRequest().getParameter("sortname");
+
+    public <T> T getSessionAttr(String key) {
+        HttpSession session = getRequest().getSession(false);
+        return session != null ? (T) session.getAttribute(key) : null;
     }
 
-    protected SortOrder getSortOrder(){
-        String sortOder=DataContext.getRequest().getParameter("sortname");
-        return SortOrder.forValue(sortOder);
+
+    public BaseController setSessionAttr(String key, Object value) {
+        getRequest().getSession().setAttribute(key, value);
+        return this;
     }
 
-    protected QueryPage getQueryPage() {
-        return new QueryPage(getPageNum(), getPageSize(),getSort(),getSortOrder());
+
+    public BaseController removeSessionAttr(String key) {
+        HttpSession session = getRequest().getSession(false);
+        if (session != null)
+            session.removeAttribute(key);
+        return this;
     }
 
-    protected String getKey() {
-        return DataContext.getRequest().getParameter("keyWord");
+
+    public String getCookie(String name, String defaultValue) {
+        Cookie cookie = getCookieObject(name);
+        return cookie != null ? cookie.getValue() : defaultValue;
     }
+
+
+    public String getCookie(String name) {
+        return getCookie(name, null);
+    }
+
+
+    public Integer getCookieToInt(String name) {
+        String result = getCookie(name);
+        return result != null ? Integer.parseInt(result) : null;
+    }
+
+
+    public Integer getCookieToInt(String name, Integer defaultValue) {
+        String result = getCookie(name);
+        return result != null ? Integer.parseInt(result) : defaultValue;
+    }
+
+
+    public Long getCookieToLong(String name) {
+        String result = getCookie(name);
+        return result != null ? Long.parseLong(result) : null;
+    }
+
+
+    public Long getCookieToLong(String name, Long defaultValue) {
+        String result = getCookie(name);
+        return result != null ? Long.parseLong(result) : defaultValue;
+    }
+
+
+    public Cookie getCookieObject(String name) {
+        Cookie[] cookies = getRequest().getCookies();
+        if (cookies != null)
+            for (Cookie cookie : cookies)
+                if (cookie.getName().equals(name))
+                    return cookie;
+        return null;
+    }
+
+
+    public Cookie[] getCookieObjects() {
+        Cookie[] result = getRequest().getCookies();
+        return result != null ? result : new Cookie[0];
+    }
+
+
+    public BaseController setCookie(Cookie cookie) {
+        getResponse().addCookie(cookie);
+        return this;
+    }
+
+
+    public BaseController setCookie(String name, String value, int maxAgeInSeconds, String path) {
+        setCookie(name, value, maxAgeInSeconds, path, null);
+        return this;
+    }
+
+
+    public BaseController setCookie(String name, String value, int maxAgeInSeconds, String path, String domain) {
+        Cookie cookie = new Cookie(name, value);
+        if (domain != null)
+            cookie.setDomain(domain);
+        cookie.setMaxAge(maxAgeInSeconds);
+        cookie.setPath(path);
+        getResponse().addCookie(cookie);
+        return this;
+    }
+
+
+    public BaseController setCookie(String name, String value, int maxAgeInSeconds) {
+        setCookie(name, value, maxAgeInSeconds, "/", null);
+        return this;
+    }
+
+
+    public BaseController removeCookie(String name) {
+        setCookie(name, null, 0, "/", null);
+        return this;
+    }
+
+    public BaseController removeCookie(String name, String path) {
+        setCookie(name, null, 0, path, null);
+        return this;
+    }
+
+
+    public BaseController removeCookie(String name, String path, String domain) {
+        setCookie(name, null, 0, path, domain);
+        return this;
+    }
+
 }
