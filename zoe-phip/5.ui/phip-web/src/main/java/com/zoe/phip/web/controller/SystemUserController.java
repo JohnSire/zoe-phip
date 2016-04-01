@@ -110,7 +110,7 @@ public class SystemUserController extends BaseController {
      */
     @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
     @ResponseBody
-    @AuthAction(permission = {Permission.Edit},name = "修改")
+    @AuthAction(permission = {Permission.Update},name = "修改")
     public ServiceResult updateUserInfo(SystemUser userInfo) {
         return ServiceFactory.getUserService().update(ComSession.getUserInfo(), userInfo);
     }
@@ -122,7 +122,7 @@ public class SystemUserController extends BaseController {
      */
     @RequestMapping(value = "/updateState", method = RequestMethod.POST)
     @ResponseBody
-    @AuthAction(permission = {Permission.Edit},name = "修改")
+    @AuthAction(permission = {Permission.Update},name = "修改")
     public ServiceResult updateState(String id,int state) {
         return ServiceFactory.getUserService().updateState(ComSession.getUserInfo(),id,state);
     }

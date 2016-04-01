@@ -9,7 +9,7 @@ public enum Permission {
     View(0),
     Query(1),
     Add(2),
-    Edit(3),
+    Update(3),
     Delete(4);
 
     int code;

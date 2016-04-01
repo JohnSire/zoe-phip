@@ -56,7 +56,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     public int update(SystemDictItem entity) throws Exception {
 
         Example example = new Example(SystemDictItem.class);
-        example.createCriteria().andEqualTo("code", entity.getCode()).andNotEqualTo("id", entity.getId());
+        example.createCriteria().andEqualTo("code", entity.getCode()).andEqualTo("fkSystemDictCategoryId",entity.getFkSystemDictCategoryId()).andNotEqualTo("id", entity.getId());
 
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
