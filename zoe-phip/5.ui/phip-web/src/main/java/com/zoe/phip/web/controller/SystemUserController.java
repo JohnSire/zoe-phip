@@ -65,14 +65,9 @@ public class SystemUserController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query},name = "查询")
     public ServiceResultT<PageList<SystemUser>> getUserList(HttpServletRequest request) {
+        return ServiceFactory.getUserService()
+                .getUserList(ComSession.getUserInfo(), null, request.getParameter("keyWord"), getQueryPage());
 
-        if(StringUtil.isNullOrWhiteSpace(request.getParameter("keyWord"))){
-            return ServiceFactory.getUserService()
-                    .getList(ComSession.getUserInfo(), getQueryPage(), SystemUser.class);
-        }else {
-            return ServiceFactory.getUserService()
-                    .getUserList(ComSession.getUserInfo(),null,request.getParameter("keyWord"), getQueryPage());
-        }
     }
 
     /**

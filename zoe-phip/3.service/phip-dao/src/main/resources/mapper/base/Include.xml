@@ -27,35 +27,7 @@
         <include refid="com.zoe.phip.dao.baseEntityInsert"/>,
          MODIFY_AT,MODIFY_BY,STATE
     </sql>
-    <sql id="orderSort">
-        <choose>
-            <when test="_parameter.containsKey('sortOrder')">
-                ${sortOrder}
-            </when>
-            <otherwise>
-                DESC
-            </otherwise>
-        </choose>
-    </sql>
-    <sql id="orderBy">
-        ORDER BY
-        <choose>
-            <when test="_parameter.containsKey('order')">
-                ${order}
-            </when>
-            <otherwise>
-                ${prefix}CREATE_AT
-            </otherwise>
-        </choose>
-        <choose>
-            <when test="_parameter.containsKey('sortOrder')">
-                ${sortOrder}
-            </when>
-            <otherwise>
-                DESC
-            </otherwise>
-        </choose>
-    </sql>
+    <!--自定义查询占位符-->
     <sql id="selfWhere">
     </sql>
 </mapper>

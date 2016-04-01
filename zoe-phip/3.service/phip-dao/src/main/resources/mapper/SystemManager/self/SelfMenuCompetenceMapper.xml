@@ -43,6 +43,7 @@
       INNER JOIN SYS_MENU_COMPETENCE MC ON MC.FK_MENU_ID = T.ID
       WHERE MC.FK_COMPETENCE_CATEGORY_ID = #{C_ID,jdbcType=VARCHAR}
       AND (t.NAME LIKE '%' || #{KEY ,jdbcType=VARCHAR} || '%' OR t.CODE LIKE '%' || #{KEY,jdbcType=VARCHAR} || '%')
+      <include refid="com.zoe.phip.dao.selfWhere"/>
     </select>
     <select id="checkExists" resultType="java.lang.Integer" parameterType="java.util.Map">
         SELECT COUNT(1)

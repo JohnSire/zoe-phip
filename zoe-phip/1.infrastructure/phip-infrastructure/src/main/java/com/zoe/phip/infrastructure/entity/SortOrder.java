@@ -5,5 +5,13 @@ package com.zoe.phip.infrastructure.entity;
  */
 public enum SortOrder {
     DESC,
-    ASC
+    ASC;
+
+    public static SortOrder forValue(String value) {
+        for (SortOrder type : values()) {
+            if (type.toString().equalsIgnoreCase(value))
+                return type;
+        }
+        return null;
+    }
 }

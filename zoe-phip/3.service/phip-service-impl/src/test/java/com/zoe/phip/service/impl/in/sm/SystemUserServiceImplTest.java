@@ -75,7 +75,7 @@ public class SystemUserServiceImplTest extends BaseTest {
     @Test
     public void testGetUsers() throws Exception {
         PageList<SystemUser> resultT =
-                systemUserService.getUserList(null, "a", new QueryPage(1,30,"NAME",SortOrder.ASC));
+                systemUserService.getUserList(0, "", new QueryPage(1,30,"NAME",SortOrder.ASC));
     }
 
     @Test

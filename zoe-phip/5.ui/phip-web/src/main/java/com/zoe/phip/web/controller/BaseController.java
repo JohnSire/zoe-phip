@@ -1,6 +1,7 @@
 package com.zoe.phip.web.controller;
 
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SortOrder;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.web.context.DataContext;
 
@@ -162,8 +163,17 @@ public abstract class BaseController {
         return StringUtil.isNullOrWhiteSpace(pageNum) ? 1 : Integer.valueOf(pageNum);
     }
 
+    protected String getSort(){
+        return DataContext.getRequest().getParameter("sortname");
+    }
+
+    protected SortOrder getSortOrder(){
+        String sortOder=DataContext.getRequest().getParameter("sortname");
+        return SortOrder.forValue(sortOder);
+    }
+
     protected QueryPage getQueryPage() {
-        return new QueryPage(getPageNum(), getPageSize());
+        return new QueryPage(getPageNum(), getPageSize(),getSort(),getSortOrder());
     }
 
     protected String getKey() {

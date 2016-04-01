@@ -62,12 +62,6 @@ public class MenuData extends MasterEntity {
 
 
 
-    /**
-     * 状�
-     */
-    @Column(name = "STATE")
-//    @JSONField(name = "State")
-    private int state;
 
 
     public MenuData(){
@@ -144,14 +138,6 @@ public class MenuData extends MasterEntity {
 
     public void setParentMenu(MenuData parentMenu) {
         this.parentMenu = parentMenu;
-    }
-
-    public int getState() {
-        return this.state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
     }
 
 

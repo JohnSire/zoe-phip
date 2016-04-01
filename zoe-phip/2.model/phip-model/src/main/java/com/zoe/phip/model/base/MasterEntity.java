@@ -10,7 +10,7 @@ public class MasterEntity extends BaseEntity {
     /**
      * 状态
      */
-    private int state;
+    protected int state;
 
     /**
      * 修改人
