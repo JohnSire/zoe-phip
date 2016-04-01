@@ -42,7 +42,7 @@ define(function (require, exports, module) {
             var ids = "";
             if (selectRows.length > 0) {
                 $.each(selectRows, function (index, item) {
-                    ids += ",'" + item["id"] + "'"
+                    ids += "," + item["id"] + ""
                 });
                 if (ids.length > 0) {
                     ids = ids.substr(1, ids.length);
