@@ -6,8 +6,8 @@ import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.model.sm.SystemDictItem;
-import com.zoe.phip.service.in.sm.SystemDictCategoryService;
-import com.zoe.phip.service.in.sm.SystemDictItemService;
+import com.zoe.phip.service.in.sm.ISystemDictCategoryService;
+import com.zoe.phip.service.in.sm.ISystemDictItemService;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
@@ -25,10 +25,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/dict")
 public class SystemDictController extends BaseController {
-
-    private SystemDictCategoryService categoryService;
-
-    private SystemDictItemService itemService;
 
     //系统字典列表
     @RequestMapping("/view/list")

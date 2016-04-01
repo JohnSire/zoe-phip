@@ -4,7 +4,7 @@ package com.zoe.phip.infrastructure.cache;
  * 缓存管理器
  * Created by zengjiyang on 2016/3/12.
  */
-public interface Cache {
+public interface ICache {
     /**
      * 保存缓存对象。
      *

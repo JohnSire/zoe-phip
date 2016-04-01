@@ -7,16 +7,15 @@ package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
-import com.zoe.phip.dao.sm.MenuDataMapper;
+import com.zoe.phip.dao.sm.IMenuDataMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.impl.util.SqlHelper;
-import com.zoe.phip.service.in.sm.MenuDataService;
+import com.zoe.phip.service.in.sm.IMenuDataService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
@@ -28,8 +27,8 @@ import java.util.*;
  * @date 2016-03-21
  */
 @Repository("MenuDataService")
-@Service(interfaceClass = MenuDataService.class, proxy = "sdpf", dynamic = true)
-public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMapper> implements MenuDataMapper {
+@Service(interfaceClass = IMenuDataService.class, proxy = "sdpf", dynamic = true)
+public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMapper> implements IMenuDataMapper {
 
     @Override
     public int add(MenuData entity) throws Exception {
@@ -81,7 +80,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, MenuDataMap
         SqlHelper.startPage(queryPage);
         Map<String, Object> paras = new HashMap<String, Object>();
         paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
-        List<MenuData> results= ((MenuDataMapper) getMapper()).getMenuDataList(paras);
+        List<MenuData> results= ((IMenuDataMapper) getMapper()).getMenuDataList(paras);
         PageInfo<MenuData> pageInfo = new PageInfo<MenuData>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);

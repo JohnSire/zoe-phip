@@ -6,10 +6,9 @@
 
 package com.zoe.phip.service.impl.in.sm;
 
-import com.alibaba.dubbo.common.serialize.ObjectInput;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
-import com.zoe.phip.dao.sm.SystemDictCategoryMapper;
+import com.zoe.phip.dao.sm.ISystemDictCategoryMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -18,7 +17,7 @@ import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.impl.util.SqlHelper;
-import com.zoe.phip.service.in.sm.SystemDictCategoryService;
+import com.zoe.phip.service.in.sm.ISystemDictCategoryService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
@@ -34,8 +33,8 @@ import java.util.Map;
 
 
 @Repository("SystemDictCategoryService")
-@Service(interfaceClass = SystemDictCategoryService.class, proxy = "sdpf", dynamic = true)
-public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory, SystemDictCategoryMapper> implements SystemDictCategoryMapper {
+@Service(interfaceClass = ISystemDictCategoryService.class, proxy = "sdpf", dynamic = true)
+public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory, ISystemDictCategoryMapper> implements ISystemDictCategoryMapper {
 
     @Override
     public int add(SystemDictCategory entity) throws Exception {

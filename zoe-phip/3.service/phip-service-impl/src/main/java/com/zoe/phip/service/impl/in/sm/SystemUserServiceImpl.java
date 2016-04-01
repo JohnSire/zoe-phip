@@ -7,9 +7,8 @@
 package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zoe.phip.dao.sm.SystemUserMapper;
+import com.zoe.phip.dao.sm.ISystemUserMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -19,7 +18,7 @@ import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.impl.util.SqlHelper;
-import com.zoe.phip.service.in.sm.SystemUserService;
+import com.zoe.phip.service.in.sm.ISystemUserService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
@@ -31,8 +30,8 @@ import java.util.*;
  * @date 2016-03-18
  */
 @Repository("SystemUserService")
-@Service(interfaceClass = SystemUserService.class, proxy = "sdpf", dynamic = true)
-public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, SystemUserMapper> implements SystemUserMapper {
+@Service(interfaceClass = ISystemUserService.class, proxy = "sdpf", dynamic = true)
+public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystemUserMapper> implements ISystemUserMapper {
 
 
     @Override

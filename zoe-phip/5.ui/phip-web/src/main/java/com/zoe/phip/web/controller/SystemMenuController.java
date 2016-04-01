@@ -51,17 +51,6 @@ public class SystemMenuController extends BaseController {
         return "/menu/acc";
     }
 
-    /**
-     * 获取用户关联菜单
-     *
-     * @return
-     */
-    @RequestMapping("/user")
-    @ResponseBody
-    public ServiceResultT<List<MenuData>> getMenuUser() {
-        return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(), ComSession.getUserInfo().getUserId());
-    }
-
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResultT<PageList<MenuData>> getMenuList(HttpServletRequest request, Model model) {

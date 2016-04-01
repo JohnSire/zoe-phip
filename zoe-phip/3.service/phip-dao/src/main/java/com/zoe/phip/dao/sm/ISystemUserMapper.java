@@ -5,7 +5,7 @@
 
 package com.zoe.phip.dao.sm;
 
-import com.zoe.phip.dao.MyMapper;
+import com.zoe.phip.dao.IMyMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.model.sm.LoginCredentials;
@@ -19,7 +19,7 @@ import java.util.Map;
  * @version 1.0
  * @date 2016-03-18
  */
-public interface SystemUserMapper extends MyMapper<SystemUser> {
+public interface ISystemUserMapper extends IMyMapper<SystemUser> {
     List<SystemUser> getUserList(Map<String, Object> args);
 
     /**

@@ -6,13 +6,11 @@
 
 package com.zoe.phip.dao.sm;
 
-import com.zoe.phip.dao.MyMapper;
+import com.zoe.phip.dao.IMyMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.model.sm.MenuCompetence;
 import com.zoe.phip.model.sm.MenuData;
-import com.zoe.phip.model.sm.SystemUser;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +20,7 @@ import java.util.Map;
  * @version 1.0
  * @date 2016-03-29
  */
-public interface MenuCompetenceMapper extends MyMapper<MenuCompetence> {
+public interface IMenuCompetenceMapper extends IMyMapper<MenuCompetence> {
 
     boolean saveList(String competenceCategoryId, List<MenuCompetence> list) throws Exception;
 

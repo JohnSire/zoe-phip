@@ -7,9 +7,8 @@
 package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.alibaba.dubbo.remoting.Codec2;
 import com.github.pagehelper.PageInfo;
-import com.zoe.phip.dao.sm.SystemDictItemMapper;
+import com.zoe.phip.dao.sm.ISystemDictItemMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -19,7 +18,7 @@ import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.model.sm.SystemDictItem;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.impl.util.SqlHelper;
-import com.zoe.phip.service.in.sm.SystemDictItemService;
+import com.zoe.phip.service.in.sm.ISystemDictItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
@@ -33,8 +32,8 @@ import java.util.Map;
  * @date 2016-03-22
  */
 @Repository("SystemDictItemService")
-@Service(interfaceClass = SystemDictItemService.class, proxy = "sdpf", dynamic = true)
-public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem, SystemDictItemMapper> implements SystemDictItemMapper {
+@Service(interfaceClass = ISystemDictItemService.class, proxy = "sdpf", dynamic = true)
+public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem, ISystemDictItemMapper> implements ISystemDictItemMapper {
 
     @Autowired
     private SystemDictCategoryServiceImpl service;

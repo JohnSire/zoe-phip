@@ -11,7 +11,7 @@ import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.model.sm.SystemDictCategory;
-import com.zoe.phip.service.in.BaseInService;
+import com.zoe.phip.service.in.IBaseInService;
 
 /**
  * 对外发布的服务接口
@@ -20,7 +20,7 @@ import com.zoe.phip.service.in.BaseInService;
  * @version 1.0
  * @date 2016-03-22
  */
-public interface SystemDictCategoryService extends BaseInService<SystemDictCategory> {
+public interface ISystemDictCategoryService extends IBaseInService<SystemDictCategory> {
 
     ServiceResultT<PageList<SystemDictCategory>> getDictCategories(SystemData systemData, String key, QueryPage queryPage);
 

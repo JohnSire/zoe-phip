@@ -7,7 +7,7 @@ package com.zoe.phip.service.in.sm;
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
-import com.zoe.phip.service.in.BaseInService;
+import com.zoe.phip.service.in.IBaseInService;
 
 /**
  * 对外发布的服务接口
@@ -16,7 +16,7 @@ import com.zoe.phip.service.in.BaseInService;
  * @version 1.0
  * @date 2016-03-18
  */
-public interface SystemUserService extends BaseInService<SystemUser> {
+public interface ISystemUserService extends IBaseInService<SystemUser> {
 
     /**
      * 用户登录操作

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zoe.phip.dao.sm.MenuCompetenceMapper">
+<mapper namespace="com.zoe.phip.dao.sm.IMenuCompetenceMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.model.sm.MenuCompetence" extends="BaseResultMap">
 
     </resultMap>
-    <resultMap id="MenuDataResultMap" type="com.zoe.phip.model.sm.MenuData" extends="com.zoe.phip.dao.sm.MenuDataMapper.BaseResultMap">
+    <resultMap id="MenuDataResultMap" type="com.zoe.phip.model.sm.MenuData" extends="com.zoe.phip.dao.sm.IMenuDataMapper.BaseResultMap">
            <result column="COMPETENCE_ID" property="competenceId" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="NAME_PATH" property="namePath" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>

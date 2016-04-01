@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by zengjiyang on 2016/1/25.
  */
-public interface MyMapper<T extends BaseEntity> extends Mapper<T> {
+public interface IMyMapper<T extends BaseEntity> extends Mapper<T> {
 
     int addList(List<T> entities) throws Exception;
 

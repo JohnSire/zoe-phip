@@ -3,7 +3,7 @@ package com.zoe.phip.service.in.sm;
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.model.sm.UserCompetence;
-import com.zoe.phip.service.in.BaseInService;
+import com.zoe.phip.service.in.IBaseInService;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @version 1.0
  * @date 2016-03-29
  */
-public interface UserCompetenceService extends BaseInService<UserCompetence> {
+public interface IUserCompetenceService extends IBaseInService<UserCompetence> {
 
     ServiceResult saveList(SystemData systemData, String competenceCategoryId, List<UserCompetence> list);
 
