@@ -26,5 +26,7 @@
     <dubbo:reference id="MenuCompetenceService" interface="com.zoe.phip.service.in.sm.IMenuCompetenceService"
                      url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.IMenuCompetenceService"/>
 
+    <dubbo:consumer timeout="10000"/>
+
 
 </beans>

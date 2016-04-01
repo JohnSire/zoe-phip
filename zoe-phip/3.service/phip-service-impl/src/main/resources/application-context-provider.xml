@@ -11,7 +11,7 @@
 
     <dubbo:protocol name="dubbo" host="localhost" port="20080"/>
     <dubbo:annotation package="com.zoe.phip.service"></dubbo:annotation>
-
+    <dubbo:provider timeout="10000"/>
     <!--<dubbo:service interface="com.zoe.phip.service.in.sm.SystemUserService" version="1.0.0"
                      ref="SystemUserService"/>-->
     <!--  <dubbo:service interface="com.zoe.phip.service.in.sm.ISystemDictCategoryServicee" version="1.0.0"

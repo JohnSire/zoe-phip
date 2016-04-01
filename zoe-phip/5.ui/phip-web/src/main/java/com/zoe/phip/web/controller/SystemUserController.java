@@ -154,7 +154,7 @@ public class SystemUserController extends BaseController {
      */
     @RequestMapping("/menu")
     @ResponseBody
-    @AuthAction(permission = {Permission.Query},name = "查看")
+    @AuthAction(permission = {Permission.Query},name = "查询")
     public ServiceResultT<List<MenuData>> getUserMenu() {
         return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(), ComSession.getUserInfo().getUserId());
     }

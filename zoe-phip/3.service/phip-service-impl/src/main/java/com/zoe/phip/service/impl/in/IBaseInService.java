@@ -14,7 +14,7 @@ import java.util.List;
  * 内部服务基接口
  * Created by qiuyungen on 2016/3/26.
  */
-public interface BaseInService<T extends MasterEntity> {
+public interface IBaseInService<T extends MasterEntity> {
 
     SystemData getSystemData();
 

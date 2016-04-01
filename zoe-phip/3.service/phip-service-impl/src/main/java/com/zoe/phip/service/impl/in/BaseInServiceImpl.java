@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Created by qiuyungen on 2016/3/26.
  */
-public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends IMyMapper<T>> implements BaseInService<T>, Mapper<T>, GenericService {
+public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends IMyMapper<T>> implements IBaseInService<T>, Mapper<T>, GenericService {
 
     private SystemData systemData;
 

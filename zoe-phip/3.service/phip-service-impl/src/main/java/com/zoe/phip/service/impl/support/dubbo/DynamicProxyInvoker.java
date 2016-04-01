@@ -2,10 +2,6 @@ package com.zoe.phip.service.impl.support.dubbo;
 
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.alibaba.dubbo.rpc.Invocation;
-import com.alibaba.dubbo.rpc.Result;
-import com.alibaba.dubbo.rpc.RpcException;
-import com.alibaba.dubbo.rpc.RpcResult;
 import com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker;
 import com.zoe.phip.infrastructure.entity.ErrorCode;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
@@ -13,10 +9,9 @@ import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.function.Function;
 import com.zoe.phip.infrastructure.security.SystemCredential;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
-import com.zoe.phip.service.impl.in.BaseInService;
+import com.zoe.phip.service.impl.in.IBaseInService;
 import com.zoe.phip.service.impl.support.annotation.WithResult;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +99,7 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
         if (!methodName.equals("login")) {
             if (isFirstSystemDataClass) {
                 SystemData token = (SystemData) firstData;
-                ((BaseInService) instance).setSystemData(token);
+                ((IBaseInService) instance).setSystemData(token);
                 boolean isAuth = SystemCredential.checkCredential(token.getUserId(), token.getUserName(), token.getCredential());
                 if (!isAuth) {
                     ServiceResult result=new ServiceResult();
