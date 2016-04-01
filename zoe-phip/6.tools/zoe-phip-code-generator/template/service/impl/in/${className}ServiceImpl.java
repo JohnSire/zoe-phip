@@ -15,6 +15,6 @@
  */
 @Repository("${className?uncap_first}Service")
 @Service(interfaceClass = ${className}Service.class, proxy = "sdpf", dynamic = true)
-public class ${className}ServiceImpl extends BaseInServiceImpl<${className},${className}Mapper> implements ${className}Mapper{
+public class ${className}ServiceImpl extends BaseInServiceImpl<${className},I${className}Mapper> implements I${className}Mapper{
 
         }
