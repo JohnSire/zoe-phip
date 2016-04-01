@@ -43,7 +43,7 @@ define(function (require, exports, module) {
                     },
                     checkbox: false,
                     width: "100%",
-                    height: $("body").innerHeight() - $("#categoryTools").outerHeight() - 76//500
+                    height: "99%"//500
                 }
             });
         },
@@ -74,9 +74,10 @@ define(function (require, exports, module) {
                         {display: '项名称', name: 'name', width: 400, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
+                    frozen:false,
                     usePage: true,
                     width: "100%",
-                    height: $("body").innerHeight() - $("#dictItemTools").outerHeight() - 76//500
+                    height: "99%"//$("body").innerHeight() - $("#dictItemTools").outerHeight() - 76//500
                 },
                 dialogParam: {
                     winName: "win_dict_item_dialog",//弹窗对象变量名称
@@ -86,6 +87,7 @@ define(function (require, exports, module) {
                     add: {title: "新增字典项信息"},
                     //编辑参数
                     edit: {title: "编辑字典项信息"},
+
                     common: {
                         otherUrlParam: {fkSystemDictCategoryId: internal.getCategoryId()},
                         url: webRoot + '/dict/view/item',

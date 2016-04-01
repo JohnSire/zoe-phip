@@ -9178,6 +9178,9 @@
         }
         if (!value) return "";
         // /Date(1328423451489)/
+        //add by lqh
+        value= "/Date("+value+")/";
+
         if (typeof (value) == "string" && /^\/Date/.test(value))
         {
             value = value.replace(/^\//, "new ").replace(/\/$/, "");
