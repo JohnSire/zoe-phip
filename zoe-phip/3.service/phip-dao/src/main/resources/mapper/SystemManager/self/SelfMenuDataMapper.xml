@@ -43,6 +43,14 @@
       where regexp_like(t.address,'+#{key,jdbcType=VARCHAR}+','i')
 
     </select>
+    <select id="getMenuDataList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select * from SYS_MENU_DATA
+        <where>
+            <if test="key !=null and key !=''">AND (UPPER(NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(CODE) LIKE
+                #{key,jdbcType=VARCHAR} OR UPPER(ADDRESS) LIKE #{key,jdbcType=VARCHAR})</if>
+            <include refid="com.zoe.phip.dao.selfWhere"/>
+        </where>
+    </select>
 
     <insert id="insertMenuData" parameterType="java.util.List">
         <foreach collection="list" item="item" index="index" open="begin" close="end;">
