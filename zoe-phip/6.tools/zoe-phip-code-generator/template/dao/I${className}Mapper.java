@@ -12,6 +12,6 @@
  * @version 1.0
  * @date ${now?string("yyyy-MM-dd")}
  */
-public interface ${className}Mapper extends MyMapper<${className}>{
+public interface I${className}Mapper extends IMyMapper<${className}>{
 
         }
