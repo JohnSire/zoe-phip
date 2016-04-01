@@ -1,17 +1,21 @@
-package com.zoe.phip.web.controller;
+package com.zoe.phip.web.controller.SystemManager;
 
 
 import com.zoe.phip.infrastructure.annotation.AuthAction;
+import com.zoe.phip.infrastructure.annotation.AuthController;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.security.MenuCode;
 import com.zoe.phip.infrastructure.security.Permission;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.model.sm.SystemDictItem;
 import com.zoe.phip.service.in.sm.ISystemDictCategoryService;
 import com.zoe.phip.service.in.sm.ISystemDictItemService;
+import com.zoe.phip.web.bean.Constant;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
+import com.zoe.phip.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +30,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/dict")
+@AuthController(code= MenuCode.SystemDict)
 public class SystemDictController extends BaseController {
 
     //系统字典列表

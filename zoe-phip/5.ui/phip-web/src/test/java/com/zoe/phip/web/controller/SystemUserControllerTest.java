@@ -3,21 +3,10 @@ package com.zoe.phip.web.controller;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.model.sm.SystemUser;
-import com.zoe.phip.web.context.DataContext;
+import com.zoe.phip.web.controller.SystemManager.SystemUserController;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.awt.*;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by zengjiyang on 2016/3/25.

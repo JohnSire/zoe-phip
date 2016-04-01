@@ -1,4 +1,4 @@
-package com.zoe.phip.web.controller;
+package com.zoe.phip.web.controller.SystemManager;
 
 import com.zoe.phip.infrastructure.annotation.AuthAction;
 import com.zoe.phip.infrastructure.annotation.AuthController;
@@ -13,6 +13,7 @@ import com.zoe.phip.model.sm.MenuData;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
+import com.zoe.phip.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
