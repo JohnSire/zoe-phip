@@ -5,7 +5,6 @@ package com.zoe.phip.infrastructure.security;
  * Created by zengjiyang on 2016/3/29.
  */
 public enum Permission {
-
     View(0),
     Query(1),
     Add(2),

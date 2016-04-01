@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.dao.sm.SystemParameterMapper">
-    <resultMap id="BaseResultMap" type="com.zoe.phip.model.sm.SystemParameter" extends="com.zoe.phip.dao.MasterEntityResultMap">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.model.sm.SystemParameter"
+               extends="com.zoe.phip.dao.MasterEntityResultMap">
         <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="CODE" property="code" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="VALUE" property="value" javaType="java.lang.String" jdbcType="VARCHAR"/>
@@ -41,7 +42,7 @@
             #{item.id}
         </foreach>
     </delete>
-    <update id="updateList"  parameterType="java.util.List">
+    <update id="updateList" parameterType="java.util.List">
         <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
             update SYS_SYSTEM_PARAMETER
             <set>

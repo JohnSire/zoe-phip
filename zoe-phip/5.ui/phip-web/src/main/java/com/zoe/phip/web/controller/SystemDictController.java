@@ -1,9 +1,11 @@
 package com.zoe.phip.web.controller;
 
 
+import com.zoe.phip.infrastructure.annotation.AuthAction;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.security.Permission;
 import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.model.sm.SystemDictItem;
 import com.zoe.phip.service.in.sm.SystemDictCategoryService;
@@ -32,18 +34,21 @@ public class SystemDictController extends BaseController {
 
     //系统字典列表
     @RequestMapping("/view/list")
+    @AuthAction(permission = {Permission.View}, name = "查看")
     public String ToDictList(HttpServletRequest request, Model model) {
         return "/SystemManage/SysDict/list";
     }
 
     //字典项详情
     @RequestMapping("/view/item")
+    @AuthAction(permission = {Permission.View}, name = "查看")
     public String ToDictItemDetail(HttpServletRequest request, Model model) {
         return "/SystemManage/SysDict/item";
     }
 
     //字典类别详情
     @RequestMapping("/view/category")
+    @AuthAction(permission = {Permission.View}, name = "查看")
     public String ToDictCategoryDetail(HttpServletRequest request, Model model) {
         return "/SystemManage/SysDict/category";
     }
@@ -58,6 +63,7 @@ public class SystemDictController extends BaseController {
      */
     @RequestMapping(value = "/getCategoryList")
     @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<SystemDictCategory>> getSysDictCategoryList(HttpServletRequest request, Model model) {
         return ServiceFactory.getDictCategoryService().getDictCategories(ComSession.getUserInfo(), super.getKey(), getQueryPage());
     }
@@ -71,6 +77,7 @@ public class SystemDictController extends BaseController {
      */
     @RequestMapping(value = "/getCategoryInfo")
     @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<SystemDictCategory> getSysDictCategoryInfo(HttpServletRequest request, Model model) {
         return ServiceFactory.getDictCategoryService().getById(ComSession.getUserInfo(), request.getParameter("id"));
     }
@@ -84,6 +91,7 @@ public class SystemDictController extends BaseController {
      */
     @RequestMapping(value = "/addCategory")
     @ResponseBody
+    @AuthAction(permission = {Permission.Add}, name = "新增")
     public ServiceResult addCategoryInfo(SystemDictCategory info, HttpServletRequest request) {
         return ServiceFactory.getDictCategoryService().add(ComSession.getUserInfo(), info);
     }
@@ -97,6 +105,7 @@ public class SystemDictController extends BaseController {
      */
     @RequestMapping(value = "/updateCategory")
     @ResponseBody
+    @AuthAction(permission = {Permission.Update}, name = "修改")
     public ServiceResult updateCategoryInfo(SystemDictCategory info, HttpServletRequest request) {
         return ServiceFactory.getDictCategoryService().update(ComSession.getUserInfo(), info);
     }
@@ -109,6 +118,7 @@ public class SystemDictController extends BaseController {
      */
     @RequestMapping(value = "/deleteCategory")
     @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult deleteCategoryInfo(HttpServletRequest request) {
         String id = request.getParameter("id");
         return ServiceFactory.getDictCategoryService().deleteById(ComSession.getUserInfo(), id);
@@ -122,6 +132,7 @@ public class SystemDictController extends BaseController {
      */
     @RequestMapping(value = "/deleteCategoryList")
     @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult deleteSysDictCategoryList(HttpServletRequest request) {
         String id = request.getParameter("ids");
         return ServiceFactory.getDictCategoryService().deleteByIds(ComSession.getUserInfo(), Arrays.asList(id.split(",")));
@@ -135,14 +146,15 @@ public class SystemDictController extends BaseController {
      */
     @RequestMapping(value = "/getItemPageList")
     @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<SystemDictItem>> getSysDictItemList(HttpServletRequest request) {
-        String key = request.getParameter("keyWord");
         String categoryId = request.getParameter("categoryId");
-        return ServiceFactory.getDictItemService().getDictItems(ComSession.getUserInfo(), categoryId, key, getQueryPage());
+        return ServiceFactory.getDictItemService().getDictItems(ComSession.getUserInfo(), categoryId, getKey(), getQueryPage());
     }
 
     @RequestMapping(value = "/getItemList")
     @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<List<SystemDictItem>> getSysDictItemListByCode(HttpServletRequest request) {
         String catalog = request.getParameter("catalogCode");
         return ServiceFactory.getDictItemService().getDictItemsByCategoryCode(ComSession.getUserInfo(), catalog);
@@ -150,6 +162,7 @@ public class SystemDictController extends BaseController {
 
     @RequestMapping(value = "/getSysDictItemInfo")
     @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<SystemDictItem> getSysDictItemInfo(HttpServletRequest request) {
         return ServiceFactory.getDictItemService().getById(ComSession.getUserInfo(), request.getParameter("id"));
     }
@@ -164,6 +177,7 @@ public class SystemDictController extends BaseController {
      */
     @RequestMapping(value = "/addItem")
     @ResponseBody
+    @AuthAction(permission = {Permission.Add}, name = "新增")
     public ServiceResult addSysDictItemInfo(SystemDictItem info, HttpServletRequest request) {
         return ServiceFactory.getDictItemService().add(ComSession.getUserInfo(), info);
     }
@@ -177,6 +191,7 @@ public class SystemDictController extends BaseController {
      */
     @RequestMapping(value = "/updateItem")
     @ResponseBody
+    @AuthAction(permission = {Permission.Update}, name = "修改")
     public ServiceResult updateSysDictItemInfo(SystemDictItem info, HttpServletRequest request) {
         return ServiceFactory.getDictItemService().update(ComSession.getUserInfo(), info);
     }
@@ -189,18 +204,21 @@ public class SystemDictController extends BaseController {
      */
     @RequestMapping(value = "/deleteItem")
     @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult deleteSysDictItemInfo(String id) {
         return ServiceFactory.getDictItemService().deleteById(ComSession.getUserInfo(), id);
     }
 
     @RequestMapping(value = "/deleteItemList")
     @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult deleteSysDictItemList(HttpServletRequest request) {
         return ServiceFactory.getDictItemService().deleteByIds(ComSession.getUserInfo(), Arrays.asList(request.getParameter("ids").split(",")));
     }
 
     @RequestMapping(value = "/categoryExists")
     @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResult categoryExists(HttpServletRequest request) {
         return ServiceFactory.getDictItemService().categoryExists(ComSession.getUserInfo(), request.getParameter("catalogId"));
     }

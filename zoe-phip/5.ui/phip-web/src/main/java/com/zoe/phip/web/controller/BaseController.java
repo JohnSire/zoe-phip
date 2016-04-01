@@ -16,7 +16,6 @@ import java.util.Map;
 public abstract class BaseController {
 
 
-
     public HttpServletRequest getRequest() {
         return DataContext.getRequest();
     }
@@ -25,8 +24,6 @@ public abstract class BaseController {
     public HttpServletResponse getResponse() {
         return DataContext.getResponse();
     }
-
-
 
 
     public BaseController setAttr(String name, Object value) {
@@ -46,26 +43,25 @@ public abstract class BaseController {
     }
 
 
-
     public String getPara(String name) {
         return getRequest().getParameter(name);
     }
 
     public String getPara(String name, String defaultValue) {
-        String result =  getRequest().getParameter(name);
+        String result = getRequest().getParameter(name);
         return result != null && !"".equals(result) ? result : defaultValue;
     }
 
     public <T> T getAttr(String name) {
-        return (T)getRequest().getAttribute(name);
+        return (T) getRequest().getAttribute(name);
     }
 
     public String getAttrForStr(String name) {
-        return (String)getRequest().getAttribute(name);
+        return (String) getRequest().getAttribute(name);
     }
 
     public Integer getAttrForInt(String name) {
-        return (Integer)getRequest().getAttribute(name);
+        return (Integer) getRequest().getAttribute(name);
     }
 
 
