@@ -1,30 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.dao.sm.SystemUserMapper">
-    <resultMap id="BaseResultMap" type="com.zoe.phip.model.sm.SystemUser">
-        <id column="ID" property="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <resultMap id="BaseResultMap" type="com.zoe.phip.model.sm.SystemUser" extends="com.zoe.phip.dao.MasterEntityResultMap">
         <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="LOGIN_NAME" property="loginName" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="PASSWORD" property="password" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="STATE" property="state" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-        <result column="CREATE_AT" property="createAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
-        <result column="CREATE_BY" property="createBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="MODIFY_AT" property="modifyAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
-        <result column="MODIFY_BY" property="modifyBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
-        INSERT INTO SYS_SYSTEM_USER (ID,NAME,LOGIN_NAME,PASSWORD,STATE,CREATE_AT,CREATE_BY,MODIFY_AT,MODIFY_BY)
+        INSERT INTO SYS_SYSTEM_USER (NAME,LOGIN_NAME,PASSWORD,
+        <include refid="com.zoe.phip.dao.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
-            #{item.id,jdbcType=VARCHAR},
             #{item.name,jdbcType=VARCHAR},
             #{item.loginName,jdbcType=VARCHAR},
             #{item.password,jdbcType=VARCHAR},
-            #{item.state,jdbcType=INTEGER},
-            #{item.createAt,jdbcType=TIMESTAMP},
-            #{item.createBy,jdbcType=VARCHAR},
-            #{item.modifyAt,jdbcType=TIMESTAMP},
-            #{item.modifyBy,jdbcType=VARCHAR}
+            <include refid="com.zoe.phip.dao.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
     </insert>

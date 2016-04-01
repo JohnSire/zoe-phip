@@ -7,6 +7,7 @@ package com.zoe.phip.model.sm;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.model.base.BaseEntity;
+import com.zoe.phip.model.base.MasterEntity;
 
 import javax.persistence.*;
 
@@ -16,7 +17,7 @@ import javax.persistence.*;
  * @date 2016-03-22
  */
 @Table(name = "SYS_SYSTEM_DICT_CATEGORY")
-public class SystemDictCategory extends BaseEntity {
+public class SystemDictCategory extends MasterEntity {
     /**
      * 名称
      */

@@ -28,22 +28,14 @@ public class BaseEntity implements Serializable {
 //    @JSONField(name = "CreateBy")
     private String createBy;
 
-    /**
-     * 修改人
-     */
-//    @JSONField(name = "ModifyBy")
-    private String modifyBy;
+
 
     /**
      * 实体（数据记录）创建时间
      */
 //    @JSONField(name = "CreateAt")
     private Date createAt;
-    /**
-     * 实体（数据记录）修改时间
-     */
-//    @JSONField(name = "ModifyAt")
-    private Date modifyAt;
+
 
     /**
      * 获取实体主键id
@@ -82,23 +74,7 @@ public class BaseEntity implements Serializable {
         this.createAt = createAt;
     }
 
-    /**
-     * 获取实体（数据记录）修改时间
-     *
-     * @return
-     */
-    public Date getModifyAt() {
-        return modifyAt;
-    }
 
-    /**
-     * 设置实体（数据记录）修改时间
-     *
-     * @param modifyAt
-     */
-    public void setModifyAt(Date modifyAt) {
-        this.modifyAt = modifyAt;
-    }
 
     public String getCreateBy() {
         return createBy;
@@ -108,12 +84,6 @@ public class BaseEntity implements Serializable {
         this.createBy = createBy;
     }
 
-    public String getModifyBy() {
-        return modifyBy;
-    }
 
-    public void setModifyBy(String modifyBy) {
-        this.modifyBy = modifyBy;
-    }
 
 }

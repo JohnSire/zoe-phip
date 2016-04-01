@@ -5,6 +5,7 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.model.base.BaseEntity;
+import com.zoe.phip.model.base.MasterEntity;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * 内部服务基接口
  * Created by qiuyungen on 2016/3/26.
  */
-public interface BaseInService<T extends BaseEntity> {
+public interface BaseInService<T extends MasterEntity> {
 
     SystemData getSystemData();
 

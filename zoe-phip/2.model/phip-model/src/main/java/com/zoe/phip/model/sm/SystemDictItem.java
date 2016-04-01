@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.model.base.BaseEntity;
+import com.zoe.phip.model.base.MasterEntity;
 
 /**
  * @author
@@ -16,7 +17,7 @@ import com.zoe.phip.model.base.BaseEntity;
  * @date 2016-03-22
  */
 @Table(name = "SYS_SYSTEM_DICT_ITEM")
-public class SystemDictItem extends BaseEntity {
+public class SystemDictItem extends MasterEntity {
     /**
      * 字典类别
      */

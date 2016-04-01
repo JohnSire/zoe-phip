@@ -2,6 +2,7 @@ package com.zoe.phip.service.impl.in.sm;
 
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SortOrder;
 import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.impl.BaseTest;
@@ -74,7 +75,7 @@ public class SystemUserServiceImplTest extends BaseTest {
     @Test
     public void testGetUsers() throws Exception {
         PageList<SystemUser> resultT =
-                systemUserService.getUserList(1, "a", new QueryPage());
+                systemUserService.getUserList(null, "a", new QueryPage(1,30,"NAME",SortOrder.ASC));
     }
 
     @Test

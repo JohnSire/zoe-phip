@@ -5,6 +5,7 @@ import javax.persistence.Table;
 import javax.persistence.*;
 
 import com.zoe.phip.model.base.BaseEntity;
+import com.zoe.phip.model.base.MasterEntity;
 
 
 /**
@@ -13,7 +14,7 @@ import com.zoe.phip.model.base.BaseEntity;
  * @date 2016-03-29
  */
 @Table(name = "SYS_USER_COMPETENCE")
-public class UserCompetence extends BaseEntity {
+public class UserCompetence extends MasterEntity {
     /**
      * 权限分类设计
      */

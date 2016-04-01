@@ -6,6 +6,7 @@
 package com.zoe.phip.model.sm;
 
 import com.zoe.phip.model.base.BaseEntity;
+import com.zoe.phip.model.base.MasterEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
  * @date 2016-03-29
  */
 @Table(name = "SYS_MENU_COMPETENCE")
-public class MenuCompetence extends BaseEntity {
+public class MenuCompetence extends MasterEntity {
     /**
      * 权限分类设计
      */

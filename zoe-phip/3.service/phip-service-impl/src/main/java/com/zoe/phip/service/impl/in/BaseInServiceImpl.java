@@ -10,6 +10,7 @@ import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.model.base.BaseEntity;
+import com.zoe.phip.model.base.MasterEntity;
 import com.zoe.phip.service.impl.util.SqlHelper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
@@ -24,7 +25,7 @@ import java.util.Map;
 /**
  * Created by qiuyungen on 2016/3/26.
  */
-public abstract class BaseInServiceImpl<T extends BaseEntity, TMapper extends MyMapper<T>> implements BaseInService<T>, Mapper<T>, GenericService {
+public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends MyMapper<T>> implements BaseInService<T>, Mapper<T>, GenericService {
 
     private SystemData systemData;
 
