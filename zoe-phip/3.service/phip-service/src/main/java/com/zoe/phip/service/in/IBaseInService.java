@@ -12,7 +12,7 @@ import java.util.List;
  * 内部服务基接口
  * Created by zengjiyang on 2016/1/25.
  */
-public interface BaseInService<T extends MasterEntity> {
+public interface IBaseInService<T extends MasterEntity> {
 
     /**
      * 新增

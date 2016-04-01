@@ -10,30 +10,30 @@ import com.zoe.phip.web.bean.Constant;
  */
 public final class ServiceFactory {
 
-    public static SystemUserService getUserService() {
+    public static ISystemUserService getUserService() {
         return BeanFactory.getBean(Constant.SYSTEM_USER_SERVICE);
     }
 
-    public static SystemDictItemService getDictItemService() {
+    public static ISystemDictItemService getDictItemService() {
         return BeanFactory.getBean(Constant.SYSTEM_DICT_ITEM_SERVICE);
     }
 
-    public static MenuDataService getMenuDataService() {
+    public static IMenuDataService getMenuDataService() {
         return BeanFactory.getBean(Constant.MENU_DATA_SERVICE);
     }
 
-    public static SystemDictCategoryService getDictCategoryService() {
+    public static ISystemDictCategoryService getDictCategoryService() {
         return BeanFactory.getBean(Constant.SYSTEM_DICT_CATEGORY_SERVICE);
     }
 
-    public static SystemParameterService getParameterService() {
+    public static ISystemParameterService getParameterService() {
         return BeanFactory.getBean(Constant.SYSTEM_PARAMETER_SERVICE);
     }
-    public static UserCompetenceService getUserCompetenceService() {
+    public static IUserCompetenceService getUserCompetenceService() {
         return BeanFactory.getBean(Constant.USER_COMPETENCE_SERVICE);
     }
 
-    public static MenuCompetenceService getMenuCompetenceService() {
+    public static IMenuCompetenceService getMenuCompetenceService() {
         return BeanFactory.getBean(Constant.MENU_COMPETENCE_SERVICE);
     }
 }

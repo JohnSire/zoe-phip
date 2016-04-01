@@ -3,13 +3,12 @@ package com.zoe.phip.service.impl.in;
 import com.alibaba.dubbo.rpc.service.GenericException;
 import com.alibaba.dubbo.rpc.service.GenericService;
 import com.github.pagehelper.PageInfo;
-import com.zoe.phip.dao.MyMapper;
+import com.zoe.phip.dao.IMyMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
-import com.zoe.phip.model.base.BaseEntity;
 import com.zoe.phip.model.base.MasterEntity;
 import com.zoe.phip.service.impl.util.SqlHelper;
 import org.apache.ibatis.annotations.Param;
@@ -20,18 +19,17 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by qiuyungen on 2016/3/26.
  */
-public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends MyMapper<T>> implements BaseInService<T>, Mapper<T>, GenericService {
+public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends IMyMapper<T>> implements BaseInService<T>, Mapper<T>, GenericService {
 
     private SystemData systemData;
 
     @Autowired
     @SuppressWarnings("all")
-    private MyMapper<T> mapper;
+    private IMyMapper<T> mapper;
 
     public TMapper getMapper() {
         return (TMapper) mapper;

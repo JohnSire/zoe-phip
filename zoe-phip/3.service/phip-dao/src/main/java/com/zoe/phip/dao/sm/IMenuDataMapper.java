@@ -6,7 +6,7 @@
 
 package com.zoe.phip.dao.sm;
 
-import com.zoe.phip.dao.MyMapper;
+import com.zoe.phip.dao.IMyMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.model.sm.MenuData;
@@ -19,7 +19,7 @@ import java.util.Map;
  * @version 1.0
  * @date 2016-03-21
  */
-public interface MenuDataMapper extends MyMapper<MenuData> {
+public interface IMenuDataMapper extends IMyMapper<MenuData> {
 
     List<MenuData> getMenuDataList(Map<String, Object> args);
 

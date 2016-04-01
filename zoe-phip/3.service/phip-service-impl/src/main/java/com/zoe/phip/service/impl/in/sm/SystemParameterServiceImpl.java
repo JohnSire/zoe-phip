@@ -7,10 +7,10 @@
 package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.zoe.phip.dao.sm.SystemParameterMapper;
+import com.zoe.phip.dao.sm.ISystemParameterMapper;
 import com.zoe.phip.model.sm.SystemParameter;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
-import com.zoe.phip.service.in.sm.SystemParameterService;
+import com.zoe.phip.service.in.sm.ISystemParameterService;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
  * @date 2016-03-22
  */
 @Repository("systemParameterService")
-@Service(interfaceClass = SystemParameterService.class, proxy = "sdpf", dynamic = true)
-public class SystemParameterServiceImpl extends BaseInServiceImpl<SystemParameter, SystemParameterMapper> implements SystemParameterMapper {
+@Service(interfaceClass = ISystemParameterService.class, proxy = "sdpf", dynamic = true)
+public class SystemParameterServiceImpl extends BaseInServiceImpl<SystemParameter, ISystemParameterMapper> implements ISystemParameterMapper {
 
 }

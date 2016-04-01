@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zoe.phip.dao.sm.MenuDataMapper">
+<mapper namespace="com.zoe.phip.dao.sm.IMenuDataMapper">
     <resultMap id="BaseResultMap" type="com.zoe.phip.model.sm.MenuData" extends="com.zoe.phip.dao.MasterEntityResultMap">
         <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="CODE" property="code" javaType="java.lang.String" jdbcType="VARCHAR"/>
@@ -35,11 +35,7 @@
             #{item.id}
         </foreach>
     </delete>
-    <select id="getMenuDataList" resultMap="BaseResultMap" parameterType="java.util.Map">
-        select * from SYS_MENU_DATA WHERE 1=1
-        <if test="key !=null and key !=''">AND (UPPER(NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(CODE) LIKE
-            #{key,jdbcType=VARCHAR} OR UPPER(ADDRESS) LIKE #{key,jdbcType=VARCHAR})</if>
-    </select>
+
 
     <update id="updateList"  parameterType="java.util.List">
     <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">

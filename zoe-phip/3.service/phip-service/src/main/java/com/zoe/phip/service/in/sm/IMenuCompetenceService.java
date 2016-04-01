@@ -9,7 +9,7 @@ package com.zoe.phip.service.in.sm;
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.model.sm.MenuCompetence;
 import com.zoe.phip.model.sm.MenuData;
-import com.zoe.phip.service.in.BaseInService;
+import com.zoe.phip.service.in.IBaseInService;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * @version 1.0
  * @date 2016-03-29
  */
-public interface MenuCompetenceService extends BaseInService<MenuCompetence> {
+public interface IMenuCompetenceService extends IBaseInService<MenuCompetence> {
 
     ServiceResult saveList(SystemData systemData, String competenceCategoryId, List<MenuCompetence> list);
 

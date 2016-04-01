@@ -39,12 +39,6 @@ public class SystemUser extends MasterEntity {
 //    @JSONField(name = "Password")
     private String password;
 
-    /**
-     * 状态
-     */
-    @Column(name = "STATE")
-//    @JSONField(name = "State")
-    private int state;
 
     public String getName() {
         return this.name;
@@ -69,15 +63,6 @@ public class SystemUser extends MasterEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public int getState() {
-        return this.state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
 
     public String getCompetenceId() {
         return competenceId;

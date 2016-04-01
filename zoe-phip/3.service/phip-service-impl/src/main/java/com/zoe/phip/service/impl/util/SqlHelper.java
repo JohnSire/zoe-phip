@@ -13,9 +13,11 @@ import java.util.Map;
 public final class SqlHelper {
     public static void startPage(QueryPage queryPage){
         if (queryPage.getOrderBy() != null) {
-            PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize(), queryPage.getOrderBy());
+            String order=queryPage.getOrderBy()+" "+queryPage.getSortOrder();
+            PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize(), order);
         } else {
-            PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize());
+            //默认按照时间倒序
+            PageHelper.startPage(queryPage.getPageNum(), queryPage.getPageSize()," CREATE_AT DESC ");
         }
     }
 
@@ -30,17 +32,4 @@ public final class SqlHelper {
     public static String getEndWithStr(String input){
         return MessageFormat.format("%{0}",input);
     }
-
-    /**
-     * 设置排序
-     * @param map
-     * @param queryPage
-     */
-    public static void setOrder(Map<String, Object> map, QueryPage queryPage){
-        if(!StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())){
-            map.put("order",queryPage.getOrderBy());
-            map.put("sortOrder","ASC");
-        }
-    }
-
 }

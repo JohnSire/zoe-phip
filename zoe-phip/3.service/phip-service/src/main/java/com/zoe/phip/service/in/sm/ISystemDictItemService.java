@@ -8,7 +8,7 @@ package com.zoe.phip.service.in.sm;
 
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.model.sm.SystemDictItem;
-import com.zoe.phip.service.in.BaseInService;
+import com.zoe.phip.service.in.IBaseInService;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import java.util.List;
  * @version 1.0
  * @date 2016-03-22
  */
-public interface SystemDictItemService extends BaseInService<SystemDictItem> {
+public interface ISystemDictItemService extends IBaseInService<SystemDictItem> {
 
     /// <summary>
     /// 检查字典类别是否存在字典项

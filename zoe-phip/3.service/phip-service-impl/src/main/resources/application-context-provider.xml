@@ -14,8 +14,8 @@
 
     <!--<dubbo:service interface="com.zoe.phip.service.in.sm.SystemUserService" version="1.0.0"
                      ref="SystemUserService"/>-->
-    <!--  <dubbo:service interface="com.zoe.phip.service.in.sm.SystemDictCategoryService" version="1.0.0"
-                     ref="SystemDictCategoryService"/>
+    <!--  <dubbo:service interface="com.zoe.phip.service.in.sm.ISystemDictCategoryServicee" version="1.0.0"
+                     ref="ISystemDictCategoryService"/>
       <dubbo:service interface="com.zoe.phip.service.in.sm.SystemDictItemService" version="1.0.0"
                      ref="SystemDictItemService"/>-->
 </beans>

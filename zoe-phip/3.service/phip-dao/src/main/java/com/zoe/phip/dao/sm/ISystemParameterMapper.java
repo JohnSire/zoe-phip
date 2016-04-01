@@ -6,7 +6,7 @@
 
 package com.zoe.phip.dao.sm;
 
-import com.zoe.phip.dao.MyMapper;
+import com.zoe.phip.dao.IMyMapper;
 import com.zoe.phip.model.sm.SystemParameter;
 
 /**
@@ -14,6 +14,6 @@ import com.zoe.phip.model.sm.SystemParameter;
  * @version 1.0
  * @date 2016-03-22
  */
-public interface SystemParameterMapper extends MyMapper<SystemParameter> {
+public interface ISystemParameterMapper extends IMyMapper<SystemParameter> {
 
 }

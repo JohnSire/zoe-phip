@@ -8,7 +8,7 @@ package com.zoe.phip.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
-import com.zoe.phip.dao.sm.SystemUserMapper;
+import com.zoe.phip.dao.sm.ISystemUserMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -18,7 +18,7 @@ import com.zoe.phip.model.sm.LoginCredentials;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.impl.util.SqlHelper;
-import com.zoe.phip.service.in.sm.SystemUserService;
+import com.zoe.phip.service.in.sm.ISystemUserService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
@@ -30,8 +30,8 @@ import java.util.*;
  * @date 2016-03-18
  */
 @Repository("SystemUserService")
-@Service(interfaceClass = SystemUserService.class, proxy = "sdpf", dynamic = true)
-public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, SystemUserMapper> implements SystemUserMapper {
+@Service(interfaceClass = ISystemUserService.class, proxy = "sdpf", dynamic = true)
+public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystemUserMapper> implements ISystemUserMapper {
 
 
     @Override
@@ -54,7 +54,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, SystemU
         if (!psd.equals(user.getPassword())) {
             throw new BusinessException("密码错误!");
         }
-        LoginCredentials credentials = createLoginCredentials(user.getId(), user.getName(),expiresTime);
+        LoginCredentials credentials = createLoginCredentials(user.getId(), user.getName(), expiresTime);
         return credentials;
     }
 
@@ -102,12 +102,13 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, SystemU
         //分页
         SqlHelper.startPage(queryPage);
         Map<String, Object> paras = new HashMap<String, Object>();
-        paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        }
         if (state != null) {
             paras.put("state", state);
         }
-        SqlHelper.setOrder(paras,queryPage);
-
+//        SqlHelper.setOrder(paras,queryPage);
         List<SystemUser> results = getMapper().getUserList(paras);
         PageInfo<SystemUser> pageInfo = new PageInfo<SystemUser>(results);
         pageList.setTotal((int) pageInfo.getTotal());
@@ -158,11 +159,11 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, SystemU
         return StringUtil.toMD5(String.join("zoe", loginName, StringUtil.toMD5(password), loginName));
     }
 
-    private LoginCredentials createLoginCredentials(String userId, String userName,int expiresTime) {
+    private LoginCredentials createLoginCredentials(String userId, String userName, int expiresTime) {
         LoginCredentials credentials = new LoginCredentials();
         credentials.setUserId(userId);
         credentials.setUserName(userName);
-        String credential=SystemCredential.createCredential(userId,userName,expiresTime);
+        String credential = SystemCredential.createCredential(userId, userName, expiresTime);
         credentials.setCredential(credential);
         return credentials;
     }

@@ -5,13 +5,9 @@
 
 package com.zoe.phip.dao.sm;
 
-import com.zoe.phip.dao.MyMapper;
+import com.zoe.phip.dao.IMyMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
-import com.zoe.phip.infrastructure.exception.BusinessException;
-import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.model.sm.UserCompetence;
 
@@ -23,7 +19,7 @@ import java.util.Map;
  * @version 1.0
  * @date 2016-03-29
  */
-public interface UserCompetenceMapper extends MyMapper<UserCompetence> {
+public interface IUserCompetenceMapper extends IMyMapper<UserCompetence> {
 
     boolean saveList(String competenceCategoryId, List<UserCompetence> list) throws Exception;
 

@@ -2,32 +2,25 @@
 package com.zoe.phip.service.impl.in.sm;
 
 import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import com.zoe.phip.dao.sm.UserCompetenceMapper;
+import com.zoe.phip.dao.sm.IUserCompetenceMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
-import com.zoe.phip.model.sm.SystemDictCategory;
 import com.zoe.phip.model.sm.SystemUser;
 import com.zoe.phip.model.sm.UserCompetence;
 import com.zoe.phip.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.service.impl.util.SqlHelper;
-import com.zoe.phip.service.in.sm.UserCompetenceService;
+import com.zoe.phip.service.in.sm.IUserCompetenceService;
 import org.springframework.stereotype.Repository;
 import com.alibaba.dubbo.config.annotation.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static java.lang.System.in;
 
 /**
  * @author
@@ -35,8 +28,8 @@ import static java.lang.System.in;
  * @date 2016-03-29
  */
 @Repository("UserCompetenceService")
-@Service(interfaceClass = UserCompetenceService.class, proxy = "sdpf", dynamic = true)
-public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence, UserCompetenceMapper> implements UserCompetenceMapper {
+@Service(interfaceClass = IUserCompetenceService.class, proxy = "sdpf", dynamic = true)
+public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence, IUserCompetenceMapper> implements IUserCompetenceMapper {
 
     @Override
     public boolean saveList(String competenceCategoryId, List<UserCompetence> list) throws Exception {

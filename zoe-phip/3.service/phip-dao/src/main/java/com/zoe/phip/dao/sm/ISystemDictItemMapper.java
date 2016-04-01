@@ -6,7 +6,7 @@
 
 package com.zoe.phip.dao.sm;
 
-import com.zoe.phip.dao.MyMapper;
+import com.zoe.phip.dao.IMyMapper;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.model.sm.SystemDictItem;
@@ -19,7 +19,7 @@ import java.util.Map;
  * @version 1.0
  * @date 2016-03-22
  */
-public interface SystemDictItemMapper extends MyMapper<SystemDictItem> {
+public interface ISystemDictItemMapper extends IMyMapper<SystemDictItem> {
 
 
     List<SystemDictItem> getDataItemList(Map map);

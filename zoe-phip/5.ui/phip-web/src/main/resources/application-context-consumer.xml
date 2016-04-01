@@ -10,21 +10,21 @@
     <dubbo:registry address="N/A"/>
 
     <!--地址：本地测试时用localhost 部署时要换成Ip地址-->
-    <dubbo:reference id="SystemUserService" interface="com.zoe.phip.service.in.sm.SystemUserService"
-                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemUserService"/>
-    <dubbo:reference id="SystemDictCategoryService" interface="com.zoe.phip.service.in.sm.SystemDictCategoryService"
+    <dubbo:reference id="SystemUserService" interface="com.zoe.phip.service.in.sm.ISystemUserService"
+                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.ISystemUserService"/>
+    <dubbo:reference id="SystemDictCategoryService" interface="com.zoe.phip.service.in.sm.ISystemDictCategoryService"
 
-                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemDictCategoryService"/>
-    <dubbo:reference id="SystemDictItemService" interface="com.zoe.phip.service.in.sm.SystemDictItemService"
-                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemDictItemService"/>
-    <dubbo:reference id="MenuDataService" interface="com.zoe.phip.service.in.sm.MenuDataService"
-                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.MenuDataService"/>
-    <dubbo:reference id="SystemParameterService" interface="com.zoe.phip.service.in.sm.SystemParameterService"
-                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.SystemParameterService"/>
-    <dubbo:reference id="UserCompetenceService" interface="com.zoe.phip.service.in.sm.UserCompetenceService"
-                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.UserCompetenceService"/>
-    <dubbo:reference id="MenuCompetenceService" interface="com.zoe.phip.service.in.sm.MenuCompetenceService"
-                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.MenuCompetenceService"/>
+                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.ISystemDictCategoryService"/>
+    <dubbo:reference id="SystemDictItemService" interface="com.zoe.phip.service.in.sm.ISystemDictItemService"
+                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.ISystemDictItemService"/>
+    <dubbo:reference id="MenuDataService" interface="com.zoe.phip.service.in.sm.IMenuDataService"
+                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.IMenuDataService"/>
+    <dubbo:reference id="SystemParameterService" interface="com.zoe.phip.service.in.sm.ISystemParameterService"
+                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.ISystemParameterService"/>
+    <dubbo:reference id="UserCompetenceService" interface="com.zoe.phip.service.in.sm.IUserCompetenceService"
+                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.IUserCompetenceService"/>
+    <dubbo:reference id="MenuCompetenceService" interface="com.zoe.phip.service.in.sm.IMenuCompetenceService"
+                     url="dubbo://localhost:20080/com.zoe.phip.service.in.sm.IMenuCompetenceService"/>
 
 
 </beans>
