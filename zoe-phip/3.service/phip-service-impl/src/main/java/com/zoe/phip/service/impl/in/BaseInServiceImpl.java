@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -72,10 +74,15 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
     }
 
     @Override
-    public int deleteByIds(List<String> ids) throws Exception {
-        if (ids == null || ids.size() <= 0)
+    public int deleteByIds(String ids) throws Exception {
+        if(StringUtil.isNullOrWhiteSpace(ids))
             throw new BusinessException("批量删除参数不能为空");
-        return mapper.deleteByIds(ids);
+        List<String> list = Arrays.asList(ids.split(","));
+        return mapper.deleteByIds(list);
+    }
+
+    public int deleteByIds(List<String> list) throws Exception {
+        return mapper.deleteByIds(list);
     }
 
     @Override

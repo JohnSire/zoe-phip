@@ -56,10 +56,10 @@ public interface IBaseInService<T extends MasterEntity> {
     /**
      * 批量删除
      *
-     * @param idList
+     * @param ids
      * @return
      */
-    int deleteByIds(List<String> idList) throws Exception;
+    int deleteByIds(String ids) throws Exception;
 
     /**
      * 更新

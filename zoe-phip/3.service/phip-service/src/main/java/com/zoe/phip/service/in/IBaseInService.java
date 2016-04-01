@@ -50,10 +50,10 @@ public interface IBaseInService<T extends MasterEntity> {
     /**
      * 批量删除
      *
-     * @param idList
+     * @param ids
      * @return
      */
-    ServiceResult deleteByIds(SystemData systemData, List<String> idList);
+    ServiceResult deleteByIds(SystemData systemData, String ids);
 
     /**
      * 更新

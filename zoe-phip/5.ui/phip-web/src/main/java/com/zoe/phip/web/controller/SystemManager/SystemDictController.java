@@ -136,7 +136,7 @@ public class SystemDictController extends BaseController {
     @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult deleteSysDictCategoryList(HttpServletRequest request) {
         String id = request.getParameter("ids");
-        return ServiceFactory.getDictCategoryService().deleteByIds(ComSession.getUserInfo(), Arrays.asList(id.split(",")));
+        return ServiceFactory.getDictCategoryService().deleteByIds(ComSession.getUserInfo(), id);
     }
 
     /**
@@ -214,7 +214,8 @@ public class SystemDictController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult deleteSysDictItemList(HttpServletRequest request) {
-        return ServiceFactory.getDictItemService().deleteByIds(ComSession.getUserInfo(), Arrays.asList(request.getParameter("ids").split(",")));
+        return ServiceFactory.getDictItemService().deleteByIds(ComSession.getUserInfo(),
+                request.getParameter("ids"));
     }
 
     @RequestMapping(value = "/categoryExists")

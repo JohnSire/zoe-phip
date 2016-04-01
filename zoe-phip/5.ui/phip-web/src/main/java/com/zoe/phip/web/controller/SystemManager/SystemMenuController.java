@@ -234,8 +234,7 @@ public class SystemMenuController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Delete},name = "删除")
     public ServiceResult delMenuAcc( @RequestParam("ids") String ids) {
-      List<String> idList = Arrays.asList( ids.split(","));
-        return ServiceFactory.getMenuCompetenceService().deleteByIds(ComSession.getUserInfo(),idList);
+        return ServiceFactory.getMenuCompetenceService().deleteByIds(ComSession.getUserInfo(),ids);
     }
 
 }

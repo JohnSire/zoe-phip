@@ -145,8 +145,7 @@ public class SystemUserController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Delete},name = "删除")
     public ServiceResult deleteUserList(String ids) {
-        List<String> list = Arrays.asList(ids.split(","));
-        return ServiceFactory.getUserService().deleteByIds(ComSession.getUserInfo(), list);
+        return ServiceFactory.getUserService().deleteByIds(ComSession.getUserInfo(), ids);
     }
 
     /**
@@ -193,8 +192,7 @@ public class SystemUserController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Add},name = "新增")
     public ServiceResult delUserAcc( @RequestParam("ids") String ids) {
-        List<String> idList = Arrays.asList( ids.split(","));
-        return ServiceFactory.getUserCompetenceService().deleteByIds(ComSession.getUserInfo(),idList);
+        return ServiceFactory.getUserCompetenceService().deleteByIds(ComSession.getUserInfo(),ids);
     }
 
 }
