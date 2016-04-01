@@ -4,7 +4,7 @@
     <resultMap id="MultiResultMap" type="com.zoe.phip.model.sm.SystemDictItem" extends="BaseResultMap">
     </resultMap>
     <select id="getDataItemList" resultMap="MultiResultMap" parameterType="java.util.Map">
-        SELECT * FROM SYS_SYSTEM_DICT_ITEM SSDI
+        SELECT ssdi.* FROM SYS_SYSTEM_DICT_ITEM SSDI
         INNER JOIN SYS_SYSTEM_DICT_CATEGORY SSDC
         ON SSDC.ID = SSDI.FK_SYSTEM_DICT_CATEGORY_ID
         where 1 = 1

@@ -42,7 +42,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     public int add(SystemDictItem entity) throws Exception {
         Example example = new Example(SystemDictItem.class);
         example.createCriteria().andEqualTo("fkSystemDictCategoryId", entity.getFkSystemDictCategoryId())
-                .andEqualTo("code",entity.getCode());
+                .andEqualTo("code", entity.getCode());
         //example.createCriteria().andEqualTo("code", entity.getCode());
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
@@ -55,7 +55,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     public int update(SystemDictItem entity) throws Exception {
 
         Example example = new Example(SystemDictItem.class);
-        example.createCriteria().andEqualTo("code", entity.getCode()).andEqualTo("fkSystemDictCategoryId",entity.getFkSystemDictCategoryId()).andNotEqualTo("id", entity.getId());
+        example.createCriteria().andEqualTo("code", entity.getCode()).andEqualTo("fkSystemDictCategoryId", entity.getFkSystemDictCategoryId()).andNotEqualTo("id", entity.getId());
 
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
@@ -78,6 +78,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     public PageList<SystemDictItem> getDictItems(String categoryId, String key, QueryPage page) {
 
         PageList<SystemDictItem> pageList = new PageList<>();
+        page.setOrderBy("ssdi.code");
         SqlHelper.startPage(page);
         Map<String, Object> map = MapUtil.createMap(m -> {
             m.put("categoryId", categoryId);
