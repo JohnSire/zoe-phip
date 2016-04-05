@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sm.IUserCompetenceMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sm.UserCompetence" extends="BaseResultMap">
+        <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="LOGIN_NAME" property="loginName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="SystemUserResultMap" type="com.zoe.phip.web.model.sm.SystemUser">
+        <id column="ID" property="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="LOGIN_NAME" property="loginName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="STATE" property="state" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result column="CREATE_AT" property="createAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_BY" property="createBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="MODIFY_AT" property="modifyAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        <result property="competenceId" column="COMPETENCE_ID"/>
+    </resultMap>
+    <select id="checkExists" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT COUNT(1)
+        FROM SYS_SYSTEM_USER t
+        INNER JOIN SYS_USER_COMPETENCE MC ON MC.FK_USER_ID = T.ID
+        WHERE T.STATE = 1 AND MC.FK_COMPETENCE_CATEGORY_ID =#{CATEGORY_ID,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('USER_ID')">
+            AND T.ID = #{USER_ID,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getUserListByCompetenceCategory" resultMap="SystemUserResultMap" parameterType="java.util.Map">
+        SELECT MC.ID COMPETENCE_ID, t.ID, t.NAME, t.LOGIN_NAME, t.PASSWORD, t.STATE, mc.CREATE_AT, mc.CREATE_BY, t.MODIFY_AT, t.MODIFY_BY, row_number() over(ORDER BY t.ID) AS NUM_INDEX
+        FROM SYS_SYSTEM_USER t
+        INNER JOIN SYS_USER_COMPETENCE MC ON MC.FK_USER_ID = T.ID
+        WHERE MC.FK_COMPETENCE_CATEGORY_ID = #{C_ID,jdbcType=VARCHAR}
+        AND (concat(UPPER(t.NAME),UPPER(t.LOGIN_NAME)) LIKE '%' || UPPER(#{KEY,jdbcType=VARCHAR}) || '%')
+    </select>
+</mapper>

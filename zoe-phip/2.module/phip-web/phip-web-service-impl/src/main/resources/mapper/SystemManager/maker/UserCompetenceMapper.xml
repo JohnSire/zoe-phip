@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sm.IUserCompetenceMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.web.model.sm.UserCompetence" extends="com.zoe.phip.web.dao.MasterEntityResultMap">
+        <result column="FK_COMPETENCE_CATEGORY_ID" property="fkCompetenceCategoryId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="FK_USER_ID" property="fkUserId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="addList" parameterType="java.util.List">
+        INSERT INTO SYS_USER_COMPETENCE (
+        FK_COMPETENCE_CATEGORY_ID,FK_USER_ID,
+        <include refid="com.zoe.phip.web.dao.baseEntityInsert"/>)
+        <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+            SELECT
+            #{item.fkCompetenceCategoryId,jdbcType=VARCHAR},
+            #{item.fkUserId,jdbcType=VARCHAR}
+            <include refid="com.zoe.phip.web.dao.baseEntitySelect"/>
+            FROM DUAL
+        </foreach>
+    </insert>
+    <delete id="deleteByIds" parameterType="java.util.List">
+        delete from SYS_USER_COMPETENCE where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <delete id="deleteByList" parameterType="java.util.List">
+        delete from SYS_USER_COMPETENCE where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+</mapper>

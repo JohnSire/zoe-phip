@@ -18,6 +18,9 @@
         <module>5.ui/phip-web</module>
         <module>5.ui/phip-web-static</module>
         <module>6.tools/zoe-phip-code-generator</module>
+        <module>2.module/phip-module-infrastructure</module>
+        <module>2.module/phip-web/phip-web-service</module>
+        <module>2.module/phip-web/phip-web-service-impl</module>
     </modules>
 
     <properties>
