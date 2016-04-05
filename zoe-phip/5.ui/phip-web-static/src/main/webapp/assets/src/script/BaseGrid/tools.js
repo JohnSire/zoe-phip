@@ -97,9 +97,11 @@ define(function (require, exports, module) {
                     top[options["dialogParam"]["winCallback"]](callback, submited);
                 }
                 var urlParam="";
-                $.each(addParam["otherUrlParam"],function(key,value){
-                    urlParam+=key+"="+value+"&&";
-                });
+                if(typeof(addParam["otherUrlParam"]=="function")) {
+                    $.each(addParam["otherUrlParam"](), function (key, value) {
+                        urlParam += key + "=" + value + "&&";
+                    });
+                }
                 addParam["url"]=addParam["url"]+"?"+urlParam;
                 top[options["dialogParam"]["winName"]] = common.dialog(addParam);
             },
