@@ -68,22 +68,17 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
         return mapper.deleteByPrimaryKey(id);
     }
 
-    @Override
-    public int deleteByList(List<T> entities) throws Exception {
-        return mapper.deleteByList(entities);
+    public int deleteByIds(String[] ids) throws Exception{
+        return mapper.deleteByIds(ids);
     }
 
     @Override
     public int deleteByIds(String ids) throws Exception {
         if(StringUtil.isNullOrWhiteSpace(ids))
             throw new BusinessException("批量删除参数不能为空");
-        List<String> list = Arrays.asList(ids.split(","));
-        return mapper.deleteByIds(list);
+        return mapper.deleteByIds(ids.split(","));
     }
 
-    public int deleteByIds(List<String> list) throws Exception {
-        return mapper.deleteByIds(list);
-    }
 
     @Override
     public int update(T entity) throws Exception {

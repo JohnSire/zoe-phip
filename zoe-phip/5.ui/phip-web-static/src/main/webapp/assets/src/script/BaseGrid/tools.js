@@ -97,7 +97,7 @@ define(function (require, exports, module) {
                     top[options["dialogParam"]["winCallback"]](callback, submited);
                 }
                 var urlParam="";
-                if(typeof(addParam["otherUrlParam"]=="function")) {
+                if(typeof(addParam["otherUrlParam"])=="function") {
                     $.each(addParam["otherUrlParam"](), function (key, value) {
                         urlParam += key + "=" + value + "&&";
                     });
