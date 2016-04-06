@@ -1,0 +1,36 @@
+<%
+var baseTitle={
+%>
+${title}
+<%};%>
+<%
+var baseStyleSection = {
+%>
+<link href="/assets/dist/style/layout.css" rel="stylesheet"/>
+${styleSection}
+<%};%>
+<%
+var baseBodySection = {
+%>
+${bodySection}
+<!--工具栏-->
+<div class="y-layout-header">
+    <ul id="gridTools" class="y-layout-form clearfix">
+
+    </ul>
+</div>
+<!--工具栏-->
+<!--主要内容-->
+<div>
+    <div id="grid" style="border:0;"></div>
+</div>
+<!--主要内容-->
+<%};%>
+<%
+var baseScriptSection={
+%>
+${scriptSection}
+<%};%>
+<%
+include("/WEB-INF/Shared/_default.html",{baseTitle:baseTitle,baseStyleSection:baseStyleSection,baseBodySection:baseBodySection,baseScriptSection:baseScriptSection}){}
+%>

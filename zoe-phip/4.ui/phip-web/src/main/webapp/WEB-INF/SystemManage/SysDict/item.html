@@ -1,0 +1,36 @@
+<%
+var bodySection = {
+%>
+    <div class="y-dialog-content">
+        <div class="y-dialog-form form-little">
+            <ul class="y-dialog-lists clearfix">
+                <li class="list">
+                    <p class="column-one">
+                        <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
+                        <input type="text" name="code" class="text-big" datatype="*1-36" errormsg="编码长度应为1~36位！"
+                               nullmsg="请填写编码！"/>
+                    </p>
+                    <p class="column-one">
+                        <label class="label" for="name"><span class="text-mark">*</span>名称：</label>
+                        <input type="text" name="name" class="text-big" datatype="*1-36" errormsg="编码长度应为1~36位！"
+                               nullmsg="请填写编码！"/>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/SystemManager/SysDict/itemDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"系统字典项信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>
