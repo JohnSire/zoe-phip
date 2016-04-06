@@ -4,6 +4,10 @@
  */
 
 package com.zoe.phip.web.model.sm;
+/*
+ * Powered By zoe
+ * Since 2008 - 2016
+ */
 
 import com.zoe.phip.module.service.entity.MasterEntity;
 
@@ -23,13 +27,28 @@ public class MenuData extends MasterEntity {
 
 
     /**
+     * 子节�
+     */
+    @Transient
+//    @JSONField(name = "Childrens")
+    public List<MenuData> children;
+    /// <summary>
+    /// 对应的权限标�
+    /// </summary>
+    @Transient
+    @Column(name = "COMPETENCE_ID")
+    public String competenceId;
+    /// <summary>
+    /// 菜单路径
+    /// </summary>
+    @Transient
+    public String namePath;
+    /**
      * 名称
      */
     @Column(name = "NAME")
 //    @JSONField(name = "Name")
     private String name;
-
-
     /**
      * 编码
      */
@@ -40,48 +59,35 @@ public class MenuData extends MasterEntity {
      */
     @Column(name = "SORT")
     private int sort;
-
     /**
      * 地址
      */
     @Column(name = "ADDRESS")
 //    @JSONField(name = "Address")
     private String address;
-
     /**
      * 上级菜单
      */
     @Column(name = "FK_PARENT_MENU_ID")
 //    @JSONField(name = "FkParentMenuId")
     private String fkParentMenuId;
-
     @Transient
     private MenuData parentMenu;
 
-
-
-
-
-
-    public MenuData(){
+    public MenuData() {
 
     }
 
-    public MenuData(String name, String uri, String code,int state, int sort){
-        this.name=name;
-        this.address=uri;
-        this.code=code;
-        this.sort=sort;
-        this.state=state;
-        this.children=new ArrayList<>();
+    public MenuData(String name, String uri, String code, int state, int sort, MenuData parentMenu) {
+        this.name = name;
+        this.address = uri;
+        this.code = code;
+        this.sort = sort;
+        this.state = state;
+        this.children = new ArrayList<>();
+        if (parentMenu != null)
+            parentMenu.children.add(this);
     }
-
-    /**
-     * 子节�
-     */
-    @Transient
-//    @JSONField(name = "Childrens")
-    public List<MenuData> children;
 
     public List<MenuData> getChildren() {
         return children;
@@ -107,12 +113,12 @@ public class MenuData extends MasterEntity {
         this.code = code;
     }
 
-    public int getSort(){
+    public int getSort() {
         return this.sort;
     }
 
-    public void setSort(int sort){
-        this.sort=sort;
+    public void setSort(int sort) {
+        this.sort = sort;
     }
 
     public String getAddress() {
@@ -139,7 +145,6 @@ public class MenuData extends MasterEntity {
         this.parentMenu = parentMenu;
     }
 
-
     @Override
     public String toString() {
         return "MenuData{" +
@@ -159,14 +164,6 @@ public class MenuData extends MasterEntity {
         this.competenceId = competenceId;
     }
 
-    /// <summary>
-    /// 对应的权限标�
-    /// </summary>
-    @Transient
-    @Column(name = "COMPETENCE_ID")
-    public String competenceId;
-
-
     public String getNamePath() {
         return namePath;
     }
@@ -174,10 +171,4 @@ public class MenuData extends MasterEntity {
     public void setNamePath(String namePath) {
         this.namePath = namePath;
     }
-
-    /// <summary>
-    /// 菜单路径
-    /// </summary>
-    @Transient
-    public String namePath;
 }

@@ -43,13 +43,7 @@ public interface IBaseInService<T extends MasterEntity> {
      */
     int deleteById(String id) throws Exception;
 
-    /**
-     * 批量删除
-     *
-     * @param entities
-     * @return
-     */
-    int deleteByList(List<T> entities) throws Exception;
+
 
 
     /**

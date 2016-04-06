@@ -10,10 +10,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>1.infrastructure/phip-infrastructure</module>
-        <module>2.model/phip-model</module>
-        <module>3.service/phip-dao</module>
-        <module>3.service/phip-service</module>
-        <module>3.service/phip-service-impl</module>
         <module>4.client/phip-client-host</module>
         <module>5.ui/phip-web</module>
         <module>5.ui/phip-web-static</module>

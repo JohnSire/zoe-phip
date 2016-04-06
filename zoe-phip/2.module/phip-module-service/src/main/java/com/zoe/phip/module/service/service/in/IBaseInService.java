@@ -36,14 +36,6 @@ public interface IBaseInService<T extends MasterEntity> {
      */
     ServiceResult deleteById(SystemData systemData, String id);
 
-    /**
-     * 批量删除
-     *
-     * @param entities
-     * @return
-     */
-    ServiceResult deleteByList(SystemData systemData, List<T> entities);
-
 
     /**
      * 批量删除
