@@ -10,7 +10,7 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.entity.SystemData;
-import com.zoe.phip.module.infrastructure.service.in.IBaseInService;
+import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.web.model.sm.SystemDictCategory;
 
 

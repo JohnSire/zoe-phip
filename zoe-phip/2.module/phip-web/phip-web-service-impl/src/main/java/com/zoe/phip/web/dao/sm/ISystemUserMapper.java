@@ -7,8 +7,8 @@ package com.zoe.phip.web.dao.sm;
 
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.module.infrastructure.dao.IMyMapper;
-import com.zoe.phip.module.infrastructure.entity.LoginCredentials;
+import com.zoe.phip.module.service.entity.LoginCredentials;
+import com.zoe.phip.module.service.mapper.IMyMapper;
 import com.zoe.phip.web.model.sm.SystemUser;
 
 import java.util.List;

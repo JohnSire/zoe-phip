@@ -5,8 +5,8 @@
 package com.zoe.phip.web.service.sm;
 
 import com.zoe.phip.infrastructure.entity.*;
-import com.zoe.phip.module.infrastructure.entity.LoginCredentials;
-import com.zoe.phip.module.infrastructure.service.in.IBaseInService;
+import com.zoe.phip.module.service.entity.LoginCredentials;
+import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.web.model.sm.SystemUser;
 
 

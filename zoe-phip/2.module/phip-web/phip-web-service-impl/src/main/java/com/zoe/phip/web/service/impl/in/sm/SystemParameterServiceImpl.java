@@ -7,7 +7,7 @@
 package com.zoe.phip.web.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.zoe.phip.module.infrastructure.service.impl.in.BaseInServiceImpl;
+import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.web.dao.sm.ISystemParameterMapper;
 import com.zoe.phip.web.model.sm.SystemParameter;
 import com.zoe.phip.web.service.sm.ISystemParameterService;

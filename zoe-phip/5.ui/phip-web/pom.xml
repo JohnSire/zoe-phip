@@ -12,16 +12,16 @@
     <name>phip-web Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>com.zoe</groupId>-->
+            <!--<artifactId>phip-service</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>com.zoe</groupId>
-            <artifactId>phip-service</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-       <!-- <dependency>
             <groupId>com.zoe</groupId>
             <artifactId>phip-web-service</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>com.zoe</groupId>
             <artifactId>phip-infrastructure</artifactId>

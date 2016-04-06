@@ -8,8 +8,8 @@ import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 
-import com.zoe.phip.module.infrastructure.service.impl.in.BaseInServiceImpl;
-import com.zoe.phip.module.infrastructure.util.SqlHelper;
+import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
+import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.web.dao.sm.IMenuCompetenceMapper;
 import com.zoe.phip.web.model.sm.MenuCompetence;
 import com.zoe.phip.web.model.sm.MenuData;

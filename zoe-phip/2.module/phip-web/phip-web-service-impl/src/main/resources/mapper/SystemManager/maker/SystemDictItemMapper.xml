@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.web.dao.sm.ISystemDictItemMapper">
-    <resultMap id="BaseResultMap" type="com.zoe.phip.web.model.sm.SystemDictItem" extends="com.zoe.phip.web.dao.MasterEntityResultMap">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.web.model.sm.SystemDictItem" extends="com.zoe.phip.module.service.MasterEntityResultMap">
         <result column="FK_SYSTEM_DICT_CATEGORY_ID" property="fkSystemDictCategoryId" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="CODE" property="code" javaType="java.lang.String" jdbcType="VARCHAR"/>
@@ -9,13 +9,13 @@
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO SYS_SYSTEM_DICT_ITEM
         (FK_SYSTEM_DICT_CATEGORY_ID,NAME,CODE,
-        <include refid="com.zoe.phip.web.dao.baseMasterEntityInsert"/>)
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
             #{item.fkSystemDictCategoryId,jdbcType=VARCHAR},
             #{item.name,jdbcType=VARCHAR},
             #{item.code,jdbcType=VARCHAR},
-            <include refid="com.zoe.phip.web.dao.baseMasterEntitySelect"/>
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
     </insert>

@@ -3,7 +3,7 @@ package com.zoe.phip.web.controller;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.entity.SystemData;
-import com.zoe.phip.model.sm.LoginCredentials;
+import com.zoe.phip.module.service.entity.LoginCredentials;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;

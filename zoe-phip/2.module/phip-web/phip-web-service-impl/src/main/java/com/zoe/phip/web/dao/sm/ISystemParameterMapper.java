@@ -7,7 +7,7 @@
 package com.zoe.phip.web.dao.sm;
 
 
-import com.zoe.phip.module.infrastructure.dao.IMyMapper;
+import com.zoe.phip.module.service.mapper.IMyMapper;
 import com.zoe.phip.web.model.sm.SystemParameter;
 
 /**

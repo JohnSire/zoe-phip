@@ -6,7 +6,8 @@
 package com.zoe.phip.web.model.sm;
 
 
-import com.zoe.phip.module.infrastructure.entity.MasterEntity;
+
+import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
