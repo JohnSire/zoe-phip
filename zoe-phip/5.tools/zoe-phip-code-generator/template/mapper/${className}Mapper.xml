@@ -1,4 +1,5 @@
 <#assign className = table.className>
+<#assign baseDaoName="com.zoe.phip.module.service">
         <?xml version="1.0" encoding="UTF-8" ?>
         <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="${basepackage}.dao.mapper.I${className}Mapper">
@@ -20,7 +21,7 @@ INSERT INTO ${table.sqlName} (
     ${field.sqlName},
    </#if>
  </#list>
-<include refid="com.zoe.phip.dao.baseMasterEntityInsert"/>)
+<include refid="${baseDaoName}.baseMasterEntityInsert"/>)
  <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
    SELECT
 <#list table.columns as field>
@@ -30,7 +31,7 @@ INSERT INTO ${table.sqlName} (
     ${r'#'}{item.${field.entityName?uncap_first},jdbcType=${field.jdbcType?upper_case}},
   </#if>
 </#list>
-  <include refid="com.zoe.phip.dao.baseMasterEntitySelect"/>
+  <include refid="${baseDaoName}.baseMasterEntitySelect"/>
    FROM DUAL
  </foreach>
 </insert>

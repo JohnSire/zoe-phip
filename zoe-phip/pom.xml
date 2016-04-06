@@ -18,6 +18,10 @@
         <module>4.ui/phip-web</module>
         <module>4.ui/phip-web-static</module>
         <module>5.tools/zoe-phip-code-generator</module>
+        <module>2.module/phip-register/phip-register-service</module>
+        <module>2.module/phip-register/phip-register-service-impl</module>
+        <module>2.module/phip-repository/phip-repository-service</module>
+        <module>2.module/phip-repository/phip-repository-service-impl</module>
 
     </modules>
 
