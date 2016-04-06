@@ -17,9 +17,9 @@
             FROM DUAL
         </foreach>
     </insert>
-    <delete id="deleteByIds" parameterType="java.util.List">
+    <delete id="deleteByIds" parameterType="java.lang.String">
         delete from SYS_MENU_COMPETENCE where ID in
-        <foreach collection="list" item="item" open="(" separator="," close=")">
+        <foreach collection="array" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
     </delete>

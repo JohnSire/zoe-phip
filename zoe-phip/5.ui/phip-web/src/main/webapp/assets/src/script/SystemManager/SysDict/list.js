@@ -6,6 +6,7 @@
 define(function (require, exports, module) {
     var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
     var internal = {
+        fkSystemDictCategoryId:null,
         init: function () {
             internal.categoryList();
         },
@@ -27,10 +28,12 @@ define(function (require, exports, module) {
                     ],
                     isSelected: function (rowdata) {
                         if (rowdata["__id"] == 'r1001') {
+
                             return true;
                         }
                     },
                     onSelectRow: function (rowdata, rowid, rowobj) {
+                        internal.fkSystemDictCategoryId=rowdata.id;
                         var itemGrid = liger.get("dictItemGrid");
                         if (itemGrid) {
                             itemGrid.set("page", 1);
@@ -89,21 +92,13 @@ define(function (require, exports, module) {
                     edit: {title: "编辑字典项信息"},
 
                     common: {
-                        otherUrlParam: {fkSystemDictCategoryId: internal.getCategoryId()},
+                        otherUrlParam:function(){return {fkSystemDictCategoryId: internal.fkSystemDictCategoryId}},
                         url: webRoot + '/dict/view/item',
                         width: 590,
                         height: 200
                     }
                 }
             })
-        },
-        getCategoryId: function () {
-            var dictCategoryGrid = liger.get("dictCategoryGrid")
-            var categoryId = "";
-            if (dictCategoryGrid) {
-                categoryId = dictCategoryGrid.getSelectedRow().id;
-            }
-            return categoryId;
         }
     }
     exports.init = function () {

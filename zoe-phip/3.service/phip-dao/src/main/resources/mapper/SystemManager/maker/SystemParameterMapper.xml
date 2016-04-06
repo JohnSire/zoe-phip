@@ -36,9 +36,9 @@
             #{item}
         </foreach>
     </delete>
-    <delete id="deleteByList" parameterType="java.util.List">
+    <delete id="deleteByList" parameterType="java.lang.String">
         delete from SYS_SYSTEM_PARAMETER where ID in
-        <foreach collection="list" item="item" open="(" separator="," close=")">
+        <foreach collection="array" item="item" open="(" separator="," close=")">
             #{item.id}
         </foreach>
     </delete>

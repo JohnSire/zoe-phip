@@ -42,7 +42,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
         example.createCriteria().andEqualTo("code", entity.getCode());
         List<SystemDictCategory> list = getMapper().selectByExample(example);
         if (list != null && list.size() > 0) {
-            throw new BusinessException("该字典类({0})已经存在", entity.getCode());
+            throw new BusinessException("该字典类({0})已经存在!", entity.getCode());
         } else
             return getMapper().insertSelective(entity);
 
@@ -56,7 +56,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
             example.createCriteria().andEqualTo("code", v.getCode());
             int count = getMapper().selectCountByExample(example);
             if (count > 0) {
-                stringBuffer.append("字典类别(" + v.getCode() + ")已经存在" + "\r\n");
+                stringBuffer.append("字典类别(" + v.getCode() + ")已经存在!" + "\r\n");
             }
         });
         if (stringBuffer.length() <= 0)
