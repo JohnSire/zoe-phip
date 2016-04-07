@@ -65,6 +65,8 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
 
     @Override
     public int deleteById(String id) throws Exception {
+        if(StringUtil.isNullOrWhiteSpace(id))
+            throw new BusinessException("删除参数不能为空");
         return mapper.deleteByPrimaryKey(id);
     }
 
