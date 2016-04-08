@@ -1,8 +1,10 @@
 package com.zoe.phip.infrastructure.util;
 
 import com.alibaba.fastjson.JSON;
+import javafx.scene.chart.Chart;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.util.Base64;
 import java.util.List;
@@ -163,7 +165,8 @@ public final class StringUtil {
                 file.delete();
             FileOutputStream fileOutputStream = new FileOutputStream(fileName);
             String content = toJsonString(object);
-            fileOutputStream.write(content.getBytes());
+            byte[] bytes=content.getBytes(Charset.defaultCharset());
+            fileOutputStream.write(bytes);
             fileOutputStream.close();
         } catch (Exception ex) {
             ex.printStackTrace();
