@@ -16,12 +16,16 @@ import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.entity.LoginCredentials;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
+import com.zoe.phip.web.bootstrapper.ValidationAppendUtils;
+import com.zoe.phip.web.bootstrapper.ValidationResult;
 import com.zoe.phip.web.dao.sm.ISystemUserMapper;
 import com.zoe.phip.web.model.sm.SystemUser;
 import com.zoe.phip.web.service.sm.ISystemUserService;
 import org.springframework.stereotype.Repository;
+import org.springframework.validation.BindingResult;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.validation.*;
 import java.util.*;
 
 /**
@@ -117,8 +121,21 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
     }
 
     @Override
-    public int add(SystemUser entity) throws Exception {
+    public int add(@Valid SystemUser entity,BindingResult br) throws Exception {
         //判断是否存在用户
+        if(br.hasErrors())   System.out.println(br);
+    /*    ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
+        Validator validator = vf.getValidator();
+        Set<ConstraintViolation<SystemUser>> set = validator.validate(entity);
+        for (ConstraintViolation<SystemUser> constraintViolation : set) {
+            System.out.println(constraintViolation.getMessage());
+        //    throw new BusinessException("实体保存非法", constraintViolation.getMessage());
+        }*/
+
+        ValidationResult result = ValidationAppendUtils.validateEntity(entity);
+        System.out.println("--------------------------");
+        System.out.println(result);
+
         List<SystemUser> list = getUserByLoginName(entity.getLoginName());
         if (list != null && list.size() > 0) {
             throw new BusinessException("已存在登录名({0})的用户", entity.getLoginName());

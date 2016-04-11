@@ -15,10 +15,11 @@ import com.zoe.phip.module.service.util.SqlHelper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.Arrays;
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
     }
 
     @Override
-    public int add(T entity) throws Exception {
+    public int add(@Valid T entity,BindingResult br) throws Exception {
         return mapper.insertSelective(entity);
     }
 

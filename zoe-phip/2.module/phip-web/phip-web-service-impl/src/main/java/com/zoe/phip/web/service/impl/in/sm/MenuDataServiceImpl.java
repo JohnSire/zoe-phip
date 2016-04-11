@@ -17,8 +17,10 @@ import com.zoe.phip.web.dao.sm.IMenuDataMapper;
 import com.zoe.phip.web.model.sm.MenuData;
 import com.zoe.phip.web.service.sm.IMenuDataService;
 import org.springframework.stereotype.Repository;
+import org.springframework.validation.BindingResult;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.validation.Valid;
 import java.util.*;
 
 /**
@@ -31,7 +33,7 @@ import java.util.*;
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMapper> implements IMenuDataMapper {
 
     @Override
-    public int add(MenuData entity) throws Exception {
+    public int add(@Valid  MenuData entity,BindingResult br) throws Exception {
         Example example = new Example(MenuData.class);
         entity.setCreateAt(new Date());
         entity.setModifyAt(new Date());

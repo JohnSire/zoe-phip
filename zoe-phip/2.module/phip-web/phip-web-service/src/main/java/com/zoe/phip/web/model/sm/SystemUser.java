@@ -5,10 +5,18 @@
 package com.zoe.phip.web.model.sm;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import javax.validation.constraints.Pattern;
+import java.util.Set;
 
 /**
  * @author
@@ -16,13 +24,17 @@ import javax.persistence.Transient;
  * @date 2016-03-18
  */
 @Table(name = "SYS_SYSTEM_USER")
-public class SystemUser extends MasterEntity {
+public class  SystemUser extends MasterEntity {
 
     /**
      * 名称
      */
     @Column(name = "NAME")
 //    @JSONField(name = "Name")
+    @NotEmpty(message = "{不能为空}")
+   // @Min(value =5)
+    @Length(min = 5, max = 20, message = "{最小长度为5，最大为20！}")
+    @Pattern(regexp = "[a-zA-Z]{5,20}", message = "{只能是英文字母！}")
     private String name;
 
     /**
@@ -78,4 +90,18 @@ public class SystemUser extends MasterEntity {
     @Transient
     @Column(name = "COMPETENCE_ID")
     public String competenceId;
+
+
+    public static void main(String[] args) {
+       SystemUser systemUser;
+        systemUser = new SystemUser();
+        systemUser.setName("2");
+        ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
+        Validator validator = vf.getValidator();
+        Set<ConstraintViolation<SystemUser>> set = validator.validate(systemUser);
+        for (ConstraintViolation<SystemUser> constraintViolation : set) {
+            System.out.println(constraintViolation.getMessage());
+        }
+    }
+
 }

@@ -15,13 +15,13 @@ import com.zoe.phip.web.model.sm.MenuCompetence;
 import com.zoe.phip.web.model.sm.MenuData;
 import com.zoe.phip.web.model.sm.SystemUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -134,9 +134,9 @@ public class SystemMenuController extends BaseController {
     @RequestMapping(value = "/addMenuInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Add},name = "新增")
-    public ServiceResult addMenuInfo(MenuData menuData) {
-        menuData.setCreateBy(ComSession.getUserInfo().getUserId());
-        return ServiceFactory.getMenuDataService().add(ComSession.getUserInfo(), menuData);
+    public ServiceResult addMenuInfo(MenuData menuData,BindingResult br) {
+       menuData.setCreateBy(ComSession.getUserInfo().getUserId());
+        return ServiceFactory.getMenuDataService().add(ComSession.getUserInfo(), menuData,br);
     }
 
 

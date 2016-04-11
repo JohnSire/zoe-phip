@@ -15,11 +15,11 @@ import com.zoe.phip.web.model.sm.SystemDictCategory;
 import com.zoe.phip.web.model.sm.SystemDictItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -90,8 +90,8 @@ public class SystemDictController extends BaseController {
     @RequestMapping(value = "/addCategory")
     @ResponseBody
     @AuthAction(permission = {Permission.Add}, name = "新增")
-    public ServiceResult addCategoryInfo(SystemDictCategory info, HttpServletRequest request) {
-        return ServiceFactory.getDictCategoryService().add(ComSession.getUserInfo(), info);
+    public ServiceResult addCategoryInfo(SystemDictCategory info, HttpServletRequest request,BindingResult br) {
+        return ServiceFactory.getDictCategoryService().add(ComSession.getUserInfo(), info,br);
     }
 
     /**
@@ -176,8 +176,8 @@ public class SystemDictController extends BaseController {
     @RequestMapping(value = "/addItem")
     @ResponseBody
     @AuthAction(permission = {Permission.Add}, name = "新增")
-    public ServiceResult addSysDictItemInfo(SystemDictItem info, HttpServletRequest request) {
-        return ServiceFactory.getDictItemService().add(ComSession.getUserInfo(), info);
+    public ServiceResult addSysDictItemInfo(SystemDictItem info, HttpServletRequest request,BindingResult br) {
+        return ServiceFactory.getDictItemService().add(ComSession.getUserInfo(), info, br);
     }
 
     /**

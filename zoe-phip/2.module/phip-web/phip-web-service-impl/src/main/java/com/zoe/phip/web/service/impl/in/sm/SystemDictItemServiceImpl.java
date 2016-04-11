@@ -21,6 +21,7 @@ import com.zoe.phip.web.model.sm.SystemDictItem;
 import com.zoe.phip.web.service.sm.ISystemDictItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.validation.BindingResult;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     private SystemDictCategoryServiceImpl service;
 
     @Override
-    public int add(SystemDictItem entity) throws Exception {
+    public int add(SystemDictItem entity,BindingResult br) throws Exception {
         Example example = new Example(SystemDictItem.class);
         example.createCriteria().andEqualTo("fkSystemDictCategoryId", entity.getFkSystemDictCategoryId())
                 .andEqualTo("code", entity.getCode());

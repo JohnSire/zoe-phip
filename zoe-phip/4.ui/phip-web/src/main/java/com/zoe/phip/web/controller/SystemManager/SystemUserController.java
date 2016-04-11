@@ -5,7 +5,6 @@ import com.zoe.phip.infrastructure.annotation.AuthController;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
-import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.security.MenuCode;
 import com.zoe.phip.infrastructure.security.Permission;
 import com.zoe.phip.infrastructure.util.StringUtil;
@@ -17,6 +16,8 @@ import com.zoe.phip.web.model.sm.SystemUser;
 import com.zoe.phip.web.model.sm.UserCompetence;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,6 +33,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 @AuthController(code= MenuCode.SystemUser)
+@Validated
 public class SystemUserController extends BaseController {
     //region 用户管理视图开始
     //用户管理列表
@@ -96,8 +97,10 @@ public class SystemUserController extends BaseController {
     @RequestMapping(value = "/addUserInfo", method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Add},name = "新增")
-    public ServiceResult addUserInfo(SystemUser userInfo) {
-        return ServiceFactory.getUserService().add(ComSession.getUserInfo(), userInfo);
+    public ServiceResult addUserInfo( SystemUser userInfo, BindingResult br) {
+        if(br.hasErrors())   System.out.println(br);
+
+        return ServiceFactory.getUserService().add(ComSession.getUserInfo(), userInfo, br);
     }
     /**
      * 更新用户

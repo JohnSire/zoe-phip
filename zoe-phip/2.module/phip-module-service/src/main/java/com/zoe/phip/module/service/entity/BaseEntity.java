@@ -14,6 +14,10 @@ public class BaseEntity implements Serializable {
     /**
      * 主键id
      */
+
+
+
+
     @Id
     @Column(name = "ID")
     @GeneratedValue(generator = "UUID")
