@@ -1,4 +1,5 @@
 ﻿//菜单整合
+//菜单整合
 define(function (require, exports, module) {
     var internal = {
         mainMenu: require("./mainMenu.js"),//主菜单
@@ -139,11 +140,13 @@ define(function (require, exports, module) {
                         for (var j = 0; j < data.result[i].children.length; j++) {
                             dataHtml += "<ul class='lists clearfix' class='lists clearfix'>";
                             dataHtml += "<li class='list' id='menu-li-a'> ";
-                            dataHtml += "<a class='link' navid='" + data.result[i].children[j]["Id"] + "' href=" + webRoot + data.result[i].children[j].address + " target='mainframe'>" + data.result[i].children[j].name + "</a><hr class='y-line' />";
+
+
+                            dataHtml += "<a class='link' navid='" + data.result[i].children[j]["id"] + "' href=" + webRoot + data.result[i].children[j].address + " target='mainframe'>" + data.result[i].children[j].name + "</a><hr class='y-line' />";
                             if (data.result[i].children[j].children != null && data.result[i].children[j].children.length > 0) {
                                 dataHtml += "<ul class='lists clearfix'>";
                                 for (var k = 0; k < data.result[i].children[j].children.length; k++) {
-                                    dataHtml += "<li class='list'><a class='link' navid='" + data.result[i].children[j].children[k].Id + "' href=" + webRoot + data.result[i].children[j].children[k].address + " target='mainframe'>" + data.result[i].children[j].children[k].name + "</a><hr class='y-line' /></li>";
+                                    dataHtml += "<li class='list'><a class='link' navid='" + data.result[i].children[j].children[k].id + "' href=" + webRoot + data.result[i].children[j].children[k].address + " target='mainframe'>" + data.result[i].children[j].children[k].name + "</a><hr class='y-line' /></li>";
                                 }
                                 dataHtml += "</ul>";
                             }

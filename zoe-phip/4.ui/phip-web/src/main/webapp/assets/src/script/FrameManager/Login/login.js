@@ -137,7 +137,7 @@ define(function (require, exports, module) {
             }
         }
     };
-    exports.internal = function () {
+    exports.init = function () {
         internal.init();
     };
 });
