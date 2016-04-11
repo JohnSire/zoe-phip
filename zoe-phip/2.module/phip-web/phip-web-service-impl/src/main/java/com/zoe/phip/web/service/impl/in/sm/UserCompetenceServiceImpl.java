@@ -3,6 +3,7 @@ package com.zoe.phip.web.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
+import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -32,9 +33,10 @@ import java.util.stream.Collectors;
 public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence, IUserCompetenceMapper> implements IUserCompetenceMapper {
 
     @Override
+    @ErrorMessage(code = "001",message = "权限分类不能为空!")
     public boolean saveList(String competenceCategoryId, List<UserCompetence> list) throws Exception {
         if (StringUtil.isNullOrWhiteSpace(competenceCategoryId))
-            throw new BusinessException("权限分类不能为空!");
+            throw new BusinessException("001");
         //1 根据权限类型ID，查询出该类型下的用户
         List<String> existsUser = this.getUserCompetenceIdList(competenceCategoryId);
         if (existsUser != null && existsUser.size() > 0) {

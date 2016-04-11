@@ -3,6 +3,8 @@ package com.zoe.phip.module.service.support.dubbo;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker;
+import com.zoe.phip.infrastructure.annotation.ErrorMessage;
+import com.zoe.phip.infrastructure.annotation.ErrorMessages;
 import com.zoe.phip.infrastructure.entity.ErrorCode;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.SystemData;
@@ -12,6 +14,7 @@ import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.module.service.impl.in.IBaseInService;
 import com.zoe.phip.module.service.support.annotation.WithResult;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -115,21 +118,21 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
 
         final Class<?>[] types = makeClass(parameterTypes);
         Method method = instance.getClass().getMethod(methodName, types);
-
+        ErrorMessage[] errors=method.getAnnotationsByType(ErrorMessage.class);
         final boolean withResult = method.getAnnotation(WithResult.class) != null;
 
         if (method.getReturnType() == Boolean.class && !withResult) {
             return SafeExecuteUtil.execute(() ->
-                    execute(() -> (Boolean) method.invoke(instance, objects))
+                    execute(() -> (Boolean) method.invoke(instance, objects)),errors
             );
         }
         if (method.getReturnType() == int.class && !withResult) {
             return SafeExecuteUtil.execute(() ->
-                    execute(() -> ((int) method.invoke(instance, objects) >= 0))
+                    execute(() -> ((int) method.invoke(instance, objects) >= 0)),errors
             );
         }
         return SafeExecuteUtil.execute0(() ->
-                execute(() -> method.invoke(instance, objects))
+                execute(() -> method.invoke(instance, objects)),errors
         );
     }
 }

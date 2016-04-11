@@ -8,6 +8,7 @@ package com.zoe.phip.web.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
+import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -39,6 +40,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     private SystemDictCategoryServiceImpl service;
 
     @Override
+    @ErrorMessage(code = "001",message = "该字典类({0})已经存在!")
     public int add(SystemDictItem entity) throws Exception {
         Example example = new Example(SystemDictItem.class);
         example.createCriteria().andEqualTo("fkSystemDictCategoryId", entity.getFkSystemDictCategoryId())
@@ -46,12 +48,13 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
         //example.createCriteria().andEqualTo("code", entity.getCode());
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
-            throw new BusinessException("该字典类({0})已经存在!", entity.getCode());
+            throw new BusinessException("001", entity.getCode());
         } else
             return getMapper().insertSelective(entity);
     }
 
     @Override
+    @ErrorMessage(code = "002",message = "该字典类({0})已经存在!")
     public int update(SystemDictItem entity) throws Exception {
 
         Example example = new Example(SystemDictItem.class);
@@ -59,7 +62,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
 
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
-            throw new BusinessException("该字典类({0})已经存在!", entity.getCode());
+            throw new BusinessException("002", entity.getCode());
         } else
             return getMapper().updateByPrimaryKeySelective(entity);
 
@@ -110,13 +113,14 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
+    @ErrorMessage(code = "003",message = "字典分类({0})已经被删除!")
     public PageList<SystemDictItem> getDictItemsByCategoryCode(String categoryCode, QueryPage page) throws Exception {
 
         PageList<SystemDictItem> pageList = new PageList<>();
         SqlHelper.startPage(page);
         String categoryId = getCategoryId(categoryCode);
         if (StringUtil.isNullOrWhiteSpace(categoryId))
-            throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
+            throw new BusinessException("003", categoryCode);
         Map<String, Object> map = MapUtil.createMap(m -> m.put("categoryCode", categoryCode));
         List<SystemDictItem> results = getMapper().getDataItemList(map);
         PageInfo<SystemDictItem> pageInfo = new PageInfo<>(results);
@@ -128,9 +132,10 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
+    @ErrorMessage(code = "004",message = "字典项代码不能为空!")
     public SystemDictItem getDictItemByCategoryId(String categoryId, String code) throws Exception {
         if (StringUtil.isNullOrWhiteSpace(code))
-            throw new BusinessException("字典项代码不能为空!");
+            throw new BusinessException("004");
         return getMapper().getDataItemList(MapUtil.createMap(m -> {
             m.put("categoryId", categoryId);
             m.put("code", code);
@@ -138,12 +143,14 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
+    @ErrorMessage(code = "005",message = "字典分类({0})已经被删除!")
+    @ErrorMessage(code = "006",message = "字典项代码不能为空!")
     public SystemDictItem getDictItemByCategoryCode(String categoryCode, String code) throws Exception {
         String categoryId = getCategoryId(categoryCode);
         if (StringUtil.isNullOrWhiteSpace(categoryId))
-            throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
+            throw new BusinessException("005", categoryCode);
         if (StringUtil.isNullOrWhiteSpace(code))
-            throw new BusinessException("字典项代码不能为空!");
+            throw new BusinessException("006");
         return getMapper().getDataItemList(MapUtil.createMap(m -> {
             m.put("categoryId", categoryId);
             m.put("code", code);
@@ -151,11 +158,12 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
+    @ErrorMessage(code = "007",message = "字典分类({0})已经被删除!")
     public List<SystemDictItem> getDictItemsByCategoryCode(String categoryCode) throws Exception {
 
         String categoryId = getCategoryId(categoryCode);
         if (StringUtil.isNullOrWhiteSpace(categoryId))
-            throw new BusinessException("字典分类({0})已经被删除!", categoryCode);
+            throw new BusinessException("007", categoryCode);
         Example example = new Example(SystemDictItem.class);
         example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
         return getMapper().selectByExample(example);

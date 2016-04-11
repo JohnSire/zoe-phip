@@ -2,6 +2,7 @@ package com.zoe.phip.web.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
+import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -32,9 +33,10 @@ import java.util.stream.Collectors;
 public class MenuCompetenceServiceImpl extends BaseInServiceImpl<MenuCompetence, IMenuCompetenceMapper> implements IMenuCompetenceMapper {
 
     @Override
+    @ErrorMessage(code="001",message = "权限分类不能为空!")
     public boolean saveList(String competenceCategoryId, List<MenuCompetence> list) throws Exception {
         if (StringUtil.isNullOrWhiteSpace(competenceCategoryId))
-            throw new BusinessException("权限分类不能为空!");
+            throw new BusinessException("001");
         //1、 根据权限类型，查询已经存在的菜单权限
         List<String> existsMenuList = this.getMenuCompetenceIdList(competenceCategoryId);
         if (existsMenuList != null && existsMenuList.size() > 0) {
