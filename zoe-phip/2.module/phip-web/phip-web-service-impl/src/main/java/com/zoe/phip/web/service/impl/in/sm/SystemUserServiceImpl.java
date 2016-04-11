@@ -8,6 +8,9 @@ package com.zoe.phip.web.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
+import com.zoe.phip.infrastructure.annotation.ErrorMessage;
+import com.zoe.phip.infrastructure.annotation.ErrorMessages;
+import com.zoe.phip.infrastructure.aop.Action;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -44,33 +47,38 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
     }
 
     @Override
+    @ErrorMessage(code="001",message = "用户名错�")
+    @ErrorMessage(code="002",message = "用户不可�")
+    @ErrorMessage(code="003",message = "密码错误!")
     public LoginCredentials login(String loginName, String passWord, int expiresTime) throws Exception {
 
         List<SystemUser> list = getUserByLoginName(loginName);
         if (list == null || list.size() == 0) {
-            throw new BusinessException("用户名错误!");
+            throw new BusinessException("001");
         }
         SystemUser user = list.get(0);
         if (user.getState() == 0) {
-            throw new BusinessException("用户不可用");
+            throw new BusinessException("002");
         }
         String psd = createPassword(user.getLoginName(), passWord);
         if (!psd.equals(user.getPassword())) {
-            throw new BusinessException("密码错误!");
+            throw new BusinessException("003");
         }
         LoginCredentials credentials = createLoginCredentials(user.getId(), user.getName(), expiresTime);
         return credentials;
     }
 
     @Override
+    @ErrorMessage(code = "004",message = "未找到该用户!")
+    @ErrorMessage(code = "005",message = "旧密码错!")
     public int updatePassword(String id, String oldPwd, String newPwd) throws Exception {
         SystemUser user = getMapper().selectByPrimaryKey(id);
         if (user == null) {
-            throw new BusinessException("未找到该用户!");
+            throw new BusinessException("004");
         }
         String oldPassword = createPassword(user.getLoginName(), oldPwd);
         if (!user.getPassword().equals(oldPassword)) {
-            throw new BusinessException("旧密码错");
+            throw new BusinessException("005");
         }
         user.setPassword(createPassword(user.getLoginName(), newPwd));
         user.setModifyAt(new Date());
@@ -78,10 +86,11 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
     }
 
     @Override
+    @ErrorMessage(code = "006",message = "未找到该用户!")
     public int resetPassword(String id, String newPwd) throws Exception {
         SystemUser user = getMapper().selectByPrimaryKey(id);
         if (user == null) {
-            throw new BusinessException("未找到该用户!");
+            throw new BusinessException("006");
         }
         user.setPassword(createPassword(user.getLoginName(), newPwd));
         user.setModifyAt(new Date());
@@ -89,10 +98,11 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
     }
 
     @Override
+    @ErrorMessage(code = "007",message = "未找到该用户!")
     public int updateState(String id, int state) throws Exception {
         SystemUser user = getMapper().selectByPrimaryKey(id);
         if (user == null) {
-            throw new BusinessException("未找到该用户!");
+            throw new BusinessException("007");
         }
         user.setState(state);
         user.setModifyAt(new Date());
@@ -102,7 +112,6 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
     @Override
     public PageList<SystemUser> getUserList(Integer state, String key, QueryPage queryPage) throws Exception {
         PageList<SystemUser> pageList = new PageList<SystemUser>();
-        Example example = new Example(SystemUser.class);
         //分页
         SqlHelper.startPage(queryPage);
         Map<String, Object> paras = new HashMap<String, Object>();
@@ -121,6 +130,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
     }
 
     @Override
+    @ErrorMessage(code = "008",message = "已存在登录名({0})的用�")
     public int add(@Valid SystemUser entity,BindingResult br) throws Exception {
         //判断是否存在用户
         if(br.hasErrors())   System.out.println(br);
@@ -138,7 +148,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
 
         List<SystemUser> list = getUserByLoginName(entity.getLoginName());
         if (list != null && list.size() > 0) {
-            throw new BusinessException("已存在登录名({0})的用户", entity.getLoginName());
+            throw new BusinessException("008", entity.getLoginName());
         }
         String password = createPassword(entity.getLoginName(), entity.getPassword());
         entity.setPassword(password);
@@ -146,6 +156,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
     }
 
     @Override
+    @ErrorMessage(code = "009",message = "已存在登录名({0})的用�")
     public int addList(List<SystemUser> entities) throws Exception {
 
         List<String> loginNames = new ArrayList<String>();
@@ -161,7 +172,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
             list.forEach(l -> {
                 loginNames.add(l.getLoginName());
             });
-            throw new BusinessException("已存在登录名({0})的用户", loginNames.toString());
+            throw new BusinessException("009", loginNames.toString());
         }
         entities.forEach(e -> {
             String password = createPassword(e.getLoginName(), e.getPassword());

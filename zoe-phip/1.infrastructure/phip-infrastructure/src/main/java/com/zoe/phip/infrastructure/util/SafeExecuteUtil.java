@@ -1,11 +1,15 @@
 package com.zoe.phip.infrastructure.util;
 
+import com.zoe.phip.infrastructure.annotation.ErrorMessage;
+import com.zoe.phip.infrastructure.annotation.ErrorMessages;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.text.MessageFormat;
 
 /**
  * Created by zhangwenbin on 2016/2/29.
@@ -14,14 +18,13 @@ public final class SafeExecuteUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(SafeExecuteUtil.class);
 
-    public static ServiceResult execute(Function<Boolean> invoker) {
+    public static ServiceResult execute(Function<Boolean> invoker, ErrorMessage[]  errors) {
         ServiceResult executeResult = new ServiceResult();
         try {
             executeResult.setIsSuccess(invoker.apply());
         } catch (BusinessException ex) {
             //日志消息
-            executeResult.addMessage(ex.getCode(), ex.getMessage());
-            executeResult.setIsSuccess(false);
+            setErrorMessage(errors,executeResult,ex);
             logger.error(ex.getMessage());
         } catch (Exception e) {
             //错误消息
@@ -33,7 +36,7 @@ public final class SafeExecuteUtil {
         return executeResult;
     }
 
-    public static <R> ServiceResultT<R> execute0(Function<Object> invoker) {
+    public static <R> ServiceResultT<R> execute0(Function<Object> invoker,ErrorMessage[]  errors) {
         ServiceResultT<R> executeResult = new ServiceResultT<R>();
         try {
             R result = (R) invoker.apply();
@@ -41,8 +44,7 @@ public final class SafeExecuteUtil {
             executeResult.setIsSuccess(result != null);
         } catch (BusinessException ex) {
             //日志消息
-            executeResult.addMessage(ex.getCode(), ex.getMessage());
-            executeResult.setIsSuccess(false);
+            setErrorMessage(errors,executeResult,ex);
             logger.error(ex.getMessage());
         } catch (Exception e) {
             executeResult.setIsSuccess(false);
@@ -51,6 +53,19 @@ public final class SafeExecuteUtil {
             logger.error("方法执行报错:", e);
         }
         return executeResult;
+    }
+
+    private static void setErrorMessage(ErrorMessage[]  errors,ServiceResult result,BusinessException ex){
+        if(errors!=null){
+            for (ErrorMessage er : errors) {
+                if(er.code().equals(ex.getCode())){
+                    String message= MessageFormat.format(er.message(),ex.getArguments());
+                    result.addMessage(er.code(),message);
+                    result.setIsSuccess(false);
+                    break;
+                }
+            }
+        }
     }
 
     public static String getStackMsg(Throwable e) {

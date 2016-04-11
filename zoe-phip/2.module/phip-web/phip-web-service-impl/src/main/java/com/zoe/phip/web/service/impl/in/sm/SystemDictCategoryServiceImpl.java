@@ -8,6 +8,7 @@ package com.zoe.phip.web.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
+import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -38,18 +39,20 @@ import java.util.Map;
 public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory, ISystemDictCategoryMapper> implements ISystemDictCategoryMapper {
 
     @Override
+    @ErrorMessage(code = "001",message = "该字典类({0})已经存在!")
     public int add(SystemDictCategory entity,BindingResult br) throws Exception {
         Example example = new Example(SystemDictCategory.class);
         example.createCriteria().andEqualTo("code", entity.getCode());
         List<SystemDictCategory> list = getMapper().selectByExample(example);
         if (list != null && list.size() > 0) {
-            throw new BusinessException("该字典类({0})已经存在", entity.getCode());
+            throw new BusinessException("001", entity.getCode());
         } else
             return getMapper().insertSelective(entity);
 
     }
 
     @Override
+    @ErrorMessage(code = "002",message = "字典类别({0})已经存在!")
     public int addList(List<SystemDictCategory> entities) throws Exception {
         StringBuffer stringBuffer = new StringBuffer();
         entities.forEach(v -> {
@@ -57,24 +60,25 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
             example.createCriteria().andEqualTo("code", v.getCode());
             int count = getMapper().selectCountByExample(example);
             if (count > 0) {
-                stringBuffer.append("字典类别(" + v.getCode() + ")已经存在" + "\r\n");
+                stringBuffer.append("["+v.getCode() + "]");
             }
         });
         if (stringBuffer.length() <= 0)
             return getMapper().addList(entities);
         else {
-            throw new BusinessException(stringBuffer.toString());
+            throw new BusinessException("002",stringBuffer.toString());
         }
     }
 
     @Override
+    @ErrorMessage(code = "003",message = "该字典类({0})已经存在!")
     public int update(SystemDictCategory entity) throws Exception {
         Example example = new Example(SystemDictCategory.class);
         example.createCriteria().andEqualTo("code", entity.getCode())
                 .andNotEqualTo("id", entity.getId());
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
-            throw new BusinessException("该字典类{0})已经存在", entity.getCode());
+            throw new BusinessException("003", entity.getCode());
         } else
             return getMapper().updateByPrimaryKeySelective(entity);
     }
@@ -92,14 +96,16 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
         return pageList;
     }
 
+    @ErrorMessage(code = "004",message = "字典项编码不能为�")
+    @ErrorMessage(code = "005",message = "该字典类({0})已经存在")
     public SystemDictCategory getDictCategory(String code) throws Exception {
         if (StringUtil.isNullOrWhiteSpace(code))
-            throw new BusinessException("字典项编码不能为空!");
+            throw new BusinessException("004!");
         Example example = new Example(SystemDictCategory.class);
         example.createCriteria().andEqualTo("code", code);
         SystemDictCategory model = getMapper().getDictCategory(MapUtil.createMap(m -> m.put("code", code)));
         if (model == null) {
-            throw new BusinessException("该字典类{0})不存在!", code);
+            throw new BusinessException("005", code);
         } else
             return model;
     }

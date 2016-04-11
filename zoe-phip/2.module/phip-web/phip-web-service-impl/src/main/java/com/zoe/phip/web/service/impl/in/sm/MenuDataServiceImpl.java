@@ -7,6 +7,7 @@ package com.zoe.phip.web.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
+import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -33,6 +34,7 @@ import java.util.*;
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMapper> implements IMenuDataMapper {
 
     @Override
+    @ErrorMessage(code="001",message = "该菜单{0}已存�")
     public int add(@Valid  MenuData entity,BindingResult br) throws Exception {
         Example example = new Example(MenuData.class);
         entity.setCreateAt(new Date());
@@ -41,7 +43,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMa
         example.createCriteria().andEqualTo("code", entity.getCode());
         List<MenuData> dataList = getMapper().selectByExample(example);
         if (dataList != null && dataList.size() > 0) {
-            throw new BusinessException("该菜单{0}已存在", entity.getCode());
+            throw new BusinessException("001", entity.getCode());
         } else {
             return getMapper().insertSelective(entity);
         }
@@ -140,10 +142,11 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMa
     }
 
     @Override
+    @ErrorMessage(code="002",message = "还没有为该用户分配菜�")
     public List<MenuData> getCompetenceMenuByUser(String userId) throws Exception {
         List<MenuData> menus = getMapper().getCompetenceMenuByUser(userId);
         if (menus.size() == 0) {
-            throw new BusinessException("还没有为该用户分配菜单");
+            throw new BusinessException("002");
         }
         Map<String, List<MenuData>> map = new HashMap<>();
         menus.forEach(m -> {
@@ -166,10 +169,11 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMa
     }
 
     @Override
+    @ErrorMessage(code="003",message = "未找到该菜单!")
     public int updateState(String id, int state) throws Exception {
         MenuData menuData = getMapper().selectByPrimaryKey(id);
         if(menuData == null){
-            throw new BusinessException("未找到该菜单");
+            throw new BusinessException("003");
         }
         menuData.setState(state);
         menuData.setModifyAt(new Date());
