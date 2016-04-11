@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.dao.mapper.IXmanCardMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.XmanCard">
+        <result column="XC_CARD_CODE" property="xcCardCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="XC_CARD_TYPE" property="xcCardType" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="XC_XMAN_ID" property="xcXmanId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="HEALTH_RECORD_NO" property="healthRecordNo" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="XC_ORG_ID" property="xcOrgId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="XC_CREATE_BY" property="xcCreateBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="XC_CREATE_AT" property="xcCreateAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        <result column="XC_UPDATE_BY" property="xcUpdateBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="XC_UPDATE_AT" property="xcUpdateAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+        <result column="XC_DESCR" property="xcDescr" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="XC_STATUS" property="xcStatus" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+        <result column="XC_ORG_CODE" property="xcOrgCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="addList" parameterType="java.util.List">
+        INSERT INTO PHIP_XMAN_CARD (
+        XC_CARD_CODE,
+        XC_CARD_TYPE,
+        XC_XMAN_ID,
+        HEALTH_RECORD_NO,
+        XC_ORG_ID,
+        XC_CREATE_BY,
+        XC_CREATE_AT,
+        XC_UPDATE_BY,
+        XC_UPDATE_AT,
+        XC_DESCR,
+        XC_STATUS,
+        XC_ORG_CODE,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+            SELECT
+            #{item.xcCardCode,jdbcType=VARCHAR},
+            #{item.xcCardType,jdbcType=VARCHAR},
+            #{item.xcXmanId,jdbcType=VARCHAR},
+            #{item.healthRecordNo,jdbcType=VARCHAR},
+            #{item.xcOrgId,jdbcType=VARCHAR},
+            #{item.xcCreateBy,jdbcType=VARCHAR},
+            #{item.xcCreateAt,jdbcType=TIMESTAMP},
+            #{item.xcUpdateBy,jdbcType=VARCHAR},
+            #{item.xcUpdateAt,jdbcType=TIMESTAMP},
+            #{item.xcDescr,jdbcType=VARCHAR},
+            #{item.xcStatus,jdbcType=DECIMAL},
+            #{item.xcOrgCode,jdbcType=VARCHAR},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
+            FROM DUAL
+        </foreach>
+    </insert>
+    <delete id="deleteByIds" parameterType="java.lang.String">
+        delete from PHIP_XMAN_CARD where ID in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <delete id="deleteByList" parameterType="java.util.List">
+        delete from PHIP_XMAN_CARD where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
+            update PHIP_XMAN_CARD
+            <set>
+                <if test="item.xcCardCode != null">
+                    XC_CARD_CODE = #{item.xcCardCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.xcCardType != null">
+                    XC_CARD_TYPE = #{item.xcCardType,jdbcType=VARCHAR},
+                </if>
+                <if test="item.xcXmanId != null">
+                    XC_XMAN_ID = #{item.xcXmanId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.healthRecordNo != null">
+                    HEALTH_RECORD_NO = #{item.healthRecordNo,jdbcType=VARCHAR},
+                </if>
+                <if test="item.xcOrgId != null">
+                    XC_ORG_ID = #{item.xcOrgId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.xcCreateBy != null">
+                    XC_CREATE_BY = #{item.xcCreateBy,jdbcType=VARCHAR},
+                </if>
+                <if test="item.xcCreateAt != null">
+                    XC_CREATE_AT = #{item.xcCreateAt,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.xcUpdateBy != null">
+                    XC_UPDATE_BY = #{item.xcUpdateBy,jdbcType=VARCHAR},
+                </if>
+                <if test="item.xcUpdateAt != null">
+                    XC_UPDATE_AT = #{item.xcUpdateAt,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.xcDescr != null">
+                    XC_DESCR = #{item.xcDescr,jdbcType=VARCHAR},
+                </if>
+                <if test="item.xcStatus != null">
+                    XC_STATUS = #{item.xcStatus,jdbcType=DECIMAL},
+                </if>
+                <if test="item.xcOrgCode != null">
+                    XC_ORG_CODE = #{item.xcOrgCode,jdbcType=VARCHAR},
+                </if>
+                MODIFY_AT=sysdate
+            </set>
+            where id = #{item.id};
+        </foreach>
+    </update>
+</mapper>

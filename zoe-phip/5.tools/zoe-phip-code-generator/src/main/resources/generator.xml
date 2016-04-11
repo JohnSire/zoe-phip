@@ -15,7 +15,7 @@
     <entry key="outRoot">generator-output</entry>
 
     <!--需要移除的表名前缀-->
-    <entry key="tableRemovePrefixes">SYS_,CS_,CM_</entry>
+    <entry key="tableRemovePrefixes">SYS_,CS_,CM_,PHIP_</entry>
 
     <!--数据库相关设置-->
     <entry key="jdbc_username">PHIP</entry>
