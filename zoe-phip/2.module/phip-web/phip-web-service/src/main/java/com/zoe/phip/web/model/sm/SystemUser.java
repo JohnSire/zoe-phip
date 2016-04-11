@@ -4,7 +4,9 @@
  */
 package com.zoe.phip.web.model.sm;
 
+import com.zoe.phip.module.service.entity.First;
 import com.zoe.phip.module.service.entity.MasterEntity;
+import com.zoe.phip.web.myvalidator.MyPassword;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -24,7 +26,7 @@ import java.util.Set;
  * @date 2016-03-18
  */
 @Table(name = "SYS_SYSTEM_USER")
-public class  SystemUser extends MasterEntity {
+public class  SystemUser extends MasterEntity implements First {
 
     /**
      * 名称
@@ -32,14 +34,15 @@ public class  SystemUser extends MasterEntity {
     @Column(name = "NAME")
 //    @JSONField(name = "Name")
     @NotEmpty(message = "{不能为空}")
-    @Length(min = 5, max = 20, message = "{最小长度为5，最大为20！}")
-    @Pattern(regexp = "[a-zA-Z]{5,20}", message = "{只能是英文字母！}")
+    @Length(min = 5, max = 20, message = "{名称最小长度为5，最大为20！}")
+    @Pattern(regexp = "[a-zA-Z]{5,20}", message = "{名称只能是英文字母！}")
     private String name;
 
     /**
      * 登陆名
      */
     @Column(name = "LOGIN_NAME")
+    @NotEmpty(message = "{不能为空}")
 //    @JSONField(name = "LoginName")
     private String loginName;
 
@@ -48,6 +51,7 @@ public class  SystemUser extends MasterEntity {
      */
     @Column(name = "PASSWORD")
 //    @JSONField(name = "Password")
+    @MyPassword
     private String password;
 
 

@@ -1,8 +1,12 @@
 package com.zoe.phip.module.service.entity;
 
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,28 +18,23 @@ public class BaseEntity implements Serializable {
     /**
      * 主键id
      */
-
-
-
-
     @Id
     @Column(name = "ID")
     @GeneratedValue(generator = "UUID")
+    @NotNull(message = "{id不能为空}")
 //    @JSONField(name = "Id")
     private String id;
-
     /**
      * 创建人
      */
 //    @JSONField(name = "CreateBy")
+    @NotEmpty(message = "{修改人不能为空}")
     private String createBy;
-
-
-
     /**
      * 实体（数据记录）创建时间
      */
 //    @JSONField(name = "CreateAt")
+    @NotNull(message = "{创建时间不能为空}")
     private Date createAt;
 
 
