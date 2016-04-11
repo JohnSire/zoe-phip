@@ -7,34 +7,35 @@
     <#list table.columns as field>
     <#if field.entityName?uncap_first!="id"&&field.entityName?uncap_first!="modifyAt"
     &&field.entityName?uncap_first!="createBy"&&field.entityName?uncap_first!="createAt"
-    &&field.entityName?uncap_first!="state">
-    <result column="${field.sqlName}" property="${field.entityName?uncap_first}" javaType="${field.javaType}" jdbcType="${field.jdbcType?upper_case}"/>
+    &&field.entityName?uncap_first!="state"&&field.entityName?uncap_first!="modifyBy">
+    <result column="${field.sqlName}" property="${field.entityName?uncap_first}" javaType="${field.javaType}"
+            jdbcType="${field.jdbcType?upper_case}"/>
 </#if>
 </#list>
-</resultMap>
+        </resultMap>
 <insert id="addList" parameterType="java.util.List">
 INSERT INTO ${table.sqlName} (
- <#list table.columns as field>
-  <#if field.entityName?uncap_first!="id"&&field.entityName?uncap_first!="modifyAt"
-   &&field.entityName?uncap_first!="createBy"&&field.entityName?uncap_first!="createAt"
-   &&field.entityName?uncap_first!="state">
-    ${field.sqlName},
-   </#if>
- </#list>
-<include refid="${baseDaoName}.baseMasterEntityInsert"/>)
- <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
-   SELECT
 <#list table.columns as field>
-  <#if field.entityName?uncap_first!="id"&&field.entityName?uncap_first!="modifyAt"
-    &&field.entityName?uncap_first!="createBy"&&field.entityName?uncap_first!="createAt"
-    &&field.entityName?uncap_first!="state">
-    ${r'#'}{item.${field.entityName?uncap_first},jdbcType=${field.jdbcType?upper_case}},
-  </#if>
-</#list>
-  <include refid="${baseDaoName}.baseMasterEntitySelect"/>
-   FROM DUAL
- </foreach>
-</insert>
+<#if field.entityName?uncap_first!="id"&&field.entityName?uncap_first!="modifyAt"
+&&field.entityName?uncap_first!="createBy"&&field.entityName?uncap_first!="createAt"
+&&field.entityName?uncap_first!="state"&&field.entityName?uncap_first!="modifyBy">
+${field.sqlName},
+</#if>
+        </#list>
+<include refid="${baseDaoName}.baseMasterEntityInsert"/>)
+<foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+SELECT
+<#list table.columns as field>
+<#if field.entityName?uncap_first!="id"&&field.entityName?uncap_first!="modifyAt"
+&&field.entityName?uncap_first!="createBy"&&field.entityName?uncap_first!="createAt"
+&&field.entityName?uncap_first!="state"&&field.entityName?uncap_first!="modifyBy">
+${r'#'}{item.${field.entityName?uncap_first},jdbcType=${field.jdbcType?upper_case}},
+</#if>
+        </#list>
+<include refid="${baseDaoName}.baseMasterEntitySelect"/>
+        FROM DUAL
+        </foreach>
+        </insert>
 <delete id="deleteByIds" parameterType="java.lang.String">
 delete from ${table.sqlName} where ID in
 <foreach collection="array" item="item" open="(" separator="," close=")">
@@ -47,21 +48,22 @@ delete from ${table.sqlName} where ID in
     ${r'#{item.id}'}
 </foreach>
 </delete>
-<update id="updateList"  parameterType="java.util.List">
+<update id="updateList" parameterType="java.util.List">
 <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
     update ${table.sqlName}
     <set>
         <#list table.columns as field>
-          <#if field.entityName?uncap_first!="id"&&field.entityName?uncap_first!="modifyAt"
-        &&field.entityName?uncap_first!="createBy"&&field.entityName?uncap_first!="createAt">
-            <if test="item.${field.entityName?uncap_first} != null">
-                ${field.sqlName} = ${r'#'}{item.${field.entityName?uncap_first},jdbcType=${field.jdbcType?upper_case}},
-            </if>
-          </#if>
-        </#list>
+        <#if field.entityName?uncap_first!="id"&&field.entityName?uncap_first!="modifyAt"
+        &&field.entityName?uncap_first!="createBy"&&field.entityName?uncap_first!="createAt"&&
+        field.entityName?uncap_first!="modifyBy">
+        <if test="item.${field.entityName?uncap_first} != null">
+            ${field.sqlName} = ${r'#'}{item.${field.entityName?uncap_first},jdbcType=${field.jdbcType?upper_case}},
+        </if>
+    </#if>
+</#list>
         MODIFY_AT=sysdate
 </set>
-    where id = ${r'#'}{item.id};
-</foreach>
-</update>
-</mapper>
+        where id = ${r'#'}{item.id};
+        </foreach>
+        </update>
+        </mapper>

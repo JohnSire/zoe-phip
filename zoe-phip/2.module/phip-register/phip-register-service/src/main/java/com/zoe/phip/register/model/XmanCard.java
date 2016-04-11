@@ -5,7 +5,7 @@
 
 package com.zoe.phip.register.model;
 
-import com.zoe.phip.module.service.entity.BaseEntity;
+import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.*;
 
@@ -16,7 +16,7 @@ import javax.persistence.*;
  * @date 2016-04-11
  */
 @Table(name = "PHIP_XMAN_CARD")
-public class XmanCard extends BaseEntity {
+public class XmanCard extends MasterEntity {
     /**
      * 健康卡代码
      */
@@ -43,35 +43,10 @@ public class XmanCard extends BaseEntity {
     @Column(name = "XC_ORG_ID")
     private String xcOrgId;
     /**
-     * 创建人
-     */
-    @Column(name = "XC_CREATE_BY")
-    private String xcCreateBy;
-    /**
-     * 创建时间
-     */
-    @Column(name = "XC_CREATE_AT")
-    private java.sql.Timestamp xcCreateAt;
-    /**
-     * 最后修改人
-     */
-    @Column(name = "XC_UPDATE_BY")
-    private String xcUpdateBy;
-    /**
-     * 最后修改时间
-     */
-    @Column(name = "XC_UPDATE_AT")
-    private java.sql.Timestamp xcUpdateAt;
-    /**
      * 描述
      */
     @Column(name = "XC_DESCR")
     private String xcDescr;
-    /**
-     * 状态
-     */
-    @Column(name = "XC_STATUS")
-    private java.math.BigDecimal xcStatus;
     /**
      * 健康卡发放机构代码
      */
@@ -118,52 +93,12 @@ public class XmanCard extends BaseEntity {
         this.xcOrgId = xcOrgId;
     }
 
-    public String getXcCreateBy() {
-        return this.xcCreateBy;
-    }
-
-    public void setXcCreateBy(String xcCreateBy) {
-        this.xcCreateBy = xcCreateBy;
-    }
-
-    public java.sql.Timestamp getXcCreateAt() {
-        return this.xcCreateAt;
-    }
-
-    public void setXcCreateAt(java.sql.Timestamp xcCreateAt) {
-        this.xcCreateAt = xcCreateAt;
-    }
-
-    public String getXcUpdateBy() {
-        return this.xcUpdateBy;
-    }
-
-    public void setXcUpdateBy(String xcUpdateBy) {
-        this.xcUpdateBy = xcUpdateBy;
-    }
-
-    public java.sql.Timestamp getXcUpdateAt() {
-        return this.xcUpdateAt;
-    }
-
-    public void setXcUpdateAt(java.sql.Timestamp xcUpdateAt) {
-        this.xcUpdateAt = xcUpdateAt;
-    }
-
     public String getXcDescr() {
         return this.xcDescr;
     }
 
     public void setXcDescr(String xcDescr) {
         this.xcDescr = xcDescr;
-    }
-
-    public java.math.BigDecimal getXcStatus() {
-        return this.xcStatus;
-    }
-
-    public void setXcStatus(java.math.BigDecimal xcStatus) {
-        this.xcStatus = xcStatus;
     }
 
     public String getXcOrgCode() {

@@ -2,9 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.dao.mapper.IDictItemMapper">
     <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.DictItem">
-        <result column="CODE" property="code" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="FK_CATALOG_CODE" property="fkCatalogCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CODE" property="code" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="FK_CATALOG_CODE" property="fkCatalogCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO PHIP_DICT_ITEM (
@@ -45,6 +48,9 @@
                 </if>
                 <if test="item.fkCatalogCode != null">
                     FK_CATALOG_CODE = #{item.fkCatalogCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.state != null">
+                    STATE = #{item.state,jdbcType=DECIMAL},
                 </if>
                 MODIFY_AT=sysdate
             </set>

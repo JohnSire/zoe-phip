@@ -2,10 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.dao.mapper.IDictCatalogMapper">
     <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.DictCatalog">
-        <result column="CODE" property="code" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="PARENT_CODE" property="parentCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="TYPE" property="type" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+        <result column="CODE" property="code" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="PARENT_CODE" property="parentCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="TYPE" property="type" javaType="java.math.BigDecimal"
+                jdbcType="DECIMAL"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO PHIP_DICT_CATALOG (
@@ -51,6 +55,9 @@
                 </if>
                 <if test="item.type != null">
                     TYPE = #{item.type,jdbcType=DECIMAL},
+                </if>
+                <if test="item.state != null">
+                    STATE = #{item.state,jdbcType=DECIMAL},
                 </if>
                 MODIFY_AT=sysdate
             </set>

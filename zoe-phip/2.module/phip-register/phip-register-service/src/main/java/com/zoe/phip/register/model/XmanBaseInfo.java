@@ -5,7 +5,7 @@
 
 package com.zoe.phip.register.model;
 
-import com.zoe.phip.module.service.entity.BaseEntity;
+import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.*;
 
@@ -16,7 +16,7 @@ import javax.persistence.*;
  * @date 2016-04-11
  */
 @Table(name = "PHIP_XMAN_BASE_INFO")
-public class XmanBaseInfo extends BaseEntity {
+public class XmanBaseInfo extends MasterEntity {
     /**
      * 注册机构名称
      */
@@ -127,16 +127,6 @@ public class XmanBaseInfo extends BaseEntity {
      */
     @Column(name = "CODE_SYS_NAME")
     private String codeSysName;
-    /**
-     * 最后修改人
-     */
-    @Column(name = "UPDATE_BY")
-    private String updateBy;
-    /**
-     * 最后修改时间
-     */
-    @Column(name = "LAST_UPDATE_DTIME")
-    private java.sql.Timestamp lastUpdateDtime;
 
     public String getOrgName() {
         return this.orgName;
@@ -312,21 +302,5 @@ public class XmanBaseInfo extends BaseEntity {
 
     public void setCodeSysName(String codeSysName) {
         this.codeSysName = codeSysName;
-    }
-
-    public String getUpdateBy() {
-        return this.updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    public java.sql.Timestamp getLastUpdateDtime() {
-        return this.lastUpdateDtime;
-    }
-
-    public void setLastUpdateDtime(java.sql.Timestamp lastUpdateDtime) {
-        this.lastUpdateDtime = lastUpdateDtime;
     }
 }

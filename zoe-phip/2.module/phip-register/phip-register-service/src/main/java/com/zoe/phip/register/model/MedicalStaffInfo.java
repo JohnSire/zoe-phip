@@ -5,7 +5,7 @@
 
 package com.zoe.phip.register.model;
 
-import com.zoe.phip.module.service.entity.BaseEntity;
+import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.*;
 
@@ -16,7 +16,7 @@ import javax.persistence.*;
  * @date 2016-04-11
  */
 @Table(name = "PHIP_MEDICAL_STAFF_INFO")
-public class MedicalStaffInfo extends BaseEntity {
+public class MedicalStaffInfo extends MasterEntity {
     /**
      * 医务人员id
      */
@@ -92,11 +92,6 @@ public class MedicalStaffInfo extends BaseEntity {
      */
     @Column(name = "AFFILIATED_ORG_NAME")
     private String affiliatedOrgName;
-    /**
-     * 创建时间
-     */
-    @Column(name = "CREATION_TIME")
-    private java.sql.Timestamp creationTime;
     /**
      * 消息id
      */
@@ -246,14 +241,6 @@ public class MedicalStaffInfo extends BaseEntity {
 
     public void setAffiliatedOrgName(String affiliatedOrgName) {
         this.affiliatedOrgName = affiliatedOrgName;
-    }
-
-    public java.sql.Timestamp getCreationTime() {
-        return this.creationTime;
-    }
-
-    public void setCreationTime(java.sql.Timestamp creationTime) {
-        this.creationTime = creationTime;
     }
 
     public String getMsgId() {

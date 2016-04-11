@@ -2,31 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.dao.mapper.IXmanBaseInfoMapper">
     <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.XmanBaseInfo">
-        <result column="ORG_NAME" property="orgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="ORG_CODE" property="orgCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="XMAN_ID" property="xmanId" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="ID_NO" property="idNo" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="SEX_CODE" property="sexCode" javaType="java.lang.Boolean" jdbcType="DECIMAL"/>
-        <result column="BIRTH_DATE" property="birthDate" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
-        <result column="ID_TYPE_CODE" property="idTypeCode" javaType="java.lang.Byte" jdbcType="DECIMAL"/>
-        <result column="EMPLOYER_NAME" property="employerName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="TEL_NO" property="telNo" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="REL_NAME" property="relName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="REL_TEL_NO" property="relTelNo" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="ADDRESS" property="address" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="POSTALCODE" property="postalcode" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="NATIONALITY_CODE" property="nationalityCode" javaType="java.lang.Byte" jdbcType="DECIMAL"/>
-        <result column="ABO_CODE" property="aboCode" javaType="java.lang.Boolean" jdbcType="DECIMAL"/>
-        <result column="RH_CODE" property="rhCode" javaType="java.lang.Boolean" jdbcType="DECIMAL"/>
-        <result column="EDUCATION_CODE" property="educationCode" javaType="java.lang.Byte" jdbcType="DECIMAL"/>
-        <result column="OCCUPATION_CODE" property="occupationCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="MARRIAGE_CODE" property="marriageCode" javaType="java.lang.Byte" jdbcType="DECIMAL"/>
-        <result column="CODE_SYS_CODE" property="codeSysCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="CODE_SYS_NAME" property="codeSysName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="UPDATE_BY" property="updateBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="LAST_UPDATE_DTIME" property="lastUpdateDtime" javaType="java.sql.Timestamp"
+        <result column="ORG_NAME" property="orgName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ORG_CODE" property="orgCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="XMAN_ID" property="xmanId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ID_NO" property="idNo" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="SEX_CODE" property="sexCode" javaType="java.lang.Boolean"
+                jdbcType="DECIMAL"/>
+        <result column="BIRTH_DATE" property="birthDate" javaType="java.sql.Timestamp"
                 jdbcType="TIMESTAMP"/>
+        <result column="ID_TYPE_CODE" property="idTypeCode" javaType="java.lang.Byte"
+                jdbcType="DECIMAL"/>
+        <result column="EMPLOYER_NAME" property="employerName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="TEL_NO" property="telNo" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="REL_NAME" property="relName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="REL_TEL_NO" property="relTelNo" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ADDRESS" property="address" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="POSTALCODE" property="postalcode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="NATIONALITY_CODE" property="nationalityCode" javaType="java.lang.Byte"
+                jdbcType="DECIMAL"/>
+        <result column="ABO_CODE" property="aboCode" javaType="java.lang.Boolean"
+                jdbcType="DECIMAL"/>
+        <result column="RH_CODE" property="rhCode" javaType="java.lang.Boolean"
+                jdbcType="DECIMAL"/>
+        <result column="EDUCATION_CODE" property="educationCode" javaType="java.lang.Byte"
+                jdbcType="DECIMAL"/>
+        <result column="OCCUPATION_CODE" property="occupationCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="MARRIAGE_CODE" property="marriageCode" javaType="java.lang.Byte"
+                jdbcType="DECIMAL"/>
+        <result column="CODE_SYS_CODE" property="codeSysCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="CODE_SYS_NAME" property="codeSysName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO PHIP_XMAN_BASE_INFO (
@@ -52,8 +71,6 @@
         MARRIAGE_CODE,
         CODE_SYS_CODE,
         CODE_SYS_NAME,
-        UPDATE_BY,
-        LAST_UPDATE_DTIME,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
@@ -79,8 +96,6 @@
             #{item.marriageCode,jdbcType=DECIMAL},
             #{item.codeSysCode,jdbcType=VARCHAR},
             #{item.codeSysName,jdbcType=VARCHAR},
-            #{item.updateBy,jdbcType=VARCHAR},
-            #{item.lastUpdateDtime,jdbcType=TIMESTAMP},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -167,11 +182,8 @@
                 <if test="item.codeSysName != null">
                     CODE_SYS_NAME = #{item.codeSysName,jdbcType=VARCHAR},
                 </if>
-                <if test="item.updateBy != null">
-                    UPDATE_BY = #{item.updateBy,jdbcType=VARCHAR},
-                </if>
-                <if test="item.lastUpdateDtime != null">
-                    LAST_UPDATE_DTIME = #{item.lastUpdateDtime,jdbcType=TIMESTAMP},
+                <if test="item.state != null">
+                    STATE = #{item.state,jdbcType=DECIMAL},
                 </if>
                 MODIFY_AT=sysdate
             </set>

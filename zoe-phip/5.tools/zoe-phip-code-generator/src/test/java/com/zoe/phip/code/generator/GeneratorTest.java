@@ -14,6 +14,6 @@ public class GeneratorTest {
         GeneratorFacade facade = new GeneratorFacade();
         facade.getGenerator().addTemplateRootDir(new File("template"));
         facade.deleteOutRootDir();
-        facade.generateByTable("PHIP_AREA_BASE_INFO");
+        facade.generateByTable("PHIP_XMAN_CARD");
     }
 }

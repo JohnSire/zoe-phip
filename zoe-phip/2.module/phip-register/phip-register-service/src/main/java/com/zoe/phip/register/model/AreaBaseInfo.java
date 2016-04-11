@@ -5,9 +5,10 @@
 
 package com.zoe.phip.register.model;
 
-import com.zoe.phip.module.service.entity.BaseEntity;
-
 import javax.persistence.*;
+
+
+import com.zoe.phip.module.service.entity.MasterEntity;
 
 
 /**
@@ -16,7 +17,7 @@ import javax.persistence.*;
  * @date 2016-04-11
  */
 @Table(name = "PHIP_AREA_BASE_INFO")
-public class AreaBaseInfo extends BaseEntity {
+public class AreaBaseInfo extends MasterEntity {
     /**
      * 区域代码
      */
@@ -37,16 +38,6 @@ public class AreaBaseInfo extends BaseEntity {
      */
     @Column(name = "BUILD_TIME")
     private java.sql.Timestamp buildTime;
-    /**
-     * 创建时间
-     */
-    @Column(name = "CREATE_TIME")
-    private java.sql.Timestamp createTime;
-    /**
-     * 修改时间
-     */
-    @Column(name = "UPDATE_TIME")
-    private java.sql.Timestamp updateTime;
     /**
      * 注销日期
      */
@@ -93,22 +84,6 @@ public class AreaBaseInfo extends BaseEntity {
 
     public void setBuildTime(java.sql.Timestamp buildTime) {
         this.buildTime = buildTime;
-    }
-
-    public java.sql.Timestamp getCreateTime() {
-        return this.createTime;
-    }
-
-    public void setCreateTime(java.sql.Timestamp createTime) {
-        this.createTime = createTime;
-    }
-
-    public java.sql.Timestamp getUpdateTime() {
-        return this.updateTime;
-    }
-
-    public void setUpdateTime(java.sql.Timestamp updateTime) {
-        this.updateTime = updateTime;
     }
 
     public java.sql.Timestamp getAreaCancellationDate() {

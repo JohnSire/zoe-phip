@@ -2,17 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.dao.mapper.IMedicalStaffInfoMapper">
     <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.MedicalStaffInfo">
-        <result column="STAFF_ID" property="staffId" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="NAME" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="GENDER_CODE" property="genderCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="GENDER_NAME" property="genderName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="BIRTH_TIME" property="birthTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
-        <result column="BIRTHPLACE_ADDR" property="birthplaceAddr" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="ID_NO" property="idNo" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="TECHNICAL_CODE" property="technicalCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="TECHNICAL_NAME" property="technicalName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="EMPLOYER_ADDR" property="employerAddr" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="EMPLOYER_TEL_NO" property="employerTelNo" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="STAFF_ID" property="staffId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="GENDER_CODE" property="genderCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="GENDER_NAME" property="genderName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="BIRTH_TIME" property="birthTime" javaType="java.sql.Timestamp"
+                jdbcType="TIMESTAMP"/>
+        <result column="BIRTHPLACE_ADDR" property="birthplaceAddr" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ID_NO" property="idNo" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="TECHNICAL_CODE" property="technicalCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="TECHNICAL_NAME" property="technicalName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="EMPLOYER_ADDR" property="employerAddr" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="EMPLOYER_TEL_NO" property="employerTelNo" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
         <result column="EFFECTIVE_TIME_LOW" property="effectiveTimeLow" javaType="java.sql.Timestamp"
                 jdbcType="TIMESTAMP"/>
         <result column="EFFECTIVE_TIME_HIGH" property="effectiveTimeHigh" javaType="java.sql.Timestamp"
@@ -21,12 +32,16 @@
                 jdbcType="VARCHAR"/>
         <result column="AFFILIATED_ORG_NAME" property="affiliatedOrgName" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="CREATION_TIME" property="creationTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
-        <result column="MSG_ID" property="msgId" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="ASSIGNED_CODE" property="assignedCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="ASSIGNED_NAME" property="assignedName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="ASSIGNED_DEPT_CODE" property="assignedDeptCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="ASSIGNED_DEPT_NAME" property="assignedDeptName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="MSG_ID" property="msgId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ASSIGNED_CODE" property="assignedCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ASSIGNED_NAME" property="assignedName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ASSIGNED_DEPT_CODE" property="assignedDeptCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ASSIGNED_DEPT_NAME" property="assignedDeptName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
         <result column="ASSIGNED_ONTACT_PERSON" property="assignedOntactPerson" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
     </resultMap>
@@ -47,7 +62,6 @@
         EFFECTIVE_TIME_HIGH,
         AFFILIATED_ORG_CODE,
         AFFILIATED_ORG_NAME,
-        CREATION_TIME,
         MSG_ID,
         ASSIGNED_CODE,
         ASSIGNED_NAME,
@@ -72,7 +86,6 @@
             #{item.effectiveTimeHigh,jdbcType=TIMESTAMP},
             #{item.affiliatedOrgCode,jdbcType=VARCHAR},
             #{item.affiliatedOrgName,jdbcType=VARCHAR},
-            #{item.creationTime,jdbcType=TIMESTAMP},
             #{item.msgId,jdbcType=VARCHAR},
             #{item.assignedCode,jdbcType=VARCHAR},
             #{item.assignedName,jdbcType=VARCHAR},
@@ -144,9 +157,6 @@
                 <if test="item.affiliatedOrgName != null">
                     AFFILIATED_ORG_NAME = #{item.affiliatedOrgName,jdbcType=VARCHAR},
                 </if>
-                <if test="item.creationTime != null">
-                    CREATION_TIME = #{item.creationTime,jdbcType=TIMESTAMP},
-                </if>
                 <if test="item.msgId != null">
                     MSG_ID = #{item.msgId,jdbcType=VARCHAR},
                 </if>
@@ -164,6 +174,9 @@
                 </if>
                 <if test="item.assignedOntactPerson != null">
                     ASSIGNED_ONTACT_PERSON = #{item.assignedOntactPerson,jdbcType=VARCHAR},
+                </if>
+                <if test="item.state != null">
+                    STATE = #{item.state,jdbcType=DECIMAL},
                 </if>
                 MODIFY_AT=sysdate
             </set>
