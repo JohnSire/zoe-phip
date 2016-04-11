@@ -42,7 +42,6 @@ define(function (require, exports, module) {
                         var spanObj = liObj.children("a").children("span");
                         //判断是否有子菜单和设置距左距离
                         //设置左距离
-
                         //如果有下级菜单
                         if (liObj.children("ul").length > 0) {
                             liObj.children("a").removeAttr("href"); //删除链接，防止跳转

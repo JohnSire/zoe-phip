@@ -39,7 +39,6 @@ define(function (require, exports, module) {
             internal.req.getMenuList(function (data) {
                 internal.dataMenu = data;
             })
-
         },
         //创建菜单
         buildMenu: function (islink, data) {

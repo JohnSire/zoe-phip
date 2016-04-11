@@ -16,7 +16,6 @@ define(function (require, exports, module) {
                 } else {
                     linkObj.addClass("link");
                     linkObj.click(function () {
-
                         internal.linkMenuTree(true, linkObj.attr("navid")); //加载函数
                     });
                 }

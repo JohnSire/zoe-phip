@@ -8,36 +8,35 @@
     <script type="text/javascript">
         var webRoot = '${ctxPath}', seajsRoot = '/', version = '20160317';
     </script>
-    <% var staticRoot='http://localhost:8082';%>
     <!--静态资源样式部分-->
-    <link href="${staticRoot}/lib/jqueryui/jquery-ui-1.11.4.custom/jquery-ui.min.css" rel="stylesheet"/>
-    <link href="${staticRoot}/lib/ligerui/V1.3.2/skins/Aqua/css/ligerui-all.css" rel="stylesheet"/>
-    <link href="${staticRoot}/lib/ligerui/V1.3.2/skins/Gray/css/all.css" rel="stylesheet"/>
-    <link href="${staticRoot}/assets/src/style/style.css" rel="stylesheet">
-    <link href="${staticRoot}/assets/src/style/style.css" rel="stylesheet">
-    <link href="${staticRoot}/lib/ztree/V3.5/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/jqueryui/jquery-ui-1.11.4.custom/jquery-ui.min.css")}' rel="stylesheet"/>
+    <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ligerui/V1.3.2/skins/Aqua/css/ligerui-all.css")}' rel="stylesheet"/>
+    <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ligerui/V1.3.2/skins/Gray/css/all.css")}' rel="stylesheet"/>
+    <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("assets/src/style/style.css")}' rel="stylesheet">
+    <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("assets/src/style/style.css")}' rel="stylesheet">
+    <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ztree/V3.5/css/zTreeStyle/zTreeStyle.css")}' rel="stylesheet" />
     ${baseStyleSection}
 </head>
 <body>
 ${baseBodySection}
 <!--静态资源脚本部分-->
-<script src="${staticRoot}/lib/jquery/jquery-1.11.1.js"></script>
-<script src="${staticRoot}/lib/cookie/jquery.cookie.js"></script>
-<script src="${staticRoot}/lib/seajs/2.3.0/sea-debug.js"></script>
-<script src="${ctxPath}/assets/config.js"></script>
-<script src="${staticRoot}/lib/ligerui/V1.3.2/js/ligerui.all.js"></script>
-<script src="${staticRoot}/lib/validform/Validform_v5.3.2.min.js"></script>
-<script src="${staticRoot}/lib/scroll/jquery.nicescroll.js"></script>
-<script src="${staticRoot}/lib/jqueryui/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-<script src="${staticRoot}/lib/guid/guid.js"></script>
-<script src="${staticRoot}/lib/base64/base64.js"></script>
-<script src="${staticRoot}/lib/custom/unit.js"></script>
-<script src="${staticRoot}/lib/custom/thirdExtend.js"></script>
-<script src="${staticRoot}/lib/custom/class.js"></script>
-<script src="${staticRoot}/lib/custom/request.js"></script>
-<script src="${staticRoot}/lib/custom/plugin.js"></script>
-<script src="${staticRoot}/lib/custom/plugin.js"></script>
-<script src="${staticRoot}/lib/ztree/V3.5/js/jquery.ztree.all-3.5.js"></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/jquery/jquery-1.11.1.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/cookie/jquery.cookie.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/seajs/2.3.0/sea-debug.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/config.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ligerui/V1.3.2/js/ligerui.all.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/validform/Validform_v5.3.2.min.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/scroll/jquery.nicescroll.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/jqueryui/jquery-ui-1.11.4.custom/jquery-ui.min.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/guid/guid.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/base64/base64.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/custom/unit.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/custom/thirdExtend.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/custom/class.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/custom/request.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/custom/plugin.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/custom/plugin.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ztree/V3.5/js/jquery.ztree.all-3.5.js")}'></script>
 ${baseScriptSection}
 </body>
 </html>
