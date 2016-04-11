@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -135,7 +134,7 @@ public class SystemMenuController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Add},name = "新增")
     public ServiceResult addMenuInfo(MenuData menuData) {
-        menuData.setCreateBy(ComSession.getUserInfo().getUserId());
+       menuData.setCreateBy(ComSession.getUserInfo().getUserId());
         return ServiceFactory.getMenuDataService().add(ComSession.getUserInfo(), menuData);
     }
 

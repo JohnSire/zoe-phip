@@ -95,7 +95,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
         return pageList;
     }
 
-    @ErrorMessage(code = "004",message = "字典项编码不能为空!")
+    @ErrorMessage(code = "004",message = "字典项编码不能为�")
     @ErrorMessage(code = "005",message = "该字典类({0})已经存在")
     public SystemDictCategory getDictCategory(String code) throws Exception {
         if (StringUtil.isNullOrWhiteSpace(code))

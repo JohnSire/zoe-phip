@@ -9,8 +9,6 @@ package com.zoe.phip.web.service.impl.in.sm;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
-import com.zoe.phip.infrastructure.annotation.ErrorMessages;
-import com.zoe.phip.infrastructure.aop.Action;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -43,8 +41,8 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
     }
 
     @Override
-    @ErrorMessage(code="001",message = "用户名错误!")
-    @ErrorMessage(code="002",message = "用户不可用!")
+    @ErrorMessage(code="001",message = "用户名错�")
+    @ErrorMessage(code="002",message = "用户不可�")
     @ErrorMessage(code="003",message = "密码错误!")
     public LoginCredentials login(String loginName, String passWord, int expiresTime) throws Exception {
 
@@ -126,9 +124,16 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
     }
 
     @Override
-    @ErrorMessage(code = "008",message = "已存在登录名({0})的用户!")
-    public int add(SystemUser entity) throws Exception {
+    @ErrorMessage(code = "008",message = "已存在登录名({0})的用户！")
+    public int add( SystemUser entity) throws Exception {
         //判断是否存在用户
+    /*    ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
+        Validator validator = vf.getValidator();
+        Set<ConstraintViolation<SystemUser>> set = validator.validate(entity);
+        for (ConstraintViolation<SystemUser> constraintViolation : set) {
+            System.out.println(constraintViolation.getMessage());
+        //    throw new BusinessException("实体保存非法", constraintViolation.getMessage());
+        }*/
         List<SystemUser> list = getUserByLoginName(entity.getLoginName());
         if (list != null && list.size() > 0) {
             throw new BusinessException("008", entity.getLoginName());
@@ -139,7 +144,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
     }
 
     @Override
-    @ErrorMessage(code = "009",message = "已存在登录名({0})的用户!")
+    @ErrorMessage(code = "009",message = "已存在登录名({0})的用�")
     public int addList(List<SystemUser> entities) throws Exception {
 
         List<String> loginNames = new ArrayList<String>();

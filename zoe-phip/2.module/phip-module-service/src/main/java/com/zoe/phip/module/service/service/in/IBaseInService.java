@@ -18,7 +18,7 @@ public interface IBaseInService<T extends MasterEntity> {
      * @param entity
      * @return
      */
-    ServiceResult add(SystemData systemData, T entity);
+    ServiceResult add(SystemData systemData, T entity );
 
     /**
      * 批量新增

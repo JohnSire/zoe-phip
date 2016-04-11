@@ -113,7 +113,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
-    @ErrorMessage(code = "003",message = "字典分类({0})已经被删除!")
+    @ErrorMessage(code = "003",message = "字典分类({0})已经被删�")
     public PageList<SystemDictItem> getDictItemsByCategoryCode(String categoryCode, QueryPage page) throws Exception {
 
         PageList<SystemDictItem> pageList = new PageList<>();
@@ -132,7 +132,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
-    @ErrorMessage(code = "004",message = "字典项代码不能为空!")
+    @ErrorMessage(code = "004",message = "字典项代码不能为�")
     public SystemDictItem getDictItemByCategoryId(String categoryId, String code) throws Exception {
         if (StringUtil.isNullOrWhiteSpace(code))
             throw new BusinessException("004");
@@ -143,8 +143,8 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
-    @ErrorMessage(code = "005",message = "字典分类({0})已经被删除!")
-    @ErrorMessage(code = "006",message = "字典项代码不能为空!")
+    @ErrorMessage(code = "005",message = "字典分类({0})已经被删�")
+    @ErrorMessage(code = "006",message = "字典项代码不能为�")
     public SystemDictItem getDictItemByCategoryCode(String categoryCode, String code) throws Exception {
         String categoryId = getCategoryId(categoryCode);
         if (StringUtil.isNullOrWhiteSpace(categoryId))
@@ -158,7 +158,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
-    @ErrorMessage(code = "007",message = "字典分类({0})已经被删除!")
+    @ErrorMessage(code = "007",message = "字典分类({0})已经被删�")
     public List<SystemDictItem> getDictItemsByCategoryCode(String categoryCode) throws Exception {
 
         String categoryId = getCategoryId(categoryCode);

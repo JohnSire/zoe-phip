@@ -35,6 +35,7 @@ public class MenuData extends MasterEntity {
     /// <summary>
     /// 对应的权限标�
     /// </summary>
+
     @Transient
     @Column(name = "COMPETENCE_ID")
     public String competenceId;
