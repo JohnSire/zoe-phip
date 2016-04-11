@@ -6,6 +6,8 @@
 package com.zoe.phip.register.model;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
+import com.zoe.phip.module.service.entity.BaseEntity;
+import com.zoe.phip.register.service.annotation.XPath;
 
 import javax.persistence.*;
 
@@ -20,6 +22,7 @@ public class XmanBaseInfo extends MasterEntity {
     /**
      * 注册机构名称
      */
+    @XPath(value = "",descr = "")
     @Column(name = "ORG_NAME")
     private String orgName;
     /**
@@ -68,12 +71,12 @@ public class XmanBaseInfo extends MasterEntity {
     @Column(name = "TEL_NO")
     private String telNo;
     /**
-     * 联系人姓名
+     * 联系人姓�
      */
     @Column(name = "REL_NAME")
     private String relName;
     /**
-     * 联系人电话
+     * 联系人电�
      */
     @Column(name = "REL_TEL_NO")
     private String relTelNo;
@@ -93,12 +96,12 @@ public class XmanBaseInfo extends MasterEntity {
     @Column(name = "NATIONALITY_CODE")
     private Byte nationalityCode;
     /**
-     * abo血型代码
+     * abo血型代�
      */
     @Column(name = "ABO_CODE")
     private Boolean aboCode;
     /**
-     * rh血型代码
+     * rh血型代�
      */
     @Column(name = "RH_CODE")
     private Boolean rhCode;
