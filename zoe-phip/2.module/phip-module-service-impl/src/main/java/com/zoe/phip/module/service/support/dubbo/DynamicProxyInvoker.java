@@ -4,17 +4,18 @@ import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
-import com.zoe.phip.infrastructure.annotation.ErrorMessages;
 import com.zoe.phip.infrastructure.entity.ErrorCode;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.function.Function;
 import com.zoe.phip.infrastructure.security.SystemCredential;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
+import com.zoe.phip.module.service.entity.BaseEntity;
 import com.zoe.phip.module.service.impl.in.IBaseInService;
 import com.zoe.phip.module.service.support.annotation.WithResult;
+import com.zoe.phip.module.service.validator.ValidationAppendUtils;
+import com.zoe.phip.module.service.validator.ValidationResult;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,6 +114,20 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
                 ServiceResult result=new ServiceResult();
                 result.addMessage(ErrorCode.DEFAULT,"方法的第一个参数必须为SystemData类型");
                 return result;
+            }
+        }
+        //methodName.startsWith
+        if (methodName.equals("add")||methodName.equals("update")) {
+            for (Object o : arguments) {
+                if(o instanceof BaseEntity){
+                    ValidationResult result = ValidationAppendUtils.validateEntity(o);
+                    if(result.isHasErrors()){
+                        ServiceResult serviceResult=new ServiceResult();
+                        serviceResult.addMessage(ErrorCode.VALIDATOR_ERROR,result.getErrorMessage());
+                        return serviceResult;
+                    }
+
+                }
             }
         }
 

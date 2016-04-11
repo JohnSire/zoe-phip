@@ -18,7 +18,6 @@ import com.zoe.phip.web.dao.sm.IMenuDataMapper;
 import com.zoe.phip.web.model.sm.MenuData;
 import com.zoe.phip.web.service.sm.IMenuDataService;
 import org.springframework.stereotype.Repository;
-import org.springframework.validation.BindingResult;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.validation.Valid;
@@ -34,8 +33,8 @@ import java.util.*;
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMapper> implements IMenuDataMapper {
 
     @Override
-    @ErrorMessage(code="001",message = "该菜单{0}已存�")
-    public int add(@Valid  MenuData entity,BindingResult br) throws Exception {
+    @ErrorMessage(code="001",message = "该菜单{0}已存�")
+    public int add(@Valid  MenuData entity) throws Exception {
         Example example = new Example(MenuData.class);
         entity.setCreateAt(new Date());
         entity.setModifyAt(new Date());
@@ -142,7 +141,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMa
     }
 
     @Override
-    @ErrorMessage(code="002",message = "还没有为该用户分配菜�")
+    @ErrorMessage(code="002",message = "还没有为该用户分配菜�")
     public List<MenuData> getCompetenceMenuByUser(String userId) throws Exception {
         List<MenuData> menus = getMapper().getCompetenceMenuByUser(userId);
         if (menus.size() == 0) {

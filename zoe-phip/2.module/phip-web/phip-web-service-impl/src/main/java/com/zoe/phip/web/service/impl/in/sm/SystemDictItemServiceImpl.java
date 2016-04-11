@@ -22,7 +22,6 @@ import com.zoe.phip.web.model.sm.SystemDictItem;
 import com.zoe.phip.web.service.sm.ISystemDictItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.validation.BindingResult;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -42,7 +41,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
 
     @Override
     @ErrorMessage(code = "001",message = "该字典类({0})已经存在!")
-    public int add(SystemDictItem entity,BindingResult br) throws Exception {
+    public int add(SystemDictItem entity) throws Exception {
         Example example = new Example(SystemDictItem.class);
         example.createCriteria().andEqualTo("fkSystemDictCategoryId", entity.getFkSystemDictCategoryId())
                 .andEqualTo("code", entity.getCode());
@@ -114,7 +113,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
-    @ErrorMessage(code = "003",message = "字典分类({0})已经被删�")
+    @ErrorMessage(code = "003",message = "字典分类({0})已经被删�")
     public PageList<SystemDictItem> getDictItemsByCategoryCode(String categoryCode, QueryPage page) throws Exception {
 
         PageList<SystemDictItem> pageList = new PageList<>();
@@ -133,7 +132,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
-    @ErrorMessage(code = "004",message = "字典项代码不能为�")
+    @ErrorMessage(code = "004",message = "字典项代码不能为�")
     public SystemDictItem getDictItemByCategoryId(String categoryId, String code) throws Exception {
         if (StringUtil.isNullOrWhiteSpace(code))
             throw new BusinessException("004");
@@ -144,8 +143,8 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
-    @ErrorMessage(code = "005",message = "字典分类({0})已经被删�")
-    @ErrorMessage(code = "006",message = "字典项代码不能为�")
+    @ErrorMessage(code = "005",message = "字典分类({0})已经被删�")
+    @ErrorMessage(code = "006",message = "字典项代码不能为�")
     public SystemDictItem getDictItemByCategoryCode(String categoryCode, String code) throws Exception {
         String categoryId = getCategoryId(categoryCode);
         if (StringUtil.isNullOrWhiteSpace(categoryId))
@@ -159,7 +158,7 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     }
 
     @Override
-    @ErrorMessage(code = "007",message = "字典分类({0})已经被删�")
+    @ErrorMessage(code = "007",message = "字典分类({0})已经被删�")
     public List<SystemDictItem> getDictItemsByCategoryCode(String categoryCode) throws Exception {
 
         String categoryId = getCategoryId(categoryCode);

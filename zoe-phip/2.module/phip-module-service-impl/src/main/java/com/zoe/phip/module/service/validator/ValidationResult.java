@@ -1,4 +1,4 @@
-package com.zoe.phip.web.bootstrapper;
+package com.zoe.phip.module.service.validator;
 
 import java.util.Map;
 
@@ -9,6 +9,16 @@ public class ValidationResult {
 
     //校验结果是否有错
     private boolean hasErrors;
+
+    private String errorMessage;
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 
     //校验错误信息
     private Map<String,String> errorMsg;

@@ -32,7 +32,6 @@ public class  SystemUser extends MasterEntity {
     @Column(name = "NAME")
 //    @JSONField(name = "Name")
     @NotEmpty(message = "{不能为空}")
-   // @Min(value =5)
     @Length(min = 5, max = 20, message = "{最小长度为5，最大为20！}")
     @Pattern(regexp = "[a-zA-Z]{5,20}", message = "{只能是英文字母！}")
     private String name;

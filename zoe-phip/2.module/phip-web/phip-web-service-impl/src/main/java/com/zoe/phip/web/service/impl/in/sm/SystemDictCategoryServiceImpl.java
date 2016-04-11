@@ -20,7 +20,6 @@ import com.zoe.phip.web.dao.sm.ISystemDictCategoryMapper;
 import com.zoe.phip.web.model.sm.SystemDictCategory;
 import com.zoe.phip.web.service.sm.ISystemDictCategoryService;
 import org.springframework.stereotype.Repository;
-import org.springframework.validation.BindingResult;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.HashMap;
@@ -40,7 +39,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
 
     @Override
     @ErrorMessage(code = "001",message = "该字典类({0})已经存在!")
-    public int add(SystemDictCategory entity,BindingResult br) throws Exception {
+    public int add(SystemDictCategory entity) throws Exception {
         Example example = new Example(SystemDictCategory.class);
         example.createCriteria().andEqualTo("code", entity.getCode());
         List<SystemDictCategory> list = getMapper().selectByExample(example);
@@ -96,7 +95,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
         return pageList;
     }
 
-    @ErrorMessage(code = "004",message = "字典项编码不能为�")
+    @ErrorMessage(code = "004",message = "字典项编码不能为�")
     @ErrorMessage(code = "005",message = "该字典类({0})已经存在")
     public SystemDictCategory getDictCategory(String code) throws Exception {
         if (StringUtil.isNullOrWhiteSpace(code))

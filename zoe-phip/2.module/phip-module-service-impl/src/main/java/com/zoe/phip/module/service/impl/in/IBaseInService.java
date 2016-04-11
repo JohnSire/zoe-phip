@@ -5,7 +5,6 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.module.service.entity.MasterEntity;
-import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public interface IBaseInService<T extends MasterEntity> {
      * @param entity
      * @return
      */
-    int add(T entity,BindingResult br) throws Exception;
+    int add(T entity) throws Exception;
 
     /**
      * 批量新增

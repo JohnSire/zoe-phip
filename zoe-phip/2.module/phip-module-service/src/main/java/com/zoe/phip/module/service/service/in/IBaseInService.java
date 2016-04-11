@@ -2,7 +2,6 @@ package com.zoe.phip.module.service.service.in;
 
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.module.service.entity.MasterEntity;
-import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public interface IBaseInService<T extends MasterEntity> {
      * @param entity
      * @return
      */
-    ServiceResult add(SystemData systemData, T entity ,BindingResult br);
+    ServiceResult add(SystemData systemData, T entity );
 
     /**
      * 批量新增

@@ -97,10 +97,8 @@ public class SystemUserController extends BaseController {
     @RequestMapping(value = "/addUserInfo", method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Add},name = "新增")
-    public ServiceResult addUserInfo( SystemUser userInfo, BindingResult br) {
-        if(br.hasErrors())   System.out.println(br);
-
-        return ServiceFactory.getUserService().add(ComSession.getUserInfo(), userInfo, br);
+    public ServiceResult addUserInfo( SystemUser userInfo) {
+        return ServiceFactory.getUserService().add(ComSession.getUserInfo(), userInfo);
     }
     /**
      * 更新用户

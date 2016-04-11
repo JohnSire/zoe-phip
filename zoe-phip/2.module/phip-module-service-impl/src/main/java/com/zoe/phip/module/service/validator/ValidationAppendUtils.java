@@ -1,4 +1,4 @@
-package com.zoe.phip.web.bootstrapper;
+package com.zoe.phip.module.service.validator;
 
 import com.alibaba.dubbo.common.utils.CollectionUtils;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -7,7 +7,9 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by huangyinfu on 2016/4/11.
@@ -15,6 +17,13 @@ import java.util.*;
 public class ValidationAppendUtils {
     private static Validator validator =  Validation.buildDefaultValidatorFactory().getValidator();
 
+    /**
+     * 抽出公共方法
+     * @param obj
+     * @param <T>
+     * @return
+     * @throws BusinessException
+     */
     public static <T> ValidationResult validateEntity(T obj) throws BusinessException {
         ValidationResult result = new ValidationResult();
         Set<ConstraintViolation<T>> set = validator.validate(obj,Default.class);
@@ -27,7 +36,9 @@ public class ValidationAppendUtils {
                 s += "属性名："+cv.getPropertyPath().toString()+"的值："+cv.getMessage()+";";
             }
             result.setErrorMsg(errorMsg);
-            throw new BusinessException(s,"实体保存非法！");
+            result.setErrorMessage(s);
+            //throw new BusinessException("801", s);
+
         }
         return result;
     }
