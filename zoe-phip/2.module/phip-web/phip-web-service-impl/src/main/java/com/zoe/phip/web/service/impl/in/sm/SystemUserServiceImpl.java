@@ -40,6 +40,14 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
         return getMapper().getUserList(args);
     }
 
+    /**
+     * 用户登录
+     * @param loginName
+     * @param passWord
+     * @param expiresTime session过期时间 毫秒
+     * @return
+     * @throws Exception
+     */
     @Override
     @ErrorMessage(code="001",message = "用户名错�")
     @ErrorMessage(code="002",message = "用户不可�")
@@ -62,6 +70,14 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
         return credentials;
     }
 
+    /**
+     * 修改密码
+     * @param id 用户id
+     * @param oldPwd 旧密码
+     * @param newPwd 新密码
+     * @return
+     * @throws Exception
+     */
     @Override
     @ErrorMessage(code = "004",message = "未找到该用户!")
     @ErrorMessage(code = "005",message = "旧密码错!")
@@ -79,6 +95,13 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
         return getMapper().updateByPrimaryKeySelective(user);
     }
 
+    /**
+     * 重设密码
+     * @param id
+     * @param newPwd
+     * @return
+     * @throws Exception
+     */
     @Override
     @ErrorMessage(code = "006",message = "未找到该用户!")
     public int resetPassword(String id, String newPwd) throws Exception {
@@ -91,6 +114,13 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
         return getMapper().updateByPrimaryKeySelective(user);
     }
 
+    /**
+     * 更新用户状态
+     * @param id
+     * @param state
+     * @return
+     * @throws Exception
+     */
     @Override
     @ErrorMessage(code = "007",message = "未找到该用户!")
     public int updateState(String id, int state) throws Exception {
@@ -103,6 +133,14 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
         return getMapper().updateByPrimaryKeySelective(user);
     }
 
+    /**
+     * 获取用户列表
+     * @param state
+     * @param key
+     * @param queryPage
+     * @return
+     * @throws Exception
+     */
     @Override
     public PageList<SystemUser> getUserList(Integer state, String key, QueryPage queryPage) throws Exception {
         PageList<SystemUser> pageList = new PageList<SystemUser>();
@@ -123,6 +161,12 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
         return pageList;
     }
 
+    /**
+     * 新增用户
+     * @param entity
+     * @return
+     * @throws Exception
+     */
     @Override
     @ErrorMessage(code = "008",message = "已存在登录名({0})的用户！")
     public int add( SystemUser entity) throws Exception {
@@ -143,6 +187,12 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
         return getMapper().insertSelective(entity);
     }
 
+    /**
+     * 批量新增
+     * @param entities
+     * @return
+     * @throws Exception
+     */
     @Override
     @ErrorMessage(code = "009",message = "已存在登录名({0})的用�")
     public int addList(List<SystemUser> entities) throws Exception {
