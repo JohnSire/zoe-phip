@@ -39,8 +39,15 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
     @Autowired
     private SystemDictCategoryServiceImpl service;
 
+    /**
+     * 新增字典项信息
+     *
+     * @param entity
+     * @return
+     * @throws Exception
+     */
     @Override
-    @ErrorMessage(code = "001",message = "该字典类({0})已经存在!")
+    @ErrorMessage(code = "001", message = "该字典类({0})已经存在!")
     public int add(SystemDictItem entity) throws Exception {
         Example example = new Example(SystemDictItem.class);
         example.createCriteria().andEqualTo("fkSystemDictCategoryId", entity.getFkSystemDictCategoryId())
@@ -53,8 +60,15 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
             return getMapper().insertSelective(entity);
     }
 
+    /**
+     * 更新字典项信息
+     *
+     * @param entity
+     * @return
+     * @throws Exception
+     */
     @Override
-    @ErrorMessage(code = "002",message = "该字典类({0})已经存在!")
+    @ErrorMessage(code = "002", message = "该字典类({0})已经存在!")
     public int update(SystemDictItem entity) throws Exception {
 
         Example example = new Example(SystemDictItem.class);
@@ -68,6 +82,12 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
 
     }
 
+    /**
+     * 判断字典分类是否存在字典项信息
+     * @param categoryId 字典分类Id
+     * @return
+     * @throws Exception
+     */
     @Override
     public int categoryExists(String categoryId) throws Exception {
 
@@ -77,6 +97,13 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
         return count;
     }
 
+    /**
+     * 根据字典分类Id和关键字查询字典项
+     * @param categoryId 字典分类Id
+     * @param key 关键字
+     * @param page 分页参数
+     * @return
+     */
     @Override
     public PageList<SystemDictItem> getDictItems(String categoryId, String key, QueryPage page) {
 
@@ -98,6 +125,12 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
         return pageList;
     }
 
+    /**
+     * 根据字典分类Id和关键字查询字典项
+     * @param categoryId 字典分类Id
+     * @param key 关键字
+     * @return
+     */
     @Override
     public List<SystemDictItem> getDictItems(String categoryId, String key) {
         Map<String, Object> map = MapUtil.createMap(m -> {
@@ -112,8 +145,15 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
         return list;
     }
 
+    /**
+     * 根据字典分类编码获取字典项
+     * @param categoryCode
+     * @param page
+     * @return
+     * @throws Exception
+     */
     @Override
-    @ErrorMessage(code = "003",message = "字典分类({0})已经被删�")
+    @ErrorMessage(code = "003", message = "字典分类({0})已经被删除")
     public PageList<SystemDictItem> getDictItemsByCategoryCode(String categoryCode, QueryPage page) throws Exception {
 
         PageList<SystemDictItem> pageList = new PageList<>();
@@ -131,8 +171,15 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
         return pageList;
     }
 
+    /**
+     * 根据字典分类Id和字典项编码查询字典项信息
+     * @param categoryId
+     * @param code
+     * @return
+     * @throws Exception
+     */
     @Override
-    @ErrorMessage(code = "004",message = "字典项代码不能为�")
+    @ErrorMessage(code = "004", message = "字典项代码不能为空")
     public SystemDictItem getDictItemByCategoryId(String categoryId, String code) throws Exception {
         if (StringUtil.isNullOrWhiteSpace(code))
             throw new BusinessException("004");
@@ -142,9 +189,17 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
         })).stream().findFirst().orElseGet(null);
     }
 
+
+    /**
+     * 根据字典分类编码和字典项编码查询字典项信息
+     * @param categoryCode
+     * @param code
+     * @return
+     * @throws Exception
+     */
     @Override
-    @ErrorMessage(code = "005",message = "字典分类({0})已经被删�")
-    @ErrorMessage(code = "006",message = "字典项代码不能为�")
+    @ErrorMessage(code = "005", message = "字典分类({0})已经被删!")
+    @ErrorMessage(code = "006", message = "字典项代码不能为!")
     public SystemDictItem getDictItemByCategoryCode(String categoryCode, String code) throws Exception {
         String categoryId = getCategoryId(categoryCode);
         if (StringUtil.isNullOrWhiteSpace(categoryId))
@@ -157,8 +212,14 @@ public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDic
         })).stream().findFirst().orElseGet(null);
     }
 
+    /**
+     * 根据字典分类编码查询字典项列表
+     * @param categoryCode
+     * @return
+     * @throws Exception
+     */
     @Override
-    @ErrorMessage(code = "007",message = "字典分类({0})已经被删�")
+    @ErrorMessage(code = "007", message = "字典分类({0})已经被删除!")
     public List<SystemDictItem> getDictItemsByCategoryCode(String categoryCode) throws Exception {
 
         String categoryId = getCategoryId(categoryCode);

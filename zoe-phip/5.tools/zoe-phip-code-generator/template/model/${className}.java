@@ -32,6 +32,7 @@ public ${field.javaType} get${field.entityName?cap_first}(){
         return this.${field.entityName?uncap_first};
         }
 
+
 public void set${field.entityName?cap_first}(${field.javaType} ${field.entityName?uncap_first}){
         this.${field.entityName?uncap_first}=${field.entityName?uncap_first};
         }

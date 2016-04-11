@@ -6,6 +6,7 @@
 package com.zoe.phip.register.model;
 
 import com.zoe.phip.module.service.entity.BaseEntity;
+import com.zoe.phip.register.service.annotation.XPath;
 
 import javax.persistence.*;
 
@@ -20,6 +21,7 @@ public class XmanBaseInfo extends BaseEntity {
     /**
      * 注册机构名称
      */
+    @XPath(value = "",descr = "")
     @Column(name = "ORG_NAME")
     private String orgName;
     /**
