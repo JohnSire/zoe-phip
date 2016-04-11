@@ -14,6 +14,7 @@ import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.security.SystemCredential;
 import com.zoe.phip.infrastructure.util.StringUtil;
+import com.zoe.phip.module.service.entity.First;
 import com.zoe.phip.module.service.entity.LoginCredentials;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
@@ -21,6 +22,7 @@ import com.zoe.phip.web.dao.sm.ISystemUserMapper;
 import com.zoe.phip.web.model.sm.SystemUser;
 import com.zoe.phip.web.service.sm.ISystemUserService;
 import org.springframework.stereotype.Repository;
+import org.springframework.validation.annotation.Validated;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.*;
@@ -125,10 +127,11 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
 
     @Override
     @ErrorMessage(code = "008",message = "已存在登录名({0})的用户！")
-    public int add( SystemUser entity) throws Exception {
-        //判断是否存在用户
-    /*    ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
+    public int add( @Validated({First.class})  SystemUser entity) throws Exception {
+ /*       //判断是否存在用户
+       ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
         Validator validator = vf.getValidator();
+        //Set<ConstraintViolation<SystemUser>> set = validator.validate(entity,First.class);
         Set<ConstraintViolation<SystemUser>> set = validator.validate(entity);
         for (ConstraintViolation<SystemUser> constraintViolation : set) {
             System.out.println(constraintViolation.getMessage());

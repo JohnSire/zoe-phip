@@ -96,8 +96,8 @@
         <property name="basenames">
             <list>
                 <!-- 在web环境中一定要定位到classpath 否则默认到当前web应用下找  -->
-                                <value>classpath*:messages</value>
-                              <!--  <value>classpath:validatemessages</value>-->
+                             <!--   <value>classpath*:messages</value>-->
+                      <value>classpath:validatemessages</value>
                                 <value>validatemessages</value>
             </list>
         </property>

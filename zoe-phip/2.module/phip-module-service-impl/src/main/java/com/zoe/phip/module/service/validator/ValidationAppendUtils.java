@@ -30,13 +30,15 @@ public class ValidationAppendUtils {
         if( CollectionUtils.isNotEmpty(set) ){
             result.setHasErrors(true);
             Map<String,String> errorMsg = new HashMap<String,String>();
-            String s ="";
+        //    String s ="";
+            StringBuffer s = new StringBuffer();
             for(ConstraintViolation<T> cv : set){
                 errorMsg.put(cv.getPropertyPath().toString(), cv.getMessage());
-                s += "属性名："+cv.getPropertyPath().toString()+"的值："+cv.getMessage()+";";
+              //  s += "属性名："+cv.getPropertyPath().toString()+"的值："+cv.getMessage()+";";
+                s.append( cv.getMessage()+";");
             }
             result.setErrorMsg(errorMsg);
-            result.setErrorMessage(s);
+            result.setErrorMessage(s.toString());
             //throw new BusinessException("801", s);
 
         }
