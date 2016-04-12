@@ -112,7 +112,7 @@ public class OrgDeptInfo extends MasterEntity {
      * 排序值  越小排在越前
      */
     @Column(name = "SORT_NUM")
-    private java.math.BigDecimal sortNum;
+    private int sortNum;
 
     public String getDeptCode() {
         return this.deptCode;
@@ -258,11 +258,11 @@ public class OrgDeptInfo extends MasterEntity {
         this.orgCode = orgCode;
     }
 
-    public java.math.BigDecimal getSortNum() {
+    public int getSortNum() {
         return this.sortNum;
     }
 
-    public void setSortNum(java.math.BigDecimal sortNum) {
+    public void setSortNum(int sortNum) {
         this.sortNum = sortNum;
     }
 }

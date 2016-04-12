@@ -6,7 +6,6 @@
 package com.zoe.phip.register.model;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
-import com.zoe.phip.module.service.entity.BaseEntity;
 import com.zoe.phip.register.service.annotation.XPath;
 
 import javax.persistence.*;
@@ -50,7 +49,7 @@ public class XmanBaseInfo extends MasterEntity {
      * 性别代码
      */
     @Column(name = "SEX_CODE")
-    private Boolean sexCode;
+    private int sexCode;
     /**
      * 出生日期
      */
@@ -60,7 +59,7 @@ public class XmanBaseInfo extends MasterEntity {
      * 身份证件类别代码
      */
     @Column(name = "ID_TYPE_CODE")
-    private Byte idTypeCode;
+    private int idTypeCode;
     /**
      * 工作单位名称
      */
@@ -72,12 +71,12 @@ public class XmanBaseInfo extends MasterEntity {
     @Column(name = "TEL_NO")
     private String telNo;
     /**
-     * 联系人姓�
+     * 联系人姓名
      */
     @Column(name = "REL_NAME")
     private String relName;
     /**
-     * 联系人电�
+     * 联系人电话
      */
     @Column(name = "REL_TEL_NO")
     private String relTelNo;
@@ -95,22 +94,22 @@ public class XmanBaseInfo extends MasterEntity {
      * 民族代码
      */
     @Column(name = "NATIONALITY_CODE")
-    private Byte nationalityCode;
+    private int nationalityCode;
     /**
-     * abo血型代�
+     * abo血型代码
      */
     @Column(name = "ABO_CODE")
-    private Boolean aboCode;
+    private int aboCode;
     /**
-     * rh血型代�
+     * rh血型代码
      */
     @Column(name = "RH_CODE")
-    private Boolean rhCode;
+    private int rhCode;
     /**
      * 学历代码
      */
     @Column(name = "EDUCATION_CODE")
-    private Byte educationCode;
+    private int educationCode;
     /**
      * 职业类别代码
      */
@@ -120,7 +119,7 @@ public class XmanBaseInfo extends MasterEntity {
      * 婚姻状况代码
      */
     @Column(name = "MARRIAGE_CODE")
-    private Byte marriageCode;
+    private int marriageCode;
     /**
      * 医疗保险类别代码
      */
@@ -172,11 +171,11 @@ public class XmanBaseInfo extends MasterEntity {
         this.name = name;
     }
 
-    public Boolean getSexCode() {
+    public int getSexCode() {
         return this.sexCode;
     }
 
-    public void setSexCode(Boolean sexCode) {
+    public void setSexCode(int sexCode) {
         this.sexCode = sexCode;
     }
 
@@ -188,11 +187,11 @@ public class XmanBaseInfo extends MasterEntity {
         this.birthDate = birthDate;
     }
 
-    public Byte getIdTypeCode() {
+    public int getIdTypeCode() {
         return this.idTypeCode;
     }
 
-    public void setIdTypeCode(Byte idTypeCode) {
+    public void setIdTypeCode(int idTypeCode) {
         this.idTypeCode = idTypeCode;
     }
 
@@ -244,35 +243,35 @@ public class XmanBaseInfo extends MasterEntity {
         this.postalcode = postalcode;
     }
 
-    public Byte getNationalityCode() {
+    public int getNationalityCode() {
         return this.nationalityCode;
     }
 
-    public void setNationalityCode(Byte nationalityCode) {
+    public void setNationalityCode(int nationalityCode) {
         this.nationalityCode = nationalityCode;
     }
 
-    public Boolean getAboCode() {
+    public int getAboCode() {
         return this.aboCode;
     }
 
-    public void setAboCode(Boolean aboCode) {
+    public void setAboCode(int aboCode) {
         this.aboCode = aboCode;
     }
 
-    public Boolean getRhCode() {
+    public int getRhCode() {
         return this.rhCode;
     }
 
-    public void setRhCode(Boolean rhCode) {
+    public void setRhCode(int rhCode) {
         this.rhCode = rhCode;
     }
 
-    public Byte getEducationCode() {
+    public int getEducationCode() {
         return this.educationCode;
     }
 
-    public void setEducationCode(Byte educationCode) {
+    public void setEducationCode(int educationCode) {
         this.educationCode = educationCode;
     }
 
@@ -284,11 +283,11 @@ public class XmanBaseInfo extends MasterEntity {
         this.occupationCode = occupationCode;
     }
 
-    public Byte getMarriageCode() {
+    public int getMarriageCode() {
         return this.marriageCode;
     }
 
-    public void setMarriageCode(Byte marriageCode) {
+    public void setMarriageCode(int marriageCode) {
         this.marriageCode = marriageCode;
     }
 

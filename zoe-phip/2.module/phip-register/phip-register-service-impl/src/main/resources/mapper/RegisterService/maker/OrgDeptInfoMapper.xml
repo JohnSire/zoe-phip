@@ -38,7 +38,7 @@
                 jdbcType="VARCHAR"/>
         <result column="ORG_CODE" property="orgCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="SORT_NUM" property="sortNum" javaType="java.math.BigDecimal"
+        <result column="SORT_NUM" property="sortNum" javaType="java.lang.Integer"
                 jdbcType="DECIMAL"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">

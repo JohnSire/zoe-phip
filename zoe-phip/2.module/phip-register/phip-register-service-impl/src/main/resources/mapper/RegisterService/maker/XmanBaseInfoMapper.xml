@@ -12,11 +12,11 @@
                 jdbcType="VARCHAR"/>
         <result column="NAME" property="name" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="SEX_CODE" property="sexCode" javaType="java.lang.Boolean"
+        <result column="SEX_CODE" property="sexCode" javaType="java.lang.Integer"
                 jdbcType="DECIMAL"/>
         <result column="BIRTH_DATE" property="birthDate" javaType="java.sql.Timestamp"
                 jdbcType="TIMESTAMP"/>
-        <result column="ID_TYPE_CODE" property="idTypeCode" javaType="java.lang.Byte"
+        <result column="ID_TYPE_CODE" property="idTypeCode" javaType="java.lang.Integer"
                 jdbcType="DECIMAL"/>
         <result column="EMPLOYER_NAME" property="employerName" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
@@ -30,17 +30,17 @@
                 jdbcType="VARCHAR"/>
         <result column="POSTALCODE" property="postalcode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="NATIONALITY_CODE" property="nationalityCode" javaType="java.lang.Byte"
+        <result column="NATIONALITY_CODE" property="nationalityCode" javaType="java.lang.Integer"
                 jdbcType="DECIMAL"/>
-        <result column="ABO_CODE" property="aboCode" javaType="java.lang.Boolean"
+        <result column="ABO_CODE" property="aboCode" javaType="java.lang.Integer"
                 jdbcType="DECIMAL"/>
-        <result column="RH_CODE" property="rhCode" javaType="java.lang.Boolean"
+        <result column="RH_CODE" property="rhCode" javaType="java.lang.Integer"
                 jdbcType="DECIMAL"/>
-        <result column="EDUCATION_CODE" property="educationCode" javaType="java.lang.Byte"
+        <result column="EDUCATION_CODE" property="educationCode" javaType="java.lang.Integer"
                 jdbcType="DECIMAL"/>
         <result column="OCCUPATION_CODE" property="occupationCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="MARRIAGE_CODE" property="marriageCode" javaType="java.lang.Byte"
+        <result column="MARRIAGE_CODE" property="marriageCode" javaType="java.lang.Integer"
                 jdbcType="DECIMAL"/>
         <result column="CODE_SYS_CODE" property="codeSysCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>

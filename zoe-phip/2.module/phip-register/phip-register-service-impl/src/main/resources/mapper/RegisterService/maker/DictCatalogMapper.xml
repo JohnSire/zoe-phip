@@ -8,7 +8,7 @@
                 jdbcType="VARCHAR"/>
         <result column="PARENT_CODE" property="parentCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="TYPE" property="type" javaType="java.math.BigDecimal"
+        <result column="TYPE" property="type" javaType="java.lang.Integer"
                 jdbcType="DECIMAL"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
