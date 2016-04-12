@@ -95,6 +95,13 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
 
         Object instance = proxy;
 
+        //处理webservice
+        if(this.getUrl().getProtocol().equals("webservice")){
+            Method method = instance.getClass().getMethod(methodName, parameterTypes);
+            ErrorMessage[] errors=method.getAnnotationsByType(ErrorMessage.class);
+            return SafeExecuteUtil.executeWebService(()->method.invoke(instance,arguments),errors);
+        }
+
         // arguments
         final boolean isFirstSystemDataClass = parameterTypes.length != 0 && parameterTypes[0] == SystemData.class;
         Object firstData = isFirstSystemDataClass ? arguments[0] : null;

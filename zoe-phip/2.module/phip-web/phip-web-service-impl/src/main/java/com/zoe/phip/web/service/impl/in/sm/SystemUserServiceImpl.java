@@ -51,8 +51,8 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
      * @throws Exception
      */
     @Override
-    @ErrorMessage(code="001",message = "用户名错误")
-    @ErrorMessage(code="002",message = "用户不可用")
+    @ErrorMessage(code="001",message = "用户名错误!")
+    @ErrorMessage(code="002",message = "用户不可用!")
     @ErrorMessage(code="003",message = "密码错误!")
     public LoginCredentials login(String loginName, String passWord, int expiresTime) throws Exception {
 
@@ -197,7 +197,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
      * @throws Exception
      */
     @Override
-    @ErrorMessage(code = "009",message = "已存在登录名({0})的用�")
+    @ErrorMessage(code = "009",message = "已存在登录名({0})的用户!")
     public int addList(List<SystemUser> entities) throws Exception {
 
         List<String> loginNames = new ArrayList<String>();

@@ -36,6 +36,29 @@ public final class SafeExecuteUtil {
         return executeResult;
     }
 
+
+    /**
+     * 处理webservice服务  todo:错误返回处理 统一生成XML？
+     * @param invoker
+     * @param errors
+     * @return
+     */
+    public static String executeWebService(Function<Object> invoker, ErrorMessage[]  errors) {
+        String result;
+        try {
+            result= (String) invoker.apply();
+        } catch (BusinessException ex) {
+            //日志消息
+            result=ex.getMessage();
+            logger.error(ex.getMessage());
+        } catch (Exception e) {
+            //错误消息
+            result=e.getMessage();
+            logger.error("方法执行报错:", e);
+        }
+        return result;
+    }
+
     public static <R> ServiceResultT<R> execute0(Function<Object> invoker,ErrorMessage[]  errors) {
         ServiceResultT<R> executeResult = new ServiceResultT<R>();
         try {

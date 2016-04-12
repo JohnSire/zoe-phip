@@ -10,6 +10,8 @@ import javax.persistence.*;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
 
+import java.util.Date;
+
 
 /**
  * @author
@@ -37,12 +39,12 @@ public class AreaBaseInfo extends MasterEntity {
      * 成立时间
      */
     @Column(name = "BUILD_TIME")
-    private java.sql.Timestamp buildTime;
+    private Date buildTime;
     /**
      * 注销日期
      */
     @Column(name = "AREA_CANCELLATION_DATE")
-    private java.sql.Timestamp areaCancellationDate;
+    private Date areaCancellationDate;
     /**
      * 注销原因
      */
@@ -78,19 +80,19 @@ public class AreaBaseInfo extends MasterEntity {
         this.pareaId = pareaId;
     }
 
-    public java.sql.Timestamp getBuildTime() {
+    public Date getBuildTime() {
         return this.buildTime;
     }
 
-    public void setBuildTime(java.sql.Timestamp buildTime) {
+    public void setBuildTime(Date buildTime) {
         this.buildTime = buildTime;
     }
 
-    public java.sql.Timestamp getAreaCancellationDate() {
+    public Date getAreaCancellationDate() {
         return this.areaCancellationDate;
     }
 
-    public void setAreaCancellationDate(java.sql.Timestamp areaCancellationDate) {
+    public void setAreaCancellationDate(Date areaCancellationDate) {
         this.areaCancellationDate = areaCancellationDate;
     }
 

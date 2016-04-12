@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zoe.phip.dao.mapper.IOrgDeptInfoMapper">
-    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.OrgDeptInfo">
+<mapper namespace="com.zoe.phip.register.dao.IOrgDeptInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.OrgDeptInfo" extends="com.zoe.phip.module.service.MasterEntityResultMap">
         <result column="DEPT_CODE" property="deptCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="DEPT_NAME" property="deptName" javaType="java.lang.String"

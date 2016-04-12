@@ -5,16 +5,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 	   ">
-    <dubbo:application name="zoe-phip-provider"/>
+    <dubbo:application name="zoe-phip-register-provider"/>
 
     <dubbo:registry address="N/A"/>
 
     <dubbo:protocol name="webservice"  port="8089" server="tomcat"/>
-    <!--<dubbo:annotation package="com.zoe.phip.register.service"></dubbo:annotation>-->
+    <dubbo:annotation package="com.zoe.phip.register.service"></dubbo:annotation>
     <dubbo:provider timeout="10000"/>
 
-    <bean id="helloService" class="com.zoe.phip.register.service.impl.AreaRegisterImpl"/>
+    <!--<bean id="AreaRegister" class="com.zoe.phip.register.service.impl.AreaRegisterImpl"/>
 
     <dubbo:service interface="com.zoe.phip.register.service.IAreaRegister" version="1.0.0"
-                   protocol="webservice" ref="helloService"/>
+                   protocol="webservice" ref="AreaRegister">
+    </dubbo:service>-->
 </beans>

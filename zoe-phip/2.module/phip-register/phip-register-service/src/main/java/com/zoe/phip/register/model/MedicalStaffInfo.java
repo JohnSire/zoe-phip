@@ -8,6 +8,7 @@ package com.zoe.phip.register.model;
 import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -41,7 +42,7 @@ public class MedicalStaffInfo extends MasterEntity {
      * 出生日期
      */
     @Column(name = "BIRTH_TIME")
-    private java.sql.Timestamp birthTime;
+    private Date birthTime;
     /**
      * 出生地
      */
@@ -76,12 +77,12 @@ public class MedicalStaffInfo extends MasterEntity {
      * 角色有效期间(起始日期)
      */
     @Column(name = "EFFECTIVE_TIME_LOW")
-    private java.sql.Timestamp effectiveTimeLow;
+    private Date effectiveTimeLow;
     /**
      * 角色有效期间(截止日期)
      */
     @Column(name = "EFFECTIVE_TIME_HIGH")
-    private java.sql.Timestamp effectiveTimeHigh;
+    private Date effectiveTimeHigh;
     /**
      * 科室号
      */
@@ -155,11 +156,11 @@ public class MedicalStaffInfo extends MasterEntity {
         this.genderName = genderName;
     }
 
-    public java.sql.Timestamp getBirthTime() {
+    public Date getBirthTime() {
         return this.birthTime;
     }
 
-    public void setBirthTime(java.sql.Timestamp birthTime) {
+    public void setBirthTime(Date birthTime) {
         this.birthTime = birthTime;
     }
 
@@ -211,19 +212,19 @@ public class MedicalStaffInfo extends MasterEntity {
         this.employerTelNo = employerTelNo;
     }
 
-    public java.sql.Timestamp getEffectiveTimeLow() {
+    public Date getEffectiveTimeLow() {
         return this.effectiveTimeLow;
     }
 
-    public void setEffectiveTimeLow(java.sql.Timestamp effectiveTimeLow) {
+    public void setEffectiveTimeLow(Date effectiveTimeLow) {
         this.effectiveTimeLow = effectiveTimeLow;
     }
 
-    public java.sql.Timestamp getEffectiveTimeHigh() {
+    public Date getEffectiveTimeHigh() {
         return this.effectiveTimeHigh;
     }
 
-    public void setEffectiveTimeHigh(java.sql.Timestamp effectiveTimeHigh) {
+    public void setEffectiveTimeHigh(Date effectiveTimeHigh) {
         this.effectiveTimeHigh = effectiveTimeHigh;
     }
 

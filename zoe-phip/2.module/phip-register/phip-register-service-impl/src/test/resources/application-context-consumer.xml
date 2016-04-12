@@ -5,10 +5,10 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 	   ">
-	<dubbo:application name="ws-demo" />
+	<dubbo:application name="zoe-phip-register-consumer" />
 
 	<dubbo:registry address="N/A" />
-
+	<dubbo:consumer timeout="10000"/>
 	<dubbo:reference id="AreaRegister" interface="com.zoe.phip.register.service.IAreaRegister" version="1.0.0"
 				   url="webservice://127.0.0.1:8089/com.zoe.phip.register.service.IAreaRegister"/>
 </beans>

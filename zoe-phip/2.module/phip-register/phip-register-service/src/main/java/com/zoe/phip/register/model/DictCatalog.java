@@ -36,7 +36,7 @@ public class DictCatalog extends MasterEntity {
      * 字典分类类别
      */
     @Column(name = "TYPE")
-    private java.math.BigDecimal type;
+    private int type;
 
     public String getCode() {
         return this.code;
@@ -62,11 +62,11 @@ public class DictCatalog extends MasterEntity {
         this.parentCode = parentCode;
     }
 
-    public java.math.BigDecimal getType() {
+    public int getType() {
         return this.type;
     }
 
-    public void setType(java.math.BigDecimal type) {
+    public void setType(int type) {
         this.type = type;
     }
 }

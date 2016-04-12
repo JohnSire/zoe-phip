@@ -4,8 +4,7 @@
 
         package ${basepackage}.dto;
 
-        import ${basepackage}.dao.MyMapper;
-        import ${basepackage}.model.${className};
+        import ${basepackage}.module.service.mapper.IMyMapper;
 
 /**
  * @author
