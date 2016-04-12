@@ -8,7 +8,7 @@
 	<dubbo:application name="ws-demo" />
 
 	<dubbo:registry address="N/A" />
-
+	<dubbo:consumer timeout="10000"/>
 	<dubbo:reference id="AreaRegister" interface="com.zoe.phip.register.service.IAreaRegister" version="1.0.0"
 				   url="webservice://127.0.0.1:8089/com.zoe.phip.register.service.IAreaRegister"/>
 </beans>

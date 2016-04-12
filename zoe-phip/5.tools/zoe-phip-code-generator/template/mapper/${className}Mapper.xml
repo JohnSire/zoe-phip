@@ -3,7 +3,7 @@
         <?xml version="1.0" encoding="UTF-8" ?>
         <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="${basepackage}.dao.mapper.I${className}Mapper">
-<resultMap id="BaseResultMap" type="${basepackage}.model.${className}">
+<resultMap id="BaseResultMap" type="${basepackage}.model.${className}" extends="com.zoe.phip.module.service.MasterEntityResultMap">
     <#list table.columns as field>
     <#if field.entityName?uncap_first!="id"&&field.entityName?uncap_first!="modifyAt"
     &&field.entityName?uncap_first!="createBy"&&field.entityName?uncap_first!="createAt"

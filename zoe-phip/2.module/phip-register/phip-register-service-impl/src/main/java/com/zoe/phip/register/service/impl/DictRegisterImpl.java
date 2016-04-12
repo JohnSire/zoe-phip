@@ -1,6 +1,9 @@
 package com.zoe.phip.register.service.impl;
 
+import com.zoe.phip.register.dao.IDictCatalogMapper;
+import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.service.IDictRegister;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,8 +11,18 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("DictRegister")
 public class DictRegisterImpl implements IDictRegister {
+
+    @Autowired
+    private IDictCatalogMapper dictCatalogMapper;
+
     @Override
     public String addDictCatalogRequest(String message) {
+        DictCatalog catalog=new DictCatalog();
+        catalog.setName("test");
+        catalog.setId("2");
+        catalog.setCode("123");
+        catalog.setType(12);
+        dictCatalogMapper.insertSelective(catalog);
         return null;
     }
 

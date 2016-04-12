@@ -8,6 +8,7 @@ package com.zoe.phip.register.model;
 import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -56,12 +57,12 @@ public class OrgDeptInfo extends MasterEntity {
      * 角色有效期间(起始日期)
      */
     @Column(name = "EFFECTIVE_TIME_LOW")
-    private java.sql.Timestamp effectiveTimeLow;
+    private Date effectiveTimeLow;
     /**
      * 角色有效期间(截止日期)
      */
     @Column(name = "EFFECTIVE_TIME_HIGH")
-    private java.sql.Timestamp effectiveTimeHigh;
+    private Date effectiveTimeHigh;
     /**
      * 工作地址
      */
@@ -169,19 +170,19 @@ public class OrgDeptInfo extends MasterEntity {
         this.deptParentName = deptParentName;
     }
 
-    public java.sql.Timestamp getEffectiveTimeLow() {
+    public Date getEffectiveTimeLow() {
         return this.effectiveTimeLow;
     }
 
-    public void setEffectiveTimeLow(java.sql.Timestamp effectiveTimeLow) {
+    public void setEffectiveTimeLow(Date effectiveTimeLow) {
         this.effectiveTimeLow = effectiveTimeLow;
     }
 
-    public java.sql.Timestamp getEffectiveTimeHigh() {
+    public Date getEffectiveTimeHigh() {
         return this.effectiveTimeHigh;
     }
 
-    public void setEffectiveTimeHigh(java.sql.Timestamp effectiveTimeHigh) {
+    public void setEffectiveTimeHigh(Date effectiveTimeHigh) {
         this.effectiveTimeHigh = effectiveTimeHigh;
     }
 

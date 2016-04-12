@@ -10,6 +10,7 @@ import com.zoe.phip.module.service.entity.BaseEntity;
 import com.zoe.phip.register.service.annotation.XPath;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -54,7 +55,7 @@ public class XmanBaseInfo extends MasterEntity {
      * 出生日期
      */
     @Column(name = "BIRTH_DATE")
-    private java.sql.Timestamp birthDate;
+    private Date birthDate;
     /**
      * 身份证件类别代码
      */
@@ -71,12 +72,12 @@ public class XmanBaseInfo extends MasterEntity {
     @Column(name = "TEL_NO")
     private String telNo;
     /**
-     * 联系人姓�
+     * 联系人姓�
      */
     @Column(name = "REL_NAME")
     private String relName;
     /**
-     * 联系人电�
+     * 联系人电�
      */
     @Column(name = "REL_TEL_NO")
     private String relTelNo;
@@ -96,12 +97,12 @@ public class XmanBaseInfo extends MasterEntity {
     @Column(name = "NATIONALITY_CODE")
     private Byte nationalityCode;
     /**
-     * abo血型代�
+     * abo血型代�
      */
     @Column(name = "ABO_CODE")
     private Boolean aboCode;
     /**
-     * rh血型代�
+     * rh血型代�
      */
     @Column(name = "RH_CODE")
     private Boolean rhCode;
@@ -179,11 +180,11 @@ public class XmanBaseInfo extends MasterEntity {
         this.sexCode = sexCode;
     }
 
-    public java.sql.Timestamp getBirthDate() {
+    public Date getBirthDate() {
         return this.birthDate;
     }
 
-    public void setBirthDate(java.sql.Timestamp birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
