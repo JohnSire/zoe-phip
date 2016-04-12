@@ -51,8 +51,8 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
      * @throws Exception
      */
     @Override
-    @ErrorMessage(code="001",message = "用户名错�")
-    @ErrorMessage(code="002",message = "用户不可�")
+    @ErrorMessage(code="001",message = "用户名错误")
+    @ErrorMessage(code="002",message = "用户不可用")
     @ErrorMessage(code="003",message = "密码错误!")
     public LoginCredentials login(String loginName, String passWord, int expiresTime) throws Exception {
 

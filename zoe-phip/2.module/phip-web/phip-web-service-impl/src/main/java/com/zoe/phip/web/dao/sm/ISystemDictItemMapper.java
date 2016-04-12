@@ -21,7 +21,12 @@ import java.util.Map;
  */
 public interface ISystemDictItemMapper extends IMyMapper<SystemDictItem> {
 
-
+    /**
+     * 获取菜单列表
+     *
+     * @param map
+     * @return
+     */
     List<SystemDictItem> getDataItemList(Map map);
 
     /// <summary>
@@ -29,18 +34,74 @@ public interface ISystemDictItemMapper extends IMyMapper<SystemDictItem> {
     /// </summary>
     /// <param name="categoryId"></param>
     /// <returns></returns>
+
+    /**
+     * 检查该字典类别是否存在
+     *
+     * @param categoryId
+     * @return
+     * @throws Exception
+     */
     int categoryExists(String categoryId) throws Exception;
 
+    /**
+     * 通过关键字分页获取字典列表
+     *
+     * @param categoryId
+     * @param key
+     * @param page
+     * @return
+     * @throws Exception
+     */
     PageList<SystemDictItem> getDictItems(String categoryId, String key, QueryPage page) throws Exception;
 
+    /**
+     * 通过关键字获取字典列表
+     *
+     * @param categoryId
+     * @param key
+     * @return
+     * @throws Exception
+     */
     List<SystemDictItem> getDictItems(String categoryId, String key) throws Exception;
 
+    /**
+     * 通过字典类别编码分页获取字典列表
+     *
+     * @param categoryCode
+     * @param page
+     * @return
+     * @throws Exception
+     */
     PageList<SystemDictItem> getDictItemsByCategoryCode(String categoryCode, QueryPage page) throws Exception;
 
+    /**
+     * 通过字典类别ID获取字典项
+     *
+     * @param categoryId
+     * @param code
+     * @return
+     * @throws Exception
+     */
     SystemDictItem getDictItemByCategoryId(String categoryId, String code) throws Exception;
 
+    /**
+     * 通过字典类别编码获取字典列表
+     *
+     * @param categoryCode
+     * @param code
+     * @return
+     * @throws Exception
+     */
     SystemDictItem getDictItemByCategoryCode(String categoryCode, String code) throws Exception;
 
+    /**
+     * 通过字典类别编码获取字典列表
+     *
+     * @param categoryCode
+     * @return
+     * @throws Exception
+     */
     List<SystemDictItem> getDictItemsByCategoryCode(String categoryCode) throws Exception;
 }
 

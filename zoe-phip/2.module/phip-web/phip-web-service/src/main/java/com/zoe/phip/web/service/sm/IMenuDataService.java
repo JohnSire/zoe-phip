@@ -68,7 +68,7 @@ public interface IMenuDataService extends IBaseInService<MenuData> {
 
 
     /**
-     * 更新用户状态
+     * 更新菜单状态
      * @param systemData
      * @param id
      * @param state
