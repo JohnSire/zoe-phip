@@ -1,7 +1,9 @@
 package com.zoe.phip.register.service.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.register.dao.IDictCatalogMapper;
 import com.zoe.phip.register.model.DictCatalog;
+import com.zoe.phip.register.service.IAreaRegister;
 import com.zoe.phip.register.service.IDictRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Repository;
  * Created by zengjiyang on 2016/4/11.
  */
 @Repository("DictRegister")
+@Service(interfaceClass = IDictRegister.class, proxy = "sdpf", dynamic = true)
 public class DictRegisterImpl implements IDictRegister {
 
     @Autowired

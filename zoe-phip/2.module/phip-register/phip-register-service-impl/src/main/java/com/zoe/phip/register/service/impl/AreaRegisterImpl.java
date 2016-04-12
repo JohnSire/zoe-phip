@@ -15,6 +15,7 @@ import java.util.Date;
  * Created by zengjiyang on 2016/4/11.
  */
 @Repository("AreaRegister")
+@Service(interfaceClass = IAreaRegister.class, proxy = "sdpf", dynamic = true)
 public class AreaRegisterImpl implements IAreaRegister {
 
     @Override
