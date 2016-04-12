@@ -1,4 +1,4 @@
-package com.zoe.phip.register.service.annotation;
+package com.zoe.phip.infrastructure.annotation;
 
 /**
  * Created by zhangwenbin on 2016/4/11.
@@ -18,7 +18,7 @@ public @interface XPath {
      *
      * @return
      */
-    String value();
+    String value() default "";
 
     /**
      * 描述
@@ -27,4 +27,10 @@ public @interface XPath {
      */
 
     String descr() default "";
+
+    //默认值,如果路径为空,取默认
+    String defaultValue() default "";
+
+    //级别(0:单个,1:多个节点)
+    int level() default 0;
 }

@@ -73,6 +73,7 @@ public class OrgDeptInfo extends MasterEntity {
      */
     @Column(name = "EMPLOYER_TEL_NO")
     private String employerTelNo;
+
     /**
      * 消息id
      */
