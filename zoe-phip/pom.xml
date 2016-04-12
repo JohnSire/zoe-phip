@@ -54,6 +54,8 @@
         <persistence.version>1.0</persistence.version>
         <commons-dbcp>1.4</commons-dbcp>
         <freemarker.version>2.3.19</freemarker.version>
+        <dom4j.version>2.0.0-RC1</dom4j.version>
+        <dom4j-core.version>1.4-dev-8</dom4j-core.version>
     </properties>
 
 </project>
