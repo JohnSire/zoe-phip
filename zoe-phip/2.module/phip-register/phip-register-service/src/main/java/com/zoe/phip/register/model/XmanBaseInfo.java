@@ -9,6 +9,8 @@ import com.zoe.phip.module.service.entity.MasterEntity;
 import com.zoe.phip.infrastructure.annotation.XPath;
 
 import javax.persistence.*;
+import javax.swing.plaf.synth.Region;
+import javax.swing.text.EditorKit;
 import java.util.Date;
 
 
@@ -19,18 +21,18 @@ import java.util.Date;
  */
 @Table(name = "PHIP_XMAN_BASE_INFO")
 public class XmanBaseInfo extends MasterEntity {
-private final  String ROOT = "PRPA_IN201311UV02";
+    private final String ROOT = "/PRPA_IN201311UV02";
 
     /**
      * 注册机构名称
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/name", descr = "机构名称")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/name", descr = "机构名称")
     @Column(name = "ORG_NAME")
     private String orgName;
     /**
      * 注册机构编码
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/id/@extension", descr = "机构编码")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/id/@extension", descr = "机构编码")
     @Column(name = "ORG_CODE")
     private String orgCode;
 
@@ -42,28 +44,28 @@ private final  String ROOT = "PRPA_IN201311UV02";
     /**
      * 身份证件号码
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/id/@extension", descr = "身份证件号码")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/id/@extension", descr = "身份证件号码")
     @Column(name = "ID_NO")
     private String idNo;
 
     /**
      * 本人姓名
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/name", descr = "本人姓名")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/name", descr = "本人姓名")
     @Column(name = "NAME")
     private String name;
 
     /**
      * 性别代码
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@code", descr = "性别代码")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@code", descr = "性别代码")
     @Column(name = "SEX_CODE")
     private Integer sexCode;
 
     /**
      * 出生日期
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/birthTime/@value", descr = "出生日期")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/birthTime/@value", descr = "出生日期")
     @Column(name = "BIRTH_DATE")
     private Date birthDate;
 
@@ -72,47 +74,47 @@ private final  String ROOT = "PRPA_IN201311UV02";
      */
     @XPath(defaultValue = "01")
     @Column(name = "ID_TYPE_CODE")
-    private Integer idTypeCode;
+    private int idTypeCode;
 
     /**
      * 工作单位名称
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asEmployee/employerOrganization/name", descr = "工作单位名称")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asEmployee/employerOrganization/name", descr = "工作单位名称")
     @Column(name = "EMPLOYER_NAME")
     private String employerName;
 
     /**
      * 联系电话
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/telecom/@value", descr = "本人电话号码")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/telecom/@value", descr = "本人电话号码")
     @Column(name = "TEL_NO")
     private String telNo;
 
     /**
      * 联系人姓名
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/relationshipHolder1/name", descr = "联系人姓名")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/relationshipHolder1/name", descr = "联系人姓名")
     @Column(name = "REL_NAME")
     private String relName;
 
     /**
      * 联系人电码
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/telecom/@value", descr = "联系人电码")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/telecom/@value", descr = "联系人电码")
     @Column(name = "REL_TEL_NO")
     private String relTelNo;
 
     /**
      * 常住地址户籍
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetAddressLine", descr = "常住地址户籍")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetAddressLine", descr = "常住地址户籍")
     @Column(name = "ADDRESS")
     private String address;
 
     /**
      * 邮政编码
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/postalCode", descr = "邮政编码")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/postalCode", descr = "邮政编码")
     @Column(name = "POSTALCODE")
     private String postalcode;
 
@@ -120,7 +122,7 @@ private final  String ROOT = "PRPA_IN201311UV02";
      * 民族代码
      */
 
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/ethnicGroupCode/@code", descr = "民族代码")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/ethnicGroupCode/@code", descr = "民族代码")
     @Column(name = "NATIONALITY_CODE")
     private Integer nationalityCode;
 
@@ -147,28 +149,28 @@ private final  String ROOT = "PRPA_IN201311UV02";
     /**
      * 职业类别代码
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asEmployee/occupationCode", descr = "职业类别代码")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asEmployee/occupationCode", descr = "职业类别代码")
     @Column(name = "OCCUPATION_CODE")
     private String occupationCode;
 
     /**
      * 婚姻状况代码
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/maritalStatusCode/@code", descr = "婚姻状况代码")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/maritalStatusCode/@code", descr = "婚姻状况代码")
     @Column(name = "MARRIAGE_CODE")
     private Integer marriageCode;
 
     /**
      * 医疗保险类别代码
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/coveredPartyOf/coverageRecord/beneficiary/beneficiary/code/@code", descr = "医疗保险类别代码")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/coveredPartyOf/coverageRecord/beneficiary/beneficiary/code/@code", descr = "医疗保险类别代码")
     @Column(name = "CODE_SYS_CODE")
     private String codeSysCode;
 
     /**
      * 医疗保险类别名称
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/coveredPartyOf/coverageRecord/beneficiary/beneficiary/code/@displayName", descr = "医疗保险类别名称")
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/coveredPartyOf/coverageRecord/beneficiary/beneficiary/code/@displayName", descr = "医疗保险类别名称")
     @Column(name = "CODE_SYS_NAME")
     private String codeSysName;
 
@@ -181,6 +183,63 @@ private final  String ROOT = "PRPA_IN201311UV02";
 
         this.orgName = orgName;
     }
+
+    /**
+     * 城乡居民健康档案编号
+     */
+    @Transient
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/@extension", descr = "城乡居民健康档案编号")
+    private String healthRecordNo;
+
+    public String getHealthRecordNo() {
+        return healthRecordNo;
+    }
+
+    public void setHealthRecordNo(String healthRecordNo) {
+        this.healthRecordNo = healthRecordNo;
+    }
+
+    /**
+     * 消息ID
+     */
+    @Transient
+    @XPath(value = ROOT + "/id/@extension", descr = "消息ID")
+    private String messageId;
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
+
+    @Transient
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.19']/@extension", descr = "卡号")
+    private String cardNo;
+
+    public String getCardNo() {
+        return cardNo;
+    }
+
+    public void setCardNo(String cardNo) {
+        this.cardNo = cardNo;
+    }
+
+    @Transient
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/id/@extension", descr = "病人ID")
+    private String patientId;
+
+
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
 
     public String getOrgCode() {
         return this.orgCode;
