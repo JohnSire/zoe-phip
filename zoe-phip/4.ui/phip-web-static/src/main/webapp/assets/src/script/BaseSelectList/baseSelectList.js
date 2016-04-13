@@ -5,6 +5,7 @@ define(function (require, exports, module) {
     var baseSelectList = new Class();
     var defaultOptions = require("./options").defaultOptions;
     var grid = require("./grid").grid;
+    var itemsbox = require("./itemsbox").itemsbox;
     baseSelectList.include({
         //初始化
         init: function () {
@@ -12,8 +13,10 @@ define(function (require, exports, module) {
             grid.build(options);
         },
         //保存:data保存返回选中的数据
-        save: function (data) {
-
+        getSelected: function () {
+            //return {"text": 1};
+            var data = itemsbox.getItemsData();
+            return data;
         }
     })
     module.exports = baseSelectList;

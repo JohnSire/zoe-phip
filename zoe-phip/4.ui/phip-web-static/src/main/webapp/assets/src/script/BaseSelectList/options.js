@@ -7,7 +7,6 @@ define(function (require, exports, module) {
         winCallback: "",
         stroage: [],//存储的参数
         multiselect: false,//是否多选:true为多选，false为单选
-        isTree:false,//是否树形展示表格
         displayField: '',
         valueField: '',
         gridParam: {
