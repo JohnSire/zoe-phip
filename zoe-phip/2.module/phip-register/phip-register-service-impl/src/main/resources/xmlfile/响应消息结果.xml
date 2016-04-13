@@ -1,0 +1,11 @@
+﻿<!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->
+<acknowledgement typeCode="AA">
+  <targetMessage>
+    <!--请求的消息ID-->
+    <id root="2.16.156.10011.0" extension="22a0f9e0-4454-11dc-a6be-3603d6866807"/>
+  </targetMessage>
+  <acknowledgementDetail>
+    <!--处理结果说明-->
+    <text>更新成功</text>
+  </acknowledgementDetail>
+</acknowledgement>
