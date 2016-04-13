@@ -7,7 +7,7 @@ define(function (require, exports, module) {
         addItem: function (data, displayField, valueField,delCallback) {
             if($(".item-"+data[valueField]).length==0) {
                 var jqUl = $("#pane-list-selected");
-                var jqLi = $('<li></li>').addClass("item");
+                var jqLi = $('<li></li>').addClass("item").data("data", data);
                 var jqClose = $('<a></a>').addClass("close").text("X").on("click", function () {
                     if (typeof (delCallback) == "function") {
                         internal.removeItem(data, valueField);
@@ -17,7 +17,7 @@ define(function (require, exports, module) {
                 jqLi.addClass("item-" + data[valueField]).attr({title: data[displayField]});
                 jqLi.append(jqClose);
                 jqLi.append(data[displayField]);
-                jqUl.append(jqLi).data("data", data);
+                jqUl.append(jqLi);
             }
 
         },
@@ -29,8 +29,9 @@ define(function (require, exports, module) {
         getItemsData: function () {
             var data = [];
             $("#pane-list-selected").find("li").each(function () {
-
-            })
+                data.push($(this).data("data"));
+            });
+            return data;
         },
         addItemList: function (storage, displayField, valueField,delCallback) {
             $.each(storage, function (index, item) {
