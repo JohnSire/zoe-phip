@@ -1,0 +1,409 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0036)http://www.w3.org/2001/XMLSchema.dtd -->
+<HTML><HEAD><META content="IE=5.0000" http-equiv="X-UA-Compatible">
+
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<META name=GENERATOR content="MSHTML 10.00.9200.16540"></HEAD>
+<BODY><PRE>&lt;!-- DTD for XML Schemas: Part 1: Structures
+     Public Identifier: "-//W3C//DTD XMLSCHEMA 200102//EN"
+     Official Location: http://www.w3.org/2001/XMLSchema.dtd --&gt;
+&lt;!-- $Id: XMLSchema.dtd,v 1.31 2001/10/24 15:50:16 ht Exp $ --&gt;
+&lt;!-- Note this DTD is NOT normative, or even definitive. --&gt;           &lt;!--d--&gt;
+&lt;!-- prose copy in the structures REC is the definitive version --&gt;    &lt;!--d--&gt;
+&lt;!-- (which shouldn't differ from this one except for this --&gt;         &lt;!--d--&gt;
+&lt;!-- comment and entity expansions, but just in case) --&gt;              &lt;!--d--&gt;
+&lt;!-- With the exception of cases with multiple namespace
+     prefixes for the XML Schema namespace, any XML document which is
+     not valid per this DTD given redefinitions in its internal subset of the
+     'p' and 's' parameter entities below appropriate to its namespace
+     declaration of the XML Schema namespace is almost certainly not
+     a valid schema. --&gt;
+
+&lt;!-- The simpleType element and its constituent parts
+     are defined in XML Schema: Part 2: Datatypes --&gt;
+&lt;!ENTITY % xs-datatypes PUBLIC 'datatypes' 'datatypes.dtd' &gt;
+
+&lt;!ENTITY % p 'xs:'&gt; &lt;!-- can be overriden in the internal subset of a
+                         schema document to establish a different
+                         namespace prefix --&gt;
+&lt;!ENTITY % s ':xs'&gt; &lt;!-- if %p is defined (e.g. as foo:) then you must
+                         also define %s as the suffix for the appropriate
+                         namespace declaration (e.g. :foo) --&gt;
+&lt;!ENTITY % nds 'xmlns%s;'&gt;
+
+&lt;!-- Define all the element names, with optional prefix --&gt;
+&lt;!ENTITY % schema "%p;schema"&gt;
+&lt;!ENTITY % complexType "%p;complexType"&gt;
+&lt;!ENTITY % complexContent "%p;complexContent"&gt;
+&lt;!ENTITY % simpleContent "%p;simpleContent"&gt;
+&lt;!ENTITY % extension "%p;extension"&gt;
+&lt;!ENTITY % element "%p;element"&gt;
+&lt;!ENTITY % unique "%p;unique"&gt;
+&lt;!ENTITY % key "%p;key"&gt;
+&lt;!ENTITY % keyref "%p;keyref"&gt;
+&lt;!ENTITY % selector "%p;selector"&gt;
+&lt;!ENTITY % field "%p;field"&gt;
+&lt;!ENTITY % group "%p;group"&gt;
+&lt;!ENTITY % all "%p;all"&gt;
+&lt;!ENTITY % choice "%p;choice"&gt;
+&lt;!ENTITY % sequence "%p;sequence"&gt;
+&lt;!ENTITY % any "%p;any"&gt;
+&lt;!ENTITY % anyAttribute "%p;anyAttribute"&gt;
+&lt;!ENTITY % attribute "%p;attribute"&gt;
+&lt;!ENTITY % attributeGroup "%p;attributeGroup"&gt;
+&lt;!ENTITY % include "%p;include"&gt;
+&lt;!ENTITY % import "%p;import"&gt;
+&lt;!ENTITY % redefine "%p;redefine"&gt;
+&lt;!ENTITY % notation "%p;notation"&gt;
+
+&lt;!-- annotation elements --&gt;
+&lt;!ENTITY % annotation "%p;annotation"&gt;
+&lt;!ENTITY % appinfo "%p;appinfo"&gt;
+&lt;!ENTITY % documentation "%p;documentation"&gt;
+
+&lt;!-- Customisation entities for the ATTLIST of each element type.
+     Define one of these if your schema takes advantage of the
+     anyAttribute='##other' in the schema for schemas --&gt;
+
+&lt;!ENTITY % schemaAttrs ''&gt;
+&lt;!ENTITY % complexTypeAttrs ''&gt;
+&lt;!ENTITY % complexContentAttrs ''&gt;
+&lt;!ENTITY % simpleContentAttrs ''&gt;
+&lt;!ENTITY % extensionAttrs ''&gt;
+&lt;!ENTITY % elementAttrs ''&gt;
+&lt;!ENTITY % groupAttrs ''&gt;
+&lt;!ENTITY % allAttrs ''&gt;
+&lt;!ENTITY % choiceAttrs ''&gt;
+&lt;!ENTITY % sequenceAttrs ''&gt;
+&lt;!ENTITY % anyAttrs ''&gt;
+&lt;!ENTITY % anyAttributeAttrs ''&gt;
+&lt;!ENTITY % attributeAttrs ''&gt;
+&lt;!ENTITY % attributeGroupAttrs ''&gt;
+&lt;!ENTITY % uniqueAttrs ''&gt;
+&lt;!ENTITY % keyAttrs ''&gt;
+&lt;!ENTITY % keyrefAttrs ''&gt;
+&lt;!ENTITY % selectorAttrs ''&gt;
+&lt;!ENTITY % fieldAttrs ''&gt;
+&lt;!ENTITY % includeAttrs ''&gt;
+&lt;!ENTITY % importAttrs ''&gt;
+&lt;!ENTITY % redefineAttrs ''&gt;
+&lt;!ENTITY % notationAttrs ''&gt;
+&lt;!ENTITY % annotationAttrs ''&gt;
+&lt;!ENTITY % appinfoAttrs ''&gt;
+&lt;!ENTITY % documentationAttrs ''&gt;
+
+&lt;!ENTITY % complexDerivationSet "CDATA"&gt;
+      &lt;!-- #all or space-separated list drawn from derivationChoice --&gt;
+&lt;!ENTITY % blockSet "CDATA"&gt;
+      &lt;!-- #all or space-separated list drawn from
+                      derivationChoice + 'substitution' --&gt;
+
+&lt;!ENTITY % mgs '%all; | %choice; | %sequence;'&gt;
+&lt;!ENTITY % cs '%choice; | %sequence;'&gt;
+&lt;!ENTITY % formValues '(qualified|unqualified)'&gt;
+
+
+&lt;!ENTITY % attrDecls    '((%attribute;| %attributeGroup;)*,(%anyAttribute;)?)'&gt;
+
+&lt;!ENTITY % particleAndAttrs '((%mgs; | %group;)?, %attrDecls;)'&gt;
+
+&lt;!-- This is used in part2 --&gt;
+&lt;!ENTITY % restriction1 '((%mgs; | %group;)?)'&gt;
+
+%xs-datatypes;
+
+&lt;!-- the duplication below is to produce an unambiguous content model
+     which allows annotation everywhere --&gt;
+&lt;!ELEMENT %schema; ((%include; | %import; | %redefine; | %annotation;)*,
+                    ((%simpleType; | %complexType;
+                      | %element; | %attribute;
+                      | %attributeGroup; | %group;
+                      | %notation; ),
+                     (%annotation;)*)* )&gt;
+&lt;!ATTLIST %schema;
+   targetNamespace      %URIref;               #IMPLIED
+   version              CDATA                  #IMPLIED
+   %nds;                %URIref;               #FIXED 'http://www.w3.org/2001/XMLSchema'
+   xmlns                CDATA                  #IMPLIED
+   finalDefault         %complexDerivationSet; ''
+   blockDefault         %blockSet;             ''
+   id                   ID                     #IMPLIED
+   elementFormDefault   %formValues;           'unqualified'
+   attributeFormDefault %formValues;           'unqualified'
+   xml:lang             CDATA                  #IMPLIED
+   %schemaAttrs;&gt;
+&lt;!-- Note the xmlns declaration is NOT in the Schema for Schemas,
+     because at the Infoset level where schemas operate,
+     xmlns(:prefix) is NOT an attribute! --&gt;
+&lt;!-- The declaration of xmlns is a convenience for schema authors --&gt;
+ 
+&lt;!-- The id attribute here and below is for use in external references
+     from non-schemas using simple fragment identifiers.
+     It is NOT used for schema-to-schema reference, internal or
+     external. --&gt;
+
+&lt;!-- a type is a named content type specification which allows attribute
+     declarations--&gt;
+&lt;!-- --&gt;
+
+&lt;!ELEMENT %complexType; ((%annotation;)?,
+                         (%simpleContent;|%complexContent;|
+                          %particleAndAttrs;))&gt;
+
+&lt;!ATTLIST %complexType;
+          name      %NCName;                        #IMPLIED
+          id        ID                              #IMPLIED
+          abstract  %boolean;                       #IMPLIED
+          final     %complexDerivationSet;          #IMPLIED
+          block     %complexDerivationSet;          #IMPLIED
+          mixed (true|false) 'false'
+          %complexTypeAttrs;&gt;
+
+&lt;!-- particleAndAttrs is shorthand for a root type --&gt;
+&lt;!-- mixed is disallowed if simpleContent, overriden if complexContent
+     has one too. --&gt;
+
+&lt;!-- If anyAttribute appears in one or more referenced attributeGroups
+     and/or explicitly, the intersection of the permissions is used --&gt;
+
+&lt;!ELEMENT %complexContent; ((%annotation;)?, (%restriction;|%extension;))&gt;
+&lt;!ATTLIST %complexContent;
+          mixed (true|false) #IMPLIED
+          id    ID           #IMPLIED
+          %complexContentAttrs;&gt;
+
+&lt;!-- restriction should use the branch defined above, not the simple
+     one from part2; extension should use the full model  --&gt;
+
+&lt;!ELEMENT %simpleContent; ((%annotation;)?, (%restriction;|%extension;))&gt;
+&lt;!ATTLIST %simpleContent;
+          id    ID           #IMPLIED
+          %simpleContentAttrs;&gt;
+
+&lt;!-- restriction should use the simple branch from part2, not the 
+     one defined above; extension should have no particle  --&gt;
+
+&lt;!ELEMENT %extension; ((%annotation;)?, (%particleAndAttrs;))&gt;
+&lt;!ATTLIST %extension;
+          base  %QName;      #REQUIRED
+          id    ID           #IMPLIED
+          %extensionAttrs;&gt;
+
+&lt;!-- an element is declared by either:
+ a name and a type (either nested or referenced via the type attribute)
+ or a ref to an existing element declaration --&gt;
+
+&lt;!ELEMENT %element; ((%annotation;)?, (%complexType;| %simpleType;)?,
+                     (%unique; | %key; | %keyref;)*)&gt;
+&lt;!-- simpleType or complexType only if no type|ref attribute --&gt;
+&lt;!-- ref not allowed at top level --&gt;
+&lt;!ATTLIST %element;
+            name               %NCName;               #IMPLIED
+            id                 ID                     #IMPLIED
+            ref                %QName;                #IMPLIED
+            type               %QName;                #IMPLIED
+            minOccurs          %nonNegativeInteger;   #IMPLIED
+            maxOccurs          CDATA                  #IMPLIED
+            nillable           %boolean;              #IMPLIED
+            substitutionGroup  %QName;                #IMPLIED
+            abstract           %boolean;              #IMPLIED
+            final              %complexDerivationSet; #IMPLIED
+            block              %blockSet;             #IMPLIED
+            default            CDATA                  #IMPLIED
+            fixed              CDATA                  #IMPLIED
+            form               %formValues;           #IMPLIED
+            %elementAttrs;&gt;
+&lt;!-- type and ref are mutually exclusive.
+     name and ref are mutually exclusive, one is required --&gt;
+&lt;!-- In the absence of type AND ref, type defaults to type of
+     substitutionGroup, if any, else the ur-type, i.e. unconstrained --&gt;
+&lt;!-- default and fixed are mutually exclusive --&gt;
+
+&lt;!ELEMENT %group; ((%annotation;)?,(%mgs;)?)&gt;
+&lt;!ATTLIST %group; 
+          name        %NCName;               #IMPLIED
+          ref         %QName;                #IMPLIED
+          minOccurs   %nonNegativeInteger;   #IMPLIED
+          maxOccurs   CDATA                  #IMPLIED
+          id          ID                     #IMPLIED
+          %groupAttrs;&gt;
+
+&lt;!ELEMENT %all; ((%annotation;)?, (%element;)*)&gt;
+&lt;!ATTLIST %all;
+          minOccurs   (1)                    #IMPLIED
+          maxOccurs   (1)                    #IMPLIED
+          id          ID                     #IMPLIED
+          %allAttrs;&gt;
+
+&lt;!ELEMENT %choice; ((%annotation;)?, (%element;| %group;| %cs; | %any;)*)&gt;
+&lt;!ATTLIST %choice;
+          minOccurs   %nonNegativeInteger;   #IMPLIED
+          maxOccurs   CDATA                  #IMPLIED
+          id          ID                     #IMPLIED
+          %choiceAttrs;&gt;
+
+&lt;!ELEMENT %sequence; ((%annotation;)?, (%element;| %group;| %cs; | %any;)*)&gt;
+&lt;!ATTLIST %sequence;
+          minOccurs   %nonNegativeInteger;   #IMPLIED
+          maxOccurs   CDATA                  #IMPLIED
+          id          ID                     #IMPLIED
+          %sequenceAttrs;&gt;
+
+&lt;!-- an anonymous grouping in a model, or
+     a top-level named group definition, or a reference to same --&gt;
+
+&lt;!-- Note that if order is 'all', group is not allowed inside.
+     If order is 'all' THIS group must be alone (or referenced alone) at
+     the top level of a content model --&gt;
+&lt;!-- If order is 'all', minOccurs==maxOccurs==1 on element/any inside --&gt;
+&lt;!-- Should allow minOccurs=0 inside order='all' . . . --&gt;
+
+&lt;!ELEMENT %any; (%annotation;)?&gt;
+&lt;!ATTLIST %any;
+            namespace       CDATA                  '##any'
+            processContents (skip|lax|strict)      'strict'
+            minOccurs       %nonNegativeInteger;   '1'
+            maxOccurs       CDATA                  '1'
+            id              ID                     #IMPLIED
+            %anyAttrs;&gt;
+
+&lt;!-- namespace is interpreted as follows:
+                  ##any      - - any non-conflicting WFXML at all
+
+                  ##other    - - any non-conflicting WFXML from namespace other
+                                  than targetNamespace
+
+                  ##local    - - any unqualified non-conflicting WFXML/attribute
+                  one or     - - any non-conflicting WFXML from
+                  more URI        the listed namespaces
+                  references
+
+                  ##targetNamespace ##local may appear in the above list,
+                    with the obvious meaning --&gt;
+
+&lt;!ELEMENT %anyAttribute; (%annotation;)?&gt;
+&lt;!ATTLIST %anyAttribute;
+            namespace       CDATA              '##any'
+            processContents (skip|lax|strict)  'strict'
+            id              ID                 #IMPLIED
+            %anyAttributeAttrs;&gt;
+&lt;!-- namespace is interpreted as for 'any' above --&gt;
+
+&lt;!-- simpleType only if no type|ref attribute --&gt;
+&lt;!-- ref not allowed at top level, name iff at top level --&gt;
+&lt;!ELEMENT %attribute; ((%annotation;)?, (%simpleType;)?)&gt;
+&lt;!ATTLIST %attribute;
+          name      %NCName;      #IMPLIED
+          id        ID            #IMPLIED
+          ref       %QName;       #IMPLIED
+          type      %QName;       #IMPLIED
+          use       (prohibited|optional|required) #IMPLIED
+          default   CDATA         #IMPLIED
+          fixed     CDATA         #IMPLIED
+          form      %formValues;  #IMPLIED
+          %attributeAttrs;&gt;
+&lt;!-- type and ref are mutually exclusive.
+     name and ref are mutually exclusive, one is required --&gt;
+&lt;!-- default for use is optional when nested, none otherwise --&gt;
+&lt;!-- default and fixed are mutually exclusive --&gt;
+&lt;!-- type attr and simpleType content are mutually exclusive --&gt;
+
+&lt;!-- an attributeGroup is a named collection of attribute decls, or a
+     reference thereto --&gt;
+&lt;!ELEMENT %attributeGroup; ((%annotation;)?,
+                       (%attribute; | %attributeGroup;)*,
+                       (%anyAttribute;)?) &gt;
+&lt;!ATTLIST %attributeGroup;
+                 name       %NCName;       #IMPLIED
+                 id         ID             #IMPLIED
+                 ref        %QName;        #IMPLIED
+                 %attributeGroupAttrs;&gt;
+
+&lt;!-- ref iff no content, no name.  ref iff not top level --&gt;
+
+&lt;!-- better reference mechanisms --&gt;
+&lt;!ELEMENT %unique; ((%annotation;)?, %selector;, (%field;)+)&gt;
+&lt;!ATTLIST %unique;
+          name     %NCName;       #REQUIRED
+	  id       ID             #IMPLIED
+	  %uniqueAttrs;&gt;
+
+&lt;!ELEMENT %key;    ((%annotation;)?, %selector;, (%field;)+)&gt;
+&lt;!ATTLIST %key;
+          name     %NCName;       #REQUIRED
+	  id       ID             #IMPLIED
+	  %keyAttrs;&gt;
+
+&lt;!ELEMENT %keyref; ((%annotation;)?, %selector;, (%field;)+)&gt;
+&lt;!ATTLIST %keyref;
+          name     %NCName;       #REQUIRED
+	  refer    %QName;        #REQUIRED
+	  id       ID             #IMPLIED
+	  %keyrefAttrs;&gt;
+
+&lt;!ELEMENT %selector; ((%annotation;)?)&gt;
+&lt;!ATTLIST %selector;
+          xpath %XPathExpr; #REQUIRED
+          id    ID          #IMPLIED
+          %selectorAttrs;&gt;
+&lt;!ELEMENT %field; ((%annotation;)?)&gt;
+&lt;!ATTLIST %field;
+          xpath %XPathExpr; #REQUIRED
+          id    ID          #IMPLIED
+          %fieldAttrs;&gt;
+
+&lt;!-- Schema combination mechanisms --&gt;
+&lt;!ELEMENT %include; (%annotation;)?&gt;
+&lt;!ATTLIST %include;
+          schemaLocation %URIref; #REQUIRED
+          id             ID       #IMPLIED
+          %includeAttrs;&gt;
+
+&lt;!ELEMENT %import; (%annotation;)?&gt;
+&lt;!ATTLIST %import;
+          namespace      %URIref; #IMPLIED
+          schemaLocation %URIref; #IMPLIED
+          id             ID       #IMPLIED
+          %importAttrs;&gt;
+
+&lt;!ELEMENT %redefine; (%annotation; | %simpleType; | %complexType; |
+                      %attributeGroup; | %group;)*&gt;
+&lt;!ATTLIST %redefine;
+          schemaLocation %URIref; #REQUIRED
+          id             ID       #IMPLIED
+          %redefineAttrs;&gt;
+
+&lt;!ELEMENT %notation; (%annotation;)?&gt;
+&lt;!ATTLIST %notation;
+	  name        %NCName;    #REQUIRED
+	  id          ID          #IMPLIED
+	  public      CDATA       #REQUIRED
+	  system      %URIref;    #IMPLIED
+	  %notationAttrs;&gt;
+
+&lt;!-- Annotation is either application information or documentation --&gt;
+&lt;!-- By having these here they are available for datatypes as well
+     as all the structures elements --&gt;
+
+&lt;!ELEMENT %annotation; (%appinfo; | %documentation;)*&gt;
+&lt;!ATTLIST %annotation; %annotationAttrs;&gt;
+
+&lt;!-- User must define annotation elements in internal subset for this
+     to work --&gt;
+&lt;!ELEMENT %appinfo; ANY&gt;   &lt;!-- too restrictive --&gt;
+&lt;!ATTLIST %appinfo;
+          source     %URIref;      #IMPLIED
+          id         ID         #IMPLIED
+          %appinfoAttrs;&gt;
+&lt;!ELEMENT %documentation; ANY&gt;   &lt;!-- too restrictive --&gt;
+&lt;!ATTLIST %documentation;
+          source     %URIref;   #IMPLIED
+          id         ID         #IMPLIED
+          xml:lang   CDATA      #IMPLIED
+          %documentationAttrs;&gt;
+
+&lt;!NOTATION XMLSchemaStructures PUBLIC
+           'structures' 'http://www.w3.org/2001/XMLSchema.xsd' &gt;
+&lt;!NOTATION XML PUBLIC
+           'REC-xml-1998-0210' 'http://www.w3.org/TR/1998/REC-xml-19980210' &gt;
+</PRE></BODY></HTML>

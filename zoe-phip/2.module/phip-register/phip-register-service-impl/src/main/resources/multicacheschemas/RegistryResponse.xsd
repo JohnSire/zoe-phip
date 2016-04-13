@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by wangxien (wangxien) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:xs="urn:hl7-org:v3" targetNamespace="urn:hl7-org:v3" elementFormDefault="qualified">
+	<element name="RegistryResponse">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="Id" type="xs:II">
+					<annotation>
+						<documentation>消息标识</documentation>
+					</annotation>
+				</element>
+				<element minOccurs="0" name="TargetId" type="xs:II">
+					<annotation>
+						<documentation>目标消息标识</documentation>
+					</annotation>
+				</element>
+				<element name="Response" type="xs:ResgistryStatusInfo" maxOccurs="unbounded">
+					<annotation>
+						<documentation>共享文档存储状态信息</documentation>
+					</annotation>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="II">
+		<attribute name="root" type="s:string">
+			<annotation>
+				<documentation>标识符根</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="extension" type="s:string">
+			<annotation>
+				<documentation>根下唯一标识</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="ResgistryStatusInfo">
+		<sequence>
+			<element name="Detail" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>共享文档存储状态描述</documentation>
+				</annotation>
+			</element>
+		</sequence>
+		<attribute name="id" type="s:string" use="required">
+			<annotation>
+				<documentation>共享文档注册请求前的UID</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="documentUniqueId" type="s:string">
+			<annotation>
+				<documentation>共享文档在平台注册的UID</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="repositoryId" type="s:string">
+			<annotation>
+				<documentation>共享文档库UID</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="status" type="s:string">
+			<annotation>
+				<documentation>共享文档存储状态</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="doumentUrl">
+			<annotation>
+				<documentation>共享文档存储URL地址</documentation>
+			</annotation>
+			<simpleType>
+				<restriction base="s:string">
+					<maxLength value="1000"/>
+				</restriction>
+			</simpleType>
+		</attribute>
+	</complexType>
+</schema>

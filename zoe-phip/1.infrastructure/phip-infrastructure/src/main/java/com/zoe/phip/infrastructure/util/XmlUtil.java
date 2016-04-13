@@ -2,11 +2,14 @@ package com.zoe.phip.infrastructure.util;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
+import org.dom4j.Node;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.SAXValidator;
 import org.dom4j.io.XMLWriter;
 import org.dom4j.util.XMLErrorHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -15,6 +18,10 @@ import javax.xml.parsers.SAXParserFactory;
  * Created by zhangwenbin on 2016/4/12.
  */
 public final class XmlUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(XmlUtil.class);
+
+
     /**
      * 验证XML是否正确格式
      *
@@ -39,11 +46,12 @@ public final class XmlUtil {
 
     /**
      * 通过XSD验证xml的准确性
+     *
      * @param xsdFileName
      * @param xmlString
      * @return
      */
-    public static boolean validateXsd(String xsdFileName, String xmlString) {
+    public static String validateXsd(String xsdFileName, String xmlString) {
         try {
             XMLErrorHandler handler = new XMLErrorHandler();
             //获取基于 SAX 的解析器的实例
@@ -72,27 +80,30 @@ public final class XmlUtil {
 
             XMLWriter writer = new XMLWriter(OutputFormat.createPrettyPrint());
             if (handler.getErrors().hasContent()) {
-                System.out.println("XML文件通过XSD文件校验失败!");
+                logger.error("XML文件通过XSD文件校验失败!");
                 writer.write(handler.getErrors());
-                return false;
+                String error = "";
+                for (Node node : handler.getErrors().content()) {
+                    error += node.asXML() + System.getProperty("line.separator");
+                }
+                return error;
             } else {
-                System.out.println("XML文件通过XSD文件校验成功!");
+                logger.info("XML文件通过XSD文件校验成功!");
             }
-            return true;
+            return "";
         } catch (Exception ex) {
-            System.out.println("XML文件通过XSD文件:" + xsdFileName + "检验失败。\n原因： " + ex.getMessage());
-            //ex.printStackTrace();
-            return false;
+            logger.error("XML文件通过XSD文件:" + xsdFileName + "检验失败。\n原因： " + ex.getMessage());
+            return ex.getMessage();
         }
     }
 
     /**
      * 去掉XML文件中的命名空间xmlns,防止查找元素出错
+     *
      * @param xmlString
      * @return
      */
-    public static String removeNameSpace(String xmlString)
-    {
+    public static String removeNameSpace(String xmlString) {
         String awsNamespace = "urn:hl7-org:v3";
         String xmlnsStr = " xmlns=\"" + awsNamespace + "\"";
         return xmlString.replace(xmlnsStr, "");
