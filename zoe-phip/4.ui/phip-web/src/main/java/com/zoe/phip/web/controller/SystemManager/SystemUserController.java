@@ -16,7 +16,6 @@ import com.zoe.phip.web.model.sm.SystemUser;
 import com.zoe.phip.web.model.sm.UserCompetence;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +39,7 @@ public class SystemUserController extends BaseController {
     @RequestMapping("/list")
     @AuthAction(permission = {Permission.View},name = "查看")
     public String ToList(HttpServletRequest request, Model model) {
+
         return "SystemManage/SysUser/list";
     }
     //用户详详情

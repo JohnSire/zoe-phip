@@ -11,7 +11,21 @@
                 tools: {
                     btnbox: {
                         'add': true,
-                        'del': true
+                        'del': true,
+                        'custom': {
+                            text: "用户列表选择测试", click: function () {
+                              common.dialog({
+                                  title:'用户列表选择',
+                                  url:"../select/view/list",
+                                  width:560,
+                                  height:600,
+                                  buttons:[
+                                      { text: '确定', onclick: function (item, dialog) {} },
+                                      { text: '取消', onclick: function (item, dialog) { dialog.close(); } }
+                                  ]
+                              })
+                            }
+                        }
                     },
                     searchbox: [
                         {label: '关键字', name: 'keyWord', type: 'text'}

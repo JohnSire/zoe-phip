@@ -3,7 +3,7 @@ var scriptSection={
 %>
 <script type="text/javascript">
     var top = common.getTopWindowDom();
-    top.location.href = "${ctxPath}/frame/login";
+    top.location.href = webRoot + "/frame/login";
 </script>
 <%};%>
 include("/WEB-INF/shared/_default.html",{baseTitle:"skip",baseStyleSection:styleSection,baseBodySection:bodySection,baseScriptSection:scriptSection}){}
