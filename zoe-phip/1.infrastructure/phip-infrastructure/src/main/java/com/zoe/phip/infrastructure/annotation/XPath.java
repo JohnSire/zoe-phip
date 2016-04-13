@@ -5,12 +5,15 @@ package com.zoe.phip.infrastructure.annotation;
  */
 
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
  * 注册服务属性路径注解
  */
 @Target({ElementType.METHOD, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
 public @interface XPath {
 
     /**

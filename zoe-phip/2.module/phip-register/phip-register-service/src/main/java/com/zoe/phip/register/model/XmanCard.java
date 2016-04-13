@@ -47,6 +47,7 @@ public class XmanCard extends MasterEntity {
      */
     @Column(name = "XC_DESCR")
     private String xcDescr;
+
     /**
      * 健康卡发放机构代码
      */

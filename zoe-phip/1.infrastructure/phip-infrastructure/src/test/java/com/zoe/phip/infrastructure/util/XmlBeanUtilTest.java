@@ -1,10 +1,14 @@
 package com.zoe.phip.infrastructure.util;
 
+import com.zoe.phip.infrastructure.annotation.XPath;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.junit.Test;
+
+import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -161,13 +165,65 @@ public class XmlBeanUtilTest {
         xmlString = XmlUtil.removeNameSpace(xmlString);
         try {
             Document document = DocumentHelper.parseText(xmlString);
-            Element element = document.getRootElement();
-            Node node = element.selectSingleNode("/"+element.getName() + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@code");
-            System.out.println(node.getText());
+
+            BaseInfo baseInfo = XmlBeanUtil.toBean(document, new BaseInfo());
+            System.out.println();
+
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
     }
+}
+
+class BaseInfo {
+    final String ROOT = "/PRPA_IN201311UV02";
+
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
+    }
+
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/name", descr = "机构名称")
+    //@Column(name = "ORG_NAME")
+    public String orgName;
+
+    public Integer getSexCode() {
+        return sexCode;
+    }
+
+    public void setSexCode(Integer sexCode) {
+        this.sexCode = sexCode;
+    }
+
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@code", descr = "性别代码")
+    private Integer sexCode;
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/birthTime/@value", descr = "出生日期")
+    private Date birthDate;
+
+
+    public String getHealthRecordNo() {
+        return healthRecordNo;
+    }
+
+    public void setHealthRecordNo(String healthRecordNo) {
+        this.healthRecordNo = healthRecordNo;
+    }
+
+    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/@extension", descr = "出生日期")
+    private String healthRecordNo;
+
 }
