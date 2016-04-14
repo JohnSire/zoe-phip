@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * Created by linqinghuang on 2016/1/26.
  */
-public class BaseEntity implements Serializable {
+public class BaseEntity implements Serializable,First {
 
     /**
      * 主键id
@@ -21,7 +21,7 @@ public class BaseEntity implements Serializable {
     @Id
     @Column(name = "ID")
     @GeneratedValue(generator = "UUID")
-    @ValidateNotBlank(message = "id不能为空")
+    @ValidateNotNull(message = "id不能为空",groups = {First.class})
 //    @JSONField(name = "Id")
     private String id;
     /**

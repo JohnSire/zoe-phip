@@ -8,7 +8,6 @@ import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateLength;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotBlank;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotNull;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidatePattern;
-import com.zoe.phip.module.service.entity.First;
 import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.Column;
@@ -21,7 +20,7 @@ import javax.persistence.Transient;
  * @date 2016-03-18
  */
 @Table(name = "SYS_SYSTEM_USER")
-public class  SystemUser extends MasterEntity implements First {
+public class  SystemUser extends MasterEntity {
 
     /**
      * 名称
