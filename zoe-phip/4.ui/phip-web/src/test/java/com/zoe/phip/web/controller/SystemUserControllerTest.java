@@ -1,6 +1,7 @@
 package com.zoe.phip.web.controller;
 
 import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.web.controller.SystemManager.SystemUserController;
 import com.zoe.phip.web.model.sm.SystemUser;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class SystemUserControllerTest extends BaseControllerTest {
     @Test
     public void testGetUserInfo() throws Exception {
         try {
-            ServiceResultT<SystemUser> result= systemUserController.getUserInfo(request,null);
+            ServiceResultT<SystemUser> result = systemUserController.getUserInfo(request, null);
             System.out.println(result.getResult().getName());
         } catch (Exception e) {
             e.printStackTrace();

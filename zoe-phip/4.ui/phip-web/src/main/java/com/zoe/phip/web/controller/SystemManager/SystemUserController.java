@@ -32,7 +32,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 @AuthController(code= MenuCode.SystemUser)
-@Validated
 public class SystemUserController extends BaseController {
     //region 用户管理视图开始
     //用户管理列表
