@@ -7,7 +7,10 @@ define(function (require, exports, module) {
         addItem: function (data, displayField, valueField,delCallback) {
             if($(".item-"+data[valueField]).length==0) {
                 var jqUl = $("#pane-list-selected");
-                var jqLi = $('<li></li>').addClass("item").data("data", data);
+                var dataJson={};
+                dataJson[valueField]=data[valueField];
+                dataJson[displayField]=data[displayField];
+                var jqLi = $('<li></li>').addClass("item").data("data", dataJson);
                 var jqClose = $('<a></a>').addClass("close").text("X").on("click", function () {
                     if (typeof (delCallback) == "function") {
                         internal.removeItem(data, valueField);
@@ -19,7 +22,6 @@ define(function (require, exports, module) {
                 jqLi.append(data[displayField]);
                 jqUl.append(jqLi);
             }
-
         },
         //移除选中节点
         removeItem: function (data, valueField) {

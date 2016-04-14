@@ -1,8 +1,12 @@
-package com.zoe.phip.web.myvalidator;
+package com.zoe.phip.infrastructure.myvalidator.annotation;
 
 /**
  * Created by huangyinfu on 2016/4/11.
  */
+
+
+import com.zoe.phip.infrastructure.myvalidator.actualize.MyPasswordValidator;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Documented;
@@ -16,12 +20,17 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Constraint(validatedBy = MyPasswordValidator.class)
 @Documented
-/**
- * 自定义注解验证
- */
-public @interface MyPassword {
 
-    String message() default "{密码必须是6~12位数字和字母组合}";
+/**
+ *
+ * @author by hyf
+ * @version 1.0
+ * @date 2016/4/14
+ * bean验证：扩展验证
+ */
+public @interface MyPassword   {
+
+   String message() default "{密码必须是6~12位数字和字母组合}";
 
     Class<?>[] groups() default {};
 

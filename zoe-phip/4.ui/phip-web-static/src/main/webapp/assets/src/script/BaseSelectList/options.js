@@ -3,18 +3,21 @@
  */
 define(function (require, exports, module) {
     var options = {
-        winName: "",
-        winCallback: "",
         stroage: [],//存储的参数
         multiselect: false,//是否多选:true为多选，false为单选
-        displayField: '',
-        valueField: '',
-        gridParam: {
+        displayField: '',//内容的字段
+        valueField: '',//值的字段
+        gridParam: {//表格参数，跟ligerui 一致
             url: '',
             columns: [],//列
             checkbox: true//选择框
-        },//表格参数
-        extendParam: {}//列表查询相关联的扩展参数
+        },
+        searchParam: function () {//列表查询条件相关参数
+            var keyWord=$("#txtKey").val();
+            var value=$.trim(keyWord);
+            return {"keyWord":value };
+        },
+        winCallback:''
     }
     exports.defaultOptions = options;
 })

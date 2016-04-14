@@ -14,7 +14,6 @@ define(function (require, exports, module) {
         },
         //保存:data保存返回选中的数据
         getSelected: function () {
-            //return {"text": 1};
             var data = itemsbox.getItemsData();
             return data;
         }

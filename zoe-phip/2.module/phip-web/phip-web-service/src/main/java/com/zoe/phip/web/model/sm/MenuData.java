@@ -29,6 +29,7 @@ public class MenuData extends MasterEntity {
     /**
      * 子节�
      */
+
     @Transient
 //    @JSONField(name = "Childrens")
     public List<MenuData> children;
