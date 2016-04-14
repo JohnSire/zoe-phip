@@ -391,7 +391,6 @@
                         $(self).find("input").val(data[valueField]);
                         $(self).find(".text-line-content").text(data[displayField]);
                         top[winName].close();
-
                     }
                 })
             }

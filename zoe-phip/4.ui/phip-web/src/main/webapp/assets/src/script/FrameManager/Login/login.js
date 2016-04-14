@@ -35,7 +35,11 @@ define(function (require, exports, module) {
                             if (data.isSuccess) {
                                 window.location.href = webRoot + "/frame/index";
                             } else {
-                                internal.showMsg(data.messages[0].content);
+                                if(data.messages[0]) {
+                                    internal.showMsg(data.messages[0].content);
+                                }else{
+                                    internal.showMsg("用户名或密码不正确!");
+                                }
                             }
                         },
                         complete: function () {

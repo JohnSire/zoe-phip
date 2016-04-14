@@ -19,7 +19,7 @@ define(function (require, exports, module) {
             gridParam["onCheckRow"] = internal.onChecked;
             gridParam["onCheckAllRow"] = internal.onCheckAllRow;
             gridParam["isChecked"] = internal.isChecked;
-            var gridObj= $("#grid").ligerGrid(gridParam);
+            var gridObj = $("#grid").ligerGrid(gridParam);
             //如果是非多选的，则移除全选框
             if (!internal.multiselect) {
                 var chkObj = $("#grid .l-grid-hd-cell-checkbox");
@@ -59,11 +59,9 @@ define(function (require, exports, module) {
                         this.unselect(rowid);
                         internal.itemsbox.removeItem(this.records[rowid], internal.valueField);
                     }
-                }else{
-                    internal.recursiveChecked(rowdata);
                 }
+                internal.recursiveChecked(rowdata);
                 this.select(rowindex);
-
             } else {
                 this.unselect(rowindex);
                 internal.removeRecursiveChecked(rowdata);
@@ -103,8 +101,8 @@ define(function (require, exports, module) {
 
                 internal.unChecked(data);
             });
-            if(nodeData["children"]){
-                for(var i in nodeData["children"]){
+            if (nodeData["children"]) {
+                for (var i in nodeData["children"]) {
                     internal.recursiveChecked(nodeData["children"][i]);
                 }
             }
@@ -112,8 +110,8 @@ define(function (require, exports, module) {
         //递归移除选中节点（在树形选择列表下用到）
         removeRecursiveChecked: function (nodeData) {
             internal.itemsbox.removeItem(nodeData, internal.valueField);
-            if(nodeData["children"]){
-                for(var i in nodeData["children"]){
+            if (nodeData["children"]) {
+                for (var i in nodeData["children"]) {
                     internal.removeRecursiveChecked(nodeData["children"][i]);
                 }
             }

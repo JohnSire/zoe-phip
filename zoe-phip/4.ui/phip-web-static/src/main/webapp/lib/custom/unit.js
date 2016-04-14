@@ -60,11 +60,11 @@
             var str = "<div id=\"msgprint\" class=\"" + cssname + "\">" + msgtitle + "</div>";
             $("body").append(str);
             var bodyWidth = $("body").innerWidth(), msgprintWidth = $("#msgprint").outerWidth();
-            $("#msgprint").css({ "left": (bodyWidth - msgprintWidth) / 2 - 2, width: msgprintWidth });
+            $("#msgprint").css({ "left": (bodyWidth - msgprintWidth) / 2 - 2, width: msgprintWidth, "z-index": 999999999 });
             $("#msgprint").show();
             //1秒后清除提示
             setTimeout(function () {
-                $("#msgprint").fadeOut(500);
+                $("#msgprint").fadeOut(1000);
                 //如果动画结束则删除节点
                 if (!$("#msgprint").is(":animated")) {
                     $("#msgprint").remove();

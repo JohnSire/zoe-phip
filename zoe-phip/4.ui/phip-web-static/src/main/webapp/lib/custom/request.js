@@ -52,7 +52,7 @@
                     var success = function (data) {
                         var msgCss = data.isSuccess ? "Success" : "Error";
 
-                        var msgContext = "操作成功";
+                        var msgContext = "";
                         if (!data.isSuccess&&data.messages&&data.messages.length > 0) {
                             $.each(data.messages, function (index, item) {
                                 msgContext += item["content"]
