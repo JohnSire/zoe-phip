@@ -173,6 +173,7 @@ public class ProcessXmlUtil {
 
     /**
      * 验证xml格式是否正确
+     *
      * @param strXml
      * @return
      */
@@ -197,5 +198,17 @@ public class ProcessXmlUtil {
         }
 
         return result;
+    }
+
+    public static Document load(String xmlString) {
+        xmlString = XmlUtil.removeNameSpace(xmlString);
+        if (!xmlString.startsWith("<")) {
+            xmlString = xmlString.substring(0, 1);
+        }
+        try {
+            return DocumentHelper.parseText(xmlString);
+        } catch (DocumentException ex) {
+            return null;
+        }
     }
 }

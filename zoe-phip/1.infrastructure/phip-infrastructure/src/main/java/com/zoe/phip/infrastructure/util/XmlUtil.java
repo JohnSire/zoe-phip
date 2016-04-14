@@ -28,20 +28,18 @@ public final class XmlUtil {
      * @param xmlString xml格式的文本
      * @return
      */
-    public static boolean isValid(String xmlString) {
-        try {
-            if (!StringUtil.isNullOrWhiteSpace(xmlString)) {
-                //XML转换时，如果转换前编码方法是UTF-8 或者 UniCode，则XML可能首位会出现异常字符
-                //所以需要判断第一位字符是否为 “<”,如果不是 则需要去除
-                if (!xmlString.startsWith("<")) {
-                    xmlString = xmlString.substring(0, 1);
-                }
-                DocumentHelper.parseText(xmlString);
+    public static boolean isValid(String xmlString) throws Exception {
+
+        if (!StringUtil.isNullOrWhiteSpace(xmlString)) {
+            //XML转换时，如果转换前编码方法是UTF-8 或者 UniCode，则XML可能首位会出现异常字符
+            //所以需要判断第一位字符是否为 “<”,如果不是 则需要去除
+            if (!xmlString.startsWith("<")) {
+                xmlString = xmlString.substring(0, 1);
             }
+            DocumentHelper.parseText(xmlString);
             return true;
-        } catch (Exception ex) {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -108,5 +106,4 @@ public final class XmlUtil {
         String xmlnsStr = " xmlns=\"" + awsNamespace + "\"";
         return xmlString.replace(xmlnsStr, "");
     }
-
 }

@@ -178,7 +178,7 @@ public class XmlBeanUtilTest {
 }
 
 class BaseInfo {
-    final String ROOT = "/PRPA_IN201311UV02";
+    //final String ROOT = "/PRPA_IN201311UV02";
 
     public String getOrgName() {
         return orgName;
@@ -188,7 +188,7 @@ class BaseInfo {
         this.orgName = orgName;
     }
 
-    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/name", descr = "机构名称")
+    @XPath(value =   "//controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/name", descr = "机构名称")
     //@Column(name = "ORG_NAME")
     public String orgName;
 
@@ -200,7 +200,7 @@ class BaseInfo {
         this.sexCode = sexCode;
     }
 
-    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@code", descr = "性别代码")
+    @XPath(value =  "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@code", descr = "性别代码")
     private Integer sexCode;
 
     public Date getBirthDate() {
@@ -211,7 +211,7 @@ class BaseInfo {
         this.birthDate = birthDate;
     }
 
-    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/birthTime/@value", descr = "出生日期")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/birthTime/@value", descr = "出生日期")
     private Date birthDate;
 
 
@@ -223,7 +223,7 @@ class BaseInfo {
         this.healthRecordNo = healthRecordNo;
     }
 
-    @XPath(value = ROOT + "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/@extension", descr = "出生日期")
+    @XPath(value =  "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/@extension", descr = "出生日期")
     private String healthRecordNo;
 
 }

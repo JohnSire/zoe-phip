@@ -3,10 +3,7 @@ package com.zoe.phip.infrastructure.util;
 import com.zoe.phip.infrastructure.annotation.XPath;
 import org.dom4j.Document;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.Date;
 
 /**
@@ -56,20 +53,21 @@ public final class XmlBeanUtil {
             } else if (fieldType.endsWith("double")) {
                 Method method = clazz.getClass().getMethod("set" + fieldName, double.class);
                 method.invoke(clazz, Double.parseDouble(value));
-            } else if (fieldType.endsWith("double")) {
+            } else if (fieldType.endsWith("Double")) {
                 Method method = clazz.getClass().getMethod("set" + fieldName, Double.class);
                 method.invoke(clazz, new Double(value));
-            }  else if (fieldType.endsWith("Date")) {
+            } else if (fieldType.endsWith("Date")) {
                 Method method = clazz.getClass().getMethod("set" + fieldName, Date.class);
                 method.invoke(clazz, DateUtil.stringToDateTime(value));
             } else if (fieldType.endsWith("Boolean")) {
                 Method method = clazz.getClass().getMethod("set" + fieldName, Boolean.class);
-                method.invoke(clazz, (value.toUpperCase() == "TRUE" || value.toUpperCase() == "1") ? new Boolean(true) :
+                method.invoke(clazz, (value.toUpperCase().equals("TRUE") || value.toUpperCase().equals("1")) ?
+                        new Boolean(true) :
                         new Boolean(false));
             } else if (fieldType.endsWith("boolean")) {
                 Method method = clazz.getClass().getMethod("set" + fieldName, Boolean.class);
-                method.invoke(clazz, (value.toUpperCase() == "TRUE" || value.toUpperCase() == "1") ? true :
-                        false);
+                method.invoke(clazz, (value.toUpperCase().equals("TRUE") || value.toUpperCase().equals("1")) ?
+                        true : false);
             } else if (fieldType.endsWith("List")) {
                 // TODO: 2016/4/13
                 Type fc = field.getGenericType();
