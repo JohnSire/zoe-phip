@@ -10,12 +10,8 @@ import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.function.Function;
 import com.zoe.phip.infrastructure.security.SystemCredential;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
-import com.zoe.phip.module.service.entity.BaseEntity;
-import com.zoe.phip.module.service.entity.First;
 import com.zoe.phip.module.service.impl.in.IBaseInService;
 import com.zoe.phip.module.service.support.annotation.WithResult;
-import com.zoe.phip.module.service.validator.ValidationAppendUtils;
-import com.zoe.phip.module.service.validator.ValidationResult;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -125,7 +121,8 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
             }
         }
         //methodName.startsWith   ||methodName.startsWith("update")
-        if (methodName.startsWith("add")) {
+        ///验证例子
+     /*   if (methodName.startsWith("add")) {
             for (Object o : arguments) {
                 if(o instanceof BaseEntity){
                     ValidationResult result = ValidationAppendUtils.validateEntity(o);
@@ -150,7 +147,7 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
 
                 }
             }
-        }
+        }*/
 
         final Class<?>[] types = makeClass(parameterTypes);
         Method method = instance.getClass().getMethod(methodName, types);
