@@ -116,8 +116,8 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
                 return result;
             }
         }
-        //methodName.startsWith
-        if (methodName.equals("add")||methodName.equals("update")) {
+        //methodName.startsWith   ||methodName.startsWith("update")
+        if (methodName.startsWith("add")) {
             for (Object o : arguments) {
                 if(o instanceof BaseEntity){
                     ValidationResult result = ValidationAppendUtils.validateEntity(o);

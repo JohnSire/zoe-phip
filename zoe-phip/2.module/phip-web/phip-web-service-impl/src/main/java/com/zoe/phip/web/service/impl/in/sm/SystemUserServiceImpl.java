@@ -14,7 +14,6 @@ import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.security.SystemCredential;
 import com.zoe.phip.infrastructure.util.StringUtil;
-import com.zoe.phip.module.service.entity.First;
 import com.zoe.phip.module.service.entity.LoginCredentials;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
@@ -127,16 +126,8 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
 
     @Override
     @ErrorMessage(code = "008",message = "已存在登录名({0})的用户！")
-    public int add( @Validated({First.class})  SystemUser entity) throws Exception {
- /*       //判断是否存在用户
-       ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
-        Validator validator = vf.getValidator();
-        //Set<ConstraintViolation<SystemUser>> set = validator.validate(entity,First.class);
-        Set<ConstraintViolation<SystemUser>> set = validator.validate(entity);
-        for (ConstraintViolation<SystemUser> constraintViolation : set) {
-            System.out.println(constraintViolation.getMessage());
-        //    throw new BusinessException("实体保存非法", constraintViolation.getMessage());
-        }*/
+    public int add( @Validated SystemUser entity) throws Exception {
+       //判断是否存在用户
         List<SystemUser> list = getUserByLoginName(entity.getLoginName());
         if (list != null && list.size() > 0) {
             throw new BusinessException("008", entity.getLoginName());

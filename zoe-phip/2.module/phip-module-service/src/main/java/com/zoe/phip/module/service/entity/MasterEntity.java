@@ -1,8 +1,8 @@
 package com.zoe.phip.module.service.entity;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotBlank;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotNull;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -13,19 +13,19 @@ public class MasterEntity extends BaseEntity {
     /**
      * 状态
      */
-    @NotNull(message = "{状态不能为空}")
+    @ValidateNotNull(message = "状态不能为空")
     protected int state;
 
     /**
      * 修改人
      */
-    @NotEmpty(message = "{修改人不能为空}")
+    @ValidateNotBlank(message = "修改人不能为空")
     private String modifyBy;
 
     /**
      * 实体（数据记录）修改时间
      */
-    @NotNull(message = "{修改时间不能为空}")
+    @ValidateNotNull(message = "修改时间不能为空")
     private Date modifyAt;
 
 

@@ -4,6 +4,7 @@ package com.zoe.phip.web.service.impl.in.sm;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
+import com.zoe.phip.infrastructure.bean.BeanFactory;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -15,12 +16,17 @@ import com.zoe.phip.web.dao.sm.IUserCompetenceMapper;
 import com.zoe.phip.web.model.sm.SystemUser;
 import com.zoe.phip.web.model.sm.UserCompetence;
 import com.zoe.phip.web.service.sm.IUserCompetenceService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -142,5 +148,21 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
         Example e = new Example(UserCompetence.class);
         e.createCriteria().andEqualTo("fkUserId", userId).andEqualTo("fkCompetenceCategoryId", catalogId);
         return getMapper().deleteByExample(e) > 0;
+    }
+
+    public static void main(String[] args) {
+        ClassPathXmlApplicationContext context =
+                new ClassPathXmlApplicationContext(new String[]{"application-context-provider.xml", "spring-mybatis.xml"});
+        context.start();
+
+        SystemUser systemUser;
+        systemUser = new SystemUser();
+        systemUser.setName("2");
+        ValidatorFactory vf = BeanFactory.getBean("validator");
+        Validator validator = vf.getValidator();
+        Set<ConstraintViolation<SystemUser>> set = validator.validate(systemUser);
+        for (ConstraintViolation<SystemUser> constraintViolation : set) {
+            System.out.println(constraintViolation.getMessage());
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.zoe.phip.web.controller;
 
+import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.web.controller.SystemManager.SystemUserController;
 import com.zoe.phip.web.model.sm.SystemUser;
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class SystemUserControllerTest extends BaseControllerTest {
        user.setName("2");
         user.setPassword("1");
         user.setLoginName("1test4");
-       // ServiceResult result=systemUserController.addUserInfo(user);
-    //    Assert.assertTrue(result.getIsSuccess());
+       ServiceResult result=systemUserController.addUserInfo(user);
+     //  Assert.assertTrue(result.getIsSuccess());
     }
 }

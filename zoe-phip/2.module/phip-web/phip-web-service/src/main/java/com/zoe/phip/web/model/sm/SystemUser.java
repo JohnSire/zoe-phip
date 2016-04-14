@@ -4,21 +4,16 @@
  */
 package com.zoe.phip.web.model.sm;
 
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateLength;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotBlank;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotNull;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidatePattern;
 import com.zoe.phip.module.service.entity.First;
 import com.zoe.phip.module.service.entity.MasterEntity;
-import com.zoe.phip.web.myvalidator.MyPassword;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import javax.validation.constraints.Pattern;
-import java.util.Set;
 
 /**
  * @author
@@ -33,16 +28,16 @@ public class  SystemUser extends MasterEntity implements First {
      */
     @Column(name = "NAME")
 //    @JSONField(name = "Name")
-    @NotEmpty(message = "{不能为空}")
-    @Length(min = 5, max = 20, message = "{名称最小长度为5，最大为20！}")
-    @Pattern(regexp = "[a-zA-Z]{5,20}", message = "{名称只能是英文字母！}")
+    @ValidateNotBlank(message = "{SystemUser.name.ValidateNotBlank.illegal}")
+    @ValidateLength(min = 5, max = 20, message = "{SystemUser.name.ValidateLength.illegal}")
+    @ValidatePattern(regexp = "[a-zA-Z]{5,20}",message = "{SystemUser.name.ValidatePattern.illegal}")
+    @ValidateNotNull(message = "{SystemUser.name.ValidateNotNull.illegal}")
     private String name;
 
     /**
      * 登陆名
      */
     @Column(name = "LOGIN_NAME")
-    @NotEmpty(message = "{不能为空}")
 //    @JSONField(name = "LoginName")
     private String loginName;
 
@@ -51,9 +46,19 @@ public class  SystemUser extends MasterEntity implements First {
      */
     @Column(name = "PASSWORD")
 //    @JSONField(name = "Password")
-    @MyPassword
+   // @MyPassword(message = "{SystemUser.password.MyPassword.illegal}")
     private String password;
+/*
+   @ValidateMax(message = "{SystemUser.password.ValidateMax.illegal}", value = 1)
+    private int number;
 
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }*/
 
     public String getName() {
         return this.name;
@@ -93,18 +98,4 @@ public class  SystemUser extends MasterEntity implements First {
     @Transient
     @Column(name = "COMPETENCE_ID")
     public String competenceId;
-
-
-    public static void main(String[] args) {
-       SystemUser systemUser;
-        systemUser = new SystemUser();
-        systemUser.setName("2");
-        ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
-        Validator validator = vf.getValidator();
-        Set<ConstraintViolation<SystemUser>> set = validator.validate(systemUser);
-        for (ConstraintViolation<SystemUser> constraintViolation : set) {
-            System.out.println(constraintViolation.getMessage());
-        }
-    }
-
 }
