@@ -57,7 +57,7 @@
         },
         menuTree: function () {
             var top = common.getTopWindowDom();
-            top.win_menu_tree_dialog = $.ligerDialog.open({
+            top.win_menu_tree_dialog = top.common.dialog({
                 title: '调整菜单结构',
                 url: webRoot + '/menu/menutree',
                 width: 460,

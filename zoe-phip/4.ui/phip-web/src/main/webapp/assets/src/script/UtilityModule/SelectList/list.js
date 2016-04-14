@@ -10,7 +10,8 @@ define(function (require, exports, module) {
             title: '',
             width: 560,
             height: 600,
-            isAllowEmptySelect: false,
+            url:'/select/view/list',
+            isAllowEmptySelect: true,
             emptyMsg: "请选择相应的列表数据!",
             selectParam: null,//选择列表参数
             callback: null//回调函数
@@ -23,7 +24,7 @@ define(function (require, exports, module) {
             internal.top["win_select_list_param"] = selectParam;
             internal.top[options["winName"]] = common.dialog({
                 title: options["title"],
-                url: '/select/view/list',
+                url:options["url"],
                 width: options["width"],
                 height: options["height"],
                 buttons: [
@@ -35,7 +36,6 @@ define(function (require, exports, module) {
                                 options["callback"](data);
                                 dialog.close();
                             } else {
-
                                 var emptyMsg = options["emptyMsg"];
                                 internal.top.common.jsmsgError(emptyMsg);
                             }
