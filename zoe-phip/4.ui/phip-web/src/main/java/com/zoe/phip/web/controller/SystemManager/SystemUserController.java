@@ -16,7 +16,6 @@ import com.zoe.phip.web.model.sm.SystemUser;
 import com.zoe.phip.web.model.sm.UserCompetence;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +31,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 @AuthController(code= MenuCode.SystemUser)
-@Validated
 public class SystemUserController extends BaseController {
     //region 用户管理视图开始
     //用户管理列表

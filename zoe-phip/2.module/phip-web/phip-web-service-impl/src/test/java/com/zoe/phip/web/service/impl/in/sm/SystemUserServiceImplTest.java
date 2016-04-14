@@ -1,11 +1,16 @@
 package com.zoe.phip.web.service.impl.in.sm;
 
 import com.zoe.phip.web.model.sm.SystemUser;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Created by zengjiyang on 2016/4/8.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:spring-mybatis.xml"})
 public class SystemUserServiceImplTest {
 
 
@@ -23,6 +28,9 @@ public class SystemUserServiceImplTest {
         SystemUser s = new SystemUser();
        // s.setName("1");
        s.setPassword("1");
+        s.setLoginName("admin");
+        s.setName("1");
+        s.setState(1);
 
      /*   Field[] fields = SystemUser.class.getDeclaredFields();
 
@@ -69,7 +77,6 @@ public class SystemUserServiceImplTest {
 */
 
 
-       systemUserService= new SystemUserServiceImpl();
         systemUserService.add(s);
 
         }

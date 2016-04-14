@@ -1,4 +1,7 @@
-package com.zoe.phip.web.myvalidator;
+package com.zoe.phip.infrastructure.myvalidator.actualize;
+
+
+import com.zoe.phip.infrastructure.myvalidator.annotation.MyPassword;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
