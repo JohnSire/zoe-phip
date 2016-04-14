@@ -23,7 +23,22 @@ import com.zoe.phip.web.model.sm.SystemDictCategory;
  */
 public interface ISystemDictCategoryService extends IBaseInService<SystemDictCategory> {
 
+    /**
+     * 获取字典类别列表
+     *
+     * @param systemData
+     * @param key
+     * @param queryPage
+     * @return
+     */
     ServiceResultT<PageList<SystemDictCategory>> getDictCategories(SystemData systemData, String key, QueryPage queryPage);
 
+    /**
+     * 通过编码获取唯一的菜单类别
+     *
+     * @param systemData
+     * @param code
+     * @return
+     */
     ServiceResultT<SystemDictCategory> getDictCategory(SystemData systemData, String code);
 }

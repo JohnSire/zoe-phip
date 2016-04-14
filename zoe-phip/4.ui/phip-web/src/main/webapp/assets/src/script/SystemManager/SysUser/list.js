@@ -1,5 +1,6 @@
 ﻿define(function (require, exports, module) {
     var internal = {
+        selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
             var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
             var baseGrid = new BaseGrid({
@@ -11,7 +12,20 @@
                 tools: {
                     btnbox: {
                         'add': true,
-                        'del': true
+                        'del': true,
+                        'custom': {
+                            text: "用户列表选择测试", click: function () {
+
+                                internal.selectList.invoke("user", {
+                                    stroage:[{id:'2587d91cb3ee474ca5045fe3be8babd6',loginName:'admin'}],
+                                    multiselect:false,
+                                    callback: function (data) {
+                                        alert(JSON.stringify(data));
+                                    }
+                                });
+
+                            }
+                        }
                     },
                     searchbox: [
                         {label: '关键字', name: 'keyWord', type: 'text'}
@@ -22,11 +36,33 @@
                     columns: [
                         {display: '名称', name: 'name', width: 120, align: 'left'},
                         {display: '登录名', name: 'loginName', width: 120, align: 'left'},
-                        {display: '注册时间', name: 'createAt', width: 120, align: 'left', type: 'date', format: 'yyyy-mm-dd'},
-                        {display:'状态', name:'state', width:80, align:'center', icons:['switch'], iconsParam:{'switch':{switchOff: 0, switchOn: 1,confirmMeg:'确认修改用户状态?',primaryKey:'id',url:'/user/updateState'}}},
+                        {
+                            display: '注册时间',
+                            name: 'createAt',
+                            width: 120,
+                            align: 'left',
+                            type: 'date',
+                            format: 'yyyy-mm-dd'
+                        },
+                        {
+                            display: '状态',
+                            name: 'state',
+                            width: 80,
+                            align: 'center',
+                            icons: ['switch'],
+                            iconsParam: {
+                                'switch': {
+                                    switchOff: 0,
+                                    switchOn: 1,
+                                    confirmMeg: '确认修改用户状态?',
+                                    primaryKey: 'id',
+                                    url: '/user/updateState'
+                                }
+                            }
+                        },
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
-                    usePage:true,
+                    usePage: true,
                     width: $("body").innerWidth() - 2,
                     height: $("body").innerHeight() - $("#gridTools").outerHeight() - 38//500
                 },

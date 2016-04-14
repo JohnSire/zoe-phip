@@ -21,11 +21,38 @@ import java.util.Map;
  */
 public interface ISystemDictCategoryMapper extends IMyMapper<SystemDictCategory> {
 
+    /**
+     * 获取字典类别列表
+     *
+     * @param map
+     * @return
+     */
     List<SystemDictCategory> getDictCategories(Map map);
 
+    /**
+     * 获取具体的字典类别
+     *
+     * @param map
+     * @return
+     */
     SystemDictCategory getDictCategory(Map map);
 
+    /**
+     * 分页获取字典类别
+     *
+     * @param key
+     * @param queryPage
+     * @return
+     * @throws Exception
+     */
     PageList<SystemDictCategory> getDictCategories(String key, QueryPage queryPage) throws Exception;
 
+    /**
+     * 通过编码获取具体的字典类别
+     *
+     * @param code
+     * @return
+     * @throws Exception
+     */
     SystemDictCategory getDictCategory(String code) throws Exception;
 }

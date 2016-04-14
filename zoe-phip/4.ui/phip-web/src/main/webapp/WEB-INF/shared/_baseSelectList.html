@@ -1,0 +1,47 @@
+<%
+var baseTitle={
+%>
+${title}
+<%};%>
+<%
+var baseStyleSection = {
+%>
+<link href="/assets/dist/style/layout.css" rel="stylesheet"/>
+<style type="text/css">
+    .y-dialog-form .label {
+        width: 56px;
+    }
+</style>
+<%};%>
+
+<%
+var baseBodySection = {
+%>
+<div class="y-dialog-container" style="overflow:hidden">
+    <div class="y-dialog-content">
+        <div class="y-dialog-title" style="border-top:0;">
+            <h4 class="title">选择列表</h4>
+        </div>
+        <div class="y-dialog-form">
+            ${bodySection}
+        </div>
+        <div class="y-dialog-table" id="grid"></div>
+    </div>
+    <div class="y-dialog-content">
+        <div class="y-dialog-title" style="border-top:0;">
+            <h4 class="title">已选择项</h4>
+        </div>
+        <div class="y-dialog-select clearfix">
+            <ul class="lists" id="pane-list-selected"></ul>
+        </div>
+    </div>
+</div>
+<%};%>
+<%
+var baseScriptSection={
+%>
+${scriptSection}
+<%};%>
+<%
+include("/WEB-INF/shared/_default.html",{baseTitle:baseTitle,baseStyleSection:baseStyleSection,baseBodySection:baseBodySection,baseScriptSection:baseScriptSection}){}
+%>

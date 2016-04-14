@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.register.dao.IXmanBaseInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.XmanBaseInfo" extends="com.zoe.phip.module.service.MasterEntityResultMap">
+        <result column="ORG_NAME" property="orgName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ORG_CODE" property="orgCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="XMAN_ID" property="xmanId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ID_NO" property="idNo" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="SEX_CODE" property="sexCode" javaType="java.lang.Integer"
+                jdbcType="DECIMAL"/>
+        <result column="BIRTH_DATE" property="birthDate" javaType="java.sql.Timestamp"
+                jdbcType="TIMESTAMP"/>
+        <result column="ID_TYPE_CODE" property="idTypeCode" javaType="java.lang.Integer"
+                jdbcType="DECIMAL"/>
+        <result column="EMPLOYER_NAME" property="employerName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="TEL_NO" property="telNo" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="REL_NAME" property="relName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="REL_TEL_NO" property="relTelNo" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ADDRESS" property="address" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="POSTALCODE" property="postalcode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="NATIONALITY_CODE" property="nationalityCode" javaType="java.lang.Integer"
+                jdbcType="DECIMAL"/>
+        <result column="ABO_CODE" property="aboCode" javaType="java.lang.Integer"
+                jdbcType="DECIMAL"/>
+        <result column="RH_CODE" property="rhCode" javaType="java.lang.Integer"
+                jdbcType="DECIMAL"/>
+        <result column="EDUCATION_CODE" property="educationCode" javaType="java.lang.Integer"
+                jdbcType="DECIMAL"/>
+        <result column="OCCUPATION_CODE" property="occupationCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="MARRIAGE_CODE" property="marriageCode" javaType="java.lang.Integer"
+                jdbcType="DECIMAL"/>
+        <result column="CODE_SYS_CODE" property="codeSysCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="CODE_SYS_NAME" property="codeSysName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="addList" parameterType="java.util.List">
+        INSERT INTO PHIP_XMAN_BASE_INFO (
+        ORG_NAME,
+        ORG_CODE,
+        XMAN_ID,
+        ID_NO,
+        NAME,
+        SEX_CODE,
+        BIRTH_DATE,
+        ID_TYPE_CODE,
+        EMPLOYER_NAME,
+        TEL_NO,
+        REL_NAME,
+        REL_TEL_NO,
+        ADDRESS,
+        POSTALCODE,
+        NATIONALITY_CODE,
+        ABO_CODE,
+        RH_CODE,
+        EDUCATION_CODE,
+        OCCUPATION_CODE,
+        MARRIAGE_CODE,
+        CODE_SYS_CODE,
+        CODE_SYS_NAME,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+            SELECT
+            #{item.orgName,jdbcType=VARCHAR},
+            #{item.orgCode,jdbcType=VARCHAR},
+            #{item.xmanId,jdbcType=VARCHAR},
+            #{item.idNo,jdbcType=VARCHAR},
+            #{item.name,jdbcType=VARCHAR},
+            #{item.sexCode,jdbcType=DECIMAL},
+            #{item.birthDate,jdbcType=TIMESTAMP},
+            #{item.idTypeCode,jdbcType=DECIMAL},
+            #{item.employerName,jdbcType=VARCHAR},
+            #{item.telNo,jdbcType=VARCHAR},
+            #{item.relName,jdbcType=VARCHAR},
+            #{item.relTelNo,jdbcType=VARCHAR},
+            #{item.address,jdbcType=VARCHAR},
+            #{item.postalcode,jdbcType=VARCHAR},
+            #{item.nationalityCode,jdbcType=DECIMAL},
+            #{item.aboCode,jdbcType=DECIMAL},
+            #{item.rhCode,jdbcType=DECIMAL},
+            #{item.educationCode,jdbcType=DECIMAL},
+            #{item.occupationCode,jdbcType=VARCHAR},
+            #{item.marriageCode,jdbcType=DECIMAL},
+            #{item.codeSysCode,jdbcType=VARCHAR},
+            #{item.codeSysName,jdbcType=VARCHAR},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
+            FROM DUAL
+        </foreach>
+    </insert>
+    <delete id="deleteByIds" parameterType="java.lang.String">
+        delete from PHIP_XMAN_BASE_INFO where ID in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <delete id="deleteByList" parameterType="java.util.List">
+        delete from PHIP_XMAN_BASE_INFO where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
+            update PHIP_XMAN_BASE_INFO
+            <set>
+                <if test="item.orgName != null">
+                    ORG_NAME = #{item.orgName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.orgCode != null">
+                    ORG_CODE = #{item.orgCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.xmanId != null">
+                    XMAN_ID = #{item.xmanId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.idNo != null">
+                    ID_NO = #{item.idNo,jdbcType=VARCHAR},
+                </if>
+                <if test="item.name != null">
+                    NAME = #{item.name,jdbcType=VARCHAR},
+                </if>
+                <if test="item.sexCode != null">
+                    SEX_CODE = #{item.sexCode,jdbcType=DECIMAL},
+                </if>
+                <if test="item.birthDate != null">
+                    BIRTH_DATE = #{item.birthDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.idTypeCode != null">
+                    ID_TYPE_CODE = #{item.idTypeCode,jdbcType=DECIMAL},
+                </if>
+                <if test="item.employerName != null">
+                    EMPLOYER_NAME = #{item.employerName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.telNo != null">
+                    TEL_NO = #{item.telNo,jdbcType=VARCHAR},
+                </if>
+                <if test="item.relName != null">
+                    REL_NAME = #{item.relName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.relTelNo != null">
+                    REL_TEL_NO = #{item.relTelNo,jdbcType=VARCHAR},
+                </if>
+                <if test="item.address != null">
+                    ADDRESS = #{item.address,jdbcType=VARCHAR},
+                </if>
+                <if test="item.postalcode != null">
+                    POSTALCODE = #{item.postalcode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.nationalityCode != null">
+                    NATIONALITY_CODE = #{item.nationalityCode,jdbcType=DECIMAL},
+                </if>
+                <if test="item.aboCode != null">
+                    ABO_CODE = #{item.aboCode,jdbcType=DECIMAL},
+                </if>
+                <if test="item.rhCode != null">
+                    RH_CODE = #{item.rhCode,jdbcType=DECIMAL},
+                </if>
+                <if test="item.educationCode != null">
+                    EDUCATION_CODE = #{item.educationCode,jdbcType=DECIMAL},
+                </if>
+                <if test="item.occupationCode != null">
+                    OCCUPATION_CODE = #{item.occupationCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.marriageCode != null">
+                    MARRIAGE_CODE = #{item.marriageCode,jdbcType=DECIMAL},
+                </if>
+                <if test="item.codeSysCode != null">
+                    CODE_SYS_CODE = #{item.codeSysCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.codeSysName != null">
+                    CODE_SYS_NAME = #{item.codeSysName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.state != null">
+                    STATE = #{item.state,jdbcType=DECIMAL},
+                </if>
+                MODIFY_AT=sysdate
+            </set>
+            where id = #{item.id};
+        </foreach>
+    </update>
+</mapper>

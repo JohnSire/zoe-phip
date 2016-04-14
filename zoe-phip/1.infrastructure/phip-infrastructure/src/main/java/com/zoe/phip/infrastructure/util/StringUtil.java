@@ -7,6 +7,7 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -181,6 +182,7 @@ public final class StringUtil {
         String result = sw.toString();
         pw.close();
         try {
+
             sw.close();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by wangxien (wangxien) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:xs="urn:hl7-org:v3" targetNamespace="urn:hl7-org:v3" elementFormDefault="qualified">
+	<element name="GetDocumentStroedInfoResponse">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="Id" type="xs:II">
+					<annotation>
+						<documentation>消息标识</documentation>
+					</annotation>
+				</element>
+				<element minOccurs="0" name="TargetId" type="xs:II">
+					<annotation>
+						<documentation>目标消息标识</documentation>
+					</annotation>
+				</element>
+				<element name="DocumentSet" type="xs:DocumentIndex" nillable="true" minOccurs="0" maxOccurs="unbounded">
+					<annotation>
+						<documentation>文档信息列表</documentation>
+					</annotation>
+				</element>
+				<element name="Detail" type="s:string" minOccurs="0">
+					<annotation>
+						<documentation>状态细节</documentation>
+					</annotation>
+				</element>
+			</sequence>
+			<attribute name="status" type="s:string" use="required">
+				<annotation>
+					<documentation>状态</documentation>
+				</annotation>
+			</attribute>
+		</complexType>
+	</element>
+	<complexType name="DocumentIndex">
+		<sequence>
+			<element name="DocumentUniqueId" type="s:string">
+				<annotation>
+					<documentation>共享文档存储UID</documentation>
+				</annotation>
+			</element>
+			<element name="RepositoryUniqueId" type="s:string">
+				<annotation>
+					<documentation>共享文档存储机构标识符</documentation>
+				</annotation>
+			</element>
+			<element name="DocumentTitle" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>共享文档标题</documentation>
+				</annotation>
+			</element>
+			<element name="CreateTime" type="s:dateTime" minOccurs="0">
+				<annotation>
+					<documentation>共享文档创建时间</documentation>
+				</annotation>
+			</element>
+			<element name="AuthorName" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>共享文档作者</documentation>
+				</annotation>
+			</element>
+			<element name="PatientID" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>患者标识</documentation>
+				</annotation>
+			</element>
+			<element name="PatientName" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>患者姓名</documentation>
+				</annotation>
+			</element>
+			<element name="ServerOrganization" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>就诊机构名称</documentation>
+				</annotation>
+			</element>
+			<element name="EpisodeID" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>就诊号</documentation>
+				</annotation>
+			</element>
+			<element name="InTime" type="s:dateTime" minOccurs="0">
+				<annotation>
+					<documentation>入院时间</documentation>
+				</annotation>
+			</element>
+			<element name="OutTime" type="s:dateTime" minOccurs="0">
+				<annotation>
+					<documentation>出院时间</documentation>
+				</annotation>
+			</element>
+			<element name="AdmissionDepart" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>就诊科室</documentation>
+				</annotation>
+			</element>
+			<element name="AdmissionDoctor" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>主管医生</documentation>
+				</annotation>
+			</element>
+			<element name="AdmissionType" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>就诊类型</documentation>
+				</annotation>
+			</element>
+			<element name="DiagnosisResult" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>诊断</documentation>
+				</annotation>
+			</element>
+			<element name="DocUrl" minOccurs="0">
+				<annotation>
+					<documentation>文档的URL地址</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="s:string">
+						<maxLength value="1000"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ArrayOfAuthorAuthor">
+		<sequence>
+			<element name="Author" type="xs:Author" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="Author">
+		<sequence>
+			<element name="AuthorName" type="s:string">
+				<annotation>
+					<documentation>共享文档作者</documentation>
+				</annotation>
+			</element>
+			<element name="AuthorInstitution" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>共享文档作者所在机构</documentation>
+				</annotation>
+			</element>
+			<element name="AuthorSpecialty" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>共享文档作者专业</documentation>
+				</annotation>
+			</element>
+			<element name="AuthorRole" type="s:string" minOccurs="0">
+				<annotation>
+					<documentation>共享文档作者角色信息</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="II">
+		<attribute name="root" type="s:string">
+			<annotation>
+				<documentation>标识符根</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="extension" type="s:string">
+			<annotation>
+				<documentation>根下唯一标识</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+</schema>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 (http://www.altova.com) by wangxien (wangxien) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:xs="urn:hl7-org:v3" targetNamespace="urn:hl7-org:v3" elementFormDefault="qualified">
+	<element name="RetrieveDocumentSetRequest">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="ID" type="xs:II">
+					<annotation>
+						<documentation>消息标识</documentation>
+					</annotation>
+				</element>
+				<element name="DocumentRequest" type="xs:DocumentRequest" maxOccurs="unbounded">
+					<annotation>
+						<documentation>文档检索请求列表</documentation>
+					</annotation>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="II">
+		<attribute name="root" type="s:string">
+			<annotation>
+				<documentation>标识符根</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="extension" type="s:string">
+			<annotation>
+				<documentation>根下唯一标识</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType name="DocumentRequest">
+		<sequence>
+			<element name="RepositoryUniqueId" type="s:string">
+				<annotation>
+					<documentation>文档存储机构标识符</documentation>
+				</annotation>
+			</element>
+			<element name="DocumentUniqueId" type="s:string">
+				<annotation>
+					<documentation>文档唯一标识符</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

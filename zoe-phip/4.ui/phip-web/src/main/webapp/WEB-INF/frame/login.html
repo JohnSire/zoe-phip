@@ -1,7 +1,7 @@
 <%
 var styleSection = {
 %>
-<link href="/assets/dist/style/login.css" rel="stylesheet"/>
+<link href='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/dist/style/login.css")}' rel="stylesheet"/>
 <%};%>
 <%
 var bodySection = {
@@ -80,18 +80,12 @@ var scriptSection={
 %>
 <script type="text/javascript">
     $(function () {
-        //背景动画效果
-        $('#slides div.dynamic-bg').css("background-position", "50% 571px")
-                .stop()
-                .animate({backgroundPositionY: 0}, 57100, this.scrollbackground);
-
-        //加载js
         seajs.use('{dir}/FrameManager/Login/login', function (a) {
-            a.internal();
+            a.init();
         });
     });
 </script>
 <%};%>
 <%
-include("/WEB-INF/shared/_default.html",{baseTitle:"登录页",baseStyleSection:styleSection,baseBodySection:bodySection,baseScriptSection:scriptSection}){}
+include("/WEB-INF/shared/_default.html",{baseTitle:"人口信息基础平台--用户登录",baseStyleSection:styleSection,baseBodySection:bodySection,baseScriptSection:scriptSection}){}
 %>

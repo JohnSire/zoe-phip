@@ -35,7 +35,7 @@ define(function (require, exports, module) {
                             if (data.isSuccess) {
                                 window.location.href = webRoot + "/frame/index";
                             } else {
-                                internal.showMsg(data.Message[0].Content);
+                                internal.showMsg(data.messages[0].content);
                             }
                         },
                         complete: function () {
@@ -137,7 +137,7 @@ define(function (require, exports, module) {
             }
         }
     };
-    exports.internal = function () {
+    exports.init = function () {
         internal.init();
     };
 });

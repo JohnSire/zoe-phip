@@ -16,7 +16,7 @@ public class SystemUserControllerTest extends BaseControllerTest {
     @Autowired
     private SystemUserController systemUserController;
 
-/*    @Test
+    @Test
     public void testGetUserInfo() throws Exception {
         try {
             ServiceResultT<SystemUser> result= systemUserController.getUserInfo(request,null);
@@ -24,7 +24,7 @@ public class SystemUserControllerTest extends BaseControllerTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
 
     @Test
