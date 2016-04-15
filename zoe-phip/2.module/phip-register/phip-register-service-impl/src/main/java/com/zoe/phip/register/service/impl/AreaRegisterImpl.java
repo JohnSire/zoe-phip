@@ -1,11 +1,17 @@
 package com.zoe.phip.register.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IAreaBaseInfoMapper;
 import com.zoe.phip.register.dao.IDictCatalogMapper;
 import com.zoe.phip.register.model.AreaBaseInfo;
 import com.zoe.phip.register.model.DictCatalog;
+import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.service.IAreaRegister;
+import com.zoe.phip.register.util.ProcessXmlUtil;
+import org.dom4j.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,9 +24,22 @@ import java.util.Date;
 @Service(interfaceClass = IAreaRegister.class, proxy = "sdpf", dynamic = true)
 public class AreaRegisterImpl implements IAreaRegister {
 
+    private static final Logger logger = LoggerFactory.getLogger(AreaRegisterImpl.class);
+
+    @Autowired
+    private IAreaBaseInfoMapper areaBaseInfoMapper;
+
     @Override
     public String addAreaRequest(String message) {
-        return "123456";
+        Document document = ProcessXmlUtil.load(message);
+        AreaBaseInfo areaBaseInfo;
+        try {
+            areaBaseInfo = XmlBeanUtil.toBean(document, new AreaBaseInfo());
+            areaBaseInfoMapper.insertSelective(areaBaseInfo);
+        } catch (Exception ex) {
+            logger.error("error",ex);
+        }
+        return "success";
     }
 
     @Override
