@@ -4,6 +4,7 @@
  */
 package com.zoe.phip.web.model.sm;
 
+import com.zoe.phip.infrastructure.annotation.ColumnNotes;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateLength;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotBlank;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotNull;
@@ -27,6 +28,7 @@ public class  SystemUser extends MasterEntity {
      */
     @Column(name = "NAME")
 //    @JSONField(name = "Name")
+    @ColumnNotes(name="真实字段名称为：名称")
     @ValidateNotBlank(message = "{SystemUser.name.ValidateNotBlank.illegal}")
     @ValidateLength(min = 5, max = 20, message = "{SystemUser.name.ValidateLength.illegal}")
     @ValidatePattern(regexp = "[a-zA-Z]{5,20}",message = "{SystemUser.name.ValidatePattern.illegal}")

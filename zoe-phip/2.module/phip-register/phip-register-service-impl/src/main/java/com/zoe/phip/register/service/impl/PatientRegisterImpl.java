@@ -65,7 +65,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             document.getRootElement().element("/acceptAckCode").attribute("code").setValue("NE");
             String result;
             if (!strResult.equals("success:数据集内容验证正确")) {
-                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", strResult + "，注册失败", baseInfo.getMessageId(), idRoot);
+                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", strResult + "，更新失败", baseInfo.getMessageId(), idRoot);
             } else {
                 result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", "由于内容重复注册，注册失败", baseInfo.getMessageId(), idRoot);
             }

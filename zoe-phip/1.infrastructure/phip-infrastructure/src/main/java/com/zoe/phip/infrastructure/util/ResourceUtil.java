@@ -40,7 +40,7 @@ public final class ResourceUtil {
         try {
             if (stream != null)
                 return StringUtil.inputStream2String(stream);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

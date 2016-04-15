@@ -3,6 +3,7 @@ package com.zoe.phip.web.service.impl.in.sm;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
+import com.zoe.phip.infrastructure.annotation.ColumnNotes;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.bean.BeanFactory;
 import com.zoe.phip.infrastructure.entity.PageList;
@@ -20,9 +21,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.persistence.Column;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -163,6 +168,38 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
         Set<ConstraintViolation<SystemUser>> set = validator.validate(systemUser);
         for (ConstraintViolation<SystemUser> constraintViolation : set) {
             System.out.println(constraintViolation.getMessage());
+            //字段名:如name.
+            String columnName=constraintViolation.getPropertyPath().toString();
+            //class:如：systemuser
+            constraintViolation.getRootBeanClass();
+
+
+            Class<?> bean=constraintViolation.getRootBeanClass();
+            String columnNotesName="";
+            Field[] fields = bean.getDeclaredFields();
+            if (fields != null) {
+                for (int i = 0; i < fields.length; i++) {
+                    Field field = fields[i];
+                    if (field.isAnnotationPresent(Column.class)) {
+                        String name = null;
+                        Annotation annotation = field.getAnnotation(Column.class);
+                        try {
+                            Method method = Column.class.getMethod("name");
+                            name = (String) method.invoke(annotation);
+                            if(name.equals(columnName.toUpperCase())){
+                                Annotation annotationTwo = field.getAnnotation(ColumnNotes.class);
+                                Method methodTwo = ColumnNotes.class.getMethod("name");
+                                columnNotesName=(String)methodTwo.invoke(annotationTwo);
+                                break;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+            }
+            System.out.println(columnNotesName+constraintViolation.getMessage());
         }
     }
 }
