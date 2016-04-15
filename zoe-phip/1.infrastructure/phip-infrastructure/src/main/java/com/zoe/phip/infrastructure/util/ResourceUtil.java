@@ -38,9 +38,8 @@ public final class ResourceUtil {
     public static String loadEmbeddedResource(String path) {
         InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
         try {
-            if (stream != null)
-                return StringUtil.inputStream2String(stream);
-        } catch (IOException e) {
+            if (stream != null) return StringUtil.inputStream2String(stream);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

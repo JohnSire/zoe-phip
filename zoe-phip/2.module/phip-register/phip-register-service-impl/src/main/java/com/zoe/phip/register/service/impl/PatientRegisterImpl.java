@@ -59,15 +59,15 @@ public class PatientRegisterImpl implements IPatientRegister {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        baseInfo.setXmanId(UUID.randomUUID().toString());
+        baseInfo.setId(UUID.randomUUID().toString());
         String strExists = "yes";
         if (!strResult.equals("success:数据集内容验证正确") || strExists.equals("yes")) {
             document.getRootElement().element("/acceptAckCode").attribute("code").setValue("NE");
             String result;
             if (!strResult.equals("success:数据集内容验证正确")) {
-                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", strResult + "，注册失败", baseInfo.getMessageId(), idRoot);
+                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", strResult + "，注册失败", baseInfo.getMsgId(), idRoot);
             } else {
-                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", "由于内容重复注册，注册失败", baseInfo.getMessageId(), idRoot);
+                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", "由于内容重复注册，注册失败", baseInfo.getMsgId(), idRoot);
             }
         }
         // TODO: 2016/4/14 新增个人基本信息到数据库
@@ -76,7 +76,7 @@ public class PatientRegisterImpl implements IPatientRegister {
         if (StringUtil.isNullOrWhiteSpace(strAddPatientDataSet)) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
             Document xmlResponse = ProcessXmlUtil.loadXmlFile("个人信息注册更新服务响应成功");
-            ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/id")).attribute("extension").setValue(baseInfo.getMessageId());
+            ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/id")).attribute("extension").setValue(baseInfo.getMsgId());
             ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/creationTime")).attribute("value").setValue(sdf.format(new Date()));
             ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/controlActProcess/subject/registrationEvent/subject1/patient/id")).attribute("extension").setValue(baseInfo.getPatientId());
             xmlResponse.selectSingleNode("/PRPA_IN201312UV02/controlActProcess/subject/registrationEvent/subject1/patient/patientPerson/name").setText(baseInfo.getName());
@@ -86,11 +86,11 @@ public class PatientRegisterImpl implements IPatientRegister {
             ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/sender/device/id")).attribute("root").setValue(receiverId);
             ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/receiver/device/id")).attribute("extension").setValue(senderExtension);
             ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/sender/device/id")).attribute("extension").setValue(receiverExtension);
-            outputStr = ProcessXmlUtil.mixResponseXml(xmlResponse, "PRPA_IN201312UV02", "PRPA_IN201312UV02", "AA", "注册成功", baseInfo.getMessageId(), idRoot);
+            outputStr = ProcessXmlUtil.mixResponseXml(xmlResponse, "PRPA_IN201312UV02", "PRPA_IN201312UV02", "AA", "注册成功", baseInfo.getMsgId(), idRoot);
             // 如果个人注册成功,不仅要添加BASEINFO表,而且在EHR_DATA_INFO中也需添加一条个人信息的索引记录用以调阅档案
 
-            EhrDataInfo ehrDataInfo = new EhrDataInfo();
-            ehrDataInfo.setMsgId(baseInfo.getMessageId());
+          /*  EhrDataInfo ehrDataInfo = new EhrDataInfo();
+            ehrDataInfo.setMsgId(baseInfo.getMsgId());
             ehrDataInfo.setPatientId(baseInfo.getHealthRecordNo());
             ehrDataInfo.setPatientName(baseInfo.getName());
             ehrDataInfo.setHealthCardId(baseInfo.getCardNo());
@@ -103,7 +103,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             ehrDataInfo.setOutTime(new Date());
             ehrDataInfo.setTitle("个人基本健康信息");
             ehrDataInfo.setDocumentUniqueId("HSDA00.01");
-            ehrDataInfo.setRepositoryUniqueId(UUID.randomUUID().toString());
+            ehrDataInfo.setRepositoryUniqueId(UUID.randomUUID().toString());*/
 
         } else {
             ((Element) (document.selectSingleNode("/" + root + "/receiver/device/id"))).attribute("root").setValue(senderId);
@@ -111,7 +111,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             ((Element) (document.selectSingleNode("/" + root + "/receiver/device/id"))).attribute("extension").setValue(senderExtension);
             ((Element) (document.selectSingleNode("/" + root + "/sender/device/id"))).attribute("extension").setValue(receiverExtension);
             ((Element) (document.selectSingleNode("/" + root + "/acceptAckCode"))).attribute("code").setValue("NE");
-            outputStr = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", "由于" + strAddPatientDataSet + "，注册失败", baseInfo.getMessageId(), idRoot);
+            outputStr = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", "由于" + strAddPatientDataSet + "，注册失败", baseInfo.getMsgId(), idRoot);
         }
         return outputStr;
     }

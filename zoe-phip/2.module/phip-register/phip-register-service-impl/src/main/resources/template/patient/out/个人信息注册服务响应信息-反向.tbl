@@ -1,6 +1,6 @@
 ﻿<PRPA_IN201313UV02 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPA_IN201313UV02.xsd" ITSVersion="XML_1.0">
-  <id root="2.16.156.10011.0" extension="22a0f9e0-4454-11dc-a6be-3603d6866807" />
-  <creationTime value="20070803130624" />
+  <id root="2.16.156.10011.0" extension="${Model.msgId}" />
+  <creationTime value="${Model.createTime}" />
   <interactionId root="2.16.840.1.113883.1.6" extension="PRPA_IN201313UV02" />
   <processingCode code="P" />
   <processingModeCode code="R" />
@@ -19,7 +19,7 @@
   <acknowledgement typeCode="AE">
     <targetMessage>
       <!--请求的消息ID-->
-      <id root="2.16.156.10011.0" extension="22a0f9e0-4454-11dc-a6be-3603d6866807" />
+      <id root="2.16.156.10011.0" extension="${Model.msgId}" />
     </targetMessage>
     <acknowledgementDetail>
       <!--处理结果说明-->
@@ -29,92 +29,91 @@
   <controlActProcess classCode="CACT" moodCode="EVN">
     <subject typeCode="SUBJ">
       <registrationRequest classCode="REG" moodCode="RQO">
-        <statusCode code="active" />
+        <statusCode code="${Model.statusCode}" />
         <subject1 typeCode="SBJ">
           <patient classCode="PAT">
             <!--本地系统的患者ID -->
-            <id root="2.16.156.10011.0.2.2" extension="患者ID" />
-            <statusCode code="active" />
-            <effectiveTime value="20111212141414" />
+            <id root="2.16.156.10011.0.2.2" extension="${Model.patientId}" />
+            <statusCode code="${Model.statusCode}" />
+            <effectiveTime value="${Model.reqisterDate}" />
             <patientPerson>
               <!--身份证号-->
-              <id root="2.16.156.10011.1.3" extension="120109197706015516" />
+              <id root="2.16.156.10011.1.3" extension="${Model.idNo}" />
               <!--姓名-->
-              <name use="L">刘永好</name>
+              <name use="L">${Model.name}</name>
               <!--联系电话-->
-              <telecom value="028-2222444" use="H" />
+              <telecom value="${Model.telNo}" use="H" />
               <!--性别-->
-              <administrativeGenderCode code="1" codeSystem="2.16.156.10011.2.3.3.4" displayName="男性" />
+              <administrativeGenderCode code="${Model.sexCode}" codeSystem="2.16.156.10011.2.3.3.4" displayName="${Model.sexCodeName}" />
               <!--出生时间-->
-              <birthTime value="19570323" />
+              <birthTime value="${Model.birthTime}" />
               <!--联系地址-->
               <addr use="PUB">
                 <!--非结构化地址（完整地址描述） -->
                 <streetAddressLine partType="SAL">
-                  四川省成都市双流县红沙
-                  村3 号
+                ${Model.address}
                 </streetAddressLine>
                 <!--地址-省（自治区、直辖市） -->
-                <state language="CH">广东省</state>
+                <state language="CH">${Model.stateCode}</state>
                 <!--地址-市（地区） -->
-                <city>广州市</city>
+                <city>${Model.cityCode}</city>
                 <!--地址-县（区） -->
-                <county>越秀区</county>
+                <county>${Model.areaCode}</county>
                 <!-- 地址-乡（镇、街道办事处） -->
-                <streetNameBase>童心街</streetNameBase>
+                <streetNameBase>${Model.cityCode}</streetNameBase>
                 <!-- 地址-村（街、路、弄等） -->
-                <streetName>下塘西路</streetName>
+                <streetName>${Model.committeeCode}</streetName>
                 <!-- 地址-门牌号码 -->
-                <houseNumber>39号</houseNumber>
+                <houseNumber>${Model.houseNumber}</houseNumber>
                 <!-- 邮政编码-->
-                <postalCode>510000</postalCode>
+                <postalCode>${Model.postalCode}</postalCode>
               </addr>
               <!--婚姻状况-->
-              <maritalStatusCode code="10" codeSystem="2.16.156.10011.2.3.3.5" displayName="未婚" />
+              <maritalStatusCode code="${Model.marriageCode}" codeSystem="2.16.156.10011.2.3.3.5" displayName="${Model.marriageName}" />
               <!--民族-->
-              <ethnicGroupCode code="01" codeSystem="2.16.156.10011.2.3.3.3" displayName="汉族" />
+              <ethnicGroupCode code="${Model.nationalityCode}" codeSystem="2.16.156.10011.2.3.3.3" displayName="${Model.nationalityName}" />
               <!--职业类别代码-->
               <asEmployee classCode="EMP">
-                <occupationCode code="13" codeSystem="2.16.156.10011.2.3.3.7" displayName="专业技术人员" />
+                <occupationCode code="${Model.occupationCode}" codeSystem="2.16.156.10011.2.3.3.7" displayName="${Model.occupationName}" />
                 <employerOrganization classCode="ORG" determinerCode="INSTANCE">
                   <!--工作单位名称-->
-                  <name>XXX学校</name>
+                  <name>${Model.employerName}</name>
                   <contactParty classCode="CON">
                     <!--工作联系电话-->
-                    <telecom value="028-9999999" use="WP" />
+                    <telecom value="${Model.employerTelNo}" use="WP" />
                   </contactParty>
                 </employerOrganization>
               </asEmployee>
               <asOtherIDs classCode="PAT">
                 <!--健康卡号-->
-                <id root="2.16.156.10011.1.19" extension="38273N237" />
+                <id root="2.16.156.10011.1.19" extension="${Model.healthRecordNo}" />
                 <scopingOrganization classCode="ORG" determinerCode="INSTANCE">
                   <!--健康卡发放机构代码-->
-                  <id root="2.16.156.10011.1.5" extension="XXXXX" />
+                  <id root="2.16.156.10011.1.5" extension="${Model.healthRecordOrgCode}" />
                 </scopingOrganization>
               </asOtherIDs>
               <asOtherIDs classCode="PAT">
                 <!--城乡居民健康档案编号-->
-                <id root="2.16.156.10011.1.2" extension="38273N237" />
+                <id root="2.16.156.10011.1.2" extension="${Model.healthRecordNo}" />
                 <scopingOrganization classCode="ORG" determinerCode="INSTANCE">
                   <!--建档医疗机构组织机构代码-->
-                  <id root="2.16.156.10011.1.5" extension="XXXXX" />
+                  <id root="2.16.156.10011.1.5" extension="${Model.healthRecordOrgCode}" />
                 </scopingOrganization>
               </asOtherIDs>
               <!--联系人-->
               <personalRelationship>
                 <code />
                 <!--联系人电话-->
-                <telecom use="H" value="" />
+                <telecom use="H" value="${Model.relTelNo}" />
                 <relationshipHolder1 classCode="PSN" determinerCode="INSTANCE">
                   <!--联系人姓名-->
-                  <name>刘好</name>
+                  <name>${Model.relName}</name>
                 </relationshipHolder1>
               </personalRelationship>
             </patientPerson>
             <providerOrganization classCode="ORG" determinerCode="INSTANCE">
-              <id root="2.16.156.10011.1.5" extension="XXXXX" />
-              <name use="L">无锡中医院</name>
+              <id root="2.16.156.10011.1.5" extension="${Model.orgCode}" />
+              <name use="L">"${Model.orgName}"</name>
               <contactParty classCode="CON" />
             </providerOrganization>
             <!--医疗保险信息-->
@@ -122,7 +121,7 @@
               <coverageRecord classCode="COV" moodCode="EVN">
                 <beneficiary typeCode="BEN">
                   <beneficiary classCode="MBR">
-                    <code code="1" codeSystem="2.16.156.10011.2.3.1.248" codeSystemName="医疗保险类别代码" displayName="城镇职工基本医疗保险" />
+                    <code code="${Model.codeSysCode}" codeSystem="2.16.156.10011.2.3.1.248" codeSystemName="医疗保险类别代码" displayName="${Model.codeSysName}" />
                   </beneficiary>
                 </beneficiary>
               </coverageRecord>
@@ -131,9 +130,9 @@
         </subject1>
         <author typeCode="AUT">
           <assignedEntity classCode="ASSIGNED">
-            <id root="2.16.156.10011.0.3.2" extension="修改人ID" />
+            <id root="2.16.156.10011.0.3.2" extension="${Model.assignedPersonCode}" />
             <assignedPerson classCode="PSN" determinerCode="INSTANCE">
-              <name use="L">赵武x</name>
+              <name use="L">${Model.assignedPersonName}</name>
             </assignedPerson>
           </assignedEntity>
         </author>
