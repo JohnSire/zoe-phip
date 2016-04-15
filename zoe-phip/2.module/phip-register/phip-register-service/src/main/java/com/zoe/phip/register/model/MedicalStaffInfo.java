@@ -5,6 +5,7 @@
 
 package com.zoe.phip.register.model;
 
+import com.zoe.phip.infrastructure.annotation.XPath;
 import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.*;
@@ -22,106 +23,127 @@ public class MedicalStaffInfo extends MasterEntity {
      * 医务人员id
      */
     @Column(name = "STAFF_ID")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/id", descr = "医务人员id")
     private String staffId;
     /**
      * 姓名
      */
     @Column(name = "NAME")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/name", descr = "姓名")
     private String name;
     /**
      * 性别代码
      */
     @Column(name = "GENDER_CODE")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/administrativeGenderCode/@code", descr = "性别代码")
     private String genderCode;
     /**
      * 性别名称
      */
     @Column(name = "GENDER_NAME")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/administrativeGenderCode/@displayName", descr = "姓名名称")
     private String genderName;
     /**
      * 出生日期
      */
     @Column(name = "BIRTH_TIME")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/birthTime/@value", descr = "出生日期")
     private Date birthTime;
     /**
      * 出生地
      */
     @Column(name = "BIRTHPLACE_ADDR")
+    @XPath(value = "//controlActProcess/subject/registrationRequest//subject1/healthCareProvider/healthCarePrincipalPerson/birthplace/addr", descr = "出生地")
     private String birthplaceAddr;
     /**
      * 身份证号
      */
     @Column(name = "ID_NO")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/id/@extension", descr = "身份证号")
     private String idNo;
     /**
      * 专业技术职务代码
      */
     @Column(name = "TECHNICAL_CODE")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/code/@code", descr = "专业技术职务代码")
     private String technicalCode;
     /**
      * 专业技术职务名称
      */
     @Column(name = "TECHNICAL_NAME")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/code/@displayName", descr = "专业技术职务名称")
     private String technicalName;
     /**
      * 工作地址
      */
     @Column(name = "EMPLOYER_ADDR")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/addr", descr = "工作地址")
     private String employerAddr;
     /**
      * 工作联系电话
      */
     @Column(name = "EMPLOYER_TEL_NO")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/telecom", descr = "工作联系电话")
     private String employerTelNo;
     /**
      * 角色有效期间(起始日期)
      */
     @Column(name = "EFFECTIVE_TIME_LOW")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/effectiveTime/low/@value", descr = "角色有效期间(起始日期)")
     private Date effectiveTimeLow;
     /**
      * 角色有效期间(截止日期)
      */
     @Column(name = "EFFECTIVE_TIME_HIGH")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/effectiveTime/high/@value", descr = "角色有效期间(截止日期)")
     private Date effectiveTimeHigh;
     /**
      * 科室号
      */
     @Column(name = "AFFILIATED_ORG_CODE")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/asAffiliate/affiliatedPrincipalOrganization/id/@extension", descr = "科室号")
     private String affiliatedOrgCode;
     /**
      * 科室名称
      */
     @Column(name = "AFFILIATED_ORG_NAME")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/asAffiliate/affiliatedPrincipalOrganization/name", descr = "科室名称")
     private String affiliatedOrgName;
     /**
      * 消息id
      */
     @Column(name = "MSG_ID")
+    @XPath(value = "//id/@root", descr = "消息id")
     private String msgId;
     /**
      * 申请者代码
      */
     @Column(name = "ASSIGNED_CODE")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/id/@extension", descr = "申请者代码")
     private String assignedCode;
     /**
      * 申请者名称
      */
     @Column(name = "ASSIGNED_NAME")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/assignedPerson/name", descr = "申请者名称")
     private String assignedName;
     /**
      * 申请者科室代码
      */
     @Column(name = "ASSIGNED_DEPT_CODE")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/id/@extension", descr = "申请者科室代码")
     private String assignedDeptCode;
     /**
      * 申请者科室名称
      */
     @Column(name = "ASSIGNED_DEPT_NAME")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/name", descr = "申请者科室名称")
     private String assignedDeptName;
     /**
      * 申请联系人
      */
     @Column(name = "ASSIGNED_ONTACT_PERSON")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/contactParty/contactPerson/name", descr = "申请联系人")
     private String assignedOntactPerson;
 
     public String getStaffId() {
@@ -291,4 +313,8 @@ public class MedicalStaffInfo extends MasterEntity {
     public void setAssignedOntactPerson(String assignedOntactPerson) {
         this.assignedOntactPerson = assignedOntactPerson;
     }
+
+
+
+
 }
