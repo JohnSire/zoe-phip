@@ -3,12 +3,15 @@ package com.zoe.phip.register.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
+import com.zoe.phip.register.dao.IXmanBaseInfoMapper;
+import com.zoe.phip.register.dao.IXmanCardMapper;
 import com.zoe.phip.register.model.EhrDataInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.service.IPatientRegister;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.text.SimpleDateFormat;
@@ -21,6 +24,12 @@ import java.util.UUID;
 @Repository("PatientRegister")
 @Service(interfaceClass = IPatientRegister.class, proxy = "sdpf", dynamic = true)
 public class PatientRegisterImpl implements IPatientRegister {
+
+    @Autowired
+    private IXmanBaseInfoMapper baseInfoMapper;
+
+    @Autowired
+    private IXmanCardMapper cardMapper;
 
     /**
      * 新增个人信息注册
@@ -50,6 +59,7 @@ public class PatientRegisterImpl implements IPatientRegister {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        baseInfo.setXmanId(UUID.randomUUID().toString());
         String strExists = "yes";
         if (!strResult.equals("success:数据集内容验证正确") || strExists.equals("yes")) {
             document.getRootElement().element("/acceptAckCode").attribute("code").setValue("NE");
@@ -61,7 +71,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             }
         }
         // TODO: 2016/4/14 新增个人基本信息到数据库
-        String strAddPatientDataSet = "";
+        String strAddPatientDataSet = baseInfoMapper.insertSelective(baseInfo) > 0 ? "" : baseInfo.getPatientId();
         String outputStr;
         if (StringUtil.isNullOrWhiteSpace(strAddPatientDataSet)) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");

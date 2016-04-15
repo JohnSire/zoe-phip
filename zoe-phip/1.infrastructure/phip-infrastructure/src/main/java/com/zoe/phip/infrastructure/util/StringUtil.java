@@ -67,14 +67,23 @@ public final class StringUtil {
         return builder.toString();
     }
 
-    public static String inputStream2String(InputStream is) throws IOException {
+    public static String inputStream2String(InputStream is) {
         BufferedReader in = new BufferedReader(new InputStreamReader(is));
-        StringBuilder buffer = new StringBuilder();
-        String line;
-        while ((line = in.readLine()) != null) {
-            buffer.append(line).append(System.getProperty("line.separator"));
+        try {
+            StringBuffer buffer = new StringBuffer();
+            String line;
+            while ((line = in.readLine()) != null) {
+                buffer.append(line).append(System.getProperty("line.separator"));
+            }
+            return buffer.toString();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        } finally {
+            try {
+                in.close();
+            } catch (Exception ex) {
+            }
         }
-        return buffer.toString();
     }
 
     public static String toMd516(String text) {
@@ -99,8 +108,7 @@ public final class StringUtil {
         StringBuffer hexValue = new StringBuffer();
         for (int i = 0; i < md5Bytes.length; i++) {
             int val = ((int) md5Bytes[i]) & 0xff;
-            if (val < 16)
-                hexValue.append("0");
+            if (val < 16) hexValue.append("0");
             hexValue.append(Integer.toHexString(val));
         }
         return hexValue.toString();
@@ -123,8 +131,7 @@ public final class StringUtil {
     }
 
     public static String fromBase64String(String text) {
-        if (isNullOrWhiteSpace(text))
-            return text;
+        if (isNullOrWhiteSpace(text)) return text;
         return new String(Base64.getDecoder().decode(text));
     }
 
@@ -162,11 +169,10 @@ public final class StringUtil {
 
         try {
             File file = new File(fileName);
-            if (file.exists())
-                file.delete();
+            if (file.exists()) file.delete();
             FileOutputStream fileOutputStream = new FileOutputStream(fileName);
             String content = toJsonString(object);
-            byte[] bytes=content.getBytes(Charset.defaultCharset());
+            byte[] bytes = content.getBytes(Charset.defaultCharset());
             fileOutputStream.write(bytes);
             fileOutputStream.close();
         } catch (Exception ex) {

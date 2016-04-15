@@ -56,6 +56,7 @@
         <freemarker.version>2.3.19</freemarker.version>
         <dom4j.version>2.0.0-RC1</dom4j.version>
         <dom4j-core.version>1.4-dev-8</dom4j-core.version>
+        <ibeetl.version>2.2.5</ibeetl.version>
     </properties>
 
 </project>
