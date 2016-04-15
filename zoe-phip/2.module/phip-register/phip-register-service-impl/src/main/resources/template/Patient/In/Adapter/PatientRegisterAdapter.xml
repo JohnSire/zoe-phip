@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <OrgName path="//controlActProcess/subject/registrationRequest/author/assignedEntity/assignedPerson/name"/>
+    <OrgCode path="//controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/id/@extension"/>
+    <XmanId path=""/>
+    <IdNo path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/id/@extension"/>
+    <Name path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/name"/>
+    <SexCode path="/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@code"/>
+    <BirthDate path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/birthTime/@value"/>
+    <IdTypeCode path=""/>
+    <EmployerName path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asEmployee/employerOrganization/name"/>
+    <XmanId path=""/>
+    <XmanId path=""/>
+    <XmanId path=""/>
+    <XmanId path=""/>
+    <XmanId path=""/>
+    <XmanId path=""/>
+    <XmanId path=""/>
+
+</root>

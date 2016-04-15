@@ -8,6 +8,7 @@ package com.zoe.phip.register.model;
 import javax.persistence.*;
 
 
+import com.zoe.phip.infrastructure.annotation.XPath;
 import com.zoe.phip.module.service.entity.MasterEntity;
 
 import java.util.Date;
@@ -24,36 +25,43 @@ public class AreaBaseInfo extends MasterEntity {
      * 区域代码
      */
     @Column(name = "CODE")
+    @XPath(value = "//code/@value")
     private String code;
     /**
      * 区域名称
      */
     @Column(name = "NAME")
+    @XPath(value = "//name/@value")
     private String name;
     /**
      * 父级区域
      */
     @Column(name = "P_AREA_ID")
+    @XPath(value = "//pareaId/@value")
     private String pareaId;
     /**
      * 成立时间
      */
     @Column(name = "BUILD_TIME")
+    @XPath(value = "//buildTime/@value")
     private Date buildTime;
     /**
      * 注销日期
      */
     @Column(name = "AREA_CANCELLATION_DATE")
+    @XPath(value = "//areaCancellationDate/@value")
     private Date areaCancellationDate;
     /**
      * 注销原因
      */
     @Column(name = "AREA_CANCEL_RESON")
+    @XPath(value = "//areaCancelReson/@value")
     private String areaCancelReson;
     /**
      * 注销前区域信息，用以做历史沿革关联
      */
     @Column(name = "HISTORY_AREA_ID")
+    @XPath(value = "//historyAreaId/@value")
     private String historyAreaId;
 
     public String getCode() {
