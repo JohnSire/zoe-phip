@@ -1,5 +1,6 @@
 ﻿define(function (require, exports, module) {
     var internal = {
+        selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
             var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
             var baseAttr = new BaseAttr({
@@ -10,25 +11,26 @@
                 updateUrl: webRoot + '/menu/updateMenuInfo',//修改接口Url
                 loadPageEvent: function () {
                     $(".btn-switch-outer").btnSwitch({name: 'state'});
-                    $("#btnFkParent").selectDialog({
-                        winName:'win_menu_tree_dialog',
-                        winCallback:'win_menu_tree_select_callback',
-                        name:'fkParentMenuId',
-                        fkObj:'parentMenu',
-                        dialogParam: {
-                            title:'选择父级菜单节点',
-                            url: '/menu/menutree?noDrag=1',//弹窗url
-                            width: 500,
-                            height: 580,
-                            buttons: [
-                                {
-                                    text: "关闭",
-                                    onclick: function (item, dialog) {
-                                        dialog.close();
-                                    }
-                                }
-                            ]
-                        }
+                    internal.selectList.dialog('menu', {
+                        target: $("#btnFkParent"),
+                        name: 'fkParentMenuId',
+                        fkObj: 'parentMenu',
+                        displayField: 'name',
+                        valueField: 'id',
+                        fkNullContent: '菜单根节点',
+                        selectParam: {
+                            isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
+                            treeVaildMsg: '父节点不能是其本身!',
+                            multiselect: false
+                        },
+                        buttonsExtend: [{
+                            text: '菜单根节点', onclick: function (item, dialog) {
+                                $('input[name="fkParentMenuId"]').val(0);
+                                $("#btnFkParent").find(".text-line-content").text("菜单根节点");
+                                dialog.close();
+                            }
+                        }]
+
                     });
                 }
             })

@@ -40,7 +40,7 @@
                         jqObj.ligerGetDateEditorManager().setValue(o)
                     } else {
                         jqObj.val(o);
-                        jqObj.trigger("setValue",obj);
+                        jqObj.trigger("setValue", obj);
                     }
                     break;
                 case "select":
@@ -348,58 +348,5 @@
             internal.init(self);
         })
     }
-    //选择字段功能
-    $.fn.selectDialog = function (options) {
-        var internal = {
-            defaultOptions: {
-                winStorage: [],
-                winName: '',//弹窗名称
-                winCallback: '',//弹窗回调函数
-                name:'',//选择字典的名称
-                fkObj: '',//外键对象
-                displayField: 'name',//内容显示的列
-                valueField:'id',
-                dialogParam: {
-                    title: '',
-                    url: '',//弹窗url
-                    width: 800,
-                    height: 600
-                }
-            },
-            init: function (self) {
-                var dialogParam = self.param.dialogParam;//弹窗的参数
-                var winName = self.param.winName;//弹窗的名称
-                var winCallback = self.param.winCallback;//回调函数
-                var valueField=self.param.valueField;//值字典
-                var displayField=self.param.displayField;//显示内容
-                var fkObj=self.param.fkObj;//外键对象
-                var name=self.param.name;//字典名称
-                $('input[name="' + name + '"]').on("setValue",function(event,argument){
-                    $(self).find("input").val(argument[name]);
-                    if(argument[fkObj]) {
-                        $(self).find(".text-line-content").text(argument[fkObj][displayField]);
-                    }else{
-                        //菜单特殊处理
-                        $(self).find(".text-line-content").text("菜单根节点");
-                    }
-                });
 
-                $(self).on("click", function () {
-                    var top = common.getTopWindowDom();
-                    top[winName] = common.dialog(dialogParam);
-                    top[winCallback] = function (data) {
-                        $(self).find("input").val(data[valueField]);
-                        $(self).find(".text-line-content").text(data[displayField]);
-                        top[winName].close();
-                    }
-                })
-            }
-        }
-        var target = this;
-        $(target).each(function () {
-            var self = this;
-            self.param = $.extend(true, {}, internal.defaultOptions, options);
-            internal.init(self);
-        })
-    }
 })();

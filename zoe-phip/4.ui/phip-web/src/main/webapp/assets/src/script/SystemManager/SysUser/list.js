@@ -12,22 +12,22 @@
                 tools: {
                     btnbox: {
                         'add': true,
-                        'del': true,
-                        'custom': {
-                            text: "用户列表选择测试", click: function () {
-                                var storage=[{id: '2587d91cb3ee474ca5045fe3be8babd6', loginName: 'admin'}];
-                                internal.selectList.invoke("user",
-                                    {
-                                        selectParam: {
-                                            stroage:storage
-                                        },
-                                        callback: function (data) {
-                                            alert(JSON.stringify(data));
-                                        }
-                                    });
-
-                            }
-                        }
+                        'del': true
+                        //'custom': {
+                        //    text: "用户列表选择测试", click: function () {
+                        //        var storage = [{id: '2587d91cb3ee474ca5045fe3be8babd6', loginName: 'admin'}];
+                        //        internal.selectList.invoke("user",
+                        //            {
+                        //                isAllowEmptySelect: false,
+                        //                selectParam: {
+                        //                    stroage: storage
+                        //                },
+                        //                callback: function (data) {
+                        //                    alert(JSON.stringify(data));
+                        //                }
+                        //            })
+                        //    }
+                        //}
                     },
                     searchbox: [
                         {label: '关键字', name: 'keyWord', type: 'text'}
