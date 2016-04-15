@@ -3,6 +3,7 @@
  */
 define(function (require, exports, module) {
     var internal = {
+        top: common.getTopWindowDom(),
         searchbox: require("./searchbox").searchbox,
         itemsbox: require("./itemsbox").itemsbox,
         stroage: [],
@@ -16,9 +17,13 @@ define(function (require, exports, module) {
             internal.displayField = options["displayField"];
             internal.valueField = options["valueField"];
             internal.storage = options["stroage"];
-            gridParam["onCheckRow"] = internal.onChecked;
+            internal.isTreeVaild = options["isTreeVaild"];
+            internal.selfId = options["selfId"];
+            internal.treeVaildMsg = options["treeVaildMsg"]
+            gridParam["onCheckRow"] = internal.onCheckRow;
             gridParam["onCheckAllRow"] = internal.onCheckAllRow;
             gridParam["isChecked"] = internal.isChecked;
+            gridParam["onBeforeCheckRow"]=internal.onBeforeCheckRow;
             var gridObj = $("#grid").ligerGrid(gridParam);
             //如果是非多选的，则移除全选框
             if (!internal.multiselect) {
@@ -51,16 +56,29 @@ define(function (require, exports, module) {
             }
             return false;
         },
+        //点击选中前先验证
+        onBeforeCheckRow:function(checked, data, rowid, rowdata){
+            if (internal.isTreeVaild && internal.selfId == data[internal.valueField]) {
+                internal.top.common.jsmsgError(internal.treeVaildMsg);
+                return false;
+            }
+        },
         //点击选中
-        onChecked: function (checked, rowdata, rowindex) {
+        onCheckRow: function (checked, rowdata, rowindex) {
             if (checked) {
                 if (!internal.multiselect) {
                     for (var rowid in this.records) {
                         this.unselect(rowid);
                         internal.itemsbox.removeItem(this.records[rowid], internal.valueField);
                     }
+                    $("#pane-list-selected").empty();
+                    internal.itemsbox.addItem(rowdata, internal.displayField, internal.valueField, function (data) {
+                        //点击移除按钮，取消选中
+                        internal.unChecked(data);
+                    });
+                } else {
+                    internal.recursiveChecked(rowdata);
                 }
-                internal.recursiveChecked(rowdata);
                 this.select(rowindex);
             } else {
                 this.unselect(rowindex);
@@ -75,7 +93,6 @@ define(function (require, exports, module) {
                     function (data) {
                         internal.unChecked(data);
                     });
-
             } else {
                 var gridObj = common.getGrid("grid");
                 var rowsdata = gridObj.getData();

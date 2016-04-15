@@ -13,8 +13,20 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: webRoot + '/menu/getMenuList',
                     columns: [
-                        {display: '名称', name: 'name', width: 120, align: 'left'},
-                        {display: '编码', name: 'code', width: 100, align: 'left'}
+                        {display: '名称', name: 'name', width: 280, align: 'left'},
+                        {
+                            display: '状态',
+                            name: 'state',
+                            width: 120,
+                            align: "center",
+                            render: function (rowdata, index, value) {
+                                if (value == 1) {
+                                    return "<span>启用</span>";
+                                } else {
+                                    return "<span style='color:red;'>禁用</span>"
+                                }
+                            }
+                        },
                     ],
                     usePager: false,
                     tree: {

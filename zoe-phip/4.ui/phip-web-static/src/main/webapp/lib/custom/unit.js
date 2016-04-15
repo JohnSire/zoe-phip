@@ -70,7 +70,7 @@
                     $("#msgprint").remove();
                 }
                 if (typeof (callback) == "function") callback();
-            }, 1500);
+            }, 1200);
             //执行回调函数
         },
         //正确消息提醒
