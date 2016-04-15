@@ -4,21 +4,9 @@ import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlUtil;
 import org.dom4j.*;
 import org.dom4j.io.SAXReader;
-import org.dom4j.util.XMLErrorHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.SchemaFactory;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -193,7 +181,7 @@ public class ProcessXmlUtil {
         //TODO xsdPath的路径
         String result = "success:数据集内容验证正确";
         String strMessage = XmlUtil.validateXsd(xsdPath, strXml);
-        if (strMessage != "") {
+        if (!strMessage.equals("")) {
             result = "error:数据集内容验证错误(" + strMessage + ")";
         }
 

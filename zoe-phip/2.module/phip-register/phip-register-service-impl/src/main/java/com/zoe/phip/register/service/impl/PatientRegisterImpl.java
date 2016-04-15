@@ -61,13 +61,13 @@ public class PatientRegisterImpl implements IPatientRegister {
         }
         baseInfo.setId(UUID.randomUUID().toString());
         String strExists = "yes";
-        if (!strResult.equals("success:数据集内容验证正确") || strExists.equals("yes")) {
+        if (!strResult.equals("success:数据集内容验证正�) || strExists.equals("yes")) {
             document.getRootElement().element("/acceptAckCode").attribute("code").setValue("NE");
             String result;
-            if (!strResult.equals("success:数据集内容验证正确")) {
-                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", strResult + "，注册失败", baseInfo.getMsgId(), idRoot);
+            if (!strResult.equals("success:数据集内容验证正�)) {
+                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", strResult + "，注册失�, baseInfo.getMsgId(), idRoot);
             } else {
-                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", "由于内容重复注册，注册失败", baseInfo.getMsgId(), idRoot);
+                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", "由于内容重复注册，注册失�, baseInfo.getMsgId(), idRoot);
             }
         }
         // TODO: 2016/4/14 新增个人基本信息到数据库
@@ -87,7 +87,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/receiver/device/id")).attribute("extension").setValue(senderExtension);
             ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/sender/device/id")).attribute("extension").setValue(receiverExtension);
             outputStr = ProcessXmlUtil.mixResponseXml(xmlResponse, "PRPA_IN201312UV02", "PRPA_IN201312UV02", "AA", "注册成功", baseInfo.getMsgId(), idRoot);
-            // 如果个人注册成功,不仅要添加BASEINFO表,而且在EHR_DATA_INFO中也需添加一条个人信息的索引记录用以调阅档案
+            // 如果个人注册成功,不仅要添加BASEINFO�而且在EHR_DATA_INFO中也需添加一条个人信息的索引记录用以调阅档案
 
           /*  EhrDataInfo ehrDataInfo = new EhrDataInfo();
             ehrDataInfo.setMsgId(baseInfo.getMsgId());
@@ -111,7 +111,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             ((Element) (document.selectSingleNode("/" + root + "/receiver/device/id"))).attribute("extension").setValue(senderExtension);
             ((Element) (document.selectSingleNode("/" + root + "/sender/device/id"))).attribute("extension").setValue(receiverExtension);
             ((Element) (document.selectSingleNode("/" + root + "/acceptAckCode"))).attribute("code").setValue("NE");
-            outputStr = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", "由于" + strAddPatientDataSet + "，注册失败", baseInfo.getMsgId(), idRoot);
+            outputStr = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", "由于" + strAddPatientDataSet + "，注册失�, baseInfo.getMsgId(), idRoot);
         }
         return outputStr;
     }
