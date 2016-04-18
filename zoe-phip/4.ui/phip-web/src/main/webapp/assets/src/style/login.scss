@@ -1,110 +1,6 @@
-@charset "UTF-8"
-/* 0- reset样式 1- 基本样式 2- 登录页*/
-/*reset样式*/
-/*=====================================================================================================================*/
-body, div, dl, dt, dd, ul, ol, li,
-h1, h2, h3, h4, h5, h6, pre, code,
-form, fieldset, legend, input, button,
-textarea, p, blockquote, th, td {
-  margin: 0;
-  padding: 0;
-
-}
-table {
-  border-collapse:collapse;
-  border-spacing: 0;
-
-}
-fieldset, img {
-  border: 0;
-
-}
-li {
-  list-style:none;
-
-}
-  :focus {
-    outline: 0;
-
-}
-/*IE6-Win, IE7-Win */
-input, button, textarea, select {
-  *font-size: 100%;
-
-}
-/* 去除火狐中的特殊样式 */
-button::-moz-focus-inner,
-input[type="reset"]::-moz-focus-inner,
-input[type="button"]::-moz-focus-inner,
-input[type="submit"]::-moz-focus-inner,
-input[type="file"] > input[type="button"]::-moz-focus-inner {
-  border:none;
-  padding: 0;
-
-}
-
-/*基本样式*/
-/*=======================================================================================================================*/
-body {
-  font:12px Arial,SimSun,Tahoma, Helvetica,  sans-serif;
-  color:#2b2c2b;
-
-}
-select {
-  font:12px Arial,SimSun,Tahoma, Helvetica,  sans-serif;
-
-}
-.hide {
-  display:none;
-
-}
-.left {
-  float:left;
-
-}
-.right {
-  float:right;
-
-}
-.clear {
-  clear:both;
-
-}
-/* Clearfix */
-.clearfix:after {
-  clear:both;
-  content:" ";
-  display:block;
-  font-size:0;
-  height:0;
-  visibility:hidden;
-
-}
-/* for IE6 */
-* html .clearfix {
-  zoom:1;
-
-}
-/* for IE7 */
-* + html .clearfix {
-  zoom:1;
-
-}
-a {
-  cursor:pointer;
-  text-decoration:none;
-  blr:expression(this.onFocus=this.blur());
-
-}
-button,
-input[type="submit"],
-input[type="reset"],
-input[type="button"]{
-  cursor:pointer;
-
-}
-/*登录页*/
-/*****************************************************************************************************************/
+@charset "utf-8";
+$imgsrc: '../images/login';
+@import "_base";
 .wrapper {
   width: 100%;
   height: 544px;
@@ -112,61 +8,50 @@ input[type="button"]{
   top: 50%;
   left: 0;
   margin-top: -265px;
-
 }
 .header {
   width: 1003px;
   height: 57px;
   margin: 0 auto;
-
 }
 .header-logo {
   height: 48px;
   width: 550px;
   padding-left: 85px;
-
 }
 .header-msg {
   padding-right: 102px;
   width: 200px;
-
 }
 .header-msg .help {
   color: #878787;
   float:right;
   line-height: 57px;
   padding: 0 3px;
-
 }
 .header-msg .link {
   color: #878787;
   text-decoration:none;
-
 }
 .header-msg .link:hover {
   color: #878787;
   text-decoration:underline;
-
 }
 .moduletable-banner {
   height: 474px;
   position:relative;
-
 }
 .slides .one-bg {
   width: 1003px;
   margin: 0 auto;
-
 }
 .slides .one-bg .static-bg {
   width: 1003px;
   height: 476px;
-
 }
 .slides .one-bg .dynamic-bg {
   width: 1003px;
   height: 476px;
-
 }
 .slides .text {
   width: 446px;
@@ -174,28 +59,23 @@ input[type="button"]{
   padding-top: 85px;
   padding-left: 122px;
   float:left;
-
 }
 .slides .img-login-logo {
   width: 463px;
   height: 183px;
-
 }
 .slides .one {
-  background: url(../images/login/bg.jpg) repeat-x left top;
-
+  background: url(#{$imgsrc}/bg.jpg) repeat-x left top;
 }
 .slides .one-bg {
-  background: url(../images/login/bg-body-front_bg.png) no-repeat left top;
-
+  background: url(#{$imgsrc}/bg-body-front_bg.png) no-repeat left top;
 }
 .slides .one-bg .static-bg {
-  background: url(../images/login/bg-body-front_da.png) no-repeat 352px 233px;
+  background: url(#{$imgsrc}/bg-body-front_da.png) no-repeat 352px 233px;
 
 }
 .slides .one-bg .dynamic-bg {
-  background: url(../images/login/bg-body-front.png) repeat 50% 0;
-
+  background: url(#{$imgsrc}/bg-body-front.png) repeat 50% 0;
 }
 .content {
   position:absolute;
@@ -203,7 +83,6 @@ input[type="button"]{
   top: 57px;
   width: 880px;
   margin-left: -440px;
-
 }
 .content-inner {
   width: 797px;
@@ -212,7 +91,6 @@ input[type="button"]{
   position:relative;
   top: 0;
   z-index: 100;
-
 }
 .login {
   float:right;
@@ -223,7 +101,7 @@ input[type="button"]{
 .login .tit {
   position:relative;
   height: 53px;
-  background: url(../images/login/login_top.png) no-repeat left top;
+  background: url(#{$imgsrc}/login_top.png) no-repeat left top;
 
 }
 .login .tit .bq {
@@ -232,18 +110,18 @@ input[type="button"]{
   right: 34px;
   width: 30px;
   height: 35px;
-  background: url(../images/login/bq.png) no-repeat left top;
+  background: url(#{$imgsrc}/bq.png) no-repeat left top;
   padding: 7px 0 0 8px;
 
 }
 .form-login {
-  background: url(../images/login/sg.png) no-repeat left bottom;
+  background: url(#{$imgsrc}/sg.png) no-repeat left bottom;
 
 }
 .form-login-inner {
   width: 290px;
   padding-top: 14px;
-  background: url(../images/login/login_bg.png) repeat-y left top;
+  background: url(#{$imgsrc}/login_bg.png) repeat-y left top;
   overflow:hidden;
 
 }
@@ -251,36 +129,30 @@ input[type="button"]{
   width: 238px;
   height: 40px;
   margin: 0 auto 9px auto;
-  background: url(../images/login/icon_peo.gif) no-repeat;
+  background: url(#{$imgsrc}/icon_peo.gif) no-repeat;
   position:relative;
 
 }
 .form-login-inner .login-icon {
   background-position:left top;
-
 }
 .form-login-inner .icon-suo {
   background-position:left - 49 px;
-
 }
 .form-login-inner .login-verify {
   background-position:left - 98 px;
-
 }
 .form-login-inner .bd-text.login-verify .inp-yh {
   width: 125px;
   padding: 5px 5px 0 5px;
   vertical-align:top;
-
 }
 .verify-outer {
   margin-left:4px;
-
 }
 .img-verify {
   width:95px;
   height:40px;
-
 }
 .form-login-inner .bd-text .inp-yh {
   width: 180px;
@@ -291,7 +163,6 @@ input[type="button"]{
   font-size: 14px;
   color: #9b9b9b;
   line-height: 40px;
-
 }
 .form-login-inner .bd-text .input-tips {
   color: #9b9b9b;
@@ -301,7 +172,6 @@ input[type="button"]{
   left: 50px;
   display:block;
   cursor:text;
-
 }
 .form-login-inner .tips {
   width: 240px;
@@ -309,25 +179,21 @@ input[type="button"]{
   line-height: 24px;
   text-align:left;
   overflow:hidden;
-
 }
 .form-login-inner .tips-span {
   color: #fff;
   display:inline-block;
   float:left;
-
 }
 .form-login-inner .tips-link {
   color: #fff;
   display:inline-block;
   float:right;
-
 }
 .form-login-inner .tips-input {
   position:relative;
   margin-right: 3px;
   vertical-align:middle;
-
 }
 .form-login-inner .warnning {
   width: 240px;
@@ -335,46 +201,39 @@ input[type="button"]{
   text-align:left;
   line-height: 20px;
   overflow:hidden;
-
 }
 .form-login-inner .warnning span.warnning {
   color: #f6ff00;
   font-weight:bold;
   font-size: 14px;
-
 }
 .form-login-inner .bd-login {
   width: 238px;
   height: 51px;
   margin: 0 auto 9px auto;
-
 }
 .form-login-inner .bd-login .dl {
   width: 238px;
   height: 51px;
   border:none;
   background: url(../images/login/dl.png) no-repeat left -51px;
-
 }
 .form-login-inner .bd-login .dl-hover {
   width: 238px;
   height: 51px;
   border:none;
   background: url(../images/login/dl.png) no-repeat left 0;
-
 }
 .login-foot {
   background: url(../images/login/login_foot.png) no-repeat left top;
   width: 290px;
   height: 55px;
-
 }
 .footer {
   position:relative;
   top: -70px;
   padding-top: 45px;
   background: url(../images/login/yun.png) repeat-x 0 0;
-
 }
 .copyright {
   text-align:center;

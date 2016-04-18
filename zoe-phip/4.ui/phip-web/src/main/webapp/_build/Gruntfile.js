@@ -3,15 +3,15 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         meta: {
-            imagePath: '../Assets/Images/',
-            srcImages: '../Assets/Src/Images/',
-            distImages: '../Assets/Dist/Images/',
-            stylePath: '../Assets/Style/',
-            srcStyle: '../Assets/Src/Style/',
-            distStyle: '../Assets/Dist/Style/',
-            scriptPath: '../Assets/Script/',
-            srcScript: '../Assets/Src/Script/',
-            distScript: '../Assets/Dist/Script/'
+            imagePath: '../assets/images/',
+            srcImages: '../assets/src/images/',
+            distImages: '../assets/dist/Images/',
+            stylePath: '../assets/style/',
+            srcStyle: '../assets/src/Style/',
+            distStyle: '../assets/dist/style/',
+            scriptPath: '../assets/script/',
+            srcScript: '../assets/src/script/',
+            distScript: '../assets/dist/script/'
         },
         //图片压缩
         imagemin: {                          // Task
