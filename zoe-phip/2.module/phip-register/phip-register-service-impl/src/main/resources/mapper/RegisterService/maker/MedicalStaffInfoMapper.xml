@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IMedicalStaffInfoMapper">
-    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.MedicalStaffInfo" extends="com.zoe.phip.module.service.MasterEntityResultMap">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.MedicalStaffInfo"
+               extends="com.zoe.phip.module.service.MasterEntityResultMap">
         <result column="STAFF_ID" property="staffId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="NAME" property="name" javaType="java.lang.String"
@@ -44,6 +45,8 @@
                 jdbcType="VARCHAR"/>
         <result column="ASSIGNED_ONTACT_PERSON" property="assignedOntactPerson" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
+        <result column="STATUSCODE" property="statuscode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO PHIP_MEDICAL_STAFF_INFO (
@@ -68,6 +71,7 @@
         ASSIGNED_DEPT_CODE,
         ASSIGNED_DEPT_NAME,
         ASSIGNED_ONTACT_PERSON,
+        STATUSCODE,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
@@ -92,6 +96,7 @@
             #{item.assignedDeptCode,jdbcType=VARCHAR},
             #{item.assignedDeptName,jdbcType=VARCHAR},
             #{item.assignedOntactPerson,jdbcType=VARCHAR},
+            #{item.statuscode,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -177,6 +182,9 @@
                 </if>
                 <if test="item.state != null">
                     STATE = #{item.state,jdbcType=DECIMAL},
+                </if>
+                <if test="item.statuscode != null">
+                    STATUSCODE = #{item.statuscode,jdbcType=VARCHAR},
                 </if>
                 MODIFY_AT=sysdate
             </set>
