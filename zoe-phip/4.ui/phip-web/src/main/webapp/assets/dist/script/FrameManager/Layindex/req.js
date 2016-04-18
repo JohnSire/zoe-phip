@@ -1,0 +1,1 @@
+define("modules/FrameManager/Layindex/req",[],function(a,b,c){var d={getMenuList:function(a){var b=new Request("/user/menu");b.post({async:!1,isTip:!1,success:function(b){"function"==typeof a&&a(b)}})}};b.req={getMenuList:function(a){d.getMenuList(a)}}});
