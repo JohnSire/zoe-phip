@@ -1,12 +1,18 @@
 package com.zoe.phip.register.service.impl;
 
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
+import com.zoe.phip.infrastructure.util.XmlUtil;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
+import org.dom4j.XPath;
 import org.dom4j.io.SAXReader;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -171,8 +177,8 @@ public class PatientRegisterImplTest {
         } catch (DocumentException e) {
 
         }
+        patientInput= XmlUtil.removeNameSpace(patientInput);
         Document doc= DocumentHelper.parseText(patientInput);
-
         XmanBaseInfo info = XmlBeanUtil.toBean(doc, XmanBaseInfo.class,document);
 
     }

@@ -41,49 +41,36 @@ public final class XmlBeanUtil {
             String defValue =((Element)x.selectSingleNode(parserDoc)).attribute("defValue")!=null?
                     ((Element)x.selectSingleNode(parserDoc)).attribute("defValue").getValue():"";
             String fieldType = field.getType().toString();
-            System.out.println(path);
             String value = defValue;
             if(!StringUtil.isNullOrWhiteSpace(path))
             {
                 XPath xpath= document.createXPath(path);
-                if(!StringUtil.isNullOrWhiteSpace(document.getRootElement().getNamespaceURI())){
-                    Map map = new HashMap();
-                    map.put("ns", document.getRootElement().getNamespaceURI());
-                    xpath = document.createXPath("//ns:"+path);
-                    xpath.setNamespaceURIs(map);
-                }
                 value=xpath.selectSingleNode(document).getText();
             }
+            System.out.println(path);//todo 删除这句代码
+            System.out.println(value);//todo 删除这句代码
             if(value==""){
                 continue;
             }
-
+            Method method = clazz.getMethod("set" + fieldName,field.getType());
             if (fieldType.endsWith("String")) {
                 //获得set方法
-                Method method = clazz.getMethod("set" + fieldName,String.class);
                 method.invoke(instance, value);
             } else if (fieldType.endsWith("int")) {
-                Method method = clazz.getMethod("set" + fieldName, int.class);
                 method.invoke(instance, Integer.parseInt(value));
             } else if (fieldType.endsWith("Integer")) {
-                Method method = clazz.getMethod("set" + fieldName, Integer.class);
                 method.invoke(instance, new Integer(value));
             } else if (fieldType.endsWith("double")) {
-                Method method = clazz.getMethod("set" + fieldName, double.class);
                 method.invoke(instance, Double.parseDouble(value));
             } else if (fieldType.endsWith("Double")) {
-                Method method = clazz.getMethod("set" + fieldName, Double.class);
                 method.invoke(instance, new Double(value));
             } else if (fieldType.endsWith("Date")) {
-                Method method = clazz.getMethod("set" + fieldName, Date.class);
                 method.invoke(instance, DateUtil.stringToDateTime(value));
             } else if (fieldType.endsWith("Boolean")) {
-                Method method = clazz.getMethod("set" + fieldName, Boolean.class);
                 method.invoke(instance, (value.toUpperCase().equals("TRUE") || value.toUpperCase().equals("1")) ?
                         new Boolean(true) :
                         new Boolean(false));
             } else if (fieldType.endsWith("boolean")) {
-                Method method = clazz.getMethod("set" + fieldName, Boolean.class);
                 method.invoke(instance, (value.toUpperCase().equals("TRUE") || value.toUpperCase().equals("1")) ?
                         true : false);
             } else if (fieldType.endsWith("List")) {

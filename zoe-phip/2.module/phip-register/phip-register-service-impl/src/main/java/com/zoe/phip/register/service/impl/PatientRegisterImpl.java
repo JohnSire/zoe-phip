@@ -39,6 +39,14 @@ public class PatientRegisterImpl implements IPatientRegister {
      */
     @Override
     public String addPatientRegistry(String message) {
+
+
+        //1.验证参数合法
+        //2.通过适配xml转成指定实体
+        //3.补全数据库实体
+        //4.执行数据库
+        //5.操作实体 AE AA
+        //6.返回值魔板处理
         String strResult = ProcessXmlUtil.verifyMessage(message);
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             // TODO: 2016/4/14

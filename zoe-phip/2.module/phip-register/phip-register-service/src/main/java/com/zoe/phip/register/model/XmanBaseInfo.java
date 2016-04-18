@@ -93,6 +93,8 @@ public class XmanBaseInfo extends MasterEntity {
     @Column(name = "EMPLOYER_NAME")
     private String employerName;
 
+
+
     /**
      * 工作单位联系方式
      */
@@ -653,5 +655,13 @@ public class XmanBaseInfo extends MasterEntity {
 
     public void setMarriageName(String marriageName) {
         this.marriageName = marriageName;
+    }
+
+    public String getEmployerTelNo() {
+        return employerTelNo;
+    }
+
+    public void setEmployerTelNo(String employerTelNo) {
+        this.employerTelNo = employerTelNo;
     }
 }
