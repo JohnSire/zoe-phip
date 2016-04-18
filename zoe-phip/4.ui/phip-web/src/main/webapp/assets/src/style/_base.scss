@@ -1,0 +1,83 @@
+/*-------------------------重置样式-------------------*/
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6, pre, code,
+form, fieldset, legend, input, button,
+textarea, p, blockquote, th, td {
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-collapse:collapse;
+  border-spacing: 0;
+}
+fieldset, img {
+  border: 0;
+}
+li {
+  list-style:none;
+}
+:focus {
+  outline: 0;
+}
+/*IE6-Win, IE7-Win */
+input, button, textarea, select {
+  *font-size: 100%;
+}
+/* 去除火狐中的特殊样式 */
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+  border:none;
+  padding: 0;
+}
+/*基本样式*/
+/*=======================================================================================================================*/
+body {
+  font:12px Arial,SimSun,Tahoma, Helvetica,  sans-serif;
+  color:#2b2c2b;
+}
+select {
+  font:12px Arial,SimSun,Tahoma, Helvetica,  sans-serif;
+}
+.hide {
+  display:none;
+}
+.left {
+  float:left;
+}
+.right {
+  float:right;
+}
+.clear {
+  clear:both;
+}
+/* Clearfix */
+.clearfix:after {
+  clear:both;
+  content:" ";
+  display:block;
+  font-size:0;
+  height:0;
+  visibility:hidden;
+}
+/* for IE6 */
+* html .clearfix {
+  zoom:1;
+}
+/* for IE7 */
+* + html .clearfix {
+  zoom:1;
+}
+a {
+  cursor:pointer;
+  text-decoration:none;
+  blr:expression(this.onFocus=this.blur());
+}
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"]{
+  cursor:pointer;
+}

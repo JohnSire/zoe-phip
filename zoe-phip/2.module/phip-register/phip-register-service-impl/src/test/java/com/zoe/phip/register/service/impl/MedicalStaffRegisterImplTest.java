@@ -116,7 +116,7 @@ public class MedicalStaffRegisterImplTest {
 
         xml = XmlUtil.removeNameSpace(xml);
         Document document = DocumentHelper.parseText(xml);
-        MedicalStaffInfo info = XmlBeanUtil.toBean(document, new MedicalStaffInfo());
+        MedicalStaffInfo info = XmlBeanUtil.toBean(document, MedicalStaffInfo.class,null);
         System.out.println();
     }
 }

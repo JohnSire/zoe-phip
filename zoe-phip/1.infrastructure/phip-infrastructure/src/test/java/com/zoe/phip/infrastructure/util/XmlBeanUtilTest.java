@@ -166,7 +166,7 @@ public class XmlBeanUtilTest {
         try {
             Document document = DocumentHelper.parseText(xmlString);
 
-            BaseInfo baseInfo = XmlBeanUtil.toBean(document, new BaseInfo());
+            BaseInfo baseInfo = XmlBeanUtil.toBean(document, BaseInfo.class,null);
             System.out.println();
 
 

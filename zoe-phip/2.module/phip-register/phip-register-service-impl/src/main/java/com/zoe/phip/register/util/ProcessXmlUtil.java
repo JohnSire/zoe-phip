@@ -61,6 +61,7 @@ public class ProcessXmlUtil {
         Map map = new HashMap();
         map.put("ns", nameSpace);
         XPath x = newXmlDoc.createXPath("//ns:interactionId");
+
         x.setNamespaceURIs(map);
         ((Element) x.selectSingleNode(rootNode)).attribute("extension").setValue(strMsgModelCode);
 

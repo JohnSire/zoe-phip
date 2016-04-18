@@ -1,72 +1,77 @@
 package com.zoe.phip.infrastructure.util;
 
-import com.zoe.phip.infrastructure.annotation.XPath;
+import org.dom4j.Attribute;
 import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.XPath;
 
 import java.lang.reflect.*;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by zhangwenbin on 2016/4/12.
  */
 public final class XmlBeanUtil {
 
-    public static <T> T toBean(Document document, T clazz) throws Exception {
-
+    public static <T> T toBean(Document document, Class<T> clazz,Document parserDoc) throws Exception {
+        if(document==null||parserDoc==null){
+            throw new Exception("document or parserDoc could not be null!");
+        }
         //获取所有的属性
-        Field[] fields = clazz.getClass().getDeclaredFields();
+        Field[] fields = clazz.getDeclaredFields();
 
-        clazz = (T) clazz.getClass().newInstance();
+        T instance =  clazz.newInstance();
         for (Field field : fields) {
-
-            //获取注解
-            XPath xPath = field.getAnnotation(XPath.class);
-
-            if (xPath == null) continue;
-            //路径
-            String path = xPath.value();
-            //默认值
-            String defValue = xPath.defaultValue();
-            //级别
-            int level = xPath.level();
             //属性名
             String fieldName = field.getName();
 
             //将第一位转化为大写，便于获取实体类中set,get方法
             fieldName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
-
+            XPath x = parserDoc.createXPath("//"+fieldName);
+            //路径
+            if((Element)x.selectSingleNode(parserDoc)==null
+                    ||((Element)x.selectSingleNode(parserDoc)).attribute("path")==null){
+                continue;
+            }
+            Attribute pathAttr=((Element)x.selectSingleNode(parserDoc)).attribute("path");
+            String path =pathAttr.getValue();// xPath.value();
+            //默认值
+            String defValue =((Element)x.selectSingleNode(parserDoc)).attribute("defValue")!=null?
+                    ((Element)x.selectSingleNode(parserDoc)).attribute("defValue").getValue():"";
             String fieldType = field.getType().toString();
-
-            String value = StringUtil.isNullOrWhiteSpace(path) ? defValue :
-                    document.selectSingleNode(path).getText();
-
+            String value = defValue;
+            if(!StringUtil.isNullOrWhiteSpace(path))
+            {
+                XPath xpath= document.createXPath(path);
+                value=xpath.selectSingleNode(document).getText();
+            }
+            System.out.println(path);//todo 删除这句代码
+            System.out.println(value);//todo 删除这句代码
+            if(value==""){
+                continue;
+            }
+            Method method = clazz.getMethod("set" + fieldName,field.getType());
             if (fieldType.endsWith("String")) {
                 //获得set方法
-                Method method = clazz.getClass().getMethod("set" + fieldName, String.class);
-                method.invoke(clazz, value);
-            } else if (fieldType.endsWith("Int")) {
-                Method method = clazz.getClass().getMethod("set" + fieldName, int.class);
-                method.invoke(clazz, Integer.parseInt(value));
+                method.invoke(instance, value);
+            } else if (fieldType.endsWith("int")) {
+                method.invoke(instance, Integer.parseInt(value));
             } else if (fieldType.endsWith("Integer")) {
-                Method method = clazz.getClass().getMethod("set" + fieldName, Integer.class);
-                method.invoke(clazz, new Integer(value));
+                method.invoke(instance, new Integer(value));
             } else if (fieldType.endsWith("double")) {
-                Method method = clazz.getClass().getMethod("set" + fieldName, double.class);
-                method.invoke(clazz, Double.parseDouble(value));
+                method.invoke(instance, Double.parseDouble(value));
             } else if (fieldType.endsWith("Double")) {
-                Method method = clazz.getClass().getMethod("set" + fieldName, Double.class);
-                method.invoke(clazz, new Double(value));
+                method.invoke(instance, new Double(value));
             } else if (fieldType.endsWith("Date")) {
-                Method method = clazz.getClass().getMethod("set" + fieldName, Date.class);
-                method.invoke(clazz, DateUtil.stringToDateTime(value));
+                method.invoke(instance, DateUtil.stringToDateTime(value));
             } else if (fieldType.endsWith("Boolean")) {
-                Method method = clazz.getClass().getMethod("set" + fieldName, Boolean.class);
-                method.invoke(clazz, (value.toUpperCase().equals("TRUE") || value.toUpperCase().equals("1")) ?
+                method.invoke(instance, (value.toUpperCase().equals("TRUE") || value.toUpperCase().equals("1")) ?
                         new Boolean(true) :
                         new Boolean(false));
             } else if (fieldType.endsWith("boolean")) {
-                Method method = clazz.getClass().getMethod("set" + fieldName, Boolean.class);
-                method.invoke(clazz, (value.toUpperCase().equals("TRUE") || value.toUpperCase().equals("1")) ?
+                method.invoke(instance, (value.toUpperCase().equals("TRUE") || value.toUpperCase().equals("1")) ?
                         true : false);
             } else if (fieldType.endsWith("List")) {
                 // TODO: 2016/4/13
@@ -77,6 +82,6 @@ public final class XmlBeanUtil {
                 }
             }
         }
-        return clazz;
+        return instance;
     }
 }

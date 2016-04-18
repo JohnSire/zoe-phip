@@ -113,7 +113,7 @@
             </patientPerson>
             <providerOrganization classCode="ORG" determinerCode="INSTANCE">
               <id root="2.16.156.10011.1.5" extension="${Model.orgCode}" />
-              <name use="L">"${Model.orgName}"</name>
+              <name use="L">${Model.orgName}</name>
               <contactParty classCode="CON" />
             </providerOrganization>
             <!--医疗保险信息-->
