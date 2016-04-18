@@ -1,7 +1,7 @@
-﻿<PRPA_IN201313UV02 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPA_IN201313UV02.xsd" ITSVersion="XML_1.0">
+﻿<PRPA_IN201316UV02 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPA_IN201316UV02.xsd" ITSVersion="XML_1.0">
   <id root="2.16.156.10011.0" extension="${Model.msgId}" />
   <creationTime value="${Model.createTime}" />
-  <interactionId root="2.16.840.1.113883.1.6" extension="PRPA_IN201313UV02" />
+  <interactionId root="2.16.840.1.113883.1.6" extension="PRPA_IN201316UV02" />
   <processingCode code="P" />
   <processingModeCode code="R" />
   <acceptAckCode code="NE" />
@@ -23,7 +23,7 @@
     </targetMessage>
     <acknowledgementDetail>
       <!--处理结果说明-->
-      <text>由于内容重复注册，注册失败</text>
+      <text>由于更新内容不存在，更新失败</text>
     </acknowledgementDetail>
   </acknowledgement>
   <controlActProcess classCode="CACT" moodCode="EVN">
@@ -50,23 +50,23 @@
               <!--联系地址-->
               <addr use="PUB">
                 <!--非结构化地址（完整地址描述） -->
-                <streetAddressLine partType="SAL">
-                ${Model.address}
-                </streetAddressLine>
-                <!--地址-省（自治区、直辖市） -->
-                <state language="CH">${Model.stateCode}</state>
-                <!--地址-市（地区） -->
-                <city>${Model.cityCode}</city>
-                <!--地址-县（区） -->
-                <county>${Model.areaCode}</county>
-                <!-- 地址-乡（镇、街道办事处） -->
-                <streetNameBase>${Model.cityCode}</streetNameBase>
-                <!-- 地址-村（街、路、弄等） -->
-                <streetName>${Model.committeeCode}</streetName>
-                <!-- 地址-门牌号码 -->
-                <houseNumber>${Model.houseNumber}</houseNumber>
-                <!-- 邮政编码-->
-                <postalCode>${Model.postalCode}</postalCode>
+               <streetAddressLine partType="SAL">
+               ${Model.address}
+               </streetAddressLine>
+               <!--地址-省（自治区、直辖市） -->
+               <state language="CH">${Model.stateCode}</state>
+               <!--地址-市（地区） -->
+               <city>${Model.cityCode}</city>
+               <!--地址-县（区） -->
+               <county>${Model.areaCode}</county>
+               <!-- 地址-乡（镇、街道办事处） -->
+               <streetNameBase>${Model.cityCode}</streetNameBase>
+               <!-- 地址-村（街、路、弄等） -->
+               <streetName>${Model.committeeCode}</streetName>
+               <!-- 地址-门牌号码 -->
+               <houseNumber>${Model.houseNumber}</houseNumber>
+               <!-- 邮政编码-->
+               <postalCode>${Model.postalCode}</postalCode>
               </addr>
               <!--婚姻状况-->
               <maritalStatusCode code="${Model.marriageCode}" codeSystem="2.16.156.10011.2.3.3.5" displayName="${Model.marriageName}" />
@@ -139,4 +139,4 @@
       </registrationRequest>
     </subject>
   </controlActProcess>
-</PRPA_IN201313UV02>
+</PRPA_IN201316UV02>

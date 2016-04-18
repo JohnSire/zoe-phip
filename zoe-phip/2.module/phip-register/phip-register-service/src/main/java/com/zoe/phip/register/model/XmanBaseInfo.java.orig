@@ -111,16 +111,16 @@ public class XmanBaseInfo extends MasterEntity {
     private String telNo;
 
     /**
-     * 联系人姓�
+     * 联系人姓名
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/relationshipHolder1/name", descr = "联系人姓")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/relationshipHolder1/name", descr = "联系人姓名")
     @Column(name = "REL_NAME")
     private String relName;
 
     /**
-     * 联系人电�
+     * 联系人电话
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/telecom/@value", descr = "联系人电")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/telecom/@value", descr = "联系人电码")
     @Column(name = "REL_TEL_NO")
     private String relTelNo;
 
@@ -164,9 +164,9 @@ public class XmanBaseInfo extends MasterEntity {
     private String committeeCode;
 
     /**
-     * 门牌�
+     * 门牌号
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/houseNumber", descr = "门牌")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/houseNumber", descr = "门牌号")
     @Column(name = "HOUSE_NUMBER")
     private String houseNumber;
 
@@ -193,14 +193,14 @@ public class XmanBaseInfo extends MasterEntity {
 
 
     /**
-     * abo血型代�
+     * abo血型代码
      */
     @XPath(descr = "5")
     @Column(name = "ABO_CODE")
     private int aboCode;
 
     /**
-     * rh血型代�
+     * rh血型代码
      */
     @XPath(descr = "3")
     @Column(name = "RH_CODE")
@@ -253,16 +253,16 @@ public class XmanBaseInfo extends MasterEntity {
     private String codeSysName;
 
     /**
-     * 作者职工代�
+     * 作者职工代码
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/id/@extension", descr = "作者职工代")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/id/@extension", descr = "作者职工代码")
     @Column(name = "ASSIGNED_PERSON_CODE")
     private String assignedPersonCode;
 
     /**
      * 作者人姓名
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/assignedPerson/name", descr = "作者职工名")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/assignedPerson/name", descr = "作者职工名称")
     @Column(name = "ASSIGNED_PERSON_NAME")
     private String assignedPersonName;
 
@@ -649,6 +649,7 @@ public class XmanBaseInfo extends MasterEntity {
         this.marriageName = marriageName;
     }
 
+<<<<<<< HEAD
     public String getEmployerTelNo() {
         return employerTelNo;
     }
@@ -656,6 +657,7 @@ public class XmanBaseInfo extends MasterEntity {
     public void setEmployerTelNo(String employerTelNo) {
         this.employerTelNo = employerTelNo;
     }
+=======
 
-
+>>>>>>> origin/dev_zwb
 }
