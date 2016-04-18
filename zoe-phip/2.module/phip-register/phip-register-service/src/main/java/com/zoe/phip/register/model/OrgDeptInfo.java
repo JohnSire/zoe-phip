@@ -27,8 +27,11 @@ public class OrgDeptInfo extends MasterEntity {
      * 医疗卫生机构（科室）标识
      */
     @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/id/@extension", descr = "机构（科室）标识")
-    @Column(name = "DEPT_CODE")
-    private String deptCode;
+    @Column(name = "CODE")
+    private String code;
+
+
+
     /**
      * 医疗卫生机构（科室）实体名称
      */
@@ -133,27 +136,15 @@ public class OrgDeptInfo extends MasterEntity {
     @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/contactParty/contactPerson/name", descr = "申请联系人")
     @Column(name = "ASSIGNED_ONTACT_PERSON")
     private String assignedOntactPerson;
-    /**
-     * 机构编码
-     */     //// TODO: 2016/4/15  找不到该节点
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/id/@extension", descr = "机构编码")
-    @Column(name = "ORG_CODE")
-    private String orgCode;
+
     /**
      * 排序值  越小排在越前
      */
-    //// TODO: 2016/4/15  找不到该节点
+    ////
     // @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/name", descr = "排序值")
     @Column(name = "SORT_NUM")
     private int sortNum;
 
-    public String getDeptCode() {
-        return this.deptCode;
-    }
-
-    public void setDeptCode(String deptCode) {
-        this.deptCode = deptCode;
-    }
 
     public String getDeptName() {
         return this.deptName;
@@ -283,13 +274,15 @@ public class OrgDeptInfo extends MasterEntity {
         this.assignedOntactPerson = assignedOntactPerson;
     }
 
-    public String getOrgCode() {
-        return this.orgCode;
+
+    public String getCode() {
+        return code;
     }
 
-    public void setOrgCode(String orgCode) {
-        this.orgCode = orgCode;
+    public void setCode(String code) {
+        this.code = code;
     }
+
 
     public int getSortNum() {
         return this.sortNum;

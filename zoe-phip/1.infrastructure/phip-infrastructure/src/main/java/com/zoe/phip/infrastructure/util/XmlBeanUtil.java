@@ -5,10 +5,10 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.XPath;
 
-import java.lang.reflect.*;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
  * Created by zhangwenbin on 2016/4/12.

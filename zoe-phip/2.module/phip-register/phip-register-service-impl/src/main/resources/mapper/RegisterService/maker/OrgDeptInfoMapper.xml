@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IOrgDeptInfoMapper">
     <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.OrgDeptInfo" extends="com.zoe.phip.module.service.MasterEntityResultMap">
-        <result column="DEPT_CODE" property="deptCode" javaType="java.lang.String"
+        <result column="CODE" property="deptCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="DEPT_NAME" property="deptName" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
@@ -36,14 +36,13 @@
                 jdbcType="VARCHAR"/>
         <result column="ASSIGNED_ONTACT_PERSON" property="assignedOntactPerson" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="ORG_CODE" property="orgCode" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
+
         <result column="SORT_NUM" property="sortNum" javaType="java.lang.Integer"
                 jdbcType="DECIMAL"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO PHIP_ORG_DEPT_INFO (
-        DEPT_CODE,
+        CODE,
         DEPT_NAME,
         DEPT_TYPE_CODE,
         DEPT_TYPE_NAME,
@@ -60,12 +59,11 @@
         ASSIGNED_DEPT_CODE,
         ASSIGNED_DEPT_NAME,
         ASSIGNED_ONTACT_PERSON,
-        ORG_CODE,
         SORT_NUM,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
-            #{item.deptCode,jdbcType=VARCHAR},
+            #{item.code,jdbcType=VARCHAR},
             #{item.deptName,jdbcType=VARCHAR},
             #{item.deptTypeCode,jdbcType=VARCHAR},
             #{item.deptTypeName,jdbcType=VARCHAR},
@@ -82,7 +80,6 @@
             #{item.assignedDeptCode,jdbcType=VARCHAR},
             #{item.assignedDeptName,jdbcType=VARCHAR},
             #{item.assignedOntactPerson,jdbcType=VARCHAR},
-            #{item.orgCode,jdbcType=VARCHAR},
             #{item.sortNum,jdbcType=DECIMAL},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
@@ -105,7 +102,7 @@
             update PHIP_ORG_DEPT_INFO
             <set>
                 <if test="item.deptCode != null">
-                    DEPT_CODE = #{item.deptCode,jdbcType=VARCHAR},
+                    CODE = #{item.Code,jdbcType=VARCHAR},
                 </if>
                 <if test="item.deptName != null">
                     DEPT_NAME = #{item.deptName,jdbcType=VARCHAR},
@@ -155,9 +152,7 @@
                 <if test="item.assignedOntactPerson != null">
                     ASSIGNED_ONTACT_PERSON = #{item.assignedOntactPerson,jdbcType=VARCHAR},
                 </if>
-                <if test="item.orgCode != null">
-                    ORG_CODE = #{item.orgCode,jdbcType=VARCHAR},
-                </if>
+
                 <if test="item.sortNum != null">
                     SORT_NUM = #{item.sortNum,jdbcType=DECIMAL},
                 </if>
