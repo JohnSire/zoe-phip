@@ -22,9 +22,9 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
 
     @Autowired
     private IOrgDeptInfoMapper baseInfoMapper;
-
+/*
     @Autowired
-    private BaseInServiceImpl baseInServiceImpl;
+    private BaseInServiceImpl baseInServiceImpl;*/
 
     @Override
     /**
@@ -183,6 +183,8 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
     public OrgDeptInfo getOrgDeptInfo(String deptCode,String deptName){
         Example example = new Example(OrgDeptInfo.class);
         example.createCriteria().andEqualTo("deptCode", deptCode).andEqualTo("deptName",deptName);
-        return (OrgDeptInfo)baseInServiceImpl.getMapper().selectByExample(example).get(0);
+        //return (OrgDeptInfo)baseInServiceImpl.getMapper().selectByExample(example).get(0);
+        // TODO: 2016/4/18
+        return null;
     }
 }

@@ -1,0 +1,11 @@
+﻿<!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->
+<acknowledgement typeCode="${Model.typeCode}">
+  <targetMessage>
+    <!--请求的消息ID-->
+    <id root="${Model.id}" extension="${Model.extension}"/>
+  </targetMessage>
+  <acknowledgementDetail>
+    <!--处理结果说明-->
+    <text>${Model.text}</text>
+  </acknowledgementDetail>
+</acknowledgement>

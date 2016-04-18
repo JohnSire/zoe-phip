@@ -1,12 +1,15 @@
 package com.zoe.phip.register.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.parser.Parser;
+import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IXmanBaseInfoMapper;
 import com.zoe.phip.register.dao.IXmanCardMapper;
 import com.zoe.phip.register.model.EhrDataInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
+import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.service.IPatientRegister;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import org.dom4j.Document;
@@ -26,6 +29,8 @@ import java.util.UUID;
 public class PatientRegisterImpl implements IPatientRegister {
 
     @Autowired
+    private Parser parser;
+    @Autowired
     private IXmanBaseInfoMapper baseInfoMapper;
 
     @Autowired
@@ -42,8 +47,12 @@ public class PatientRegisterImpl implements IPatientRegister {
         String strResult = ProcessXmlUtil.verifyMessage(message);
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             // TODO: 2016/4/14
-            String output = ProcessXmlUtil.responseMsgXml("AE", strResult, "", "").getTextTrim();
-            return output;
+            Acknowledgement model = new Acknowledgement();
+            model.setTypeCode("AE");
+            model.setText(strResult);
+            return parser.parseByResource("template/响应消息结果.tbl", MapUtil.createMap(m -> {
+                m.put("Model", model);
+            }));
         }
         Document document = ProcessXmlUtil.load(message);
         String root = document.getRootElement().getName();

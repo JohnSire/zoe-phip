@@ -316,14 +316,6 @@ public class XmanBaseInfo extends MasterEntity {
     private String msgId;
 
 
-   /* public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }*/
-
 
     public String getOrgCode() {
         return this.orgCode;
@@ -654,4 +646,6 @@ public class XmanBaseInfo extends MasterEntity {
     public void setMarriageName(String marriageName) {
         this.marriageName = marriageName;
     }
+
+
 }

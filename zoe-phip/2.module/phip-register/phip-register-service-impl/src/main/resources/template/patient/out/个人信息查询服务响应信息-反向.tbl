@@ -1,0 +1,36 @@
+﻿<PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPA_IN201306UV02.xsd" ITSVersion="XML_1.0">
+  <id root="2.16.156.10011.0" extension="${Model.msgId}" />
+  <creationTime value="${Model.createTime}" />
+  <interactionId root="2.16.840.1.113883.1.6" extension="PRPA_IN201306UV02" />
+  <processingCode code="T" />
+  <processingModeCode code="I" />
+  <acceptAckCode code="AA" />
+  <receiver typeCode="RCV">
+    <device classCode="DEV" determinerCode="INSTANCE">
+      <id root="${Receiver.id}" />
+    </device>
+  </receiver>
+  <sender typeCode="SND">
+    <device classCode="DEV" determinerCode="INSTANCE">
+      <id root="${Sender.id}" />
+    </device>
+  </sender>
+  <!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->
+  <acknowledgement typeCode="AE">
+    <targetMessage>
+      <!--请求的消息ID-->
+      <id root="2.16.156.10011.0" extension="${Model.msgId}" />
+    </targetMessage>
+    <acknowledgementDetail>
+      <!--处理结果说明-->
+      <text>${Acknowledgement.text}</text>
+    </acknowledgementDetail>
+  </acknowledgement>
+  <controlActProcess classCode="CACT" moodCode="EVN">
+    <code code="PRPA_TE201306UV02" codeSystem="2.16.840.1.113883.1.6" />
+    <queryAck>
+      <queryId extension="${Model.msgId}" />
+      <queryResponseCode code="NF" />
+    </queryAck>
+  </controlActProcess>
+</PRPA_IN201306UV02>
