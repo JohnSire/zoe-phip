@@ -34,7 +34,7 @@ public class AreaRegisterImpl implements IAreaRegister {
         Document document = ProcessXmlUtil.load(message);
         AreaBaseInfo areaBaseInfo;
         try {
-            areaBaseInfo = XmlBeanUtil.toBean(document, new AreaBaseInfo());
+            areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class,null);
             areaBaseInfoMapper.insertSelective(areaBaseInfo);
         } catch (Exception ex) {
             logger.error("error",ex);

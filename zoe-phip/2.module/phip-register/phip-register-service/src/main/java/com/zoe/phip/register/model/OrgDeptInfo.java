@@ -398,7 +398,7 @@ public class OrgDeptInfo extends MasterEntity {
 
         try {
             Document document = DocumentHelper.parseText(xmlString);
-            baseInfo = XmlBeanUtil.toBean(document, new OrgDeptInfo());
+            baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class,null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

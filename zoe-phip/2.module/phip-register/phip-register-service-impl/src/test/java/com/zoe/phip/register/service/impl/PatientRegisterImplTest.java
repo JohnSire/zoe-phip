@@ -1,27 +1,26 @@
-package com.zoe.phip.infrastructure.util;
+package com.zoe.phip.register.service.impl;
 
-import com.zoe.phip.infrastructure.annotation.XPath;
+import com.zoe.phip.infrastructure.util.XmlBeanUtil;
+import com.zoe.phip.register.model.XmanBaseInfo;
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
 import org.junit.Test;
-
-import java.util.Date;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
 /**
- * Created by zhangwenbin on 2016/4/12.
+ * Created by zengjiyang on 2016/4/18.
  */
-public class XmlBeanUtilTest {
+public class PatientRegisterImplTest {
 
     @Test
-    public void toBean() throws Exception {
-        String xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<PRPA_IN201311UV02 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\"\n" +
-                "xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPA_IN201311UV02.xsd\" xmlns=\"urn:hl7-org:v3\">\n" +
+    public void testAddPatientRegistry() throws Exception {
+        String patientInput="<PRPA_IN201311UV02 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\"\n" +
+                "xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPA_IN201311UV02.xsd\" " +
+                "xmlns=\"urn:hl7-org:v3\"" +
+                ">\n" +
                 "  <id root=\"2.16.156.10011.0\" extension=\"22a0f9e0-4454-11dc-a6be-3603d6866807\"/>\n" +
                 "  <creationTime value=\"20070803130624\"/>\n" +
                 "  <interactionId root=\"2.16.840.1.113883.1.6\" extension=\"PRPA_IN201311UV02\"/>\n" +
@@ -162,68 +161,19 @@ public class XmlBeanUtilTest {
                 "    </subject>\n" +
                 "  </controlActProcess>\n" +
                 "</PRPA_IN201311UV02>";
-        xmlString = XmlUtil.removeNameSpace(xmlString);
+
+
+        SAXReader reader = new SAXReader();
+        String filePath = "/template/Patient/In/Adapter/PatientRegisterAdapter.xml";
+        Document document = null;
         try {
-            Document document = DocumentHelper.parseText(xmlString);
+            document = reader.read(this.getClass().getResourceAsStream(filePath));
+        } catch (DocumentException e) {
 
-            BaseInfo baseInfo = XmlBeanUtil.toBean(document, BaseInfo.class,null);
-            System.out.println();
-
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
+        Document doc= DocumentHelper.parseText(patientInput);
+
+        XmanBaseInfo info = XmlBeanUtil.toBean(doc, XmanBaseInfo.class,document);
 
     }
-}
-
-class BaseInfo {
-    //final String ROOT = "/PRPA_IN201311UV02";
-
-    public String getOrgName() {
-        return orgName;
-    }
-
-    public void setOrgName(String orgName) {
-        this.orgName = orgName;
-    }
-
-    @XPath(value =   "//controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/name", descr = "机构名称")
-    //@Column(name = "ORG_NAME")
-    public String orgName;
-
-    public Integer getSexCode() {
-        return sexCode;
-    }
-
-    public void setSexCode(Integer sexCode) {
-        this.sexCode = sexCode;
-    }
-
-    @XPath(value =  "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@code", descr = "性别代码")
-    private Integer sexCode;
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/birthTime/@value", descr = "出生日期")
-    private Date birthDate;
-
-
-    public String getHealthRecordNo() {
-        return healthRecordNo;
-    }
-
-    public void setHealthRecordNo(String healthRecordNo) {
-        this.healthRecordNo = healthRecordNo;
-    }
-
-    @XPath(value =  "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/@extension", descr = "出生日期")
-    private String healthRecordNo;
-
 }

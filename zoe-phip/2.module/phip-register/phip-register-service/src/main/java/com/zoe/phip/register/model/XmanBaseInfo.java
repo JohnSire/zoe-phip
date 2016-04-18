@@ -23,7 +23,7 @@ import java.util.List;
 @Table(name = "PHIP_XMAN_BASE_INFO")
 public class XmanBaseInfo extends MasterEntity {
 
-    private String id;
+//    private String id;
 
 
     /**
@@ -316,13 +316,13 @@ public class XmanBaseInfo extends MasterEntity {
     private String msgId;
 
 
-    public String getId() {
+   /* public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
+    }*/
 
 
     public String getOrgCode() {

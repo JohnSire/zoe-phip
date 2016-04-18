@@ -55,7 +55,7 @@ public class PatientRegisterImpl implements IPatientRegister {
 
         XmanBaseInfo baseInfo = new XmanBaseInfo();
         try {
-            baseInfo = XmlBeanUtil.toBean(document, new XmanBaseInfo());
+            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class,null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -53,7 +53,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
         String senderExtension = document.selectSingleNode("/" + root + "/sender/device/id/@extension").getText();
         OrgDeptInfo baseInfo = null;
         try {
-            baseInfo = XmlBeanUtil.toBean(document, new OrgDeptInfo());
+            baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class,null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -119,7 +119,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
         String senderExtension = document.selectSingleNode("/" + root + "/sender/device/id/@extension").getText();
         OrgDeptInfo baseInfo = null;
         try {
-            baseInfo = XmlBeanUtil.toBean(document, new OrgDeptInfo());
+            baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class,null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
