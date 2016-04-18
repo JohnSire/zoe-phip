@@ -57,11 +57,13 @@ public class MedicalStaffInfo extends MasterEntity {
      */
     @Column(name = "TECHNICAL_CODE")
     private String technicalCode;
+
     /**
      * 专业技术职务名称
      */
     @Column(name = "TECHNICAL_NAME")
     private String technicalName;
+
     /**
      * 工作地址
      */
@@ -97,6 +99,7 @@ public class MedicalStaffInfo extends MasterEntity {
      */
     @Column(name = "MSG_ID")
     private String msgId;
+
     /**
      * 申请者代码
      */
