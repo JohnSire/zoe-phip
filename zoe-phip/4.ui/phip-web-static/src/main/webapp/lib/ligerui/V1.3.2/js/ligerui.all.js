@@ -665,6 +665,7 @@
         unmask: function (win)
         {
             var jwins = $("body > .l-dialog:visible,body > .l-window:visible");
+            $(".l-window-mask").css("z-index", "9000");//update by lqh 用来修改遮罩高度
             for (var i = 0, l = jwins.length; i < l; i++)
             {
                 var winid = jwins.eq(i).attr("ligeruiid");
@@ -797,11 +798,13 @@
                 if (w == win)
                 {
                     $(w.element).css("z-index", "9200");
+                    $(".l-window-mask").css("z-index", "9110");//update by lqh 用来修改遮罩高度
                     this.activeTask(w);
                 }
                 else
                 {
                     $(w.element).css("z-index", "9100");
+                    $(".l-window-mask").css("z-index", "9000");//update by lqh 用来修改遮罩高度
                 }
             }
         }
@@ -5498,10 +5501,11 @@
             //设置事件
             $(".l-dialog-tc .l-dialog-close", g.dialog).click(function ()
             {
-                if (p.isHidden)
-                    g.hide();
-                else
-                    g.close();
+                //if (p.isHidden)
+                //    g.hide();
+                //else
+                //    g.close();
+                g.close();//update by lqh
             });
             if (!p.fixedType)
             {
