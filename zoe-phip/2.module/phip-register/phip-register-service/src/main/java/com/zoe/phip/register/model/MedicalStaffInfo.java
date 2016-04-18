@@ -128,8 +128,8 @@ public class MedicalStaffInfo extends MasterEntity {
     /**
      * 医护人员激活状态
      */
-    @Column(name = "STATUSCODE")
-    private String statuscode;
+    @Column(name = "STATUS_CODE")
+    private String statusCode;
 
     public String getStaffId() {
         return this.staffId;
@@ -320,12 +320,12 @@ public class MedicalStaffInfo extends MasterEntity {
         this.assignedOntactPerson = assignedOntactPerson;
     }
 
-    public String getStatuscode() {
-        return this.statuscode;
+    public String getStatusCode() {
+        return this.statusCode;
     }
 
 
-    public void setStatuscode(String statuscode) {
-        this.statuscode = statuscode;
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
     }
 }

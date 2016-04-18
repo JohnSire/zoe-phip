@@ -45,7 +45,7 @@
                 jdbcType="VARCHAR"/>
         <result column="ASSIGNED_ONTACT_PERSON" property="assignedOntactPerson" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="STATUSCODE" property="statuscode" javaType="java.lang.String"
+        <result column="STATUS_CODE" property="statusCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
@@ -71,7 +71,7 @@
         ASSIGNED_DEPT_CODE,
         ASSIGNED_DEPT_NAME,
         ASSIGNED_ONTACT_PERSON,
-        STATUSCODE,
+        STATUS_CODE,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
@@ -96,7 +96,7 @@
             #{item.assignedDeptCode,jdbcType=VARCHAR},
             #{item.assignedDeptName,jdbcType=VARCHAR},
             #{item.assignedOntactPerson,jdbcType=VARCHAR},
-            #{item.statuscode,jdbcType=VARCHAR},
+            #{item.statusCode,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -183,8 +183,8 @@
                 <if test="item.state != null">
                     STATE = #{item.state,jdbcType=DECIMAL},
                 </if>
-                <if test="item.statuscode != null">
-                    STATUSCODE = #{item.statuscode,jdbcType=VARCHAR},
+                <if test="item.statusCode != null">
+                    STATUS_CODE = #{item.statusCode,jdbcType=VARCHAR},
                 </if>
                 MODIFY_AT=sysdate
             </set>
