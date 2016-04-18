@@ -67,12 +67,14 @@ public class MedicalStaffInfo extends MasterEntity {
     @Column(name = "TECHNICAL_CODE")
     @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/code/@code", descr = "专业技术职务代码")
     private String technicalCode;
+
     /**
      * 专业技术职务名称
      */
     @Column(name = "TECHNICAL_NAME")
     @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/code/@displayName", descr = "专业技术职务名称")
     private String technicalName;
+
     /**
      * 工作地址
      */
@@ -115,6 +117,7 @@ public class MedicalStaffInfo extends MasterEntity {
     @Column(name = "MSG_ID")
     @XPath(value = "//id/@root", descr = "消息id")
     private String msgId;
+
     /**
      * 申请者代码
      */
