@@ -1,7 +1,6 @@
 package com.zoe.phip.register.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.register.dao.IOrgDeptInfoMapper;
@@ -12,6 +11,8 @@ import org.dom4j.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
+
+import java.util.UUID;
 
 /**
  * Created by zengjiyang on 2016/4/11.
@@ -65,7 +66,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             if (!strResult.equals("success:数据集内容验证正确")) {
                 result = ProcessXmlUtil.mixResponseXml(document, root, "PRPM_IN401031UV01", "AE", strResult + "，注册失败", baseInfo.getMsgId(), idRoot);
             } else {
-                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPM_IN401031UV02", "AE", "由于内容重复注册，注册失败", baseInfo.getMsgId(), idRoot);
+                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPM_IN401031UV01", "AE", "由于内容重复注册，注册失败", baseInfo.getMsgId(), idRoot);
             }
         }
         String strAddPatientDataSet = baseInfoMapper.insertSelective(baseInfo) > 0 ? "" : "false";
@@ -83,7 +84,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/sender/device/id")).attribute("root").setValue(receiverId);
             ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/receiver/device/id")).attribute("extension").setValue(senderExtension);
             ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/sender/device/id")).attribute("extension").setValue(receiverExtension);
-            outputStr = ProcessXmlUtil.mixResponseXml(xmlResponse, "PRPM_IN401031UV02", "PRPM_IN401031UV02", "AA", "注册成功", baseInfo.getMessageId(), idRoot);
+            outputStr = ProcessXmlUtil.mixResponseXml(xmlResponse, "PRPM_IN401031UV01", "PRPM_IN401031UV01", "AA", "注册成功", baseInfo.getMessageId(), idRoot);
 
 
 
@@ -130,7 +131,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             if (!strResult.equals("success:数据集内容验证正确")) {
                 result = ProcessXmlUtil.mixResponseXml(document, root, "PRPM_IN401031UV01", "AE", strResult + "，注册失败", baseInfo.getMsgId(), idRoot);
             } else {
-                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPM_IN401031UV02", "AE", "由于更新内容不存在，注册失败", baseInfo.getMsgId(), idRoot);
+                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPM_IN401031UV01", "AE", "由于更新内容不存在，注册失败", baseInfo.getMsgId(), idRoot);
             }
         }
         String strAddPatientDataSet = baseInfoMapper.updateByPrimaryKeySelective(baseInfo) > 0 ? "" : "false";
@@ -165,14 +166,14 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
         
         //// TODO: 2016/4/15  查询数据库
         OrgDeptInfo baseInfo = getOrgDeptInfo(strDeptId, strDeptName);
-        baseInfo.setMsgId ( strMsgId.equals("") ? StringUtil.getUUID() : strMsgId);
+        baseInfo.setMsgId ( strMsgId.equals("") ? UUID.randomUUID().toString() : strMsgId);
         if (strResult != "success:数据集内容验证正确" || baseInfo.getDeptCode().equals("")) {
             document.getRootElement().element("/acceptAckCode").attribute("code").setValue("NE");
             String result;
             if (!strResult.equals("success:数据集内容验证正确")) {
                 result = ProcessXmlUtil.mixResponseXml(document, root, "PRPM_IN401031UV01", "AE", strResult + "，查询失败", baseInfo.getMsgId(), idRoot);
             } else {
-                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPM_IN401031UV02", "AE", "由于查询内容不存在，查询失败", baseInfo.getMsgId(), idRoot);
+                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPM_IN401031UV01", "AE", "由于查询内容不存在，查询失败", baseInfo.getMsgId(), idRoot);
             }
         }
 

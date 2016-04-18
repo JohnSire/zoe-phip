@@ -5,7 +5,6 @@ import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IXmanBaseInfoMapper;
 import com.zoe.phip.register.dao.IXmanCardMapper;
-import com.zoe.phip.register.model.EhrDataInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.service.IPatientRegister;
 import com.zoe.phip.register.util.ProcessXmlUtil;
