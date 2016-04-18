@@ -71,6 +71,10 @@
                 jdbcType="VARCHAR"/>
         <result column="MSG_ID" property="msgId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
+        <result column="EMPLOYER_TEL_NO" property="employerTelNo" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="STATUS_CODE" property="statusCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO PHIP_XMAN_BASE_INFO (
@@ -108,6 +112,8 @@
         HEALTH_RECORD_ORG_CODE,
         PATIENT_ID,
         MSG_ID,
+        EMPLOYER_TEL_NO,
+        STATUS_CODE,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
@@ -145,6 +151,8 @@
             #{item.healthRecordOrgCode,jdbcType=VARCHAR},
             #{item.patientId,jdbcType=VARCHAR},
             #{item.msgId,jdbcType=VARCHAR},
+            #{item.employerTelNo,jdbcType=VARCHAR},
+            #{item.statusCode,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -266,6 +274,12 @@
                 </if>
                 <if test="item.msgId != null">
                     MSG_ID = #{item.msgId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.employerTelNo != null">
+                    EMPLOYER_TEL_NO = #{item.employerTelNo,jdbcType=VARCHAR},
+                </if>
+                <if test="item.employerTelNo != null">
+                    STATUS_CODE = #{item.statusCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.state != null">
                     STATE = #{item.state,jdbcType=DECIMAL},

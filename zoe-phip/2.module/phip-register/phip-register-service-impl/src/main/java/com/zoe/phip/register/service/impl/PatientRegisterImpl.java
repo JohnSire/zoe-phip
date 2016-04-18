@@ -9,7 +9,9 @@ import com.zoe.phip.register.dao.IXmanBaseInfoMapper;
 import com.zoe.phip.register.dao.IXmanCardMapper;
 import com.zoe.phip.register.model.EhrDataInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
+import com.zoe.phip.register.model.XmanCard;
 import com.zoe.phip.register.model.base.Acknowledgement;
+import com.zoe.phip.register.model.base.ReceiverSender;
 import com.zoe.phip.register.service.IPatientRegister;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import org.dom4j.Document;
@@ -52,88 +54,51 @@ public class PatientRegisterImpl implements IPatientRegister {
     public String addPatientRegistry(String message) {
 
         String strResult = ProcessXmlUtil.verifyMessage(message);
+        Acknowledgement acknowledgement = new Acknowledgement();
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             // TODO: 2016/4/14
-            Acknowledgement model = new Acknowledgement();
-            model.setTypeCode("AE");
-            model.setText(strResult);
+            acknowledgement.setTypeCode("AE");
+            acknowledgement.setText(strResult);
             return parser.parseByResource("template/响应消息结果.tbl", MapUtil.createMap(m -> {
-                m.put("Model", model);
+                m.put("Model", acknowledgement);
             }));
         }
         Document document = ProcessXmlUtil.load(message);
-        String root = document.getRootElement().getName();
-        String idRoot = document.selectSingleNode("/" + root + "/id/@root").getText();
-        String receiverId = document.selectSingleNode("/" + root + "/receiver/receiver/id/@root").getText();
-        String senderId = document.selectSingleNode("/" + root + "/sender/device/id/@root").getText();
-        String receiverExtension = document.selectSingleNode("/" + root + "/receiver/device/id/@extension").getText();
-        String senderExtension = document.selectSingleNode("/" + root + "/sender/device/id/@extension").getText();
-
-        XmanBaseInfo baseInfo = new XmanBaseInfo();
-
         try {
             SAXReader reader = new SAXReader();
+            String rsXmlPath="/template/base/ReceiverSenderAdapter.xml";
+            Document rsParDoc = reader.read(this.getClass().getResourceAsStream(rsXmlPath));
+            ReceiverSender sr=XmlBeanUtil.toBean(document,ReceiverSender.class,rsParDoc);
+
             String filePath = "/template/Patient/In/Adapter/PatientRegisterAdapter.xml";
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
-            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class,parserDoc);
+            XmanBaseInfo baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class,parserDoc);
+            baseInfo.setId(StringUtil.getUUID());
+            String cardXmlPath = "/template/Patient/In/Adapter/XmanCardAdapter.xml";
+            Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardXmlPath));
+            XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class,cardParDoc);
+
+            //保存到数据库
+            baseInfoMapper.insertSelective(baseInfo);
+            xmanCard.setXcXmanId(baseInfo.getId());
+            cardMapper.insertSelective(xmanCard);
+
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("注册成功");
+            baseInfo.setAcknowledgement(acknowledgement);
+            baseInfo.setReceiverSender(sr);
+
+            String result=
+              parser.parseByResource("template/patient/out/个人信息注册服务响应信息-正向.tbl", MapUtil.createMap(m -> {
+                m.put("Model", baseInfo);}));
+            return result;
         } catch (Exception ex) {
+            acknowledgement.setTypeCode("AE");
+            acknowledgement.setText(ex.getMessage());
             ex.printStackTrace();
         }
-        baseInfo.setId(UUID.randomUUID().toString());
-        String strExists = "yes";
-        if (!strResult.equals("success:数据集内容验证正确!") || strExists.equals("yes")) {
-            document.getRootElement().element("/acceptAckCode").attribute("code").setValue("NE");
-            String result;
-            if (!strResult.equals("success:数据集内容验证正确!")) {
-                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", strResult + "，注册失败!", baseInfo.getMsgId(), idRoot);
-            } else {
-                result = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", "由于内容重复注册,注册失败!", baseInfo.getMsgId(), idRoot);
-            }
-        }
-        // TODO: 2016/4/14 新增个人基本信息到数据库
-        String strAddPatientDataSet = baseInfoMapper.insertSelective(baseInfo) > 0 ? "" : baseInfo.getPatientId();
-        String outputStr;
-        if (StringUtil.isNullOrWhiteSpace(strAddPatientDataSet)) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
-            Document xmlResponse = ProcessXmlUtil.loadXmlFile("个人信息注册更新服务响应成功");
-            ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/id")).attribute("extension").setValue(baseInfo.getMsgId());
-            ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/creationTime")).attribute("value").setValue(sdf.format(new Date()));
-            ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/controlActProcess/subject/registrationEvent/subject1/patient/id")).attribute("extension").setValue(baseInfo.getPatientId());
-            xmlResponse.selectSingleNode("/PRPA_IN201312UV02/controlActProcess/subject/registrationEvent/subject1/patient/patientPerson/name").setText(baseInfo.getName());
-            ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/controlActProcess/subject/registrationEvent/custodian/assignedEntity/id")).attribute("extension").setValue(baseInfo.getAssignedPersonCode());
-            xmlResponse.selectSingleNode("/PRPA_IN201312UV02/controlActProcess/subject/registrationEvent/custodian/assignedEntity/assignedPerson/name").setText(baseInfo.getAssignedPersonName());
-            ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/receiver/device/id")).attribute("root").setValue(senderId);
-            ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/sender/device/id")).attribute("root").setValue(receiverId);
-            ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/receiver/device/id")).attribute("extension").setValue(senderExtension);
-            ((Element) xmlResponse.selectSingleNode("/PRPA_IN201312UV02/sender/device/id")).attribute("extension").setValue(receiverExtension);
-            outputStr = ProcessXmlUtil.mixResponseXml(xmlResponse, "PRPA_IN201312UV02", "PRPA_IN201312UV02", "AA", "注册成功", baseInfo.getMsgId(), idRoot);
-            // 如果个人注册成功,不仅要添加BASEINFO�而且在EHR_DATA_INFO中也需添加一条个人信息的索引记录用以调阅档案
-
-          /*  EhrDataInfo ehrDataInfo = new EhrDataInfo();
-            ehrDataInfo.setMsgId(baseInfo.getMsgId());
-            ehrDataInfo.setPatientId(baseInfo.getHealthRecordNo());
-            ehrDataInfo.setPatientName(baseInfo.getName());
-            ehrDataInfo.setHealthCardId(baseInfo.getCardNo());
-            ehrDataInfo.setIdNo(baseInfo.getIdNo());
-            ehrDataInfo.setOrgCode(baseInfo.getOrgCode());
-            ehrDataInfo.setOrgName(baseInfo.getOrgName());
-            ehrDataInfo.setAreaCode(baseInfo.getAreaCode());
-            ehrDataInfo.setTelNo(baseInfo.getTelNo());
-            ehrDataInfo.setAddressStreet(baseInfo.getAddress());
-            ehrDataInfo.setOutTime(new Date());
-            ehrDataInfo.setTitle("个人基本健康信息");
-            ehrDataInfo.setDocumentUniqueId("HSDA00.01");
-            ehrDataInfo.setRepositoryUniqueId(UUID.randomUUID().toString());*/
-
-        } else {
-            ((Element) (document.selectSingleNode("/" + root + "/receiver/device/id"))).attribute("root").setValue(senderId);
-            ((Element) (document.selectSingleNode("/" + root + "/sender/device/id"))).attribute("root").setValue(receiverId);
-            ((Element) (document.selectSingleNode("/" + root + "/receiver/device/id"))).attribute("extension").setValue(senderExtension);
-            ((Element) (document.selectSingleNode("/" + root + "/sender/device/id"))).attribute("extension").setValue(receiverExtension);
-            ((Element) (document.selectSingleNode("/" + root + "/acceptAckCode"))).attribute("code").setValue("NE");
-            outputStr = ProcessXmlUtil.mixResponseXml(document, root, "PRPA_IN201313UV02", "AE", "由于" + strAddPatientDataSet + "，注册失败!", baseInfo.getMsgId(), idRoot);
-        }
-        return outputStr;
+        //todo 反向
+        return "";
     }
 
     @Override

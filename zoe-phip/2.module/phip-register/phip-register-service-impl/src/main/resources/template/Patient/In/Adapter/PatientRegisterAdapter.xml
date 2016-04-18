@@ -40,4 +40,5 @@
     <HealthRecordOrgCode descr="医疗保险类别名称" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/scopingOrganization/id/@extension"/>
     <PatientId descr="病人ID" path="//controlActProcess/subject/registrationRequest/subject1/patient/id/@extension"/>
     <MsgId descr="消息ID" path="//id/@extension"/>
+    <StatusCode descr="状态" path="//controlActProcess/subject/registrationRequest/statusCode/@code"/>
 </root>

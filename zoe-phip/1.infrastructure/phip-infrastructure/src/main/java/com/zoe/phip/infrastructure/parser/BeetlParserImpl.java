@@ -48,6 +48,9 @@ public class BeetlParserImpl implements Parser {
 
     @Override
     public String parse(String template, Map<String, Object> variableMap) {
+        if(groupTemplate==null){
+            initialize();
+        }
         Template t = groupTemplate.getTemplate(template);
         t.binding(variableMap);
         return t.render();

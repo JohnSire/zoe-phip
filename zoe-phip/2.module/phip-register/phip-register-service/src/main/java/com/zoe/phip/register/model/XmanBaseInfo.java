@@ -7,6 +7,7 @@ package com.zoe.phip.register.model;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
 import com.zoe.phip.infrastructure.annotation.XPath;
+import com.zoe.phip.register.model.base.RegisterEntity;
 
 import javax.persistence.*;
 import javax.swing.plaf.synth.Region;
@@ -21,7 +22,7 @@ import java.util.List;
  * @date 2016-04-11
  */
 @Table(name = "PHIP_XMAN_BASE_INFO")
-public class XmanBaseInfo extends MasterEntity {
+public class XmanBaseInfo extends RegisterEntity {
 
 //    private String id;
 
@@ -29,36 +30,30 @@ public class XmanBaseInfo extends MasterEntity {
     /**
      * 注册机构编码
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/id/@extension", descr = "机构编码")
     @Column(name = "ORG_CODE")
     private String orgCode;
 
     /**
      * 注册机构名称
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/name", descr = "机构名称")
-
     @Column(name = "ORG_NAME")
     private String orgName;
 
     /**
      * 身份证件号码
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/id/@extension", descr = "身份证件号码")
     @Column(name = "ID_NO")
     private String idNo;
 
     /**
      * 本人姓名
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/name", descr = "本人姓名")
     @Column(name = "NAME")
     private String name;
 
     /**
      * 性别代码
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@code", descr = "性别代码")
     @Column(name = "SEX_CODE")
     private int sexCode;
 
@@ -66,7 +61,6 @@ public class XmanBaseInfo extends MasterEntity {
      * 性别名称
      */
     @Transient
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@displayName", descr = "性别名称")
     @Column(name = "SEX_CODE_NAME")
     private String sexCodeName;
 
@@ -75,7 +69,6 @@ public class XmanBaseInfo extends MasterEntity {
     /**
      * 出生日期
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/birthTime/@value", descr = "出生日期")
     @Column(name = "BIRTH_DATE")
     private Date birthDate;
 
@@ -89,7 +82,6 @@ public class XmanBaseInfo extends MasterEntity {
     /**
      * 工作单位名称
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asEmployee/employerOrganization/name", descr = "工作单位名称")
     @Column(name = "EMPLOYER_NAME")
     private String employerName;
 
@@ -98,7 +90,6 @@ public class XmanBaseInfo extends MasterEntity {
     /**
      * 工作单位联系方式
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asEmployee/employerOrganization/contactParty/telecom", descr = "工作单位联系方式")
     @Column(name = "EMPLOYER_TEL_NO")
     private String employerTelNo;
 
@@ -106,21 +97,18 @@ public class XmanBaseInfo extends MasterEntity {
     /**
      * 联系电话
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/telecom/@value", descr = "本人电话号码")
     @Column(name = "TEL_NO")
     private String telNo;
 
     /**
      * 联系人姓�
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/relationshipHolder1/name", descr = "联系人姓")
     @Column(name = "REL_NAME")
     private String relName;
 
     /**
      * 联系人电�
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/telecom/@value", descr = "联系人电")
     @Column(name = "REL_TEL_NO")
     private String relTelNo;
 
@@ -133,61 +121,53 @@ public class XmanBaseInfo extends MasterEntity {
     /**
      * 地址
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetAddressLine", descr = "常住地址户籍")
     @Column(name = "STATE_CODE")
     private String stateCode;
 
     /**
      * 地址
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/city", descr = "地址")
     @Column(name = "CITY_CODE")
     private String cityCode;
 
     /**
      * 地址
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/county", descr = "地址")
     @Column(name = "AREA_CODE")
     private String areaCode;
     /**
      * 地址
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetNameBase", descr = "地址")
     @Column(name = "STREET_CODE")
     private String streetCode;
     /**
      *
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetName", descr = "地址")
     @Column(name = "COMMITTEE_CODE")
     private String committeeCode;
 
     /**
      * 门牌�
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/houseNumber", descr = "门牌")
     @Column(name = "HOUSE_NUMBER")
     private String houseNumber;
 
     /**
      * 邮政编码
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/postalCode", descr = "邮政编码")
     @Column(name = "POSTALCODE")
     private String postalcode;
 
     /**
      * 民族代码
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/ethnicGroupCode/@code")
     @Column(name = "NATIONALITY_CODE")
     private int nationalityCode;
 
     /**
      * 民族名称
      */
-    @XPath(value = "/controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/ethnicGroupCode/@displayName")
+    @Transient
     @Column(name = "NATIONALITY_NAME")
     private String nationalityName;
 
@@ -216,14 +196,12 @@ public class XmanBaseInfo extends MasterEntity {
     /**
      * 职业类别代码
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asEmployee/occupationCode", descr = "职业类别代码")
     @Column(name = "OCCUPATION_CODE")
     private String occupationCode;
 
     /**
      * 婚姻状况代码
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/maritalStatusCode/@code", descr = "婚姻状况代码")
     @Column(name = "MARRIAGE_CODE")
     private int marriageCode;
 
@@ -231,7 +209,6 @@ public class XmanBaseInfo extends MasterEntity {
      * 婚姻状况名称
      */
     @Transient
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/maritalStatusCode/@displayName", descr = "婚姻状况名称")
     @Column(name = "MARRIAGE_Name")
     private String marriageName;
 
@@ -240,7 +217,6 @@ public class XmanBaseInfo extends MasterEntity {
     /**
      * 医疗保险类别代码
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/coveredPartyOf/coverageRecord/beneficiary/beneficiary/code/@code", descr = "医疗保险类别代码")
     @Column(name = "CODE_SYS_CODE")
     private String codeSysCode;
 
@@ -249,27 +225,23 @@ public class XmanBaseInfo extends MasterEntity {
      */
     @Transient
     @Column(name = "CODE_SYS_NAME")
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/coveredPartyOf/coverageRecord/beneficiary/beneficiary/code/@displayName", descr = "医疗保险类别名称")
     private String codeSysName;
 
     /**
      * 作者职工代�
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/id/@extension", descr = "作者职工代")
     @Column(name = "ASSIGNED_PERSON_CODE")
     private String assignedPersonCode;
 
     /**
      * 作者人姓名
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/assignedPerson/name", descr = "作者职工名")
     @Column(name = "ASSIGNED_PERSON_NAME")
     private String assignedPersonName;
 
     /**
      * 建档时间
      */
-    @XPath(value = "//creationTime/@value")
     @Column(name = "CREATE_TIME")
     private Date createTime;
 
@@ -277,7 +249,6 @@ public class XmanBaseInfo extends MasterEntity {
     /**
      * 登记日期
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/effectiveTime/@value", descr = "登记时间")
     @Column(name = "REQISTER_DATE")
     private Date reqisterDate;
 
@@ -292,32 +263,44 @@ public class XmanBaseInfo extends MasterEntity {
     /**
      * 城乡居民健康档案编号
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/@extension", descr = "城乡居民健康档案编号")
     @Column(name = "HEALTH_RECORD_NO")
     private String healthRecordNo;
 
     /**
      * 建档机构代码
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/scopingOrganization/id/@extension")
     @Column(name = "HEALTH_RECORD_ORG_CODE")
     private String healthRecordOrgCode;
 
     /**
      * 病人ID
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/id/@extension", descr = "病人ID")
     @Column(name = "PATIENT_ID")
     private String patientId;
 
     /**
      * 消息ID
      */
-    @XPath(value = "//id/@extension", descr = "消息ID")
     @Column(name = "MSG_ID")
     private String msgId;
 
+    /**
+     * 消息ID
+     */
+    @Column(name = "STATUS_CODE")
+    private String statusCode;
 
+    /**
+     * 状态代码
+     * @return
+     */
+    public String getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
 
     public String getOrgCode() {
         return this.orgCode;

@@ -7,12 +7,12 @@
   <acceptAckCode code="NE" />
   <receiver typeCode="RCV">
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="2.16.156.10011.0.1.2" extension="2.16.156.10011.0.1.2" />
+      <id root="${Model.ReceiverSender.ReceiverId}" extension="${Model.ReceiverSender.ReceiverExtension}" />
     </device>
   </receiver>
   <sender typeCode="SND">
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="2.16.156.10011.0.1.1" extension="2.16.156.10011.0.1.1" />
+      <id root="${Model.ReceiverSender.SenderId}" extension="${Model.ReceiverSender.SenderExtension}" />
     </device>
   </sender>
   <!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->
@@ -23,7 +23,7 @@
     </targetMessage>
     <acknowledgementDetail>
       <!--处理结果说明-->
-      <text>由于内容重复注册，注册失败</text>
+      <text>${Model.Acknowledgement.Text}</text>
     </acknowledgementDetail>
   </acknowledgement>
   <controlActProcess classCode="CACT" moodCode="EVN">
