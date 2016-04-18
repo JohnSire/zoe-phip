@@ -1,16 +1,9 @@
 package com.zoe.phip.register.service.impl;
 
 
-import com.zoe.phip.infrastructure.parser.BeetlParserImpl;
 import com.zoe.phip.infrastructure.parser.Parser;
 import com.zoe.phip.infrastructure.util.MapUtil;
-import com.zoe.phip.infrastructure.util.XmlBeanUtil;
-import com.zoe.phip.infrastructure.util.XmlUtil;
-import com.zoe.phip.register.model.MedicalStaffInfo;
 import com.zoe.phip.register.model.base.Acknowledgement;
-import com.zoe.phip.register.model.base.Receiver;
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
 import org.junit.Test;
 
 import com.zoe.phip.register.BaseTest;

@@ -7,25 +7,25 @@
   <acceptAckCode code="NE" />
   <receiver typeCode="RCV">
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="2.16.156.10011.0.1.2" extension="2.16.156.10011.0.1.2" />
-    </device>
-  </receiver>
-  <sender typeCode="SND">
-    <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="2.16.156.10011.0.1.1" extension="2.16.156.10011.0.1.1" />
-    </device>
-  </sender>
-  <!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->
-  <acknowledgement typeCode="AE">
-    <targetMessage>
-      <!--请求的消息ID-->
-      <id root="2.16.156.10011.0" extension="${Model.msgId}" />
-    </targetMessage>
-    <acknowledgementDetail>
-      <!--处理结果说明-->
-      <text>由于更新内容不存在，更新失败</text>
-    </acknowledgementDetail>
-  </acknowledgement>
+                          <id root="2.16.156.10011.0.1.2" extension="2.16.156.10011.0.1.2" />
+                        </device>
+                      </receiver>
+                      <sender typeCode="SND">
+                        <device classCode="DEV" determinerCode="INSTANCE">
+                          <id root="2.16.156.10011.0.1.1" extension="2.16.156.10011.0.1.1" />
+                        </device>
+                      </sender>
+                      <!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->
+                      <acknowledgement typeCode="AE">
+                        <targetMessage>
+                          <!--请求的消息ID-->
+                          <id root="2.16.156.10011.0" extension="${Model.msgId}" />
+                        </targetMessage>
+                        <acknowledgementDetail>
+                          <!--处理结果说明-->
+                          <text>由于更新内容不存在，更新失败</text>
+                        </acknowledgementDetail>
+                      </acknowledgement>
   <controlActProcess classCode="CACT" moodCode="EVN">
     <subject typeCode="SUBJ">
       <registrationRequest classCode="REG" moodCode="RQO">

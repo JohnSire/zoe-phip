@@ -15,6 +15,15 @@ import java.util.Map;
  */
 public final class XmlBeanUtil {
 
+    /**
+     * 将xml转换成java bean
+     * @param document 要转换的xml
+     * @param clazz 转换后的实体类
+     * @param parserDoc 转换适配xml
+     * @param <T>
+     * @return
+     * @throws Exception
+     */
     public static <T> T toBean(Document document, Class<T> clazz,Document parserDoc) throws Exception {
         if(document==null||parserDoc==null){
             throw new Exception("document or parserDoc could not be null!");

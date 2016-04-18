@@ -13,7 +13,9 @@ import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.service.IPatientRegister;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -38,20 +40,17 @@ public class PatientRegisterImpl implements IPatientRegister {
 
     /**
      * 新增个人信息注册
-     *
+     * 1.验证参数合法
+     * 2.通过适配xml转成指定实体
+     * 3.补全数据库实体
+     * 4.执行数据库
+     * 5.操作实体 AE AA
      * @param message
      * @return
      */
     @Override
     public String addPatientRegistry(String message) {
 
-
-        //1.验证参数合法
-        //2.通过适配xml转成指定实体
-        //3.补全数据库实体
-        //4.执行数据库
-        //5.操作实体 AE AA
-        //6.返回值魔板处理
         String strResult = ProcessXmlUtil.verifyMessage(message);
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             // TODO: 2016/4/14
@@ -71,8 +70,12 @@ public class PatientRegisterImpl implements IPatientRegister {
         String senderExtension = document.selectSingleNode("/" + root + "/sender/device/id/@extension").getText();
 
         XmanBaseInfo baseInfo = new XmanBaseInfo();
+
         try {
-            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class,null);
+            SAXReader reader = new SAXReader();
+            String filePath = "/template/Patient/In/Adapter/PatientRegisterAdapter.xml";
+            Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
+            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class,parserDoc);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

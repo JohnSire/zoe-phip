@@ -14,7 +14,6 @@ public class Acknowledgement {
      */
     private String text;
 
-    pri xmamC;
     /**
      * AA 表示成功 AE 表示失败
      */
