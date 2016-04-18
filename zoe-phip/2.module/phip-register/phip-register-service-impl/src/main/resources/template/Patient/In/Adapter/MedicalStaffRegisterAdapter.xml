@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <staffId descr="医务人员id" path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/id"/>
+
+    <technicalCode descr="专业技术职务代码"
+                   path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/code/@code"/>
+
+    <technicalName descr="专业技术职务名称"
+                   path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/code/@displayName"/>
+
+    <employerAddr descr="工作地址" path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/addr"/>
+
+    <employerTelNo descr="工作联系电话"
+                   path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/telecom"/>
+
+    <roleStatus descr="角色状态"
+                path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/statusCode"/>
+
+    <effectiveTimeLow descr="角色有效期间(起始日期)"
+                      path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/effectiveTime/low/@value"/>
+
+    <effectiveTimeHigh descr="角色有效期间(截止日期)"
+                       path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/effectiveTime/high/@value"/>
+
+    <idNo descr="身份证号"
+          path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/id/@extension"/>
+
+    <name descr="姓名"
+          path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/name"/>
+
+    <genderCode descr="性别代码"
+                path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/administrativeGenderCode/@code"/>
+
+    <genderName descr="性别名称"
+                path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/administrativeGenderCode/@displayName"/>
+
+    <birthTime descr="出生日期"
+               path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/birthTime/@value"/>
+
+    <birthplaceAddr descr="出生地"
+                    path="//controlActProcess/subject/registrationRequest//subject1/healthCareProvider/healthCarePrincipalPerson/birthplace/addr"/>
+
+    <affiliatedOrgCode descr="科室号"
+                       path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/asAffiliate/affiliatedPrincipalOrganization/id/@extension"/>
+
+    <affiliatedOrgName descr="科室名称"
+                       path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/healthCarePrincipalPerson/asAffiliate/affiliatedPrincipalOrganization/name"/>
+
+    <assignedCode descr="申请者代码"
+                  path="//controlActProcess/subject/registrationRequest/author/assignedEntity/id/@extension"/>
+
+    <assignedName descr="申请者名称"
+                  path="//controlActProcess/subject/registrationRequest/author/assignedEntity/assignedPerson/name"/>
+
+    <assignedDeptCode descr="申请者科室代码"
+                      path="//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/id/@extension"/>
+
+    <assignedDeptName descr="申请者科室名称"
+                      path="//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/name"/>
+
+    <assignedOntactPerson descr="申请联系人"
+                          path="//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/contactParty/contactPerson/name"/>
+
+</root>
