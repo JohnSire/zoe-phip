@@ -1,0 +1,1 @@
+define("modules/SystemManager/SysParam/index",["./build","./req"],function(a,b,c){var d={build:a("./build"),init:function(){d.build.init()}};b.init=d.init});
