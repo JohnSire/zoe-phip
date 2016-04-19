@@ -13,6 +13,7 @@ import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.model.base.ReceiverSender;
 import com.zoe.phip.register.service.IPatientRegister;
 import com.zoe.phip.register.util.ProcessXmlUtil;
+import com.zoe.phip.register.util.RegisterUtil;
 import org.dom4j.Document;
 import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
@@ -62,9 +63,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             // TODO: 2016/4/14
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
-            return parser.parseByResource("template/响应消息结果.tbl", MapUtil.createMap(m -> {
-                m.put("Model", acknowledgement);
-            }));
+            return RegisterUtil.registerMessage("template/响应消息结果.tbl",acknowledgement);
         }
 
         Document document = ProcessXmlUtil.load(message);
@@ -118,16 +117,75 @@ public class PatientRegisterImpl implements IPatientRegister {
 
     @Override
     public String updatePatientRegistry(String message) {
-        String validateResult=validate(message);
-        if(!StringUtil.isNullOrWhiteSpace(validateResult)){
-            return validateResult;
+
+        String strResult = ProcessXmlUtil.verifyMessage(message);
+        Acknowledgement acknowledgement = new Acknowledgement();
+        //xml格式错误
+        if (strResult.contains("error:传入的参数不符合xml格式")) {
+            // TODO: 2016/4/14
+            acknowledgement.setTypeCode("AE");
+            acknowledgement.setText(strResult);
+            return RegisterUtil.registerMessage("template/响应消息结果.tbl",acknowledgement);
         }
-        //验证 判断是否存在 更新
-        return null;
+        Document document = ProcessXmlUtil.load(message);
+        XmanBaseInfo baseInfo=null;
+        try {
+            SAXReader reader = new SAXReader();
+            //XmanBaseInfo
+            String filePath = "/template/Patient/In/Adapter/PatientRegisterAdapter.xml";
+            Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
+            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class,parserDoc);
+            //ReceiverSender
+            String rsXmlPath="/template/base/ReceiverSenderAdapter.xml";
+            Document rsParDoc = reader.read(this.getClass().getResourceAsStream(rsXmlPath));
+            ReceiverSender sr=XmlBeanUtil.toBean(document,ReceiverSender.class,rsParDoc);
+            baseInfo.setReceiverSender(sr);
+            //xml 验证错误  todo 打开验证功能
+            /*if(strResult.contains("error:数据集内容验证错误")){
+                return registerFailed(baseInfo,strResult);
+            }*/
+            //数据是否存在判断
+            Example example=new Example(XmanBaseInfo.class);
+            example.createCriteria().andEqualTo("healthRecordNo",baseInfo.getHealthRecordNo());
+            int count= baseInfoMapper.selectCountByExample(example);
+            if(count==0){
+                return updateFailed(baseInfo,"由于更新内容不存在，更新失败");
+            }
+
+            String cardXmlPath = "/template/Patient/In/Adapter/XmanCardAdapter.xml";
+            Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardXmlPath));
+            XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class,cardParDoc);
+
+            //保存到数据库
+            baseInfoMapper.defaultUpdate(baseInfo);
+            cardMapper.defaultUpdate(xmanCard);
+
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("更新成功");
+            baseInfo.setAcknowledgement(acknowledgement);
+            Map<String,Object> map=new HashMap<String,Object>();
+            map.put("Model",baseInfo);
+            String result=
+                    parser.parseByResource("template/patient/out/个人信息更新服务响应信息-正向.tbl", map);
+            return result;
+        } catch (Exception ex) {
+            logger.error("error:",ex);
+            return updateFailed(baseInfo,ex.getMessage());
+        }
+
     }
 
+    /**
+     * 合并病人信息
+     * 1.找到new和old两个病人信息
+     * 2.如果new中病人信息为空，而old中不为空，则将old值赋到new中
+     * 3.更新new 删除old
+     * @param message
+     * @return
+     */
     @Override
     public String mergePatientRegistry(String message) {
+
         return null;
     }
 
@@ -145,19 +203,27 @@ public class PatientRegisterImpl implements IPatientRegister {
      * @return
      */
     private String registerFailed(XmanBaseInfo baseInfo, String errorMsg){
+        return responseFailed(baseInfo,errorMsg,"template/patient/out/个人信息注册服务响应信息-反向.tbl");
+    }
+
+    /**
+     * 更新失败返回值
+     * @param baseInfo
+     * @param errorMsg
+     * @return
+     */
+    private String updateFailed(XmanBaseInfo baseInfo,String errorMsg){
+        return responseFailed(baseInfo,errorMsg,"template/patient/out/个人信息更新服务响应信息-反向.tbl");
+    }
+
+    private String responseFailed(XmanBaseInfo baseInfo,String errorMsg,String path){
         Acknowledgement acknowledgement=new Acknowledgement();
         acknowledgement.setTypeCode("AE");
         acknowledgement.setText(errorMsg);
         baseInfo.setAcknowledgement(acknowledgement);
-        return parser.parseByResource("template/patient/out/个人信息注册服务响应信息-反向.tbl", MapUtil.createMap(m -> {
+        return parser.parseByResource(path, MapUtil.createMap(m -> {
             m.put("Model", baseInfo);}));
     }
-
-    private String validate(String xmlInput){
-        String strResult = ProcessXmlUtil.verifyMessage(xmlInput);
-        return "";
-    }
-
 
 
 }

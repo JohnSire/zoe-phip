@@ -5,4 +5,20 @@
 <resultMap id="MultiResultMap" type="${basepackage}.model.${className}" extends="BaseResultMap">
 
 </resultMap>
+<update id="defaultUpdate" parameterType="${basepackage}.这里要自己改">
+    update ${table.sqlName}
+    <set>
+        <#list table.columns as field>
+        <#if field.entityName?uncap_first!="id"&&field.entityName?uncap_first!="modifyAt"
+        &&field.entityName?uncap_first!="createBy"&&field.entityName?uncap_first!="createAt"&&
+        field.entityName?uncap_first!="modifyBy">
+        <if test="${field.entityName?uncap_first} != null">
+            ${field.sqlName} = ${r'#'}{${field.entityName?uncap_first},jdbcType=${field.jdbcType?upper_case}},
+        </if>
+    </#if>
+</#list>
+        MODIFY_AT=sysdate
+</set>
+        where id = ${r'#'}{id}
+        </update>
 </mapper>

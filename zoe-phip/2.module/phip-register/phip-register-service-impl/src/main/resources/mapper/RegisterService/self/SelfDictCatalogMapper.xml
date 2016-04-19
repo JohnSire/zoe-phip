@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IDictCatalogMapper">
-<resultMap id="MultiResultMap" type="com.zoe.phip.register.model.DictCatalog" extends="BaseResultMap">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.DictCatalog" extends="BaseResultMap">
 
-</resultMap>
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.DictCatalog">
+        update PHIP_DICT_CATALOG
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="parentCode != null">
+                PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                TYPE = #{type,jdbcType=DECIMAL},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id}
+    </update>
+
 </mapper>

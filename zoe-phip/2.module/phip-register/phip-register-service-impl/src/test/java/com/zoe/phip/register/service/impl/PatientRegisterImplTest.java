@@ -63,7 +63,7 @@ public class PatientRegisterImplTest extends BaseTest {
                 "              <!--身份证号-->\n" +
                 "              <id root=\"2.16.156.10011.1.3\" extension=\"120109197706015516\"/>\n" +
                 "              <!--姓名-->\n" +
-                "              <name use=\"L\">刘永好</name>\n" +
+                "              <name use=\"L\">刘永好123</name>\n" +
                 "              <!--联系电话-->\n" +
                 "              <telecom value=\"028-2222444\" use=\"H\"/>\n" +
                 "              <!--性别-->\n" +
@@ -175,7 +175,7 @@ public class PatientRegisterImplTest extends BaseTest {
                 "</PRPA_IN201311UV02>";
 
 
-        String result = patientRegister.addPatientRegistry(patientInput);
+        String result = patientRegister.updatePatientRegistry(patientInput);
         System.out.println(result);
 
        /* SAXReader reader = new SAXReader();

@@ -94,13 +94,13 @@ delete from ${table.sqlName} where ID in
         <#if field.entityName?uncap_first!="id"&&field.entityName?uncap_first!="modifyAt"
         &&field.entityName?uncap_first!="createBy"&&field.entityName?uncap_first!="createAt"&&
         field.entityName?uncap_first!="modifyBy">
-        <if test="item.${field.entityName?uncap_first} != null">
+        <if test="${field.entityName?uncap_first} != null">
             ${field.sqlName} = ${r'#'}{${field.entityName?uncap_first},jdbcType=${field.jdbcType?upper_case}},
         </if>
     </#if>
 </#list>
         MODIFY_AT=sysdate
 </set>
-        where id = ${r'#'}{id};
+        where id = ${r'#'}{id}
         </update>
         </mapper>
