@@ -131,6 +131,60 @@ public class MedicalStaffInfo extends MasterEntity {
     @Column(name = "STATUS_CODE")
     private String statusCode;
 
+
+
+    @Transient
+    private String interactionId;
+
+    /**
+     * 根节点
+     */
+    @Transient
+    private String typeCode;
+
+    /**
+     * 操作(Add,Update,Query)
+     */
+
+    @Transient
+    private String operateCode;
+
+    public String getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    @Transient
+    private String creationTime;
+
+
+    public String getOperateCode() {
+        return operateCode;
+    }
+
+    public void setOperateCode(String operateCode) {
+        this.operateCode = operateCode;
+    }
+
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
+    }
+
+
+    public String getInteractionId() {
+        return interactionId;
+    }
+    public void setInteractionId(String interactionId) {
+        this.interactionId = interactionId;
+    }
+
     public String getStaffId() {
         return this.staffId;
     }

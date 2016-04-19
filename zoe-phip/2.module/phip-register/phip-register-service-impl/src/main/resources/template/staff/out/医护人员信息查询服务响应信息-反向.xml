@@ -1,0 +1,43 @@
+﻿<PRPM_IN306011UV01 xmlns="urn:hl7-org:v3">
+  <id extension="${Model.msgId}" />
+  <creationTime value="${Model.creationTime}" />
+  <interactionId root="2.16.840.1.113883.1.6" extension="PRPM_IN306011UV01" />
+  <processingCode code="P" />
+  <processingModeCode code="I" />
+  <acceptAckCode code="AL" />
+  <receiver typeCode="RCV">
+    <device classCode="DEV" determinerCode="INSTANCE">
+      <id root="1.2.840.114350.1.13.999.567" />
+    </device>
+  </receiver>
+  <sender typeCode="SND">
+    <device classCode="DEV" determinerCode="INSTANCE">
+      <id root="1.2.840.114350.1.13.999.234" />
+    </device>
+  </sender>
+  <!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->
+  <acknowledgement typeCode="AE">
+    <targetMessage>
+      <!--请求的消息ID-->
+      <id root="${Model.msgId}" extension="${Model.acknowledgement.extension}" />
+    </targetMessage>
+    <acknowledgementDetail>
+      <!--处理结果说明-->
+      <text>${Model.acknowledgement.text}</text>
+    </acknowledgementDetail>
+  </acknowledgement>
+  <controlActProcess classCode="CACT" moodCode="EVN">
+    <code code="PRPM_TE306110UV01" codeSystem="2.16.840.1.113883.1.6" />
+    <queryAck>
+      <queryId extension="18204" />
+      <queryResponseCode code="error" />
+    </queryAck>
+    <queryByParameterPayload>
+      <statusCode code="new"></statusCode>
+      <providerID>
+        <value root="2.16.156.10011.1.4" extension="120109197706015518"></value>
+        <semanticsText>HealthCareProvider.id</semanticsText>
+      </providerID>
+    </queryByParameterPayload>
+  </controlActProcess>
+</PRPM_IN306011UV01>
