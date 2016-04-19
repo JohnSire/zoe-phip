@@ -2,7 +2,6 @@ package com.zoe.phip.register.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.parser.Parser;
-import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IXmanBaseInfoMapper;
@@ -22,9 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by zengjiyang on 2016/4/11.

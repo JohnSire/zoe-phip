@@ -66,6 +66,6 @@
             </if>
             MODIFY_AT=sysdate
         </set>
-        where id = #{id}
+        where CODE = #{code,jdbcType=VARCHAR}
     </update>
 </mapper>

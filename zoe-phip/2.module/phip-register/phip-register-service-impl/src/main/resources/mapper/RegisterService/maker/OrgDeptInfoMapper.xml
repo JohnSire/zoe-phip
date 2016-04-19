@@ -34,7 +34,7 @@
                 jdbcType="VARCHAR"/>
         <result column="ASSIGNED_DEPT_NAME" property="assignedDeptName" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="ASSIGNED_ONTACT_PERSON" property="assignedContactPerson" javaType="java.lang.String"
+        <result column="ASSIGNED_CONTACT_PERSON" property="assignedContactPerson" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
 
         <result column="SORT_NUM" property="sortNum" javaType="java.lang.Integer"
@@ -58,7 +58,7 @@
         ASSIGNED_NAME,
         ASSIGNED_DEPT_CODE,
         ASSIGNED_DEPT_NAME,
-        ASSIGNED_ONTACT_PERSON,
+        ASSIGNED_CONTACT_PERSON,
         SORT_NUM,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
@@ -103,7 +103,7 @@
         ASSIGNED_NAME,
         ASSIGNED_DEPT_CODE,
         ASSIGNED_DEPT_NAME,
-        ASSIGNED_ONTACT_PERSON,
+        ASSIGNED_CONTACT_PERSON,
         SORT_NUM,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES (
@@ -123,7 +123,7 @@
         #{assignedName,jdbcType=VARCHAR},
         #{assignedDeptCode,jdbcType=VARCHAR},
         #{assignedDeptName,jdbcType=VARCHAR},
-        #{assignedOntactPerson,jdbcType=VARCHAR},
+        #{assignedContactPerson,jdbcType=VARCHAR},
         #{sortNum,jdbcType=DECIMAL},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
@@ -193,7 +193,7 @@
                     ASSIGNED_DEPT_NAME = #{item.assignedDeptName,jdbcType=VARCHAR},
                 </if>
                 <if test="item.assignedContactPerson != null">
-                    ASSIGNED_ONTACT_PERSON = #{item.assignedContactPerson,jdbcType=VARCHAR},
+                    ASSIGNED_CONTACT_PERSON = #{item.assignedContactPerson,jdbcType=VARCHAR},
                 </if>
 
                 <if test="item.sortNum != null">

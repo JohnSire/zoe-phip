@@ -8,11 +8,12 @@ package com.zoe.phip.register.model;
 import com.zoe.phip.infrastructure.annotation.XPath;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.infrastructure.util.XmlUtil;
-import com.zoe.phip.module.service.entity.MasterEntity;
+import com.zoe.phip.register.model.base.RegisterEntity;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Table;
 import java.util.Date;
 
 
@@ -22,11 +23,10 @@ import java.util.Date;
  * @date 2016-04-11
  */
 @Table(name = "PHIP_ORG_DEPT_INFO")
-public class OrgDeptInfo extends MasterEntity {
+public class OrgDeptInfo extends RegisterEntity {
     /**
      * 医疗卫生机构（科室）标识
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/id/@extension", descr = "机构（科室）标识")
     @Column(name = "CODE")
     private String code;
 
