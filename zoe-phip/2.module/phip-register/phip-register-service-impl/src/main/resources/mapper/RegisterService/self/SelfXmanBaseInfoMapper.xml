@@ -123,4 +123,7 @@
         </set>
         where HEALTH_RECORD_NO = #{healthRecordNo,jdbcType=VARCHAR}
     </update>
+    <select id="getPatient" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM PHIP_XMAN_BASE_INFO T WHERE T.PATIENT_ID=#{id} OR T.HEALTH_RECORD_NO=#{id};
+    </select>
 </mapper>

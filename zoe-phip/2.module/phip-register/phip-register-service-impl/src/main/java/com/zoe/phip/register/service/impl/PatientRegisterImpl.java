@@ -185,6 +185,23 @@ public class PatientRegisterImpl implements IPatientRegister {
      */
     @Override
     public String mergePatientRegistry(String message) {
+        String strResult = ProcessXmlUtil.verifyMessage(message);
+        Acknowledgement acknowledgement = new Acknowledgement();
+        //xml格式错误
+        if (strResult.contains("error:传入的参数不符合xml格式")) {
+            // TODO: 2016/4/14
+            acknowledgement.setTypeCode("AE");
+            acknowledgement.setText(strResult);
+            return RegisterUtil.registerMessage("template/响应消息结果.tbl",acknowledgement);
+        }
+        Document document = ProcessXmlUtil.load(message);
+        String oldPatientId=document.selectSingleNode("/controlActProcess/subject/registrationEvent/replacementOf/priorRegistration/subject1/priorRegisteredRole/id/@extension").getText();
+        String newPatientId=document.selectSingleNode("/controlActProcess/subject/registrationEvent/subject1/patient/id/@extension").getText();
+        /*Example example=new Example(XmanBaseInfo.class);
+        example.createCriteria().andEqualTo("healthRecordNo",baseInfo.getHealthRecordNo());
+        int count= baseInfoMapper.selectCountByExample(example);
+        XmanBaseInfo oldPatient=*/
+
 
         return null;
     }

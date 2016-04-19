@@ -17,4 +17,10 @@ import com.zoe.phip.register.model.XmanBaseInfo;
  */
 public interface IXmanBaseInfoMapper extends IServiceMapper<XmanBaseInfo> {
 
+    /**根据patient_id或health_record_no
+     * 获取病人信息
+     * @param id
+     * @return
+     */
+    XmanBaseInfo getPatient(String id);
 }
