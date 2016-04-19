@@ -39,7 +39,7 @@
                 jdbcType="VARCHAR"/>
         <result column="HOUSE_NUMBER" property="houseNumber" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="POSTALCODE" property="postalcode" javaType="java.lang.String"
+        <result column="POSTAL_CODE" property="postalCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="NATIONALITY_CODE" property="nationalityCode" javaType="java.lang.Byte"
                 jdbcType="DECIMAL"/>
@@ -96,7 +96,7 @@
         STREET_CODE,
         COMMITTEE_CODE,
         HOUSE_NUMBER,
-        POSTALCODE,
+        POSTAL_CODE,
         NATIONALITY_CODE,
         ABO_CODE,
         RH_CODE,
@@ -135,7 +135,7 @@
             #{item.streetCode,jdbcType=VARCHAR},
             #{item.committeeCode,jdbcType=VARCHAR},
             #{item.houseNumber,jdbcType=VARCHAR},
-            #{item.postalcode,jdbcType=VARCHAR},
+            #{item.postalCode,jdbcType=VARCHAR},
             #{item.nationalityCode,jdbcType=DECIMAL},
             #{item.aboCode,jdbcType=DECIMAL},
             #{item.rhCode,jdbcType=DECIMAL},
@@ -156,6 +156,85 @@
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
+    </insert>
+    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.XmanBaseInfo">
+        INSERT INTO PHIP_XMAN_BASE_INFO (
+        ORG_CODE,
+        ORG_NAME,
+        ID_NO,
+        NAME,
+        SEX_CODE,
+        BIRTH_DATE,
+        ID_TYPE_CODE,
+        EMPLOYER_NAME,
+        TEL_NO,
+        REL_NAME,
+        REL_TEL_NO,
+        ADDRESS,
+        STATE_CODE,
+        CITY_CODE,
+        AREA_CODE,
+        STREET_CODE,
+        COMMITTEE_CODE,
+        HOUSE_NUMBER,
+        POSTAL_CODE,
+        NATIONALITY_CODE,
+        ABO_CODE,
+        RH_CODE,
+        EDUCATION_CODE,
+        OCCUPATION_CODE,
+        MARRIAGE_CODE,
+        CODE_SYS_CODE,
+        CODE_SYS_NAME,
+        ASSIGNED_PERSON_CODE,
+        ASSIGNED_PERSON_NAME,
+        CREATE_TIME,
+        HEALTH_RECORD_NO,
+        HEALTH_RECORD_ORG_CODE,
+        PATIENT_ID,
+        MSG_ID,
+        EMPLOYER_TEL_NO,
+        STATUS_CODE,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>
+        ) VALUES (
+        #{orgCode,jdbcType=VARCHAR},
+        #{orgName,jdbcType=VARCHAR},
+        #{idNo,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR},
+        #{sexCode,jdbcType=DECIMAL},
+        #{birthDate,jdbcType=TIMESTAMP},
+        #{idTypeCode,jdbcType=DECIMAL},
+        #{employerName,jdbcType=VARCHAR},
+        #{telNo,jdbcType=VARCHAR},
+        #{relName,jdbcType=VARCHAR},
+        #{relTelNo,jdbcType=VARCHAR},
+        #{address,jdbcType=VARCHAR},
+        #{stateCode,jdbcType=VARCHAR},
+        #{cityCode,jdbcType=VARCHAR},
+        #{areaCode,jdbcType=VARCHAR},
+        #{streetCode,jdbcType=VARCHAR},
+        #{committeeCode,jdbcType=VARCHAR},
+        #{houseNumber,jdbcType=VARCHAR},
+        #{postalCode,jdbcType=VARCHAR},
+        #{nationalityCode,jdbcType=DECIMAL},
+        #{aboCode,jdbcType=DECIMAL},
+        #{rhCode,jdbcType=DECIMAL},
+        #{educationCode,jdbcType=DECIMAL},
+        #{occupationCode,jdbcType=VARCHAR},
+        #{marriageCode,jdbcType=DECIMAL},
+        #{codeSysCode,jdbcType=VARCHAR},
+        #{codeSysName,jdbcType=VARCHAR},
+        #{assignedPersonCode,jdbcType=VARCHAR},
+        #{assignedPersonName,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},
+        #{healthRecordNo,jdbcType=VARCHAR},
+        #{healthRecordOrgCode,jdbcType=VARCHAR},
+        #{patientId,jdbcType=VARCHAR},
+        #{msgId,jdbcType=VARCHAR},
+        #{employerTelNo,jdbcType=VARCHAR},
+        #{statusCode,jdbcType=VARCHAR},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
     </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
         delete from PHIP_XMAN_BASE_INFO where ID in
@@ -227,8 +306,8 @@
                 <if test="item.houseNumber != null">
                     HOUSE_NUMBER = #{item.houseNumber,jdbcType=VARCHAR},
                 </if>
-                <if test="item.postalcode != null">
-                    POSTALCODE = #{item.postalcode,jdbcType=VARCHAR},
+                <if test="item.postalCode != null">
+                    POSTAL_CODE = #{item.postalCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.nationalityCode != null">
                     NATIONALITY_CODE = #{item.nationalityCode,jdbcType=DECIMAL},
@@ -289,4 +368,5 @@
             where id = #{item.id};
         </foreach>
     </update>
+
 </mapper>

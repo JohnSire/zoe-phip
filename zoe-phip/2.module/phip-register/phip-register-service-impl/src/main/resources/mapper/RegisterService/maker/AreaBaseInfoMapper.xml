@@ -40,6 +40,27 @@
             FROM DUAL
         </foreach>
     </insert>
+    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.AreaBaseInfo">
+        INSERT INTO PHIP_AREA_BASE_INFO (
+        CODE,
+        NAME,
+        P_AREA_ID,
+        BUILD_TIME,
+        AREA_CANCELLATION_DATE,
+        AREA_CANCEL_RESON,
+        HISTORY_AREA_ID,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES (
+            #{code,jdbcType=VARCHAR},
+            #{name,jdbcType=VARCHAR},
+            #{pareaId,jdbcType=VARCHAR},
+            #{buildTime,jdbcType=TIMESTAMP},
+            #{areaCancellationDate,jdbcType=TIMESTAMP},
+            #{areaCancelReson,jdbcType=VARCHAR},
+            #{historyAreaId,jdbcType=VARCHAR},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
         delete from PHIP_AREA_BASE_INFO where ID in
         <foreach collection="array" item="item" open="(" separator="," close=")">

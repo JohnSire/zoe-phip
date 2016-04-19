@@ -27,6 +27,21 @@
         <include refid="com.zoe.phip.module.service.baseEntityInsert"/>,
          MODIFY_AT,MODIFY_BY,STATE
     </sql>
+    <sql id="baseMasterEntitySelectDefault">
+        <choose>
+            <when test="id == null">
+                lower(sys_guid()),
+            </when>
+            <otherwise>
+                #{id,jdbcType=VARCHAR},
+            </otherwise>
+        </choose>
+        sysdate,
+        #{createBy,jdbcType=VARCHAR},
+        sysdate,
+        #{modifyBy,jdbcType=VARCHAR},
+        1
+    </sql>
     <!--自定义查询占位符-->
     <sql id="selfWhere">
     </sql>

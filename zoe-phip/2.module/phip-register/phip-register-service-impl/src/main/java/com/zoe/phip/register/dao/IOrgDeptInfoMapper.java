@@ -7,6 +7,7 @@
 package com.zoe.phip.register.dao;
 
 import com.zoe.phip.module.service.mapper.IMyMapper;
+import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.OrgDeptInfo;
 
 /**
@@ -14,6 +15,6 @@ import com.zoe.phip.register.model.OrgDeptInfo;
  * @version 1.0
  * @date 2016-04-12
  */
-public interface IOrgDeptInfoMapper extends IMyMapper<OrgDeptInfo> {
+public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
 
 }

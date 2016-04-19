@@ -4,4 +4,54 @@
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.EhrDataInfo" extends="BaseResultMap">
 
     </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.EhrDataInfo">
+        update EHR_DATA_INFO
+        <set>
+            <if test="msgId != null">
+                MSG_ID = #{msgId,jdbcType=VARCHAR},
+            </if>
+            <if test="patientId != null">
+                PATIENT_ID = #{patientId,jdbcType=VARCHAR},
+            </if>
+            <if test="patientName != null">
+                PATIENT_NAME = #{patientName,jdbcType=VARCHAR},
+            </if>
+            <if test="healthCardId != null">
+                HEALTH_CARD_ID = #{healthCardId,jdbcType=VARCHAR},
+            </if>
+            <if test="idNo != null">
+                ID_NO = #{idNo,jdbcType=VARCHAR},
+            </if>
+            <if test="orgCode != null">
+                ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null">
+                ORG_NAME = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="telNo != null">
+                TEL_NO = #{telNo,jdbcType=VARCHAR},
+            </if>
+            <if test="addressStreet != null">
+                ADDRESS_STREET = #{addressStreet,jdbcType=VARCHAR},
+            </if>
+            <if test="outTime != null">
+                OUT_TIME = #{outTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="title != null">
+                TITLE = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="documentUniqueId != null">
+                DOCUMENT_UNIQUE_ID = #{documentUniqueId,jdbcType=VARCHAR},
+            </if>
+            <if test="repositoryUniqueId != null">
+                REPOSITORY_UNIQUE_ID = #{repositoryUniqueId,jdbcType=VARCHAR},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id}
+    </update>
+
 </mapper>

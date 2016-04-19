@@ -101,6 +101,57 @@
             FROM DUAL
         </foreach>
     </insert>
+    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
+        INSERT INTO PHIP_MEDICAL_STAFF_INFO (
+        STAFF_ID,
+        NAME,
+        GENDER_CODE,
+        GENDER_NAME,
+        BIRTH_TIME,
+        BIRTHPLACE_ADDR,
+        ID_NO,
+        TECHNICAL_CODE,
+        TECHNICAL_NAME,
+        EMPLOYER_ADDR,
+        EMPLOYER_TEL_NO,
+        EFFECTIVE_TIME_LOW,
+        EFFECTIVE_TIME_HIGH,
+        AFFILIATED_ORG_CODE,
+        AFFILIATED_ORG_NAME,
+        MSG_ID,
+        ASSIGNED_CODE,
+        ASSIGNED_NAME,
+        ASSIGNED_DEPT_CODE,
+        ASSIGNED_DEPT_NAME,
+        ASSIGNED_ONTACT_PERSON,
+        STATUS_CODE,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES (
+            #{staffId,jdbcType=VARCHAR},
+            #{name,jdbcType=VARCHAR},
+            #{genderCode,jdbcType=VARCHAR},
+            #{genderName,jdbcType=VARCHAR},
+            #{birthTime,jdbcType=TIMESTAMP},
+            #{birthplaceAddr,jdbcType=VARCHAR},
+            #{idNo,jdbcType=VARCHAR},
+            #{technicalCode,jdbcType=VARCHAR},
+            #{technicalName,jdbcType=VARCHAR},
+            #{employerAddr,jdbcType=VARCHAR},
+            #{employerTelNo,jdbcType=VARCHAR},
+            #{effectiveTimeLow,jdbcType=TIMESTAMP},
+            #{effectiveTimeHigh,jdbcType=TIMESTAMP},
+            #{affiliatedOrgCode,jdbcType=VARCHAR},
+            #{affiliatedOrgName,jdbcType=VARCHAR},
+            #{msgId,jdbcType=VARCHAR},
+            #{assignedCode,jdbcType=VARCHAR},
+            #{assignedName,jdbcType=VARCHAR},
+            #{assignedDeptCode,jdbcType=VARCHAR},
+            #{assignedDeptName,jdbcType=VARCHAR},
+            #{assignedOntactPerson,jdbcType=VARCHAR},
+            #{statusCode,jdbcType=VARCHAR},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
         delete from PHIP_MEDICAL_STAFF_INFO where ID in
         <foreach collection="array" item="item" open="(" separator="," close=")">

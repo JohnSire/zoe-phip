@@ -4,4 +4,84 @@
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.MedicalStaffInfo" extends="BaseResultMap">
 
     </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
+        update PHIP_MEDICAL_STAFF_INFO
+        <set>
+            <if test="staffId != null">
+                STAFF_ID = #{staffId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="genderCode != null">
+                GENDER_CODE = #{genderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="genderName != null">
+                GENDER_NAME = #{genderName,jdbcType=VARCHAR},
+            </if>
+            <if test="birthTime != null">
+                BIRTH_TIME = #{birthTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="birthplaceAddr != null">
+                BIRTHPLACE_ADDR = #{birthplaceAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="idNo != null">
+                ID_NO = #{idNo,jdbcType=VARCHAR},
+            </if>
+            <if test="technicalCode != null">
+                TECHNICAL_CODE = #{technicalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="technicalName != null">
+                TECHNICAL_NAME = #{technicalName,jdbcType=VARCHAR},
+            </if>
+            <if test="employerAddr != null">
+                EMPLOYER_ADDR = #{employerAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="employerTelNo != null">
+                EMPLOYER_TEL_NO = #{employerTelNo,jdbcType=VARCHAR},
+            </if>
+            <if test="effectiveTimeLow != null">
+                EFFECTIVE_TIME_LOW = #{effectiveTimeLow,jdbcType=TIMESTAMP},
+            </if>
+            <if test="effectiveTimeHigh != null">
+                EFFECTIVE_TIME_HIGH = #{effectiveTimeHigh,jdbcType=TIMESTAMP},
+            </if>
+            <if test="affiliatedOrgCode != null">
+                AFFILIATED_ORG_CODE = #{affiliatedOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="affiliatedOrgName != null">
+                AFFILIATED_ORG_NAME = #{affiliatedOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="msgId != null">
+                MSG_ID = #{msgId,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedCode != null">
+                ASSIGNED_CODE = #{assignedCode,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedName != null">
+                ASSIGNED_NAME = #{assignedName,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedDeptCode != null">
+                ASSIGNED_DEPT_CODE = #{assignedDeptCode,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedDeptName != null">
+                ASSIGNED_DEPT_NAME = #{assignedDeptName,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedContactPerson != null">
+                ASSIGNED_CONTACT_PERSON = #{assignedContactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="statusCode != null">
+                STATUS_CODE = #{statusCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creationTime != null">
+                CREATION_TIME = #{creationTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id}
+    </update>
+
 </mapper>

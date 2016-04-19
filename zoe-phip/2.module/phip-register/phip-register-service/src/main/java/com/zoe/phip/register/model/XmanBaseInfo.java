@@ -5,15 +5,11 @@
 
 package com.zoe.phip.register.model;
 
-import com.zoe.phip.module.service.entity.MasterEntity;
 import com.zoe.phip.infrastructure.annotation.XPath;
 import com.zoe.phip.register.model.base.RegisterEntity;
 
 import javax.persistence.*;
-import javax.swing.plaf.synth.Region;
-import javax.swing.text.EditorKit;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -155,8 +151,8 @@ public class XmanBaseInfo extends RegisterEntity {
     /**
      * 邮政编码
      */
-    @Column(name = "POSTALCODE")
-    private String postalcode;
+    @Column(name = "POSTAL_CODE")
+    private String postalCode;
 
     /**
      * 民族代码
@@ -198,6 +194,22 @@ public class XmanBaseInfo extends RegisterEntity {
      */
     @Column(name = "OCCUPATION_CODE")
     private String occupationCode;
+
+
+    /**
+     * 职业类别代码  todo 是否加入到数据库
+     */
+    @Transient
+    private String occupationName;
+
+    public String getOccupationName() {
+        return occupationName;
+    }
+
+    public void setOccupationName(String occupationName) {
+        this.occupationName = occupationName;
+    }
+
 
     /**
      * 婚姻状况代码
@@ -464,13 +476,13 @@ public class XmanBaseInfo extends RegisterEntity {
         this.houseNumber = houseNumber;
     }
 
-    public String getPostalcode() {
-        return this.postalcode;
+    public String getPostalCode() {
+        return this.postalCode;
     }
 
 
-    public void setPostalcode(String postalcode) {
-        this.postalcode = postalcode;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public int getNationalityCode() {

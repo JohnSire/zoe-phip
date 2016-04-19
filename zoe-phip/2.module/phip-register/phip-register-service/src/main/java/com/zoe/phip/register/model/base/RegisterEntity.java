@@ -5,6 +5,7 @@ import com.zoe.phip.module.service.entity.MasterEntity;
 import javax.persistence.Transient;
 
 /**
+ * 要输出XML的都可以继承这个类
  * Created by zengjiyang on 2016/4/18.
  */
 public class RegisterEntity extends MasterEntity {

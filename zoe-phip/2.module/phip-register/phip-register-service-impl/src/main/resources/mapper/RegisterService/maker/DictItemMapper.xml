@@ -24,6 +24,19 @@
             FROM DUAL
         </foreach>
     </insert>
+    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.DictItem">
+        INSERT INTO PHIP_DICT_ITEM (
+        CODE,
+        NAME,
+        FK_CATALOG_CODE,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES (
+            #{code,jdbcType=VARCHAR},
+            #{name,jdbcType=VARCHAR},
+            #{fkCatalogCode,jdbcType=VARCHAR},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
         delete from PHIP_DICT_ITEM where ID in
         <foreach collection="array" item="item" open="(" separator="," close=")">

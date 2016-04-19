@@ -32,6 +32,7 @@
         <result column="REPOSITORY_UNIQUE_ID" property="repositoryUniqueId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
     </resultMap>
+
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO EHR_DATA_INFO (
         MSG_ID,
@@ -68,6 +69,41 @@
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
+    </insert>
+    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.EhrDataInfo">
+        INSERT INTO EHR_DATA_INFO (
+        MSG_ID,
+        PATIENT_ID,
+        PATIENT_NAME,
+        HEALTH_CARD_ID,
+        ID_NO,
+        ORG_CODE,
+        ORG_NAME,
+        AREA_CODE,
+        TEL_NO,
+        ADDRESS_STREET,
+        OUT_TIME,
+        TITLE,
+        DOCUMENT_UNIQUE_ID,
+        REPOSITORY_UNIQUE_ID,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES (
+        #{msgId,jdbcType=VARCHAR},
+        #{patientId,jdbcType=VARCHAR},
+        #{patientName,jdbcType=VARCHAR},
+        #{healthCardId,jdbcType=VARCHAR},
+        #{idNo,jdbcType=VARCHAR},
+        #{orgCode,jdbcType=VARCHAR},
+        #{orgName,jdbcType=VARCHAR},
+        #{areaCode,jdbcType=VARCHAR},
+        #{telNo,jdbcType=VARCHAR},
+        #{addressStreet,jdbcType=VARCHAR},
+        #{outTime,jdbcType=TIMESTAMP},
+        #{title,jdbcType=VARCHAR},
+        #{documentUniqueId,jdbcType=VARCHAR},
+        #{repositoryUniqueId,jdbcType=VARCHAR},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
     </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
         delete from EHR_DATA_INFO where ID in
