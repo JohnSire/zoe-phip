@@ -85,6 +85,49 @@
             FROM DUAL
         </foreach>
     </insert>
+    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.OrgDeptInfo">
+        INSERT INTO PHIP_ORG_DEPT_INFO (
+        CODE,
+        DEPT_NAME,
+        DEPT_TYPE_CODE,
+        DEPT_TYPE_NAME,
+        DEPT_ROLE_NAME,
+        DEPT_PARENT_CODE,
+        DEPT_PARENT_NAME,
+        EFFECTIVE_TIME_LOW,
+        EFFECTIVE_TIME_HIGH,
+        EMPLOYER_ADDR,
+        EMPLOYER_TEL_NO,
+        MSG_ID,
+        ASSIGNED_CODE,
+        ASSIGNED_NAME,
+        ASSIGNED_DEPT_CODE,
+        ASSIGNED_DEPT_NAME,
+        ASSIGNED_ONTACT_PERSON,
+        SORT_NUM,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES (
+        #{code,jdbcType=VARCHAR},
+        #{deptName,jdbcType=VARCHAR},
+        #{deptTypeCode,jdbcType=VARCHAR},
+        #{deptTypeName,jdbcType=VARCHAR},
+        #{deptRoleName,jdbcType=VARCHAR},
+        #{deptParentCode,jdbcType=VARCHAR},
+        #{deptParentName,jdbcType=VARCHAR},
+        #{effectiveTimeLow,jdbcType=TIMESTAMP},
+        #{effectiveTimeHigh,jdbcType=TIMESTAMP},
+        #{employerAddr,jdbcType=VARCHAR},
+        #{employerTelNo,jdbcType=VARCHAR},
+        #{msgId,jdbcType=VARCHAR},
+        #{assignedCode,jdbcType=VARCHAR},
+        #{assignedName,jdbcType=VARCHAR},
+        #{assignedDeptCode,jdbcType=VARCHAR},
+        #{assignedDeptName,jdbcType=VARCHAR},
+        #{assignedOntactPerson,jdbcType=VARCHAR},
+        #{sortNum,jdbcType=DECIMAL},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
         delete from PHIP_ORG_DEPT_INFO where ID in
         <foreach collection="array" item="item" open="(" separator="," close=")">

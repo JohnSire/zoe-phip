@@ -101,6 +101,57 @@
             FROM DUAL
         </foreach>
     </insert>
+    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
+        INSERT INTO PHIP_MEDICAL_STAFF_INFO (
+        STAFF_ID,
+        NAME,
+        GENDER_CODE,
+        GENDER_NAME,
+        BIRTH_TIME,
+        BIRTHPLACE_ADDR,
+        ID_NO,
+        TECHNICAL_CODE,
+        TECHNICAL_NAME,
+        EMPLOYER_ADDR,
+        EMPLOYER_TEL_NO,
+        EFFECTIVE_TIME_LOW,
+        EFFECTIVE_TIME_HIGH,
+        AFFILIATED_ORG_CODE,
+        AFFILIATED_ORG_NAME,
+        MSG_ID,
+        ASSIGNED_CODE,
+        ASSIGNED_NAME,
+        ASSIGNED_DEPT_CODE,
+        ASSIGNED_DEPT_NAME,
+        ASSIGNED_ONTACT_PERSON,
+        STATUS_CODE,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES (
+            #{staffId,jdbcType=VARCHAR},
+            #{name,jdbcType=VARCHAR},
+            #{genderCode,jdbcType=VARCHAR},
+            #{genderName,jdbcType=VARCHAR},
+            #{birthTime,jdbcType=TIMESTAMP},
+            #{birthplaceAddr,jdbcType=VARCHAR},
+            #{idNo,jdbcType=VARCHAR},
+            #{technicalCode,jdbcType=VARCHAR},
+            #{technicalName,jdbcType=VARCHAR},
+            #{employerAddr,jdbcType=VARCHAR},
+            #{employerTelNo,jdbcType=VARCHAR},
+            #{effectiveTimeLow,jdbcType=TIMESTAMP},
+            #{effectiveTimeHigh,jdbcType=TIMESTAMP},
+            #{affiliatedOrgCode,jdbcType=VARCHAR},
+            #{affiliatedOrgName,jdbcType=VARCHAR},
+            #{msgId,jdbcType=VARCHAR},
+            #{assignedCode,jdbcType=VARCHAR},
+            #{assignedName,jdbcType=VARCHAR},
+            #{assignedDeptCode,jdbcType=VARCHAR},
+            #{assignedDeptName,jdbcType=VARCHAR},
+            #{assignedOntactPerson,jdbcType=VARCHAR},
+            #{statusCode,jdbcType=VARCHAR},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
         delete from PHIP_MEDICAL_STAFF_INFO where ID in
         <foreach collection="array" item="item" open="(" separator="," close=")">
@@ -190,5 +241,81 @@
             </set>
             where id = #{item.id};
         </foreach>
+    </update>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
+        update PHIP_MEDICAL_STAFF_INFO
+        <set>
+            <if test="item.staffId != null">
+                STAFF_ID = #{staffId,jdbcType=VARCHAR},
+            </if>
+            <if test="item.name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="item.genderCode != null">
+                GENDER_CODE = #{genderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="item.genderName != null">
+                GENDER_NAME = #{genderName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.birthTime != null">
+                BIRTH_TIME = #{birthTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.birthplaceAddr != null">
+                BIRTHPLACE_ADDR = #{birthplaceAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="item.idNo != null">
+                ID_NO = #{idNo,jdbcType=VARCHAR},
+            </if>
+            <if test="item.technicalCode != null">
+                TECHNICAL_CODE = #{technicalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="item.technicalName != null">
+                TECHNICAL_NAME = #{technicalName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.employerAddr != null">
+                EMPLOYER_ADDR = #{employerAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="item.employerTelNo != null">
+                EMPLOYER_TEL_NO = #{employerTelNo,jdbcType=VARCHAR},
+            </if>
+            <if test="item.effectiveTimeLow != null">
+                EFFECTIVE_TIME_LOW = #{effectiveTimeLow,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.effectiveTimeHigh != null">
+                EFFECTIVE_TIME_HIGH = #{effectiveTimeHigh,jdbcType=TIMESTAMP},
+            </if>
+            <if test="item.affiliatedOrgCode != null">
+                AFFILIATED_ORG_CODE = #{affiliatedOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="item.affiliatedOrgName != null">
+                AFFILIATED_ORG_NAME = #{affiliatedOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.msgId != null">
+                MSG_ID = #{msgId,jdbcType=VARCHAR},
+            </if>
+            <if test="item.assignedCode != null">
+                ASSIGNED_CODE = #{assignedCode,jdbcType=VARCHAR},
+            </if>
+            <if test="item.assignedName != null">
+                ASSIGNED_NAME = #{assignedName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.assignedDeptCode != null">
+                ASSIGNED_DEPT_CODE = #{assignedDeptCode,jdbcType=VARCHAR},
+            </if>
+            <if test="item.assignedDeptName != null">
+                ASSIGNED_DEPT_NAME = #{assignedDeptName,jdbcType=VARCHAR},
+            </if>
+            <if test="item.assignedOntactPerson != null">
+                ASSIGNED_ONTACT_PERSON = #{assignedOntactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="item.state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            <if test="item.statusCode != null">
+                STATUS_CODE = #{statusCode,jdbcType=VARCHAR},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id};
     </update>
 </mapper>

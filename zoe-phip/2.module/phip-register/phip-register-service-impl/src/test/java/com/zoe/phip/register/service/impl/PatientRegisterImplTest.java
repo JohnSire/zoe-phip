@@ -29,7 +29,7 @@ public class PatientRegisterImplTest extends BaseTest {
 
     @Test
     public void testAddPatientRegistry() throws Exception {
-        String patientInput="<PRPA_IN201311UV02 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\"\n" +
+        String patientInput = "<PRPA_IN201311UV02 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\"\n" +
                 "xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPA_IN201311UV02.xsd\" " +
                 "xmlns=\"urn:hl7-org:v3\"" +
                 ">\n" +
@@ -175,8 +175,8 @@ public class PatientRegisterImplTest extends BaseTest {
                 "</PRPA_IN201311UV02>";
 
 
-        patientRegister.addPatientRegistry(patientInput);
-
+        String result = patientRegister.addPatientRegistry(patientInput);
+        System.out.println(result);
 
        /* SAXReader reader = new SAXReader();
         String filePath = "/template/Patient/In/Adapter/PatientRegisterAdapter.xml";

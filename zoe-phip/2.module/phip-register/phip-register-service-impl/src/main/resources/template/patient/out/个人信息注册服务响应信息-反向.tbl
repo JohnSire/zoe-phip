@@ -46,7 +46,7 @@
               <!--性别-->
               <administrativeGenderCode code="${Model.sexCode}" codeSystem="2.16.156.10011.2.3.3.4" displayName="${Model.sexCodeName}" />
               <!--出生时间-->
-              <birthTime value="${Model.birthTime}" />
+              <birthTime value="${Model.birthDate}" />
               <!--联系地址-->
               <addr use="PUB">
                 <!--非结构化地址（完整地址描述） -->

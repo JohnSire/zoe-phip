@@ -7,6 +7,7 @@
 package com.zoe.phip.register.dao;
 
 import com.zoe.phip.module.service.mapper.IMyMapper;
+import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.XmanCard;
 
 /**
@@ -14,6 +15,6 @@ import com.zoe.phip.register.model.XmanCard;
  * @version 1.0
  * @date 2016-04-12
  */
-public interface IXmanCardMapper extends IMyMapper<XmanCard> {
+public interface IXmanCardMapper extends IServiceMapper<XmanCard> {
 
 }

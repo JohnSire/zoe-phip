@@ -40,6 +40,27 @@
             FROM DUAL
         </foreach>
     </insert>
+    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.XmanCard">
+        INSERT INTO PHIP_XMAN_CARD (
+        XC_CARD_CODE,
+        XC_CARD_TYPE,
+        XC_XMAN_ID,
+        HEALTH_RECORD_NO,
+        XC_ORG_ID,
+        XC_DESCR,
+        XC_ORG_CODE,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES (
+        #{xcCardCode,jdbcType=VARCHAR},
+        #{xcCardType,jdbcType=VARCHAR},
+        #{xcXmanId,jdbcType=VARCHAR},
+        #{healthRecordNo,jdbcType=VARCHAR},
+        #{xcOrgId,jdbcType=VARCHAR},
+        #{xcDescr,jdbcType=VARCHAR},
+        #{xcOrgCode,jdbcType=VARCHAR},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
         delete from PHIP_XMAN_CARD where ID in
         <foreach collection="array" item="item" open="(" separator="," close=")">

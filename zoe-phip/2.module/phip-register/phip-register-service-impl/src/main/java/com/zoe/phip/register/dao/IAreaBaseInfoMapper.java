@@ -8,6 +8,7 @@ package com.zoe.phip.register.dao;
 
 
 import com.zoe.phip.module.service.mapper.IMyMapper;
+import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.AreaBaseInfo;
 
 /**
@@ -15,6 +16,6 @@ import com.zoe.phip.register.model.AreaBaseInfo;
  * @version 1.0
  * @date 2016-04-11
  */
-public interface IAreaBaseInfoMapper extends IMyMapper<AreaBaseInfo> {
+public interface IAreaBaseInfoMapper extends IServiceMapper<AreaBaseInfo> {
 
 }

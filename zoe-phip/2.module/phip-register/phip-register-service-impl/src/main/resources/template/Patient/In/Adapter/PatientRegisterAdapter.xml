@@ -21,7 +21,7 @@
     <StreetCode descr = "地址-乡（镇、街道办事处）" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetNameBase"/>
     <CommitteeCode descr = "地址-村（街、路、弄等）" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetName"/>
     <HouseNumber descr = "地址-门牌号码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/houseNumber"/>
-    <Postalcode descr = "邮政编码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/postalCode"/>
+    <PostalCode descr = "邮政编码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/postalCode"/>
     <NationalityCode  descr = "民族代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/ethnicGroupCode/@code"/>
     <NationalityName  descr = "民族名称" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/ethnicGroupCode/@displayName"/>
     <AboCode descr="abo血型代码" path=""/>

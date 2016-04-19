@@ -7,6 +7,7 @@
 package com.zoe.phip.register.dao;
 
 import com.zoe.phip.module.service.mapper.IMyMapper;
+import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.EhrDataInfo;
 
 /**
@@ -14,6 +15,6 @@ import com.zoe.phip.register.model.EhrDataInfo;
  * @version 1.0
  * @date 2016-04-14
  */
-public interface IEhrDataInfoMapper extends IMyMapper<EhrDataInfo> {
+public interface IEhrDataInfoMapper extends IServiceMapper<EhrDataInfo> {
 
 }
