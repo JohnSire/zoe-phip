@@ -13,6 +13,7 @@ import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.model.base.ReceiverSender;
 import com.zoe.phip.register.service.IPatientRegister;
 import com.zoe.phip.register.util.ProcessXmlUtil;
+import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
 import org.dom4j.Document;
 import org.dom4j.io.SAXReader;
@@ -50,6 +51,7 @@ public class PatientRegisterImpl implements IPatientRegister {
      * 3.补全数据库实体
      * 4.执行数据库
      * 5.操作实体 AE AA
+     *
      * @param message
      * @return
      */
@@ -63,38 +65,38 @@ public class PatientRegisterImpl implements IPatientRegister {
             // TODO: 2016/4/14
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage("template/响应消息结果.tbl",acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
 
         Document document = ProcessXmlUtil.load(message);
-        XmanBaseInfo baseInfo=null;
+        XmanBaseInfo baseInfo = null;
         try {
             SAXReader reader = new SAXReader();
             //XmanBaseInfo
-            String filePath = "/template/Patient/In/Adapter/PatientRegisterAdapter.xml";
+            String filePath = "/template/patient/input/Adapter/PatientRegisterAdapter.xml";
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
-            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class,parserDoc);
+            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
             baseInfo.setId(StringUtil.getUUID());
             //ReceiverSender
-            String rsXmlPath="/template/base/ReceiverSenderAdapter.xml";
+            String rsXmlPath = "/template/base/ReceiverSenderAdapter.xml";
             Document rsParDoc = reader.read(this.getClass().getResourceAsStream(rsXmlPath));
-            ReceiverSender sr=XmlBeanUtil.toBean(document,ReceiverSender.class,rsParDoc);
+            ReceiverSender sr = XmlBeanUtil.toBean(document, ReceiverSender.class, rsParDoc);
             baseInfo.setReceiverSender(sr);
             //xml 验证错误  todo 打开验证功能
             /*if(strResult.contains("error:数据集内容验证错误")){
                 return registerFailed(baseInfo,strResult);
             }*/
             //数据是否存在判断
-            Example example=new Example(XmanBaseInfo.class);
-            example.createCriteria().andEqualTo("healthRecordNo",baseInfo.getHealthRecordNo());
-            int count= baseInfoMapper.selectCountByExample(example);
-            if(count>0){
-                return registerFailed(baseInfo,"由于内容重复注册，注册失败");
+            Example example = new Example(XmanBaseInfo.class);
+            example.createCriteria().andEqualTo("healthRecordNo", baseInfo.getHealthRecordNo());
+            int count = baseInfoMapper.selectCountByExample(example);
+            if (count > 0) {
+                return registerFailed(baseInfo, "由于内容重复注册，注册失败");
             }
 
-            String cardXmlPath = "/template/Patient/In/Adapter/XmanCardAdapter.xml";
+            String cardXmlPath = "/template/patient/input/Adapter/XmanCardAdapter.xml";
             Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardXmlPath));
-            XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class,cardParDoc);
+            XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class, cardParDoc);
 
             //保存到数据库
             baseInfoMapper.defaultAdd(baseInfo);
@@ -104,14 +106,15 @@ public class PatientRegisterImpl implements IPatientRegister {
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("注册成功");
             baseInfo.setAcknowledgement(acknowledgement);
-            Map<String,Object> map=new HashMap<String,Object>();
-            map.put("Model",baseInfo);
-            String result=
-              parser.parseByResource("template/patient/out/个人信息注册服务响应信息-正向.tbl", map);
-            return result;
+            /*
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("Model", baseInfo);
+            String result = parser.parseByResource("template/patient/output/个人信息注册服务响应信息-正向.tbl", map);
+            */
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_ADD_SUCUESS, baseInfo);
         } catch (Exception ex) {
-            logger.error("error:",ex);
-            return registerFailed(baseInfo,ex.getMessage());
+            logger.error("error:", ex);
+            return registerFailed(baseInfo, ex.getMessage());
         }
     }
 
@@ -125,36 +128,36 @@ public class PatientRegisterImpl implements IPatientRegister {
             // TODO: 2016/4/14
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage("template/响应消息结果.tbl",acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
         Document document = ProcessXmlUtil.load(message);
-        XmanBaseInfo baseInfo=null;
+        XmanBaseInfo baseInfo = null;
         try {
             SAXReader reader = new SAXReader();
             //XmanBaseInfo
-            String filePath = "/template/Patient/In/Adapter/PatientRegisterAdapter.xml";
+            String filePath = "/template/patient/input/Adapter/PatientRegisterAdapter.xml";
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
-            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class,parserDoc);
+            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
             //ReceiverSender
-            String rsXmlPath="/template/base/ReceiverSenderAdapter.xml";
+            String rsXmlPath = "/template/base/ReceiverSenderAdapter.xml";
             Document rsParDoc = reader.read(this.getClass().getResourceAsStream(rsXmlPath));
-            ReceiverSender sr=XmlBeanUtil.toBean(document,ReceiverSender.class,rsParDoc);
+            ReceiverSender sr = XmlBeanUtil.toBean(document, ReceiverSender.class, rsParDoc);
             baseInfo.setReceiverSender(sr);
             //xml 验证错误  todo 打开验证功能
             /*if(strResult.contains("error:数据集内容验证错误")){
                 return registerFailed(baseInfo,strResult);
             }*/
             //数据是否存在判断
-            Example example=new Example(XmanBaseInfo.class);
-            example.createCriteria().andEqualTo("healthRecordNo",baseInfo.getHealthRecordNo());
-            int count= baseInfoMapper.selectCountByExample(example);
-            if(count==0){
-                return updateFailed(baseInfo,"由于更新内容不存在，更新失败");
+            Example example = new Example(XmanBaseInfo.class);
+            example.createCriteria().andEqualTo("healthRecordNo", baseInfo.getHealthRecordNo());
+            int count = baseInfoMapper.selectCountByExample(example);
+            if (count == 0) {
+                return updateFailed(baseInfo, "由于更新内容不存在，更新失败");
             }
 
-            String cardXmlPath = "/template/Patient/In/Adapter/XmanCardAdapter.xml";
+            String cardXmlPath = "/template/patient/input/Adapter/XmanCardAdapter.xml";
             Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardXmlPath));
-            XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class,cardParDoc);
+            XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class, cardParDoc);
 
             //保存到数据库
             baseInfoMapper.defaultUpdate(baseInfo);
@@ -163,14 +166,11 @@ public class PatientRegisterImpl implements IPatientRegister {
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("更新成功");
             baseInfo.setAcknowledgement(acknowledgement);
-            Map<String,Object> map=new HashMap<String,Object>();
-            map.put("Model",baseInfo);
-            String result=
-                    parser.parseByResource("template/patient/out/个人信息更新服务响应信息-正向.tbl", map);
-            return result;
+            //String result = parser.parseByResource("template/patient/output/个人信息更新服务响应信息-正向.tbl", map);
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCUESS, baseInfo);
         } catch (Exception ex) {
-            logger.error("error:",ex);
-            return updateFailed(baseInfo,ex.getMessage());
+            logger.error("error:", ex);
+            return updateFailed(baseInfo, ex.getMessage());
         }
 
     }
@@ -180,6 +180,7 @@ public class PatientRegisterImpl implements IPatientRegister {
      * 1.找到new和old两个病人信息
      * 2.如果new中病人信息为空，而old中不为空，则将old值赋到new中
      * 3.更新new 删除old
+     *
      * @param message
      * @return
      */
@@ -198,32 +199,31 @@ public class PatientRegisterImpl implements IPatientRegister {
 
     /**
      * 注册失败返回值
+     *
      * @param baseInfo
      * @param errorMsg
      * @return
      */
-    private String registerFailed(XmanBaseInfo baseInfo, String errorMsg){
-        return responseFailed(baseInfo,errorMsg,"template/patient/out/个人信息注册服务响应信息-反向.tbl");
+    private String registerFailed(XmanBaseInfo baseInfo, String errorMsg) {
+        return responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_ADD_ERROR);
     }
 
     /**
      * 更新失败返回值
+     *
      * @param baseInfo
      * @param errorMsg
      * @return
      */
-    private String updateFailed(XmanBaseInfo baseInfo,String errorMsg){
-        return responseFailed(baseInfo,errorMsg,"template/patient/out/个人信息更新服务响应信息-反向.tbl");
+    private String updateFailed(XmanBaseInfo baseInfo, String errorMsg) {
+        return responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_UPDATE_ERROR);
     }
 
-    private String responseFailed(XmanBaseInfo baseInfo,String errorMsg,String path){
-        Acknowledgement acknowledgement=new Acknowledgement();
+    private String responseFailed(XmanBaseInfo baseInfo, String errorMsg, String path) {
+        Acknowledgement acknowledgement = new Acknowledgement();
         acknowledgement.setTypeCode("AE");
         acknowledgement.setText(errorMsg);
         baseInfo.setAcknowledgement(acknowledgement);
-        return parser.parseByResource(path, MapUtil.createMap(m -> {
-            m.put("Model", baseInfo);}));
+        return RegisterUtil.registerMessage(path, baseInfo);
     }
-
-
 }
