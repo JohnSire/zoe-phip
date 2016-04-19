@@ -3,6 +3,8 @@ package com.zoe.phip.register.util;
 import com.zoe.phip.infrastructure.bean.BeanFactory;
 import com.zoe.phip.infrastructure.parser.Parser;
 import com.zoe.phip.infrastructure.util.MapUtil;
+import com.zoe.phip.register.model.base.Acknowledgement;
+import com.zoe.phip.register.model.base.RegisterEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +24,13 @@ public final class RegisterUtil {
         map.clear();
         map = null;
         return result;
+    }
+    public static String responseFailed(RegisterEntity entity, String errorMsg, String path) {
+        Acknowledgement acknowledgement = new Acknowledgement();
+        acknowledgement.setTypeCode("AE");
+        acknowledgement.setText(errorMsg);
+        entity.setAcknowledgement(acknowledgement);
+        return RegisterUtil.registerMessage(path, entity);
     }
 
     private static Parser getParser() {

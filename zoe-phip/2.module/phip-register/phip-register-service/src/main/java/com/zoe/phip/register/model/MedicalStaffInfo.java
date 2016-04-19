@@ -6,6 +6,7 @@
 package com.zoe.phip.register.model;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
+import com.zoe.phip.register.model.base.RegisterEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,7 +18,7 @@ import java.util.Date;
  * @date 2016-04-18
  */
 @Table(name = "PHIP_MEDICAL_STAFF_INFO")
-public class MedicalStaffInfo extends MasterEntity {
+public class MedicalStaffInfo extends RegisterEntity {
     /**
      * 医务人员id
      */

@@ -2,18 +2,22 @@ package com.zoe.phip.register.service.impl;
 
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.infrastructure.util.XmlUtil;
+import com.zoe.phip.register.BaseTest;
 import com.zoe.phip.register.model.MedicalStaffInfo;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.io.SAXReader;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by zhanghao on 2016/4/15.
  */
-public class MedicalStaffRegisterImplTest {
+public class MedicalStaffRegisterImplTest extends BaseTest{
 
+    @Autowired
+    private MedicalStaffRegisterImpl medicalStaffRegister;
 
     @Test
     public void toBean() throws Exception {
@@ -224,18 +228,21 @@ public class MedicalStaffRegisterImplTest {
                 "  </controlActProcess>\n" +
                 "</PRPM_IN301010UV01>";
 
-        SAXReader reader = new SAXReader();
-        String filePath = "/template/Patient/In/Adapter/MedicalStaffRegisterAdapter.xml";
-        Document document = null;
-        try {
-            document = reader.read(this.getClass().getResourceAsStream(filePath));
-        } catch (DocumentException e) {
+//        SAXReader reader = new SAXReader();
+//        String filePath = "/template/Patient/In/Adapter/MedicalStaffRegisterAdapter.xml";
+//        Document document = null;
+//        try {
+//            document = reader.read(this.getClass().getResourceAsStream(filePath));
+//        } catch (DocumentException e) {
+//
+//        }
+//
+//        Medicalxml = XmlUtil.removeNameSpace(Medicalxml);
+//        Document doc = DocumentHelper.parseText(Medicalxml);
+//        MedicalStaffInfo info = XmlBeanUtil.toBean(doc, MedicalStaffInfo.class, document);
+//        System.out.println();
 
-        }
-
-        Medicalxml = XmlUtil.removeNameSpace(Medicalxml);
-        Document doc = DocumentHelper.parseText(Medicalxml);
-        MedicalStaffInfo info = XmlBeanUtil.toBean(doc, MedicalStaffInfo.class, document);
-        System.out.println();
+        String s = medicalStaffRegister.addProvider(Medicalxml);
+        System.out.println(s);
     }
 }

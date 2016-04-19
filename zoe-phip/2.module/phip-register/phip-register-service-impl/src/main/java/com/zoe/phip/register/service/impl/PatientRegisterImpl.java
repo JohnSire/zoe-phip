@@ -205,7 +205,7 @@ public class PatientRegisterImpl implements IPatientRegister {
      * @return
      */
     private String registerFailed(XmanBaseInfo baseInfo, String errorMsg) {
-        return responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_ADD_ERROR);
+        return RegisterUtil.responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_ADD_ERROR);
     }
 
     /**
@@ -216,14 +216,14 @@ public class PatientRegisterImpl implements IPatientRegister {
      * @return
      */
     private String updateFailed(XmanBaseInfo baseInfo, String errorMsg) {
-        return responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_UPDATE_ERROR);
+        return RegisterUtil.responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_UPDATE_ERROR);
     }
 
-    private String responseFailed(XmanBaseInfo baseInfo, String errorMsg, String path) {
-        Acknowledgement acknowledgement = new Acknowledgement();
-        acknowledgement.setTypeCode("AE");
-        acknowledgement.setText(errorMsg);
-        baseInfo.setAcknowledgement(acknowledgement);
-        return RegisterUtil.registerMessage(path, baseInfo);
-    }
+//    private String responseFailed(XmanBaseInfo baseInfo, String errorMsg, String path) {
+//        Acknowledgement acknowledgement = new Acknowledgement();
+//        acknowledgement.setTypeCode("AE");
+//        acknowledgement.setText(errorMsg);
+//        baseInfo.setAcknowledgement(acknowledgement);
+//        return RegisterUtil.registerMessage(path, baseInfo);
+//    }
 }
