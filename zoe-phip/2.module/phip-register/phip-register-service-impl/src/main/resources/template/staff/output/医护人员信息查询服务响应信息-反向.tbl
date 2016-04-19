@@ -1,4 +1,4 @@
-﻿<PRPM_IN306011UV01 xmlns="urn:hl7-org:v3">
+﻿<PRPM_IN306011UV01 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPM_IN306011UV01.xsd" ITSVersion="XML_1.0">
   <id extension="${Model.msgId}" />
   <creationTime value="${Model.creationTime}" />
   <interactionId root="2.16.840.1.113883.1.6" extension="PRPM_IN306011UV01" />
@@ -7,19 +7,19 @@
   <acceptAckCode code="AL" />
   <receiver typeCode="RCV">
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="1.2.840.114350.1.13.999.567" />
+       <id root="${Model.receiverSender.receiverId}" />
     </device>
   </receiver>
   <sender typeCode="SND">
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="1.2.840.114350.1.13.999.234" />
+      <id root="${Model.receiverSender.senderId}" />
     </device>
   </sender>
   <!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->
   <acknowledgement typeCode="AE">
     <targetMessage>
       <!--请求的消息ID-->
-      <id root="${Model.msgId}" extension="${Model.acknowledgement.extension}" />
+      <id root="${Model.id}" extension="${Model.msgId}" />
     </targetMessage>
     <acknowledgementDetail>
       <!--处理结果说明-->
@@ -35,7 +35,7 @@
     <queryByParameterPayload>
       <statusCode code="new"></statusCode>
       <providerID>
-        <value root="2.16.156.10011.1.4" extension="120109197706015518"></value>
+        <value root="2.16.156.10011.1.4" extension="${Model.staffId}"></value>
         <semanticsText>HealthCareProvider.id</semanticsText>
       </providerID>
     </queryByParameterPayload>

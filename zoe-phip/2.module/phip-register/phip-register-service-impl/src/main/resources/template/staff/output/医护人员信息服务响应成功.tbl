@@ -9,23 +9,21 @@ xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPM_IN301011UV01.xsd" I
     <processingModeCode code="I"/>
     <acceptAckCode code="AL"/>
     <receiver typeCode="RCV">
-
       <telecom/>
-
       <device classCode="DEV" determinerCode="INSTANCE">
-        <id root="1.2.840.114350.1.13.999.234"/>
+        <id root="${Model.receiverSender.receiverId}"/>
       </device>
     </receiver>
     <sender typeCode="SND">
      <telecom/>
       <device classCode="DEV" determinerCode="INSTANCE">
-        <id root="1.2.840.114350.1.13.999.567"/>
+        <id root="${Model.receiverSender.senderId}"/>
       </device>
     </sender>
       <acknowledgement typeCode="${Model.acknowledgement.typeCode}">
         <targetMessage>
           <!--请求的消息ID-->
-          <id root="${Model.acknowledgement.id}" extension="${Model.acknowledgement.extension}" />
+          <id root="${Model.id}" extension="${Model.msgId}" />
         </targetMessage>
         <acknowledgementDetail>
           <!--处理结果说明-->
@@ -107,7 +105,7 @@ xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPM_IN301011UV01.xsd" I
                 <contactParty classCode="CON">
                   <contactPerson classCode="PSN"
                   determinerCode="INSTANCE">
-                    <name>${Model.assignedOntactPerson}</name>
+                    <name>${Model.assignedContactPerson}</name>
                   </contactPerson>
                 </contactParty>
               </representedOrganization>
