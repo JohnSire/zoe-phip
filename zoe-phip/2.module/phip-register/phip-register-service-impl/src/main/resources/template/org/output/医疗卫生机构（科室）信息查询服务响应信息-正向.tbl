@@ -64,7 +64,7 @@
               <name>${Model.assignedDeptName}</name>
               <contactParty classCode="CON">
                 <contactPerson classCode="PSN" determinerCode="INSTANCE">
-                  <name>${Model.assignedOntactPerson}</name>
+                  <name>${Model.assignedContactPerson}</name>
                 </contactPerson>
               </contactParty>
             </representedOrganization>

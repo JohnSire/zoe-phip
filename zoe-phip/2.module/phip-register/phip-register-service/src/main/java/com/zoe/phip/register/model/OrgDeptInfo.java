@@ -134,8 +134,8 @@ public class OrgDeptInfo extends MasterEntity {
      * 申请联系人
      */
     @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/contactParty/contactPerson/name", descr = "申请联系人")
-    @Column(name = "ASSIGNED_ONTACT_PERSON")
-    private String assignedOntactPerson;
+    @Column(name = "ASSIGNED_CONTACT_PERSON")
+    private String assignedContactPerson;
 
     /**
      * 排序值  越小排在越前
@@ -266,12 +266,12 @@ public class OrgDeptInfo extends MasterEntity {
         this.assignedDeptName = assignedDeptName;
     }
 
-    public String getAssignedOntactPerson() {
-        return this.assignedOntactPerson;
+    public String getAssignedContactPerson() {
+        return this.assignedContactPerson;
     }
 
-    public void setAssignedOntactPerson(String assignedOntactPerson) {
-        this.assignedOntactPerson = assignedOntactPerson;
+    public void setAssignedContactPerson(String assignedContactPerson) {
+        this.assignedContactPerson = assignedContactPerson;
     }
 
 

@@ -34,7 +34,7 @@
                 jdbcType="VARCHAR"/>
         <result column="ASSIGNED_DEPT_NAME" property="assignedDeptName" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="ASSIGNED_ONTACT_PERSON" property="assignedOntactPerson" javaType="java.lang.String"
+        <result column="ASSIGNED_ONTACT_PERSON" property="assignedContactPerson" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
 
         <result column="SORT_NUM" property="sortNum" javaType="java.lang.Integer"
@@ -79,7 +79,7 @@
             #{item.assignedName,jdbcType=VARCHAR},
             #{item.assignedDeptCode,jdbcType=VARCHAR},
             #{item.assignedDeptName,jdbcType=VARCHAR},
-            #{item.assignedOntactPerson,jdbcType=VARCHAR},
+            #{item.assignedContactPerson,jdbcType=VARCHAR},
             #{item.sortNum,jdbcType=DECIMAL},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
@@ -192,8 +192,8 @@
                 <if test="item.assignedDeptName != null">
                     ASSIGNED_DEPT_NAME = #{item.assignedDeptName,jdbcType=VARCHAR},
                 </if>
-                <if test="item.assignedOntactPerson != null">
-                    ASSIGNED_ONTACT_PERSON = #{item.assignedOntactPerson,jdbcType=VARCHAR},
+                <if test="item.assignedContactPerson != null">
+                    ASSIGNED_ONTACT_PERSON = #{item.assignedContactPerson,jdbcType=VARCHAR},
                 </if>
 
                 <if test="item.sortNum != null">
