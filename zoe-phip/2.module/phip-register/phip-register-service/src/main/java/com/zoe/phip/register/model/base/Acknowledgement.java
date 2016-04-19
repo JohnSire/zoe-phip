@@ -19,6 +19,11 @@ public class Acknowledgement {
      */
     private String typeCode;
 
+    /**
+     * 响应消息ID
+     */
+    private String msgId;
+
 
     public String getText() {
         return text;
@@ -50,6 +55,14 @@ public class Acknowledgement {
 
     public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
+    }
+
+    public String getMsgId() {
+        return msgId;
+    }
+
+    public void setMsgId(String msgId) {
+        this.msgId = msgId;
     }
 
 }

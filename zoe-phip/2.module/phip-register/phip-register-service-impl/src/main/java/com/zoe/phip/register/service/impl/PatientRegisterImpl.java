@@ -23,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -196,21 +198,65 @@ public class PatientRegisterImpl implements IPatientRegister {
             return RegisterUtil.registerMessage("template/响应消息结果.tbl",acknowledgement);
         }
         Document document = ProcessXmlUtil.load(message);
-        String oldPatientId=document.selectSingleNode("/controlActProcess/subject/registrationEvent/replacementOf/priorRegistration/subject1/priorRegisteredRole/id/@extension").getText();
-        String newPatientId=document.selectSingleNode("/controlActProcess/subject/registrationEvent/subject1/patient/id/@extension").getText();
-        /*Example example=new Example(XmanBaseInfo.class);
-        example.createCriteria().andEqualTo("healthRecordNo",baseInfo.getHealthRecordNo());
-        int count= baseInfoMapper.selectCountByExample(example);
-        XmanBaseInfo oldPatient=*/
+        String oldPatientId=document.selectSingleNode("//controlActProcess/subject/registrationEvent/replacementOf/priorRegistration/subject1/priorRegisteredRole/id/@extension").getText();
+        String newPatientId=document.selectSingleNode("//controlActProcess/subject/registrationEvent/subject1/patient/id/@extension").getText();
+        String msgId = document.selectSingleNode("//id/@extension").getText();
+        acknowledgement.setMsgId(msgId);
+        if (strResult.contains("error:数据集内容验证错误")) {
+            // TODO: 2016/4/14
+            acknowledgement.setTypeCode("AE");
+            acknowledgement.setText(strResult+",合并失败");
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR,acknowledgement);
+        }
 
-
-        return null;
+        XmanBaseInfo oldPatient=baseInfoMapper.getPatient(oldPatientId);
+        XmanBaseInfo newPatient=baseInfoMapper.getPatient(newPatientId);
+        if(oldPatient==null||newPatient==null||StringUtil.isNullOrWhiteSpace(oldPatient.getHealthRecordNo())
+                ||StringUtil.isNullOrWhiteSpace(newPatient.getHealthRecordNo())){
+            acknowledgement.setTypeCode("AE");
+            acknowledgement.setText("由于合并内容不存在，合并失败");
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR,acknowledgement);
+        }
+        //赋值
+        copyValue(newPatient,oldPatient);
+        //保存到数据库
+        baseInfoMapper.defaultUpdate(newPatient);
+        baseInfoMapper.delete(oldPatient);
+        return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCUESS,acknowledgement);
     }
 
     @Override
     public String patientRegistryQuery(String message) {
 
         return null;
+    }
+
+
+    /**
+     * 将旧实体的值，赋到新实体上
+     * @param newBaseInfo
+     * @param oldBaseInfo
+     */
+    private void copyValue(XmanBaseInfo newBaseInfo,XmanBaseInfo oldBaseInfo){
+        Field[] fields = XmanBaseInfo.class.getDeclaredFields();
+        for (Field field:fields) {
+            String fieldName = field.getName();
+            fieldName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+            try {
+                Method getMethod = XmanBaseInfo.class.getMethod("get" + fieldName);
+                Object oldValue= getMethod.invoke(oldBaseInfo);
+                Object newValue= getMethod.invoke(newBaseInfo);
+                //int类型 新值为0，旧值不为0  或者 新值为空，旧值不为空
+                if((field.getType()==int.class&&Integer.parseInt(oldValue.toString())>0&&
+                        Integer.parseInt(newValue.toString())==0)||
+                        ((newValue==null&&oldValue!=null))){
+                    Method setMethod = XmanBaseInfo.class.getMethod("set" + fieldName,field.getType());
+                    setMethod.invoke(newBaseInfo,oldValue);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
@@ -234,6 +280,10 @@ public class PatientRegisterImpl implements IPatientRegister {
      */
     private String updateFailed(XmanBaseInfo baseInfo, String errorMsg) {
         return responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_UPDATE_ERROR);
+    }
+
+    private String mergeFailed(String errorMsg){
+        return errorMsg;
     }
 
     private String responseFailed(XmanBaseInfo baseInfo, String errorMsg, String path) {

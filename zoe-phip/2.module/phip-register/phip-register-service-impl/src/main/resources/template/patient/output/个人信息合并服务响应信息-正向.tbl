@@ -5,14 +5,14 @@
   <processingCode code="P" />
   <processingModeCode code="R" />
   <acceptAckCode code="NE" />
-  <receiver typeCode="RCV">
+<receiver typeCode="RCV">
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="2.16.156.10011.0.1.2" extension="${Receiver.extension}" />
+      <id root="2.16.156.10011.0.1.2" extension="2.16.156.10011.0.1.2" />
     </device>
   </receiver>
   <sender typeCode="SND">
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="2.16.156.10011.0.1.1" extension="${Sender.extension}" />
+      <id root="2.16.156.10011.0.1.1" extension="2.16.156.10011.0.1.1" />
     </device>
   </sender>
   <!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->
@@ -23,7 +23,7 @@
     </targetMessage>
     <acknowledgementDetail>
       <!--处理结果说明-->
-      <text>${Acknowledgement.text}</text>
+      <text>${Model.text}</text>
     </acknowledgementDetail>
   </acknowledgement>
 </MCCI_IN000002UV01>

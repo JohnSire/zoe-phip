@@ -13,6 +13,7 @@ import org.dom4j.io.SAXReader;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -189,6 +190,22 @@ public class PatientRegisterImplTest extends BaseTest {
         patientInput= XmlUtil.removeNameSpace(patientInput);
         Document doc= DocumentHelper.parseText(patientInput);
         XmanBaseInfo info = XmlBeanUtil.toBean(doc, XmanBaseInfo.class,document);*/
+
+    }
+
+    @Test
+    public void testCopyValue() throws Exception {
+        XmanBaseInfo old=new XmanBaseInfo();
+        old.setName("123");
+        old.setModifyAt(new Date());
+        old.setId("123");
+        old.setAboCode(3);
+        old.setCreateTime(new Date());
+        XmanBaseInfo newOne=new XmanBaseInfo();
+        newOne.setName("456");
+        newOne.setAboCode(1);
+        patientRegister.copyValue(newOne,old);
+        System.out.println(newOne);
 
     }
 }
