@@ -6,6 +6,7 @@ import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IMedicalStaffInfoMapper;
 import com.zoe.phip.register.model.MedicalStaffInfo;
+import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.model.base.ReceiverSender;
 import com.zoe.phip.register.service.IMedicalStaffRegister;
@@ -32,7 +33,7 @@ import java.util.UUID;
 @Service(interfaceClass = IMedicalStaffRegister.class, proxy = "sdpf", dynamic = true)
 public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
 
-
+    private static final String adapter = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";
     private static final Logger logger = LoggerFactory.getLogger(MedicalStaffRegisterImpl.class);
 
 
@@ -40,7 +41,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
     private Parser parser;
 
     @Autowired
-    private IMedicalStaffInfoMapper medicalStaffmapper;
+    private IMedicalStaffInfoMapper staffInfoMapper;
 
     /**
      * 新增个人信息注册
@@ -71,8 +72,8 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
         try {
             SAXReader reader = new SAXReader();
             //MedicalStaffInfo
-            String filePath = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";
-            Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
+            //String filePath = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";
+            Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapter));
             staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class, parserDoc);
             staffInfo.setId(StringUtil.getUUID());
             //ReceiverSender
@@ -81,30 +82,49 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
 //            ReceiverSender sr = XmlBeanUtil.toBean(document, ReceiverSender.class, rsParDoc);
 //            staffInfo.setReceiverSender(sr);
             //数据是否存在判断
-            Example example = new Example(MedicalStaffInfo.class);
-            example.createCriteria().andEqualTo("staffId", staffInfo.getStaffId());
-            int count = medicalStaffmapper.selectCountByExample(example);
-            if (count > 0) {
-                return registerFailed(staffInfo, "由于内容重复注册，注册失败");
+            if (ifStaffIdExist(staffInfo.getStaffId())) {
+                return RegisterUtil.responseFailed(staffInfo, "由于内容重复注册，注册失败", RegisterType.DOCTOR_ADD_ERROR);
             }
-
-            medicalStaffmapper.defaultAdd(staffInfo);
+            staffInfoMapper.defaultAdd(staffInfo);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("注册成功");
             staffInfo.setAcknowledgement(acknowledgement);
-            return RegisterUtil.registerMessage(RegisterType.DOCTOR_SUCUESS, staffInfo);
+            return RegisterUtil.registerMessage(RegisterType.DOCTOR_ADD_SUCUESS, staffInfo);
         } catch (Exception ex) {
             logger.error("error:", ex);
-            return registerFailed(staffInfo, ex.getMessage());
+            return RegisterUtil.responseFailed(staffInfo, ex.getMessage(), RegisterType.DOCTOR_ADD_ERROR);
         }
-
-
     }
 
     @Override
     public String updateProvider(String message) {
+        String result = ProcessXmlUtil.verifyMessage(message);
+        Acknowledgement acknowledgement = new Acknowledgement();
+        //xml格式错误
+        if (result.contains("error:传入的参数不符合xml格式")) {
+            // TODO: 2016/4/14
+            acknowledgement.setTypeCode("AE");
+            acknowledgement.setText(result);
+            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+        }
+        Document document = ProcessXmlUtil.load(message);
+        MedicalStaffInfo staffInfo = null;
+        try {
+            SAXReader reader = new SAXReader();
+            //MedicalStaffInfo
+            Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapter));
+            staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class, parserDoc);
+            if (!ifStaffIdExist(staffInfo.getStaffId())) {
+                return RegisterUtil.responseFailed(staffInfo, "由于更新内容不存在，更新失败", RegisterType.DOCTOR_UPDATE_ERROR);
+            }
+            staffInfoMapper.defaultUpdate(staffInfo);
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("更新成功");
+            staffInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.DOCTOR_UPDATE_SUCUESS, staffInfo);
+        } catch (Exception ex) {
 
-
+        }
         return null;
     }
 
@@ -114,24 +134,11 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
     }
 
 
-    /**
-     * 注册失败返回值
-     *
-     * @param staffInfo
-     * @param errorMsg
-     * @return
-     */
-    private String registerFailed(MedicalStaffInfo staffInfo, String errorMsg) {
-
-        return RegisterUtil.responseFailed(staffInfo, errorMsg, RegisterType.DOCTOR_SUCUESS);
+    public boolean ifStaffIdExist(String staffId) {
+        Example example = new Example(XmanBaseInfo.class);
+        example.createCriteria().andEqualTo("staffId", staffId);
+        int count = staffInfoMapper.selectCountByExample(example);
+        return count > 0;
     }
 
-
-//    private String responseFailed(MedicalStaffInfo staffInfo, String errorMsg, String path) {
-//        Acknowledgement acknowledgement = new Acknowledgement();
-//        acknowledgement.setTypeCode("AE");
-//        acknowledgement.setText(errorMsg);
-//        staffInfo.setAcknowledgement(acknowledgement);
-//        return RegisterUtil.registerMessage(path, staffInfo);
-//    }
 }

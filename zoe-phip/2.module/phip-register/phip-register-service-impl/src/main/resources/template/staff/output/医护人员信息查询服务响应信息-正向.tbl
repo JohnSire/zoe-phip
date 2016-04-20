@@ -1,18 +1,26 @@
-﻿<PRPM_IN306011UV01 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPM_IN306011UV01.xsd" ITSVersion="XML_1.0">
+﻿<%
+var creationTime = Model.creationTime;
+var birthDate = Model.birthDate;
+var effHigh = Model.effectiveTimeHigh;
+var effLow = Model.effectiveTimeLow;
+%>
+<PRPM_IN306011UV01 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPM_IN306011UV01.xsd" ITSVersion="XML_1.0">
   <id root="${Model.id}" extension="${Model.extension}" />
-  <creationTime value="${Model.creationTime}" />
+   <creationTime value="${creationTime,dateFormat="yyyyMMddHHmmss"}" />
   <interactionId root="2.16.840.1.113883.1.6" extension="PRPM_IN306011UV01" />
   <processingCode code="P" />
   <processingModeCode code="I" />
   <acceptAckCode code="AL" />
    <receiver typeCode="RCV">
+      <telecom />
       <device classCode="DEV" determinerCode="INSTANCE">
-         <id root="${Model.receiverSender.receiverId}" />
+        <id root="1.2.840.114350.1.13.999.234" />
       </device>
     </receiver>
     <sender typeCode="SND">
+      <telecom />
       <device classCode="DEV" determinerCode="INSTANCE">
-        <id root="${Model.receiverSender.senderId}" />
+        <id root="1.2.840.114350.1.13.999.567" />
       </device>
     </sender>
     <!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->
@@ -45,8 +53,8 @@
             <statusCode code="${Model.statusCode}"/>
             <!--角色有效期间-->
             <effectiveTime>
-              <low value="${Model.effectiveTimeLow}"/>
-              <high value="${Model.effectiveTimeHigh}"/>
+              <low value="${effLow,dateFormat="yyyyMMddHHmmss"}"/>
+              <high value="${effHigh,dateFormat="yyyyMMddHHmmss"}"/>
             </effectiveTime>
             <healthCarePrincipalPerson classCode="PSN" determinerCode="INSTANCE">
               <!--身份证号-->
@@ -57,7 +65,7 @@
                <administrativeGenderCode code="${Model.genderCode}"
                codeSystem="2.16.156.10011.2.3.3.4" displayName="${Model.genderName}" codeSystemName="生理性别代码表(GB/T 2261.1)"/>
               <!--出生日期-->
-              <birthTime value="${Model.birthDate}" />
+              <birthTime value="${birthDate,dateFormat="yyyyMMddHHmmss"}" />
               <!--隶属-->
               <asAffiliate classCode="AFFL">
                 <code />

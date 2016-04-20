@@ -20,7 +20,7 @@ import java.util.Date;
 @Table(name = "PHIP_MEDICAL_STAFF_INFO")
 public class MedicalStaffInfo extends RegisterEntity {
     /**
-     * 医务人员id
+     * 医务人员ID
      */
     @Column(name = "STAFF_ID")
     private String staffId;

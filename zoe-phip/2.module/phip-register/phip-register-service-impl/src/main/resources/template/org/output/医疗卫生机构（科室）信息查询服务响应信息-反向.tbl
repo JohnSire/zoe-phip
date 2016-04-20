@@ -19,7 +19,7 @@
   <acknowledgement typeCode="AE">
     <targetMessage>
       <!--请求的消息ID-->
-      <id root="140CD76A-ED0E-400B-9FD3-60387BCDE0EQ" extension="${Model.msgId}" />
+      <id root="${Model.id}" extension="${Model.msgId}" />
     </targetMessage>
     <acknowledgementDetail>
       <!--处理结果说明-->

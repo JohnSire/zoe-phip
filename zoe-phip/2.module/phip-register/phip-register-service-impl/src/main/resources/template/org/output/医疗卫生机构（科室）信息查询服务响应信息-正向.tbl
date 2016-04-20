@@ -1,6 +1,9 @@
-﻿<PRPM_IN406110UV01 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPM_IN406110UV01.xsd" ITSVersion="XML_1.0">
-  <id root="140CD76A-ED0E-400B-9FD3-60387BCDE0EQ" extension="${Model.msgId}" />
-  <creationTime value="${Model.creationTime}" />
+﻿<%
+var creationTime=Model.creationTime;
+%>
+<PRPM_IN406110UV01 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPM_IN406110UV01.xsd" ITSVersion="XML_1.0">
+  <id root="${Model.id}" extension="${Model.msgId}" />
+  <creationTime value="${creationTime,dateFormat="yyyyMMddHHmmss"}" />
   <interactionId root="2.16.840.1.113883.1.6" extension="PRPM_IN406110UV01" />
   <processingCode code="P" />
   <processingModeCode code="I" />
@@ -19,7 +22,7 @@
   <acknowledgement typeCode="AA">
     <targetMessage>
       <!--请求的消息ID-->
-      <id root="140CD76A-ED0E-400B-9FD3-60387BCDE0EQ" extension="${Model.msgId}" />
+      <id root="${Model.id}" extension="${Model.msgId}" />
     </targetMessage>
     <acknowledgementDetail>
       <!--处理结果说明-->
