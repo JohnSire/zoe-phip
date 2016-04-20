@@ -6,11 +6,9 @@ define(function (require, exports, module) {
         menu: require("./menu.js"),
         updatePwd: require("./userUpdatePwd.js"),
         dataMenu: null,
-
         init: function () {
             internal.getMenuList();
             internal.buildMenu(true, internal.dataMenu);
-            //internal.GetUserInfo();
             internal.SafeExit();
             internal.togglePopMenu();
             internal.UpdateUserPwd();
@@ -18,22 +16,6 @@ define(function (require, exports, module) {
                 common.jsmsg(msgContext, msgCss);
             };
         },
-        //获取登录用户数据
-        //GetUserInfo: function () {
-        //    //获取用户基本信息
-        //    var req = new Request("/user/info")
-        //    //$.ajax({
-        //    //    type: "post",
-        //    //    url: webRoot + "SystemUser/GetLoginUserInfo",
-        //    req.post({
-        //        isTip: false,
-        //        success: function (data) {
-        //            if (data.result != null) {
-        //                $("#LoginName").html(data.result.LoginName); //显示登陆的用户名
-        //            }
-        //        }
-        //    });
-        //},
         //获取菜单数据
         getMenuList: function () {
             internal.req.getMenuList(function (data) {
@@ -115,25 +97,27 @@ define(function (require, exports, module) {
         //修改用户密码
         UpdateUserPwd: function () {
             $("#LoginName").on("click", function () {
-                //跳出接口选择窗口
-                var options = {
-                    modal: true,
+
+                common.dialog({
                     title: "用户密码修改",
-                    url: webRoot + "SystemUser/UserPwd",
+                    url: "SystemUser/UserPwd",
                     width: 400,
                     height: 300,
                     buttons: [
                         {
-                            text: "确认", onclick: function () {
+                            text: "确认",
+                            onclick: function () {
                                 internal.top.win_update_user_password();
                             }
                         },
                         {
-                            text: '取消', onclick: function (item, dialog) { dialog.close(); }
+                            text: '取消',
+                            onclick: function (item, dialog) {
+                                dialog.close();
+                            }
                         }
                     ]
-                };
-                $.ligerDialog.open(options);
+                })
             });
         }
     };

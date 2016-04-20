@@ -13,28 +13,13 @@
                     btnbox: {
                         'add': true,
                         'del': true
-                        //'custom': {
-                        //    text: "用户列表选择测试", click: function () {
-                        //        var storage = [{id: '2587d91cb3ee474ca5045fe3be8babd6', loginName: 'admin'}];
-                        //        internal.selectList.invoke("user",
-                        //            {
-                        //                isAllowEmptySelect: false,
-                        //                selectParam: {
-                        //                    stroage: storage
-                        //                },
-                        //                callback: function (data) {
-                        //                    alert(JSON.stringify(data));
-                        //                }
-                        //            })
-                        //    }
-                        //}
                     },
                     searchbox: [
                         {label: '关键字', name: 'keyWord', type: 'text'}
                     ]
                 },
                 gridParam: {
-                    url: webRoot + '/user/getUserList',
+                    url: '/user/getUserList',
                     columns: [
                         {display: '名称', name: 'name', width: 120, align: 'left'},
                         {display: '登录名', name: 'loginName', width: 120, align: 'left'},
@@ -77,7 +62,7 @@
                     //编辑参数
                     edit: {title: "编辑用户"},
                     common: {
-                        url: webRoot + '/user/detail',
+                        url: 'user/detail',
                         width: 360,
                         height: 260
                     }

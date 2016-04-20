@@ -6,12 +6,16 @@
 define(function (require, exports, module) {
     var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
     var internal = {
-        fkSystemDictCategoryId:null,
+        categoryList: null,
+        itemList: null,
+        fkSystemDictCategoryId: null,
+        categoryId: null,
         init: function () {
+            internal.itemList();
             internal.categoryList();
         },
         categoryList: function () {
-            var categoryList = new BaseGrid({
+            var categoryGrid = new BaseGrid({
                 gridId: 'dictCategoryGrid',
                 toolsBoxId: 'categoryTools',
                 tools: {
@@ -20,7 +24,7 @@ define(function (require, exports, module) {
                     ]
                 },
                 gridParam: {
-                    url: webRoot + '/dict/getCategoryList',
+                    url: 'dict/getCategoryList',
                     columns: [
                         {display: '字典编码', name: 'code', isSort: false, width: 160, align: 'left'},
                         {display: '字典名称', name: 'name', isSort: false, width: 200, align: 'left'},
@@ -28,20 +32,17 @@ define(function (require, exports, module) {
                     ],
                     isSelected: function (rowdata) {
                         if (rowdata["__id"] == 'r1001') {
-
                             return true;
                         }
                     },
                     onSelectRow: function (rowdata, rowid, rowobj) {
-                        internal.fkSystemDictCategoryId=rowdata.id;
+                        internal.fkSystemDictCategoryId = rowdata.id;
+                        internal.categoryId = rowdata.id;
                         var itemGrid = liger.get("dictItemGrid");
-                        if (itemGrid) {
-                            itemGrid.set("page", 1);
-                            itemGrid.set("newPage", 1);
-                            itemGrid.setParm('categoryId', rowdata.id);
-                            itemGrid.reload();
+                        if (itemGrid.get("dataAction") == "local") {
+                            internal.itemGrid.setServer();
                         } else {
-                            internal.itemList(rowdata.id);
+                            internal.itemGrid.reload();
                         }
                     },
                     checkbox: false,
@@ -50,13 +51,13 @@ define(function (require, exports, module) {
                 }
             });
         },
-        itemList: function (categoryId) {
-            var itemGrid = new BaseGrid({
+        itemList: function () {
+            internal.itemGrid = new BaseGrid({
                 gridId: 'dictItemGrid',
                 toolsBoxId: 'dictItemTools',
                 deleteUrl: {
-                    deleteInfo: "/dict/deleteItem",
-                    deleteList: "/dict/deleteItemList"
+                    deleteInfo: "dict/deleteItem",
+                    deleteList: "dict/deleteItemList"
                 },
                 tools: {
                     btnbox: {
@@ -68,16 +69,17 @@ define(function (require, exports, module) {
                     ]
                 },
                 extendParam: function () {
-                    return {categoryId: categoryId};
+                    return {categoryId: internal.categoryId};
                 },
                 gridParam: {
-                    url: webRoot + '/dict/getItemPageList',
+                    dataAction: "local",
+                    url: 'dict/getItemPageList',
                     columns: [
                         {display: '项编码', name: 'code', width: 150, align: 'left'},
                         {display: '项名称', name: 'name', width: 400, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
-                    frozen:false,
+                    frozen: false,
                     usePage: true,
                     width: "100%",
                     height: "99%"//$("body").innerHeight() - $("#dictItemTools").outerHeight() - 76//500
@@ -90,10 +92,11 @@ define(function (require, exports, module) {
                     add: {title: "新增字典项信息"},
                     //编辑参数
                     edit: {title: "编辑字典项信息"},
-
                     common: {
-                        otherUrlParam:function(){return {fkSystemDictCategoryId: internal.fkSystemDictCategoryId}},
-                        url: webRoot + '/dict/view/item',
+                        otherUrlParam: function () {
+                            return {fkSystemDictCategoryId: internal.fkSystemDictCategoryId}
+                        },
+                        url: 'dict/view/item',
                         width: 590,
                         height: 200
                     }
