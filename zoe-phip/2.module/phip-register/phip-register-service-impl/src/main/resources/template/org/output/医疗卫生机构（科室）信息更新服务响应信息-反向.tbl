@@ -1,18 +1,19 @@
-﻿<PRPM_IN403011UV01 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPM_IN403011UV01.xsd" ITSVersion="XML_1.0">
+﻿<% var date=date(); %>
+<PRPM_IN403011UV01 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPM_IN403011UV01.xsd" ITSVersion="XML_1.0">
   <id root="040CD76A-ED0E-400B-9FD3-60387BCDE0EB" extension="${Model.msgId}" />
-  <creationTime value="${Model.creationTime}" />
+  <creationTime value="${date,dateFormat="yyyyMMddHHmmss"}" />
   <interactionId root="2.16.840.1.113883.1.6" extension="PRPM_IN403011UV01" />
   <processingCode code="P" />
   <processingModeCode code="I" />
   <acceptAckCode code="AL" />
   <receiver typeCode="RCV">
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="${Model.receiverSender.receiverId}" />
+      <id root="1.2.840.114350.1.13.999.234" />
     </device>
   </receiver>
   <sender typeCode="SND">
     <device classCode="DEV" determinerCode="INSTANCE">
-    <id root="${Model.receiverSender.senderId}" />
+    <id root="1.2.840.114350.1.13.999.567" />
     </device>
   </sender>
   <!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->

@@ -1,18 +1,16 @@
 package com.zoe.phip.register.service.impl;
 
-import com.zoe.phip.infrastructure.util.XmlBeanUtil;
-import com.zoe.phip.infrastructure.util.XmlUtil;
-import com.zoe.phip.register.model.OrgDeptInfo;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.io.SAXReader;
+import com.zoe.phip.register.BaseTest;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by huangyinfu on 2016/4/18.
  */
-public class OrganizationRegisterTest {
+public class OrganizationRegisterTest extends BaseTest {
+
+    @Autowired
+    private OrganizationRegisterImpl organizationRegisterImpl;
     @Test
     public void testAdd() throws Exception {
         String patientInput ="<PRPM_IN401030UV01 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN401030UV01.xsd\">\n" +
@@ -24,7 +22,7 @@ public class OrganizationRegisterTest {
                 "  <acceptAckCode code=\"AL\"/>\n" +
                 "  <receiver typeCode=\"RCV\">\n" +
                 "    <device classCode=\"DEV\" determinerCode=\"INSTANCE\">\n" +
-                "      <id root=\"1.2.840.114350.1.13.999.567\"/>\n" +
+                "      <id root=\"1.2.840.114350.1.13.999.567\"  />\n" +
                 "    </device>\n" +
                 "  </receiver>\n" +
                 "  <sender typeCode=\"SND\">\n" +
@@ -101,17 +99,7 @@ public class OrganizationRegisterTest {
                 "</PRPM_IN401030UV01>";
 
 
-        SAXReader reader = new SAXReader();
-        String filePath = "/template/Patient/In/Adapter/OrganizationRegisterAdapter.xml";
-        Document document = null;
-        try {
-            document = reader.read(this.getClass().getResourceAsStream(filePath));
-        } catch (DocumentException e) {
-
-        }
-        patientInput = XmlUtil.removeNameSpace(patientInput);
-        Document doc = DocumentHelper.parseText(patientInput);
-        OrgDeptInfo info = XmlBeanUtil.toBean(doc, OrgDeptInfo.class, document);
-
+        String result = organizationRegisterImpl.addOrganization(patientInput);
+        System.out.println(result);
     }
 }
