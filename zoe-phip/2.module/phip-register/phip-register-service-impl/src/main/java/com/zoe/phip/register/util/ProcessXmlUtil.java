@@ -176,12 +176,10 @@ public class ProcessXmlUtil {
             return "error:传入的参数不符合xml格式。" + ex.getMessage();
         }
         String rootName = xd.getRootElement().getName();
-        String xsdPath = "/multicacheschemas/" + rootName + ".xsd";
-//        String NamespaceUrl = "urn:hl7-org:v3";
-
-        //TODO xsdPath的路径
+        String xsdPath = "multicacheschemas/" + rootName + ".xsd";
+        String xsdFilePath = ProcessXmlUtil.class.getClassLoader().getResource(xsdPath).getPath();
         String result = "success:数据集内容验证正确";
-        String strMessage = XmlUtil.validateXsd(xsdPath, strXml);
+        String strMessage = XmlUtil.validateXsd(xsdFilePath, strXml);
         if (!strMessage.equals("")) {
             result = "error:数据集内容验证错误(" + strMessage + ")";
         }

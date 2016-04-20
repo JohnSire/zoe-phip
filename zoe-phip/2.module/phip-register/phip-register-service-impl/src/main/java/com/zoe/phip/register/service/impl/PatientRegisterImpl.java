@@ -61,7 +61,6 @@ public class PatientRegisterImpl implements IPatientRegister {
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
-            // TODO: 2016/4/14
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
@@ -77,10 +76,10 @@ public class PatientRegisterImpl implements IPatientRegister {
             baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
             baseInfo.setId(StringUtil.getUUID());
 
-            //xml 验证错误  todo 打开验证功能
-            /*if(strResult.contains("error:数据集内容验证错误")){
+            //xml 验证错误
+            if(strResult.contains("error:数据集内容验证错误")){
                 return registerFailed(baseInfo,strResult);
-            }*/
+            }
             //数据是否存在判断
             Example example = new Example(XmanBaseInfo.class);
             example.createCriteria().andEqualTo("healthRecordNo", baseInfo.getHealthRecordNo());
@@ -128,10 +127,10 @@ public class PatientRegisterImpl implements IPatientRegister {
             String filePath = "/template/patient/input/Adapter/PatientRegisterAdapter.xml";
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
             baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
-            //xml 验证错误  todo 打开验证功能
-            /*if(strResult.contains("error:数据集内容验证错误")){
+            //xml 验证错误
+            if(strResult.contains("error:数据集内容验证错误")){
                 return registerFailed(baseInfo,strResult);
-            }*/
+            }
             //数据是否存在判断
             Example example = new Example(XmanBaseInfo.class);
             example.createCriteria().andEqualTo("healthRecordNo", baseInfo.getHealthRecordNo());
@@ -174,7 +173,6 @@ public class PatientRegisterImpl implements IPatientRegister {
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
-            // TODO: 2016/4/14
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
@@ -188,7 +186,6 @@ public class PatientRegisterImpl implements IPatientRegister {
             String createTime = document.selectSingleNode("//creationTime/@value").getText();
             acknowledgement.setCreateTime(createTime);
             if (strResult.contains("error:数据集内容验证错误")) {
-                // TODO: 2016/4/14
                 acknowledgement.setTypeCode("AE");
                 acknowledgement.setText(strResult + ",合并失败");
                 return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
@@ -222,7 +219,6 @@ public class PatientRegisterImpl implements IPatientRegister {
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
-            // TODO: 2016/4/14
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
@@ -234,12 +230,11 @@ public class PatientRegisterImpl implements IPatientRegister {
             acknowledgement.setMsgId(msgId);
             String createTime = document.selectSingleNode("//creationTime/@value").getText();
             acknowledgement.setCreateTime(createTime);
-            /*if (strResult.contains("error:数据集内容验证错误")) {
-                // TODO: 取消注释
+            if (strResult.contains("error:数据集内容验证错误")) {
                 acknowledgement.setTypeCode("AE");
                 acknowledgement.setText(strResult + ",查询失败");
                 return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
-            }*/
+            }
             XmanBaseInfo baseInfo=baseInfoMapper.getPatient(patientId);
             if(baseInfo==null){
                 acknowledgement.setTypeCode("AE");
@@ -306,10 +301,6 @@ public class PatientRegisterImpl implements IPatientRegister {
      */
     private String updateFailed(XmanBaseInfo baseInfo, String errorMsg) {
         return RegisterUtil.responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_UPDATE_ERROR);
-    }
-
-    private String mergeFailed(String errorMsg) {
-        return errorMsg;
     }
 
 }
