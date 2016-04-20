@@ -10,11 +10,13 @@ import com.zoe.phip.module.service.mapper.IMyMapper;
 import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.MedicalStaffInfo;
 
+import java.util.Map;
+
 /**
  * @author
  * @version 1.0
  * @date 2016-04-12
  */
 public interface IMedicalStaffInfoMapper extends IServiceMapper<MedicalStaffInfo> {
-
+    MedicalStaffInfo getStaff(Map<String,Object> map);
 }

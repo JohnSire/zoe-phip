@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
 
-    <StaffId descr="医务人员ID" path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/id"/>
+    <StaffId descr="医务人员ID" path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/id/@extension"/>
 
     <TechnicalCode descr="专业技术职务代码"
                    path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/code/@code"/>

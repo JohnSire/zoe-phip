@@ -1,6 +1,6 @@
 ﻿<%
 var creationTime = Model.creationTime;
-var birthDate = Model.birthDate;
+var birthDate = Model.birthTime;
 var effHigh = Model.effectiveTimeHigh;
 var effLow = Model.effectiveTimeLow;
 %>

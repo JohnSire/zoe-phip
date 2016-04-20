@@ -23,8 +23,7 @@ import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by zengjiyang on 2016/4/11.
@@ -130,12 +129,54 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
 
     @Override
     public String providerDetailsQuery(String message) {
+        String result = ProcessXmlUtil.verifyMessage(message);
+        Acknowledgement acknowledgement = new Acknowledgement();
+        if (result.contains("error:传入的参数不符合xml格式")) {
+            // TODO: 2016/4/14
+            acknowledgement.setTypeCode("AE");
+            acknowledgement.setText(result);
+            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+        }
+        try {
+            Document document = ProcessXmlUtil.load(message);
+            String rootModeCode = document.getRootElement().getName();
+            String msgId = document.selectSingleNode("//id/@extension").getText();
+            String idRoot = document.selectSingleNode("//id/@root").getText(); //消息IDroot属性
+            String creationTime = document.selectSingleNode("//creationTime/value").getText();
+            String staffId = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerID/value/@extension").getText();
+
+            String genderCode = document.selectSingleNode("//controlActProcess/queryByParameterPayload/administrativeGender/value/@code").getText();
+            String staffName = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerName/value").getText();
+            String birthDate = document.selectSingleNode("//controlActProcess/queryByParameterPayload/dOB/value/@value").getText();
+
+            Map<String, Object> map = new TreeMap<>();
+            if (!StringUtil.isNullOrWhiteSpace(staffId)) map.put("staffId", staffId);
+            if (!StringUtil.isNullOrWhiteSpace(staffName)) map.put("staffName", staffName);
+            if (!StringUtil.isNullOrWhiteSpace(genderCode)) map.put("genderCode", genderCode);
+            if (!StringUtil.isNullOrWhiteSpace(birthDate)) map.put("birthDate", birthDate);
+            MedicalStaffInfo staffInfo = staffInfoMapper.getStaff(map);
+            map.clear();
+            map = null;
+            if (staffInfo == null || StringUtil.isNullOrWhiteSpace(staffInfo.getStaffId())) {
+                staffInfo = new MedicalStaffInfo();
+                staffInfo.setMsgId(msgId);
+                staffInfo.setId(idRoot);
+                staffInfo.setCreationTime(creationTime);
+                staffInfo.setStaffId(staffId);
+                return RegisterUtil.responseFailed(staffInfo,"由于查询内容不存在，查询失败",RegisterType.DOCTOR_QUERY_ERROR);
+            }
+
+        } catch (Exception ex) {
+
+        }
+
+
         return null;
     }
 
 
     public boolean ifStaffIdExist(String staffId) {
-        Example example = new Example(XmanBaseInfo.class);
+        Example example = new Example(MedicalStaffInfo.class);
         example.createCriteria().andEqualTo("staffId", staffId);
         int count = staffInfoMapper.selectCountByExample(example);
         return count > 0;

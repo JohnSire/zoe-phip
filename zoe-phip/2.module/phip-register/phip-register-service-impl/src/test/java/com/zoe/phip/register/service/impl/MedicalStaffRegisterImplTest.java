@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Created by zhanghao on 2016/4/15.
  */
-public class MedicalStaffRegisterImplTest extends BaseTest{
+public class MedicalStaffRegisterImplTest extends BaseTest {
 
     @Autowired
     private MedicalStaffRegisterImpl medicalStaffRegister;
@@ -122,14 +122,14 @@ public class MedicalStaffRegisterImplTest extends BaseTest{
 
         xml = XmlUtil.removeNameSpace(xml);
         Document document = DocumentHelper.parseText(xml);
-        MedicalStaffInfo info = XmlBeanUtil.toBean(document, MedicalStaffInfo.class,null);
+        MedicalStaffInfo info = XmlBeanUtil.toBean(document, MedicalStaffInfo.class, null);
         System.out.println();
     }
 
 
     @Test
     public void testAddMedicalRegister() throws Exception {
-        String Medicalxml="<PRPM_IN301010UV01 xmlns=\"urn:hl7-org:v3\"\n" +
+        String Medicalxml = "<PRPM_IN301010UV01 xmlns=\"urn:hl7-org:v3\"\n" +
                 "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\"\n" +
                 "xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN301010UV01.xsd\">\n" +
                 "  <id root=\"040CD76A-ED0E-400B-9FD3-60387BCDE0EB\"\n" +
@@ -228,19 +228,6 @@ public class MedicalStaffRegisterImplTest extends BaseTest{
                 "  </controlActProcess>\n" +
                 "</PRPM_IN301010UV01>";
 
-//        SAXReader reader = new SAXReader();
-//        String filePath = "/template/Patient/In/Adapter/MedicalStaffRegisterAdapter.xml";
-//        Document document = null;
-//        try {
-//            document = reader.read(this.getClass().getResourceAsStream(filePath));
-//        } catch (DocumentException e) {
-//
-//        }
-//
-//        Medicalxml = XmlUtil.removeNameSpace(Medicalxml);
-//        Document doc = DocumentHelper.parseText(Medicalxml);
-//        MedicalStaffInfo info = XmlBeanUtil.toBean(doc, MedicalStaffInfo.class, document);
-//        System.out.println();
 
         String s = medicalStaffRegister.addProvider(Medicalxml);
         System.out.println(s);

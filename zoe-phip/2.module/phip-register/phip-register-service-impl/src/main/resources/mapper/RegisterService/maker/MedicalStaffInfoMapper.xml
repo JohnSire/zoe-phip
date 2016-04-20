@@ -47,8 +47,10 @@
                 jdbcType="VARCHAR"/>
         <result column="STATUS_CODE" property="statusCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
+        <result column="CREATION_TIME" property="creationTime" javaType="java.sql.Timestamp"
+                jdbcType="TIMESTAMP"/>
     </resultMap>
-    <insert id="addList" parameterType="java.util.List">
+    <insert id="addList" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
         INSERT INTO PHIP_MEDICAL_STAFF_INFO (
         STAFF_ID,
         NAME,
@@ -72,6 +74,7 @@
         ASSIGNED_DEPT_NAME,
         ASSIGNED_CONTACT_PERSON,
         STATUS_CODE,
+        CREATION_TIME,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
@@ -97,11 +100,12 @@
             #{item.assignedDeptName,jdbcType=VARCHAR},
             #{item.assignedContactPerson,jdbcType=VARCHAR},
             #{item.statusCode,jdbcType=VARCHAR},
+            #{item.creationTime,jdbcType=TIMESTAMP},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
     </insert>
-    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
+    <insert id="defaultAdd" parameterType="java.util.List">
         INSERT INTO PHIP_MEDICAL_STAFF_INFO (
         STAFF_ID,
         NAME,
@@ -125,31 +129,33 @@
         ASSIGNED_DEPT_NAME,
         ASSIGNED_CONTACT_PERSON,
         STATUS_CODE,
+        CREATION_TIME,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
-        VALUES (
-            #{staffId,jdbcType=VARCHAR},
-            #{name,jdbcType=VARCHAR},
-            #{genderCode,jdbcType=VARCHAR},
-            #{genderName,jdbcType=VARCHAR},
-            #{birthTime,jdbcType=TIMESTAMP},
-            #{birthplaceAddr,jdbcType=VARCHAR},
-            #{idNo,jdbcType=VARCHAR},
-            #{technicalCode,jdbcType=VARCHAR},
-            #{technicalName,jdbcType=VARCHAR},
-            #{employerAddr,jdbcType=VARCHAR},
-            #{employerTelNo,jdbcType=VARCHAR},
-            #{effectiveTimeLow,jdbcType=TIMESTAMP},
-            #{effectiveTimeHigh,jdbcType=TIMESTAMP},
-            #{affiliatedOrgCode,jdbcType=VARCHAR},
-            #{affiliatedOrgName,jdbcType=VARCHAR},
-            #{msgId,jdbcType=VARCHAR},
-            #{assignedCode,jdbcType=VARCHAR},
-            #{assignedName,jdbcType=VARCHAR},
-            #{assignedDeptCode,jdbcType=VARCHAR},
-            #{assignedDeptName,jdbcType=VARCHAR},
-            #{assignedContactPerson,jdbcType=VARCHAR},
-            #{statusCode,jdbcType=VARCHAR},
-            <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        VALUES(
+        #{staffId,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR},
+        #{genderCode,jdbcType=VARCHAR},
+        #{genderName,jdbcType=VARCHAR},
+        #{birthTime,jdbcType=TIMESTAMP},
+        #{birthplaceAddr,jdbcType=VARCHAR},
+        #{idNo,jdbcType=VARCHAR},
+        #{technicalCode,jdbcType=VARCHAR},
+        #{technicalName,jdbcType=VARCHAR},
+        #{employerAddr,jdbcType=VARCHAR},
+        #{employerTelNo,jdbcType=VARCHAR},
+        #{effectiveTimeLow,jdbcType=TIMESTAMP},
+        #{effectiveTimeHigh,jdbcType=TIMESTAMP},
+        #{affiliatedOrgCode,jdbcType=VARCHAR},
+        #{affiliatedOrgName,jdbcType=VARCHAR},
+        #{msgId,jdbcType=VARCHAR},
+        #{assignedCode,jdbcType=VARCHAR},
+        #{assignedName,jdbcType=VARCHAR},
+        #{assignedDeptCode,jdbcType=VARCHAR},
+        #{assignedDeptName,jdbcType=VARCHAR},
+        #{assignedContactPerson,jdbcType=VARCHAR},
+        #{statusCode,jdbcType=VARCHAR},
+        #{creationTime,jdbcType=TIMESTAMP},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
@@ -231,11 +237,14 @@
                 <if test="item.assignedContactPerson != null">
                     ASSIGNED_CONTACT_PERSON = #{item.assignedContactPerson,jdbcType=VARCHAR},
                 </if>
-                <if test="item.state != null">
-                    STATE = #{item.state,jdbcType=DECIMAL},
-                </if>
                 <if test="item.statusCode != null">
                     STATUS_CODE = #{item.statusCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.creationTime != null">
+                    CREATION_TIME = #{item.creationTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.state != null">
+                    STATE = #{item.state,jdbcType=DECIMAL},
                 </if>
                 MODIFY_AT=sysdate
             </set>
