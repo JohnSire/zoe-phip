@@ -35,5 +35,6 @@ public final class RegisterType {
     public static final String ORG_QUERY_SUCCESS = "template/org/output/医疗卫生机构（科室）信息查询服务响应信息-正向.tbl";
     public static final String ORG_QUERY_ERROR = "template/org/output/医疗卫生机构（科室）信息查询服务响应信息-反向.tbl";
 
+
     public static final String MESSAGE = "template/响应消息结果.tbl";
 }

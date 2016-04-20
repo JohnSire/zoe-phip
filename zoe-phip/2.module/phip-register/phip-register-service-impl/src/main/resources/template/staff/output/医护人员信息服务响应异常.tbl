@@ -15,7 +15,7 @@
     }
     %>
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="${Model.receiverSender.receiverId}"/>
+      <id root="1.2.840.114350.1.13.999.567"/>
     </device>
   </receiver>
   <sender typeCode="SND">
@@ -27,7 +27,7 @@
         }
         %>
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="${Model.receiverSender.senderId}"/>
+      <id root="1.2.840.114350.1.13.999.234"/>
     </device>
   </sender>
   <%
