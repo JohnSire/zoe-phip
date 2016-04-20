@@ -195,7 +195,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             // TODO: 2016/4/14
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage("template/响应消息结果.tbl",acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.MESSAGE,acknowledgement);
         }
         Document document = ProcessXmlUtil.load(message);
         String oldPatientId=document.selectSingleNode("//controlActProcess/subject/registrationEvent/replacementOf/priorRegistration/subject1/priorRegisteredRole/id/@extension").getText();
