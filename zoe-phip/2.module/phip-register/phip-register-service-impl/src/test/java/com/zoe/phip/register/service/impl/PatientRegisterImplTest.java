@@ -64,7 +64,7 @@ public class PatientRegisterImplTest extends BaseTest {
                 "              <!--身份证号-->\n" +
                 "              <id root=\"2.16.156.10011.1.3\" extension=\"120109197706015516\"/>\n" +
                 "              <!--姓名-->\n" +
-                "              <name use=\"L\">刘永好123</name>\n" +
+                "              <name use=\"L\">刘永好</name>\n" +
                 "              <!--联系电话-->\n" +
                 "              <telecom value=\"028-2222444\" use=\"H\"/>\n" +
                 "              <!--性别-->\n" +
@@ -194,18 +194,50 @@ public class PatientRegisterImplTest extends BaseTest {
     }
 
     @Test
-    public void testCopyValue() throws Exception {
-        XmanBaseInfo old=new XmanBaseInfo();
-        old.setName("123");
-        old.setModifyAt(new Date());
-        old.setId("123");
-        old.setAboCode(3);
-        old.setCreateTime(new Date());
-        XmanBaseInfo newOne=new XmanBaseInfo();
-        newOne.setName("456");
-        newOne.setAboCode(1);
-        patientRegister.copyValue(newOne,old);
-        System.out.println(newOne);
+    public void testQueryPatient(){
+        String inputXml="<PRPA_IN201305UV02 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                "ITSVersion=\"XML_1.0\" xmlns=\"urn:hl7-org:v3\"\n" +
+                "xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPA_IN201305UV02.xsd\">\n" +
+                "  <id root=\"2.16.156.10011.0\" extension=\"22a0f9e0-4454-11dc-a6be-3603d6866807\"/>\n" +
+                "  <creationTime value=\"20070803130624\"/>\n" +
+                "  <interactionId root=\"2.16.840.1.113883.1.6\" extension=\"PRPA_IN201305UV02\"/>\n" +
+                "  <processingCode code=\"P\"/>\n" +
+                "  <processingModeCode code=\"R\"/>\n" +
+                "  <acceptAckCode code=\"AL\"/>\n" +
+                "  <receiver typeCode=\"RCV\">\n" +
+                "    <device classCode=\"DEV\" determinerCode=\"INSTANCE\">\n" +
+                "      <id root=\"2.16.156.10011.0.1.1\" extension=\"2.16.156.10011.0.1.1\"/>\n" +
+                "    </device>\n" +
+                "  </receiver>\n" +
+                "  <sender typeCode=\"SND\">\n" +
+                "    <device classCode=\"DEV\" determinerCode=\"INSTANCE\">\n" +
+                "      <id root=\"2.16.156.10011.0.1.2\" extension=\"2.16.156.10011.0.1.2\"/>\n" +
+                "    </device>\n" +
+                "  </sender>\n" +
+                "  <controlActProcess classCode=\"CACT\" moodCode=\"EVN\">\n" +
+                "    <code code=\"PRPA_TE201305UV02\" codeSystem=\"2.16.840.1.113883.1.6\"/>\n" +
+                "    <queryByParameter>\n" +
+                "      <queryId root=\"2.16.156.10011.0\"\n" +
+                "      extension=\"22a0f9e0-4454-11dc-a6be-3603d6866807\"/>\n" +
+                "      <statusCode code=\"new\"/>\n" +
+                "      <initialQuantity value=\"2\"/>\n" +
+                "      <matchCriterionList>\n" +
+                "        <minimumDegreeMatch>\n" +
+                "          <value xsi:type=\"INT\" value=\"100\"/>\n" +
+                "          <semanticsText>匹配程度</semanticsText>\n" +
+                "        </minimumDegreeMatch>\n" +
+                "      </matchCriterionList>\n" +
+                "      <parameterList>\n" +
+                "        <livingSubjectId>\n" +
+                "          <value root=\"2.16.156.10011.0.2.2\" extension=\"患者ID\"></value>\n" +
+                "          <semanticsText>本地系统的患者ID</semanticsText>\n" +
+                "        </livingSubjectId>\n" +
+                "      </parameterList>\n" +
+                "    </queryByParameter>\n" +
+                "  </controlActProcess>\n" +
+                "</PRPA_IN201305UV02>";
 
+        String result= patientRegister.patientRegistryQuery(inputXml);
+        System.out.println(result);
     }
 }

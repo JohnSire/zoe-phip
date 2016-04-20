@@ -37,9 +37,6 @@ public class PatientRegisterImpl implements IPatientRegister {
 
     private static final Logger logger = LoggerFactory.getLogger(PatientRegisterImpl.class);
 
-
-    @Autowired
-    private Parser parser;
     @Autowired
     private IXmanBaseInfoMapper baseInfoMapper;
 
@@ -79,11 +76,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
             baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
             baseInfo.setId(StringUtil.getUUID());
-            //ReceiverSender
-            String rsXmlPath = "/template/base/ReceiverSenderAdapter.xml";
-            Document rsParDoc = reader.read(this.getClass().getResourceAsStream(rsXmlPath));
-            ReceiverSender sr = XmlBeanUtil.toBean(document, ReceiverSender.class, rsParDoc);
-            baseInfo.setReceiverSender(sr);
+
             //xml 验证错误  todo 打开验证功能
             /*if(strResult.contains("error:数据集内容验证错误")){
                 return registerFailed(baseInfo,strResult);
@@ -108,11 +101,6 @@ public class PatientRegisterImpl implements IPatientRegister {
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("注册成功");
             baseInfo.setAcknowledgement(acknowledgement);
-            /*
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("Model", baseInfo);
-            String result = parser.parseByResource("template/patient/output/个人信息注册服务响应信息-正向.tbl", map);
-            */
             return RegisterUtil.registerMessage(RegisterType.PATIENT_ADD_SUCUESS, baseInfo);
         } catch (Exception ex) {
             logger.error("error:", ex);
@@ -140,11 +128,6 @@ public class PatientRegisterImpl implements IPatientRegister {
             String filePath = "/template/patient/input/Adapter/PatientRegisterAdapter.xml";
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
             baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
-            //ReceiverSender
-            String rsXmlPath = "/template/base/ReceiverSenderAdapter.xml";
-            Document rsParDoc = reader.read(this.getClass().getResourceAsStream(rsXmlPath));
-            ReceiverSender sr = XmlBeanUtil.toBean(document, ReceiverSender.class, rsParDoc);
-            baseInfo.setReceiverSender(sr);
             //xml 验证错误  todo 打开验证功能
             /*if(strResult.contains("error:数据集内容验证错误")){
                 return registerFailed(baseInfo,strResult);
@@ -168,8 +151,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("更新成功");
             baseInfo.setAcknowledgement(acknowledgement);
-            //String result = parser.parseByResource("template/patient/output/个人信息更新服务响应信息-正向.tbl", map);
-            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCUESS, baseInfo);
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_UPDATE_SUCUESS, baseInfo);
         } catch (Exception ex) {
             logger.error("error:", ex);
             return updateFailed(baseInfo, ex.getMessage());
@@ -195,63 +177,107 @@ public class PatientRegisterImpl implements IPatientRegister {
             // TODO: 2016/4/14
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE,acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
-        Document document = ProcessXmlUtil.load(message);
-        String oldPatientId=document.selectSingleNode("//controlActProcess/subject/registrationEvent/replacementOf/priorRegistration/subject1/priorRegisteredRole/id/@extension").getText();
-        String newPatientId=document.selectSingleNode("//controlActProcess/subject/registrationEvent/subject1/patient/id/@extension").getText();
-        String msgId = document.selectSingleNode("//id/@extension").getText();
-        acknowledgement.setMsgId(msgId);
-        if (strResult.contains("error:数据集内容验证错误")) {
-            // TODO: 2016/4/14
+        try {
+            Document document = ProcessXmlUtil.load(message);
+            String oldPatientId = document.selectSingleNode("//controlActProcess/subject/registrationEvent/replacementOf/priorRegistration/subject1/priorRegisteredRole/id/@extension").getText();
+            String newPatientId = document.selectSingleNode("//controlActProcess/subject/registrationEvent/subject1/patient/id/@extension").getText();
+            String msgId = document.selectSingleNode("//id/@extension").getText();
+            acknowledgement.setMsgId(msgId);
+            String createTime = document.selectSingleNode("//creationTime/@value").getText();
+            acknowledgement.setCreateTime(createTime);
+            if (strResult.contains("error:数据集内容验证错误")) {
+                // TODO: 2016/4/14
+                acknowledgement.setTypeCode("AE");
+                acknowledgement.setText(strResult + ",合并失败");
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
+            }
+            XmanBaseInfo oldPatient = baseInfoMapper.getPatient(oldPatientId);
+            XmanBaseInfo newPatient = baseInfoMapper.getPatient(newPatientId);
+            if (oldPatient == null || newPatient == null || StringUtil.isNullOrWhiteSpace(oldPatient.getHealthRecordNo())
+                    || StringUtil.isNullOrWhiteSpace(newPatient.getHealthRecordNo())) {
+                acknowledgement.setTypeCode("AE");
+                acknowledgement.setText("由于合并内容不存在，合并失败");
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
+            }
+            //赋值
+            copyValue(newPatient, oldPatient);
+            //保存到数据库
+            baseInfoMapper.defaultUpdate(newPatient);
+            baseInfoMapper.delete(oldPatient);
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("合并成功");
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCUESS, acknowledgement);
+        } catch (Exception ex) {
             acknowledgement.setTypeCode("AE");
-            acknowledgement.setText(strResult+",合并失败");
-            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR,acknowledgement);
+            acknowledgement.setText(ex.getMessage());
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
         }
-
-        XmanBaseInfo oldPatient=baseInfoMapper.getPatient(oldPatientId);
-        XmanBaseInfo newPatient=baseInfoMapper.getPatient(newPatientId);
-        if(oldPatient==null||newPatient==null||StringUtil.isNullOrWhiteSpace(oldPatient.getHealthRecordNo())
-                ||StringUtil.isNullOrWhiteSpace(newPatient.getHealthRecordNo())){
-            acknowledgement.setTypeCode("AE");
-            acknowledgement.setText("由于合并内容不存在，合并失败");
-            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR,acknowledgement);
-        }
-        //赋值
-        copyValue(newPatient,oldPatient);
-        //保存到数据库
-        baseInfoMapper.defaultUpdate(newPatient);
-        baseInfoMapper.delete(oldPatient);
-        return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCUESS,acknowledgement);
     }
 
     @Override
     public String patientRegistryQuery(String message) {
+        String strResult = ProcessXmlUtil.verifyMessage(message);
+        Acknowledgement acknowledgement = new Acknowledgement();
+        //xml格式错误
+        if (strResult.contains("error:传入的参数不符合xml格式")) {
+            // TODO: 2016/4/14
+            acknowledgement.setTypeCode("AE");
+            acknowledgement.setText(strResult);
+            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+        }
+        try {
+            Document document = ProcessXmlUtil.load(message);
+            String patientId = document.selectSingleNode("//controlActProcess/queryByParameter/parameterList/livingSubjectId/value/@extension").getText();
+            String msgId=document.selectSingleNode("//id/@extension").getText();
+            acknowledgement.setMsgId(msgId);
+            String createTime = document.selectSingleNode("//creationTime/@value").getText();
+            acknowledgement.setCreateTime(createTime);
+            /*if (strResult.contains("error:数据集内容验证错误")) {
+                // TODO: 取消注释
+                acknowledgement.setTypeCode("AE");
+                acknowledgement.setText(strResult + ",查询失败");
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
+            }*/
+            XmanBaseInfo baseInfo=baseInfoMapper.getPatient(patientId);
+            if(baseInfo==null){
+                acknowledgement.setTypeCode("AE");
+                acknowledgement.setText("由于查询内容不存在，查询失败");
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
+            }
+            XmanCard xmanCard=cardMapper.getXmanCard(baseInfo.getId());
+            //todo 字典赋值
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_SUCUESS, baseInfo);
 
+        }catch (Exception ex){
+            logger.error("error:",ex);
+        }
         return null;
     }
 
 
     /**
      * 将旧实体的值，赋到新实体上
+     *
      * @param newBaseInfo
      * @param oldBaseInfo
      */
-    private void copyValue(XmanBaseInfo newBaseInfo,XmanBaseInfo oldBaseInfo){
+    private void copyValue(XmanBaseInfo newBaseInfo, XmanBaseInfo oldBaseInfo) {
         Field[] fields = XmanBaseInfo.class.getDeclaredFields();
-        for (Field field:fields) {
+        for (Field field : fields) {
             String fieldName = field.getName();
             fieldName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
             try {
                 Method getMethod = XmanBaseInfo.class.getMethod("get" + fieldName);
-                Object oldValue= getMethod.invoke(oldBaseInfo);
-                Object newValue= getMethod.invoke(newBaseInfo);
+                Object oldValue = getMethod.invoke(oldBaseInfo);
+                Object newValue = getMethod.invoke(newBaseInfo);
                 //int类型 新值为0，旧值不为0  或者 新值为空，旧值不为空
-                if((field.getType()==int.class&&Integer.parseInt(oldValue.toString())>0&&
-                        Integer.parseInt(newValue.toString())==0)||
-                        ((newValue==null&&oldValue!=null))){
-                    Method setMethod = XmanBaseInfo.class.getMethod("set" + fieldName,field.getType());
-                    setMethod.invoke(newBaseInfo,oldValue);
+                if ((field.getType() == int.class && Integer.parseInt(oldValue.toString()) > 0 &&
+                        Integer.parseInt(newValue.toString()) == 0) ||
+                        ((newValue == null && oldValue != null))) {
+                    Method setMethod = XmanBaseInfo.class.getMethod("set" + fieldName, field.getType());
+                    setMethod.invoke(newBaseInfo, oldValue);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -268,7 +294,7 @@ public class PatientRegisterImpl implements IPatientRegister {
      * @return
      */
     private String registerFailed(XmanBaseInfo baseInfo, String errorMsg) {
-        return responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_ADD_ERROR);
+        return RegisterUtil.responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_ADD_ERROR);
     }
 
     /**
@@ -279,18 +305,11 @@ public class PatientRegisterImpl implements IPatientRegister {
      * @return
      */
     private String updateFailed(XmanBaseInfo baseInfo, String errorMsg) {
-        return responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_UPDATE_ERROR);
+        return RegisterUtil.responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_UPDATE_ERROR);
     }
 
-    private String mergeFailed(String errorMsg){
+    private String mergeFailed(String errorMsg) {
         return errorMsg;
     }
 
-    private String responseFailed(XmanBaseInfo baseInfo, String errorMsg, String path) {
-        Acknowledgement acknowledgement = new Acknowledgement();
-        acknowledgement.setTypeCode("AE");
-        acknowledgement.setText(errorMsg);
-        baseInfo.setAcknowledgement(acknowledgement);
-        return RegisterUtil.registerMessage(path, baseInfo);
-    }
 }

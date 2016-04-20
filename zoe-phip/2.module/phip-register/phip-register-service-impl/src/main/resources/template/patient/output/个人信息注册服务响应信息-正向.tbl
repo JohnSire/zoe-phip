@@ -1,22 +1,22 @@
 ﻿<PRPA_IN201312UV02 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPA_IN201312UV02.xsd" ITSVersion="XML_1.0">
   <id root="2.16.156.10011.0" extension="${Model.msgId}" />
-  <creationTime value="${Model.createTime}" />
+  <creationTime value="${Model.createTime,dateFormat="yyyyMMddHHmmss"}" />
   <interactionId root="2.16.840.1.113883.1.6" extension="PRPA_IN201312UV02" />
   <processingCode code="P" />
   <processingModeCode code="R" />
   <acceptAckCode code="NE" />
   <receiver typeCode="RCV">
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="${Model.ReceiverSender.ReceiverId}" extension="${Model.ReceiverSender.ReceiverExtension}" />
+      <id root="2.16.156.10011.0.1.2" extension="2.16.156.10011.0.1.2" />
     </device>
   </receiver>
   <sender typeCode="SND">
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="${Model.ReceiverSender.SenderId}" extension="${Model.ReceiverSender.SenderExtension}" />
+      <id root="2.16.156.10011.0.1.1" extension="2.16.156.10011.0.1.1" />
     </device>
   </sender>
   <!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->
-  <acknowledgement typeCode="${Model.Acknowledgement.TypeCode}">
+  <acknowledgement typeCode="AA">
     <targetMessage>
       <!--请求的消息ID-->
       <id root="2.16.156.10011.0" extension="${Model.msgId}" />
