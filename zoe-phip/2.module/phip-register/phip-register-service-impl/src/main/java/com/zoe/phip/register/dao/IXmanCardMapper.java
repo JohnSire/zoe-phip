@@ -17,4 +17,11 @@ import com.zoe.phip.register.model.XmanCard;
  */
 public interface IXmanCardMapper extends IServiceMapper<XmanCard> {
 
+    /**
+     * 根据病人信息获取卡
+     * @param baseInfoId
+     * @return
+     */
+    XmanCard getXmanCard(String baseInfoId);
+
 }

@@ -24,6 +24,10 @@ public class Acknowledgement {
      */
     private String msgId;
 
+    /**
+     * 创建时间
+     */
+    private String createTime;
 
     public String getText() {
         return text;
@@ -63,6 +67,14 @@ public class Acknowledgement {
 
     public void setMsgId(String msgId) {
         this.msgId = msgId;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
 }

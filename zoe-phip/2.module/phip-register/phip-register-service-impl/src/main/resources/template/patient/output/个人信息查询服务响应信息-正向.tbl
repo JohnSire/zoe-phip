@@ -1,18 +1,18 @@
 ﻿<PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPA_IN201306UV02.xsd" ITSVersion="XML_1.0">
   <id root="2.16.156.10011.0" extension="${Model.msgId}" />
-  <creationTime value="${Model.createTime}" />
+  <creationTime value="${Model.createTime,dateFormat="yyyyMMddHHmmss"}" />
   <interactionId root="2.16.840.1.113883.1.6" extension="PRPA_IN201306UV02" />
   <processingCode code="T" />
   <processingModeCode code="I" />
   <acceptAckCode code="AA" />
   <receiver typeCode="RCV">
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="2.16.156.10011.0.1.2" extension="${Receiver.extension}" />
+      <id root="2.16.156.10011.0.1.2" extension="2.16.156.10011.0.1.2" />
     </device>
   </receiver>
   <sender typeCode="SND">
     <device classCode="DEV" determinerCode="INSTANCE">
-      <id root="2.16.156.10011.0.1.1" extension="${Sender.extension}" />
+      <id root="2.16.156.10011.0.1.1" extension="2.16.156.10011.0.1.1" />
     </device>
   </sender>
   <acknowledgement typeCode="AA">
@@ -30,7 +30,7 @@
             <!--平台注册的患者ID -->
             <id root="2.16.156.10011.0.2.1" extension="${Model.patientId}" />
             <statusCode code="${Model.statusCode}" />
-            <effectiveTime value="${Model.reqisterDate}" />
+            <effectiveTime value="${Model.reqisterDate,dateFormat="yyyyMMddHHmmss"}" />
             <patientPerson>
               <!--身份证号-->
               <id root="2.16.156.10011.1.3" extension="${Model.idNo}" />
@@ -39,9 +39,9 @@
               <!--联系电话-->
               <telecom value="${Model.telNo}" use="H" />
               <!--性别-->
-              <administrativeGenderCode code="${Model.setCode}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="${Model.sexCodeName" />
+              <administrativeGenderCode code="${Model.sexCode}" codeSystem="2.16.156.10011.2.3.3.4" codeSystemName="生理性别代码表(GB/T 2261.1)" displayName="${Model.sexCodeName}" />
               <!--出生时间-->
-              <birthTime value="${Model.birthTime}" />
+              <birthTime value="${Model.birthDate,dateFormat="yyyyMMddHHmmss"}" />
               <!--联系地址-->
               <addr use="PUB">
                 <!--非结构化地址（完整地址描述） -->
