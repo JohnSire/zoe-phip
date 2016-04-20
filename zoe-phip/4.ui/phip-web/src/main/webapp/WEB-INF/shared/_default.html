@@ -6,14 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${baseTitle}</title>
     <script type="text/javascript">
-        var webRoot = '${ctxPath}', seajsRoot = '/', version = '20160317';
+        var webRoot = "http://localhost:8080/", seajsRoot = '/', version = '20160317';
     </script>
     <!--静态资源样式部分-->
     <!--<link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/jqueryui/jquery-ui-1.11.4.custom/jquery-ui.min.css")}' rel="stylesheet"/>-->
-    <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ligerui/V1.3.2/skins/Aqua/css/ligerui-all.css")}' rel="stylesheet"/>
-    <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ligerui/V1.3.2/skins/Gray/css/all.css")}' rel="stylesheet"/>
+    <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ligerui/V1.3.2/skins/Aqua/css/ligerui-all.css")}'
+          rel="stylesheet"/>
+    <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ligerui/V1.3.2/skins/Gray/css/all.css")}'
+          rel="stylesheet"/>
     <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("assets/src/style/style.css")}' rel="stylesheet">
-    <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ztree/V3.5/css/zTreeStyle/zTreeStyle.css")}' rel="stylesheet" />
+    <link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ztree/V3.5/css/zTreeStyle/zTreeStyle.css")}'
+          rel="stylesheet"/>
     ${baseStyleSection}
 </head>
 <body>

@@ -20,8 +20,8 @@ define(function (require, exports, module) {
         },
         btnBuild: function (options) {
             var btnbox = options["tools"]["btnbox"];
-            var toolsBoxId=options["toolsBoxId"];
-            var jqbtnBox = $("#"+toolsBoxId);
+            var toolsBoxId = options["toolsBoxId"];
+            var jqbtnBox = $("#" + toolsBoxId);
             $.each(btnbox, function (index, item) {
                 if (item) {
                     switch (index) {
@@ -50,8 +50,8 @@ define(function (require, exports, module) {
         },
         searchBox: function (options, searchCallback) {
             var searchBoxParam = options["tools"]["searchbox"];
-            var toolsBoxId=options["toolsBoxId"];
-            var jqbtnBox = $("#"+toolsBoxId);
+            var toolsBoxId = options["toolsBoxId"];
+            var jqbtnBox = $("#" + toolsBoxId);
             //var jqbtnBox = $("#gridTools");
             $.each(searchBoxParam, function (index, item) {
                 switch (item["type"]) {
@@ -70,7 +70,7 @@ define(function (require, exports, module) {
                 var jqLi = $("<li></li>").addClass("list").on("click", function () {
                     if (typeof (searchCallback) == "function") {
                         $.each(searchBoxParam, function (index, item) {
-                            data[item["name"]] = $("#gridTools").find("[name='" + item["name"] + "']").val();
+                            data[item["name"]] = jqbtnBox.find("[name='" + item["name"] + "']").val();
                         });
                         searchCallback(data);
                     }
@@ -96,13 +96,13 @@ define(function (require, exports, module) {
                     }
                     top[options["dialogParam"]["winCallback"]](callback, submited);
                 }
-                var urlParam="";
-                if(typeof(addParam["otherUrlParam"])=="function") {
+                var urlParam = "";
+                if (typeof(addParam["otherUrlParam"]) == "function") {
                     $.each(addParam["otherUrlParam"](), function (key, value) {
                         urlParam += key + "=" + value + "&&";
                     });
                 }
-                addParam["url"]=addParam["url"]+"?"+urlParam;
+                addParam["url"] = addParam["url"] + "?" + urlParam;
                 top[options["dialogParam"]["winName"]] = common.dialog(addParam);
             },
             "del": function (options) {

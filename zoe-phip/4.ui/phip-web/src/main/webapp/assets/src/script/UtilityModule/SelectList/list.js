@@ -11,7 +11,7 @@ define(function (require, exports, module) {
             title: '',
             width: 560,
             height: 600,
-            url: '/select/view/list',
+            url: 'select/view/list',
             isAllowEmptySelect: false,//是否允许为空
             emptyMsg: "请选择相应的列表数据!",
             fkNullContent: '',//如果存在外键id，但不存在外键对象时，显示内容
@@ -65,7 +65,7 @@ define(function (require, exports, module) {
             //初始化绑定值
             $('input[name="' + name + '"]').on("setValue", function (event, argument) {
 
-                options["selectParam"]["selfId"]=argument["id"];
+                options["selectParam"]["selfId"] = argument["id"];
 
                 $(targetObj).find("input").val(argument[name]);
                 if (argument[fkObj]) {

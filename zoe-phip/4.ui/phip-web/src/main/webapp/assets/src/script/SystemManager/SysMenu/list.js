@@ -21,14 +21,29 @@
                     checkbox: false,
                     height: "100%",
                     heightDiff: 29,
-                    url: webRoot + '/menu/getMenuList',
+                    url: 'menu/getMenuList',
                     columns: [
                         {display: '名称', name: 'name', width: 120, align: 'left'},
                         {display: '编码', name: 'code', width: 100, align: 'left'},
                         {display: '地址', name: 'address', width: 520, align: 'left'},
                         {display: '创建时间', name: 'createAt', width: 120, align: 'left', type: 'date'},
                         {display: '创建人', name: 'createBy', width: 120, align: 'left'},
-                        {display:'状态', name:'state', width:80, align:'center', icons:['switch'], iconsParam:{'switch':{switchOff: 0, switchOn: 1,confirmMeg:'确认修改菜单状态？',primaryKey:'id',url:'/menu/updateState'}}},
+                        {
+                            display: '状态',
+                            name: 'state',
+                            width: 80,
+                            align: 'center',
+                            icons: ['switch'],
+                            iconsParam: {
+                                'switch': {
+                                    switchOff: 0,
+                                    switchOn: 1,
+                                    confirmMeg: '确认修改菜单状态？',
+                                    primaryKey: 'id',
+                                    url: 'menu/updateState'
+                                }
+                            }
+                        },
                         {display: '操作', isSort: false, width: 120, icons: ['edit']}
                     ],
                     usePager: false,
@@ -48,7 +63,7 @@
                     //编辑参数
                     edit: {title: "菜单信息"},
                     common: {
-                        url: webRoot + '/menu/detail',
+                        url: 'menu/detail',
                         width: 360,
                         height: 280
                     }
@@ -59,7 +74,7 @@
             var top = common.getTopWindowDom();
             top.win_menu_tree_dialog = top.common.dialog({
                 title: '调整菜单结构',
-                url: webRoot + '/menu/menutree',
+                url: 'menu/menutree',
                 width: 460,
                 height: 500,
                 buttons: [

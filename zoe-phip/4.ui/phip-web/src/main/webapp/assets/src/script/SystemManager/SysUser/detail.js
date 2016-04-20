@@ -5,9 +5,9 @@
             var baseAttr = new BaseAttr({
                 winName: "win_user_detail_dialog",//弹窗对象变量名称
                 winCallback: "win_user_detail_callback",//弹窗回调函数
-                getUrl: webRoot + '/user/getUserInfo',//
-                addUrl: webRoot + '/user/addUserInfo',//新增接口Url
-                updateUrl: webRoot + '/user/updateUserInfo',//修改接口Url
+                getUrl: 'user/getUserInfo',//
+                addUrl: 'user/addUserInfo',//新增接口Url
+                updateUrl: 'user/updateUserInfo',//修改接口Url
                 loadPageEvent: function () {
                     var type = common.getParamFromUrl("state");
                     if (type == "edit") {
@@ -27,10 +27,10 @@
         onResetPwd: function (id) {
             $("#resetuserpwd").click(function () {
                 if ($(".Validform_error").length == 0) {
-                    $.ligerDialog.confirm('是否重置密码？', function (yes) {
+                    common.getTopWindowDom().$.ligerDialog.confirm('是否重置密码？', function (yes) {
                         if (yes) {
                             var req = new Request("SystemUser/ResetUserPwd");
-                            var data={};
+                            var data = {};
                             data["password"] = "123456";
                             data["id"] = id;
                             req.post({
@@ -41,7 +41,7 @@
                                     if (data.isSuccess) {
                                         common.jsmsgSuccess('密码重置成功!');
                                     } else {
-                                        common.jsmsgError(data.Message[0].Content);
+                                        common.jsmsgError(data.message[0].Content);
                                     }
                                 }
                             })

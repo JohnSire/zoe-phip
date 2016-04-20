@@ -33,6 +33,12 @@ define(function (require, exports, module) {
                 columnArray.push(item);
             });
             options["gridParam"]["columns"] = columnArray;
+            if (options["gridParam"]["dataAction"] == "local") {
+                delete options["gridParam"]["url"];
+            } else {
+                options["gridParam"]["url"] = webRoot + options["gridParam"]["url"];
+            }
+
             common.grid(jqGrid, options["gridParam"]);
         },
         deleteList: function (options) {
@@ -90,13 +96,13 @@ define(function (require, exports, module) {
         }
         editParam["url"] = editParam["url"] + "?state=edit&&id=" + id;
 
-        var urlParam="";
-        if(typeof(editParam["otherUrlParam"])=="function") {
+        var urlParam = "";
+        if (typeof(editParam["otherUrlParam"]) == "function") {
             $.each(editParam["otherUrlParam"](), function (key, value) {
                 urlParam += "&&" + key + "=" + value;
             });
         }
-        editParam["url"]=editParam["url"]+urlParam;
+        editParam["url"] = editParam["url"] + urlParam;
 
         //submited(提交非进行时状态改变方法）
         editParam.buttons[0]["onclick"] = function (item, dialog, submited) {
@@ -129,7 +135,6 @@ define(function (require, exports, module) {
             var param = {};
             param[primaryKeyName] = primaryKeyValue;
             param[switchName] = switchValue;
-
             var req = new Request(ajaxUrl);
             req.post({
                 isTip: true,

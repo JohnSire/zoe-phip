@@ -1,7 +1,7 @@
 ﻿define(function (require, exports, module) {
     var internal = {
         getList: function (callback) {
-            var req = new Request("/param/getSysParamList");
+            var req = new Request("param/getSysParamList");
             req.get({
                 isTip: false,
                 success: function (data) {
@@ -14,7 +14,7 @@
         updateList: function (param, callback) {
             $.ligerDialog.confirm('是否确认修改系统参数内容', function (yes) {
                 if (yes) {
-                    var req = new Request("/param/updateSysParamList");
+                    var req = new Request("param/updateSysParamList");
                     req.post({
                         data: param,
                         success: function (data) {
