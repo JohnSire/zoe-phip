@@ -2,6 +2,7 @@ package com.zoe.phip.register.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.parser.Parser;
+import com.zoe.phip.infrastructure.util.DateUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IMedicalStaffInfoMapper;
@@ -70,8 +71,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
         MedicalStaffInfo staffInfo = null;
         try {
             SAXReader reader = new SAXReader();
-            //MedicalStaffInfo
-            //String filePath = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";
+
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapter));
             staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class, parserDoc);
             staffInfo.setId(StringUtil.getUUID());
@@ -137,12 +137,14 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             acknowledgement.setText(result);
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
+        Document document;
+        MedicalStaffInfo staffInfo = null;
         try {
-            Document document = ProcessXmlUtil.load(message);
+            document = ProcessXmlUtil.load(message);
             String rootModeCode = document.getRootElement().getName();
             String msgId = document.selectSingleNode("//id/@extension").getText();
             String idRoot = document.selectSingleNode("//id/@root").getText(); //消息IDroot属性
-            String creationTime = document.selectSingleNode("//creationTime/value").getText();
+            Date creationTime = DateUtil.stringToDateTime(document.selectSingleNode("//creationTime/@value").getText());
             String staffId = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerID/value/@extension").getText();
 
             String genderCode = document.selectSingleNode("//controlActProcess/queryByParameterPayload/administrativeGender/value/@code").getText();
@@ -154,7 +156,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             if (!StringUtil.isNullOrWhiteSpace(staffName)) map.put("staffName", staffName);
             if (!StringUtil.isNullOrWhiteSpace(genderCode)) map.put("genderCode", genderCode);
             if (!StringUtil.isNullOrWhiteSpace(birthDate)) map.put("birthDate", birthDate);
-            MedicalStaffInfo staffInfo = staffInfoMapper.getStaff(map);
+            staffInfo = staffInfoMapper.getStaff(map);
             map.clear();
             map = null;
             if (staffInfo == null || StringUtil.isNullOrWhiteSpace(staffInfo.getStaffId())) {
@@ -163,17 +165,14 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
                 staffInfo.setId(idRoot);
                 staffInfo.setCreationTime(creationTime);
                 staffInfo.setStaffId(staffId);
-                return RegisterUtil.responseFailed(staffInfo,"由于查询内容不存在，查询失败",RegisterType.DOCTOR_QUERY_ERROR);
+                return RegisterUtil.responseFailed(staffInfo, "由于查询内容不存在，查询失败", RegisterType.DOCTOR_QUERY_ERROR);
             }
+            return RegisterUtil.registerMessage(RegisterType.DOCTOR_QUERY_SUCUESS, staffInfo);
 
         } catch (Exception ex) {
-
+            return RegisterUtil.responseFailed(staffInfo,ex.getMessage(),RegisterType.DOCTOR_QUERY_ERROR);
         }
-
-
-        return null;
     }
-
 
     public boolean ifStaffIdExist(String staffId) {
         Example example = new Example(MedicalStaffInfo.class);

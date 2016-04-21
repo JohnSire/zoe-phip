@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class OrganizationRegisterTest extends BaseTest {
 
     @Autowired
-    private OrganizationRegisterImpl organizationRegisterImpl;
+    private OrganizationRegisterImpl impl;
     @Test
     public void testAdd() throws Exception {
         String patientInput ="<PRPM_IN401030UV01 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN401030UV01.xsd\">\n" +
@@ -99,7 +99,59 @@ public class OrganizationRegisterTest extends BaseTest {
                 "</PRPM_IN401030UV01>";
 
 
-        String result = organizationRegisterImpl.addOrganization(patientInput);
+        String result = impl.addOrganization(patientInput);
         System.out.println(result);
+    }
+
+    @Test
+    public void  testQuery() throws Exception{
+        String  query = "<PRPM_IN406010UV01 xmlns=\"urn:hl7-org:v3\" \n" +
+                "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\" \n" +
+                "xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN406010UV01.xsd\">\n" +
+                "  <id root=\"140CD76A-ED0E-400B-9FD3-60387BCDE0EQ\"\n" +
+                "  extension=\"8D73520B-D489-4B70-8F4B-7B5C2D7961BQ\"/>\n" +
+                "  <creationTime value=\"20080625141610\"/>\n" +
+                "  <versionCode code=\"V3-2007-05\"/>\n" +
+                "  <interactionId extension=\"PRPM_IN406010UV01\" root=\"2.16.840.1.113883.1.6\"\n" +
+                "  displayable=\"true\"/>\n" +
+                "  <profileId root=\"2.16.124.113635.1.1.100.0.2.2\"/>\n" +
+                "  <processingCode code=\"P\"/>\n" +
+                "  <processingModeCode code=\"T\"/>\n" +
+                "  <acceptAckCode code=\"AL\"/>\n" +
+                "  <receiver typeCode=\"RCV\">\n" +
+                "    <device classCode=\"DEV\" determinerCode=\"INSTANCE\">\n" +
+                "      <id root=\"1.2.840.114350.1.13.999.567\"/>\n" +
+                "    </device>\n" +
+                "  </receiver>\n" +
+                "  <sender typeCode=\"SND\">\n" +
+                "    <device classCode=\"DEV\" determinerCode=\"INSTANCE\">\n" +
+                "      <id root=\"1.2.840.114350.1.13.999.234\"/>\n" +
+                "    </device>\n" +
+                "  </sender>\n" +
+                "  <controlActProcess classCode=\"CACT\" moodCode=\"EVN\">\n" +
+                "    <code code=\"PRPM_TE406010UV01\" codeSystem=\"2.16.840.1.113883.1.6\"/>\n" +
+                "    <queryByParameterPayload>\n" +
+                "      <!--查询事件的状态-->\n" +
+                "      <statusCode code=\"new\"/>\n" +
+                "      <!--医疗卫生机构（科室）ID-->\n" +
+                "      <organizationID>\n" +
+                "        <value root=\"2.16.156.10011.1.26\" extension=\"1234567890\"/>\n" +
+                "        <semanticsText>AssignedEntity.id</semanticsText>\n" +
+                "      </organizationID>\n" +
+                "      <!--医疗卫生机构（科室）实体名称-->\n" +
+                "      <organizationName>\n" +
+                "        <value>呼吸内科</value>\n" +
+                "        <semanticsText>PrincipalOrganization.name</semanticsText>\n" +
+                "      </organizationName>\n" +
+                "      <!--医疗卫生机构（科室）状态AssignedEntity.statusCode-->\n" +
+                "      <status>\n" +
+                "        <value code=\"active\"/>\n" +
+                "      </status>\n" +
+                "    </queryByParameterPayload>\n" +
+                "  </controlActProcess>\n" +
+                "</PRPM_IN406010UV01>";
+        String message = impl.organizationDetailQuery(query);
+
+        System.out.println(message);
     }
 }

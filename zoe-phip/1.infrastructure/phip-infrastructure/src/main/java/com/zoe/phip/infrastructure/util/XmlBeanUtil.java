@@ -41,8 +41,8 @@ public final class XmlBeanUtil {
             XPath x = parserDoc.createXPath("//"+fieldName);
             //路径
             if((Element)x.selectSingleNode(parserDoc)==null
-                    ||((Element)x.selectSingleNode(parserDoc)).attribute("path")==null){
-                continue;
+                        ||((Element)x.selectSingleNode(parserDoc)).attribute("path")==null){
+                    continue;
             }
             Attribute pathAttr=((Element)x.selectSingleNode(parserDoc)).attribute("path");
             String path =pathAttr.getValue();// xPath.value();

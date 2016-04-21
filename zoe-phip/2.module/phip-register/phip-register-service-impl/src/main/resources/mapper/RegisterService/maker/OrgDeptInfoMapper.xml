@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IOrgDeptInfoMapper">
-    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.OrgDeptInfo" extends="com.zoe.phip.module.service.MasterEntityResultMap">
-        <result column="CODE" property="deptCode" javaType="java.lang.String"
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.OrgDeptInfo"
+               extends="com.zoe.phip.module.service.MasterEntityResultMap">
+        <result column="CODE" property="code" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="DEPT_NAME" property="deptName" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
@@ -36,11 +37,12 @@
                 jdbcType="VARCHAR"/>
         <result column="ASSIGNED_CONTACT_PERSON" property="assignedContactPerson" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-
-        <result column="SORT_NUM" property="sortNum" javaType="java.lang.Integer"
-                jdbcType="DECIMAL"/>
+        <result column="CREATION_TIME" property="creationTime" javaType="java.sql.Timestamp"
+                jdbcType="TIMESTAMP"/>
+        <result column="SORT_NUM" property="sortNum" javaType="int"
+                jdbcType="INTEGER"/>
     </resultMap>
-    <insert id="addList" parameterType="java.util.List">
+    <insert id="addList" parameterType="com.zoe.phip.register.model.OrgDeptInfo">
         INSERT INTO PHIP_ORG_DEPT_INFO (
         CODE,
         DEPT_NAME,
@@ -59,6 +61,7 @@
         ASSIGNED_DEPT_CODE,
         ASSIGNED_DEPT_NAME,
         ASSIGNED_CONTACT_PERSON,
+        CREATION_TIME,
         SORT_NUM,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
@@ -80,12 +83,13 @@
             #{item.assignedDeptCode,jdbcType=VARCHAR},
             #{item.assignedDeptName,jdbcType=VARCHAR},
             #{item.assignedContactPerson,jdbcType=VARCHAR},
-            #{item.sortNum,jdbcType=DECIMAL},
+            #{item.creationTime,jdbcType=TIMESTAMP},
+            #{item.sortNum,jdbcType=INT},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
     </insert>
-    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.OrgDeptInfo">
+    <insert id="defaultAdd" parameterType="java.util.List">
         INSERT INTO PHIP_ORG_DEPT_INFO (
         CODE,
         DEPT_NAME,
@@ -104,9 +108,10 @@
         ASSIGNED_DEPT_CODE,
         ASSIGNED_DEPT_NAME,
         ASSIGNED_CONTACT_PERSON,
+        CREATION_TIME,
         SORT_NUM,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
-        VALUES (
+        VALUES(
         #{code,jdbcType=VARCHAR},
         #{deptName,jdbcType=VARCHAR},
         #{deptTypeCode,jdbcType=VARCHAR},
@@ -124,6 +129,7 @@
         #{assignedDeptCode,jdbcType=VARCHAR},
         #{assignedDeptName,jdbcType=VARCHAR},
         #{assignedContactPerson,jdbcType=VARCHAR},
+        #{creationTime,jdbcType=TIMESTAMP},
         #{sortNum,jdbcType=DECIMAL},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
@@ -144,8 +150,8 @@
         <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
             update PHIP_ORG_DEPT_INFO
             <set>
-                <if test="item.deptCode != null">
-                    CODE = #{item.Code,jdbcType=VARCHAR},
+                <if test="item.code != null">
+                    CODE = #{item.code,jdbcType=VARCHAR},
                 </if>
                 <if test="item.deptName != null">
                     DEPT_NAME = #{item.deptName,jdbcType=VARCHAR},
@@ -195,7 +201,9 @@
                 <if test="item.assignedContactPerson != null">
                     ASSIGNED_CONTACT_PERSON = #{item.assignedContactPerson,jdbcType=VARCHAR},
                 </if>
-
+                <if test="item.creationTime != null">
+                    CREATION_TIME = #{item.creationTime,jdbcType=TIMESTAMP},
+                </if>
                 <if test="item.sortNum != null">
                     SORT_NUM = #{item.sortNum,jdbcType=DECIMAL},
                 </if>

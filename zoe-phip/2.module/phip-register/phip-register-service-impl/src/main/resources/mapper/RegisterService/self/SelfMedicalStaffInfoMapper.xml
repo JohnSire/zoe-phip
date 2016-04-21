@@ -87,16 +87,16 @@
         SELECT * FROM PHIP_MEDICAL_STAFF_INFO PMSI
         WHERE 1 = 1
         <if test="_parameter.containsKey('staffId')">
-            AND PMSI.STAFF_ID = #{staffId,jdbcType=VARCHAR})
+            AND PMSI.STAFF_ID = #{staffId,jdbcType=VARCHAR}
         </if>
         <if test="_parameter.containsKey('staffName')">
-            AND PMSI.NAME = #{staffName,jdbcType=VARCHAR})
+            AND PMSI.NAME = #{staffName,jdbcType=VARCHAR}
         </if>
         <if test="_parameter.containsKey('genderCode')">
-            AND PMSI.GENDER_CODE = #{genderCode,jdbcType=VARCHAR})
+            AND PMSI.GENDER_CODE = #{genderCode,jdbcType=VARCHAR}
         </if>
         <if test="_parameter.containsKey('birthDate')">
-            AND to_char(PMSI.BIRTH_TIME,'yyyy-MM-dd') = #{birthDate,jdbcType=VARCHAR})
+            AND to_char(PMSI.BIRTH_TIME,'yyyyMMdd') = #{birthDate,jdbcType=VARCHAR}
         </if>
     </select>
 </mapper>

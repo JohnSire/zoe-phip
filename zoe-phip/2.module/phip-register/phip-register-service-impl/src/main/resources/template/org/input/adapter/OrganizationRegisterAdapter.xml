@@ -18,4 +18,5 @@
     <AssignedDeptCode descr = "申请者科室代码" path="//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/id/@extension"/>
     <AssignedDeptName descr = "申请者科室名称" path="//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/name"/>
     <AssignedContactPerson descr = "申请联系人" path="//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/contactParty/contactPerson/name"/>
+    <CreationTime descr="建档时间" path="//creationTime/@value"/>
 </root>

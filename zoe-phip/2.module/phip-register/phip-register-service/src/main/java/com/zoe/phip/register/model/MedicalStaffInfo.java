@@ -122,6 +122,15 @@ public class MedicalStaffInfo extends RegisterEntity {
      */
     @Column(name = "ASSIGNED_DEPT_NAME")
     private String assignedDeptName;
+
+    public String getAssignedContactPerson() {
+        return assignedContactPerson;
+    }
+
+    public void setAssignedContactPerson(String assignedContactPerson) {
+        this.assignedContactPerson = assignedContactPerson;
+    }
+
     /**
      * 申请联系人
      */
@@ -132,6 +141,10 @@ public class MedicalStaffInfo extends RegisterEntity {
      */
     @Column(name = "STATUS_CODE")
     private String statusCode;
+
+    //@Transient
+    @Column(name = "CREATION_TIME")
+    private Date creationTime;
 
 
     @Transient
@@ -150,16 +163,13 @@ public class MedicalStaffInfo extends RegisterEntity {
     @Transient
     private String operateCode;
 
-    public String getCreationTime() {
+    public Date getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(String creationTime) {
+    public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
     }
-
-    @Transient
-    private String creationTime;
 
 
     public String getOperateCode() {
@@ -370,14 +380,6 @@ public class MedicalStaffInfo extends RegisterEntity {
         this.assignedDeptName = assignedDeptName;
     }
 
-    public String getAssignedOntactPerson() {
-        return this.assignedContactPerson;
-    }
-
-
-    public void setAssignedContactPerson(String assignedContactPerson) {
-        this.assignedContactPerson = assignedContactPerson;
-    }
 
     public String getStatusCode() {
         return this.statusCode;

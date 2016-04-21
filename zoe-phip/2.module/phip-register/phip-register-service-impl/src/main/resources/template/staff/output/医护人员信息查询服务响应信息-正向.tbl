@@ -5,7 +5,7 @@ var effHigh = Model.effectiveTimeHigh;
 var effLow = Model.effectiveTimeLow;
 %>
 <PRPM_IN306011UV01 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPM_IN306011UV01.xsd" ITSVersion="XML_1.0">
-  <id root="${Model.id}" extension="${Model.extension}" />
+  <id root="${Model.id}" extension="${Model.msgId}" />
    <creationTime value="${creationTime,dateFormat="yyyyMMddHHmmss"}" />
   <interactionId root="2.16.840.1.113883.1.6" extension="PRPM_IN306011UV01" />
   <processingCode code="P" />
@@ -27,11 +27,11 @@ var effLow = Model.effectiveTimeLow;
     <acknowledgement typeCode="AA">
       <targetMessage>
         <!--请求的消息ID-->
-        <id root="${Model.msgId}" extension="${Model.acknowledgement.extension}" />
+        <id root="${Model.id}" extension="${Model.msgId}" />
       </targetMessage>
       <acknowledgementDetail>
-        <!--处理结果说明-->
-        <text>${Model.acknowledgement.text}</text>
+         <!--处理结果说明-->
+         <text>查询成功</text>
    </acknowledgementDetail>
   <controlActProcess classCode="CACT" moodCode="EVN">
     <code code="PRPM_TE306110UV01" codeSystem="2.16.840.1.113883.1.6" />
@@ -53,8 +53,8 @@ var effLow = Model.effectiveTimeLow;
             <statusCode code="${Model.statusCode}"/>
             <!--角色有效期间-->
             <effectiveTime>
-              <low value="${effLow,dateFormat="yyyyMMddHHmmss"}"/>
-              <high value="${effHigh,dateFormat="yyyyMMddHHmmss"}"/>
+              <low value="${effLow,dateFormat="yyyyMMdd"}"/>
+              <high value="${effHigh,dateFormat="yyyyMMdd"}"/>
             </effectiveTime>
             <healthCarePrincipalPerson classCode="PSN" determinerCode="INSTANCE">
               <!--身份证号-->
@@ -65,7 +65,7 @@ var effLow = Model.effectiveTimeLow;
                <administrativeGenderCode code="${Model.genderCode}"
                codeSystem="2.16.156.10011.2.3.3.4" displayName="${Model.genderName}" codeSystemName="生理性别代码表(GB/T 2261.1)"/>
               <!--出生日期-->
-              <birthTime value="${birthDate,dateFormat="yyyyMMddHHmmss"}" />
+              <birthTime value="${birthDate,dateFormat="yyyyMMddd"}" />
               <!--隶属-->
               <asAffiliate classCode="AFFL">
                 <code />
@@ -116,8 +116,8 @@ var effLow = Model.effectiveTimeLow;
         <semanticsText>PrincipalPerson.administrativeGenderCode</semanticsText>
       </administrativeGender>
       <dOB>
-        <value value="${Model.birthDate}" />
-        <semanticsText>PrincipalPerson.birthDate</semanticsText>
+        <value value="${Model.birthTime}" />
+        <semanticsText>PrincipalPerson.birthTime</semanticsText>
       </dOB>
       <providerID>
         <value root="2.16.156.10011.1.4" extension="${Model.staffId}" />

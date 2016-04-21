@@ -65,7 +65,7 @@
     <Statuscode descr="医护人员激活状态" path="//controlActProcess/subject/registrationRequest/statusCode/@code"/>
 
     <MsgId descr="消息ID" path="//id/@extension"></MsgId>
-
+    <CreationTime descr="建档时间" path="//creationTime/@value"/>
     <Id descr="ID" path="//id/@root"></Id>
 
 </root>

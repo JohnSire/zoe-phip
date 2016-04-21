@@ -128,8 +128,8 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
 
 
     @Test
-    public void testAddMedicalRegister() throws Exception {
-        String Medicalxml = "<PRPM_IN301010UV01 xmlns=\"urn:hl7-org:v3\"\n" +
+    public void testAdd() throws Exception {
+        String add = "<PRPM_IN301010UV01 xmlns=\"urn:hl7-org:v3\"\n" +
                 "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\"\n" +
                 "xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN301010UV01.xsd\">\n" +
                 "  <id root=\"040CD76A-ED0E-400B-9FD3-60387BCDE0EB\"\n" +
@@ -229,7 +229,61 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
                 "</PRPM_IN301010UV01>";
 
 
-        String s = medicalStaffRegister.addProvider(Medicalxml);
-        System.out.println(s);
+        String message = medicalStaffRegister.addProvider(add);
+        System.out.println(message);
+    }
+
+    @Test
+    public void testQuery() throws Exception{
+        String query = "<PRPM_IN306010UV01 xmlns=\"urn:hl7-org:v3\"\n" +
+                "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\"\n" +
+                "xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN306010UV01.xsd\">\n" +
+                "  <id root=\"1ee83ff1-08ab-4fe7-b573-ea777e9bad51\"\n" +
+                "  extension=\"9D73520B-D489-4B70-8F4B-7B5C2D7961B5\"/>\n" +
+                "  <creationTime value=\"20080625141610\"/>\n" +
+                "  <versionCode code=\"V3-2007-05\"/>\n" +
+                "  <interactionId extension=\"PRPM_IN306010UV01\" root=\"2.16.840.1.113883.1.6\"\n" +
+                "  displayable=\"true\"/>\n" +
+                "  <profileId root=\"2.16.124.113635.1.1.100.0.2.2\"/>\n" +
+                "  <processingCode code=\"P\"/>\n" +
+                "  <processingModeCode code=\"T\"/>\n" +
+                "  <acceptAckCode code=\"AL\"/>\n" +
+                "  <receiver typeCode=\"RCV\">\n" +
+                "    <telecom></telecom>\n" +
+                "    <device classCode=\"DEV\" determinerCode=\"INSTANCE\">\n" +
+                "      <id root=\"1.2.840.114350.1.13.999.567\"/>\n" +
+                "    </device>\n" +
+                "  </receiver>\n" +
+                "  <sender typeCode=\"SND\">\n" +
+                "    <telecom></telecom>\n" +
+                "    <device classCode=\"DEV\" determinerCode=\"INSTANCE\">\n" +
+                "      <id root=\"1.2.840.114350.1.13.999.234\"/>\n" +
+                "    </device>\n" +
+                "  </sender>\n" +
+                "  <controlActProcess classCode=\"CACT\" moodCode=\"EVN\">\n" +
+                "    <code code=\"PRPM_TE306010UV01\" codeSystem=\"2.16.840.1.113883.1.6\"/>\n" +
+                "    <queryByParameterPayload>\n" +
+                "      <statusCode code=\"new\"/>\n" +
+                "      <administrativeGender>\n" +
+                "        <value code=\"1\" codeSystem=\"2.16.156.10011.2.3.3.4\" displayName=\"男性\"/>\n" +
+                "        <semanticsText>PrincipalPerson.administrativeGenderCode</semanticsText>\n" +
+                "      </administrativeGender>\n" +
+                "      <dOB>\n" +
+                "        <value value=\"19570323\"/>\n" +
+                "        <semanticsText>PrincipalPerson.birthDate</semanticsText>\n" +
+                "      </dOB>\n" +
+                "      <providerID>\n" +
+                "        <value root=\"2.16.156.10011.1.4\" extension=\"120109197706015518\"/>\n" +
+                "        <semanticsText>HealthCareProvider.id</semanticsText>\n" +
+                "      </providerID>\n" +
+                "      <providerName>\n" +
+                "        <value>李医生</value>\n" +
+                "        <semanticsText>PrincipalPerson.name</semanticsText>\n" +
+                "      </providerName>\n" +
+                "    </queryByParameterPayload>\n" +
+                "  </controlActProcess>\n" +
+                "</PRPM_IN306010UV01>";
+        String message = medicalStaffRegister.providerDetailsQuery(query);
+        System.out.println(message);
     }
 }
