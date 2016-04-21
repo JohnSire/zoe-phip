@@ -21,7 +21,7 @@ define(function (require, exports, module) {
         btnBuild: function (options) {
             var btnbox = options["tools"]["btnbox"];
             var toolsBoxId = options["toolsBoxId"];
-            var jqbtnBox = $("#" + toolsBoxId);
+            var jqbtnBox = $("#" + toolsBoxId).find("[op='btns']");
             $.each(btnbox, function (index, item) {
                 if (item) {
                     switch (index) {
@@ -51,8 +51,7 @@ define(function (require, exports, module) {
         searchBox: function (options, searchCallback) {
             var searchBoxParam = options["tools"]["searchbox"];
             var toolsBoxId = options["toolsBoxId"];
-            var jqbtnBox = $("#" + toolsBoxId);
-            //var jqbtnBox = $("#gridTools");
+            var jqbtnBox = $("#" + toolsBoxId).find("[op='search']");
             $.each(searchBoxParam, function (index, item) {
                 switch (item["type"]) {
                     case "text":

@@ -40,9 +40,9 @@ public final class XmlBeanUtil {
             fieldName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
             XPath x = parserDoc.createXPath("//"+fieldName);
             //路径
-            if((Element)x.selectSingleNode(parserDoc)==null
-                        ||((Element)x.selectSingleNode(parserDoc)).attribute("path")==null){
-                    continue;
+            if(x.selectSingleNode(parserDoc)==null
+                    ||((Element)x.selectSingleNode(parserDoc)).attribute("path")==null){
+                continue;
             }
             Attribute pathAttr=((Element)x.selectSingleNode(parserDoc)).attribute("path");
             String path =pathAttr.getValue();// xPath.value();
