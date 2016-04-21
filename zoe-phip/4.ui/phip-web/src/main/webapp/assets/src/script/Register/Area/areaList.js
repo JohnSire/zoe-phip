@@ -1,4 +1,7 @@
-﻿define(function (require, exports, module) {
+/**
+ * Created by linqinghuang on 2016/4/21.
+ */
+define(function (require, exports, module) {
     var internal = {
         selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
@@ -21,31 +24,15 @@
                 gridParam: {
                     url: 'user/getUserList',
                     columns: [
-                        {display: '名称', name: 'name', width: 120, align: 'left'},
-                        {display: '登录名', name: 'loginName', width: 120, align: 'left'},
+                        {display: '代码', name: 'name', width: 160, align: 'left'},
+                        {display: '名称', name: 'loginName', width: 180, align: 'left'},
                         {
-                            display: '注册时间',
+                            display: '成立时间',
                             name: 'createAt',
                             width: 120,
                             align: 'left',
                             type: 'date',
                             format: 'yyyy-mm-dd'
-                        },
-                        {
-                            display: '状态',
-                            name: 'state',
-                            width: 80,
-                            align: 'center',
-                            icons: ['switch'],
-                            iconsParam: {
-                                'switch': {
-                                    switchOff: 0,
-                                    switchOn: 1,
-                                    confirmMeg: '确认修改用户状态?',
-                                    primaryKey: 'id',
-                                    url: 'user/updateState'
-                                }
-                            }
                         },
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
@@ -54,17 +41,17 @@
                     height: $("body").innerHeight() - $("#gridTools").outerHeight() - 38//500
                 },
                 dialogParam: {
-                    winName: "win_user_detail_dialog",//弹窗对象变量名称
-                    winCallback: "win_user_detail_callback",//弹窗回调函数
+                    winName: "win_area_detail_dialog",//弹窗对象变量名称
+                    winCallback: "win_area_detail_callback",//弹窗回调函数
                     titleKey: "name",
                     //新增参数
-                    add: {title: "新增用户"},
+                    add: {title: "新增行政区划"},
                     //编辑参数
-                    edit: {title: "编辑用户"},
+                    edit: {title: "编辑行政区划"},
                     common: {
-                        url: 'user/detail',
-                        width: 360,
-                        height: 260
+                        url: 'area/view/areadetail',
+                        width: 680,
+                        height: 300
                     }
                 }
             })

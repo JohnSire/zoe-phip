@@ -1,0 +1,14 @@
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Area/areaList.js', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/Shared/_baseGrid.html",{title:"行政区划管理",styleSection:null,bodySection:null,scriptSection:scriptSection}){}
+%>
