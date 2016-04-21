@@ -6,8 +6,8 @@
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
                 deleteUrl: {
-                    deleteInfo: "/user/delUserInfo",
-                    deleteList: "/user/delUserList"
+                    deleteInfo: "user/delUserInfo",
+                    deleteList: "user/delUserList"
                 },
                 tools: {
                     btnbox: {
@@ -19,7 +19,7 @@
                     ]
                 },
                 gridParam: {
-                    url: '/user/getUserList',
+                    url: 'user/getUserList',
                     columns: [
                         {display: '名称', name: 'name', width: 120, align: 'left'},
                         {display: '登录名', name: 'loginName', width: 120, align: 'left'},
@@ -43,7 +43,7 @@
                                     switchOn: 1,
                                     confirmMeg: '确认修改用户状态?',
                                     primaryKey: 'id',
-                                    url: '/user/updateState'
+                                    url: 'user/updateState'
                                 }
                             }
                         },

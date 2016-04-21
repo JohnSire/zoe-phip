@@ -1,10 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="name"><span class="text-mark">*</span>区域代码：</label>
+                    <input type="text" name="name" class="text" datatype="*1-30" errormsg="名称长度应为1-30位！"
+                           nullmsg="请填写名称！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="name"><span class="text-mark">*</span>区域名称：</label>
+                    <input type="text" name="name" class="text" datatype="*1-30" errormsg="名称长度应为1-30位！"
+                           nullmsg="请填写名称！"/>
+                </p>
 
-</body>
-</html>
+            </li>
+
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="loginName"><span class="text-mark">*</span>成立时间：</label>
+                    <input type="text" name="createTime" class="text" datatype="*1-30" errormsg="登录名长度应为1-30位！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="name">注销时间：</label>
+                    <input type="text" name="name" class="text" datatype="*1-30" errormsg="名称长度应为1-30位！"
+                           nullmsg=""/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label label-textarea">描述：</label>
+                    <textarea rows="3" class="textarea" style="width:508px;height:60px;" name="Descr"></textarea>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Area/areaDetail.js', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/Shared/_baseAttr.html",{title:"行政区划详情",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>
