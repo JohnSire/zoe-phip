@@ -1,10 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-title">
+        <h1 class="title">基本信息</h1>
+    </div>
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="ORGN_AME"><span class="text-mark">*</span>姓名：</label>
+                    <input type="text" name="orgn_ame" class="text" datatype="*1-128" errormsg="姓名长度应为1~128位！"
+                           nullmsg="请填写姓名！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="CODE"><span class="text-mark">*</span>性别：</label>
+                    <label><input name="sex" type="radio"/>男 </label>
+                    <label><input name="sex" type="radio"/>女 </label>
+                    <label><input name="sex" type="radio"/>未知 </label>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="ADDRESS"><span class="text-mark">*</span>身份证件号：</label>
+                    <input type="text" name="ADDRESS" class="text" datatype="*1-256" errormsg="身份证件号长度应为1~256位！"
+                           nullmsg="请填写身份证件号！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="CATALOG_ID"><span class="text-mark">*</span>职务：</label>
+                    <input type="text" name="CATALOG_ID" class="text" datatype="*1-128" errormsg="职务长度应为1~128位！"
+                           nullmsg="请填写联系职务！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="ADDRESS"><span class="text-mark">*</span>出生日期：</label>
+                    <input type="date" name="ADDRESS" class="text" nullmsg="请填写出生日期！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="CATALOG_ID"><span class="text-mark">*</span>隶属：</label>
+                    <input type="text" name="CATALOG_ID" class="text" datatype="*1-128" errormsg="隶属长度应为1~128位！"
+                           nullmsg="请填写隶属！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="ADDRESS"><span class="text-mark">*</span>出生地：</label>
+                    <input type="text" name="ADDRESS" class="text" style="width:508px;height:20px;" datatype="*1-256" errormsg="出生地长度应为1~256位！"
+                           nullmsg="请填写出生地！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="ADDRESS"><span class="text-mark">*</span>工作地址：</label>
+                    <input type="text" name="ADDRESS" class="text" style="width:508px;height:20px;" datatype="*1-256" errormsg="工作地址长度应为1~256位！"
+                           nullmsg="请填写工作地址！"/>
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="y-dialog-title">
+        <h1 class="title">详细信息</h1>
+    </div>
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="SHORT_NAME"><span class="text-mark">*</span>有效期开始：</label>
+                    <input type="date" name="SHORT_NAME" class="text" nullmsg="请填写有效期开始！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="AGENCY_CODE"><span class="text-mark">*</span>有效期结束：</label>
+                    <input type="date" name="AGENCY_CODE" class="text" nullmsg="请填写有效期结束！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="SHORT_NAME"><span class="text-mark">*</span>申请人：</label>
+                    <input type="text" name="SHORT_NAME" class="text" datatype="*1-256" errormsg="申请人长度应为1~256位！"
+                           nullmsg="请填写申请人！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="AGENCY_CODE"><span class="text-mark">*</span>申请人所属科室：</label>
+                    <input type="text" name="AGENCY_CODE" class="text" datatype="*1-256" errormsg="申请人所属科室长度应为1~256位！"
+                           nullmsg="请填写申请人所属科室！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="SHORT_NAME"><span class="text-mark">*</span>联系人：</label>
+                    <input type="text" name="SHORT_NAME" class="text" datatype="*1-256" errormsg="联系人长度应为1~256位！"
+                           nullmsg="请填写联系人！"/>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Personnel/medicalStaffDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/Shared/_baseAttr.html",{title:"医护人员详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>
