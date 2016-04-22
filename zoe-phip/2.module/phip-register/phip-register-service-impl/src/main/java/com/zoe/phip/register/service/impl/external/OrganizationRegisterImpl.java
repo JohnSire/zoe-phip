@@ -1,13 +1,12 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.zoe.phip.infrastructure.util.DateUtil;
-import com.zoe.phip.infrastructure.util.StringUtil;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
-import com.zoe.phip.register.dao.IOrgDeptInfoMapper;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IOrganizationRegister;
+import com.zoe.phip.register.service.internal.IOrganizationRegisterIn;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
@@ -17,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -31,9 +29,8 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
 
     private static final Logger logger = LoggerFactory.getLogger(OrganizationRegisterImpl.class);
     static final String adapter = "/template/org/input/adapter/OrganizationRegisterAdapter.xml";
-
     @Autowired
-    private IOrgDeptInfoMapper baseInfoMapper;
+    private IOrganizationRegisterIn organizationRegisterIn;
 
     /**
      * 新增医疗卫生机构注册
@@ -58,25 +55,20 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             SAXReader reader = new SAXReader();
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapter));
             baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, parserDoc);
-            baseInfo.setId(StringUtil.getUUID());
-            //ReceiverSender
-       /*     String rsXmlPath = "/template/base/ReceiverSenderAdapter.xml";
-            Document rsParDoc = reader.read(this.getClass().getResourceAsStream(rsXmlPath));
-            ReceiverSender sr = XmlBeanUtil.toBean(document, ReceiverSender.class, rsParDoc);
-            baseInfo.setReceiverSender(sr);*/
+
             //xml 验证错误  todo 打开验证功能
             if (strResult.contains("error:数据集内容验证错误")) {
                 return registerFailed(baseInfo, strResult);
             }
-            //数据是否存在判断
-            if (ifStaffIdExist(baseInfo.getCode())) {
-                return registerFailed(baseInfo, "由于内容重复注册，注册失败");
+            ServiceResultT<OrgDeptInfo> result= organizationRegisterIn.addOrganization(baseInfo);
+            if(result.getMessages().size()>0){
+                return registerFailed(baseInfo, result.getMessages().get(0).getContent());
+            }else {
+                acknowledgement.setTypeCode("AA");
+                acknowledgement.setText("注册成功");
+                baseInfo.setAcknowledgement(acknowledgement);
+                return RegisterUtil.registerMessage(RegisterType.ORG_ADD_SUCCESS, baseInfo);
             }
-            baseInfoMapper.defaultAdd(baseInfo);
-            acknowledgement.setTypeCode("AA");
-            acknowledgement.setText("注册成功");
-            baseInfo.setAcknowledgement(acknowledgement);
-            return RegisterUtil.registerMessage(RegisterType.ORG_ADD_SUCCESS, baseInfo);
         } catch (Exception ex) {
             logger.error("error:", ex);
             return registerFailed(baseInfo, ex.getMessage());
@@ -100,24 +92,20 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             SAXReader reader = new SAXReader();
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapter));
             baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, parserDoc);
-            /*String rsXmlPath = "/template/base/ReceiverSenderAdapter.xml";
-            Document rsParDoc = reader.read(this.getClass().getResourceAsStream(rsXmlPath));
-            ReceiverSender sr = XmlBeanUtil.toBean(document, ReceiverSender.class, rsParDoc);
-            baseInfo.setReceiverSender(sr);*/
+
             //xml 验证错误  todo 打开验证功能
             if (strResult.contains("error:数据集内容验证错误")) {
                 return registerFailed(baseInfo, strResult);
             }
-            //数据是否存在判断
-            if (!ifStaffIdExist(baseInfo.getCode())) {
-                return updateFailed(baseInfo, "由于更新内容不存在，更新失败");
+            ServiceResultT<OrgDeptInfo> result= organizationRegisterIn.updateOrganization(baseInfo);
+            if(result.getMessages().size()>0){
+                return updateFailed(baseInfo, result.getMessages().get(0).getContent());
+            }else {
+                acknowledgement.setTypeCode("AA");
+                acknowledgement.setText("更新成功");
+                baseInfo.setAcknowledgement(acknowledgement);
+                return RegisterUtil.registerMessage(RegisterType.ORG_UPDATE_SUCCESS, baseInfo);
             }
-            //保存到数据库
-            baseInfoMapper.defaultUpdate(baseInfo);
-            acknowledgement.setTypeCode("AA");
-            acknowledgement.setText("更新成功");
-            baseInfo.setAcknowledgement(acknowledgement);
-            return RegisterUtil.registerMessage(RegisterType.ORG_UPDATE_SUCCESS, baseInfo);
         } catch (Exception ex) {
             logger.error("error:", ex);
             return updateFailed(baseInfo, ex.getMessage());
@@ -144,15 +132,14 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             String strMsgId = document.selectSingleNode("//id/@extension").getText();
             String strIdRoot = document.selectSingleNode("//id/@root").getText();
             String strCreateTime = document.selectSingleNode("//creationTime/@value").getText();
-           /*
-              String strReceiverId = document.selectSingleNode("//receiver/device/id/@root").getText();
-              String strSenderId = document.selectSingleNode("//sender/device/id/@root").getText();
-            */
+
             Map<String, Object> map = new TreeMap<>();
-            deptInfo = baseInfoMapper.getOrgDeptInfo(map);
             map.clear();
-            map = null;
-            if (deptInfo == null || StringUtil.isNullOrWhiteSpace(deptInfo.getCode())) {
+            map.put("code",strDeptId);
+            map.put("deptName",strDeptName);
+            ServiceResultT<OrgDeptInfo> result= organizationRegisterIn.organizationDetailQuery(map);
+
+       /*     if (deptInfo == null || StringUtil.isNullOrWhiteSpace(deptInfo.getCode())) {
                 deptInfo = new OrgDeptInfo();
                 deptInfo.setCreationTime(DateUtil.stringToDateTime(strCreateTime));
                 deptInfo.setId(strIdRoot);
@@ -162,6 +149,15 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
                 return RegisterUtil.responseFailed(deptInfo, "由于查询内容不存在，查询失败", RegisterType.ORG_QUERY_ERROR);
             } else {
                 return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_SUCCESS, deptInfo);
+            }*/
+
+            if(result.getMessages().size()>0){
+                acknowledgement.setTypeCode("AE");
+                acknowledgement.setText(result.getMessages().get(0).getContent());
+                return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, acknowledgement);
+            }else {
+
+                return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_SUCCESS, result.getResult());
             }
 
         } catch (Exception ex) {
@@ -192,10 +188,5 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
         return RegisterUtil.responseFailed(baseInfo, errorMsg, RegisterType.ORG_UPDATE_ERROR);
     }
 
-    public boolean ifStaffIdExist(String code) {
-        Example example = new Example(OrgDeptInfo.class);
-        example.createCriteria().andEqualTo("code", code);
-        int count = baseInfoMapper.selectCountByExample(example);
-        return count > 0;
-    }
+
 }

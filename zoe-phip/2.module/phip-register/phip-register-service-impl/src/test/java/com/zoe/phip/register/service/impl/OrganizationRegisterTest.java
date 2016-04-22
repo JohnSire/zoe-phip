@@ -12,7 +12,7 @@ public class OrganizationRegisterTest extends BaseTest {
 
     @Autowired
     private OrganizationRegisterImpl impl;
-    @Test
+   // @Test
     public void testAdd() throws Exception {
         String patientInput ="<PRPM_IN401030UV01 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN401030UV01.xsd\">\n" +
                 "  <id root=\"040CD76A-ED0E-400B-9FD3-60387BCDE0EB\" extension=\"8D73520B-D489-4B70-8F4B-7B5C2D7961B5\"/>\n" +
@@ -100,7 +100,9 @@ public class OrganizationRegisterTest extends BaseTest {
                 "</PRPM_IN401030UV01>";
 
 
-        String result = impl.addOrganization(patientInput);
+      //  String result = impl.addOrganization(patientInput);
+        String result = impl.updateOrganization(patientInput);
+
         System.out.println(result);
     }
 
