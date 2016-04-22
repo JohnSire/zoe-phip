@@ -12,14 +12,14 @@
     </select>-->
 
     <select id="getCompetenceMenuByUser" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
-        SELECT DISTINCT t.ID, t.NAME, t.CODE, t.ADDRESS, t.FK_PARENT_MENU_ID, t.CREATE_AT, t.CREATE_BY, t.MODIFY_AT,
+        SELECT DISTINCT t.ID, t.NAME, t.CODE,t.SORT, t.ADDRESS, t.FK_PARENT_MENU_ID, t.CREATE_AT, t.CREATE_BY, t.MODIFY_AT,
         t.MODIFY_BY, t.STATE, NULL COMPETENCE_ID, NULL NAME_PATH
         FROM SYS_MENU_DATA t
         INNER JOIN SYS_MENU_COMPETENCE MC ON MC.FK_MENU_ID = T.ID
         INNER JOIN SYS_USER_COMPETENCE UC ON UC.FK_COMPETENCE_CATEGORY_ID = MC.FK_COMPETENCE_CATEGORY_ID
         INNER JOIN SYS_SYSTEM_USER U ON U.ID = UC.FK_USER_ID
         WHERE t.STATE = 1 AND U.STATE = 1 AND UC.FK_USER_ID = #{userId}
-        order by t.CODE
+        order by t.SORT ASC
     </select>
 
     <select id="getMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap" >

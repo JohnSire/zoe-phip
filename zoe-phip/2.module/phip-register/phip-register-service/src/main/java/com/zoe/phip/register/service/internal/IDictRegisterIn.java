@@ -27,10 +27,10 @@ public interface IDictRegisterIn {
 
     /**
      *3)	字典类别查询
-     * @param dictCatalog
+     * @param dictCatalogCode
      * @return
      */
-    ServiceResultT<DictCatalog> dictCatalogDetailQuery(DictCatalog dictCatalog);
+    ServiceResultT<DictCatalog> dictCatalogDetailQuery(String dictCatalogCode);
 
     /**
      *4)	字典类别删除
@@ -55,10 +55,10 @@ public interface IDictRegisterIn {
 
     /**
      *7)	字典项查询
-     * @param dictItem
+     * @param dictItemCode
      * @return
      */
-    ServiceResultT<DictItem> dictItemDetailQuery(DictItem dictItem);
+    ServiceResultT<DictItem> dictItemDetailQuery(String dictItemCode);
 
     /**
      *8)	字典项删除

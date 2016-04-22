@@ -12,8 +12,6 @@ import com.zoe.phip.register.dao.IXmanCardMapper;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.XmanCard;
 import com.zoe.phip.register.service.internal.IPatientRegisterIn;
-import com.zoe.phip.register.util.RegisterType;
-import com.zoe.phip.register.util.RegisterUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

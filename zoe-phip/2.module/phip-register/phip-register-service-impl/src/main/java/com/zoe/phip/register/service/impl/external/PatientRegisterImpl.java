@@ -34,6 +34,9 @@ public class PatientRegisterImpl implements IPatientRegister {
 
     private static final Logger logger = LoggerFactory.getLogger(PatientRegisterImpl.class);
 
+    private final String adapterPath="/template/patient/input/adapter/PatientRegisterAdapter.xml";
+    private final String cardAdapterPath="/template/patient/input/adapter/XmanCardAdapter.xml";
+
     @Autowired
     private IPatientRegisterIn patientRegisterIn;
 
@@ -65,16 +68,14 @@ public class PatientRegisterImpl implements IPatientRegister {
         try {
             SAXReader reader = new SAXReader();
             //XmanBaseInfo
-            String filePath = "/template/patient/input/Adapter/PatientRegisterAdapter.xml";
-            Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
+            Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapterPath));
             baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
 
             //xml 验证错误
             if(strResult.contains("error:数据集内容验证错误")){
                 return registerFailed(baseInfo,strResult);
             }
-            String cardXmlPath = "/template/patient/input/Adapter/XmanCardAdapter.xml";
-            Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardXmlPath));
+            Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardAdapterPath));
             XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class, cardParDoc);
 
             ServiceResultT<XmanBaseInfo> result= patientRegisterIn.addPatientRegistry(baseInfo,xmanCard);
@@ -110,26 +111,23 @@ public class PatientRegisterImpl implements IPatientRegister {
         try {
             SAXReader reader = new SAXReader();
             //XmanBaseInfo
-            String filePath = "/template/patient/input/Adapter/PatientRegisterAdapter.xml";
-            Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
+            Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapterPath));
             baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
             //xml 验证错误
             if(strResult.contains("error:数据集内容验证错误")){
-                return registerFailed(baseInfo,strResult);
+                return updateFailed(baseInfo,strResult);
             }
 
-            String cardXmlPath = "/template/patient/input/Adapter/XmanCardAdapter.xml";
-            Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardXmlPath));
+            Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardAdapterPath));
             XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class, cardParDoc);
 
             ServiceResultT<XmanBaseInfo> result= patientRegisterIn.updatePatientRegistry(baseInfo,xmanCard);
 
-
             if(result.getMessages().size()>0){
-                return registerFailed(baseInfo, result.getMessages().get(0).getContent());
+                return updateFailed(baseInfo, result.getMessages().get(0).getContent());
             }else {
                 acknowledgement.setTypeCode("AA");
-                acknowledgement.setText("注册成功");
+                acknowledgement.setText("更新成功");
                 baseInfo.setAcknowledgement(acknowledgement);
                 return RegisterUtil.registerMessage(RegisterType.PATIENT_UPDATE_SUCUESS, baseInfo);
             }
@@ -137,7 +135,6 @@ public class PatientRegisterImpl implements IPatientRegister {
             logger.error("error:", ex);
             return updateFailed(baseInfo, ex.getMessage());
         }
-
     }
 
     /**
