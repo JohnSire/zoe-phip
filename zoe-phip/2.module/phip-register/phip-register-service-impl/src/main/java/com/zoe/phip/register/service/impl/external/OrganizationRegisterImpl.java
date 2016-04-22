@@ -1,16 +1,13 @@
-package com.zoe.phip.register.service.impl;
+package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.zoe.phip.infrastructure.parser.Parser;
 import com.zoe.phip.infrastructure.util.DateUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IOrgDeptInfoMapper;
-import com.zoe.phip.register.model.MedicalStaffInfo;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.model.base.Acknowledgement;
-import com.zoe.phip.register.model.base.ReceiverSender;
-import com.zoe.phip.register.service.IOrganizationRegister;
+import com.zoe.phip.register.service.external.IOrganizationRegister;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;

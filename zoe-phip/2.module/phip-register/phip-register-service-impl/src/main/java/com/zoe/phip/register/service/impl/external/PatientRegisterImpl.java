@@ -1,8 +1,6 @@
-package com.zoe.phip.register.service.impl;
+package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.zoe.phip.infrastructure.parser.Parser;
-import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IXmanBaseInfoMapper;
@@ -10,8 +8,7 @@ import com.zoe.phip.register.dao.IXmanCardMapper;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.XmanCard;
 import com.zoe.phip.register.model.base.Acknowledgement;
-import com.zoe.phip.register.model.base.ReceiverSender;
-import com.zoe.phip.register.service.IPatientRegister;
+import com.zoe.phip.register.service.external.IPatientRegister;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
@@ -25,8 +22,6 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by zengjiyang on 2016/4/11.

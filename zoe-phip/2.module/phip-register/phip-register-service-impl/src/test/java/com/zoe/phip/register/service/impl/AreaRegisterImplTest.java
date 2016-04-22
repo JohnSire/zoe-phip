@@ -1,12 +1,11 @@
 package com.zoe.phip.register.service.impl;
 
 import com.zoe.phip.register.BaseTest;
-import com.zoe.phip.register.service.IAreaRegister;
+import com.zoe.phip.register.service.external.IAreaRegister;
+import com.zoe.phip.register.service.impl.external.AreaRegisterImpl;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by zengjiyang on 2016/4/11.

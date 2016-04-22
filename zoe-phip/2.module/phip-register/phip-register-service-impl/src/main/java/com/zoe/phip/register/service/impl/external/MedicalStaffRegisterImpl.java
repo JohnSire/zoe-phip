@@ -1,4 +1,4 @@
-package com.zoe.phip.register.service.impl;
+package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.parser.Parser;
@@ -7,15 +7,12 @@ import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IMedicalStaffInfoMapper;
 import com.zoe.phip.register.model.MedicalStaffInfo;
-import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.base.Acknowledgement;
-import com.zoe.phip.register.model.base.ReceiverSender;
-import com.zoe.phip.register.service.IMedicalStaffRegister;
+import com.zoe.phip.register.service.external.IMedicalStaffRegister;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
 import org.dom4j.Document;
-import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**

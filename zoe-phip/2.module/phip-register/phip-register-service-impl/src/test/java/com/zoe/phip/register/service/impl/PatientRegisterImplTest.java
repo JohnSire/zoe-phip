@@ -1,23 +1,9 @@
 package com.zoe.phip.register.service.impl;
 
-import com.zoe.phip.infrastructure.util.StringUtil;
-import com.zoe.phip.infrastructure.util.XmlBeanUtil;
-import com.zoe.phip.infrastructure.util.XmlUtil;
 import com.zoe.phip.register.BaseTest;
-import com.zoe.phip.register.model.XmanBaseInfo;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.XPath;
-import org.dom4j.io.SAXReader;
+import com.zoe.phip.register.service.impl.external.PatientRegisterImpl;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by zengjiyang on 2016/4/18.
