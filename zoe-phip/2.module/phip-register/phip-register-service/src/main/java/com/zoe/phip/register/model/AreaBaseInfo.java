@@ -54,9 +54,9 @@ public class AreaBaseInfo extends MasterEntity {
     /**
      * 注销原因
      */
-    @Column(name = "AREA_CANCEL_RESON")
-    @XPath(value = "//areaCancelReson/@value")
-    private String areaCancelReson;
+    @Column(name = "AREA_CANCEL_REASON")
+    @XPath(value = "//areaCancelReason/@value")
+    private String areaCancelReason;
     /**
      * 注销前区域信息，用以做历史沿革关联
      */
@@ -104,12 +104,12 @@ public class AreaBaseInfo extends MasterEntity {
         this.areaCancellationDate = areaCancellationDate;
     }
 
-    public String getAreaCancelReson() {
-        return this.areaCancelReson;
+    public String getareaCancelReason() {
+        return this.areaCancelReason;
     }
 
-    public void setAreaCancelReson(String areaCancelReson) {
-        this.areaCancelReson = areaCancelReson;
+    public void setareaCancelReason(String areaCancelReason) {
+        this.areaCancelReason = areaCancelReason;
     }
 
     public String getHistoryAreaId() {

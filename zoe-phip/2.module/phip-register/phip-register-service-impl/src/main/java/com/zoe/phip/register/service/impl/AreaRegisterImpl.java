@@ -7,8 +7,11 @@ import com.zoe.phip.register.dao.IDictCatalogMapper;
 import com.zoe.phip.register.model.AreaBaseInfo;
 import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.model.XmanBaseInfo;
+import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.service.IAreaRegister;
 import com.zoe.phip.register.util.ProcessXmlUtil;
+import com.zoe.phip.register.util.RegisterType;
+import com.zoe.phip.register.util.RegisterUtil;
 import org.dom4j.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +34,16 @@ public class AreaRegisterImpl implements IAreaRegister {
 
     @Override
     public String addAreaRequest(String message) {
+
+        String strResult = ProcessXmlUtil.verifyMessage(message);
+        //Acknowledgement
+        Acknowledgement acknowledgement = new Acknowledgement();
+        //xml格式错误
+        if (strResult.contains("error:传入的参数不符合xml格式")) {
+            acknowledgement.setTypeCode("AE");
+            acknowledgement.setText(strResult);
+            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+        }
         Document document = ProcessXmlUtil.load(message);
         AreaBaseInfo areaBaseInfo;
         try {
