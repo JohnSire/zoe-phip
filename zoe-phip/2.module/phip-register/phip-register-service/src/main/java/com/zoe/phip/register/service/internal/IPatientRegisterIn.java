@@ -3,6 +3,7 @@ package com.zoe.phip.register.service.internal;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.register.model.XmanBaseInfo;
+import com.zoe.phip.register.model.XmanCard;
 
 /**
  * 病人注册服务
@@ -12,17 +13,17 @@ public interface IPatientRegisterIn {
 
     /**
      * 个人信息新增
-     * @param message
+     * @param xmanBaseInfo
      * @return
      */
-    ServiceResultT<XmanBaseInfo> addPatientRegistry(XmanBaseInfo message);
+    ServiceResultT<XmanBaseInfo> addPatientRegistry(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard);
 
     /**
      * 个人信息更新
-     * @param message
+     * @param xmanBaseInfo
      * @return
      */
-    ServiceResultT<XmanBaseInfo> updatePatientRegistry(XmanBaseInfo message);
+    ServiceResultT<XmanBaseInfo> updatePatientRegistry(XmanBaseInfo xmanBaseInfo,XmanCard xmanCard);
 
     /**
      * 个人身份合并
@@ -33,9 +34,9 @@ public interface IPatientRegisterIn {
 
     /**
      * 个人基本信息查询
-     * @param message
+     * @param patientId
      * @return
      */
-    ServiceResult patientRegistryQuery(String message);
+    ServiceResultT<XmanBaseInfo> patientRegistryQuery(String patientId);
 
 }

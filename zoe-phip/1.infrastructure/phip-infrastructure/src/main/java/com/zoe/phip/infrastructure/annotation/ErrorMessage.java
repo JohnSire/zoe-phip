@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by zengjiyang on 2016/4/8.
  */
-@Target({ElementType.METHOD})
+@Target({ElementType.METHOD,ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Repeatable(ErrorMessages.class)

@@ -10,12 +10,14 @@
     <dubbo:registry address="N/A"/>
 
     <dubbo:protocol name="webservice"  port="8089" server="tomcat"/>
+    <dubbo:protocol name="dubbo" host="localhost" port="20080"/>
+
     <dubbo:annotation package="com.zoe.phip.register.service"></dubbo:annotation>
     <dubbo:provider timeout="10000"/>
 
-    <!--<bean id="AreaRegister" class="com.zoe.phip.register.service.impl.AreaRegisterImpl"/>
+    <!--<bean id="AreaRegisterIn" class="com.zoe.phip.register.service.impl.internal.AreaRegisterInImpl"/>
 
-    <dubbo:service interface="com.zoe.phip.register.service.IAreaRegister" version="1.0.0"
-                   protocol="webservice" ref="AreaRegister">
+    <dubbo:service interface="com.zoe.phip.register.service.internal.IAreaRegisterIn" version="1.0.0"
+                   protocol="dubbo" ref="AreaRegisterIn">
     </dubbo:service>-->
 </beans>

@@ -26,7 +26,7 @@ import java.util.TreeMap;
  * Created by zengjiyang on 2016/4/11.
  */
 @Repository("OrganizationRegister")
-@Service(interfaceClass = IOrganizationRegister.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IOrganizationRegister.class, proxy = "sdpf", protocol = {"webservice"},dynamic = true)
 public class OrganizationRegisterImpl implements IOrganizationRegister {
 
     private static final Logger logger = LoggerFactory.getLogger(OrganizationRegisterImpl.class);

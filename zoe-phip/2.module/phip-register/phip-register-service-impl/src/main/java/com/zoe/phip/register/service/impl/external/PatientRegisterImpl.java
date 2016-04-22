@@ -1,6 +1,7 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IXmanBaseInfoMapper;
@@ -9,6 +10,7 @@ import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.XmanCard;
 import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IPatientRegister;
+import com.zoe.phip.register.service.internal.IPatientRegisterIn;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
@@ -27,16 +29,13 @@ import java.lang.reflect.Method;
  * Created by zengjiyang on 2016/4/11.
  */
 @Repository("PatientRegister")
-@Service(interfaceClass = IPatientRegister.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IPatientRegister.class, proxy = "sdpf",protocol = {"webservice"}, dynamic = true)
 public class PatientRegisterImpl implements IPatientRegister {
 
     private static final Logger logger = LoggerFactory.getLogger(PatientRegisterImpl.class);
 
     @Autowired
-    private IXmanBaseInfoMapper baseInfoMapper;
-
-    @Autowired
-    private IXmanCardMapper cardMapper;
+    private IPatientRegisterIn patientRegisterIn;
 
     /**
      * 新增个人信息注册
@@ -69,33 +68,25 @@ public class PatientRegisterImpl implements IPatientRegister {
             String filePath = "/template/patient/input/Adapter/PatientRegisterAdapter.xml";
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
             baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
-            baseInfo.setId(StringUtil.getUUID());
 
             //xml 验证错误
             if(strResult.contains("error:数据集内容验证错误")){
                 return registerFailed(baseInfo,strResult);
             }
-            //数据是否存在判断
-            Example example = new Example(XmanBaseInfo.class);
-            example.createCriteria().andEqualTo("healthRecordNo", baseInfo.getHealthRecordNo());
-            int count = baseInfoMapper.selectCountByExample(example);
-            if (count > 0) {
-                return registerFailed(baseInfo, "由于内容重复注册，注册失败");
-            }
-
             String cardXmlPath = "/template/patient/input/Adapter/XmanCardAdapter.xml";
             Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardXmlPath));
             XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class, cardParDoc);
 
-            //保存到数据库
-            baseInfoMapper.defaultAdd(baseInfo);
-            xmanCard.setXcXmanId(baseInfo.getId());
-            cardMapper.defaultAdd(xmanCard);
+            ServiceResultT<XmanBaseInfo> result= patientRegisterIn.addPatientRegistry(baseInfo,xmanCard);
+            if(result.getMessages().size()>0){
+                return registerFailed(baseInfo, result.getMessages().get(0).getContent());
+            }else {
+                acknowledgement.setTypeCode("AA");
+                acknowledgement.setText("注册成功");
+                baseInfo.setAcknowledgement(acknowledgement);
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_ADD_SUCUESS, baseInfo);
+            }
 
-            acknowledgement.setTypeCode("AA");
-            acknowledgement.setText("注册成功");
-            baseInfo.setAcknowledgement(acknowledgement);
-            return RegisterUtil.registerMessage(RegisterType.PATIENT_ADD_SUCUESS, baseInfo);
         } catch (Exception ex) {
             logger.error("error:", ex);
             return registerFailed(baseInfo, ex.getMessage());
@@ -126,26 +117,22 @@ public class PatientRegisterImpl implements IPatientRegister {
             if(strResult.contains("error:数据集内容验证错误")){
                 return registerFailed(baseInfo,strResult);
             }
-            //数据是否存在判断
-            Example example = new Example(XmanBaseInfo.class);
-            example.createCriteria().andEqualTo("healthRecordNo", baseInfo.getHealthRecordNo());
-            int count = baseInfoMapper.selectCountByExample(example);
-            if (count == 0) {
-                return updateFailed(baseInfo, "由于更新内容不存在，更新失败");
-            }
 
             String cardXmlPath = "/template/patient/input/Adapter/XmanCardAdapter.xml";
             Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardXmlPath));
             XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class, cardParDoc);
 
-            //保存到数据库
-            baseInfoMapper.defaultUpdate(baseInfo);
-            cardMapper.defaultUpdate(xmanCard);
+            ServiceResultT<XmanBaseInfo> result= patientRegisterIn.updatePatientRegistry(baseInfo,xmanCard);
 
-            acknowledgement.setTypeCode("AA");
-            acknowledgement.setText("更新成功");
-            baseInfo.setAcknowledgement(acknowledgement);
-            return RegisterUtil.registerMessage(RegisterType.PATIENT_UPDATE_SUCUESS, baseInfo);
+
+            if(result.getMessages().size()>0){
+                return registerFailed(baseInfo, result.getMessages().get(0).getContent());
+            }else {
+                acknowledgement.setTypeCode("AA");
+                acknowledgement.setText("注册成功");
+                baseInfo.setAcknowledgement(acknowledgement);
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_UPDATE_SUCUESS, baseInfo);
+            }
         } catch (Exception ex) {
             logger.error("error:", ex);
             return updateFailed(baseInfo, ex.getMessage());
@@ -185,22 +172,16 @@ public class PatientRegisterImpl implements IPatientRegister {
                 acknowledgement.setText(strResult + ",合并失败");
                 return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
             }
-            XmanBaseInfo oldPatient = baseInfoMapper.getPatient(oldPatientId);
-            XmanBaseInfo newPatient = baseInfoMapper.getPatient(newPatientId);
-            if (oldPatient == null || newPatient == null || StringUtil.isNullOrWhiteSpace(oldPatient.getHealthRecordNo())
-                    || StringUtil.isNullOrWhiteSpace(newPatient.getHealthRecordNo())) {
+            ServiceResultT<XmanBaseInfo> result= patientRegisterIn.mergePatientRegistry(newPatientId,oldPatientId);
+            if(result.getMessages().size()>0){
                 acknowledgement.setTypeCode("AE");
-                acknowledgement.setText("由于合并内容不存在，合并失败");
+                acknowledgement.setText(result.getMessages().get(0).getContent());
                 return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
+            }else {
+                acknowledgement.setTypeCode("AA");
+                acknowledgement.setText("合并成功");
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCUESS, acknowledgement);
             }
-            //赋值
-            copyValue(newPatient, oldPatient);
-            //保存到数据库
-            baseInfoMapper.defaultUpdate(newPatient);
-            baseInfoMapper.delete(oldPatient);
-            acknowledgement.setTypeCode("AA");
-            acknowledgement.setText("合并成功");
-            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCUESS, acknowledgement);
         } catch (Exception ex) {
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(ex.getMessage());
@@ -230,16 +211,16 @@ public class PatientRegisterImpl implements IPatientRegister {
                 acknowledgement.setText(strResult + ",查询失败");
                 return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
             }
-            XmanBaseInfo baseInfo=baseInfoMapper.getPatient(patientId);
-            if(baseInfo==null){
-                acknowledgement.setTypeCode("AE");
-                acknowledgement.setText("由于查询内容不存在，查询失败");
-                return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
-            }
-            XmanCard xmanCard=cardMapper.getXmanCard(baseInfo.getId());
-            //todo 字典赋值
-            return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_SUCUESS, baseInfo);
 
+            ServiceResultT<XmanBaseInfo> result= patientRegisterIn.patientRegistryQuery(patientId);
+            if(result.getMessages().size()>0){
+                acknowledgement.setTypeCode("AE");
+                acknowledgement.setText(result.getMessages().get(0).getContent());
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
+            }else {
+
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_SUCUESS, result.getResult());
+            }
         }catch (Exception ex){
             logger.error("error:",ex);
         }
@@ -247,33 +228,7 @@ public class PatientRegisterImpl implements IPatientRegister {
     }
 
 
-    /**
-     * 将旧实体的值，赋到新实体上
-     *
-     * @param newBaseInfo
-     * @param oldBaseInfo
-     */
-    private void copyValue(XmanBaseInfo newBaseInfo, XmanBaseInfo oldBaseInfo) {
-        Field[] fields = XmanBaseInfo.class.getDeclaredFields();
-        for (Field field : fields) {
-            String fieldName = field.getName();
-            fieldName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
-            try {
-                Method getMethod = XmanBaseInfo.class.getMethod("get" + fieldName);
-                Object oldValue = getMethod.invoke(oldBaseInfo);
-                Object newValue = getMethod.invoke(newBaseInfo);
-                //int类型 新值为0，旧值不为0  或者 新值为空，旧值不为空
-                if ((field.getType() == int.class && Integer.parseInt(oldValue.toString()) > 0 &&
-                        Integer.parseInt(newValue.toString()) == 0) ||
-                        ((newValue == null && oldValue != null))) {
-                    Method setMethod = XmanBaseInfo.class.getMethod("set" + fieldName, field.getType());
-                    setMethod.invoke(newBaseInfo, oldValue);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+
 
 
     /**

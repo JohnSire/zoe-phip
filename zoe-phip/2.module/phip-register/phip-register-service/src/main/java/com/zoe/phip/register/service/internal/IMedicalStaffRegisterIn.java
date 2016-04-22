@@ -9,17 +9,17 @@ import com.zoe.phip.register.model.MedicalStaffInfo;
 public interface IMedicalStaffRegisterIn {
     /**
      * 医护人员注册
-     * @param message
+     * @param medicalStaffInfo
      * @return
      */
-    ServiceResultT<MedicalStaffInfo> addProvider(MedicalStaffInfo message);
+    ServiceResultT<MedicalStaffInfo> addProvider(MedicalStaffInfo medicalStaffInfo);
 
     /**
      * 	医护人员信息更新
-     * @param message
+     * @param medicalStaffInfo
      * @return
      */
-    ServiceResultT<MedicalStaffInfo> updateProvider(MedicalStaffInfo message);
+    ServiceResultT<MedicalStaffInfo> updateProvider(MedicalStaffInfo medicalStaffInfo);
 
     /**
      * 医护人员查询

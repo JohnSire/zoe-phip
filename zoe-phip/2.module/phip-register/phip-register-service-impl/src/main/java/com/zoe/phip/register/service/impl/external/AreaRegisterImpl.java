@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  * Created by zengjiyang on 2016/4/11.
  */
 @Repository("AreaRegister")
-@Service(interfaceClass = IAreaRegister.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IAreaRegister.class, proxy = "sdpf",protocol = {"webservice"},dynamic = true)
 public class AreaRegisterImpl implements IAreaRegister {
 
     private static final Logger logger = LoggerFactory.getLogger(AreaRegisterImpl.class);

@@ -11,17 +11,17 @@ public interface IOrganizationRegisterIn {
 
     /**
      *	新增医疗卫生机构注册
-     * @param message
+     * @param orgDeptInfo
      * @return
      */
-    ServiceResultT<OrgDeptInfo> addOrganization(OrgDeptInfo message);
+    ServiceResultT<OrgDeptInfo> addOrganization(OrgDeptInfo orgDeptInfo);
 
     /**
      *	医疗卫生机构信息更新
-     * @param message
+     * @param orgDeptInfo
      * @return
      */
-    ServiceResultT<OrgDeptInfo> updateOrganization(OrgDeptInfo message);
+    ServiceResultT<OrgDeptInfo> updateOrganization(OrgDeptInfo orgDeptInfo);
 
     /**
      * 	医疗卫生机构信息查询

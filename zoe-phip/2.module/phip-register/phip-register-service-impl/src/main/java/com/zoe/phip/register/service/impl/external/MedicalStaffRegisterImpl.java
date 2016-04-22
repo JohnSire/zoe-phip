@@ -26,7 +26,7 @@ import java.util.*;
  * Created by zengjiyang on 2016/4/11.
  */
 @Repository("MedicalStaffRegister")
-@Service(interfaceClass = IMedicalStaffRegister.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IMedicalStaffRegister.class, proxy = "sdpf",protocol = {"webservice"}, dynamic = true)
 public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
 
     private static final String adapter = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";

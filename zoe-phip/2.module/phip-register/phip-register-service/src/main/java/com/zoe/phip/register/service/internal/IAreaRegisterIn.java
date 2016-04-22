@@ -10,18 +10,18 @@ public interface IAreaRegisterIn {
 
     /**
      * 	新增行政区域注册
-     * @param message
+     * @param areaBaseInfo
      * @return
      */
-    ServiceResultT<AreaBaseInfo> addAreaRequest(AreaBaseInfo message);
+    ServiceResultT<AreaBaseInfo> addAreaRequest(AreaBaseInfo areaBaseInfo);
 
 
     /**
      * 	行政区域更新
-     * @param message
+     * @param areaBaseInfo
      * @return
      */
-    ServiceResultT<AreaBaseInfo> updateAreaRequest(AreaBaseInfo message);
+    ServiceResultT<AreaBaseInfo> updateAreaRequest(AreaBaseInfo areaBaseInfo);
 
     /**
      * 	行政区域基本信息查询

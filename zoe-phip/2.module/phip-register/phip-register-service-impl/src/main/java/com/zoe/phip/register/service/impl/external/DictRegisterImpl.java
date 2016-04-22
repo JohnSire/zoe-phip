@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Created by zengjiyang on 2016/4/11.
  */
 @Repository("DictRegister")
-@Service(interfaceClass = IDictRegister.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IDictRegister.class, proxy = "sdpf",protocol = {"webservice"}, dynamic = true)
 public class DictRegisterImpl implements IDictRegister {
 
     @Autowired
