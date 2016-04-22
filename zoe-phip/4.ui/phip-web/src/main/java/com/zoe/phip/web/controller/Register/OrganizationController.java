@@ -24,12 +24,14 @@ public class OrganizationController {
     // TODO: 2016/4/21
 
     //region 卫生管理机构
+    @RequestMapping("/view/healthOrgList")
     public String ToHealthOrgList() {
-        return null;
+        return "Register/Organization/healthOrgList";
     }
 
+    @RequestMapping("/view/healthOrgDetail")
     public String ToHealthOrgDetail() {
-        return null;
+        return "Register/Organization/healthOrgDetail";
     }
     //endregion
 
