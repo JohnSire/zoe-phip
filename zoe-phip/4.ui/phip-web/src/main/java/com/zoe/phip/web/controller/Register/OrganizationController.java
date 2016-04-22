@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("organization")
 public class OrganizationController {
     //region 医疗机构
-    @RequestMapping("/view/medicalorglist")
+    @RequestMapping("/view/medicalOrgList")
     public String ToMedicalOrgList() {
         return "Register/Organization/medicalOrgList";
     }
 
-    @RequestMapping("/view/medicalorgdetail")
+    @RequestMapping("/view/medicalOrgDetail")
     public String ToMedicalOrgDetail() {
         return "Register/Organization/medicalOrgDetail";
     }
@@ -24,12 +24,14 @@ public class OrganizationController {
     // TODO: 2016/4/21
 
     //region 卫生管理机构
+    @RequestMapping("/view/healthOrgList")
     public String ToHealthOrgList() {
-        return null;
+        return "Register/Organization/healthOrgList";
     }
 
+    @RequestMapping("/view/healthOrgDetail")
     public String ToHealthOrgDetail() {
-        return null;
+        return "Register/Organization/healthOrgDetail";
     }
     //endregion
 

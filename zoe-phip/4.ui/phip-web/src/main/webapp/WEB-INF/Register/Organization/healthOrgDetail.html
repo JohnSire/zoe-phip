@@ -1,10 +1,167 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-title">
+        <h1 class="title">基本信息</h1>
+    </div>
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="ORGN_AME"><span class="text-mark">*</span>机构名称：</label>
+                    <input type="text" name="orgn_ame" class="text" datatype="*1-128" errormsg="机构名称长度应为1~128位！"
+                           nullmsg="请填写机构名称！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="CODE"><span class="text-mark">*</span>机构代码：</label>
+                    <input type="text" name="CODE" class="text" datatype="*1-128" errormsg="机构代码长度应为1~128位！"
+                           nullmsg="请填写机构代码！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="APPLICANT_ID"><span class="text-mark">*</span>申请者：</label>
+                    <input type="text" name="APPLICANT_ID" class="text" datatype="*1-36" errormsg="申请者长度应为1~36位！"
+                           nullmsg="请填写申请者！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="ADDRESS"><span class="text-mark">*</span>机构地址：</label>
+                    <input type="text" name="ADDRESS" class="text" datatype="*1-256" errormsg="机构地址长度应为1~256位！"
+                           nullmsg="请填写机构地址！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="CATALOG_ID"><span class="text-mark">*</span>机构类别：</label>
+                    <input type="text" name="CATALOG_ID" class="text" datatype="*1-128" errormsg="机构类别长度应为1~128位！"
+                           nullmsg="请填写机构类别！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="TELECOM"><span class="text-mark">*</span>联系电话：</label>
+                    <input type="text" name="TELECOM" class="text" datatype="*1-128" errormsg="联系电话长度应为1~128位！"
+                           nullmsg="请填写联系电话！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="PARENT_ID"><span class="text-mark">*</span>父级机构：</label>
+                    <input type="text" name="PARENT_ID" class="text" datatype="*1-128" errormsg="父级机构长度应为1~128位！"
+                           nullmsg="请填写父级机构！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="EFFECTIVE_LOW"><span class="text-mark">*</span>有效期开始：</label>
+                    <input type="text" name="EFFECTIVE_LOW" class="text" nullmsg="请填写有效期开始！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="EFFECTIVE_HIGH"><span class="text-mark">*</span>有效期结束：</label>
+                    <input type="text" name="EFFECTIVE_HIGH" class="text" nullmsg="请填写有效期结束！"/>
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="y-dialog-title">
+        <h1 class="title">详细信息</h1>
+    </div>
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="SHORT_NAME"><span class="text-mark">*</span>简称：</label>
+                    <input type="text" name="SHORT_NAME" class="text" datatype="*1-128" errormsg="简称长度应为1~128位！"
+                           nullmsg="请填写简称！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="AGENCY_CODE"><span class="text-mark">*</span>组织机构代码：</label>
+                    <input type="text" name="AGENCY_CODE" class="text" datatype="*1-256" errormsg="组织机构代码长度应为1~256位！"
+                           nullmsg="请填写组织机构代码！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="STATUS"><span class="text-mark">*</span>状态：</label>
+                    <input type="text" name="STATUS" class="text" nullmsg="请填写状态！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="CHARGE"><span class="text-mark">*</span>信息负责人：</label>
+                    <input type="text" name="CHARGE" class="text" datatype="*1-128" errormsg="信息负责人长度应为1~128位！"
+                           nullmsg="请填写信息负责人！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="CHARGR_PHONE"><span class="text-mark">*</span>负责人电话：</label>
+                    <input type="text" name="CHARGE_PHONE" class="text" datatype="*1-128" errormsg="负责人电话长度应为1~128位！"
+                           nullmsg="请填写负责人电话！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="REPRESENTATIVE"><span class="text-mark">*</span>法人代表：</label>
+                    <input type="text" name="REPRESENTATIVE" class="text" datatype="*1-128" errormsg="法人代表长度应为1~128位！"
+                           nullmsg="请填写法人代表！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="WEB"><span class="text-mark">*</span>网址：</label>
+                    <input type="text" name="WEB" class="text" datatype="*1-128" errormsg="网址长度应为1~128位！"
+                           nullmsg="请填写网址！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="EMAIL"><span class="text-mark">*</span>电子邮件：</label>
+                    <input type="text" name="EMAIL" class="text" datatype="*1-128" errormsg="电子邮件长度应为1~128位！"
+                           nullmsg="请填写电子邮件！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="ZIP_CODE"><span class="text-mark">*</span>邮政编码：</label>
+                    <input type="text" name="ZIP_CODE" class="text" datatype="*1-16" errormsg="邮政编码长度应为1~16位！"
+                           nullmsg="请填写邮政编码！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="G_LONGITUDE"><span class="text-mark">*</span>经度：</label>
+                    <input type="text" name="G_LONGITUDE" class="text" nullmsg="请填写经度！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="G_LATITUDE"><span class="text-mark">*</span>纬度：</label>
+                    <input type="text" name="G_LATITUDE" class="text" nullmsg="请填写纬度！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="COMPLAINT_TEL"><span class="text-mark">*</span>投诉电话：</label>
+                    <input type="text" name="COMPLAINT_TEL" class="text" datatype="*1-16" errormsg="投诉电话长度应为1~16位！"
+                           nullmsg="请填写投诉电话！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="GOV_ID"><span class="text-mark">*</span>地理区划：</label>
+                    <input type="text" name="GOV_ID" class="text" datatype="*1-36" errormsg="地理区划长度应为1~36位！"
+                           nullmsg="请填写地理区划！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label label-textarea">备注：</label>
+                    <textarea rows="3" class="textarea" style="width:508px;height:60px;" name="Descr"></textarea>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label label-textarea">注销原因：</label>
+                    <textarea rows="3" class="textarea" style="width:508px;height:60px;" name="REASON"></textarea>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Organization/healthOrgDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/Shared/_baseAttr.html",{title:"卫生管理机构详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

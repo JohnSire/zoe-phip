@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by linqinghuang on 2016/4/21.
  */
 @Controller
-@RequestMapping("/oid")
+@RequestMapping("/dict")
 public class DictController extends BaseController {
     //region oid管理模块
 
@@ -50,23 +50,28 @@ public class DictController extends BaseController {
 
     //endregion
     //region 字典分类
-    public String ToDictCategoryList() {
-        return "";
+    @RequestMapping("/view/dictcategorylist")
+    @AuthAction(permission = {Permission.View}, name = "查看")
+    public String ToDictCategoryList(HttpServletRequest request, Model model) {
+        return "/Register/Dict/dictCategoryList";
     }
 
-    public String ToDictCategoryDetail() {
-        return "";
+    @RequestMapping("/view/dictcategorydetail")
+    public String ToDictCategoryDetail(HttpServletRequest request, Model model) {
+        return "/Register/Dict/dictCategoryDetail";
     }
     //endregion
 
     //region 字典(字典列表）
-    public String ToDictList() {
-        return null;
+    @RequestMapping("/view/dictlist")
+    public String ToDictList(HttpServletRequest request, Model model) {
+        return "/Register/Dict/dictList";
     }
 
     //region 字典详细
-    public String ToDictDetail() {
-        return null;
+    @RequestMapping("/view/dictdetail")
+    public String ToDictDetail(HttpServletRequest request, Model model) {
+        return "Register/Dict/dictDetail";
     }
     //endregion
 }
