@@ -3,10 +3,24 @@
  */
 define(function (require, exports, module) {
     var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
+    var BaseTree = require("{staticDir}/BaseTree/baseTree");
     var internal = {
         medicalOrgGrid: null,
         init: function () {
             internal.medicalOrgList();
+            internal.medicalOrgCategoryTree();
+
+        },
+        medicalOrgCategoryTree: function () {
+            var treeObj = new BaseTree({
+                treeId: 'tree',
+                btnBox: 'treeBtns',
+                url: {
+                    getTreeList: 'menu/getMenuList',
+                },
+                treeParam: {}
+
+            })
         },
         medicalOrgList: function () {
             internal.medicalOrgGrid = new BaseGrid({
@@ -46,16 +60,16 @@ define(function (require, exports, module) {
                     winCallback: "win_dict_item_callback",//弹窗回调函数
                     titleKey: "name",
                     //新增参数
-                    add: {title: "新增字典项信息"},
+                    add: {title: "新增机构（科室）信息"},
                     //编辑参数
-                    edit: {title: "编辑字典项信息"},
+                    edit: {title: "编辑机构（科室）信息"},
                     common: {
                         otherUrlParam: function () {
                             return {fkSystemDictCategoryId: internal.fkSystemDictCategoryId}
                         },
-                        url: 'dict/view/item',
-                        width: 590,
-                        height: 200
+                        url: 'organization/view/medicalOrgDetail',
+                        width: 1000,
+                        height: 450
                     }
                 }
             })

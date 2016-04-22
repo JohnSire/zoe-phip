@@ -11,25 +11,29 @@ define(function (require, exports, module) {
         url: {
             getTreeList: ""
         },
-        treeParam: {
-
-        },
+        treeParam: {},
         dialogParam: {
             winName: "",
             winCallback: "",
+            titleKey: null,//弹窗标题索引 如"编辑用户--张三"其中张三是通过索'userName'获取
             common: {
+                otherUrlParam: {},//用来存除id外的其他url参数
                 width: 800,
                 height: 600,
                 buttons: [
                     {
-                        text: "确定", onclick: function (item, dialog) {
-
-                    }
+                        //verifySubmit自己的验证提交状态
+                        text: "确定",
+                        verifySubmit: true,
+                        submitText: '提交中...',
+                        onclick: function (item, dialog, submited) {
+                        }
                     },
                     {
-                        text: "取消", onclick: function (item, dialog) {
-                        dialog.close();
-                    }
+                        text: "取消",
+                        onclick: function (item, dialog) {
+                            dialog.close();
+                        }
                     }
                 ]
             },

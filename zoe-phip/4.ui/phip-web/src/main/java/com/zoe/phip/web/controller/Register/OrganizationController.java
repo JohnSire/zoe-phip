@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("organization")
 public class OrganizationController {
     //region 医疗机构
-    @RequestMapping("/view/medicalOrgList")
+    @RequestMapping("/view/medicalorglist")
     public String ToMedicalOrgList() {
         return "Register/Organization/medicalOrgList";
     }

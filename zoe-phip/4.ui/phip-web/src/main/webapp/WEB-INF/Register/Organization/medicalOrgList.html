@@ -10,10 +10,10 @@ var bodySection={
 <div class="y-layout-sidebar">
     <div class="y-layout-header">
         <ul class="y-layout-form clearfix">
-            <p class="icon-wrapper">
-                <a class="icon-grid icon-grid-add" title="添加"></a>
-                <a class="icon-grid icon-grid-edit" title="编辑"></a>
-                <a class="icon-grid icon-grid-del" title="删除"></a>
+            <p class="icon-wrapper" id="treeBtns">
+                <!--<a class="icon-grid icon-grid-add" title="添加"></a>-->
+                <!--<a class="icon-grid icon-grid-edit" title="编辑"></a>-->
+                <!--<a class="icon-grid icon-grid-del" title="删除"></a>-->
             </p>
         </ul>
     </div>
@@ -28,13 +28,6 @@ var bodySection={
         <ul class="y-layout-form clearfix" id="medicalOrgTools">
             <ul op="btns" style="float:left;"></ul>
             <ul op="search" style="float:right;padding-right: 20px;"></ul>
-            <!--<li class="list" id="btnDictItemAdd"><input type="button" class="btn btn-add" value="新增"/></li>-->
-            <!--<li class="list" id="btnDictItemDelete"><input type="button" class="btn btn-del" value="删除"/></li>-->
-            <!--<li class="list">-->
-            <!--<label class="label">关键字:</label>-->
-            <!--<input type="text" id="txtDictItemKeyWord" class="text"/>-->
-            <!--<input type="button" id="btnDictItemSearch" class="btn btn-search" value="搜索"/>-->
-            <!--</li>-->
         </ul>
     </div>
     <div class="y-layout-content">
@@ -54,6 +47,42 @@ var scriptSection={
     $(function () {
         seajs.use('{dir}/Register/Organization/medicalOrgList.js', function (a) {
             a.init();
+
+            var counts = [
+                20, 10, 5
+            ];
+
+//            function createData(e) {
+//                e = e || {};
+//                var level = e.level || 1,
+//                        prev = e.prev || "",
+//                        count = counts[level - 1],
+//                        data = [];
+//                var hasChildren = level < counts.length;
+//                for (var i = 0, l = parseInt(count); i < l; i++) {
+//                    var num = i + 1, id = prev + num;
+//                    var o = {
+//                        text: "node" + id,
+//                        index: num
+//                    };
+//                    if (hasChildren) {
+//                        o.children = createData({
+//                            level: level + 1,
+//                            prev: id + "-"
+//                        });
+//                    }
+//                    data.push(o);
+//                }
+//                return data;
+//            }
+
+//            $("#tree").ligerTree({
+//                nodeWidth: 200,
+//                data: createData(),
+//                checkbox: false,
+//                idFieldName: 'id',
+//                slide: false
+//            });
         });
     })
 </script>
