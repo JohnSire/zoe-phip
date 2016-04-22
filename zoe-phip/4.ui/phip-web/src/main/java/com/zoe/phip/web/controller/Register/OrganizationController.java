@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("organization")
 public class OrganizationController {
     //region 医疗机构
-    @RequestMapping("/view/medicalorglist")
+    @RequestMapping("/view/medicalOrgList")
     public String ToMedicalOrgList() {
         return "Register/Organization/medicalOrgList";
     }
 
-    @RequestMapping("/view/medicalorgdetail")
+    @RequestMapping("/view/medicalOrgDetail")
     public String ToMedicalOrgDetail() {
         return "Register/Organization/medicalOrgDetail";
     }
