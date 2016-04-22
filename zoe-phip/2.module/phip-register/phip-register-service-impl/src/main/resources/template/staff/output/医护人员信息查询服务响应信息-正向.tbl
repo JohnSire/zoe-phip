@@ -31,7 +31,7 @@ var effLow = Model.effectiveTimeLow;
       </targetMessage>
       <acknowledgementDetail>
          <!--处理结果说明-->
-         <text>查询成功</text>
+         <text>${Model.acknowledgement.text}</text>
    </acknowledgementDetail>
   <controlActProcess classCode="CACT" moodCode="EVN">
     <code code="PRPM_TE306110UV01" codeSystem="2.16.840.1.113883.1.6" />
