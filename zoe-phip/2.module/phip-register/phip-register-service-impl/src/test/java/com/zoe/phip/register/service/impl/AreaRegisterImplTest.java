@@ -1,11 +1,17 @@
 package com.zoe.phip.register.service.impl;
 
 import com.zoe.phip.register.BaseTest;
+import com.zoe.phip.register.model.AreaBaseInfo;
 import com.zoe.phip.register.service.external.IAreaRegister;
 import com.zoe.phip.register.service.impl.external.AreaRegisterImpl;
+import com.zoe.phip.register.util.RegisterType;
+import com.zoe.phip.register.util.RegisterUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zengjiyang on 2016/4/11.
@@ -52,7 +58,18 @@ public class AreaRegisterImplTest extends BaseTest {
 
     @Test
     public void testAreaChildrenRegistryQuery() throws Exception {
+        List<AreaBaseInfo> baseInfoList = new ArrayList<>();
 
+        AreaBaseInfo b1 = new AreaBaseInfo();
+        b1.setCode("351000");
+        baseInfoList.add(b1);
+
+        AreaBaseInfo b2 = new AreaBaseInfo();
+        b2.setCode("351008");
+        baseInfoList.add(b2);
+        String message= RegisterUtil.registerMessage(RegisterType.AREA_QUERY_CHILDREN,baseInfoList);
+
+        System.out.println(message);
     }
 
     @Test

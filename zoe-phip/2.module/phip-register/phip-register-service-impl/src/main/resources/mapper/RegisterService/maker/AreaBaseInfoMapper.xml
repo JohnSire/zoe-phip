@@ -1,64 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IAreaBaseInfoMapper">
-    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.AreaBaseInfo" extends="com.zoe.phip.module.service.MasterEntityResultMap">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.AreaBaseInfo"
+               extends="com.zoe.phip.module.service.MasterEntityResultMap">
         <result column="CODE" property="code" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="NAME" property="name" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="P_AREA_ID" property="pareaId" javaType="java.lang.String"
+        <result column="PID" property="Pid" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="BUILD_TIME" property="buildTime" javaType="java.sql.Timestamp"
-                jdbcType="TIMESTAMP"/>
-        <result column="AREA_CANCELLATION_DATE" property="areaCancellationDate" javaType="java.sql.Timestamp"
-                jdbcType="TIMESTAMP"/>
-        <result column="AREA_CANCEL_RESON" property="areaCancelReson" javaType="java.lang.String"
+        <result column="BUILD_TIME" property="buildTime" javaType="java.sql.Date"
+                jdbcType="DATE"/>
+        <result column="AREA_CANCELLATION_DATE" property="areaCancellationDate" javaType="java.sql.Date"
+                jdbcType="DATE"/>
+        <result column="AREA_CANCEL_REASON" property="areaCancelReason" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="HISTORY_AREA_ID" property="historyAreaId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
     </resultMap>
-    <insert id="addList" parameterType="java.util.List">
+    <insert id="addList" parameterType="com.zoe.phip.register.model.AreaBaseInfo">
         INSERT INTO PHIP_AREA_BASE_INFO (
         CODE,
         NAME,
-        P_AREA_ID,
+        PID,
         BUILD_TIME,
         AREA_CANCELLATION_DATE,
-        AREA_CANCEL_RESON,
+        AREA_CANCEL_REASON,
         HISTORY_AREA_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
             #{item.code,jdbcType=VARCHAR},
             #{item.name,jdbcType=VARCHAR},
-            #{item.pareaId,jdbcType=VARCHAR},
-            #{item.buildTime,jdbcType=TIMESTAMP},
-            #{item.areaCancellationDate,jdbcType=TIMESTAMP},
-            #{item.areaCancelReson,jdbcType=VARCHAR},
+            #{item.Pid,jdbcType=VARCHAR},
+            #{item.buildTime,jdbcType=DATE},
+            #{item.areaCancellationDate,jdbcType=DATE},
+            #{item.areaCancelReason,jdbcType=VARCHAR},
             #{item.historyAreaId,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
     </insert>
-    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.AreaBaseInfo">
+    <insert id="defaultAdd" parameterType="java.util.List">
         INSERT INTO PHIP_AREA_BASE_INFO (
         CODE,
         NAME,
-        P_AREA_ID,
+        PID,
         BUILD_TIME,
         AREA_CANCELLATION_DATE,
-        AREA_CANCEL_RESON,
+        AREA_CANCEL_REASON,
         HISTORY_AREA_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
-        VALUES (
-            #{code,jdbcType=VARCHAR},
-            #{name,jdbcType=VARCHAR},
-            #{pareaId,jdbcType=VARCHAR},
-            #{buildTime,jdbcType=TIMESTAMP},
-            #{areaCancellationDate,jdbcType=TIMESTAMP},
-            #{areaCancelReson,jdbcType=VARCHAR},
-            #{historyAreaId,jdbcType=VARCHAR},
-            <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        VALUES(
+        #{code,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR},
+        #{Pid,jdbcType=VARCHAR},
+        #{buildTime,jdbcType=DATE},
+        #{areaCancellationDate,jdbcType=DATE},
+        #{areaCancelReason,jdbcType=VARCHAR},
+        #{historyAreaId,jdbcType=VARCHAR},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
@@ -83,17 +84,17 @@
                 <if test="item.name != null">
                     NAME = #{item.name,jdbcType=VARCHAR},
                 </if>
-                <if test="item.pareaId != null">
-                    P_AREA_ID = #{item.pareaId,jdbcType=VARCHAR},
+                <if test="item.Pid != null">
+                    PID = #{item.Pid,jdbcType=VARCHAR},
                 </if>
                 <if test="item.buildTime != null">
-                    BUILD_TIME = #{item.buildTime,jdbcType=TIMESTAMP},
+                    BUILD_TIME = #{item.buildTime,jdbcType=DATE},
                 </if>
                 <if test="item.areaCancellationDate != null">
-                    AREA_CANCELLATION_DATE = #{item.areaCancellationDate,jdbcType=TIMESTAMP},
+                    AREA_CANCELLATION_DATE = #{item.areaCancellationDate,jdbcType=DATE},
                 </if>
-                <if test="item.areaCancelReson != null">
-                    AREA_CANCEL_RESON = #{item.areaCancelReson,jdbcType=VARCHAR},
+                <if test="item.areaCancelReason != null">
+                    AREA_CANCEL_REASON = #{item.areaCancelReason,jdbcType=VARCHAR},
                 </if>
                 <if test="item.historyAreaId != null">
                     HISTORY_AREA_ID = #{item.historyAreaId,jdbcType=VARCHAR},
@@ -106,4 +107,5 @@
             where id = #{item.id};
         </foreach>
     </update>
+
 </mapper>

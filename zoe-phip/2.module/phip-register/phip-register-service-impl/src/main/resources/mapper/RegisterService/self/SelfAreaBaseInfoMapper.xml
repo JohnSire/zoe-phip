@@ -13,17 +13,17 @@
             <if test="name != null">
                 NAME = #{name,jdbcType=VARCHAR},
             </if>
-            <if test="pareaId != null">
-                P_AREA_ID = #{pareaId,jdbcType=VARCHAR},
+            <if test="Pid != null">
+                PID = #{Pid,jdbcType=VARCHAR},
             </if>
             <if test="buildTime != null">
-                BUILD_TIME = #{buildTime,jdbcType=TIMESTAMP},
+                BUILD_TIME = #{buildTime,jdbcType=DATE},
             </if>
             <if test="areaCancellationDate != null">
-                AREA_CANCELLATION_DATE = #{areaCancellationDate,jdbcType=TIMESTAMP},
+                AREA_CANCELLATION_DATE = #{areaCancellationDate,jdbcType=DATE},
             </if>
-            <if test="areaCancelReson != null">
-                AREA_CANCEL_RESON = #{areaCancelReson,jdbcType=VARCHAR},
+            <if test="areaCancelReason != null">
+                AREA_CANCEL_REASON = #{areaCancelReason,jdbcType=VARCHAR},
             </if>
             <if test="historyAreaId != null">
                 HISTORY_AREA_ID = #{historyAreaId,jdbcType=VARCHAR},
@@ -35,4 +35,20 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="getAreaBaseInfo" resultMap="BaseResultMap" parameterType="java.util.Map">
+      SELECT * FROM PHIP_AREA_BASE_INFO PABI  WHERE 1 =1
+        <if test="_parameter.containsKey('code')">
+            AND PABI.CODE = #{code,jdbcType=VARCHAR}
+        </if>
+        <if test="_parameter.containsKey('historyId')">
+            AND PABI.HISTORY_AREA_ID = #{historyId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getChildren" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT * FROM PHIP_AREA_BASE_INFO PABI  WHERE PABI.PID IN  (
+        SELECT ID from PHIP_AREA_BASE_INFO PPABI where PPABI.CODE =#{code} AND ROWNUM=1
+        )
+    </select>
 </mapper>
