@@ -1,5 +1,8 @@
 package com.zoe.phip.register.service.internal;
 
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.register.model.MedicalStaffInfo;
+
 /**医护人员注册服务
  * Created by zengjiyang on 2016/4/11.
  */
@@ -9,19 +12,19 @@ public interface IMedicalStaffRegisterIn {
      * @param message
      * @return
      */
-    String addProvider(String message);
+    ServiceResultT<MedicalStaffInfo> addProvider(MedicalStaffInfo message);
 
     /**
      * 	医护人员信息更新
      * @param message
      * @return
      */
-    String updateProvider(String message);
+    ServiceResultT<MedicalStaffInfo> updateProvider(MedicalStaffInfo message);
 
     /**
      * 医护人员查询
-     * @param message
+     * @param staffId
      * @return
      */
-    String providerDetailsQuery(String message);
+    ServiceResultT<MedicalStaffInfo> providerDetailsQuery(String staffId);
 }

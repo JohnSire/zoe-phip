@@ -1,5 +1,9 @@
 package com.zoe.phip.register.service.internal;
 
+import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.register.model.OrgDeptInfo;
+
 /**医疗机构注册服务
  * Created by zengjiyang on 2016/4/11.
  */
@@ -10,19 +14,19 @@ public interface IOrganizationRegisterIn {
      * @param message
      * @return
      */
-    String addOrganization(String message);
+    ServiceResultT<OrgDeptInfo> addOrganization(OrgDeptInfo message);
 
     /**
      *	医疗卫生机构信息更新
      * @param message
      * @return
      */
-    String updateOrganization(String message);
+    ServiceResultT<OrgDeptInfo> updateOrganization(OrgDeptInfo message);
 
     /**
      * 	医疗卫生机构信息查询
-     * @param message
+     * @param orgId
      * @return
      */
-    String organizationDetailQuery(String message);
+    ServiceResult organizationDetailQuery(String orgId);
 }
