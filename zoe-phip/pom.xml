@@ -31,7 +31,6 @@
         <cxf.version>3.1.5</cxf.version>
         <tomcat.embed.version>8.0.11</tomcat.embed.version>
         <resteasy.version>3.0.7.Final</resteasy.version>
-        <hibernate-validator.version>4.2.0.Final</hibernate-validator.version>
         <!--数据库-->
         <ojdbc.version>12.1.0.1</ojdbc.version>
         <!--spring版本号 4.2.4  3.2.9-->
@@ -62,6 +61,9 @@
         <hibernate-validator.version>5.0.0.CR3</hibernate-validator.version>
         <jsoup.version>1.8.3</jsoup.version>
         <javax.el.version>2.2.4</javax.el.version>
+        <lombok.version>1.12.6</lombok.version>
+
+
     </properties>
 
 </project>
