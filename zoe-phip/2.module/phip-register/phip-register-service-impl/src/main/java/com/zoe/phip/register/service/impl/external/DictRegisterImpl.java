@@ -1,10 +1,9 @@
-package com.zoe.phip.register.service.impl;
+package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.register.dao.IDictCatalogMapper;
 import com.zoe.phip.register.model.DictCatalog;
-import com.zoe.phip.register.service.IAreaRegister;
-import com.zoe.phip.register.service.IDictRegister;
+import com.zoe.phip.register.service.external.IDictRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

@@ -21,7 +21,7 @@ public abstract class BaseController {
 
     protected int getPageSize() {
         String pageSize = DataContext.getRequest().getParameter("pagesize");
-        return StringUtil.isNullOrWhiteSpace(pageSize) ? 30 : Integer.valueOf(pageSize);
+        return StringUtil.isNullOrWhiteSpace(pageSize) ? 10 : Integer.valueOf(pageSize);
     }
 
     protected int getPageNum() {

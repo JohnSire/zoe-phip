@@ -1,4 +1,4 @@
-package com.zoe.phip.register.service;
+package com.zoe.phip.register.service.external;
 
 /**
  * 病人注册服务

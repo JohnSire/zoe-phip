@@ -4,10 +4,9 @@ import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.infrastructure.util.XmlUtil;
 import com.zoe.phip.register.BaseTest;
 import com.zoe.phip.register.model.MedicalStaffInfo;
+import com.zoe.phip.register.service.impl.external.MedicalStaffRegisterImpl;
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
-import org.dom4j.io.SAXReader;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

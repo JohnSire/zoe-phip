@@ -1,4 +1,4 @@
-package com.zoe.phip.register.service;
+package com.zoe.phip.register.service.external;
 
 /**
  * 字典术语注册服务
