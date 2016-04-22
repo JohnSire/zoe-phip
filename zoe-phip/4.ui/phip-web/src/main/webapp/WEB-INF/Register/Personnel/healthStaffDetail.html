@@ -12,12 +12,13 @@ var bodySection = {
                 </p>
                 <p class="column-three">
                     <label class="label" for="GENDER"><span class="text-mark">*</span>性别：</label>
-                    <input type="text" name="GENDER" class="text" datatype="*1-2" errormsg="机构代码长度应为1~2位！"
-                           nullmsg="请填写性别！"/>
+                    <label><input name="sex" type="radio"/>男 </label>
+                    <label><input name="sex" type="radio"/>女 </label>
+                    <label><input name="sex" type="radio"/>未知 </label>
                 </p>
                 <p class="column-three">
                     <label class="label" for="BIRTHDAY"><span class="text-mark">*</span>出生日期：</label>
-                    <input type="text" name="BIRTHDAY" class="text" nullmsg="请填写出生日期！"/>
+                    <input type="date" name="BIRTHDAY" class="text" nullmsg="请填写出生日期！"/>
                 </p>
             </li>
             <li class="list">
@@ -28,11 +29,11 @@ var bodySection = {
                 </p>
                 <p class="column-three">
                     <label class="label" for="EFFECTIVE_TIME_LOW"><span class="text-mark">*</span>角色有效期开始：</label>
-                    <input type="text" name="EFFECTIVE_TIME_LOW" class="text" nullmsg="请填写角色有效期开始！"/>
+                    <input type="date" name="EFFECTIVE_TIME_LOW" class="text" nullmsg="请填写角色有效期开始！"/>
                 </p>
                 <p class="column-three">
                     <label class="label" for="EFFECTIVE_TIME_HIGH"><span class="text-mark">*</span>角色有效期结束：</label>
-                    <input type="text" name="EFFECTIVE_TIME_HIGH" class="text" nullmsg="请填写角色有效期结束！"/>
+                    <input type="date" name="EFFECTIVE_TIME_HIGH" class="text" nullmsg="请填写角色有效期结束！"/>
                 </p>
             </li>
             <li class="list">
