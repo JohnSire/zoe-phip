@@ -35,105 +35,88 @@ public class OrgDeptInfo extends RegisterEntity {
     /**
      * 医疗卫生机构（科室）实体名称
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/assignedPrincipalOrganization/name", descr = "机构（科室）实体名称")
     @Column(name = "DEPT_NAME")
     private String deptName;
     /**
      * 医疗卫生机构（科室）类别代码
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/code/@code", descr = "机构（科室）类别代码")
     @Column(name = "DEPT_TYPE_CODE")
     private String deptTypeCode;
     /**
      * 医疗卫生机构（科室）类别名称
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/code/@displayName", descr = "机构（科室）类别名称")
     @Column(name = "DEPT_TYPE_NAME")
     private String deptTypeName;
     /**
      * 医疗卫生机构（科室）角色名称
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/name", descr = "机构（科室）角色名称")
     @Column(name = "DEPT_ROLE_NAME")
     private String deptRoleName;
     /**
      * 上级机构（科室）号标识
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/assignedPrincipalOrganization/asAffiliate/scoper2/id/@extension", descr = "上级机构（科室）号标识")
     @Column(name = "DEPT_PARENT_CODE")
     private String deptParentCode;
     /**
      * 上级科室名称
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/assignedPrincipalOrganization/asAffiliate/scoper2/name", descr = "上级科室名称")
     @Column(name = "DEPT_PARENT_NAME")
     private String deptParentName;
     /**
      * 角色有效期间(起始日期)
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/effectiveTime/low/@value", descr = "起始日期")
     @Column(name = "EFFECTIVE_TIME_LOW")
     private Date effectiveTimeLow;
     /**
      * 角色有效期间(截止日期)
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/effectiveTime/high/@value", descr = "截止日期")
     @Column(name = "EFFECTIVE_TIME_HIGH")
     private Date effectiveTimeHigh;
     /**
      * 工作地址
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/addr", descr = "工作地址")
     @Column(name = "EMPLOYER_ADDR")
     private String employerAddr;
     /**
      * 工作联系电话
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/assignedEntity/telecom", descr = "工作联系电话")
     @Column(name = "EMPLOYER_TEL_NO")
     private String employerTelNo;
 
     /**
      * 创建时间
      */
-    @XPath(value = "//creationTime/@value", descr = "创建时间")
     @Column(name = "CREATION_TIME")
     private Date creationTime;
 
     /**
      * 消息id
      */
-    @XPath(value = "//id/@extension", descr = "消息id")
     @Column(name = "MSG_ID")
     private String msgId;
     /**
      * 申请者代码
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/id/@extension", descr = "申请者代码")
     @Column(name = "ASSIGNED_CODE")
     private String assignedCode;
     /**
      * 申请者名称
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/assignedPerson/name", descr = "申请者名称")
     @Column(name = "ASSIGNED_NAME")
     private String assignedName;
     /**
      * 申请者科室代码
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/id/@extension", descr = "申请者科室代码")
     @Column(name = "ASSIGNED_DEPT_CODE")
     private String assignedDeptCode;
     /**
      * 申请者科室名称
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/name", descr = "申请者科室名称")
     @Column(name = "ASSIGNED_DEPT_NAME")
     private String assignedDeptName;
     /**
      * 申请联系人
      */
-    @XPath(value = "//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/contactParty/contactPerson/name", descr = "申请联系人")
     @Column(name = "ASSIGNED_CONTACT_PERSON")
     private String assignedContactPerson;
 
@@ -141,7 +124,6 @@ public class OrgDeptInfo extends RegisterEntity {
      * 排序值  越小排在越前
      */
     ////
-    // @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/name", descr = "排序值")
     @Column(name = "SORT_NUM")
     private int sortNum;
 
