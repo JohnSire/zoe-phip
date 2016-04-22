@@ -18,7 +18,7 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
     @Autowired
     private MedicalStaffRegisterImpl medicalStaffRegister;
 
-    @Test
+    //@Test
     public void toBean() throws Exception {
         String xml = "<PRPM_IN301010UV01 xmlns=\"urn:hl7-org:v3\"\n" +
                 "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\"\n" +
