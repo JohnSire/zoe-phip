@@ -49,6 +49,24 @@ public class DictController extends BaseController {
     }
 
     //endregion
+    //region 字典分类
+    public String ToDictCategoryList() {
+        return "";
+    }
 
+    public String ToDictCategoryDetail() {
+        return "";
+    }
+    //endregion
 
+    //region 字典(字典列表）
+    public String ToDictList() {
+        return null;
+    }
+
+    //region 字典详细
+    public String ToDictDetail() {
+        return null;
+    }
+    //endregion
 }
