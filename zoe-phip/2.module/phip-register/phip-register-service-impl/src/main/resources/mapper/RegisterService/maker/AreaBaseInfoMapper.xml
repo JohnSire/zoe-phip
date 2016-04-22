@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IAreaBaseInfoMapper">
-    <resultMap id="BaseResultMap" type="com.zoe.phip.(这里要自己改).model.AreaBaseInfo"
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.AreaBaseInfo"
                extends="com.zoe.phip.module.service.MasterEntityResultMap">
         <result column="CODE" property="code" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="NAME" property="name" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="P_AREA_ID" property="pareaId" javaType="java.lang.String"
+        <result column="PID" property="Pid" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="BUILD_TIME" property="buildTime" javaType="java.sql.Date"
                 jdbcType="DATE"/>
@@ -22,7 +22,7 @@
         INSERT INTO PHIP_AREA_BASE_INFO (
         CODE,
         NAME,
-        P_AREA_ID,
+        PID,
         BUILD_TIME,
         AREA_CANCELLATION_DATE,
         AREA_CANCEL_REASON,
@@ -32,7 +32,7 @@
             SELECT
             #{item.code,jdbcType=VARCHAR},
             #{item.name,jdbcType=VARCHAR},
-            #{item.pareaId,jdbcType=VARCHAR},
+            #{item.Pid,jdbcType=VARCHAR},
             #{item.buildTime,jdbcType=DATE},
             #{item.areaCancellationDate,jdbcType=DATE},
             #{item.areaCancelReason,jdbcType=VARCHAR},
@@ -45,7 +45,7 @@
         INSERT INTO PHIP_AREA_BASE_INFO (
         CODE,
         NAME,
-        P_AREA_ID,
+        PID,
         BUILD_TIME,
         AREA_CANCELLATION_DATE,
         AREA_CANCEL_REASON,
@@ -54,7 +54,7 @@
         VALUES(
         #{code,jdbcType=VARCHAR},
         #{name,jdbcType=VARCHAR},
-        #{pareaId,jdbcType=VARCHAR},
+        #{Pid,jdbcType=VARCHAR},
         #{buildTime,jdbcType=DATE},
         #{areaCancellationDate,jdbcType=DATE},
         #{areaCancelReason,jdbcType=VARCHAR},
@@ -84,8 +84,8 @@
                 <if test="item.name != null">
                     NAME = #{item.name,jdbcType=VARCHAR},
                 </if>
-                <if test="item.pareaId != null">
-                    P_AREA_ID = #{item.pareaId,jdbcType=VARCHAR},
+                <if test="item.Pid != null">
+                    PID = #{item.Pid,jdbcType=VARCHAR},
                 </if>
                 <if test="item.buildTime != null">
                     BUILD_TIME = #{item.buildTime,jdbcType=DATE},

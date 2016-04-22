@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<AreaBaseInfo>
+    <Code path="//Code/@value" descr="区域代码"/>
+    <Name path="//Name/@value" descr="区域名称"/>
+    <Pid path="//Pid/@value" descr="父级区域"/>
+    <BuildTime path="//BuildTime/@value" descr="成立时间"/>
+    <AreaCancellationDate path="//AreaCancellationDate/@value" descr="注销日期"/>
+    <AreaCancelReason path="//AreaCancelReason/@value" descr="注销原因"/>
+    <HistoryAreaId path="//HistoryAreaId/@value" descr="注销前区域信息，用以做历史沿革关联"/>
+</AreaBaseInfo>

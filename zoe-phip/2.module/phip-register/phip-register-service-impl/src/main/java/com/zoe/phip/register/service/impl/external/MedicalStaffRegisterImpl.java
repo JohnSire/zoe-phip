@@ -32,10 +32,6 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
     private static final String adapter = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";
     private static final Logger logger = LoggerFactory.getLogger(MedicalStaffRegisterImpl.class);
 
-
-    @Autowired
-    private Parser parser;
-
     @Autowired
     private IMedicalStaffInfoMapper staffInfoMapper;
 

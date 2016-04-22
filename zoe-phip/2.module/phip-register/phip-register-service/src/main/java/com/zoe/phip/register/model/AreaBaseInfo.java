@@ -36,21 +36,39 @@ public class AreaBaseInfo extends MasterEntity {
     /**
      * 父级区域
      */
-    @Column(name = "P_AREA_ID")
-    @XPath(value = "//pareaId/@value")
-    private String pareaId;
+    @Column(name = "PID")
+    @XPath(value = "//Pid/@value")
+    private String Pid;
     /**
      * 成立时间
      */
     @Column(name = "BUILD_TIME")
     @XPath(value = "//buildTime/@value")
     private Date buildTime;
+
+    public Date getAreaCancellationDate() {
+        return areaCancellationDate;
+    }
+
+    public void setAreaCancellationDate(Date areaCancellationDate) {
+        this.areaCancellationDate = areaCancellationDate;
+    }
+
     /**
      * 注销日期
      */
     @Column(name = "AREA_CANCELLATION_DATE")
     @XPath(value = "//areaCancellationDate/@value")
     private Date areaCancellationDate;
+
+    public String getAreaCancelReason() {
+        return areaCancelReason;
+    }
+
+    public void setAreaCancelReason(String areaCancelReason) {
+        this.areaCancelReason = areaCancelReason;
+    }
+
     /**
      * 注销原因
      */
@@ -80,12 +98,12 @@ public class AreaBaseInfo extends MasterEntity {
         this.name = name;
     }
 
-    public String getPareaId() {
-        return this.pareaId;
+    public String getPid() {
+        return this.Pid;
     }
 
-    public void setPareaId(String pareaId) {
-        this.pareaId = pareaId;
+    public void setPid(String Pid) {
+        this.Pid = Pid;
     }
 
     public Date getBuildTime() {
@@ -94,22 +112,6 @@ public class AreaBaseInfo extends MasterEntity {
 
     public void setBuildTime(Date buildTime) {
         this.buildTime = buildTime;
-    }
-
-    public Date getAreaCancellationDate() {
-        return this.areaCancellationDate;
-    }
-
-    public void setAreaCancellationDate(Date areaCancellationDate) {
-        this.areaCancellationDate = areaCancellationDate;
-    }
-
-    public String getareaCancelReason() {
-        return this.areaCancelReason;
-    }
-
-    public void setareaCancelReason(String areaCancelReason) {
-        this.areaCancelReason = areaCancelReason;
     }
 
     public String getHistoryAreaId() {
