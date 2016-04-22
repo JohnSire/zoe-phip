@@ -88,6 +88,9 @@ public final class SafeExecuteUtil {
                     break;
                 }
             }
+        }else {
+            result.addMessage("",ex.getCode());
+            result.setIsSuccess(false);
         }
     }
 

@@ -1,38 +1,51 @@
 package com.zoe.phip.web.controller.Register;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by linqinghuang on 2016/4/21.
  */
+@Controller
+@RequestMapping("/personnel")
 public class PersonnelController {
     //region 个人信息管理
-    public String ToXmanBaseList() {
-        return null;
+    @RequestMapping("/view/xmanbaselist")
+    public String ToXmanBaseList(HttpServletRequest request, Model model) {
+        return "/Register/Personnel/xmanBaseList";
     }
 
-    public String ToXmanBaseDetail() {
-        return null;
+    @RequestMapping("/view/xmanbasedetail")
+    public String ToXmanBaseDetail(HttpServletRequest request, Model model) {
+        return "/Register/Personnel/xmanBaseDetail";
     }
     //endregion
 
     //region 医疗卫生人员
-    public String ToMedicalStaffList() {
-        return null;
+    @RequestMapping("/view/medicalstafflist")
+    public String ToMedicalStaffList(HttpServletRequest request, Model model) {
+        return "/Register/Personnel/medicalStaffList";
     }
 
-    public String ToMedicalStaffDetail() {
-        return null;
+    @RequestMapping("/view/medicalstaffdetail")
+    public String ToMedicalStaffDetail(HttpServletRequest request, Model model) {
+        return "/Register/Personnel/medicalStaffDetail";
     }
     //endregion
 
     // TODO: 2016/4/21
     //region 卫生管理机构人员
-    public String ToHealthStaffList() {
-        return null;
+    @RequestMapping("/view/healthstaffdetail")
+    public String ToHealthStaffList(HttpServletRequest request, Model model) {
+        return "/Register/Personnel/healthStaffDetail";
     }
 
-
-    public String ToHealthStaffDetail() {
-        return null;
+    @RequestMapping("/view/healthstafflist")
+    public String ToHealthStaffDetail(HttpServletRequest request, Model model) {
+        return "/Register/Personnel/healthStaffList";
     }
     //endregion
 }

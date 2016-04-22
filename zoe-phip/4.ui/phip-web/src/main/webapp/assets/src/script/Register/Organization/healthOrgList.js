@@ -1,5 +1,5 @@
 /**
- * Created by zhangxingcai on 2016/4/21 0021.
+ * Created by zhangxingcai on 2016/4/22 0022.
  */
 define(function (require, exports, module) {
     var internal = {
@@ -23,10 +23,9 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: '',
                     columns: [
-                        {display: '编码', code: 'code', width: 120, align: 'left'},
-                        {display: '代码', name: 'name', width: 120, align: 'left'},
-                        {display: '名称', name: 'code_system', width: 120, align: 'left'},
-                        {display: '标准', name: 'standard_code', width: 120, align: 'left'},
+                        {display: '机构代码', code: 'code', width: 120, align: 'left'},
+                        {display: '机构名称', name: 'orgn_ame', width: 120, align: 'left'},
+                        {display: '联系电话', name: 'telecom', width: 120, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,
@@ -34,17 +33,17 @@ define(function (require, exports, module) {
                     height: $("body").innerHeight() - $("#gridTools").outerHeight() - 38//500
                 },
                 dialogParam: {
-                    winName: "win_oid_detail_dialog",//弹窗对象变量名称
-                    winCallback: "win_oid_detail_callback",//弹窗回调函数
+                    winName: "win_health_detail_dialog",//弹窗对象变量名称
+                    winCallback: "win_health_detail_callback",//弹窗回调函数
                     titleKey: "name",
                     //新增参数
-                    add: {title: "新增OID"},
+                    add: {title: "新增卫生管理机构"},
                     //编辑参数
-                    edit: {title: "编辑OID"},
+                    edit: {title: "编辑卫生管理机构"},
                     common: {
-                        url: 'dict/view/oiddetail',
-                        width: 360,
-                        height: 260
+                        url: 'organization/view/healthOrgDetail',
+                        width: 1000,
+                        height: 580
                     }
                 }
             })

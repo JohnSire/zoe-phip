@@ -21,7 +21,7 @@ public abstract class BaseController {
 
     protected int getPageSize() {
         String pageSize = DataContext.getRequest().getParameter("pagesize");
-        return StringUtil.isNullOrWhiteSpace(pageSize) ? 30 : Integer.valueOf(pageSize);
+        return StringUtil.isNullOrWhiteSpace(pageSize) ? 10000 : Integer.valueOf(pageSize);
     }
 
     protected int getPageNum() {
@@ -29,17 +29,17 @@ public abstract class BaseController {
         return StringUtil.isNullOrWhiteSpace(pageNum) ? 1 : Integer.valueOf(pageNum);
     }
 
-    protected String getSort(){
+    protected String getSort() {
         return DataContext.getRequest().getParameter("sortname");
     }
 
-    protected SortOrder getSortOrder(){
-        String sortOder=DataContext.getRequest().getParameter("sortname");
+    protected SortOrder getSortOrder() {
+        String sortOder = DataContext.getRequest().getParameter("sortname");
         return SortOrder.forValue(sortOder);
     }
 
     protected QueryPage getQueryPage() {
-        return new QueryPage(getPageNum(), getPageSize(),getSort(),getSortOrder());
+        return new QueryPage(getPageNum(), getPageSize(), getSort(), getSortOrder());
     }
 
 

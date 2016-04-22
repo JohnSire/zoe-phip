@@ -1,4 +1,4 @@
-package com.zoe.phip.register.service;
+package com.zoe.phip.register.service.external;
 
 /**行政区域注册服务
  * Created by zengjiyang on 2016/4/11.

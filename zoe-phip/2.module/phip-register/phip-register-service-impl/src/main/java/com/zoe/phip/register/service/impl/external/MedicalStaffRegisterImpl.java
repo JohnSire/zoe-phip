@@ -1,4 +1,4 @@
-package com.zoe.phip.register.service.impl;
+package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.parser.Parser;
@@ -7,15 +7,12 @@ import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IMedicalStaffInfoMapper;
 import com.zoe.phip.register.model.MedicalStaffInfo;
-import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.base.Acknowledgement;
-import com.zoe.phip.register.model.base.ReceiverSender;
-import com.zoe.phip.register.service.IMedicalStaffRegister;
+import com.zoe.phip.register.service.external.IMedicalStaffRegister;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
 import org.dom4j.Document;
-import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,14 +20,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
  * Created by zengjiyang on 2016/4/11.
  */
 @Repository("MedicalStaffRegister")
-@Service(interfaceClass = IMedicalStaffRegister.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IMedicalStaffRegister.class, proxy = "sdpf",protocol = {"webservice"}, dynamic = true)
 public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
 
     private static final String adapter = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";
@@ -113,8 +109,13 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             //MedicalStaffInfo
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapter));
             staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class, parserDoc);
+            //数据是否存在判断
             if (!ifStaffIdExist(staffInfo.getStaffId())) {
                 return RegisterUtil.responseFailed(staffInfo, "由于更新内容不存在，更新失败", RegisterType.DOCTOR_UPDATE_ERROR);
+            }
+            //xml 验证错误
+            if (result.contains("error:数据集内容验证错误")) {
+                return RegisterUtil.responseFailed(staffInfo, result, RegisterType.DOCTOR_UPDATE_ERROR);
             }
             staffInfoMapper.defaultUpdate(staffInfo);
             acknowledgement.setTypeCode("AA");
@@ -122,9 +123,9 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             staffInfo.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.DOCTOR_UPDATE_SUCUESS, staffInfo);
         } catch (Exception ex) {
-
+            logger.error("error:",ex);
+            return RegisterUtil.responseFailed(staffInfo, ex.getMessage(), RegisterType.DOCTOR_UPDATE_ERROR);
         }
-        return null;
     }
 
     @Override

@@ -1,0 +1,48 @@
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
+                    <input type="text" name="code" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"
+                           nullmsg="请填写编码！"/>
+                </p>
+                <p class="column-one">
+                    <label class="label" for="code_system"><span class="text-mark">*</span>名称：</label>
+                    <input type="text" name="code_system" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！"
+                           nullmsg="请填写名称！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="name"><span class="text-mark">*</span>国家标准(OID)：</label>
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="国家标准(OID)长度应为1~128位！"
+                           nullmsg="请填写国家标准(OID)！"/>
+                </p>
+                <p class="column-one">
+                    <label class="label" for="standard_code"><span class="text-mark">*</span>所属分类：</label>
+                    <input type="text" name="standard_code" class="text" datatype="*1-128" errormsg="所属分类长度应为1~128位！"
+                           nullmsg="请填写所属分类！"/>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Dict/dictDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/Shared/_baseAttr.html",{title:"字典列表详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

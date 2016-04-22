@@ -1,0 +1,45 @@
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="code"><span class="text-mark">*</span>分类编码：</label>
+                    <input type="text" name="code" class="text" datatype="*1-128" errormsg="分类编码长度应为1~128位！"
+                           nullmsg="请填写分类编码！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="name"><span class="text-mark">*</span>分类名称：</label>
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="分类名称长度应为1~128位！"
+                           nullmsg="请填写分类名称！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="name"><span class="text-mark">*</span>父级分类：</label>
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="父级分类长度应为1~128位！"
+                           nullmsg="请填写父级分类！"/>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Dict/dictCategoryDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/Shared/_baseAttr.html",{title:"字典分类详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>
