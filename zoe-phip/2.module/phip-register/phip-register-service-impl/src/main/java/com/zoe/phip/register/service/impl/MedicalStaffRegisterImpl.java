@@ -113,8 +113,13 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             //MedicalStaffInfo
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapter));
             staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class, parserDoc);
+            //数据是否存在判断
             if (!ifStaffIdExist(staffInfo.getStaffId())) {
                 return RegisterUtil.responseFailed(staffInfo, "由于更新内容不存在，更新失败", RegisterType.DOCTOR_UPDATE_ERROR);
+            }
+            //xml 验证错误
+            if (result.contains("error:数据集内容验证错误")) {
+                return RegisterUtil.responseFailed(staffInfo, result, RegisterType.DOCTOR_UPDATE_ERROR);
             }
             staffInfoMapper.defaultUpdate(staffInfo);
             acknowledgement.setTypeCode("AA");
@@ -122,9 +127,9 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             staffInfo.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.DOCTOR_UPDATE_SUCUESS, staffInfo);
         } catch (Exception ex) {
-
+            logger.error("error:",ex);
+            return RegisterUtil.responseFailed(staffInfo, ex.getMessage(), RegisterType.DOCTOR_UPDATE_ERROR);
         }
-        return null;
     }
 
     @Override
