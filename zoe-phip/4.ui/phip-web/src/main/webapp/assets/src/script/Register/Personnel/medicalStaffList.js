@@ -70,7 +70,7 @@ define(function (require, exports, module) {
                     edit: {title: "编辑医护人员信息"},
                     common: {
                         url: 'personnel/view/medicalstaffdetail',
-                        width: 1000,
+                        width: 720,
                         height: 450
                     }
                 }
