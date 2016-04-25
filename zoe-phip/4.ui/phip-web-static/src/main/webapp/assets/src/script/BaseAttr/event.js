@@ -21,9 +21,11 @@ define(function (require, exports, module) {
 
             $("input[ajaxurl]").each(function () {
                 if (state == "edit") {
-                    $(this).attr({ "ajaxurl": $(this).attr("ajaxurl") + "?" + primaryKey + "=" + primary });
+                    $(this).attr({"ajaxurl": $(this).attr("ajaxurl") + "?" + primaryKey + "=" + primary});
                 }
             });
+
+            param["dialogParam"]["jqForm"].formInitDate();
             internal.vaildformObj = common.vaildform();
             if (state == "edit") {
                 ajaxData[primaryKey] = primary;
@@ -48,11 +50,11 @@ define(function (require, exports, module) {
         },
         onSave: function (ajaxData, state, param) {
             var top = common.getTopWindowDom();
-            top[internal.param["winCallback"]] = function (callback,submited) {
+            top[internal.param["winCallback"]] = function (callback, submited) {
                 var data = param["dialogParam"]["jqForm"].form2json();
 
-                $.each(param["dialogParam"]["otherUrlParam"],function(index,item){
-                    data[item]=common.getParamFromUrl(item);
+                $.each(param["dialogParam"]["otherUrlParam"], function (index, item) {
+                    data[item] = common.getParamFromUrl(item);
                 })
 
                 var preOPData = {};
@@ -63,15 +65,13 @@ define(function (require, exports, module) {
                 var url = "";
 
 
-
-
                 if (state == "edit") {
                     data = $.extend(true, {}, data, ajaxData || {});
                     url = param["updateUrl"];
                 } else {
                     url = param["addUrl"];
                 }
-                var ajaxParam = { data: data, url: url }
+                var ajaxParam = {data: data, url: url}
                 if (internal.vaildformObj.check()) {
                     if (typeof (param["customEvent"]) == "function") {
                         param["customEvent"](data);
@@ -81,7 +81,7 @@ define(function (require, exports, module) {
                     } else {
                         internal.req.editInfo(ajaxParam,
                             function (data) {
-                                if($.isFunction(submited)){
+                                if ($.isFunction(submited)) {
                                     submited();
                                 }
                                 if (typeof (param["afterSaveEvent"]) == "function") {
@@ -96,7 +96,7 @@ define(function (require, exports, module) {
                             }
                         )
                     }
-                }else{
+                } else {
                     submited();
                 }
             }

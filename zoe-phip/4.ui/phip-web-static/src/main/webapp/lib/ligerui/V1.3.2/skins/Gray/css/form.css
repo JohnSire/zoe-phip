@@ -19,6 +19,12 @@
     border:1px solid #D0D0D0; height:20px; line-height:20px;
     width:130px; 
 }
+
+.l-text-date{
+    width: 186px;
+    border: 0px solid #D0D0D0;
+}
+
 /* 文本框得到焦点的样式*/
 .l-text-focus
 {
