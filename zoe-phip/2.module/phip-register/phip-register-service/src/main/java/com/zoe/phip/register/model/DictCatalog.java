@@ -27,11 +27,20 @@ public class DictCatalog extends MasterEntity {
      */
     @Column(name = "NAME")
     private String name;
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
     /**
      * 字典父分类编码
      */
-    @Column(name = "PARENT_CODE")
-    private String parentCode;
+    @Column(name = "PID")
+    private String pid;
     /**
      * 字典分类类别
      */
@@ -54,13 +63,6 @@ public class DictCatalog extends MasterEntity {
         this.name = name;
     }
 
-    public String getParentCode() {
-        return this.parentCode;
-    }
-
-    public void setParentCode(String parentCode) {
-        this.parentCode = parentCode;
-    }
 
     public int getType() {
         return this.type;

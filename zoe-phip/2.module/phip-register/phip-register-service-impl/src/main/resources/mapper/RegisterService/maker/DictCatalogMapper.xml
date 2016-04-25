@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IDictCatalogMapper">
-    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.DictCatalog" extends="com.zoe.phip.module.service.MasterEntityResultMap">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.DictCatalog"
+               extends="com.zoe.phip.module.service.MasterEntityResultMap">
         <result column="CODE" property="code" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="NAME" property="name" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="PARENT_CODE" property="parentCode" javaType="java.lang.String"
+        <result column="PID" property="pid" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="TYPE" property="type" javaType="java.lang.Integer"
                 jdbcType="DECIMAL"/>
@@ -15,14 +16,14 @@
         INSERT INTO PHIP_DICT_CATALOG (
         CODE,
         NAME,
-        PARENT_CODE,
+        PID,
         TYPE,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
             #{item.code,jdbcType=VARCHAR},
             #{item.name,jdbcType=VARCHAR},
-            #{item.parentCode,jdbcType=VARCHAR},
+            #{item.pid,jdbcType=VARCHAR},
             #{item.type,jdbcType=DECIMAL},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
@@ -32,15 +33,15 @@
         INSERT INTO PHIP_DICT_CATALOG (
         CODE,
         NAME,
-        PARENT_CODE,
+        PID,
         TYPE,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES (
-            #{code,jdbcType=VARCHAR},
-            #{name,jdbcType=VARCHAR},
-            #{parentCode,jdbcType=VARCHAR},
-            #{type,jdbcType=DECIMAL},
-            <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        #{code,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR},
+        #{pid,jdbcType=VARCHAR},
+        #{type,jdbcType=DECIMAL},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
@@ -65,8 +66,8 @@
                 <if test="item.name != null">
                     NAME = #{item.name,jdbcType=VARCHAR},
                 </if>
-                <if test="item.parentCode != null">
-                    PARENT_CODE = #{item.parentCode,jdbcType=VARCHAR},
+                <if test="item.pid != null">
+                    PID = #{item.pid,jdbcType=VARCHAR},
                 </if>
                 <if test="item.type != null">
                     TYPE = #{item.type,jdbcType=DECIMAL},
