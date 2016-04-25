@@ -50,11 +50,19 @@ var bodySection = {
                 </p>
                 <p class="column-three">
                     <label class="label" for="EFFECTIVE_LOW"><span class="text-mark">*</span>有效期开始：</label>
-                    <input type="text" name="EFFECTIVE_LOW" class="text" nullmsg="请填写有效期开始！"/>
+                    <span class="text-line-outer">
+                    <input edittype="date" type="text" name="APPLICANT_ID" class="text" datatype="*1-36"
+                           errormsg="有效期开始度应为1~36位！"
+                           nullmsg="请填写有效期结束！"/>
+                    </span>
                 </p>
                 <p class="column-three">
                     <label class="label" for="EFFECTIVE_HIGH"><span class="text-mark">*</span>有效期结束：</label>
-                    <input type="text" name="EFFECTIVE_HIGH" class="text" nullmsg="请填写有效期结束！"/>
+                    <span class="text-line-outer">
+                    <input edittype="date" type="text" name="APPLICANT_ID" class="text" datatype="*1-36"
+                           errormsg="有效期结束长度应为1~36位！"
+                           nullmsg="请填写有效期结束！"/>
+                    </span>
                 </p>
             </li>
         </ul>
