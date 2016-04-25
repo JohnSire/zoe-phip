@@ -9,6 +9,7 @@ package com.zoe.phip.register.dao;
 import com.zoe.phip.module.service.mapper.IMyMapper;
 import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.DictCatalog;
+import com.zoe.phip.register.model.DictItem;
 
 /**
  * @author
@@ -17,4 +18,19 @@ import com.zoe.phip.register.model.DictCatalog;
  */
 public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
+    DictCatalog addDictCatalogRequest(DictCatalog dictCatalog) throws Exception;
+
+    DictCatalog updateDictCatalogRequest(DictCatalog dictCatalog) throws Exception;
+
+    DictCatalog dictCatalogDetailQuery(String dictCatalogCode);
+
+    int dictCatalogDetailDelete(String catalogId);
+
+    DictItem addDictItemRequest(DictItem dictItem);
+
+    DictItem updateDictItemRequest(DictItem dictItem);
+
+    DictItem dictItemDetailQuery(String dictItemCode);
+
+    int dictItemDetailDelete(String dictItemId);
 }

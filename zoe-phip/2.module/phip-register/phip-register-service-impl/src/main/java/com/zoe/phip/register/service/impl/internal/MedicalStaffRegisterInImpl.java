@@ -3,10 +3,15 @@ package com.zoe.phip.register.service.impl.internal;
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
+import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.register.dao.IMedicalStaffInfoMapper;
 import com.zoe.phip.register.model.MedicalStaffInfo;
 import com.zoe.phip.register.service.internal.IMedicalStaffRegisterIn;
@@ -26,6 +31,46 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     private static final Logger logger = LoggerFactory.getLogger(MedicalStaffRegisterInImpl.class);
 
 
+    @Override
+    @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
+    public MedicalStaffInfo providerDetailsQuery(Map<String, Object> map) throws Exception {
+        //todo 字典赋值
+        MedicalStaffInfo staffInfo = getMapper().getStaff(map);
+        if (staffInfo == null) {
+            throw new BusinessException("003");
+        }
+        return staffInfo;
+    }
+
+    @Override
+    @ErrorMessage(code = "004", message = "由于删除内容不存在，删除失败")
+    public boolean providerDelete(MedicalStaffInfo staffInfo) throws Exception {
+        return getMapper().deleteByPrimaryKey(staffInfo.getId()) > 0;
+    }
+
+    @Override
+    public PageList<MedicalStaffInfo> providerListQuery(QueryPage page, String message) throws Exception {
+        PageList<MedicalStaffInfo> pageList = new PageList<MedicalStaffInfo>();
+        Example example = new Example(MedicalStaffInfo.class);
+        SqlHelper.startPage(page);
+        if (!StringUtil.isNullOrWhiteSpace(message)) {
+            example.createCriteria().andLike("idNo", "%" + message + "%");
+            example.or(example.createCriteria().andLike("name", "%" + message + "%"));
+        }
+        List<MedicalStaffInfo> results = getMapper().selectByExample(example);
+        PageInfo<MedicalStaffInfo> pageInfo = new PageInfo<>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
+
+    @Override
+    public MedicalStaffInfo getStaff(Map<String, Object> map) {
+        return getMapper().getStaff(map);
+    }
+
+    @Override
     @ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
     public MedicalStaffInfo addProvider(MedicalStaffInfo medicalStaffInfo) throws Exception {
         Example example = new Example(MedicalStaffInfo.class);
@@ -41,7 +86,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
         return medicalStaffInfo;
     }
 
-
+    @Override
     @ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
     public MedicalStaffInfo updateProvider(MedicalStaffInfo medicalStaffInfo) throws Exception {
         ErrorMessage[] errorMessages = this.getClass().getAnnotationsByType(ErrorMessage.class);
@@ -56,31 +101,5 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
         medicalStaffInfo.setId(StringUtil.getUUID());
         super.add(medicalStaffInfo);
         return medicalStaffInfo;
-    }
-
-
-    @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
-    public MedicalStaffInfo providerDetailsQuery(Map<String, Object> map) throws Exception {
-        //todo 字典赋值
-        MedicalStaffInfo staffInfo = getMapper().getStaff(map);
-        if (staffInfo == null) {
-            throw new BusinessException("003");
-        }
-        return staffInfo;
-    }
-
-
-    public int providerDelete(MedicalStaffInfo staffInfo) {
-        return getMapper().deleteByPrimaryKey(staffInfo.getId());
-    }
-
-
-    public List<MedicalStaffInfo> providerListQuery(Map<String, Object> map) {
-        return null;
-    }
-
-    @Override
-    public MedicalStaffInfo getStaff(Map<String, Object> map) {
-        return getMapper().getStaff(map);
     }
 }

@@ -9,6 +9,7 @@ package com.zoe.phip.register.dao;
 import com.zoe.phip.module.service.mapper.IMyMapper;
 import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.XmanBaseInfo;
+import com.zoe.phip.register.model.XmanCard;
 
 /**
  * @author
@@ -23,4 +24,14 @@ public interface IXmanBaseInfoMapper extends IServiceMapper<XmanBaseInfo> {
      * @return
      */
     XmanBaseInfo getPatient(String id);
+
+
+    XmanBaseInfo addPatientRegistry(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) throws Exception;
+
+
+    XmanBaseInfo updatePatientRegistry(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) throws Exception;
+
+    XmanBaseInfo mergePatientRegistry(String newPatientId, String oldPatientId) throws Exception;
+
+    XmanBaseInfo patientRegistryQuery(String patientId) throws Exception;
 }

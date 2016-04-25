@@ -7,6 +7,10 @@
 package com.zoe.phip.register.service.internal;
 
 
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.register.model.NationalStandards;
 
@@ -18,5 +22,14 @@ import com.zoe.phip.register.model.NationalStandards;
  * @date 2016-04-25
  */
 public interface INationalStandardsService extends IBaseInService<NationalStandards> {
+
+    /**
+     * 根据关键字查询国家标准
+     * @param systemData
+     * @param key
+     * @param queryPage
+     * @return
+     */
+    ServiceResultT<PageList<NationalStandards>> getDataListByPage(SystemData systemData, String key, QueryPage queryPage);
 
 }

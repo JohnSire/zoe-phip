@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zoe.phip.dao.mapper.INationalStandardsMapper">
+<mapper namespace="com.zoe.phip.register.dao.INationalStandardsMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.NationalStandards" extends="BaseResultMap">
 
     </resultMap>
@@ -29,4 +29,18 @@
         </set>
         where id = #{id}
     </update>
+    <select id="getDataListByPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT * from PHIP_NATIONAL_STANDARDS PNS WHERE
+        1=1
+        <if test="_parameter.containsKey('code')">
+            where CONCAT(upper(PNS.CODE_SYSTEM), upper(CONCAT(PNS.CODE, PNS.NAME)))= '1'
+        </if>
+    </select>
+    <select id="getNationalStandard" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(1) from PHIP_NATIONAL_STANDARDS PNS
+        WHERE upper(PNS.CODE) = UPPER (#{code,jdbcType=VARCHAR})
+        <if test="_parameter.containsKey('id')">
+            AND PNS.id != #{id,jdbcType=VARCHAR}
+        </if>
+    </select>
 </mapper>
