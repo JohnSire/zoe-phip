@@ -33,7 +33,7 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
     @Autowired
     private IXmanCardMapper cardMapper;
 
-
+    @Override
     @ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
     public XmanBaseInfo addPatientRegistry(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) throws Exception {
         //数据是否存在判断
@@ -54,7 +54,7 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         return xmanBaseInfo;
     }
 
-
+    @Override
     @ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
     public XmanBaseInfo updatePatientRegistry(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) throws Exception {
         //数据是否存在判断
@@ -71,7 +71,7 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         return xmanBaseInfo;
     }
 
-
+    @Override
     @ErrorMessage(code = "003", message = "由于合并内容不存在，合并失败")
     public XmanBaseInfo mergePatientRegistry(String newPatientId, String oldPatientId) throws Exception {
         XmanBaseInfo oldPatient = getMapper().getPatient(oldPatientId);
@@ -88,7 +88,7 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         return newPatient;
     }
 
-
+    @Override
     @ErrorMessage(code = "004", message = "由于查询内容不存在，查询失败")
     public XmanBaseInfo patientRegistryQuery(String patientId) throws Exception {
         ErrorMessage[] errorMessages = this.getClass().getAnnotationsByType(ErrorMessage.class);
