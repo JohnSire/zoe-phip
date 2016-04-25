@@ -20,7 +20,6 @@ import com.zoe.phip.web.service.sm.IMenuDataService;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
-import javax.validation.Valid;
 import java.util.*;
 
 /**
@@ -33,8 +32,8 @@ import java.util.*;
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMapper> implements IMenuDataMapper {
 
     @Override
-    @ErrorMessage(code="001",message = "该菜单{0}已存�")
-    public int add(@Valid  MenuData entity) throws Exception {
+    @ErrorMessage(code="001",message = "该菜单{0}已存在")
+    public int add(MenuData entity) throws Exception {
         Example example = new Example(MenuData.class);
         entity.setCreateAt(new Date());
         entity.setModifyAt(new Date());

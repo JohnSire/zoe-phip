@@ -6,7 +6,6 @@
 
 package com.zoe.phip.register.dao;
 
-import com.zoe.phip.module.service.mapper.IMyMapper;
 import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.OrgDeptInfo;
 
@@ -19,4 +18,6 @@ import java.util.Map;
  */
 public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
   OrgDeptInfo getOrgDeptInfo(Map<String,Object> map);
+
+
 }

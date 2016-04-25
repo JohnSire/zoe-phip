@@ -5,7 +5,6 @@
 
 package com.zoe.phip.register.model;
 
-import com.zoe.phip.infrastructure.annotation.XPath;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.infrastructure.util.XmlUtil;
 import com.zoe.phip.register.model.base.RegisterEntity;
@@ -29,8 +28,6 @@ public class OrgDeptInfo extends RegisterEntity {
      */
     @Column(name = "CODE")
     private String code;
-
-
 
     /**
      * 医疗卫生机构（科室）实体名称
