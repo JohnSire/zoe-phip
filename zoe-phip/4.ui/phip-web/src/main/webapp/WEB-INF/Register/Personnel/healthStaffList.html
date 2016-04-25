@@ -1,14 +1,62 @@
 <%
+var styleSection={
+%>
+<link href='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/dist/style/layout.css")}' rel="stylesheet"/>
+<%};%>
+<%
+var bodySection={
+%>
+<!--左边栏begin-->
+<div class="y-layout-sidebar">
+    <div class="y-layout-header">
+        <ul class="y-layout-form clearfix">
+            <p class="icon-wrapper" id="treeBtns">
+                <!--<a class="icon-grid icon-grid-add" title="添加"></a>-->
+                <!--<a class="icon-grid icon-grid-edit" title="编辑"></a>-->
+                <!--<a class="icon-grid icon-grid-del" title="删除"></a>-->
+            </p>
+        </ul>
+    </div>
+    <div class="y-layout-tree" style="border:0;">
+        <ul id="tree"></ul>
+    </div>
+</div>
+<!--左边栏end-->
+<!--右边栏begin-->
+<div class="y-layout-main-two">
+    <div class="y-layout-header">
+        <ul class="y-layout-form clearfix" id="healthStaffTools">
+
+            <ul op="btns" style="float:left;"></ul>
+            <ul op="search" style="float:right;padding-right: 20px;"></ul>
+        </ul>
+    </div>
+    <div class="y-layout-content">
+        <!--主要内容-->
+        <div>
+            <div id="healthStaffGrid" style="border:0;"></div>
+        </div>
+        <!--主要内容-->
+    </div>
+</div>
+<!--右边栏end-->
+<%};%>
+<%
 var scriptSection={
 %>
 <script type="text/javascript">
     $(function () {
         seajs.use('{dir}/Register/Personnel/healthStaffList', function (a) {
             a.init();
+
+            var counts = [
+                20, 10, 5
+            ];
         });
     })
 </script>
 <%};%>
 <%
-include("/WEB-INF/Shared/_baseGrid.html",{title:"卫生管理机构人员管理",styleSection:null,bodySection:null,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_default.html",{baseTitle:"医疗卫生人员管理",baseStyleSection:styleSection,baseBodySection:bodySection,baseScriptSection:scriptSection}){}
 %>
+

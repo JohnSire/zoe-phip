@@ -15,7 +15,7 @@ define(function (require, exports, module) {
                     btnbox: {
                         'custom': {
                             text: "合并", click: function () {
-                                internal.menuTree();
+
                             }
                         },
                         'add': true,

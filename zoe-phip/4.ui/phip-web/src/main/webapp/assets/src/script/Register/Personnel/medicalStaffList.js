@@ -61,8 +61,8 @@ define(function (require, exports, module) {
                     height: "99%"//$("body").innerHeight() - $("#dictItemTools").outerHeight() - 76//500
                 },
                 dialogParam: {
-                    winName: "win_dict_item_dialog",//弹窗对象变量名称
-                    winCallback: "win_dict_item_callback",//弹窗回调函数
+                    winName: "win_medicalStaff_detail_dialog",//弹窗对象变量名称
+                    winCallback: "win_medicalStaff_detail_callback",//弹窗回调函数
                     titleKey: "name",
                     //新增参数
                     add: {title: "新增医护人员信息"},
