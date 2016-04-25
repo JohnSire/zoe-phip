@@ -71,7 +71,7 @@ define(function (require, exports, module) {
                     common: {
                         url: 'personnel/view/medicalstaffdetail',
                         width: 1000,
-                        height: 450
+                        height: 550
                     }
                 }
             })
