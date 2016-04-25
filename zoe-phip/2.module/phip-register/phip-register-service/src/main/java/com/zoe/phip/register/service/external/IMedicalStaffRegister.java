@@ -1,5 +1,7 @@
 package com.zoe.phip.register.service.external;
 
+import com.zoe.phip.register.model.MedicalStaffInfo;
+
 /**医护人员注册服务
  * Created by zengjiyang on 2016/4/11.
  */
@@ -24,4 +26,6 @@ public interface IMedicalStaffRegister {
      * @return
      */
     String providerDetailsQuery(String message);
+
+
 }

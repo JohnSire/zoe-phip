@@ -4,6 +4,7 @@ import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
+import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
@@ -79,5 +80,10 @@ public class MedicalStaffRegisterInImpl implements IMedicalStaffRegisterIn {
             }
             return staffInfo;
         }, errorMessages);
+    }
+
+    @Override
+    public ServiceResult providerDelete(MedicalStaffInfo staffInfo) {
+        return null;
     }
 }

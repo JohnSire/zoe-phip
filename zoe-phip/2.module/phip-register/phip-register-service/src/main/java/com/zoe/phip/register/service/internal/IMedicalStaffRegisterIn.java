@@ -1,5 +1,6 @@
 package com.zoe.phip.register.service.internal;
 
+import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.register.model.MedicalStaffInfo;
 
@@ -29,4 +30,11 @@ public interface IMedicalStaffRegisterIn {
      * @return
      */
     ServiceResultT<MedicalStaffInfo> providerDetailsQuery(Map<String, Object> map);
+
+    /**
+     * 医护人员删除
+     * @param staffInfo
+     * @return
+     */
+    ServiceResult providerDelete(MedicalStaffInfo staffInfo);
 }
