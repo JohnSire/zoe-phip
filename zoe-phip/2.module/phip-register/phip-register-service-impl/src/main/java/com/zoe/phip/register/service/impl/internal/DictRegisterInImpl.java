@@ -25,16 +25,19 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     @Autowired
     private IDictItemMapper dictItemMapper;
 
+    @Override
     public DictCatalog addDictCatalogRequest(DictCatalog dictCatalog) throws Exception {
         super.add(dictCatalog);
         return dictCatalog;
     }
 
+    @Override
     public DictCatalog updateDictCatalogRequest(DictCatalog dictCatalog) throws Exception {
         super.update(dictCatalog);
         return dictCatalog;
     }
 
+    @Override
     public DictCatalog dictCatalogDetailQuery(String dictCatalogCode) {
         Example example = new Example(XmanBaseInfo.class);
         example.createCriteria().andEqualTo("code", dictCatalogCode);
@@ -42,10 +45,12 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         return catalog;
     }
 
+    @Override
     public int dictCatalogDetailDelete(String catalogId) {
         return getMapper().deleteByPrimaryKey(catalogId);
     }
 
+    @Override
     public DictItem addDictItemRequest(DictItem dictItem) {
         dictItem.setCreateAt(new Date());
         dictItem.setModifyAt(new Date());
@@ -54,19 +59,21 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         return dictItem;
     }
 
+    @Override
     public DictItem updateDictItemRequest(DictItem dictItem) {
         dictItem.setModifyAt(new Date());
         dictItemMapper.updateByPrimaryKey(dictItem);
         return dictItem;
     }
 
+    @Override
     public DictItem dictItemDetailQuery(String dictItemCode) {
         Example example = new Example(XmanBaseInfo.class);
         example.createCriteria().andEqualTo("code", dictItemCode);
         DictItem catalog = dictItemMapper.selectByExample(example).get(0);
         return catalog;
     }
-
+    @Override
     public int dictItemDetailDelete(String dictItemId) {
         return dictItemMapper.deleteByPrimaryKey(dictItemId);
     }
