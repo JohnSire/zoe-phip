@@ -183,6 +183,8 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
     }
 
 
+
+
 //    public boolean ifStaffIdExist(String staffId) {
 //        Example example = new Example(MedicalStaffInfo.class);
 //        example.createCriteria().andEqualTo("staffId", staffId);

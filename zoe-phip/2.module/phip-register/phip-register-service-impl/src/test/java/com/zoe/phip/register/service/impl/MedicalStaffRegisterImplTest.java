@@ -1,10 +1,13 @@
 package com.zoe.phip.register.service.impl;
 
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.infrastructure.util.XmlUtil;
 import com.zoe.phip.register.BaseTest;
 import com.zoe.phip.register.model.MedicalStaffInfo;
 import com.zoe.phip.register.service.impl.external.MedicalStaffRegisterImpl;
+import com.zoe.phip.register.service.impl.internal.MedicalStaffRegisterInImpl;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.junit.Test;
@@ -17,6 +20,7 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
 
     @Autowired
     private MedicalStaffRegisterImpl medicalStaffRegister;
+    private MedicalStaffRegisterInImpl staffRegisterIn;
 
     //@Test
     public void toBean() throws Exception {
@@ -284,5 +288,12 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
                 "</PRPM_IN306010UV01>";
         String message = medicalStaffRegister.providerDetailsQuery(query);
         System.out.println(message);
+    }
+
+    @Test
+    public void testProviderListQuery() throws Exception {
+        MedicalStaffInfo staffInfo = new MedicalStaffInfo();
+        staffInfo.setId("f8b4727d98de4d13814ea7d71bd838b6");
+        boolean b = staffRegisterIn.providerDelete(staffInfo);
     }
 }
