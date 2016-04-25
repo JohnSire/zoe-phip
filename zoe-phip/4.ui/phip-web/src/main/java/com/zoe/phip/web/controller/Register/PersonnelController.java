@@ -38,14 +38,14 @@ public class PersonnelController {
 
     // TODO: 2016/4/21
     //region 卫生管理机构人员
-    @RequestMapping("/view/healthstaffdetail")
+    @RequestMapping("/view/healthstafflist")
     public String ToHealthStaffList(HttpServletRequest request, Model model) {
-        return "/Register/Personnel/healthStaffDetail";
+        return "/Register/Personnel/healthStaffList";
     }
 
-    @RequestMapping("/view/healthstafflist")
+    @RequestMapping("/view/healthstaffdetail")
     public String ToHealthStaffDetail(HttpServletRequest request, Model model) {
-        return "/Register/Personnel/healthStaffList";
+        return "/Register/Personnel/healthStaffDetail";
     }
     //endregion
 }
