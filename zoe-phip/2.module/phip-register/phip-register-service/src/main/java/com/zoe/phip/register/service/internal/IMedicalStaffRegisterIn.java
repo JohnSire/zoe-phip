@@ -1,7 +1,9 @@
 package com.zoe.phip.register.service.internal;
 
+import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.register.model.MedicalStaffInfo;
 
@@ -17,14 +19,14 @@ public interface IMedicalStaffRegisterIn extends IBaseInService<MedicalStaffInfo
      * @param medicalStaffInfo
      * @return
      */
-    ServiceResultT<MedicalStaffInfo> addProvider(MedicalStaffInfo medicalStaffInfo);
+    ServiceResultT<MedicalStaffInfo> addProvider(SystemData systemData,MedicalStaffInfo medicalStaffInfo);
 
     /**
      * 	医护人员信息更新
      * @param medicalStaffInfo
      * @return
      */
-    ServiceResultT<MedicalStaffInfo> updateProvider(MedicalStaffInfo medicalStaffInfo);
+    ServiceResultT<MedicalStaffInfo> updateProvider(SystemData systemData,MedicalStaffInfo medicalStaffInfo);
 
     /**
      * 医护人员查询
@@ -38,12 +40,12 @@ public interface IMedicalStaffRegisterIn extends IBaseInService<MedicalStaffInfo
      * @param staffInfo
      * @return
      */
-    ServiceResult providerDelete(MedicalStaffInfo staffInfo);
+    ServiceResult providerDelete(SystemData systemData,MedicalStaffInfo staffInfo);
 
     /**
      * 查询医疗卫生人员列表
-     * @param map
+     * @param message
      * @return
      */
-    ServiceResultT<List<MedicalStaffInfo>> providerListQuery(Map<String, Object> map);
+    ServiceResultT<PageList<MedicalStaffInfo>> providerListQuery(SystemData systemData,String message);
 }
