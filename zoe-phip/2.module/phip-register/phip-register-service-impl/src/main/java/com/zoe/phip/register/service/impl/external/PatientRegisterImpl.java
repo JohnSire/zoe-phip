@@ -78,7 +78,7 @@ public class PatientRegisterImpl implements IPatientRegister {
                 acknowledgement.setTypeCode("AA");
                 acknowledgement.setText("注册成功");
                 baseInfo.setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.PATIENT_ADD_SUCUESS, baseInfo);
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_ADD_SUCCESS, baseInfo);
             }
 
         } catch (Exception ex) {
@@ -122,7 +122,7 @@ public class PatientRegisterImpl implements IPatientRegister {
                 acknowledgement.setTypeCode("AA");
                 acknowledgement.setText("更新成功");
                 baseInfo.setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.PATIENT_UPDATE_SUCUESS, baseInfo);
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_UPDATE_SUCCESS, baseInfo);
             }
         } catch (Exception ex) {
             logger.error("error:", ex);
@@ -170,7 +170,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             }else {
                 acknowledgement.setTypeCode("AA");
                 acknowledgement.setText("合并成功");
-                return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCUESS, acknowledgement);
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCCESS, acknowledgement);
             }
         } catch (Exception ex) {
             acknowledgement.setTypeCode("AE");
@@ -209,7 +209,7 @@ public class PatientRegisterImpl implements IPatientRegister {
                 return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
             }else {
 
-                return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_SUCUESS, result.getResult());
+                return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_SUCCESS, result.getResult());
             }
         }catch (Exception ex){
             logger.error("error:",ex);

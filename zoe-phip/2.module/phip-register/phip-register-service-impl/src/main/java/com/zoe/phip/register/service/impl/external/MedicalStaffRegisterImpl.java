@@ -85,7 +85,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
                 acknowledgement.setTypeCode("AA");
                 acknowledgement.setText("注册成功");
                 staffInfo.setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.DOCTOR_ADD_SUCUESS, staffInfo);
+                return RegisterUtil.registerMessage(RegisterType.DOCTOR_ADD_SUCCESS, staffInfo);
             }
 //            staffInfo.setId(StringUtil.getUUID());
             //ReceiverSender
@@ -140,7 +140,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
                 acknowledgement.setTypeCode("AA");
                 acknowledgement.setText("注册成功");
                 staffInfo.setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.DOCTOR_UPDATE_SUCUESS, staffInfo);
+                return RegisterUtil.registerMessage(RegisterType.DOCTOR_UPDATE_SUCCESS, staffInfo);
             }
 
         } catch (Exception ex) {
@@ -187,7 +187,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
                 acknowledgement.setTypeCode("AA");
                 acknowledgement.setText("查询成功");
                 result.getResult().setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.DOCTOR_UPDATE_SUCUESS, result.getResult());
+                return RegisterUtil.registerMessage(RegisterType.DOCTOR_QUERY_SUCCESS, result.getResult());
             }
 
         } catch (Exception ex) {
@@ -196,6 +196,8 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
         }
         return null;
     }
+
+
 
 //    public boolean ifStaffIdExist(String staffId) {
 //        Example example = new Example(MedicalStaffInfo.class);
