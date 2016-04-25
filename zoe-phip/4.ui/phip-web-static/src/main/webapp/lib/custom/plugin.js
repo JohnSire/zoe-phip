@@ -10,6 +10,14 @@
         });
         return obj;
     }
+    //时间初始化
+    $.fn.formInitDate = function () {
+        $("[edittype='date']").ligerDateEditor({
+            format: "yyyy-MM-dd",
+            cancelable: true,
+            absolute: true
+        });
+    }
     //表单绑定值
     $.fn.json2form = function (obj) {
         if (obj == null || typeof (obj) == 'undefined')
