@@ -20,6 +20,7 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
 
     @Autowired
     private MedicalStaffRegisterImpl medicalStaffRegister;
+    @Autowired
     private MedicalStaffRegisterInImpl staffRegisterIn;
 
     //@Test

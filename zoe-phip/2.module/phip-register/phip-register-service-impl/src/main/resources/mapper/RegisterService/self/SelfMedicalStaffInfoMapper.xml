@@ -83,7 +83,7 @@
         </set>
         where id = #{id}
     </update>
-    <delete id="providerDelete" parameterType=""com.zoe.phip.register.model.MedicalStaffInfo"">
+    <delete id="providerDelete" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
         delete from PHIP_MEDICAL_STAFF_INFO where ID in
         <foreach collection="array" item="item" open="(" separator="," close=")">
             #{item}
