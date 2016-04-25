@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.dao.mapper.INationalStandardsMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.NationalStandards" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.NationalStandards">
+        update PHIP_NATIONAL_STANDARDS
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="codeSystem != null">
+                CODE_SYSTEM = #{codeSystem,jdbcType=VARCHAR},
+            </if>
+            <if test="standardCode != null">
+                STANDARD_CODE = #{standardCode,jdbcType=VARCHAR},
+            </if>
+            <if test="descr != null">
+                DESCR = #{descr,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
