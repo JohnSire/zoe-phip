@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -84,6 +85,11 @@ public class MedicalStaffRegisterInImpl implements IMedicalStaffRegisterIn {
 
     @Override
     public ServiceResult providerDelete(MedicalStaffInfo staffInfo) {
+        return null;
+    }
+
+    @Override
+    public ServiceResultT<List<MedicalStaffInfo>> providerListQuery(Map<String, Object> map) {
         return null;
     }
 }
