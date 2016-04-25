@@ -2,6 +2,7 @@ package com.zoe.phip.register.service.internal;
 
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.model.DictItem;
 
@@ -9,7 +10,7 @@ import com.zoe.phip.register.model.DictItem;
  * 字典术语注册服务
  * Created by zengjiyang on 2016/4/11.
  */
-public interface IDictRegisterIn {
+public interface IDictRegisterIn extends IBaseInService<DictCatalog> {
 
     /**
      *1)	新增字典类别

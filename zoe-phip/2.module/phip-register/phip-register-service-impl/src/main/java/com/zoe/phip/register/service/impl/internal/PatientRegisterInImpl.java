@@ -7,6 +7,7 @@ import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
+import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.register.dao.IXmanBaseInfoMapper;
 import com.zoe.phip.register.dao.IXmanCardMapper;
 import com.zoe.phip.register.model.XmanBaseInfo;
@@ -20,97 +21,84 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Date;
 
 /**
  * Created by zengjiyang on 2016/4/22.
  */
 @Repository("PatientRegisterIn")
 @Service(interfaceClass = IPatientRegisterIn.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
-@ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
-@ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
-@ErrorMessage(code = "003", message = "由于合并内容不存在，合并失败")
-@ErrorMessage(code = "004", message = "由于查询内容不存在，查询失败")
-public class PatientRegisterInImpl implements IPatientRegisterIn {
-
-    private static final Logger logger = LoggerFactory.getLogger(PatientRegisterInImpl.class);
-
-    @Autowired
-    private IXmanBaseInfoMapper baseInfoMapper;
+public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXmanBaseInfoMapper> implements IXmanBaseInfoMapper {
 
     @Autowired
     private IXmanCardMapper cardMapper;
 
-    @Override
-    public ServiceResultT<XmanBaseInfo> addPatientRegistry(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) {
-        ErrorMessage[] errorMessages= this.getClass().getAnnotationsByType(ErrorMessage.class);
-        return SafeExecuteUtil.execute0(() ->
-        {
-            //数据是否存在判断
-            Example example = new Example(XmanBaseInfo.class);
-            example.createCriteria().andEqualTo("healthRecordNo", xmanBaseInfo.getHealthRecordNo());
-            int count = baseInfoMapper.selectCountByExample(example);
-            if (count > 0) {
-                throw new BusinessException("001");
-            }
-            //保存到数据库
-            xmanBaseInfo.setId(StringUtil.getUUID());
-            baseInfoMapper.defaultAdd(xmanBaseInfo);
-            xmanCard.setXcXmanId(xmanBaseInfo.getId());
-            cardMapper.defaultAdd(xmanCard);
-            return xmanBaseInfo;
-        }, errorMessages);
+
+    @ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
+    public XmanBaseInfo addPatientRegistry(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) throws Exception {
+        //数据是否存在判断
+        Example example = new Example(XmanBaseInfo.class);
+        example.createCriteria().andEqualTo("healthRecordNo", xmanBaseInfo.getHealthRecordNo());
+        int count = getMapper().selectCountByExample(example);
+        if (count > 0) {
+            throw new BusinessException("001");
+        }
+        //保存到数据库
+        xmanBaseInfo.setId(StringUtil.getUUID());
+        super.add(xmanBaseInfo);
+        xmanCard.setXcXmanId(xmanBaseInfo.getId());
+        xmanCard.setCreateAt(new Date());
+        xmanCard.setModifyAt(new Date());
+        xmanCard.setState(1);
+        cardMapper.insertSelective(xmanCard);
+        return xmanBaseInfo;
     }
 
-    @Override
-    public ServiceResultT<XmanBaseInfo> updatePatientRegistry(XmanBaseInfo xmanBaseInfo,XmanCard xmanCard) {
-        ErrorMessage[] errorMessages= this.getClass().getAnnotationsByType(ErrorMessage.class);
-        return SafeExecuteUtil.execute0(() ->
-        {
-            //数据是否存在判断
-            Example example = new Example(XmanBaseInfo.class);
-            example.createCriteria().andEqualTo("healthRecordNo", xmanBaseInfo.getHealthRecordNo());
-            int count = baseInfoMapper.selectCountByExample(example);
-            if (count == 0) {
-                throw new BusinessException("002");
-            }
-            //保存到数据库
-            baseInfoMapper.defaultUpdate(xmanBaseInfo);
-            cardMapper.defaultUpdate(xmanCard);
-            return xmanBaseInfo;
-        }, errorMessages);
+
+    @ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
+    public XmanBaseInfo updatePatientRegistry(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) throws Exception {
+        //数据是否存在判断
+        Example example = new Example(XmanBaseInfo.class);
+        example.createCriteria().andEqualTo("healthRecordNo", xmanBaseInfo.getHealthRecordNo());
+        int count = getMapper().selectCountByExample(example);
+        if (count == 0) {
+            throw new BusinessException("002");
+        }
+        //保存到数据库
+        super.update(xmanBaseInfo);
+        xmanCard.setModifyAt(new Date());
+        cardMapper.updateByPrimaryKeySelective(xmanCard);
+        return xmanBaseInfo;
     }
 
-    @Override
-    public ServiceResultT<XmanBaseInfo> mergePatientRegistry(String newPatientId, String oldPatientId) {
-        ErrorMessage[] errorMessages= this.getClass().getAnnotationsByType(ErrorMessage.class);
-        return SafeExecuteUtil.execute0(()->{
-            XmanBaseInfo oldPatient = baseInfoMapper.getPatient(oldPatientId);
-            XmanBaseInfo newPatient = baseInfoMapper.getPatient(newPatientId);
-            if (oldPatient == null || newPatient == null || StringUtil.isNullOrWhiteSpace(oldPatient.getHealthRecordNo())
-                    || StringUtil.isNullOrWhiteSpace(newPatient.getHealthRecordNo())) {
-                throw new BusinessException("003");
-            }
-            //赋值
-            copyValue(newPatient, oldPatient);
-            //保存到数据库
-            baseInfoMapper.defaultUpdate(newPatient);
-            baseInfoMapper.delete(oldPatient);
-            return newPatient;
-        },errorMessages);
+
+    @ErrorMessage(code = "003", message = "由于合并内容不存在，合并失败")
+    public XmanBaseInfo mergePatientRegistry(String newPatientId, String oldPatientId) throws Exception {
+        XmanBaseInfo oldPatient = getMapper().getPatient(oldPatientId);
+        XmanBaseInfo newPatient = getMapper().getPatient(newPatientId);
+        if (oldPatient == null || newPatient == null || StringUtil.isNullOrWhiteSpace(oldPatient.getHealthRecordNo())
+                || StringUtil.isNullOrWhiteSpace(newPatient.getHealthRecordNo())) {
+            throw new BusinessException("003");
+        }
+        //赋值
+        copyValue(newPatient, oldPatient);
+        //保存到数据库
+        super.update(newPatient);
+        getMapper().delete(oldPatient);
+        return newPatient;
     }
 
-    @Override
-    public ServiceResultT<XmanBaseInfo> patientRegistryQuery(String patientId) {
-        ErrorMessage[] errorMessages= this.getClass().getAnnotationsByType(ErrorMessage.class);
-        return SafeExecuteUtil.execute0(()->{
-            //todo 字典赋值
-            XmanBaseInfo baseInfo=baseInfoMapper.getPatient(patientId);
-            if(baseInfo==null){
-                throw new BusinessException("004");
-            }
-            XmanCard xmanCard=cardMapper.getXmanCard(baseInfo.getId());
-            return baseInfo;
-        },errorMessages);
+
+    @ErrorMessage(code = "004", message = "由于查询内容不存在，查询失败")
+    public XmanBaseInfo patientRegistryQuery(String patientId) throws Exception {
+        ErrorMessage[] errorMessages = this.getClass().getAnnotationsByType(ErrorMessage.class);
+        //todo 字典赋值
+        XmanBaseInfo baseInfo = getMapper().getPatient(patientId);
+        if (baseInfo == null) {
+            throw new BusinessException("004");
+        }
+        XmanCard xmanCard = cardMapper.getXmanCard(baseInfo.getId());
+        return baseInfo;
     }
 
 
@@ -140,5 +128,10 @@ public class PatientRegisterInImpl implements IPatientRegisterIn {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public XmanBaseInfo getPatient(String id) {
+        return getMapper().getPatient(id);
     }
 }

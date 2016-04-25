@@ -30,84 +30,66 @@ import java.util.stream.Collectors;
  */
 @Repository("OrganizationRegisterIn")
 @Service(interfaceClass = IOrganizationRegisterIn.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
-@ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
-@ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
-@ErrorMessage(code = "003", message = "由于合并内容不存在，合并失败")
-@ErrorMessage(code = "004", message = "由于查询内容不存在，查询失败")
-public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, IOrgDeptInfoMapper> implements IOrganizationRegisterIn {
-    private static final Logger logger = LoggerFactory.getLogger(OrganizationRegisterInImpl.class);
+public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, IOrgDeptInfoMapper> implements IOrgDeptInfoMapper {
 
-    @Autowired
-    private IOrgDeptInfoMapper baseInfoMapper;
+    @ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
+    public OrgDeptInfo addOrganization(OrgDeptInfo orgDeptInfo) throws Exception {
 
-    @Override
-    public ServiceResultT<OrgDeptInfo> addOrganization(OrgDeptInfo orgDeptInfo) {
+        //数据是否存在判断
+        Example example = new Example(OrgDeptInfo.class);
+        example.createCriteria().andEqualTo("code", orgDeptInfo.getCode());
+        int count = getMapper().selectCountByExample(example);
+        if (count > 0) {
+            throw new BusinessException("001");
+        }
+        //保存到数据库
+        orgDeptInfo.setId(StringUtil.getUUID());
+        super.add(orgDeptInfo);
 
-        ErrorMessage[] errorMessages = this.getClass().getAnnotationsByType(ErrorMessage.class);
-        return SafeExecuteUtil.execute0(() ->
-        {
-            //数据是否存在判断
-            Example example = new Example(OrgDeptInfo.class);
-            example.createCriteria().andEqualTo("code", orgDeptInfo.getCode());
-            int count = baseInfoMapper.selectCountByExample(example);
-            if (count > 0) {
-                throw new BusinessException("001");
-            }
-            //保存到数据库
-            orgDeptInfo.setId(StringUtil.getUUID());
-            baseInfoMapper.defaultAdd(orgDeptInfo);
-
-            return orgDeptInfo;
-        }, errorMessages);
-    }
-
-    @Override
-    public ServiceResultT<OrgDeptInfo> updateOrganization(OrgDeptInfo orgDeptInfo) {
-        ErrorMessage[] errorMessages = this.getClass().getAnnotationsByType(ErrorMessage.class);
-        return SafeExecuteUtil.execute0(() ->
-        {
-            //数据是否存在判断
-            Example example = new Example(XmanBaseInfo.class);
-            example.createCriteria().andEqualTo("code", orgDeptInfo.getCode());
-            int count = baseInfoMapper.selectCountByExample(example);
-            if (count == 0) {
-                throw new BusinessException("002");
-            }
-            //保存到数据库
-            baseInfoMapper.defaultUpdate(orgDeptInfo);
-            return orgDeptInfo;
-        }, errorMessages);
+        return orgDeptInfo;
     }
 
 
-    @Override
-    public ServiceResultT<OrgDeptInfo> organizationDetailQuery(Map<String, Object> map) {
-        ErrorMessage[] errorMessages = this.getClass().getAnnotationsByType(ErrorMessage.class);
-        return SafeExecuteUtil.execute0(() -> {
-            //todo 字典赋值
-            OrgDeptInfo baseInfo = baseInfoMapper.getOrgDeptInfo(map);
-            if (baseInfo == null) {
-                throw new BusinessException("004");
-            }
-            return baseInfo;
-        }, errorMessages);
+    @ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
+    public OrgDeptInfo updateOrganization(OrgDeptInfo orgDeptInfo) throws Exception {
+        //数据是否存在判断
+        Example example = new Example(XmanBaseInfo.class);
+        example.createCriteria().andEqualTo("code", orgDeptInfo.getCode());
+        int count = getMapper().selectCountByExample(example);
+        if (count == 0) {
+            throw new BusinessException("002");
+        }
+        //保存到数据库
+        super.update(orgDeptInfo);
+        return orgDeptInfo;
     }
 
-    @Override
+
+    @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
+    public OrgDeptInfo organizationDetailQuery(Map<String, Object> map) throws Exception {
+        //todo 字典赋值
+        OrgDeptInfo baseInfo = getMapper().getOrgDeptInfo(map);
+        if (baseInfo == null) {
+            throw new BusinessException("003");
+        }
+        return baseInfo;
+    }
+
+
     public boolean organizationDelete(String id) {
         Example e = new Example(OrgDeptInfo.class);
         e.createCriteria().andEqualTo("code", id);
         return getMapper().deleteByExample(e) > 0;
     }
 
-    @Override
+
     public List<OrgDeptInfo> dictItemListQuery(String deptParentCode) {
         Example example = new Example(OrgDeptInfo.class);
         example.createCriteria().andEqualTo("deptParentCode", deptParentCode);
         return getMapper().selectByExample(example).stream().collect(Collectors.toList());
     }
 
-    @Override
+
     public PageList<OrgDeptInfo> organizationListQuery(String deptParentCode, String key, QueryPage page) {
         PageList<OrgDeptInfo> pageList = new PageList<OrgDeptInfo>();
         Example example = new Example(OrgDeptInfo.class);
@@ -123,5 +105,10 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
         return pageList;
+    }
+
+    @Override
+    public OrgDeptInfo getOrgDeptInfo(Map<String, Object> map) {
+        return getMapper().getOrgDeptInfo(map);
     }
 }

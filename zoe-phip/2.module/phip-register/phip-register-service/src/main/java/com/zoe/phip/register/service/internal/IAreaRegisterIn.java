@@ -1,6 +1,7 @@
 package com.zoe.phip.register.service.internal;
 
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.register.model.AreaBaseInfo;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 /**行政区域注册服务
  * Created by zengjiyang on 2016/4/11.
  */
-public interface IAreaRegisterIn {
+public interface IAreaRegisterIn extends IBaseInService<AreaBaseInfo> {
 
     /**
      * 	新增行政区域注册

@@ -49,6 +49,9 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
 
     @Override
     public int add( T entity) throws Exception {
+        entity.setCreateAt(new Date());
+        entity.setModifyAt(new Date());
+        entity.setState(1);//状态设置为1
         return mapper.insertSelective(entity);
     }
 
@@ -83,6 +86,7 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
 
     @Override
     public int update(T entity) throws Exception {
+        entity.setModifyAt(new Date());
         return mapper.updateByPrimaryKeySelective(entity);
     }
 

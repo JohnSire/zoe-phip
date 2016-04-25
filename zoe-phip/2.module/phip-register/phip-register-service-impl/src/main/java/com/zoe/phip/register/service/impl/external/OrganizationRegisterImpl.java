@@ -6,6 +6,7 @@ import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IOrganizationRegister;
+import com.zoe.phip.register.service.impl.internal.OrganizationRegisterInImpl;
 import com.zoe.phip.register.service.internal.IOrganizationRegisterIn;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
@@ -24,13 +25,13 @@ import java.util.TreeMap;
  * Created by zengjiyang on 2016/4/11.
  */
 @Repository("OrganizationRegister")
-@Service(interfaceClass = IOrganizationRegister.class, proxy = "sdpf", protocol = {"webservice"},dynamic = true)
+@Service(interfaceClass = IOrganizationRegister.class, proxy = "sdpf", protocol = {"webservice"}, dynamic = true)
 public class OrganizationRegisterImpl implements IOrganizationRegister {
 
     private static final Logger logger = LoggerFactory.getLogger(OrganizationRegisterImpl.class);
     static final String adapter = "/template/org/input/adapter/OrganizationRegisterAdapter.xml";
     @Autowired
-    private IOrganizationRegisterIn organizationRegisterIn;
+    private OrganizationRegisterInImpl organizationRegisterIn;
 
     /**
      * 新增医疗卫生机构注册
@@ -60,15 +61,12 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             if (strResult.contains("error:数据集内容验证错误")) {
                 return registerFailed(baseInfo, strResult);
             }
-            ServiceResultT<OrgDeptInfo> result= organizationRegisterIn.addOrganization(baseInfo);
-            if(result.getMessages().size()>0){
-                return registerFailed(baseInfo, result.getMessages().get(0).getContent());
-            }else {
-                acknowledgement.setTypeCode("AA");
-                acknowledgement.setText("注册成功");
-                baseInfo.setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.ORG_ADD_SUCCESS, baseInfo);
-            }
+            OrgDeptInfo result = organizationRegisterIn.addOrganization(baseInfo);
+
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("注册成功");
+            baseInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.ORG_ADD_SUCCESS, result);
         } catch (Exception ex) {
             logger.error("error:", ex);
             return registerFailed(baseInfo, ex.getMessage());
@@ -97,15 +95,12 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             if (strResult.contains("error:数据集内容验证错误")) {
                 return registerFailed(baseInfo, strResult);
             }
-            ServiceResultT<OrgDeptInfo> result= organizationRegisterIn.updateOrganization(baseInfo);
-            if(result.getMessages().size()>0){
-                return updateFailed(baseInfo, result.getMessages().get(0).getContent());
-            }else {
-                acknowledgement.setTypeCode("AA");
-                acknowledgement.setText("更新成功");
-                baseInfo.setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.ORG_UPDATE_SUCCESS, baseInfo);
-            }
+            OrgDeptInfo result = organizationRegisterIn.updateOrganization(baseInfo);
+
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("更新成功");
+            baseInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.ORG_UPDATE_SUCCESS, result);
         } catch (Exception ex) {
             logger.error("error:", ex);
             return updateFailed(baseInfo, ex.getMessage());
@@ -135,9 +130,9 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
 
             Map<String, Object> map = new TreeMap<>();
             map.clear();
-            map.put("code",strDeptId);
-            map.put("deptName",strDeptName);
-            ServiceResultT<OrgDeptInfo> result= organizationRegisterIn.organizationDetailQuery(map);
+            map.put("code", strDeptId);
+            map.put("deptName", strDeptName);
+            OrgDeptInfo result = organizationRegisterIn.organizationDetailQuery(map);
 
        /*     if (deptInfo == null || StringUtil.isNullOrWhiteSpace(deptInfo.getCode())) {
                 deptInfo = new OrgDeptInfo();
@@ -151,15 +146,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
                 return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_SUCCESS, deptInfo);
             }*/
 
-            if(result.getMessages().size()>0){
-                acknowledgement.setTypeCode("AE");
-                acknowledgement.setText(result.getMessages().get(0).getContent());
-                return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, acknowledgement);
-            }else {
-
-                return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_SUCCESS, result.getResult());
-            }
-
+            return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_SUCCESS, result);
         } catch (Exception ex) {
             return RegisterUtil.responseFailed(deptInfo, ex.getMessage(), RegisterType.ORG_QUERY_ERROR);
         }
@@ -187,7 +174,6 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
     private String updateFailed(OrgDeptInfo baseInfo, String errorMsg) {
         return RegisterUtil.responseFailed(baseInfo, errorMsg, RegisterType.ORG_UPDATE_ERROR);
     }
-
 
 
 }

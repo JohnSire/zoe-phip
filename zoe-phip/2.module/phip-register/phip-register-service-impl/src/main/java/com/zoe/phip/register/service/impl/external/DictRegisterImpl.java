@@ -5,6 +5,7 @@ import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.service.external.IDictRegister;
+import com.zoe.phip.register.service.impl.internal.DictRegisterInImpl;
 import com.zoe.phip.register.service.internal.IDictRegisterIn;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import org.dom4j.Document;
@@ -26,7 +27,7 @@ public class DictRegisterImpl implements IDictRegister {
     private final String itemAdapterPath="/template/dict/input/adapter/DictItemAdapter.xml";
 
     @Autowired
-    private IDictRegisterIn dictRegisterIn;
+    private DictRegisterInImpl dictRegisterIn;
 
     @Override
     public String addDictCatalogRequest(String message) {
@@ -37,7 +38,7 @@ public class DictRegisterImpl implements IDictRegister {
         try {
             parserDoc = reader.read(this.getClass().getResourceAsStream(catalogAdapterPath));
             catalog = XmlBeanUtil.toBean(document, DictCatalog.class, parserDoc);
-            ServiceResultT<DictCatalog> result= dictRegisterIn.addDictCatalogRequest(catalog);
+            DictCatalog result= dictRegisterIn.addDictCatalogRequest(catalog);
         } catch (Exception e) {
             logger.error("error",e);
             return "新增失败:"+e.getMessage();

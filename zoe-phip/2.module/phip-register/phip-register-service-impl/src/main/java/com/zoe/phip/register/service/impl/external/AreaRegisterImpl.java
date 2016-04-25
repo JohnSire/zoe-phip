@@ -7,6 +7,7 @@ import com.zoe.phip.register.model.AreaBaseInfo;
 import com.zoe.phip.register.model.MedicalStaffInfo;
 import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IAreaRegister;
+import com.zoe.phip.register.service.impl.internal.AreaRegisterInImpl;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
@@ -31,7 +32,7 @@ public class AreaRegisterImpl implements IAreaRegister {
     private static final Logger logger = LoggerFactory.getLogger(AreaRegisterImpl.class);
 
     @Autowired
-    private IAreaBaseInfoMapper baseInfoMapper;
+    private AreaRegisterInImpl areaRegisterIn;
 
 
     @Override
@@ -46,7 +47,7 @@ public class AreaRegisterImpl implements IAreaRegister {
                 acknowledgement.setText("由于内容重复注册，注册失败");
                 return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
             }
-            baseInfoMapper.defaultAdd(areaBaseInfo);
+            areaRegisterIn.addAreaRequest(areaBaseInfo);
         } catch (Exception ex) {
             logger.error("error", ex);
             return "false:" + ex.getMessage();
@@ -66,7 +67,7 @@ public class AreaRegisterImpl implements IAreaRegister {
                 acknowledgement.setText("由于更新内容不存在，更新失败!");
                 return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
             }
-            baseInfoMapper.defaultUpdate(areaBaseInfo);
+            areaRegisterIn.update(areaBaseInfo);
         } catch (Exception ex) {
             logger.error("error", ex);
             return "false:" + ex.getMessage();
@@ -82,7 +83,7 @@ public class AreaRegisterImpl implements IAreaRegister {
             String code = document.selectSingleNode("//code/@value").getText();
             Map<String, Object> map = new TreeMap<>();
             map.put("code", code);
-            AreaBaseInfo baseInfo = baseInfoMapper.getAreaBaseInfo(map);
+            AreaBaseInfo baseInfo = areaRegisterIn.getAreaBaseInfo(map);
             map.clear();
             map = null;
             return RegisterUtil.registerMessage(RegisterType.AREA_QUERY,baseInfo);
@@ -100,7 +101,7 @@ public class AreaRegisterImpl implements IAreaRegister {
             String code = document.selectSingleNode("//code/@value").getText();
             Map<String, Object> map = new TreeMap<>();
             map.put("code", code);
-            List<AreaBaseInfo> baseInfoList = baseInfoMapper.getChildren(map);
+            List<AreaBaseInfo> baseInfoList = areaRegisterIn.getChildren(map);
             map.clear();
             map = null;
             return RegisterUtil.registerMessage(RegisterType.AREA_QUERY_CHILDREN,baseInfoList);
@@ -118,7 +119,7 @@ public class AreaRegisterImpl implements IAreaRegister {
             String historyId = document.selectSingleNode("//code/@value").getText();
             Map<String, Object> map = new TreeMap<>();
             map.put("historyId", historyId);
-            AreaBaseInfo baseInfo = baseInfoMapper.getAreaBaseInfo(map);
+            AreaBaseInfo baseInfo = areaRegisterIn.getAreaBaseInfo(map);
             map.clear();
             map = null;
             return RegisterUtil.registerMessage(RegisterType.AREA_QUERY,baseInfo);
@@ -131,7 +132,7 @@ public class AreaRegisterImpl implements IAreaRegister {
     private boolean ifCodeExist(String Code) {
         Example example = new Example(AreaBaseInfo.class);
         example.createCriteria().andEqualTo("Code", Code);
-        int count = baseInfoMapper.selectCountByExample(example);
+        int count = areaRegisterIn.selectCountByExample(example);
         return count > 0;
     }
 }

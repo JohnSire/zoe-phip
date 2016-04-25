@@ -2,6 +2,7 @@ package com.zoe.phip.register.service.internal;
 
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.XmanCard;
 
@@ -9,7 +10,7 @@ import com.zoe.phip.register.model.XmanCard;
  * 病人注册服务
  * Created by zengjiyang on 2016/4/11.
  */
-public interface IPatientRegisterIn {
+public interface IPatientRegisterIn extends IBaseInService<XmanBaseInfo> {
 
     /**
      * 个人信息新增

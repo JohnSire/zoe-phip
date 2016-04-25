@@ -13,7 +13,7 @@ public interface IServiceMapper<T extends BaseEntity> extends IMyMapper<T> {
      * @param t
      * @return
      */
-    int defaultAdd(T t);
+  /*  int defaultAdd(T t);
 
-    int defaultUpdate(T t);
+    int defaultUpdate(T t);*/
 }

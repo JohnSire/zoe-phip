@@ -10,6 +10,7 @@ import com.zoe.phip.register.dao.IMedicalStaffInfoMapper;
 import com.zoe.phip.register.model.MedicalStaffInfo;
 import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IMedicalStaffRegister;
+import com.zoe.phip.register.service.impl.internal.MedicalStaffRegisterInImpl;
 import com.zoe.phip.register.service.internal.IMedicalStaffRegisterIn;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
@@ -36,11 +37,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
 
 
     @Autowired
-    private Parser parser;
-
-
-    @Autowired
-    private IMedicalStaffRegisterIn staffRegisterIn;
+    private MedicalStaffRegisterInImpl staffRegisterIn;
 
     /**
      * 新增个人信息注册
@@ -78,15 +75,12 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             if (strResult.contains("error:数据集内容验证错误")) {
                 return RegisterUtil.responseFailed(staffInfo, strResult, RegisterType.DOCTOR_ADD_ERROR);
             }
-            ServiceResultT<MedicalStaffInfo> result = staffRegisterIn.addProvider(staffInfo);
-            if (result.getMessages().size() > 0) {
-                return RegisterUtil.responseFailed(staffInfo, result.getMessages().get(0).getContent(), RegisterType.DOCTOR_ADD_ERROR);
-            } else {
-                acknowledgement.setTypeCode("AA");
-                acknowledgement.setText("注册成功");
-                staffInfo.setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.DOCTOR_ADD_SUCCESS, staffInfo);
-            }
+            MedicalStaffInfo result = staffRegisterIn.addProvider(staffInfo);
+
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("注册成功");
+            staffInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.DOCTOR_ADD_SUCCESS, result);
 //            staffInfo.setId(StringUtil.getUUID());
             //ReceiverSender
 //            String rsXmlPath = "/template/base/ReceiverSenderAdapter.xml";
@@ -133,15 +127,12 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             if (strResult.contains("error:数据集内容验证错误")) {
                 return RegisterUtil.responseFailed(staffInfo, strResult, RegisterType.DOCTOR_UPDATE_ERROR);
             }
-            ServiceResultT<MedicalStaffInfo> result = staffRegisterIn.updateProvider(staffInfo);
-            if (result.getMessages().size() > 0) {
-                return RegisterUtil.responseFailed(staffInfo, result.getMessages().get(0).getContent(), RegisterType.DOCTOR_UPDATE_ERROR);
-            } else {
-                acknowledgement.setTypeCode("AA");
-                acknowledgement.setText("注册成功");
-                staffInfo.setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.DOCTOR_UPDATE_SUCCESS, staffInfo);
-            }
+            MedicalStaffInfo result = staffRegisterIn.updateProvider(staffInfo);
+
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("注册成功");
+            staffInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.DOCTOR_UPDATE_SUCCESS, result);
 
         } catch (Exception ex) {
             logger.error("error:", ex);
@@ -177,26 +168,19 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             if (!StringUtil.isNullOrWhiteSpace(staffName)) map.put("staffName", staffName);
             if (!StringUtil.isNullOrWhiteSpace(genderCode)) map.put("genderCode", genderCode);
             if (!StringUtil.isNullOrWhiteSpace(birthDate)) map.put("birthDate", birthDate);
-            ServiceResultT<MedicalStaffInfo> result = staffRegisterIn.providerDetailsQuery(map);
-            if (result.getMessages().size() > 0) {
-                acknowledgement.setTypeCode("AE");
-                acknowledgement.setText(result.getMessages().get(0).getContent());
-                return RegisterUtil.registerMessage(RegisterType.DOCTOR_QUERY_ERROR, acknowledgement);
+            MedicalStaffInfo result = staffRegisterIn.providerDetailsQuery(map);
 
-            } else {
-                acknowledgement.setTypeCode("AA");
-                acknowledgement.setText("查询成功");
-                result.getResult().setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.DOCTOR_QUERY_SUCCESS, result.getResult());
-            }
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("查询成功");
+            result.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.DOCTOR_QUERY_SUCCESS, result);
 
         } catch (Exception ex) {
-            logger.error("error:",ex);
+            logger.error("error:", ex);
 
         }
         return null;
     }
-
 
 
 //    public boolean ifStaffIdExist(String staffId) {

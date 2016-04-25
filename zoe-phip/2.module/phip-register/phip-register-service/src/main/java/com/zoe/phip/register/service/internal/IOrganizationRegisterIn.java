@@ -3,6 +3,7 @@ package com.zoe.phip.register.service.internal;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.register.model.OrgDeptInfo;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Map;
 /**医疗机构注册服务
  * Created by zengjiyang on 2016/4/11.
  */
-public interface IOrganizationRegisterIn {
+public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
 
     /**
      *	新增医疗卫生机构注册

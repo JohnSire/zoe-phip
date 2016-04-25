@@ -7,6 +7,7 @@ import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.XmanCard;
 import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IPatientRegister;
+import com.zoe.phip.register.service.impl.internal.PatientRegisterInImpl;
 import com.zoe.phip.register.service.internal.IPatientRegisterIn;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
@@ -22,16 +23,16 @@ import org.springframework.stereotype.Repository;
  * Created by zengjiyang on 2016/4/11.
  */
 @Repository("PatientRegister")
-@Service(interfaceClass = IPatientRegister.class, proxy = "sdpf",protocol = {"webservice"}, dynamic = true)
+@Service(interfaceClass = IPatientRegister.class, proxy = "sdpf", protocol = {"webservice"}, dynamic = true)
 public class PatientRegisterImpl implements IPatientRegister {
 
     private static final Logger logger = LoggerFactory.getLogger(PatientRegisterImpl.class);
 
-    private final String adapterPath="/template/patient/input/adapter/PatientRegisterAdapter.xml";
-    private final String cardAdapterPath="/template/patient/input/adapter/XmanCardAdapter.xml";
+    private final String adapterPath = "/template/patient/input/adapter/PatientRegisterAdapter.xml";
+    private final String cardAdapterPath = "/template/patient/input/adapter/XmanCardAdapter.xml";
 
     @Autowired
-    private IPatientRegisterIn patientRegisterIn;
+    private PatientRegisterInImpl patientRegisterIn;
 
     /**
      * 新增个人信息注册
@@ -65,21 +66,18 @@ public class PatientRegisterImpl implements IPatientRegister {
             baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
 
             //xml 验证错误
-            if(strResult.contains("error:数据集内容验证错误")){
-                return registerFailed(baseInfo,strResult);
+            if (strResult.contains("error:数据集内容验证错误")) {
+                return registerFailed(baseInfo, strResult);
             }
             Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardAdapterPath));
             XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class, cardParDoc);
 
-            ServiceResultT<XmanBaseInfo> result= patientRegisterIn.addPatientRegistry(baseInfo,xmanCard);
-            if(result.getMessages().size()>0){
-                return registerFailed(baseInfo, result.getMessages().get(0).getContent());
-            }else {
-                acknowledgement.setTypeCode("AA");
-                acknowledgement.setText("注册成功");
-                baseInfo.setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.PATIENT_ADD_SUCCESS, baseInfo);
-            }
+            XmanBaseInfo result = patientRegisterIn.addPatientRegistry(baseInfo, xmanCard);
+
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("注册成功");
+            baseInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_ADD_SUCCESS, result);
 
         } catch (Exception ex) {
             logger.error("error:", ex);
@@ -107,23 +105,18 @@ public class PatientRegisterImpl implements IPatientRegister {
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapterPath));
             baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
             //xml 验证错误
-            if(strResult.contains("error:数据集内容验证错误")){
-                return updateFailed(baseInfo,strResult);
+            if (strResult.contains("error:数据集内容验证错误")) {
+                return updateFailed(baseInfo, strResult);
             }
 
             Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardAdapterPath));
             XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class, cardParDoc);
 
-            ServiceResultT<XmanBaseInfo> result= patientRegisterIn.updatePatientRegistry(baseInfo,xmanCard);
-
-            if(result.getMessages().size()>0){
-                return updateFailed(baseInfo, result.getMessages().get(0).getContent());
-            }else {
-                acknowledgement.setTypeCode("AA");
-                acknowledgement.setText("更新成功");
-                baseInfo.setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.PATIENT_UPDATE_SUCCESS, baseInfo);
-            }
+            XmanBaseInfo result = patientRegisterIn.updatePatientRegistry(baseInfo, xmanCard);
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("更新成功");
+            baseInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_UPDATE_SUCCESS, result);
         } catch (Exception ex) {
             logger.error("error:", ex);
             return updateFailed(baseInfo, ex.getMessage());
@@ -162,16 +155,11 @@ public class PatientRegisterImpl implements IPatientRegister {
                 acknowledgement.setText(strResult + ",合并失败");
                 return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
             }
-            ServiceResultT<XmanBaseInfo> result= patientRegisterIn.mergePatientRegistry(newPatientId,oldPatientId);
-            if(result.getMessages().size()>0){
-                acknowledgement.setTypeCode("AE");
-                acknowledgement.setText(result.getMessages().get(0).getContent());
-                return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
-            }else {
-                acknowledgement.setTypeCode("AA");
-                acknowledgement.setText("合并成功");
-                return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCCESS, acknowledgement);
-            }
+            XmanBaseInfo result = patientRegisterIn.mergePatientRegistry(newPatientId, oldPatientId);
+
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("合并成功");
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCCESS, acknowledgement);
         } catch (Exception ex) {
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(ex.getMessage());
@@ -192,7 +180,7 @@ public class PatientRegisterImpl implements IPatientRegister {
         try {
             Document document = ProcessXmlUtil.load(message);
             String patientId = document.selectSingleNode("//controlActProcess/queryByParameter/parameterList/livingSubjectId/value/@extension").getText();
-            String msgId=document.selectSingleNode("//id/@extension").getText();
+            String msgId = document.selectSingleNode("//id/@extension").getText();
             acknowledgement.setMsgId(msgId);
             String createTime = document.selectSingleNode("//creationTime/@value").getText();
             acknowledgement.setCreateTime(createTime);
@@ -202,23 +190,15 @@ public class PatientRegisterImpl implements IPatientRegister {
                 return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
             }
 
-            ServiceResultT<XmanBaseInfo> result= patientRegisterIn.patientRegistryQuery(patientId);
-            if(result.getMessages().size()>0){
-                acknowledgement.setTypeCode("AE");
-                acknowledgement.setText(result.getMessages().get(0).getContent());
-                return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
-            }else {
+            XmanBaseInfo result = patientRegisterIn.patientRegistryQuery(patientId);
 
-                return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_SUCCESS, result.getResult());
-            }
-        }catch (Exception ex){
-            logger.error("error:",ex);
+
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_SUCCESS, result);
+        } catch (Exception ex) {
+            logger.error("error:", ex);
         }
         return null;
     }
-
-
-
 
 
     /**
