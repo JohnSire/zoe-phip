@@ -5,7 +5,7 @@ define(function (require, exports, module) {
     var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
     var BaseTree = require("{staticDir}/BaseTree/baseTree");
     var internal = {
-        medicalStaffGrid: null,
+        healthStaffGrid: null,
         init: function () {
             internal.healthStaffList();
             internal.healthStaffTree();
@@ -45,14 +45,11 @@ define(function (require, exports, module) {
                     dataAction: "local",
                     url: '',
                     columns: [
-                        {display: '身份证号', name: 'code', width: 100, align: 'left'},
-                        {display: '姓名', name: 'name', width: 80, align: 'left'},
-                        {display: '职务', name: 'name', width: 100, align: 'left'},
-                        {display: '机构名称', name: 'name', width: 120, align: 'left'},
-                        {display: '科室名称', name: 'name', width: 120, align: 'left'},
-                        {display: '性别', name: 'name', width: 80, align: 'left'},
-                        {display: '出生日期', name: 'name', width: 100, align: 'left'},
-                        {display: '联系电话', name: 'name', width: 100, align: 'left'},
+                        {display: '身份证号', name: 'code', width: 120, align: 'left'},
+                        {display: '姓名', name: 'name', width: 120, align: 'left'},
+                        {display: '性别', name: 'name', width: 120, align: 'left'},
+                        {display: '出生日期', name: 'name', width: 120, align: 'left'},
+                        {display: '联系电话', name: 'name', width: 120, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     frozen: false,
@@ -61,15 +58,15 @@ define(function (require, exports, module) {
                     height: "99%"//$("body").innerHeight() - $("#dictItemTools").outerHeight() - 76//500
                 },
                 dialogParam: {
-                    winName: "win_dict_item_dialog",//弹窗对象变量名称
-                    winCallback: "win_dict_item_callback",//弹窗回调函数
+                    winName: "win_healthStaff_detail_dialog",//弹窗对象变量名称
+                    winCallback: "win_healthStaff_detail_callback",//弹窗回调函数
                     titleKey: "name",
                     //新增参数
-                    add: {title: "新增医护人员信息"},
+                    add: {title: "新增卫生管理机构人员信息"},
                     //编辑参数
-                    edit: {title: "编辑医护人员信息"},
+                    edit: {title: "编辑卫生管理机构人员信息"},
                     common: {
-                        url: 'personnel/view/medicalstaffdetail',
+                        url: 'personnel/view/healthstaffdetail',
                         width: 1000,
                         height: 450
                     }
