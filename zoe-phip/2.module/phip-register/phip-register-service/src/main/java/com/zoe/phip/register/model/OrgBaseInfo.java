@@ -7,8 +7,8 @@ package com.zoe.phip.register.model;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Table;
 
 
 /**
@@ -22,12 +22,12 @@ public class OrgBaseInfo extends MasterEntity {
      * 机构科室标识:0：机构、1：科室
      */
     @Column(name = "TYPE")
-    private Integer type;
+    private int type;
     /**
      * 机构类型:机构类型：1：医疗机构、2：卫生管理机构、3：第三方机构
      */
     @Column(name = "CATALOG_ID")
-    private Integer catalogId;
+    private int catalogId;
     /**
      * 机构代码:
      */
@@ -52,12 +52,12 @@ public class OrgBaseInfo extends MasterEntity {
      * 有效时间（开始）
      */
     @Column(name = "EFFECTIVE_TIME_LOW")
-    private Date effectiveTimeLow;
+    private java.sql.Date effectiveTimeLow;
     /**
      * 有效时间（结束）
      */
     @Column(name = "EFFECTIVE_TIME_HIGH")
-    private Date effectiveTimeHigh;
+    private java.sql.Date effectiveTimeHigh;
     /**
      * 科室名称
      */
@@ -73,6 +73,7 @@ public class OrgBaseInfo extends MasterEntity {
      */
     @Column(name = "APPLICANT_ID")
     private String applicantId;
+
     /**
      * 法人代表
      */
@@ -184,23 +185,6 @@ public class OrgBaseInfo extends MasterEntity {
     @Column(name = "ROLECODE")
     private String rolecode;
 
-    public Integer getType() {
-        return this.type;
-    }
-
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getCatalogId() {
-        return this.catalogId;
-    }
-
-
-    public void setCatalogId(Integer catalogId) {
-        this.catalogId = catalogId;
-    }
 
     public String getCode() {
         return this.code;
@@ -233,26 +217,41 @@ public class OrgBaseInfo extends MasterEntity {
         return this.telecom;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getCatalogId() {
+        return catalogId;
+    }
+
+    public void setCatalogId(int catalogId) {
+        this.catalogId = catalogId;
+    }
 
     public void setTelecom(String telecom) {
         this.telecom = telecom;
     }
 
-    public Date getEffectiveTimeLow() {
+    public java.sql.Date getEffectiveTimeLow() {
         return this.effectiveTimeLow;
     }
 
 
-    public void setEffectiveTimeLow(Date effectiveTimeLow) {
+    public void setEffectiveTimeLow(java.sql.Date effectiveTimeLow) {
         this.effectiveTimeLow = effectiveTimeLow;
     }
 
-    public Date getEffectiveTimeHigh() {
+    public java.sql.Date getEffectiveTimeHigh() {
         return this.effectiveTimeHigh;
     }
 
 
-    public void setEffectiveTimeHigh(Date effectiveTimeHigh) {
+    public void setEffectiveTimeHigh(java.sql.Date effectiveTimeHigh) {
         this.effectiveTimeHigh = effectiveTimeHigh;
     }
 
@@ -282,6 +281,7 @@ public class OrgBaseInfo extends MasterEntity {
     public void setApplicantId(String applicantId) {
         this.applicantId = applicantId;
     }
+
 
 
     public String getRepresentative() {
@@ -356,15 +356,6 @@ public class OrgBaseInfo extends MasterEntity {
         this.bed = bed;
     }
 
-    public String getPublicKey() {
-        return this.publicKey;
-    }
-
-
-    public void setPublicKey(String publicKey) {
-        this.publicKey = publicKey;
-    }
-
     public String getWeb() {
         return this.web;
     }
@@ -419,23 +410,6 @@ public class OrgBaseInfo extends MasterEntity {
         this.summary = summary;
     }
 
-    public double getGlongitude() {
-        return this.glongitude;
-    }
-
-
-    public void setGlongitude(double glongitude) {
-        this.glongitude = glongitude;
-    }
-
-    public double getGlatitude() {
-        return this.glatitude;
-    }
-
-
-    public void setGlatitude(double glatitude) {
-        this.glatitude = glatitude;
-    }
 
     public String getComplaintTel() {
         return this.complaintTel;
@@ -477,6 +451,29 @@ public class OrgBaseInfo extends MasterEntity {
         return this.rolecode;
     }
 
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
+
+    public double getGlongitude() {
+        return glongitude;
+    }
+
+    public void setGlongitude(double glongitude) {
+        this.glongitude = glongitude;
+    }
+
+    public double getGlatitude() {
+        return glatitude;
+    }
+
+    public void setGlatitude(double glatitude) {
+        this.glatitude = glatitude;
+    }
 
     public void setRolecode(String rolecode) {
         this.rolecode = rolecode;
