@@ -2,6 +2,7 @@ package com.zoe.phip.web.controller.Register;
 
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.register.model.DictItem;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
@@ -91,7 +92,7 @@ public class OrganizationController {
      *
      * @return
      */
-    public ServiceResultT<List<OrgDeptInfo>> getMedicalOrgCategoryList(String category) {
+    public ServiceResultT<List<DictItem>> getMedicalOrgCategoryList(String category) {
         return ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo(), category);
     }
 
