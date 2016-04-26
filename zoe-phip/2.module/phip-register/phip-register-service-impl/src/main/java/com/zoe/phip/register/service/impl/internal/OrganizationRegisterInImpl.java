@@ -9,16 +9,18 @@ import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
+import com.zoe.phip.register.dao.IDictItemMapper;
 import com.zoe.phip.register.dao.IOrgDeptInfoMapper;
+import com.zoe.phip.register.model.DictItem;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.service.internal.IOrganizationRegisterIn;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created by zengjiyang on 2016/4/22.
@@ -26,6 +28,9 @@ import java.util.stream.Collectors;
 @Repository("OrganizationRegisterIn")
 @Service(interfaceClass = IOrganizationRegisterIn.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
 public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, IOrgDeptInfoMapper> implements IOrgDeptInfoMapper {
+
+    @Autowired
+    private IDictItemMapper dictItemMapper;
 
     @ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
     public OrgDeptInfo addOrganization(OrgDeptInfo orgDeptInfo) throws Exception {
@@ -55,7 +60,7 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
             throw new BusinessException("002");
         }
         //保存到数据库
-        super.update(orgDeptInfo);
+        getMapper().defaultUpdate(orgDeptInfo);
         return orgDeptInfo;
     }
 
@@ -77,10 +82,10 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return getMapper().deleteByExample(e) > 0;
     }
 
-    public List<OrgDeptInfo> dictItemListQuery(String deptParentCode) {
+    public List<DictItem> dictItemListQuery(String fkCatalogCode) {
         Example example = new Example(OrgDeptInfo.class);
-        example.createCriteria().andEqualTo("deptParentCode", deptParentCode);
-        return getMapper().selectByExample(example).stream().collect(Collectors.toList());
+        example.createCriteria().andEqualTo("fkCatalogCode", fkCatalogCode);
+        return dictItemMapper.selectByExample(example);
     }
 
     public PageList<OrgDeptInfo> organizationListQuery(String deptParentCode, String key, QueryPage page) {
@@ -104,4 +109,6 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     public OrgDeptInfo getOrgDeptInfo(Map<String, Object> map) {
         return getMapper().getOrgDeptInfo(map);
     }
+
+
 }

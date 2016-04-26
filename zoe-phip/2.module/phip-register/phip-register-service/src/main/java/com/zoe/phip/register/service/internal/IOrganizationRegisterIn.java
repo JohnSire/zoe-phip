@@ -2,6 +2,7 @@ package com.zoe.phip.register.service.internal;
 
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.module.service.service.in.IBaseInService;
+import com.zoe.phip.register.model.DictItem;
 import com.zoe.phip.register.model.OrgDeptInfo;
 
 import java.util.List;
@@ -44,10 +45,10 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
 
     /**
      * 查询医疗机构（科室）类别字典列表，用于构造树
-     * @param deptParentCode
+     * @param fkCatalogCode
      * @return
      */
-    ServiceResultT<List<OrgDeptInfo>> dictItemListQuery(SystemData systemData,String deptParentCode);
+    ServiceResultT<List<DictItem>> dictItemListQuery(SystemData systemData, String fkCatalogCode);
 
     /**
      * 查询医疗机构（科室）列表，内部使用
