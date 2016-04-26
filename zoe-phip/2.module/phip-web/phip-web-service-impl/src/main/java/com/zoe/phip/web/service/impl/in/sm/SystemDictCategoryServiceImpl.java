@@ -34,7 +34,7 @@ import java.util.Map;
 
 
 @Repository("SystemDictCategoryService")
-@Service(interfaceClass = ISystemDictCategoryService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = ISystemDictCategoryService.class, proxy = "sdpf",protocol = {"dubbo"}, dynamic = true)
 public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory, ISystemDictCategoryMapper> implements ISystemDictCategoryMapper {
 
     /**

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
  * @date 2016-03-22
  */
 @Repository("systemParameterService")
-@Service(interfaceClass = ISystemParameterService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = ISystemParameterService.class, proxy = "sdpf",protocol = {"dubbo"}, dynamic = true)
 public class SystemParameterServiceImpl extends BaseInServiceImpl<SystemParameter, ISystemParameterMapper> implements ISystemParameterMapper {
 
 }

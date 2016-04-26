@@ -104,7 +104,7 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
         Object firstData = isFirstSystemDataClass ? arguments[0] : null;
         final Object[] objects = makeArgument(arguments, isFirstSystemDataClass);
 
-        if (!methodName.equals("login")) {
+       /* if (!methodName.equals("login")) {
             if (isFirstSystemDataClass) {
                 SystemData token = (SystemData) firstData;
                 ((IBaseInService) instance).setSystemData(token);
@@ -119,7 +119,8 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
                 result.addMessage(ErrorCode.DEFAULT,"方法的第一个参数必须为SystemData类型");
                 return result;
             }
-        }
+        }*/
+
         //methodName.startsWith   ||methodName.startsWith("update")
         ///验证例子
      /*   if (methodName.startsWith("add")) {

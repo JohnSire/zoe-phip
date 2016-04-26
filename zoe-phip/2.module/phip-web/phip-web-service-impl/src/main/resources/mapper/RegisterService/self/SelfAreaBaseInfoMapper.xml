@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.register.dao.IAreaBaseInfoMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.AreaBaseInfo" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.AreaBaseInfo">
+        update PHIP_AREA_BASE_INFO
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="Pid != null">
+                PID = #{Pid,jdbcType=VARCHAR},
+            </if>
+            <if test="buildTime != null">
+                BUILD_TIME = #{buildTime,jdbcType=DATE},
+            </if>
+            <if test="areaCancellationDate != null">
+                AREA_CANCELLATION_DATE = #{areaCancellationDate,jdbcType=DATE},
+            </if>
+            <if test="areaCancelReason != null">
+                AREA_CANCEL_REASON = #{areaCancelReason,jdbcType=VARCHAR},
+            </if>
+            <if test="historyAreaId != null">
+                HISTORY_AREA_ID = #{historyAreaId,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getAreaBaseInfo" resultMap="BaseResultMap" parameterType="java.util.Map">
+      SELECT * FROM PHIP_AREA_BASE_INFO PABI  WHERE 1 =1
+        <if test="_parameter.containsKey('code')">
+            AND PABI.CODE = #{code,jdbcType=VARCHAR}
+        </if>
+        <if test="_parameter.containsKey('historyId')">
+            AND PABI.HISTORY_AREA_ID = #{historyId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getChildren" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT * FROM PHIP_AREA_BASE_INFO PABI  WHERE PABI.PID IN  (
+        SELECT ID from PHIP_AREA_BASE_INFO PPABI where PPABI.CODE =#{code} AND ROWNUM=1
+        )
+    </select>
+</mapper>
