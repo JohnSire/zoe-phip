@@ -86,7 +86,7 @@
               </asEmployee>
               <asOtherIDs classCode="PAT">
                 <!--健康卡号-->
-                <id root="2.16.156.10011.1.19" extension="${Model.healthRecordNo}" />
+                <id root="2.16.156.10011.1.19" extension="${Model.XmanCard.XcCardCode}" />
                 <scopingOrganization classCode="ORG" determinerCode="INSTANCE">
                   <!--健康卡发放机构代码-->
                   <id root="2.16.156.10011.1.5" extension="${Model.healthRecordOrgCode}" />

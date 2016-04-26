@@ -61,6 +61,7 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         xmanCard.setModifyAt(new Date());
         xmanCard.setState(1);
         cardMapper.insertSelective(xmanCard);
+        xmanBaseInfo.setXmanCard(xmanCard);
         return xmanBaseInfo;
     }
 
@@ -74,9 +75,8 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
             throw new BusinessException("002");
         }
         //保存到数据库
-        super.update(xmanBaseInfo);
-        xmanCard.setModifyAt(new Date());
-        cardMapper.updateByPrimaryKeySelective(xmanCard);
+        getMapper().defaultUpdate(xmanBaseInfo);
+        cardMapper.defaultUpdate(xmanCard);
         xmanBaseInfo.setXmanCard(xmanCard);
         return xmanBaseInfo;
     }
@@ -90,22 +90,30 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
             throw new BusinessException("003");
         }
         //赋值
-        copyValue(newPatient, oldPatient);
+        copyValue(XmanBaseInfo.class,newPatient, oldPatient);
+        //
         //保存到数据库
-        super.update(newPatient);
+        getMapper().defaultUpdate(newPatient);
         getMapper().delete(oldPatient);
+        //卡的赋值
+        XmanCard newCard=cardMapper.getXmanCard(newPatient.getId());
+        XmanCard oldCard=cardMapper.getXmanCard(oldPatient.getId());
+        if(newCard!=null&&oldCard!=null){
+            copyValue(XmanCard.class,newCard,oldCard);
+            newPatient.setXmanCard(newCard);
+        }
         return newPatient;
     }
 
     @Override
     public XmanBaseInfo patientRegistryQuery(String patientId) throws Exception {
-        ErrorMessage[] errorMessages = this.getClass().getAnnotationsByType(ErrorMessage.class);
         //todo 字典赋值
         XmanBaseInfo baseInfo = getMapper().getPatient(patientId);
         if (baseInfo == null) {
             throw new BusinessException("004");
         }
         XmanCard xmanCard = cardMapper.getXmanCard(baseInfo.getId());
+        baseInfo.setXmanCard(xmanCard);
         return baseInfo;
     }
 
@@ -141,27 +149,27 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
     }
     //endregion
 
-    /**
+     /**
      * 将旧实体的值，赋到新实体上
-     *
-     * @param newBaseInfo
-     * @param oldBaseInfo
+     * @param cl
+     * @param newObj
+     * @param oldObj
      */
-    private void copyValue(XmanBaseInfo newBaseInfo, XmanBaseInfo oldBaseInfo) {
-        Field[] fields = XmanBaseInfo.class.getDeclaredFields();
+    private void copyValue(Class<?> cl,Object newObj, Object oldObj) {
+        Field[] fields = cl.getDeclaredFields();
         for (Field field : fields) {
             String fieldName = field.getName();
             fieldName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
             try {
-                Method getMethod = XmanBaseInfo.class.getMethod("get" + fieldName);
-                Object oldValue = getMethod.invoke(oldBaseInfo);
-                Object newValue = getMethod.invoke(newBaseInfo);
+                Method getMethod = cl.getMethod("get" + fieldName);
+                Object oldValue = getMethod.invoke(oldObj);
+                Object newValue = getMethod.invoke(newObj);
                 //int类型 新值为0，旧值不为0  或者 新值为空，旧值不为空
                 if ((field.getType() == int.class && Integer.parseInt(oldValue.toString()) > 0 &&
                         Integer.parseInt(newValue.toString()) == 0) ||
                         ((newValue == null && oldValue != null))) {
-                    Method setMethod = XmanBaseInfo.class.getMethod("set" + fieldName, field.getType());
-                    setMethod.invoke(newBaseInfo, oldValue);
+                    Method setMethod = cl.getMethod("set" + fieldName, field.getType());
+                    setMethod.invoke(newObj, oldValue);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
