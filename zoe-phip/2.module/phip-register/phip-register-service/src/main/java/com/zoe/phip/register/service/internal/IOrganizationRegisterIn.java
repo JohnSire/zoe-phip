@@ -2,6 +2,7 @@ package com.zoe.phip.register.service.internal;
 
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.module.service.service.in.IBaseInService;
+import com.zoe.phip.register.model.OrgDeptInfo;
 
 import java.util.List;
 import java.util.Map;
