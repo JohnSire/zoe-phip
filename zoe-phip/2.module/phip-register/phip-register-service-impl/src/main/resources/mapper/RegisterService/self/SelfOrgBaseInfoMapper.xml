@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.dao.mapper.IOrgBaseInfoMapper">
+<resultMap id="MultiResultMap" type="com.zoe.phip.register.model.OrgBaseInfo" extends="BaseResultMap">
+
+</resultMap>
+<update id="defaultUpdate" parameterType="com.zoe.phip.register.model.OrgBaseInfo">
+    update PHIP_ORG_BASE_INFO
+    <set>
+        <if test="type != null">
+            TYPE = #{type,jdbcType=INT},
+        </if>
+        <if test="catalogId != null">
+            CATALOG_ID = #{catalogId,jdbcType=INT},
+        </if>
+        <if test="code != null">
+            CODE = #{code,jdbcType=VARCHAR},
+        </if>
+        <if test="orgName != null">
+            ORG_NAME = #{orgName,jdbcType=VARCHAR},
+        </if>
+        <if test="address != null">
+            ADDRESS = #{address,jdbcType=VARCHAR},
+        </if>
+        <if test="telecom != null">
+            TELECOM = #{telecom,jdbcType=VARCHAR},
+        </if>
+        <if test="effectiveTimeLow != null">
+            EFFECTIVE_TIME_LOW = #{effectiveTimeLow,jdbcType=DATE},
+        </if>
+        <if test="effectiveTimeHigh != null">
+            EFFECTIVE_TIME_HIGH = #{effectiveTimeHigh,jdbcType=DATE},
+        </if>
+        <if test="departmentName != null">
+            DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR},
+        </if>
+        <if test="parentId != null">
+            PARENT_ID = #{parentId,jdbcType=VARCHAR},
+        </if>
+        <if test="applicantId != null">
+            APPLICANT_ID = #{applicantId,jdbcType=VARCHAR},
+        </if>
+        <if test="state != null">
+            STATE = #{state,jdbcType=DECIMAL},
+        </if>
+        <if test="representative != null">
+            REPRESENTATIVE = #{representative,jdbcType=VARCHAR},
+        </if>
+        <if test="license != null">
+            LICENSE = #{license,jdbcType=VARCHAR},
+        </if>
+        <if test="charge != null">
+            CHARGE = #{charge,jdbcType=VARCHAR},
+        </if>
+        <if test="chargePhone != null">
+            CHARGE_PHONE = #{chargePhone,jdbcType=VARCHAR},
+        </if>
+        <if test="agencyCode != null">
+            AGENCY_CODE = #{agencyCode,jdbcType=VARCHAR},
+        </if>
+        <if test="govId != null">
+            GOV_ID = #{govId,jdbcType=VARCHAR},
+        </if>
+        <if test="zipCode != null">
+            ZIP_CODE = #{zipCode,jdbcType=VARCHAR},
+        </if>
+        <if test="bed != null">
+            BED = #{bed,jdbcType=DECIMAL},
+        </if>
+        <if test="publicKey != null">
+            PUBLIC_KEY = #{publicKey,jdbcType=BLOB},
+        </if>
+        <if test="web != null">
+            WEB = #{web,jdbcType=VARCHAR},
+        </if>
+        <if test="email != null">
+            EMAIL = #{email,jdbcType=VARCHAR},
+        </if>
+        <if test="shortName != null">
+            SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+        </if>
+        <if test="notice != null">
+            NOTICE = #{notice,jdbcType=VARCHAR},
+        </if>
+        <if test="registePhone != null">
+            REGISTE_PHONE = #{registePhone,jdbcType=VARCHAR},
+        </if>
+        <if test="summary != null">
+            SUMMARY = #{summary,jdbcType=VARCHAR},
+        </if>
+        <if test="glongitude != null">
+            G_LONGITUDE = #{glongitude,jdbcType=DECIMAL},
+        </if>
+        <if test="glatitude != null">
+            G_LATITUDE = #{glatitude,jdbcType=DECIMAL},
+        </if>
+        <if test="complaintTel != null">
+            COMPLAINT_TEL = #{complaintTel,jdbcType=VARCHAR},
+        </if>
+        <if test="cityCode != null">
+            CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+        </if>
+        <if test="govType != null">
+            GOV_TYPE = #{govType,jdbcType=DECIMAL},
+        </if>
+        <if test="descr != null">
+            DESCR = #{descr,jdbcType=VARCHAR},
+        </if>
+        <if test="rolecode != null">
+            ROLECODE = #{rolecode,jdbcType=VARCHAR},
+        </if>
+        MODIFY_AT=sysdate
+</set>
+        where id = #{id}
+        </update>
+</mapper>

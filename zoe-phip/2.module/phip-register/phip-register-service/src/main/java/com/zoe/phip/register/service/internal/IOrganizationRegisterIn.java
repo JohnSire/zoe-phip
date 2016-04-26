@@ -1,8 +1,6 @@
 package com.zoe.phip.register.service.internal;
 
-import com.zoe.phip.infrastructure.entity.PageList;
-import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.register.model.OrgDeptInfo;
 
@@ -40,14 +38,16 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
      * @param id
      * @return
      */
-    boolean organizationDelete(String id);
+
+
+    ServiceResult  organizationDelete(SystemData systemData, String id);
 
     /**
      * 查询医疗机构（科室）类别字典列表，用于构造树
      * @param deptParentCode
      * @return
      */
-    List<OrgDeptInfo> dictItemListQuery(String deptParentCode);
+    ServiceResultT<List<OrgDeptInfo>> dictItemListQuery(SystemData systemData,String deptParentCode);
 
     /**
      * 查询医疗机构（科室）列表，内部使用
@@ -56,7 +56,7 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
      * @param page
      * @return
      */
-    PageList<OrgDeptInfo> organizationListQuery(String deptParentCode, String key, QueryPage page);
+    ServiceResultT<PageList<OrgDeptInfo>> organizationListQuery(SystemData systemData,String deptParentCode, String key, QueryPage page);
 
 
     

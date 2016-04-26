@@ -5,9 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
-import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
@@ -15,9 +13,6 @@ import com.zoe.phip.register.dao.IOrgDeptInfoMapper;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.service.internal.IOrganizationRegisterIn;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
@@ -65,7 +60,7 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     }
 
 
-    @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
+    @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败！")
     public OrgDeptInfo organizationDetailQuery(Map<String, Object> map) throws Exception {
         //todo 字典赋值
         OrgDeptInfo baseInfo = getMapper().getOrgDeptInfo(map);
@@ -82,13 +77,11 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return getMapper().deleteByExample(e) > 0;
     }
 
-
     public List<OrgDeptInfo> dictItemListQuery(String deptParentCode) {
         Example example = new Example(OrgDeptInfo.class);
         example.createCriteria().andEqualTo("deptParentCode", deptParentCode);
         return getMapper().selectByExample(example).stream().collect(Collectors.toList());
     }
-
 
     public PageList<OrgDeptInfo> organizationListQuery(String deptParentCode, String key, QueryPage page) {
         PageList<OrgDeptInfo> pageList = new PageList<OrgDeptInfo>();

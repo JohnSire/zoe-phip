@@ -21,7 +21,6 @@ import com.zoe.phip.web.dao.sm.ISystemUserMapper;
 import com.zoe.phip.web.model.sm.SystemUser;
 import com.zoe.phip.web.service.sm.ISystemUserService;
 import org.springframework.stereotype.Repository;
-import org.springframework.validation.annotation.Validated;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.*;
@@ -170,7 +169,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
      */
     @Override
     @ErrorMessage(code = "008",message = "已存在登录名({0})的用户！")
-    public int add( @Validated SystemUser entity) throws Exception {
+    public int add(  SystemUser entity) throws Exception {
        //判断是否存在用户
         List<SystemUser> list = getUserByLoginName(entity.getLoginName());
         if (list != null && list.size() > 0) {
