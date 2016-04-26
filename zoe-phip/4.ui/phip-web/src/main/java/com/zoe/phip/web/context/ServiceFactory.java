@@ -1,5 +1,6 @@
 package com.zoe.phip.web.context;
 
+import com.zoe.phip.register.service.internal.*;
 import com.zoe.phip.web.bean.BeanFactory;
 import com.zoe.phip.web.bean.Constant;
 import com.zoe.phip.web.service.sm.*;
@@ -10,6 +11,7 @@ import com.zoe.phip.web.service.sm.*;
  */
 public final class ServiceFactory {
 
+    /*web服务*/
     public static ISystemUserService getUserService() {
         return BeanFactory.getBean(Constant.SYSTEM_USER_SERVICE);
     }
@@ -35,5 +37,38 @@ public final class ServiceFactory {
 
     public static IMenuCompetenceService getMenuCompetenceService() {
         return BeanFactory.getBean(Constant.MENU_COMPETENCE_SERVICE);
+    }
+
+    /*注册服务*/
+    public static INationalStandardsService getNationalStandardsService() {
+        return BeanFactory.getBean(Constant.NATIONAL_STANDARDS_SERVICE);
+    }
+
+    public static IAreaRegisterIn getAreaRegisterIn() {
+        return BeanFactory.getBean(Constant.AREA_REGISTER_IN);
+    }
+
+    public static IDictRegisterIn getDictRegisterIn() {
+        return BeanFactory.getBean(Constant.DICT_REGISTER_IN);
+    }
+
+    public static IMedicalStaffRegisterIn getMedicalStaffRegisterIn() {
+        return BeanFactory.getBean(Constant.MEDICAL_STAFF_REGISTER_IN);
+    }
+
+    public static IOrganizationRegisterIn getOrganizationRegisterIn() {
+        return BeanFactory.getBean(Constant.ORGANIZATION_REGISTER_IN);
+    }
+
+    public static IOrgBaseInfoService getOrgBaseInfoService() {
+        return BeanFactory.getBean(Constant.ORG_BASEINFO_SERVICE);
+    }
+
+    public static IPatientRegisterIn getPatientRegisterIn() {
+        return BeanFactory.getBean(Constant.PATIENT_REGISTER_IN);
+    }
+
+    public static IThirdOrganizationRegisterIn getThirdOrganizationRegisterIn() {
+        return BeanFactory.getBean(Constant.THIRD_ORGANIZATION_REGISTER_IN);
     }
 }

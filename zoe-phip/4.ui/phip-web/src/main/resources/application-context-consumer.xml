@@ -6,10 +6,11 @@
 	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 	   ">
     <dubbo:application name="zoe-phip-consumer"/>
-
+    <dubbo:consumer timeout="10000"/>
     <dubbo:registry address="N/A"/>
 
     <!--地址：本地测试时用localhost 部署时要换成Ip地址-->
+    <!--web服务-->
     <dubbo:reference id="SystemUserService" interface="com.zoe.phip.web.service.sm.ISystemUserService"
                      url="dubbo://localhost:20080/com.zoe.phip.web.service.sm.ISystemUserService"/>
     <dubbo:reference id="SystemDictCategoryService" interface="com.zoe.phip.web.service.sm.ISystemDictCategoryService"
@@ -24,8 +25,25 @@
                      url="dubbo://localhost:20080/com.zoe.phip.web.service.sm.IUserCompetenceService"/>
     <dubbo:reference id="MenuCompetenceService" interface="com.zoe.phip.web.service.sm.IMenuCompetenceService"
                      url="dubbo://localhost:20080/com.zoe.phip.web.service.sm.sm.IMenuCompetenceService"/>
+    <!--注册服务-->
+    <dubbo:reference id="NationalStandardsService" interface="com.zoe.phip.register.service.internal.INationalStandardsService"
+                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.INationalStandardsService"/>
+    <dubbo:reference id="AreaRegisterIn" interface="com.zoe.phip.register.service.internal.IAreaRegisterIn"
+                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IAreaRegisterIn"/>
+    <dubbo:reference id="DictRegisterIn" interface="com.zoe.phip.register.service.internal.IDictRegisterIn"
+                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IDictRegisterIn"/>
+    <dubbo:reference id="MedicalStaffRegisterIn" interface="com.zoe.phip.register.service.internal.IMedicalStaffRegisterIn"
+                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IMedicalStaffRegisterIn"/>
+    <dubbo:reference id="OrganizationRegisterIn" interface="com.zoe.phip.register.service.internal.IOrganizationRegisterIn"
+                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IOrganizationRegisterIn"/>
+    <dubbo:reference id="OrgBaseInfoService" interface="com.zoe.phip.register.service.internal.IOrgBaseInfoService"
+                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IOrgBaseInfoService"/>
+    <dubbo:reference id="PatientRegisterIn" interface="com.zoe.phip.register.service.internal.IPatientRegisterIn"
+                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IPatientRegisterIn"/>
+    <dubbo:reference id="ThirdOrganizationRegisterIn" interface="com.zoe.phip.register.service.internal.IThirdOrganizationRegisterIn"
+                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IThirdOrganizationRegisterIn"/>
 
-    <dubbo:consumer timeout="10000"/>
+
 
 
 </beans>

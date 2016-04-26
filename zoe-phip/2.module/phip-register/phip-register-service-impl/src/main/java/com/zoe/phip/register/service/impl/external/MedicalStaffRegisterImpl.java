@@ -2,8 +2,10 @@ package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.parser.Parser;
 import com.zoe.phip.infrastructure.util.DateUtil;
+import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IMedicalStaffInfoMapper;
@@ -64,6 +66,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
         Document document = ProcessXmlUtil.load(message);
+        String errorMsg = "";
         MedicalStaffInfo staffInfo = null;
         try {
             SAXReader reader = new SAXReader();
@@ -81,23 +84,15 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             acknowledgement.setText("注册成功");
             staffInfo.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.DOCTOR_ADD_SUCCESS, result);
-//            staffInfo.setId(StringUtil.getUUID());
-            //ReceiverSender
-//            String rsXmlPath = "/template/base/ReceiverSenderAdapter.xml";
-//            Document rsParDoc = reader.read(this.getClass().getResourceAsStream(rsXmlPath));
-//            ReceiverSender sr = XmlBeanUtil.toBean(document, ReceiverSender.class, rsParDoc);
-//            staffInfo.setReceiverSender(sr);
-            //数据是否存在判断
-//            if (ifStaffIdExist(staffInfo.getStaffId())) {
-//                return RegisterUtil.responseFailed(staffInfo, "由于内容重复注册，注册失败", RegisterType.DOCTOR_ADD_ERROR);
-//            }
-//            staffInfoMapper.defaultAdd(staffInfo);
 
-
+        } catch (BusinessException e) {
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, staffRegisterIn.getClass());
         } catch (Exception ex) {
             logger.error("error:", ex);
-            return RegisterUtil.responseFailed(staffInfo, ex.getMessage(), RegisterType.DOCTOR_ADD_ERROR);
+            errorMsg = ex.getMessage();
         }
+        acknowledgement.setText(errorMsg);
+        return RegisterUtil.responseFailed(staffInfo, errorMsg, RegisterType.DOCTOR_ADD_ERROR);
     }
 
     @Override
@@ -113,6 +108,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
         }
         Document document = ProcessXmlUtil.load(message);
         MedicalStaffInfo staffInfo = null;
+        String errorMsg = "";
         try {
             SAXReader reader = new SAXReader();
             String filePath = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";
@@ -134,10 +130,13 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             staffInfo.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.DOCTOR_UPDATE_SUCCESS, result);
 
+        } catch (BusinessException e) {
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, staffRegisterIn.getClass());
         } catch (Exception ex) {
+            errorMsg = ex.getMessage();
             logger.error("error:", ex);
-            return RegisterUtil.responseFailed(staffInfo, ex.getMessage(), RegisterType.DOCTOR_UPDATE_ERROR);
         }
+        return RegisterUtil.responseFailed(staffInfo, errorMsg, RegisterType.DOCTOR_UPDATE_ERROR);
     }
 
     @Override
@@ -151,6 +150,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
         Document document;
+        String errorMsg = "";
         try {
             document = ProcessXmlUtil.load(message);
             String rootModeCode = document.getRootElement().getName();
@@ -175,21 +175,15 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             result.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.DOCTOR_QUERY_SUCCESS, result);
 
+        } catch (BusinessException e) {
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, staffRegisterIn.getClass());
         } catch (Exception ex) {
+            errorMsg = ex.getMessage();
             logger.error("error:", ex);
-
         }
-        return null;
+        acknowledgement.setText(errorMsg);
+        return RegisterUtil.registerMessage(RegisterType.DOCTOR_QUERY_ERROR, acknowledgement);
     }
 
-
-
-
-//    public boolean ifStaffIdExist(String staffId) {
-//        Example example = new Example(MedicalStaffInfo.class);
-//        example.createCriteria().andEqualTo("staffId", staffId);
-//        int count = staffInfoMapper.selectCountByExample(example);
-//        return count > 0;
-//    }
 
 }

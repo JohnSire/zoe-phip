@@ -26,7 +26,7 @@ import java.util.Map;
  */
 @Repository("MedicalStaffRegisterIn")
 @Service(interfaceClass = IMedicalStaffRegisterIn.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
-@ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
+@ErrorMessage(code = "001", message = "由于内容重复注册，注册失�)
 @ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
 @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
 @ErrorMessage(code = "004", message = "由于删除内容不存在，删除失败")
@@ -36,7 +36,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     @Override
 
     public MedicalStaffInfo providerDetailsQuery(Map<String, Object> map) throws Exception {
-        //todo 字典赋值
+        //todo 字典赋�
         MedicalStaffInfo staffInfo = getMapper().getStaff(map);
         if (staffInfo == null) {
             throw new BusinessException("003");
