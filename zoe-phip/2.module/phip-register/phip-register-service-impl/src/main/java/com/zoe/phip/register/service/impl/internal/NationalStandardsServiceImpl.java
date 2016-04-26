@@ -11,6 +11,7 @@ import com.zoe.phip.infrastructure.annotation.ErrorMessages;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.register.dao.INationalStandardsMapper;
@@ -38,15 +39,15 @@ public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStan
         PageList<NationalStandards> pageList = new PageList<>();
         //分页
         SqlHelper.startPage(queryPage);
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        key = StringUtil.isNullOrWhiteSpace(key) ? "" : key.toUpperCase();
+        Map<String, Object> params = new HashMap<>();
+        params.put("key", SqlHelper.getLikeStr(key));
         List<NationalStandards> results = getMapper().getDataListByPage(params);
         PageInfo<NationalStandards> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
         return pageList;
     }
-
 
 
     @Override
@@ -59,7 +60,7 @@ public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStan
             map = null;
             throw new BusinessException("001", entity.getCode());
         }
-        return getMapper().insertSelective(entity);
+        return super.add(entity);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStan
             map = null;
             throw new BusinessException("001", entity.getCode());
         }
-        return getMapper().updateByPrimaryKey(entity);
+        return super.update(entity);
     }
 
     @Override

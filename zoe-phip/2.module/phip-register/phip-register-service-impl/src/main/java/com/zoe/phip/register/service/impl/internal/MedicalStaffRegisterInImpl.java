@@ -26,15 +26,17 @@ import java.util.Map;
  */
 @Repository("MedicalStaffRegisterIn")
 @Service(interfaceClass = IMedicalStaffRegisterIn.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
+@ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
+@ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
+@ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
+@ErrorMessage(code = "004", message = "由于删除内容不存在，删除失败")
 public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffInfo, IMedicalStaffInfoMapper> implements IMedicalStaffInfoMapper {
-
     private static final Logger logger = LoggerFactory.getLogger(MedicalStaffRegisterInImpl.class);
 
-
     @Override
-    @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
+
     public MedicalStaffInfo providerDetailsQuery(Map<String, Object> map) throws Exception {
-        //todo 字典赋值
+        //todo 字典赋�
         MedicalStaffInfo staffInfo = getMapper().getStaff(map);
         if (staffInfo == null) {
             throw new BusinessException("003");
@@ -43,7 +45,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     }
 
     @Override
-    @ErrorMessage(code = "004", message = "由于删除内容不存在，删除失败")
+
     public boolean providerDelete(MedicalStaffInfo staffInfo) throws Exception {
         return getMapper().deleteByPrimaryKey(staffInfo.getId()) > 0;
     }
@@ -71,7 +73,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     }
 
     @Override
-    @ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
+
     public MedicalStaffInfo addProvider(MedicalStaffInfo medicalStaffInfo) throws Exception {
         Example example = new Example(MedicalStaffInfo.class);
         example.createCriteria().andEqualTo("staffId", medicalStaffInfo.getStaffId());
@@ -87,7 +89,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     }
 
     @Override
-    @ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
+
     public MedicalStaffInfo updateProvider(MedicalStaffInfo medicalStaffInfo) throws Exception {
         ErrorMessage[] errorMessages = this.getClass().getAnnotationsByType(ErrorMessage.class);
         Example example = new Example(MedicalStaffInfo.class);

@@ -35,4 +35,11 @@ public interface IAreaBaseInfoMapper extends IServiceMapper<AreaBaseInfo> {
      */
     List<AreaBaseInfo> getChildren(Map<String,Object> map);
 
+    /**
+     * 根据关键字查询区域信息
+     * @param map
+     * @return
+     */
+    List<AreaBaseInfo> getDataList(Map<String,Object> map);
+
 }
