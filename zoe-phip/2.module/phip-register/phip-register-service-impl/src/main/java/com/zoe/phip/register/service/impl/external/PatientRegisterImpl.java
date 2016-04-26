@@ -1,7 +1,10 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.exception.BusinessException;
+import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.XmanCard;
@@ -19,6 +22,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.text.MessageFormat;
+
 /**
  * Created by zengjiyang on 2016/4/11.
  */
@@ -33,6 +38,7 @@ public class PatientRegisterImpl implements IPatientRegister {
 
     @Autowired
     private PatientRegisterInImpl patientRegisterIn;
+
 
     /**
      * 新增个人信息注册
@@ -78,7 +84,9 @@ public class PatientRegisterImpl implements IPatientRegister {
             acknowledgement.setText("注册成功");
             baseInfo.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.PATIENT_ADD_SUCCESS, result);
-
+        } catch (BusinessException e) {
+            String msg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
+            return registerFailed(baseInfo, msg);
         } catch (Exception ex) {
             logger.error("error:", ex);
             return registerFailed(baseInfo, ex.getMessage());
@@ -117,6 +125,9 @@ public class PatientRegisterImpl implements IPatientRegister {
             acknowledgement.setText("更新成功");
             baseInfo.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.PATIENT_UPDATE_SUCCESS, result);
+        } catch (BusinessException e) {
+            String msg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
+            return updateFailed(baseInfo, msg);
         } catch (Exception ex) {
             logger.error("error:", ex);
             return updateFailed(baseInfo, ex.getMessage());
@@ -160,6 +171,10 @@ public class PatientRegisterImpl implements IPatientRegister {
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("合并成功");
             return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCCESS, acknowledgement);
+        } catch (BusinessException e) {
+            String msg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
+            acknowledgement.setText(msg);
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
         } catch (Exception ex) {
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(ex.getMessage());
@@ -191,13 +206,18 @@ public class PatientRegisterImpl implements IPatientRegister {
             }
 
             XmanBaseInfo result = patientRegisterIn.patientRegistryQuery(patientId);
-
-
             return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_SUCCESS, result);
-        } catch (Exception ex) {
-            logger.error("error:", ex);
         }
-        return null;
+        catch (BusinessException e) {
+            String msg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
+            acknowledgement.setText(msg);
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
+        }
+        catch (Exception ex) {
+            acknowledgement.setText(ex.getMessage());
+            logger.error("error:", ex);
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
+        }
     }
 
 
