@@ -23,8 +23,8 @@ import java.util.*;
  */
 @Repository("AreaRegisterIn")
 @Service(interfaceClass = IAreaRegisterIn.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
-@ErrorMessage(code = "001", message = "由于内容重复注册，注册失�)
-@ErrorMessage(code = "002", message = "由于内容重复注册，更新失�)
+@ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
+@ErrorMessage(code = "002", message = "由于内容重复注册，更新失败")
 @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
 public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBaseInfoMapper> implements IAreaBaseInfoMapper {
 
@@ -47,7 +47,7 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
     }
 
     public AreaBaseInfo getAreaBaseInfo(String id) throws Exception {
-        //todo 字典赋�
+        //todo 字典赋�
         AreaBaseInfo baseInfo = getMapper().selectByPrimaryKey(id);
         if (baseInfo == null) {
             throw new BusinessException("003");

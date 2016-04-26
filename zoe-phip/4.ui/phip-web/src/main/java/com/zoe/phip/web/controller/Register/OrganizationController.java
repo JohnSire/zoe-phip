@@ -92,11 +92,12 @@ public class OrganizationController {
      * @return
      */
     public ServiceResultT<List<OrgDeptInfo>> getMedicalOrgCategoryList(String category) {
-        return ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo(), category);
+        return null;
+        //return ServiceFactory.().dictItemListQuery(ComSession.getUserInfo(), category);
     }
 
 
-    //endregion
+    //endregiond
 
     // TODO: 2016/4/21
 
