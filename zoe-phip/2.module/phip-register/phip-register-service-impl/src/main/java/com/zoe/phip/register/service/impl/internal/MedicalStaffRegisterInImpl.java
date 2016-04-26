@@ -100,8 +100,8 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
             throw new BusinessException("002");
         }
         //保存到数据库
-        medicalStaffInfo.setId(StringUtil.getUUID());
-        super.add(medicalStaffInfo);
+//        medicalStaffInfo.setId(StringUtil.getUUID());
+        getMapper().defaultUpdate(medicalStaffInfo);
         return medicalStaffInfo;
     }
 }
