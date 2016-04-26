@@ -14,10 +14,6 @@ import static org.junit.Assert.*;
  */
 public class ProcessXmlUtilTest {
 
-    @Test
-    public void testLoadXmlFile() throws Exception {
-        ProcessXmlUtil.loadXmlFile("响应消息结果");
-    }
 
     @Test
     public void testMixResponseXml() throws Exception {
