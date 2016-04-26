@@ -35,8 +35,36 @@ var bodySection = {
                     <textarea rows="3" class="textarea" style="width:508px;height:60px;" name="Descr"></textarea>
                 </p>
             </li>
+
+            <li class="list">
+                <div class="column-one">
+                    <label class="label label-textarea">下拉列表：</label>
+                    <div class="simulate-select">
+                        <span class="text">sfsadfasdfssdfsdfsdfdsfsdfsf1111</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="margin-bottom: 10px;display:none;">
+                            <li class="simulate-select-list">厦门大学附属中山医院</li>
+                            <li class="simulate-select-list active">厦门大学附属中山医院0厦门大学附属中山医院0</li>
+                            <li class="simulate-select-list">厦门大学附属中山医院1</li>
+                            <li class="simulate-select-list">厦门大学附属中山医院2</li>
+                            <li class="simulate-select-list">厦门大学附属中山医院3</li>
+                            <li class="simulate-select-list">厦门大学附属中山医院4</li>
+                        </ul>
+
+                        <select name="FkStandardId" datatype="*" errormsg="请选择标准版本！"
+                                nullmsg="请选择!" style="display: none;">
+                            <option value="">--请选择标准版本--</option>
+                            <option value="d09fa4e9-7996-4865-8252-09ec95974b45">河南区域标准(20151214)</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <!--<li class="column-one">-->
+
+            <!--</li>-->
         </ul>
     </div>
+
 </div>
 <%};%>
 <%
