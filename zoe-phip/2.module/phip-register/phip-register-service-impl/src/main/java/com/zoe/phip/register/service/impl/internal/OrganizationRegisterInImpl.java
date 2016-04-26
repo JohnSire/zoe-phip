@@ -10,7 +10,6 @@ import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.register.dao.IOrgDeptInfoMapper;
-import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.service.internal.IOrganizationRegisterIn;
 import org.springframework.stereotype.Repository;

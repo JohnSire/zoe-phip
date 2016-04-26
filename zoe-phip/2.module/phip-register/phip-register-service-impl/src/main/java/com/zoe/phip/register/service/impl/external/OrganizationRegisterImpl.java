@@ -2,7 +2,6 @@ package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
-import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IOrganizationRegister;
 import com.zoe.phip.register.service.impl.internal.OrganizationRegisterInImpl;
