@@ -59,8 +59,8 @@ public class DictController extends BaseController {
     @RequestMapping(value = "/getOIDInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResultT<NationalStandards> getOIDInfo(HttpServletRequest request, Model model) {
-        return ServiceFactory.getNationalStandardsService().getById(ComSession.getUserInfo(), "id");
+    public ServiceResultT<NationalStandards> getOIDInfo(String id) {
+        return ServiceFactory.getNationalStandardsService().getById(ComSession.getUserInfo(), id);
     }
 
     /**
