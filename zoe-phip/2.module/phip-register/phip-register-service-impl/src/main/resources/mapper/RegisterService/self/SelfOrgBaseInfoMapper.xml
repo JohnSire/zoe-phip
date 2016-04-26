@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zoe.phip.dao.mapper.IOrgBaseInfoMapper">
+<mapper namespace="com.zoe.phip.register.dao.IOrgBaseInfoMapper">
 <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.OrgBaseInfo" extends="BaseResultMap">
 
 </resultMap>
@@ -8,10 +8,10 @@
     update PHIP_ORG_BASE_INFO
     <set>
         <if test="type != null">
-            TYPE = #{type,jdbcType=INT},
+            TYPE = #{type,jdbcType=DECIMAL},
         </if>
         <if test="catalogId != null">
-            CATALOG_ID = #{catalogId,jdbcType=INT},
+            CATALOG_ID = #{catalogId,jdbcType=DECIMAL},
         </if>
         <if test="code != null">
             CODE = #{code,jdbcType=VARCHAR},

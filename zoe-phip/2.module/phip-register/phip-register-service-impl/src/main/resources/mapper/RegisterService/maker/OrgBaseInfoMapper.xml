@@ -1,345 +1,345 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IOrgBaseInfoMapper">
-<resultMap id="BaseResultMap" type="com.zoe.phip.register.model.OrgBaseInfo" extends="com.zoe.phip.module.service.MasterEntityResultMap">
-    <result column="TYPE" property="type" javaType="java.lang.Integer"
-            jdbcType="INT"/>
-    <result column="CATALOG_ID" property="catalogId" javaType="java.lang.Integer"
-            jdbcType="INT"/>
-    <result column="CODE" property="code" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="ORG_NAME" property="orgName" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="ADDRESS" property="address" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="TELECOM" property="telecom" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="EFFECTIVE_TIME_LOW" property="effectiveTimeLow" javaType="java.sql.Date"
-            jdbcType="DATE"/>
-    <result column="EFFECTIVE_TIME_HIGH" property="effectiveTimeHigh" javaType="java.sql.Date"
-            jdbcType="DATE"/>
-    <result column="DEPARTMENT_NAME" property="departmentName" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="PARENT_ID" property="parentId" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="APPLICANT_ID" property="applicantId" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-
-    <result column="REPRESENTATIVE" property="representative" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="LICENSE" property="license" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="CHARGE" property="charge" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="CHARGE_PHONE" property="chargePhone" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="AGENCY_CODE" property="agencyCode" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="GOV_ID" property="govId" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="ZIP_CODE" property="zipCode" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="BED" property="bed" javaType="java.lang.Integer"
-            jdbcType="DECIMAL"/>
-    <result column="PUBLIC_KEY" property="publicKey" javaType="java.sql.Blob"
-            jdbcType="BLOB"/>
-    <result column="WEB" property="web" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="EMAIL" property="email" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="SHORT_NAME" property="shortName" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="NOTICE" property="notice" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="REGISTE_PHONE" property="registePhone" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="SUMMARY" property="summary" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="G_LONGITUDE" property="glongitude" javaType="java.lang.Double"
-            jdbcType="DECIMAL"/>
-    <result column="G_LATITUDE" property="glatitude" javaType="java.lang.Double"
-            jdbcType="DECIMAL"/>
-    <result column="COMPLAINT_TEL" property="complaintTel" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="CITY_CODE" property="cityCode" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="GOV_TYPE" property="govType" javaType="java.lang.Integer"
-            jdbcType="DECIMAL"/>
-    <result column="DESCR" property="descr" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-    <result column="ROLECODE" property="rolecode" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
-        </resultMap>
-<insert id="addList" parameterType="com.zoe.phip.register.model.OrgBaseInfo">
-INSERT INTO PHIP_ORG_BASE_INFO (
-TYPE,
-CATALOG_ID,
-CODE,
-ORG_NAME,
-ADDRESS,
-TELECOM,
-EFFECTIVE_TIME_LOW,
-EFFECTIVE_TIME_HIGH,
-DEPARTMENT_NAME,
-PARENT_ID,
-APPLICANT_ID,
-REPRESENTATIVE,
-LICENSE,
-CHARGE,
-CHARGE_PHONE,
-AGENCY_CODE,
-GOV_ID,
-ZIP_CODE,
-BED,
-PUBLIC_KEY,
-WEB,
-EMAIL,
-SHORT_NAME,
-NOTICE,
-REGISTE_PHONE,
-SUMMARY,
-G_LONGITUDE,
-G_LATITUDE,
-COMPLAINT_TEL,
-CITY_CODE,
-GOV_TYPE,
-DESCR,
-ROLECODE,
-<include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
-<foreach collection="list" item="item" index="index" close="" open="" separator="union all">
-SELECT
-#{item.type,jdbcType=DECIMAL},
-#{item.catalogId,jdbcType=VARCHAR},
-#{item.code,jdbcType=VARCHAR},
-#{item.orgName,jdbcType=VARCHAR},
-#{item.address,jdbcType=VARCHAR},
-#{item.telecom,jdbcType=VARCHAR},
-#{item.effectiveTimeLow,jdbcType=DATE},
-#{item.effectiveTimeHigh,jdbcType=DATE},
-#{item.departmentName,jdbcType=VARCHAR},
-#{item.parentId,jdbcType=VARCHAR},
-#{item.applicantId,jdbcType=VARCHAR},
-#{item.representative,jdbcType=VARCHAR},
-#{item.license,jdbcType=VARCHAR},
-#{item.charge,jdbcType=VARCHAR},
-#{item.chargePhone,jdbcType=VARCHAR},
-#{item.agencyCode,jdbcType=VARCHAR},
-#{item.govId,jdbcType=VARCHAR},
-#{item.zipCode,jdbcType=VARCHAR},
-#{item.bed,jdbcType=DECIMAL},
-#{item.publicKey,jdbcType=BLOB},
-#{item.web,jdbcType=VARCHAR},
-#{item.email,jdbcType=VARCHAR},
-#{item.shortName,jdbcType=VARCHAR},
-#{item.notice,jdbcType=VARCHAR},
-#{item.registePhone,jdbcType=VARCHAR},
-#{item.summary,jdbcType=VARCHAR},
-#{item.glongitude,jdbcType=DECIMAL},
-#{item.glatitude,jdbcType=DECIMAL},
-#{item.complaintTel,jdbcType=VARCHAR},
-#{item.cityCode,jdbcType=VARCHAR},
-#{item.govType,jdbcType=DECIMAL},
-#{item.descr,jdbcType=VARCHAR},
-#{item.rolecode,jdbcType=VARCHAR},
-<include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
-        FROM DUAL
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.OrgBaseInfo"
+               extends="com.zoe.phip.module.service.MasterEntityResultMap">
+        <result column="TYPE" property="type" javaType="java.lang.Integer"
+                jdbcType="INTEGER"/>
+        <result column="CATALOG_ID" property="catalogId" javaType="java.lang.Integer"
+                jdbcType="INTEGER"/>
+        <result column="CODE" property="code" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ORG_NAME" property="orgName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ADDRESS" property="address" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="TELECOM" property="telecom" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="EFFECTIVE_TIME_LOW" property="effectiveTimeLow" javaType="java.sql.Timestamp"
+                jdbcType="TIMESTAMP"/>
+        <result column="EFFECTIVE_TIME_HIGH" property="effectiveTimeHigh" javaType="java.sql.Timestamp"
+                jdbcType="TIMESTAMP"/>
+        <result column="DEPARTMENT_NAME" property="departmentName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="PARENT_ID" property="parentId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="APPLICANT_ID" property="applicantId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="REPRESENTATIVE" property="representative" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="LICENSE" property="license" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="CHARGE" property="charge" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="CHARGE_PHONE" property="chargePhone" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="AGENCY_CODE" property="agencyCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="GOV_ID" property="govId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ZIP_CODE" property="zipCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="BED" property="bed" javaType="java.lang.Integer"
+                jdbcType="DECIMAL"/>
+        <result column="PUBLIC_KEY" property="publicKey" javaType="java.lang.String"
+                jdbcType="BLOB"/>
+        <result column="WEB" property="web" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="SHORT_NAME" property="shortName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="NOTICE" property="notice" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="REGISTE_PHONE" property="registePhone" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="SUMMARY" property="summary" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="G_LONGITUDE" property="glongitude" javaType="double"
+                jdbcType="DOUBLE"/>
+        <result column="G_LATITUDE" property="glatitude" javaType="double"
+                jdbcType="DOUBLE"/>
+        <result column="COMPLAINT_TEL" property="complaintTel" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="CITY_CODE" property="cityCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="GOV_TYPE" property="govType" javaType="java.lang.Integer"
+                jdbcType="INTEGER"/>
+        <result column="DESCR" property="descr" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ROLECODE" property="rolecode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="addList" parameterType="com.zoe.phip.register.model.OrgBaseInfo">
+        INSERT INTO PHIP_ORG_BASE_INFO (
+        TYPE,
+        CATALOG_ID,
+        CODE,
+        ORG_NAME,
+        ADDRESS,
+        TELECOM,
+        EFFECTIVE_TIME_LOW,
+        EFFECTIVE_TIME_HIGH,
+        DEPARTMENT_NAME,
+        PARENT_ID,
+        APPLICANT_ID,
+        REPRESENTATIVE,
+        LICENSE,
+        CHARGE,
+        CHARGE_PHONE,
+        AGENCY_CODE,
+        GOV_ID,
+        ZIP_CODE,
+        BED,
+        PUBLIC_KEY,
+        WEB,
+        EMAIL,
+        SHORT_NAME,
+        NOTICE,
+        REGISTE_PHONE,
+        SUMMARY,
+        G_LONGITUDE,
+        G_LATITUDE,
+        COMPLAINT_TEL,
+        CITY_CODE,
+        GOV_TYPE,
+        DESCR,
+        ROLECODE,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+            SELECT
+            #{item.type,jdbcType=DECIMAL},
+            #{item.catalogId,jdbcType=DECIMAL},
+            #{item.code,jdbcType=VARCHAR},
+            #{item.orgName,jdbcType=VARCHAR},
+            #{item.address,jdbcType=VARCHAR},
+            #{item.telecom,jdbcType=VARCHAR},
+            #{item.effectiveTimeLow,jdbcType=DATE},
+            #{item.effectiveTimeHigh,jdbcType=DATE},
+            #{item.departmentName,jdbcType=VARCHAR},
+            #{item.parentId,jdbcType=VARCHAR},
+            #{item.applicantId,jdbcType=VARCHAR},
+            #{item.representative,jdbcType=VARCHAR},
+            #{item.license,jdbcType=VARCHAR},
+            #{item.charge,jdbcType=VARCHAR},
+            #{item.chargePhone,jdbcType=VARCHAR},
+            #{item.agencyCode,jdbcType=VARCHAR},
+            #{item.govId,jdbcType=VARCHAR},
+            #{item.zipCode,jdbcType=VARCHAR},
+            #{item.bed,jdbcType=DECIMAL},
+            #{item.publicKey,jdbcType=BLOB},
+            #{item.web,jdbcType=VARCHAR},
+            #{item.email,jdbcType=VARCHAR},
+            #{item.shortName,jdbcType=VARCHAR},
+            #{item.notice,jdbcType=VARCHAR},
+            #{item.registePhone,jdbcType=VARCHAR},
+            #{item.summary,jdbcType=VARCHAR},
+            #{item.glongitude,jdbcType=DECIMAL},
+            #{item.glatitude,jdbcType=DECIMAL},
+            #{item.complaintTel,jdbcType=VARCHAR},
+            #{item.cityCode,jdbcType=VARCHAR},
+            #{item.govType,jdbcType=DECIMAL},
+            #{item.descr,jdbcType=VARCHAR},
+            #{item.rolecode,jdbcType=VARCHAR},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
+            FROM DUAL
         </foreach>
-        </insert>
-<insert id="defaultAdd" parameterType="java.util.List">
-INSERT INTO PHIP_ORG_BASE_INFO (
-TYPE,
-CATALOG_ID,
-CODE,
-ORG_NAME,
-ADDRESS,
-TELECOM,
-EFFECTIVE_TIME_LOW,
-EFFECTIVE_TIME_HIGH,
-DEPARTMENT_NAME,
-PARENT_ID,
-APPLICANT_ID,
-REPRESENTATIVE,
-LICENSE,
-CHARGE,
-CHARGE_PHONE,
-AGENCY_CODE,
-GOV_ID,
-ZIP_CODE,
-BED,
-PUBLIC_KEY,
-WEB,
-EMAIL,
-SHORT_NAME,
-NOTICE,
-REGISTE_PHONE,
-SUMMARY,
-G_LONGITUDE,
-G_LATITUDE,
-COMPLAINT_TEL,
-CITY_CODE,
-GOV_TYPE,
-DESCR,
-ROLECODE,
-<include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
- VALUES(
-#{type,jdbcType=DECIMAL},
-#{catalogId,jdbcType=VARCHAR},
-#{code,jdbcType=VARCHAR},
-#{orgName,jdbcType=VARCHAR},
-#{address,jdbcType=VARCHAR},
-#{telecom,jdbcType=VARCHAR},
-#{effectiveTimeLow,jdbcType=DATE},
-#{effectiveTimeHigh,jdbcType=DATE},
-#{departmentName,jdbcType=VARCHAR},
-#{parentId,jdbcType=VARCHAR},
-#{applicantId,jdbcType=VARCHAR},
-#{representative,jdbcType=VARCHAR},
-#{license,jdbcType=VARCHAR},
-#{charge,jdbcType=VARCHAR},
-#{chargePhone,jdbcType=VARCHAR},
-#{agencyCode,jdbcType=VARCHAR},
-#{govId,jdbcType=VARCHAR},
-#{zipCode,jdbcType=VARCHAR},
-#{bed,jdbcType=DECIMAL},
-#{publicKey,jdbcType=BLOB},
-#{web,jdbcType=VARCHAR},
-#{email,jdbcType=VARCHAR},
-#{shortName,jdbcType=VARCHAR},
-#{notice,jdbcType=VARCHAR},
-#{registePhone,jdbcType=VARCHAR},
-#{summary,jdbcType=VARCHAR},
-#{glongitude,jdbcType=DECIMAL},
-#{glatitude,jdbcType=DECIMAL},
-#{complaintTel,jdbcType=VARCHAR},
-#{cityCode,jdbcType=VARCHAR},
-#{govType,jdbcType=DECIMAL},
-#{descr,jdbcType=VARCHAR},
-#{rolecode,jdbcType=VARCHAR},
-<include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
-     )
-        </insert>
-<delete id="deleteByIds" parameterType="java.lang.String">
-delete from PHIP_ORG_BASE_INFO where ID in
-<foreach collection="array" item="item" open="(" separator="," close=")">
-    #{item}
-</foreach>
-</delete>
-<delete id="deleteByList" parameterType="java.util.List">
-delete from PHIP_ORG_BASE_INFO where ID in
-<foreach collection="list" item="item" open="(" separator="," close=")">
-    #{item.id}
-</foreach>
-</delete>
-<update id="updateList" parameterType="java.util.List">
-<foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
-    update PHIP_ORG_BASE_INFO
-    <set>
-        <if test="item.type != null">
-            TYPE = #{item.type,jdbcType=DECIMAL},
-        </if>
-        <if test="item.catalogId != null">
-            CATALOG_ID = #{item.catalogId,jdbcType=VARCHAR},
-        </if>
-        <if test="item.code != null">
-            CODE = #{item.code,jdbcType=VARCHAR},
-        </if>
-        <if test="item.orgName != null">
-            ORG_NAME = #{item.orgName,jdbcType=VARCHAR},
-        </if>
-        <if test="item.address != null">
-            ADDRESS = #{item.address,jdbcType=VARCHAR},
-        </if>
-        <if test="item.telecom != null">
-            TELECOM = #{item.telecom,jdbcType=VARCHAR},
-        </if>
-        <if test="item.effectiveTimeLow != null">
-            EFFECTIVE_TIME_LOW = #{item.effectiveTimeLow,jdbcType=DATE},
-        </if>
-        <if test="item.effectiveTimeHigh != null">
-            EFFECTIVE_TIME_HIGH = #{item.effectiveTimeHigh,jdbcType=DATE},
-        </if>
-        <if test="item.departmentName != null">
-            DEPARTMENT_NAME = #{item.departmentName,jdbcType=VARCHAR},
-        </if>
-        <if test="item.parentId != null">
-            PARENT_ID = #{item.parentId,jdbcType=VARCHAR},
-        </if>
-        <if test="item.applicantId != null">
-            APPLICANT_ID = #{item.applicantId,jdbcType=VARCHAR},
-        </if>
-        <if test="item.state != null">
-            STATE = #{item.state,jdbcType=DECIMAL},
-        </if>
-        <if test="item.representative != null">
-            REPRESENTATIVE = #{item.representative,jdbcType=VARCHAR},
-        </if>
-        <if test="item.license != null">
-            LICENSE = #{item.license,jdbcType=VARCHAR},
-        </if>
-        <if test="item.charge != null">
-            CHARGE = #{item.charge,jdbcType=VARCHAR},
-        </if>
-        <if test="item.chargePhone != null">
-            CHARGE_PHONE = #{item.chargePhone,jdbcType=VARCHAR},
-        </if>
-        <if test="item.agencyCode != null">
-            AGENCY_CODE = #{item.agencyCode,jdbcType=VARCHAR},
-        </if>
-        <if test="item.govId != null">
-            GOV_ID = #{item.govId,jdbcType=VARCHAR},
-        </if>
-        <if test="item.zipCode != null">
-            ZIP_CODE = #{item.zipCode,jdbcType=VARCHAR},
-        </if>
-        <if test="item.bed != null">
-            BED = #{item.bed,jdbcType=DECIMAL},
-        </if>
-        <if test="item.publicKey != null">
-            PUBLIC_KEY = #{item.publicKey,jdbcType=BLOB},
-        </if>
-        <if test="item.web != null">
-            WEB = #{item.web,jdbcType=VARCHAR},
-        </if>
-        <if test="item.email != null">
-            EMAIL = #{item.email,jdbcType=VARCHAR},
-        </if>
-        <if test="item.shortName != null">
-            SHORT_NAME = #{item.shortName,jdbcType=VARCHAR},
-        </if>
-        <if test="item.notice != null">
-            NOTICE = #{item.notice,jdbcType=VARCHAR},
-        </if>
-        <if test="item.registePhone != null">
-            REGISTE_PHONE = #{item.registePhone,jdbcType=VARCHAR},
-        </if>
-        <if test="item.summary != null">
-            SUMMARY = #{item.summary,jdbcType=VARCHAR},
-        </if>
-        <if test="item.glongitude != null">
-            G_LONGITUDE = #{item.glongitude,jdbcType=DECIMAL},
-        </if>
-        <if test="item.glatitude != null">
-            G_LATITUDE = #{item.glatitude,jdbcType=DECIMAL},
-        </if>
-        <if test="item.complaintTel != null">
-            COMPLAINT_TEL = #{item.complaintTel,jdbcType=VARCHAR},
-        </if>
-        <if test="item.cityCode != null">
-            CITY_CODE = #{item.cityCode,jdbcType=VARCHAR},
-        </if>
-        <if test="item.govType != null">
-            GOV_TYPE = #{item.govType,jdbcType=DECIMAL},
-        </if>
-        <if test="item.descr != null">
-            DESCR = #{item.descr,jdbcType=VARCHAR},
-        </if>
-        <if test="item.rolecode != null">
-            ROLECODE = #{item.rolecode,jdbcType=VARCHAR},
-        </if>
-        MODIFY_AT=sysdate
-</set>
-        where id = #{item.id};
+    </insert>
+    <insert id="defaultAdd" parameterType="java.util.List">
+        INSERT INTO PHIP_ORG_BASE_INFO (
+        TYPE,
+        CATALOG_ID,
+        CODE,
+        ORG_NAME,
+        ADDRESS,
+        TELECOM,
+        EFFECTIVE_TIME_LOW,
+        EFFECTIVE_TIME_HIGH,
+        DEPARTMENT_NAME,
+        PARENT_ID,
+        APPLICANT_ID,
+        REPRESENTATIVE,
+        LICENSE,
+        CHARGE,
+        CHARGE_PHONE,
+        AGENCY_CODE,
+        GOV_ID,
+        ZIP_CODE,
+        BED,
+        PUBLIC_KEY,
+        WEB,
+        EMAIL,
+        SHORT_NAME,
+        NOTICE,
+        REGISTE_PHONE,
+        SUMMARY,
+        G_LONGITUDE,
+        G_LATITUDE,
+        COMPLAINT_TEL,
+        CITY_CODE,
+        GOV_TYPE,
+        DESCR,
+        ROLECODE,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES(
+        #{type,jdbcType=DECIMAL},
+        #{catalogId,jdbcType=DECIMAL},
+        #{code,jdbcType=VARCHAR},
+        #{orgName,jdbcType=VARCHAR},
+        #{address,jdbcType=VARCHAR},
+        #{telecom,jdbcType=VARCHAR},
+        #{effectiveTimeLow,jdbcType=DATE},
+        #{effectiveTimeHigh,jdbcType=DATE},
+        #{departmentName,jdbcType=VARCHAR},
+        #{parentId,jdbcType=VARCHAR},
+        #{applicantId,jdbcType=VARCHAR},
+        #{representative,jdbcType=VARCHAR},
+        #{license,jdbcType=VARCHAR},
+        #{charge,jdbcType=VARCHAR},
+        #{chargePhone,jdbcType=VARCHAR},
+        #{agencyCode,jdbcType=VARCHAR},
+        #{govId,jdbcType=VARCHAR},
+        #{zipCode,jdbcType=VARCHAR},
+        #{bed,jdbcType=DECIMAL},
+        #{publicKey,jdbcType=BLOB},
+        #{web,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR},
+        #{shortName,jdbcType=VARCHAR},
+        #{notice,jdbcType=VARCHAR},
+        #{registePhone,jdbcType=VARCHAR},
+        #{summary,jdbcType=VARCHAR},
+        #{glongitude,jdbcType=DECIMAL},
+        #{glatitude,jdbcType=DECIMAL},
+        #{complaintTel,jdbcType=VARCHAR},
+        #{cityCode,jdbcType=VARCHAR},
+        #{govType,jdbcType=DECIMAL},
+        #{descr,jdbcType=VARCHAR},
+        #{rolecode,jdbcType=VARCHAR},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
+    <delete id="deleteByIds" parameterType="java.lang.String">
+        delete from PHIP_ORG_BASE_INFO where ID in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
         </foreach>
-        </update>
+    </delete>
+    <delete id="deleteByList" parameterType="java.util.List">
+        delete from PHIP_ORG_BASE_INFO where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
+            update PHIP_ORG_BASE_INFO
+            <set>
+                <if test="item.type != null">
+                    TYPE = #{item.type,jdbcType=DECIMAL},
+                </if>
+                <if test="item.catalogId != null">
+                    CATALOG_ID = #{item.catalogId,jdbcType=DECIMAL},
+                </if>
+                <if test="item.code != null">
+                    CODE = #{item.code,jdbcType=VARCHAR},
+                </if>
+                <if test="item.orgName != null">
+                    ORG_NAME = #{item.orgName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.address != null">
+                    ADDRESS = #{item.address,jdbcType=VARCHAR},
+                </if>
+                <if test="item.telecom != null">
+                    TELECOM = #{item.telecom,jdbcType=VARCHAR},
+                </if>
+                <if test="item.effectiveTimeLow != null">
+                    EFFECTIVE_TIME_LOW = #{item.effectiveTimeLow,jdbcType=DATE},
+                </if>
+                <if test="item.effectiveTimeHigh != null">
+                    EFFECTIVE_TIME_HIGH = #{item.effectiveTimeHigh,jdbcType=DATE},
+                </if>
+                <if test="item.departmentName != null">
+                    DEPARTMENT_NAME = #{item.departmentName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.parentId != null">
+                    PARENT_ID = #{item.parentId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.applicantId != null">
+                    APPLICANT_ID = #{item.applicantId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.state != null">
+                    STATE = #{item.state,jdbcType=DECIMAL},
+                </if>
+                <if test="item.representative != null">
+                    REPRESENTATIVE = #{item.representative,jdbcType=VARCHAR},
+                </if>
+                <if test="item.license != null">
+                    LICENSE = #{item.license,jdbcType=VARCHAR},
+                </if>
+                <if test="item.charge != null">
+                    CHARGE = #{item.charge,jdbcType=VARCHAR},
+                </if>
+                <if test="item.chargePhone != null">
+                    CHARGE_PHONE = #{item.chargePhone,jdbcType=VARCHAR},
+                </if>
+                <if test="item.agencyCode != null">
+                    AGENCY_CODE = #{item.agencyCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.govId != null">
+                    GOV_ID = #{item.govId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.zipCode != null">
+                    ZIP_CODE = #{item.zipCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.bed != null">
+                    BED = #{item.bed,jdbcType=DECIMAL},
+                </if>
+                <if test="item.publicKey != null">
+                    PUBLIC_KEY = #{item.publicKey,jdbcType=BLOB},
+                </if>
+                <if test="item.web != null">
+                    WEB = #{item.web,jdbcType=VARCHAR},
+                </if>
+                <if test="item.email != null">
+                    EMAIL = #{item.email,jdbcType=VARCHAR},
+                </if>
+                <if test="item.shortName != null">
+                    SHORT_NAME = #{item.shortName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.notice != null">
+                    NOTICE = #{item.notice,jdbcType=VARCHAR},
+                </if>
+                <if test="item.registePhone != null">
+                    REGISTE_PHONE = #{item.registePhone,jdbcType=VARCHAR},
+                </if>
+                <if test="item.summary != null">
+                    SUMMARY = #{item.summary,jdbcType=VARCHAR},
+                </if>
+                <if test="item.glongitude != null">
+                    G_LONGITUDE = #{item.glongitude,jdbcType=DECIMAL},
+                </if>
+                <if test="item.glatitude != null">
+                    G_LATITUDE = #{item.glatitude,jdbcType=DECIMAL},
+                </if>
+                <if test="item.complaintTel != null">
+                    COMPLAINT_TEL = #{item.complaintTel,jdbcType=VARCHAR},
+                </if>
+                <if test="item.cityCode != null">
+                    CITY_CODE = #{item.cityCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.govType != null">
+                    GOV_TYPE = #{item.govType,jdbcType=DECIMAL},
+                </if>
+                <if test="item.descr != null">
+                    DESCR = #{item.descr,jdbcType=VARCHAR},
+                </if>
+                <if test="item.rolecode != null">
+                    ROLECODE = #{item.rolecode,jdbcType=VARCHAR},
+                </if>
+                MODIFY_AT=sysdate
+            </set>
+            where id = #{item.id};
+        </foreach>
+    </update>
 
-        </mapper>
+</mapper>
