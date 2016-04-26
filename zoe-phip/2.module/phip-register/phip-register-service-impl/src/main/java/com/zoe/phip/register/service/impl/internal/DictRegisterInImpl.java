@@ -77,4 +77,6 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public int dictItemDetailDelete(String dictItemId) {
         return dictItemMapper.deleteByPrimaryKey(dictItemId);
     }
+
+
 }

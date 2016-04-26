@@ -1,6 +1,8 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.exception.BusinessException;
+import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.model.base.Acknowledgement;
@@ -65,6 +67,10 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             acknowledgement.setText("注册成功");
             baseInfo.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.ORG_ADD_SUCCESS, result);
+        } catch (BusinessException e) {
+            String msg = SafeExecuteUtil.getBusinessExceptionMsg(e, organizationRegisterIn.getClass());
+            return registerFailed(baseInfo, msg);
+
         } catch (Exception ex) {
             logger.error("error:", ex);
             return registerFailed(baseInfo, ex.getMessage());
@@ -99,6 +105,10 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             acknowledgement.setText("更新成功");
             baseInfo.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.ORG_UPDATE_SUCCESS, result);
+        } catch (BusinessException e) {
+            String msg = SafeExecuteUtil.getBusinessExceptionMsg(e, organizationRegisterIn.getClass());
+            return updateFailed(baseInfo, msg);
+
         } catch (Exception ex) {
             logger.error("error:", ex);
             return updateFailed(baseInfo, ex.getMessage());
@@ -145,6 +155,11 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             }*/
 
             return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_SUCCESS, result);
+        } catch (BusinessException e) {
+            String msg = SafeExecuteUtil.getBusinessExceptionMsg(e, organizationRegisterIn.getClass());
+            acknowledgement.setText(msg);
+            return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, acknowledgement);
+
         } catch (Exception ex) {
             return RegisterUtil.responseFailed(deptInfo, ex.getMessage(), RegisterType.ORG_QUERY_ERROR);
         }
