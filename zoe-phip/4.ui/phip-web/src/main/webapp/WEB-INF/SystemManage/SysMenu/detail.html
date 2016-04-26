@@ -7,25 +7,28 @@ var bodySection = {
             <li class="list">
                 <p class="column-one">
                     <label class="label" for="name"><span class="text-mark">*</span>名称：</label>
-                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！" nullmsg="请填写名称！" />
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！"
+                           nullmsg="请填写名称！"/>
 
                 </p>
                 <p class="column-one">
                     <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
-                    <input type="text" name="code" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！" />
+                    <input type="text" name="code" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"/>
                 </p>
             </li>
             <li class="list">
                 <p class="column-one">
                     <label class="label" for="address">地址：</label>
-                    <input type="text" name="address" class="text" datatype="*1-512" errormsg="地址长度应为1~512位！" nullmsg="请填写地址！" />
+                    <input type="text" name="address" class="text" datatype="*1-512" errormsg="地址长度应为1~512位！"
+                           nullmsg="请填写地址！"/>
                 </p>
             </li>
             <li class="list">
                 <p class="column-one">
                     <label class="label" for="fkParentMenuId">父节点：</label>
                         <span class="text-line-outer" id="btnFkParent">
-                            <input type="text" name="fkParentMenuId" class="text-line" datatype="*" errormsg="菜单父节点不能为空" />
+                            <input type="text" name="fkParentMenuId" class="text-line" datatype="*"
+                                   errormsg="菜单父节点不能为空"/>
                             <span class="text-line-setting">
                                 <span class="icon-grid icon-grid-setting" title="配置"></span>
                                 <span class="text-line-content"></span>
@@ -33,6 +36,28 @@ var bodySection = {
                         </span>
                 </p>
             </li>
+
+            <!--<li class="list">-->
+                <!--<div class="column-one">-->
+                    <!--<label class="label label-textarea">下拉列表：</label>-->
+                    <!--<div class="simulate-select" id="selFkParent">-->
+                        <!--<span class="text" title="&#45;&#45;请选择下拉列表&#45;&#45;">&#45;&#45;请选择下拉列表&#45;&#45;</span>-->
+                        <!--<i class="icon-grid icon-grid-fold-gray"></i>-->
+                        <!--<ul class="simulate-select-lists" style="margin-bottom: 10px;display:block;">-->
+                            <!--<li class="simulate-select-list">厦门大学附属中山医院</li>-->
+                            <!--<li class="simulate-select-list active">厦门大学附属中山医院0厦门大学附属中山医院0</li>-->
+                            <!--<li class="simulate-select-list">厦门大学附属中山医院1</li>-->
+                            <!--<li class="simulate-select-list">厦门大学附属中山医院2</li>-->
+                            <!--<li class="simulate-select-list">厦门大学附属中山医院3</li>-->
+                            <!--<li class="simulate-select-list">厦门大学附属中山医院4</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                    <!--<select name="FkStandardId" datatype="*" errormsg="请选择标准版本！" nullmsg="请选择!" style="display: none;">-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</li>-->
+
+
             <li class="list">
                 <p class="column-one">
                     <label class="label" for="userState">是否有效：</label>

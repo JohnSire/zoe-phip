@@ -5,21 +5,15 @@ define(function (require, exports, module) {
     var internal = {
         req: require("./req").req,
         buildTree: function (options) {
-            internal.req.getList({url: options["url"]["getTreeList"]}, function (data) {
-                //
+            var treeParam = options["treeParam"];
 
+            internal.req.getList({url: options["url"]["getTreeList"]}, function (data) {
                 var jqTree = $("#" + options["treeId"]);
-                jqTree.ligerTree({
-                    data: data.result.rows,
-                    idFieldName: 'id',
-                    parentIDFieldName: 'fkParentMenuId',
-                    textFieldName: 'name',
-                    checkbox: false
-                })
+                var treeData = data.result;
+                treeParam["data"] = treeData;
+                jqTree.ligerTree(treeParam)
 
             });
-            //alert(JSON.stringify(options));
-
         }
     };
     exports.tree = {

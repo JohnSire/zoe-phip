@@ -10,7 +10,6 @@ import com.zoe.phip.module.service.entity.MasterEntity;
 import javax.persistence.*;
 
 
-
 /**
  * @author
  * @version 1.0
@@ -33,11 +32,22 @@ public class NationalStandards extends MasterEntity {
      */
     @Column(name = "CODE_SYSTEM")
     private String codeSystem;
+
+
+
     /**
      * 标准编码
      */
     @Column(name = "DICT_CODE")
     private String dictCode;
+
+    public String getDictCode() {
+        return this.dictCode;
+    }
+
+    public void setDictCode(String dictCode) {
+        this.dictCode = dictCode;
+    }
     /**
      * 描述
      */
@@ -69,15 +79,6 @@ public class NationalStandards extends MasterEntity {
 
     public void setCodeSystem(String codeSystem) {
         this.codeSystem = codeSystem;
-    }
-
-    public String getdictCode() {
-        return this.dictCode;
-    }
-
-
-    public void setdictCode(String dictCode) {
-        this.dictCode = dictCode;
     }
 
     public String getDescr() {

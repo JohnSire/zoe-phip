@@ -11,7 +11,9 @@ define(function (require, exports, module) {
         url: {
             getTreeList: ""
         },
-        treeParam: {},
+        treeParam: {
+
+        },
         dialogParam: {
             winName: "",
             winCallback: "",

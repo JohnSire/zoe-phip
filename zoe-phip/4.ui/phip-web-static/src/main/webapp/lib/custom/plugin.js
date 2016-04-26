@@ -159,14 +159,7 @@
     //select 选择封装
     $.fn.select = function (options) {
         var internal = {
-            vaildformObj: common.vaildform(),
             defaultOptions: {
-                name: '',//跟实体key对应的name（支持自动绑定）
-                isVaild: true,//是否启用验证；结合unit中对vaildform封装的使用
-                vaild: {
-                    datatype: "*",
-                    nullmsg: '必须选择一个选项'
-                },
                 isAsync: true,//是否异步加载，点击时加载数据，如果已经请求过的就不在请求
                 ajaxParam: {
                     url: '',//url 请求的地址
@@ -184,83 +177,7 @@
             },
             //渲染插件
             render: function (self) {
-                var jqSelectOuter = $(".simulate-select"), jqSelectInput = $(self).find("input,i"), jqUl = $(self).find(".simulate-select-lists");
-                var jqDefaultSelect = $("<select></select>").attr({"name": self["param"]["name"]}).css({display: "none"});
-
-                if (self["param"]["isVaild"]) {
-                    $.each(self["param"]["vaild"], function (index, item) {
-                        var jqPro = {};
-                        jqPro[index] = item;
-                        jqDefaultSelect.attr(jqPro);
-                    })
-                }
-                $(self).after(jqDefaultSelect);
-
-                //是否已经加载了数据
-                var hasLoadData = false;
-
-                //如果是非异步加载，且有url请求路径,初始化时即加载数据
-                if (!self["param"]["isAsync"] && self["param"]["ajaxParam"]["url"]) {
-                    internal.req(self.param, function (data) {
-                        var data = [{text: "--请选择状态--"}, {value: '1', text: '启用'}, {value: '0', text: '禁用'}];
-                        $.each(data, function (index, item) {
-                            liRender(item["value"], item["text"]);
-                            optionRender(item["value"], item["text"]);
-                        });
-                        hasLoadData = true;
-                    });
-                } else if (!self["param"]["ajaxParam"]["url"]) {//如果没有url请求路径,说明界面已经配置好值了，则从界面取值
-
-                }
-                jqDefaultSelect.change(function (event, arg) {
-
-                    var value = jqDefaultSelect.find("option[value = '" + arg + "']").val(),
-                        text = jqDefaultSelect.find("option[value = '" + arg + "']").text();
-                    $(self).find("input").val(text);
-                })
-                var liRender = function (value, text) {
-                    var jqLi = $('<li class="simulate-select-list">--请选择状态--</li>');
-                    jqLi.attr({value: value}).text(text);
-                    jqLi.on("click", function () {
-                        jqSelectInput.val(text);
-                        var value = $(this).attr("value") || '';
-
-                        jqDefaultSelect.val(value);
-                    });
-                    jqUl.append(jqLi);
-                }
-
-                var optionRender = function (value, text) {
-                    if (value) {
-                        var jqOption = $("<option value='" + value + "'>" + text + "</option>");
-                    } else {
-                        var jqOption = $("<option value=''>" + text + "</option>");
-                    }
-                    jqDefaultSelect.append(jqOption);
-                }
-
-                jqSelectOuter.click(function (e) {
-                    e.stopPropagation();
-                    //如果是异步加载且有请求路径
-                    if (self["param"]["isAsync"] && self["param"]["ajaxParam"] && !hasLoadData) {
-                        internal.req(self.param, function (data) {
-                            var data = [{text: "--请选择状态--"}, {value: '1', text: '启用'}, {value: '0', text: '禁用'}];
-                            $.each(data, function (index, item) {
-                                liRender(item["value"], item["text"]);
-                                optionRender(item["value"], item["text"]);
-                            });
-                            hasLoadData = true;
-                        })
-                    }
-                    if (jqUl.is(":hidden")) {
-                        jqUl.show();
-                    } else {
-                        jqUl.hide();
-                    }
-                })
-                $(document).click(function (e) {
-                    jqUl.hide();
-                });
+              
             },
             //ajax请求
             //need reuqest.js
