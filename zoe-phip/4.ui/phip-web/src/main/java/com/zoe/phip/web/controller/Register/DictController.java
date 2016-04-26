@@ -45,8 +45,8 @@ public class DictController extends BaseController {
     @RequestMapping(value = "/getOIDList")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResultT<PageList<NationalStandards>> getOIDList(HttpServletRequest request, Model model) {
-        return ServiceFactory.getNationalStandardsService().getDataListByPage(ComSession.getUserInfo(), super.getKey(), getQueryPage());
+    public ServiceResultT<PageList<NationalStandards>> getOIDList(String keyWord) {
+        return ServiceFactory.getNationalStandardsService().getDataListByPage(ComSession.getUserInfo(), keyWord, getQueryPage());
     }
 
     /**
