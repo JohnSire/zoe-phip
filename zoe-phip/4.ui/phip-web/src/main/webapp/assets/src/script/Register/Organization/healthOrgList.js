@@ -23,10 +23,10 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: '',
                     columns: [
-                        {display: '机构代码', code: 'code', width: 120, align: 'left'},
-                        {display: '机构名称', name: 'orgn_ame', width: 120, align: 'left'},
-                        {display: '联系电话', name: 'telecom', width: 120, align: 'left'},
-                        {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
+                        {display: '机构代码', code: 'code', width: 300, align: 'left'},
+                        {display: '机构名称', name: 'orgn_ame', width: 300, align: 'left'},
+                        {display: '联系电话', name: 'telecom', width: 300, align: 'left'},
+                        {display: '操作', isSort: false, width: 300, icons: ['edit', 'del']}
                     ],
                     usePage: true,
                     width: $("body").innerWidth() - 2,
@@ -43,7 +43,7 @@ define(function (require, exports, module) {
                     common: {
                         url: 'organization/view/healthOrgDetail',
                         width: 1000,
-                        height: 580
+                        height:600
                     }
                 }
             })

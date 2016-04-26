@@ -51,7 +51,7 @@ define(function (require, exports, module) {
                     common: {
                         url: 'area/view/areadetail',
                         width: 680,
-                        height: 300
+                        height: 450
                     }
                 }
             })

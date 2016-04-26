@@ -46,8 +46,9 @@ define(function (require, exports, module) {
                     dataAction: "local",
                     url: 'dict/getItemPageList',
                     columns: [
-                        {display: '项编码', name: 'code', width: 150, align: 'left'},
-                        {display: '项名称', name: 'name', width: 400, align: 'left'},
+                        {display: '机构(科室)代码', name: 'code', width: 300, align: 'left'},
+                        {display: '机构(科室)名称', name: 'name', width: 300, align: 'left'},
+                        {display: '联系电话', name: 'name', width: 200, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     frozen: false,
@@ -60,9 +61,9 @@ define(function (require, exports, module) {
                     winCallback: "win_dict_item_callback",//弹窗回调函数
                     titleKey: "name",
                     //新增参数
-                    add: {title: "新增机构（科室）信息"},
+                    add: {title: "新增医疗机构（科室）信息"},
                     //编辑参数
-                    edit: {title: "编辑机构（科室）信息"},
+                    edit: {title: "编辑医疗机构（科室）信息"},
                     common: {
                         otherUrlParam: function () {
                             return {fkSystemDictCategoryId: internal.fkSystemDictCategoryId}
