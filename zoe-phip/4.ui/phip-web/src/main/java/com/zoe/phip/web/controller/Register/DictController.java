@@ -1,11 +1,18 @@
 package com.zoe.phip.web.controller.Register;
 
 import com.zoe.phip.infrastructure.annotation.AuthAction;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
+import com.zoe.phip.register.model.NationalStandards;
+import com.zoe.phip.web.context.ComSession;
+import com.zoe.phip.web.context.ServiceFactory;
 import com.zoe.phip.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,24 +35,85 @@ public class DictController extends BaseController {
         return "/Register/Dict/oidDetail";
     }
 
-    public String getOIDList(HttpServletRequest request, Model model) {
-        return null;
+    /**
+     * 根据关键字获取OID列表
+     *
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/getOIDList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<NationalStandards>> getOIDList(HttpServletRequest request, Model model) {
+        return ServiceFactory.getNationalStandardsService().getDataListByPage(ComSession.getUserInfo(), super.getKey(), getQueryPage());
     }
 
-    public String AddOIDInfo() {
-        return null;
+    /**
+     * 根据id获取OID信息
+     *
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/getOIDInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<NationalStandards> getOIDInfo(HttpServletRequest request, Model model) {
+        return ServiceFactory.getNationalStandardsService().getById(ComSession.getUserInfo(), "id");
     }
 
-    public String UpdateOIDInfo() {
-        return null;
+    /**
+     * 新增OID
+     *
+     * @return
+     */
+
+    @RequestMapping(value = "/addOIDInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Add}, name = "新增")
+    public ServiceResult addOIDInfo(NationalStandards nsd, HttpServletRequest request) {
+        return ServiceFactory.getNationalStandardsService().add(ComSession.getUserInfo(), nsd);
     }
 
-    public String DelOIDInfo(String id) {
-        return null;
+    /**
+     * 更新OID列表
+     *
+     * @return
+     */
+    @RequestMapping(value = "/updateOIDInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Update}, name = "更新")
+    public ServiceResult updateOIDInfo(NationalStandards nsd, HttpServletRequest request) {
+        return ServiceFactory.getNationalStandardsService().update(ComSession.getUserInfo(), nsd);
     }
 
-    public String DelOIDList(String ids) {
-        return null;
+    /**
+     * 删除OID
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delOIDInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult delOIDInfo(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        return ServiceFactory.getNationalStandardsService().deleteById(ComSession.getUserInfo(), id);
+    }
+
+    /**
+     * 批量删除OID
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delOIDList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult delOIDList(HttpServletRequest request) {
+        String id = request.getParameter("ids");
+        return ServiceFactory.getNationalStandardsService().deleteByIds(ComSession.getUserInfo(), id);
     }
 
     //endregion
