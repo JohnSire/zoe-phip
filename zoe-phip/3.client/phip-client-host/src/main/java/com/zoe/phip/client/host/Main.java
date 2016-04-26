@@ -11,10 +11,6 @@ import java.util.List;
  */
 public class Main {
 
-    @Autowired(required = false)
-    private static List<IBootstrapper> bootstrappers;
-
-
     public static void main(String[] args) throws Exception {
 
 

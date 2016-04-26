@@ -13,40 +13,42 @@ public interface IPatientRegisterIn extends IBaseInService<XmanBaseInfo> {
 
     /**
      * 个人信息新增
+     *
      * @param xmanBaseInfo
      * @return
      */
-    @Deprecated
-    ServiceResultT<XmanBaseInfo> addPatientRegistry(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard);
+    ServiceResultT<XmanBaseInfo> addPatientRegistry(SystemData systemData, XmanBaseInfo xmanBaseInfo, XmanCard xmanCard);
 
     /**
      * 个人信息更新
+     *
      * @param xmanBaseInfo
      * @return
      */
-    @Deprecated
-    ServiceResultT<XmanBaseInfo> updatePatientRegistry(XmanBaseInfo xmanBaseInfo,XmanCard xmanCard);
+    ServiceResultT<XmanBaseInfo> updatePatientRegistry(SystemData systemData, XmanBaseInfo xmanBaseInfo, XmanCard xmanCard);
 
     /**
      * 个人身份合并
+     *
      * @param newPatientId
      * @return
      */
-    ServiceResultT<XmanBaseInfo> mergePatientRegistry(SystemData systemData, String newPatientId,String oldPatientId);
+    ServiceResultT<XmanBaseInfo> mergePatientRegistry(SystemData systemData, String newPatientId, String oldPatientId);
 
     /**
      * 个人基本信息查询
+     *
      * @param patientId
      * @return
      */
-    @Deprecated
-    ServiceResultT<XmanBaseInfo> patientRegistryQuery(String patientId);
+    ServiceResultT<XmanBaseInfo> patientRegistryQuery(SystemData systemData, String patientId);
 
     /**
      * 根据条件查询病人列表
+     *
      * @param systemData 验证信息
-     * @param key 查询关键字
-     * @param page 分页信息
+     * @param key        查询关键字
+     * @param page       分页信息
      * @return
      */
     ServiceResultT<PageList<XmanBaseInfo>> patientRegistryListQuery(SystemData systemData, String key, QueryPage page);

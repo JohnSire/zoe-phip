@@ -77,6 +77,7 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         super.update(xmanBaseInfo);
         xmanCard.setModifyAt(new Date());
         cardMapper.updateByPrimaryKeySelective(xmanCard);
+        xmanBaseInfo.setXmanCard(xmanCard);
         return xmanBaseInfo;
     }
 
@@ -109,11 +110,6 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
     }
 
     @Override
-    public List<XmanBaseInfo> getPatientList(Map<String, Object> args) {
-        return getMapper().getPatientList(args);
-    }
-
-    @Override
     public PageList<XmanBaseInfo> patientRegistryListQuery(String key, QueryPage page) {
         PageList<XmanBaseInfo> pageList = new PageList<XmanBaseInfo>();
         if(StringUtil.isNullOrWhiteSpace(page.getOrderBy())){
@@ -133,6 +129,17 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         return pageList;
     }
 
+    //region 接口转接
+    @Override
+    public XmanBaseInfo getPatient(String id) {
+        return getMapper().getPatient(id);
+    }
+
+    @Override
+    public List<XmanBaseInfo> getPatientList(Map<String, Object> args) {
+        return getMapper().getPatientList(args);
+    }
+    //endregion
 
     /**
      * 将旧实体的值，赋到新实体上
@@ -162,8 +169,4 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         }
     }
 
-    @Override
-    public XmanBaseInfo getPatient(String id) {
-        return getMapper().getPatient(id);
-    }
 }

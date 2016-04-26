@@ -4,6 +4,125 @@
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.XmanBaseInfo" extends="BaseResultMap">
         <result column="XC_CARD_CODE" property="cardCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.XmanBaseInfo">
+        update PHIP_XMAN_BASE_INFO
+        <set>
+            <if test="orgCode != null">
+                ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null">
+                ORG_NAME = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="idNo != null">
+                ID_NO = #{idNo,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sexCode != null">
+                SEX_CODE = #{sexCode,jdbcType=DECIMAL},
+            </if>
+            <if test="birthDate != null">
+                BIRTH_DATE = #{birthDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="idTypeCode != null">
+                ID_TYPE_CODE = #{idTypeCode,jdbcType=DECIMAL},
+            </if>
+            <if test="employerName != null">
+                EMPLOYER_NAME = #{employerName,jdbcType=VARCHAR},
+            </if>
+            <if test="telNo != null">
+                TEL_NO = #{telNo,jdbcType=VARCHAR},
+            </if>
+            <if test="relName != null">
+                REL_NAME = #{relName,jdbcType=VARCHAR},
+            </if>
+            <if test="relTelNo != null">
+                REL_TEL_NO = #{relTelNo,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                ADDRESS = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="stateCode != null">
+                STATE_CODE = #{stateCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cityCode != null">
+                CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="streetCode != null">
+                STREET_CODE = #{streetCode,jdbcType=VARCHAR},
+            </if>
+            <if test="committeeCode != null">
+                COMMITTEE_CODE = #{committeeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="houseNumber != null">
+                HOUSE_NUMBER = #{houseNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="postalCode != null">
+                POSTAL_CODE = #{postalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="nationalityCode != null">
+                NATIONALITY_CODE = #{nationalityCode,jdbcType=DECIMAL},
+            </if>
+            <if test="aboCode != null">
+                ABO_CODE = #{aboCode,jdbcType=DECIMAL},
+            </if>
+            <if test="rhCode != null">
+                RH_CODE = #{rhCode,jdbcType=DECIMAL},
+            </if>
+            <if test="educationCode != null">
+                EDUCATION_CODE = #{educationCode,jdbcType=DECIMAL},
+            </if>
+            <if test="occupationCode != null">
+                OCCUPATION_CODE = #{occupationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="marriageCode != null">
+                MARRIAGE_CODE = #{marriageCode,jdbcType=DECIMAL},
+            </if>
+            <if test="codeSysCode != null">
+                CODE_SYS_CODE = #{codeSysCode,jdbcType=VARCHAR},
+            </if>
+            <if test="codeSysName != null">
+                CODE_SYS_NAME = #{codeSysName,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedPersonCode != null">
+                ASSIGNED_PERSON_CODE = #{assignedPersonCode,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedPersonName != null">
+                ASSIGNED_PERSON_NAME = #{assignedPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+
+            <if test="healthRecordOrgCode != null">
+                HEALTH_RECORD_ORG_CODE = #{healthRecordOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="patientId != null">
+                PATIENT_ID = #{patientId,jdbcType=VARCHAR},
+            </if>
+            <if test="msgId != null">
+                MSG_ID = #{msgId,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            <if test="statusCode != null">
+                STATUS_CODE = #{statusCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reqisterDate != null">
+                REQISTER_DATE = #{reqisterDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="employerTelNo != null">
+                EMPLOYER_TEL_NO = #{employerTelNo,jdbcType=VARCHAR},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where HEALTH_RECORD_NO = #{healthRecordNo,jdbcType=VARCHAR}
+    </update>
     <select id="getPatient" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT * FROM PHIP_XMAN_BASE_INFO T WHERE T.PATIENT_ID=#{id} OR T.HEALTH_RECORD_NO=#{id} AND ROWNUM=1
     </select>
