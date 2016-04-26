@@ -60,7 +60,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
     /**
      * 批量新增系统字典分类信息
      *
-     * @param entity
+     * @param entities
      * @return
      * @throws Exception
      */

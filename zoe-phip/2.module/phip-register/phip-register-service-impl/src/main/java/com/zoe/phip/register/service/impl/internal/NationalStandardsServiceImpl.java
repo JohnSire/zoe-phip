@@ -59,7 +59,7 @@ public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStan
             map = null;
             throw new BusinessException("001", entity.getCode());
         }
-        return getMapper().insertSelective(entity);
+        return super.add(entity);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStan
             map = null;
             throw new BusinessException("001", entity.getCode());
         }
-        return getMapper().updateByPrimaryKey(entity);
+        return super.update(entity);
     }
 
     @Override

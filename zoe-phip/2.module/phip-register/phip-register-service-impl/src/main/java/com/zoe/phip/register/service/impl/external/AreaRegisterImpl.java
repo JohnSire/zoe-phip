@@ -47,7 +47,7 @@ public class AreaRegisterImpl implements IAreaRegister {
                 acknowledgement.setText("由于内容重复注册，注册失败");
                 return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
             }
-            areaRegisterIn.addAreaRequest(areaBaseInfo);
+            areaRegisterIn.add(areaBaseInfo);
         } catch (Exception ex) {
             logger.error("error", ex);
             return "false:" + ex.getMessage();
