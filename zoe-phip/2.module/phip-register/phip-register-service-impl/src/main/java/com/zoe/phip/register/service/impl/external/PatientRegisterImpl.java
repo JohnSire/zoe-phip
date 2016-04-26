@@ -64,6 +64,7 @@ public class PatientRegisterImpl implements IPatientRegister {
         }
 
         Document document = ProcessXmlUtil.load(message);
+        String errorMsg="";
         XmanBaseInfo baseInfo = null;
         try {
             SAXReader reader = new SAXReader();
@@ -85,12 +86,13 @@ public class PatientRegisterImpl implements IPatientRegister {
             baseInfo.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.PATIENT_ADD_SUCCESS, result);
         } catch (BusinessException e) {
-            String msg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
-            return registerFailed(baseInfo, msg);
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
         } catch (Exception ex) {
             logger.error("error:", ex);
-            return registerFailed(baseInfo, ex.getMessage());
+            errorMsg=ex.getMessage();
         }
+        return registerFailed(baseInfo, errorMsg);
+
     }
 
     @Override
@@ -107,6 +109,7 @@ public class PatientRegisterImpl implements IPatientRegister {
         }
         Document document = ProcessXmlUtil.load(message);
         XmanBaseInfo baseInfo = null;
+        String errorMsg="";
         try {
             SAXReader reader = new SAXReader();
             //XmanBaseInfo
@@ -126,12 +129,12 @@ public class PatientRegisterImpl implements IPatientRegister {
             baseInfo.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.PATIENT_UPDATE_SUCCESS, result);
         } catch (BusinessException e) {
-            String msg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
-            return updateFailed(baseInfo, msg);
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
         } catch (Exception ex) {
             logger.error("error:", ex);
-            return updateFailed(baseInfo, ex.getMessage());
+            errorMsg=ex.getMessage();
         }
+        return updateFailed(baseInfo, errorMsg);
     }
 
     /**
@@ -147,6 +150,7 @@ public class PatientRegisterImpl implements IPatientRegister {
     public String mergePatientRegistry(String message) {
         String strResult = ProcessXmlUtil.verifyMessage(message);
         Acknowledgement acknowledgement = new Acknowledgement();
+        String errorMsg="";
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             acknowledgement.setTypeCode("AE");
@@ -172,20 +176,20 @@ public class PatientRegisterImpl implements IPatientRegister {
             acknowledgement.setText("合并成功");
             return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_SUCCESS, acknowledgement);
         } catch (BusinessException e) {
-            String msg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
-            acknowledgement.setText(msg);
-            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
         } catch (Exception ex) {
             acknowledgement.setTypeCode("AE");
-            acknowledgement.setText(ex.getMessage());
-            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
+            errorMsg=ex.getMessage();
         }
+        acknowledgement.setText(errorMsg);
+        return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
     }
 
     @Override
     public String patientRegistryQuery(String message) {
         String strResult = ProcessXmlUtil.verifyMessage(message);
         Acknowledgement acknowledgement = new Acknowledgement();
+        String errorMsg="";
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             acknowledgement.setTypeCode("AE");
@@ -209,15 +213,14 @@ public class PatientRegisterImpl implements IPatientRegister {
             return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_SUCCESS, result);
         }
         catch (BusinessException e) {
-            String msg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
-            acknowledgement.setText(msg);
-            return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
         }
         catch (Exception ex) {
-            acknowledgement.setText(ex.getMessage());
+            errorMsg=ex.getMessage();
             logger.error("error:", ex);
-            return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
         }
+        acknowledgement.setText(errorMsg);
+        return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
     }
 
 
