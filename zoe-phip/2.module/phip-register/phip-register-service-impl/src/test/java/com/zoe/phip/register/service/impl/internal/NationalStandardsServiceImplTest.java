@@ -28,7 +28,7 @@ public class NationalStandardsServiceImplTest extends BaseTest {
         model.setCode("10000");
         model.setName("专业技术职务代码");
         model.setCodeSystem("2.16.156.10011.2.3.3.10");
-        model.setdictCode("GB/T 8561");
+        model.setDictCode("GB/T 8561");
         impl.add(model);
     }
 
@@ -39,7 +39,7 @@ public class NationalStandardsServiceImplTest extends BaseTest {
         model.setCode("10000");
         model.setName("专业技术职务代码");
         model.setCodeSystem("2.16.156.10011.2.3.3.10");
-        model.setdictCode("GB/T 8561");
+        model.setDictCode("GB/T 8561");
         model.setDescr("专业技术职务代码");
         impl.update(model);
     }
