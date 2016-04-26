@@ -8,6 +8,7 @@ import com.zoe.phip.web.context.ServiceFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.zoe.phip.register.model.OrgDeptInfo;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -92,6 +93,9 @@ public class OrganizationController {
      *
      * @return
      */
+
+    @RequestMapping("/getMedicalOrgCategoryTree")
+    @ResponseBody
     public ServiceResultT<List<DictItem>> getMedicalOrgCategoryList(String category) {
         return null;
 //                ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo(), category);

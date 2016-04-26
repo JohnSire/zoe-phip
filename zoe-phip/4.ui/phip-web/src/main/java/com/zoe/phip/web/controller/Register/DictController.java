@@ -38,8 +38,6 @@ public class DictController extends BaseController {
     /**
      * 根据关键字获取OID列表
      *
-     * @param request
-     * @param model
      * @return
      */
     @RequestMapping(value = "/getOIDList")
@@ -51,9 +49,7 @@ public class DictController extends BaseController {
 
     /**
      * 根据id获取OID信息
-     *
-     * @param request
-     * @param model
+
      * @return
      */
     @RequestMapping(value = "/getOIDInfo")
@@ -97,8 +93,7 @@ public class DictController extends BaseController {
     @RequestMapping(value = "/delOIDInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "删除")
-    public ServiceResult delOIDInfo(HttpServletRequest request) {
-        String id = request.getParameter("id");
+    public ServiceResult delOIDInfo(String id) {
         return ServiceFactory.getNationalStandardsService().deleteById(ComSession.getUserInfo(), id);
     }
 
@@ -111,9 +106,8 @@ public class DictController extends BaseController {
     @RequestMapping(value = "/delOIDList")
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "删除")
-    public ServiceResult delOIDList(HttpServletRequest request) {
-        String id = request.getParameter("ids");
-        return ServiceFactory.getNationalStandardsService().deleteByIds(ComSession.getUserInfo(), id);
+    public ServiceResult delOIDList(String ids) {
+        return ServiceFactory.getNationalStandardsService().deleteByIds(ComSession.getUserInfo(), ids);
     }
 
     //endregion

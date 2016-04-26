@@ -16,9 +16,15 @@ define(function (require, exports, module) {
                 treeId: 'tree',
                 btnBox: 'treeBtns',
                 url: {
-                    getTreeList: 'menu/getMenuList',
+                    getTreeList: 'organization/getMedicalOrgCategoryTree',
                 },
-                treeParam: {}
+                treeParam: {
+                    idFieldName: 'assignedCode',
+                    parentIDFieldName: 'deptParentCode',
+                    textFieldName: 'assignedDeptName',
+                    checkbox: false
+
+                }
 
             })
         },
