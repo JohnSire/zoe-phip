@@ -18,12 +18,11 @@ import com.zoe.phip.register.dao.INationalStandardsMapper;
 import com.zoe.phip.register.model.NationalStandards;
 import com.zoe.phip.register.service.internal.INationalStandardsService;
 import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * @author
@@ -49,10 +48,13 @@ public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStan
         return pageList;
     }
 
+    @Autowired
+    private SqlSession sqlSession;
 
     @Override
     @ErrorMessage(code = "001", message = "国家标准{0}已存在!")
     public int add(NationalStandards entity) throws Exception {
+        Collection<String> cols= sqlSession.getConfiguration().getMappedStatementNames();
         Map<String, Object> map = new TreeMap<>();
         map.put("code", entity.getCode());
         if (getNationalStandard(map) > 0) {
