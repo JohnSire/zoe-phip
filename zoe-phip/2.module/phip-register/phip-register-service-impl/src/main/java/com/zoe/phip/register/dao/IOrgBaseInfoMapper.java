@@ -9,9 +9,10 @@ package com.zoe.phip.register.dao;
 
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.module.service.mapper.IMyMapper;
+import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.OrgBaseInfo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,10 +20,10 @@ import java.util.Map;
  * @version 1.0
  * @date 2016-04-25
  */
-public interface IOrgBaseInfoMapper extends IMyMapper<OrgBaseInfo> {
+public interface IOrgBaseInfoMapper extends IServiceMapper<OrgBaseInfo> {
 
     /**
-     * 新增第三方机构注�
+     * 新增第三方机构注�
      *
      * @param orgBaseInfo
      * @return
@@ -31,7 +32,7 @@ public interface IOrgBaseInfoMapper extends IMyMapper<OrgBaseInfo> {
     OrgBaseInfo addOrganization(OrgBaseInfo orgBaseInfo) throws Exception;
 
     /**
-     * 第三方机构信息更�
+     * 第三方机构信息更�
      *
      * @param orgBaseInfo
      * @return
@@ -40,7 +41,7 @@ public interface IOrgBaseInfoMapper extends IMyMapper<OrgBaseInfo> {
     OrgBaseInfo updateOrganization(OrgBaseInfo orgBaseInfo) throws Exception;
 
     /**
-     * 第三方机构信息查�
+     * 第三方机构信息查�
      *
      * @param map
      * @return
@@ -49,13 +50,15 @@ public interface IOrgBaseInfoMapper extends IMyMapper<OrgBaseInfo> {
     OrgBaseInfo organizationDetailQuery(Map<String, Object> map) throws Exception;
 
     /**
-     * 第三方机构信息删�
+     * 第三方机构信息删�
      *
      * @param orgBaseInfo
      * @return
      * @throws Exception
      */
     boolean organizationDelete(OrgBaseInfo orgBaseInfo) throws Exception;
+
+
 
     /**
      * 查询第三方机构列表，内部使用
@@ -66,5 +69,17 @@ public interface IOrgBaseInfoMapper extends IMyMapper<OrgBaseInfo> {
      * @throws Exception
      */
     PageList<OrgBaseInfo> organizationListQuery(QueryPage page, String message) throws Exception;
+
+
+
+    int add(OrgBaseInfo entity)throws Exception;
+
+    boolean UpdateOrgBaseInfo(OrgBaseInfo orgBaseInfo) throws Exception;
+
+    List<OrgBaseInfo> orgBaseInfoDetailQuery(String code, String deptName) throws Exception;
+
+    boolean OrgabaseInfoDelete(String id) throws Exception;
+
+    PageList<OrgBaseInfo> orgBaseInfoPageListQuery(String code, String key, QueryPage page) throws Exception;
 
 }

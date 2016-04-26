@@ -9,6 +9,7 @@ import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.util.Date;
 
 
 /**
@@ -52,12 +53,12 @@ public class OrgBaseInfo extends MasterEntity {
      * 有效时间（开始）
      */
     @Column(name = "EFFECTIVE_TIME_LOW")
-    private java.sql.Date effectiveTimeLow;
+    private Date effectiveTimeLow;
     /**
      * 有效时间（结束）
      */
     @Column(name = "EFFECTIVE_TIME_HIGH")
-    private java.sql.Date effectiveTimeHigh;
+    private Date effectiveTimeHigh;
     /**
      * 科室名称
      */
@@ -237,18 +238,14 @@ public class OrgBaseInfo extends MasterEntity {
         this.telecom = telecom;
     }
 
-    public java.sql.Date getEffectiveTimeLow() {
-        return this.effectiveTimeLow;
-    }
+
 
 
     public void setEffectiveTimeLow(java.sql.Date effectiveTimeLow) {
         this.effectiveTimeLow = effectiveTimeLow;
     }
 
-    public java.sql.Date getEffectiveTimeHigh() {
-        return this.effectiveTimeHigh;
-    }
+
 
 
     public void setEffectiveTimeHigh(java.sql.Date effectiveTimeHigh) {
@@ -477,5 +474,21 @@ public class OrgBaseInfo extends MasterEntity {
 
     public void setRolecode(String rolecode) {
         this.rolecode = rolecode;
+    }
+
+    public Date getEffectiveTimeHigh() {
+        return effectiveTimeHigh;
+    }
+
+    public void setEffectiveTimeHigh(Date effectiveTimeHigh) {
+        this.effectiveTimeHigh = effectiveTimeHigh;
+    }
+
+    public Date getEffectiveTimeLow() {
+        return effectiveTimeLow;
+    }
+
+    public void setEffectiveTimeLow(Date effectiveTimeLow) {
+        this.effectiveTimeLow = effectiveTimeLow;
     }
 }
