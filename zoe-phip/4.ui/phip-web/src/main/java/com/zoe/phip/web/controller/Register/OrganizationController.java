@@ -94,7 +94,7 @@ public class OrganizationController {
      * @return
      */
     public ServiceResultT<List<OrgDeptInfo>> getMedicalOrgCategoryList(String category) {
-        return ServiceFactory.getOrganizationRegister().dictItemListQuery(ComSession.getUserInfo(), category);
+        return ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo(), category);
     }
 
 
