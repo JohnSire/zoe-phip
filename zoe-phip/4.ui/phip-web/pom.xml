@@ -19,6 +19,11 @@
         </dependency>
         <dependency>
             <groupId>com.zoe</groupId>
+            <artifactId>phip-register-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zoe</groupId>
             <artifactId>phip-infrastructure</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

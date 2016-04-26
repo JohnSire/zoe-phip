@@ -6,7 +6,7 @@
 	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 	   ">
     <dubbo:application name="zoe-phip-consumer"/>
-
+    <dubbo:consumer timeout="10000"/>
     <dubbo:registry address="N/A"/>
 
     <!--地址：本地测试时用localhost 部署时要换成Ip地址-->
@@ -25,7 +25,10 @@
     <dubbo:reference id="MenuCompetenceService" interface="com.zoe.phip.web.service.sm.IMenuCompetenceService"
                      url="dubbo://localhost:20080/com.zoe.phip.web.service.sm.sm.IMenuCompetenceService"/>
 
-    <dubbo:consumer timeout="10000"/>
+    <dubbo:reference id="NationalStandardsService" interface="com.zoe.phip.register.service.internal.INationalStandardsService"
+                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.INationalStandardsService"/>
+
+
 
 
 </beans>

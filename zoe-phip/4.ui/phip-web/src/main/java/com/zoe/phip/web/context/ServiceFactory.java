@@ -1,5 +1,6 @@
 package com.zoe.phip.web.context;
 
+import com.zoe.phip.register.service.internal.INationalStandardsService;
 import com.zoe.phip.web.bean.BeanFactory;
 import com.zoe.phip.web.bean.Constant;
 import com.zoe.phip.web.service.sm.*;
@@ -35,5 +36,9 @@ public final class ServiceFactory {
 
     public static IMenuCompetenceService getMenuCompetenceService() {
         return BeanFactory.getBean(Constant.MENU_COMPETENCE_SERVICE);
+    }
+
+    public static INationalStandardsService getNationalStandardsService() {
+        return BeanFactory.getBean(Constant.NATIONAL_STANDARDS_SERVICE);
     }
 }
