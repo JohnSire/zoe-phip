@@ -1,5 +1,7 @@
 package com.zoe.phip.web.context;
 
+import com.zoe.phip.register.service.external.IOrganizationRegister;
+import com.zoe.phip.register.service.internal.IOrganizationRegisterIn;
 import com.zoe.phip.web.bean.BeanFactory;
 import com.zoe.phip.web.bean.Constant;
 import com.zoe.phip.web.service.sm.*;
@@ -29,11 +31,17 @@ public final class ServiceFactory {
     public static ISystemParameterService getParameterService() {
         return BeanFactory.getBean(Constant.SYSTEM_PARAMETER_SERVICE);
     }
+
     public static IUserCompetenceService getUserCompetenceService() {
         return BeanFactory.getBean(Constant.USER_COMPETENCE_SERVICE);
     }
 
     public static IMenuCompetenceService getMenuCompetenceService() {
         return BeanFactory.getBean(Constant.MENU_COMPETENCE_SERVICE);
+    }
+
+
+    public static IOrganizationRegisterIn getOrganizationRegister() {
+        return BeanFactory.getBean(Constant.ORGANIZATION_REGISTER_SERVICE);
     }
 }
