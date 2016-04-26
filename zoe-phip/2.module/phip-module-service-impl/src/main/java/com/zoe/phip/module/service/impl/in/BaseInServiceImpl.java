@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
 
-import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 
@@ -219,6 +218,9 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
     }
 
 
+    public int defaultUpdate(T t) {
+        return getMapper().defaultUpdate(t);
+    }
 
     //endregion
 }
