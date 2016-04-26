@@ -22,6 +22,7 @@ import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author
@@ -33,20 +34,44 @@ import java.util.List;
 public class OrgBaseInfoServiceImpl extends BaseInServiceImpl<OrgBaseInfo, IOrgBaseInfoMapper> implements IOrgBaseInfoMapper {
 
 
+    @Override
+    public OrgBaseInfo addOrganization(OrgBaseInfo orgBaseInfo) throws Exception {
+        return null;
+    }
+
+    @Override
+    public OrgBaseInfo updateOrganization(OrgBaseInfo orgBaseInfo) throws Exception {
+        return null;
+    }
+
+    @Override
+    public OrgBaseInfo organizationDetailQuery(Map<String, Object> map) throws Exception {
+        return null;
+    }
+
+    @Override
+    public boolean organizationDelete(OrgBaseInfo orgBaseInfo) throws Exception {
+        return false;
+    }
+
+    @Override
+    public PageList<OrgBaseInfo> organizationListQuery(QueryPage page, String message) throws Exception {
+        return null;
+    }
 
     @Override
     @ErrorMessage(code = "001", message = "由于机构代码重复注册，注册失败")
-    public boolean AddOrganization(OrgBaseInfo entity)throws Exception {
+    public int add(OrgBaseInfo entity)throws Exception {
         List<OrgBaseInfo> list = getOrgBaseInfoByCode(entity.getCode());
         if (list != null && list.size() > 0) {
             throw new BusinessException("001", entity.getCode());
         }
-        return getMapper().insertSelective(entity)>0;
+        return super.add(entity);
     }
 
     @Override
     @ErrorMessage(code = "002",message = "已存在机构代码为({0})的机构!")
-    public boolean UpdateOrganization(OrgBaseInfo orgBaseInfo) throws Exception {
+    public boolean UpdateOrgBaseInfo(OrgBaseInfo orgBaseInfo) throws Exception {
 
        Example example = new Example(OrgBaseInfo.class);
         example.createCriteria().andEqualTo("code", orgBaseInfo.getCode())
@@ -59,7 +84,7 @@ public class OrgBaseInfoServiceImpl extends BaseInServiceImpl<OrgBaseInfo, IOrgB
     }
 
     @Override
-    public List<OrgBaseInfo> OrganizationDetailQuery(String code,String deptName) throws Exception {
+    public List<OrgBaseInfo> orgBaseInfoDetailQuery(String code,String deptName) throws Exception {
         Example example = new Example(OrgBaseInfo.class);
         example.createCriteria().andEqualTo("code", code).andEqualTo("deptName",deptName);
         List<OrgBaseInfo> list = getMapper().selectByExample(example);
@@ -67,14 +92,14 @@ public class OrgBaseInfoServiceImpl extends BaseInServiceImpl<OrgBaseInfo, IOrgB
     }
 
     @Override
-    public boolean OrganizationDelete(String id) throws Exception {
+    public boolean OrgabaseInfoDelete(String id) throws Exception {
         Example e = new Example(OrgDeptInfo.class);
         e.createCriteria().andEqualTo("code", id);
         return getMapper().deleteByExample(e) > 0;
     }
 
     @Override
-    public PageList<OrgBaseInfo> OrganizationListQuery(String code, String key, QueryPage page) throws Exception {
+    public PageList<OrgBaseInfo> orgBaseInfoPageListQuery(String code, String key, QueryPage page) throws Exception {
         PageList<OrgBaseInfo> pageList = new PageList<OrgBaseInfo>();
         Example example = new Example(OrgDeptInfo.class);
         SqlHelper.startPage(page);
@@ -98,6 +123,8 @@ public class OrgBaseInfoServiceImpl extends BaseInServiceImpl<OrgBaseInfo, IOrgB
         List<OrgBaseInfo> list = getMapper().selectByExample(example);
         return list;
     }
+
+
 
 
 
