@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.register.dao.IXmanCardMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.XmanCard" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="java.util.List">
+        update PHIP_XMAN_CARD
+        <set>
+            <if test="xcCardCode != null">
+                XC_CARD_CODE = #{xcCardCode,jdbcType=VARCHAR},
+            </if>
+            <if test="xcCardType != null">
+                XC_CARD_TYPE = #{xcCardType,jdbcType=VARCHAR},
+            </if>
+            <if test="xcXmanId != null">
+                XC_XMAN_ID = #{xcXmanId,jdbcType=VARCHAR},
+            </if>
+            <if test="xcOrgId != null">
+                XC_ORG_ID = #{xcOrgId,jdbcType=VARCHAR},
+            </if>
+            <if test="xcDescr != null">
+                XC_DESCR = #{xcDescr,jdbcType=VARCHAR},
+            </if>
+            <if test="xcOrgCode != null">
+                XC_ORG_CODE = #{xcOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where HEALTH_RECORD_NO = #{healthRecordNo,jdbcType=VARCHAR}
+    </update>
+    <select id="getXmanCard" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM PHIP_XMAN_CARD T WHERE T.XC_XMAN_ID=#{baseInfoId} AND ROWNUM=1
+    </select>
+</mapper>

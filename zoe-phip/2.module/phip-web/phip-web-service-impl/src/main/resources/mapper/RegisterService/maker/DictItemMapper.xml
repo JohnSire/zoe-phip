@@ -1,70 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zoe.phip.register.dao.INationalStandardsMapper">
-    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.NationalStandards"
-               extends="com.zoe.phip.module.service.MasterEntityResultMap">
+<mapper namespace="com.zoe.phip.register.dao.IDictItemMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.DictItem" extends="com.zoe.phip.module.service.MasterEntityResultMap">
         <result column="CODE" property="code" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="NAME" property="name" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="CODE_SYSTEM" property="codeSystem" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="DICT_CODE" property="dictCode" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="DESCR" property="descr" javaType="java.lang.String"
+        <result column="FK_CATALOG_CODE" property="fkCatalogCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
     </resultMap>
-    <insert id="addList" parameterType="com.zoe.phip.register.model.NationalStandards">
-        INSERT INTO PHIP_NATIONAL_STANDARDS (
+    <insert id="addList" parameterType="java.util.List">
+        INSERT INTO PHIP_DICT_ITEM (
         CODE,
         NAME,
-        CODE_SYSTEM,
-        DICT_CODE,
-        DESCR,
+        FK_CATALOG_CODE,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
             #{item.code,jdbcType=VARCHAR},
             #{item.name,jdbcType=VARCHAR},
-            #{item.codeSystem,jdbcType=VARCHAR},
-            #{item.dictCode,jdbcType=VARCHAR},
-            #{item.descr,jdbcType=VARCHAR},
+            #{item.fkCatalogCode,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
     </insert>
-    <insert id="defaultAdd" parameterType="java.util.List">
-        INSERT INTO PHIP_NATIONAL_STANDARDS (
+    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.DictItem">
+        INSERT INTO PHIP_DICT_ITEM (
         CODE,
         NAME,
-        CODE_SYSTEM,
-        DICT_CODE,
-        DESCR,
+        FK_CATALOG_CODE,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
-        VALUES(
-        #{code,jdbcType=VARCHAR},
-        #{name,jdbcType=VARCHAR},
-        #{codeSystem,jdbcType=VARCHAR},
-        #{dictCode,jdbcType=VARCHAR},
-        #{descr,jdbcType=VARCHAR},
-        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        VALUES (
+            #{code,jdbcType=VARCHAR},
+            #{name,jdbcType=VARCHAR},
+            #{fkCatalogCode,jdbcType=VARCHAR},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
-        delete from PHIP_NATIONAL_STANDARDS where ID in
+        delete from PHIP_DICT_ITEM where ID in
         <foreach collection="array" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
     </delete>
     <delete id="deleteByList" parameterType="java.util.List">
-        delete from PHIP_NATIONAL_STANDARDS where ID in
+        delete from PHIP_DICT_ITEM where ID in
         <foreach collection="list" item="item" open="(" separator="," close=")">
             #{item.id}
         </foreach>
     </delete>
     <update id="updateList" parameterType="java.util.List">
         <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
-            update PHIP_NATIONAL_STANDARDS
+            update PHIP_DICT_ITEM
             <set>
                 <if test="item.code != null">
                     CODE = #{item.code,jdbcType=VARCHAR},
@@ -72,14 +59,8 @@
                 <if test="item.name != null">
                     NAME = #{item.name,jdbcType=VARCHAR},
                 </if>
-                <if test="item.codeSystem != null">
-                    CODE_SYSTEM = #{item.codeSystem,jdbcType=VARCHAR},
-                </if>
-                <if test="item.dictCode != null">
-                    DICT_CODE = #{item.dictCode,jdbcType=VARCHAR},
-                </if>
-                <if test="item.descr != null">
-                    DESCR = #{item.descr,jdbcType=VARCHAR},
+                <if test="item.fkCatalogCode != null">
+                    FK_CATALOG_CODE = #{item.fkCatalogCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.state != null">
                     STATE = #{item.state,jdbcType=DECIMAL},
@@ -89,5 +70,4 @@
             where id = #{item.id};
         </foreach>
     </update>
-
 </mapper>

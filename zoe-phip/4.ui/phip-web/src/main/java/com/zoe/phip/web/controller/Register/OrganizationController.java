@@ -97,7 +97,8 @@ public class OrganizationController {
     @RequestMapping("/getMedicalOrgCategoryTree")
     @ResponseBody
     public ServiceResultT<List<DictItem>> getMedicalOrgCategoryList(String category) {
-        return ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo(), category);
+        return null;
+//                ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo(), category);
     }
 
 

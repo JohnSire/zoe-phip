@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
  * @date 2016-03-29
  */
 @Repository("UserCompetenceService")
-@Service(interfaceClass = IUserCompetenceService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IUserCompetenceService.class, proxy = "sdpf",protocol = {"dubbo"}, dynamic = true)
 public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence, IUserCompetenceMapper> implements IUserCompetenceMapper {
 
     @Override

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	   ">
+    <dubbo:application name="zoe-phip-register-provider"/>
+
+    <dubbo:registry address="N/A"/>
+
+    <dubbo:protocol name="webservice"  port="8089" server="tomcat"/>
+    <dubbo:protocol name="dubbo" host="localhost" port="20080"/>
+
+    <dubbo:annotation package="com.zoe.phip.register.service,com.zoe.phip.web.service"></dubbo:annotation>
+    <dubbo:provider timeout="10000"/>
+
+    <!--<bean id="AreaRegisterIn" class="com.zoe.phip.register.service.impl.internal.AreaRegisterInImpl"/>
+
+    <dubbo:service interface="com.zoe.phip.register.service.internal.IAreaRegisterIn" version="1.0.0"
+                   protocol="dubbo" ref="AreaRegisterIn">
+    </dubbo:service>-->
+</beans>

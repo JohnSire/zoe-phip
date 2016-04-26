@@ -36,8 +36,8 @@ public class NationalStandards extends MasterEntity {
     /**
      * 标准编码
      */
-    @Column(name = "STANDARD_CODE")
-    private String standardCode;
+    @Column(name = "DICT_CODE")
+    private String dictCode;
     /**
      * 描述
      */
@@ -71,13 +71,13 @@ public class NationalStandards extends MasterEntity {
         this.codeSystem = codeSystem;
     }
 
-    public String getStandardCode() {
-        return this.standardCode;
+    public String getdictCode() {
+        return this.dictCode;
     }
 
 
-    public void setStandardCode(String standardCode) {
-        this.standardCode = standardCode;
+    public void setdictCode(String dictCode) {
+        this.dictCode = dictCode;
     }
 
     public String getDescr() {

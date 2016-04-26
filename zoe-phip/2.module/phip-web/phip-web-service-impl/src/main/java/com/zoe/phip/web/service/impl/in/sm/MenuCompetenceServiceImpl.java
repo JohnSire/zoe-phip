@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  * @date 2016-03-29
  */
 @Repository("menuCompetenceService")
-@Service(interfaceClass = IMenuCompetenceService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IMenuCompetenceService.class, proxy = "sdpf",protocol = {"dubbo"}, dynamic = true)
 public class MenuCompetenceServiceImpl extends BaseInServiceImpl<MenuCompetence, IMenuCompetenceMapper> implements IMenuCompetenceMapper {
 
     @Override

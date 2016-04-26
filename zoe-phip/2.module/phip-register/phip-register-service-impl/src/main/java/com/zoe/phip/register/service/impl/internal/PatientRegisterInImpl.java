@@ -1,13 +1,17 @@
 package com.zoe.phip.register.service.impl.internal;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
+import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.register.dao.IXmanBaseInfoMapper;
 import com.zoe.phip.register.dao.IXmanCardMapper;
 import com.zoe.phip.register.model.XmanBaseInfo;
@@ -22,6 +26,9 @@ import tk.mybatis.mapper.entity.Example;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zengjiyang on 2016/4/22.
@@ -99,6 +106,31 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         }
         XmanCard xmanCard = cardMapper.getXmanCard(baseInfo.getId());
         return baseInfo;
+    }
+
+    @Override
+    public List<XmanBaseInfo> getPatientList(Map<String, Object> args) {
+        return getMapper().getPatientList(args);
+    }
+
+    @Override
+    public PageList<XmanBaseInfo> patientRegistryListQuery(String key, QueryPage page) {
+        PageList<XmanBaseInfo> pageList = new PageList<XmanBaseInfo>();
+        if(StringUtil.isNullOrWhiteSpace(page.getOrderBy())){
+                page.setOrderBy(" B.CREATE_AT ");
+        }
+        //分页
+        SqlHelper.startPage(page);
+        Map<String, Object> paras = new HashMap<String, Object>();
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        }
+
+        List<XmanBaseInfo> results = getMapper().getPatientList(paras);
+        PageInfo<XmanBaseInfo> pageInfo = new PageInfo<XmanBaseInfo>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
     }
 
 

@@ -1,20 +1,22 @@
 package com.zoe.phip.register.service.impl.internal;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
+import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.register.dao.IAreaBaseInfoMapper;
 import com.zoe.phip.register.model.AreaBaseInfo;
 import com.zoe.phip.register.service.internal.IAreaRegisterIn;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by zengjiyang on 2016/4/22.
@@ -22,36 +24,30 @@ import java.util.UUID;
 @Repository("AreaRegisterIn")
 @Service(interfaceClass = IAreaRegisterIn.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
 @ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
-@ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
+@ErrorMessage(code = "002", message = "由于内容重复注册，更新失败")
 @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
 public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBaseInfoMapper> implements IAreaBaseInfoMapper {
 
-
-    public AreaBaseInfo addAreaRequest(AreaBaseInfo areaBaseInfo) throws Exception {
-        String id = StringUtil.isNullOrWhiteSpace(areaBaseInfo.getId()) ? UUID.randomUUID().toString() : areaBaseInfo.getId();
-        if (ifCodeExist(id, areaBaseInfo.getCode(), 1)) {
+    @Override
+    public int add(AreaBaseInfo entity) throws Exception {
+        String id = StringUtil.isNullOrWhiteSpace(entity.getId()) ? UUID.randomUUID().toString() : entity.getId();
+        if (ifCodeExist(id, entity.getCode(), 1)) {
             throw new BusinessException("001");
         }
-        areaBaseInfo.setId(id);
-        super.add(areaBaseInfo);
-        return areaBaseInfo;
-
+        entity.setId(id);
+        return super.add(entity);
     }
 
-
-    public AreaBaseInfo updateAreaRequest(AreaBaseInfo areaBaseInfo) throws Exception {
-        //String id = StringUtil.isNullOrWhiteSpace(areaBaseInfo.getId()) ? UUID.randomUUID().toString() : areaBaseInfo.getId();
-        if (ifCodeExist(areaBaseInfo.getId(), areaBaseInfo.getCode(), 1)) {
+    @Override
+    public int update(AreaBaseInfo entity) throws Exception {
+        if (ifCodeExist(entity.getId(), entity.getCode(), 1)) {
             throw new BusinessException("002");
         }
-        //areaBaseInfo.setId(id);
-        super.update(areaBaseInfo);
-        return areaBaseInfo;
+        return super.update(entity);
     }
 
-
-    public AreaBaseInfo areaDetailQuery(String id) throws Exception {
-        //todo 字典赋值
+    public AreaBaseInfo getAreaBaseInfo(String id) throws Exception {
+        //todo 字典赋�
         AreaBaseInfo baseInfo = getMapper().selectByPrimaryKey(id);
         if (baseInfo == null) {
             throw new BusinessException("003");
@@ -59,9 +55,24 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
         return baseInfo;
     }
 
-    public List<AreaBaseInfo> areaChildrenRegistryQuery(String code) {
+    public PageList<AreaBaseInfo> getDataList(String key, QueryPage queryPage) {
+        PageList<AreaBaseInfo> pageList = new PageList<>();
+        SqlHelper.startPage(queryPage);
+        Map map = new HashMap<>();
+        if (!StringUtil.isNullOrWhiteSpace(key))
+            map.put("key", key);
+        List<AreaBaseInfo> results = getMapper().getDataList(map);
+        PageInfo<AreaBaseInfo> pageInfo = new PageInfo<>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        map.clear();
+        map = null;
+        return pageList;
+    }
+
+    public List<AreaBaseInfo> getAreaChildrenRegistry(String id) {
         Map<String, Object> map = new TreeMap<>();
-        map.put("code", code);
+        map.put("id", id);
         List<AreaBaseInfo> result = getMapper().getChildren(map);
         map.clear();
         map = null;
@@ -94,5 +105,10 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
     @Override
     public List<AreaBaseInfo> getChildren(Map<String, Object> map) {
         return getMapper().getChildren(map);
+    }
+
+    @Override
+    public List<AreaBaseInfo> getDataList(Map<String, Object> map) {
+        return getMapper().getDataList(map);
     }
 }

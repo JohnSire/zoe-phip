@@ -31,13 +31,12 @@ import java.util.Map;
 @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
 @ErrorMessage(code = "004", message = "由于删除内容不存在，删除失败")
 public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffInfo, IMedicalStaffInfoMapper> implements IMedicalStaffInfoMapper {
-
     private static final Logger logger = LoggerFactory.getLogger(MedicalStaffRegisterInImpl.class);
 
-
     @Override
+
     public MedicalStaffInfo providerDetailsQuery(Map<String, Object> map) throws Exception {
-        //todo 字典赋值
+        //todo 字典赋�
         MedicalStaffInfo staffInfo = getMapper().getStaff(map);
         if (staffInfo == null) {
             throw new BusinessException("003");
@@ -46,6 +45,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     }
 
     @Override
+
     public boolean providerDelete(MedicalStaffInfo staffInfo) throws Exception {
         return getMapper().deleteByPrimaryKey(staffInfo.getId()) > 0;
     }
@@ -73,6 +73,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     }
 
     @Override
+
     public MedicalStaffInfo addProvider(MedicalStaffInfo medicalStaffInfo) throws Exception {
         Example example = new Example(MedicalStaffInfo.class);
         example.createCriteria().andEqualTo("staffId", medicalStaffInfo.getStaffId());
@@ -88,6 +89,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     }
 
     @Override
+
     public MedicalStaffInfo updateProvider(MedicalStaffInfo medicalStaffInfo) throws Exception {
         ErrorMessage[] errorMessages = this.getClass().getAnnotationsByType(ErrorMessage.class);
         Example example = new Example(MedicalStaffInfo.class);

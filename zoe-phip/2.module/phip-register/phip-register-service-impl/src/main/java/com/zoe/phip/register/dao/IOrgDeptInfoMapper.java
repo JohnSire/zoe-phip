@@ -9,7 +9,6 @@ package com.zoe.phip.register.dao;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.register.mapper.IServiceMapper;
-import com.zoe.phip.register.model.DictItem;
 import com.zoe.phip.register.model.OrgDeptInfo;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
 
     PageList<OrgDeptInfo> organizationListQuery(String deptParentCode, String key, QueryPage page);
 
-    List<DictItem> dictItemListQuery(String deptParentCode);
+    List<OrgDeptInfo> dictItemListQuery(String deptParentCode);
 
     boolean organizationDelete(String id);
 }

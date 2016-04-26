@@ -1,5 +1,7 @@
 package com.zoe.phip.register.service.internal;
 
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.register.model.AreaBaseInfo;
@@ -11,34 +13,22 @@ import java.util.List;
  */
 public interface IAreaRegisterIn extends IBaseInService<AreaBaseInfo> {
 
-    /**
-     * 	新增行政区域注册
-     * @param areaBaseInfo
-     * @return
-     */
-    ServiceResultT<AreaBaseInfo> addAreaRequest(AreaBaseInfo areaBaseInfo);
 
-
-    /**
-     * 	行政区域更新
-     * @param areaBaseInfo
-     * @return
-     */
-    ServiceResultT<AreaBaseInfo> updateAreaRequest(AreaBaseInfo areaBaseInfo);
+    ServiceResultT<PageList<AreaBaseInfo>> getDataList(String key, QueryPage queryPage);
 
     /**
      * 	行政区域基本信息查询
      * @param id
      * @return
      */
-    ServiceResultT<AreaBaseInfo> areaDetailQuery(String id);
+    ServiceResultT<AreaBaseInfo> getAreaBaseInfo(String id);
 
     /**
      * 	所辖行政区域信息查询
-     * @param message
+     * @param id
      * @return
      */
-    ServiceResultT<List<AreaBaseInfo>> areaChildrenRegistryQuery(String message);
+    ServiceResultT<List<AreaBaseInfo>> getAreaChildrenRegistry(String id);
 
     /**
      * 	历史行政区域信息查询

@@ -33,7 +33,7 @@ import java.util.Map;
  * @date 2016-03-22
  */
 @Repository("SystemDictItemService")
-@Service(interfaceClass = ISystemDictItemService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = ISystemDictItemService.class, proxy = "sdpf",protocol = {"dubbo"}, dynamic = true)
 public final class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem, ISystemDictItemMapper> implements ISystemDictItemMapper {
 
     @Autowired

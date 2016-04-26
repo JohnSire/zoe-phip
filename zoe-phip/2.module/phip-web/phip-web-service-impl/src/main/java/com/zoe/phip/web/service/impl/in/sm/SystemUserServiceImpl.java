@@ -31,7 +31,7 @@ import java.util.*;
  * @date 2016-03-18
  */
 @Repository("SystemUserService")
-@Service(interfaceClass = ISystemUserService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = ISystemUserService.class, proxy = "sdpf",protocol = {"dubbo"}, dynamic = true)
 public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystemUserMapper> implements ISystemUserMapper {
 
 

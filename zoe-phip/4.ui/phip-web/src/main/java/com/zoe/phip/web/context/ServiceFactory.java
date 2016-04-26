@@ -60,15 +60,8 @@ public final class ServiceFactory {
         return BeanFactory.getBean(Constant.ORGANIZATION_REGISTER_IN);
     }
 
-    public static IOrgBaseInfoService getOrgBaseInfoService() {
-        return BeanFactory.getBean(Constant.ORG_BASEINFO_SERVICE);
-    }
-
     public static IPatientRegisterIn getPatientRegisterIn() {
         return BeanFactory.getBean(Constant.PATIENT_REGISTER_IN);
     }
 
-    public static IThirdOrganizationRegisterIn getThirdOrganizationRegisterIn() {
-        return BeanFactory.getBean(Constant.THIRD_ORGANIZATION_REGISTER_IN);
-    }
 }

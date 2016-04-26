@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.register.dao.IOrgDeptInfoMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.OrgDeptInfo" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.OrgDeptInfo">
+        update PHIP_ORG_DEPT_INFO
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="deptName != null">
+                DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="deptTypeCode != null">
+                DEPT_TYPE_CODE = #{deptTypeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="deptTypeName != null">
+                DEPT_TYPE_NAME = #{deptTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="deptRoleName != null">
+                DEPT_ROLE_NAME = #{deptRoleName,jdbcType=VARCHAR},
+            </if>
+            <if test="deptParentCode != null">
+                DEPT_PARENT_CODE = #{deptParentCode,jdbcType=VARCHAR},
+            </if>
+            <if test="deptParentName != null">
+                DEPT_PARENT_NAME = #{deptParentName,jdbcType=VARCHAR},
+            </if>
+            <if test="effectiveTimeLow != null">
+                EFFECTIVE_TIME_LOW = #{effectiveTimeLow,jdbcType=TIMESTAMP},
+            </if>
+            <if test="effectiveTimeHigh != null">
+                EFFECTIVE_TIME_HIGH = #{effectiveTimeHigh,jdbcType=TIMESTAMP},
+            </if>
+            <if test="employerAddr != null">
+                EMPLOYER_ADDR = #{employerAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="employerTelNo != null">
+                EMPLOYER_TEL_NO = #{employerTelNo,jdbcType=VARCHAR},
+            </if>
+            <if test="msgId != null">
+                MSG_ID = #{msgId,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedCode != null">
+                ASSIGNED_CODE = #{assignedCode,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedName != null">
+                ASSIGNED_NAME = #{assignedName,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedDeptCode != null">
+                ASSIGNED_DEPT_CODE = #{assignedDeptCode,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedDeptName != null">
+                ASSIGNED_DEPT_NAME = #{assignedDeptName,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedContactPerson != null">
+                ASSIGNED_CONTACT_PERSON = #{assignedContactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="sortNum != null">
+                SORT_NUM = #{sortNum,jdbcType=DECIMAL},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where CODE = #{code,jdbcType=VARCHAR}
+    </update>
+    <select id="getOrgDeptInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT  * FROM PHIP_ORG_DEPT_INFO PODI
+        WHERE  1=1
+        <if test="_parameter.containsKey('code')">
+            AND PODI.CODE = #{code,jdbcType=VARCHAR}
+        </if>
+        <if test="_parameter.containsKey('deptName')">
+            AND PODI.DEPT_NAME = #{deptName,jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

@@ -28,7 +28,7 @@ import java.util.*;
  * @date 2016-03-21
  */
 @Repository("MenuDataService")
-@Service(interfaceClass = IMenuDataService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IMenuDataService.class, proxy = "sdpf",protocol = {"dubbo"}, dynamic = true)
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMapper> implements IMenuDataMapper {
 
     @Override

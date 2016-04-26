@@ -19,9 +19,6 @@ public final class Constant {
     public static final String DICT_REGISTER_IN = "DictRegisterIn";
     public static final String MEDICAL_STAFF_REGISTER_IN = "MedicalStaffRegisterIn";
     public static final String ORGANIZATION_REGISTER_IN = "OrganizationRegisterIn";
-    public static final String ORG_BASEINFO_SERVICE = "OrgBaseInfoService";
     public static final String PATIENT_REGISTER_IN = "PatientRegisterIn";
-    public static final String THIRD_ORGANIZATION_REGISTER_IN = "ThirdOrganizationRegisterIn";
-
 
 }

@@ -652,5 +652,30 @@ public class XmanBaseInfo extends RegisterEntity {
         this.employerTelNo = employerTelNo;
     }
 
+    //region 健康卡
+    @Transient
+    private XmanCard xmanCard;
 
+    public XmanCard getXmanCard() {
+        return xmanCard;
+    }
+
+    public void setXmanCard(XmanCard xmanCard) {
+        this.xmanCard = xmanCard;
+    }
+
+    /**
+     * 健康卡号
+     */
+    @Transient
+    private String cardCode;
+
+    public String getCardCode() {
+        return cardCode;
+    }
+
+    public void setCardCode(String cardCode) {
+        this.cardCode = cardCode;
+    }
+    //endregion
 }

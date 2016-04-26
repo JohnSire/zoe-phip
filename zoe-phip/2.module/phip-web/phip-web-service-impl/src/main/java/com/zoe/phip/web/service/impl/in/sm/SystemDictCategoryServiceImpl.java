@@ -34,7 +34,7 @@ import java.util.Map;
 
 
 @Repository("SystemDictCategoryService")
-@Service(interfaceClass = ISystemDictCategoryService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = ISystemDictCategoryService.class, proxy = "sdpf",protocol = {"dubbo"}, dynamic = true)
 public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<SystemDictCategory, ISystemDictCategoryMapper> implements ISystemDictCategoryMapper {
 
     /**
@@ -60,7 +60,7 @@ public final class SystemDictCategoryServiceImpl extends BaseInServiceImpl<Syste
     /**
      * 批量新增系统字典分类信息
      *
-     * @param entity
+     * @param entities
      * @return
      * @throws Exception
      */

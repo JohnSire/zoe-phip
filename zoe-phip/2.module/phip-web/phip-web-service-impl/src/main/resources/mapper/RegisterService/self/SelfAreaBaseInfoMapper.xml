@@ -37,7 +37,7 @@
     </update>
 
     <select id="getAreaBaseInfo" resultMap="BaseResultMap" parameterType="java.util.Map">
-        SELECT * FROM PHIP_AREA_BASE_INFO PABI WHERE 1 =1
+      SELECT * FROM PHIP_AREA_BASE_INFO PABI  WHERE 1 =1
         <if test="_parameter.containsKey('code')">
             AND PABI.CODE = #{code,jdbcType=VARCHAR}
         </if>
@@ -47,13 +47,8 @@
     </select>
 
     <select id="getChildren" resultMap="BaseResultMap" parameterType="java.util.Map">
-        SELECT * FROM PHIP_AREA_BASE_INFO PABI  WHERE PABI.PID  = #{id,jdbcType=VARCHAR}
-    </select>
-
-    <select id="getDataList" resultMap="BaseResultMap" parameterType="java.util.Map">
-        SELECT * FROM PHIP_AREA_BASE_INFO PABI WHERE 1 =1
-        <if test="_parameter.containsKey('key')">
-            AND UPPER(CONCAT(PABI.CODE,PABI.NAME )) LIKE UPPER (CONCAT(CONCAT('%',#{key,jdbcType=VARCHAR}),'%'))
-        </if>
+        SELECT * FROM PHIP_AREA_BASE_INFO PABI  WHERE PABI.PID IN  (
+        SELECT ID from PHIP_AREA_BASE_INFO PPABI where PPABI.CODE =#{code} AND ROWNUM=1
+        )
     </select>
 </mapper>

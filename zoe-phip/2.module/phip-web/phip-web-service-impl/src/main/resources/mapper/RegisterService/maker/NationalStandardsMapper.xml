@@ -9,7 +9,7 @@
                 jdbcType="VARCHAR"/>
         <result column="CODE_SYSTEM" property="codeSystem" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="DICT_CODE" property="dictCode" javaType="java.lang.String"
+        <result column="STANDARD_CODE" property="standardCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="DESCR" property="descr" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
@@ -19,7 +19,7 @@
         CODE,
         NAME,
         CODE_SYSTEM,
-        DICT_CODE,
+        STANDARD_CODE,
         DESCR,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
@@ -27,7 +27,7 @@
             #{item.code,jdbcType=VARCHAR},
             #{item.name,jdbcType=VARCHAR},
             #{item.codeSystem,jdbcType=VARCHAR},
-            #{item.dictCode,jdbcType=VARCHAR},
+            #{item.standardCode,jdbcType=VARCHAR},
             #{item.descr,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
@@ -38,14 +38,14 @@
         CODE,
         NAME,
         CODE_SYSTEM,
-        DICT_CODE,
+        STANDARD_CODE,
         DESCR,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES(
         #{code,jdbcType=VARCHAR},
         #{name,jdbcType=VARCHAR},
         #{codeSystem,jdbcType=VARCHAR},
-        #{dictCode,jdbcType=VARCHAR},
+        #{standardCode,jdbcType=VARCHAR},
         #{descr,jdbcType=VARCHAR},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
@@ -75,8 +75,8 @@
                 <if test="item.codeSystem != null">
                     CODE_SYSTEM = #{item.codeSystem,jdbcType=VARCHAR},
                 </if>
-                <if test="item.dictCode != null">
-                    DICT_CODE = #{item.dictCode,jdbcType=VARCHAR},
+                <if test="item.standardCode != null">
+                    STANDARD_CODE = #{item.standardCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.descr != null">
                     DESCR = #{item.descr,jdbcType=VARCHAR},

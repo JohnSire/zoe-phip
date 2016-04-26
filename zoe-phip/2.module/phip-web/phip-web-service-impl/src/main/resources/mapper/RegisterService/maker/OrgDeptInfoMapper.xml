@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.register.dao.IOrgDeptInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.OrgDeptInfo"
+               extends="com.zoe.phip.module.service.MasterEntityResultMap">
+        <result column="CODE" property="code" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DEPT_NAME" property="deptName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DEPT_TYPE_CODE" property="deptTypeCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DEPT_TYPE_NAME" property="deptTypeName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DEPT_ROLE_NAME" property="deptRoleName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DEPT_PARENT_CODE" property="deptParentCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DEPT_PARENT_NAME" property="deptParentName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="EFFECTIVE_TIME_LOW" property="effectiveTimeLow" javaType="java.sql.Timestamp"
+                jdbcType="TIMESTAMP"/>
+        <result column="EFFECTIVE_TIME_HIGH" property="effectiveTimeHigh" javaType="java.sql.Timestamp"
+                jdbcType="TIMESTAMP"/>
+        <result column="EMPLOYER_ADDR" property="employerAddr" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="EMPLOYER_TEL_NO" property="employerTelNo" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="MSG_ID" property="msgId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ASSIGNED_CODE" property="assignedCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ASSIGNED_NAME" property="assignedName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ASSIGNED_DEPT_CODE" property="assignedDeptCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ASSIGNED_DEPT_NAME" property="assignedDeptName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ASSIGNED_CONTACT_PERSON" property="assignedContactPerson" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="CREATION_TIME" property="creationTime" javaType="java.sql.Timestamp"
+                jdbcType="TIMESTAMP"/>
+        <result column="SORT_NUM" property="sortNum" javaType="int"
+                jdbcType="INTEGER"/>
+    </resultMap>
+    <insert id="addList" parameterType="com.zoe.phip.register.model.OrgDeptInfo">
+        INSERT INTO PHIP_ORG_DEPT_INFO (
+        CODE,
+        DEPT_NAME,
+        DEPT_TYPE_CODE,
+        DEPT_TYPE_NAME,
+        DEPT_ROLE_NAME,
+        DEPT_PARENT_CODE,
+        DEPT_PARENT_NAME,
+        EFFECTIVE_TIME_LOW,
+        EFFECTIVE_TIME_HIGH,
+        EMPLOYER_ADDR,
+        EMPLOYER_TEL_NO,
+        MSG_ID,
+        ASSIGNED_CODE,
+        ASSIGNED_NAME,
+        ASSIGNED_DEPT_CODE,
+        ASSIGNED_DEPT_NAME,
+        ASSIGNED_CONTACT_PERSON,
+        CREATION_TIME,
+        SORT_NUM,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+            SELECT
+            #{item.code,jdbcType=VARCHAR},
+            #{item.deptName,jdbcType=VARCHAR},
+            #{item.deptTypeCode,jdbcType=VARCHAR},
+            #{item.deptTypeName,jdbcType=VARCHAR},
+            #{item.deptRoleName,jdbcType=VARCHAR},
+            #{item.deptParentCode,jdbcType=VARCHAR},
+            #{item.deptParentName,jdbcType=VARCHAR},
+            #{item.effectiveTimeLow,jdbcType=TIMESTAMP},
+            #{item.effectiveTimeHigh,jdbcType=TIMESTAMP},
+            #{item.employerAddr,jdbcType=VARCHAR},
+            #{item.employerTelNo,jdbcType=VARCHAR},
+            #{item.msgId,jdbcType=VARCHAR},
+            #{item.assignedCode,jdbcType=VARCHAR},
+            #{item.assignedName,jdbcType=VARCHAR},
+            #{item.assignedDeptCode,jdbcType=VARCHAR},
+            #{item.assignedDeptName,jdbcType=VARCHAR},
+            #{item.assignedContactPerson,jdbcType=VARCHAR},
+            #{item.creationTime,jdbcType=TIMESTAMP},
+            #{item.sortNum,jdbcType=INT},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
+            FROM DUAL
+        </foreach>
+    </insert>
+    <insert id="defaultAdd" parameterType="java.util.List">
+        INSERT INTO PHIP_ORG_DEPT_INFO (
+        CODE,
+        DEPT_NAME,
+        DEPT_TYPE_CODE,
+        DEPT_TYPE_NAME,
+        DEPT_ROLE_NAME,
+        DEPT_PARENT_CODE,
+        DEPT_PARENT_NAME,
+        EFFECTIVE_TIME_LOW,
+        EFFECTIVE_TIME_HIGH,
+        EMPLOYER_ADDR,
+        EMPLOYER_TEL_NO,
+        MSG_ID,
+        ASSIGNED_CODE,
+        ASSIGNED_NAME,
+        ASSIGNED_DEPT_CODE,
+        ASSIGNED_DEPT_NAME,
+        ASSIGNED_CONTACT_PERSON,
+        CREATION_TIME,
+        SORT_NUM,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES(
+        #{code,jdbcType=VARCHAR},
+        #{deptName,jdbcType=VARCHAR},
+        #{deptTypeCode,jdbcType=VARCHAR},
+        #{deptTypeName,jdbcType=VARCHAR},
+        #{deptRoleName,jdbcType=VARCHAR},
+        #{deptParentCode,jdbcType=VARCHAR},
+        #{deptParentName,jdbcType=VARCHAR},
+        #{effectiveTimeLow,jdbcType=TIMESTAMP},
+        #{effectiveTimeHigh,jdbcType=TIMESTAMP},
+        #{employerAddr,jdbcType=VARCHAR},
+        #{employerTelNo,jdbcType=VARCHAR},
+        #{msgId,jdbcType=VARCHAR},
+        #{assignedCode,jdbcType=VARCHAR},
+        #{assignedName,jdbcType=VARCHAR},
+        #{assignedDeptCode,jdbcType=VARCHAR},
+        #{assignedDeptName,jdbcType=VARCHAR},
+        #{assignedContactPerson,jdbcType=VARCHAR},
+        #{creationTime,jdbcType=TIMESTAMP},
+        #{sortNum,jdbcType=DECIMAL},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
+    <delete id="deleteByIds" parameterType="java.lang.String">
+        delete from PHIP_ORG_DEPT_INFO where ID in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <delete id="deleteByList" parameterType="java.util.List">
+        delete from PHIP_ORG_DEPT_INFO where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
+            update PHIP_ORG_DEPT_INFO
+            <set>
+                <if test="item.code != null">
+                    CODE = #{item.code,jdbcType=VARCHAR},
+                </if>
+                <if test="item.deptName != null">
+                    DEPT_NAME = #{item.deptName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.deptTypeCode != null">
+                    DEPT_TYPE_CODE = #{item.deptTypeCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.deptTypeName != null">
+                    DEPT_TYPE_NAME = #{item.deptTypeName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.deptRoleName != null">
+                    DEPT_ROLE_NAME = #{item.deptRoleName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.deptParentCode != null">
+                    DEPT_PARENT_CODE = #{item.deptParentCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.deptParentName != null">
+                    DEPT_PARENT_NAME = #{item.deptParentName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.effectiveTimeLow != null">
+                    EFFECTIVE_TIME_LOW = #{item.effectiveTimeLow,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.effectiveTimeHigh != null">
+                    EFFECTIVE_TIME_HIGH = #{item.effectiveTimeHigh,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.employerAddr != null">
+                    EMPLOYER_ADDR = #{item.employerAddr,jdbcType=VARCHAR},
+                </if>
+                <if test="item.employerTelNo != null">
+                    EMPLOYER_TEL_NO = #{item.employerTelNo,jdbcType=VARCHAR},
+                </if>
+                <if test="item.msgId != null">
+                    MSG_ID = #{item.msgId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.assignedCode != null">
+                    ASSIGNED_CODE = #{item.assignedCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.assignedName != null">
+                    ASSIGNED_NAME = #{item.assignedName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.assignedDeptCode != null">
+                    ASSIGNED_DEPT_CODE = #{item.assignedDeptCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.assignedDeptName != null">
+                    ASSIGNED_DEPT_NAME = #{item.assignedDeptName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.assignedContactPerson != null">
+                    ASSIGNED_CONTACT_PERSON = #{item.assignedContactPerson,jdbcType=VARCHAR},
+                </if>
+                <if test="item.creationTime != null">
+                    CREATION_TIME = #{item.creationTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="item.sortNum != null">
+                    SORT_NUM = #{item.sortNum,jdbcType=DECIMAL},
+                </if>
+                <if test="item.state != null">
+                    STATE = #{item.state,jdbcType=DECIMAL},
+                </if>
+                MODIFY_AT=sysdate
+            </set>
+            where id = #{item.id};
+        </foreach>
+    </update>
+</mapper>

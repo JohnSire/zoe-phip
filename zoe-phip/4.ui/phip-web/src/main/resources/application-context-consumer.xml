@@ -36,14 +36,7 @@
                      url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IMedicalStaffRegisterIn"/>
     <dubbo:reference id="OrganizationRegisterIn" interface="com.zoe.phip.register.service.internal.IOrganizationRegisterIn"
                      url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IOrganizationRegisterIn"/>
-    <dubbo:reference id="OrgBaseInfoService" interface="com.zoe.phip.register.service.internal.IOrgBaseInfoService"
-                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IOrgBaseInfoService"/>
     <dubbo:reference id="PatientRegisterIn" interface="com.zoe.phip.register.service.internal.IPatientRegisterIn"
                      url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IPatientRegisterIn"/>
-    <dubbo:reference id="ThirdOrganizationRegisterIn" interface="com.zoe.phip.register.service.internal.IThirdOrganizationRegisterIn"
-                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IThirdOrganizationRegisterIn"/>
-
-
-
 
 </beans>
