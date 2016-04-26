@@ -71,15 +71,47 @@ public interface IOrgBaseInfoMapper extends IServiceMapper<OrgBaseInfo> {
     PageList<OrgBaseInfo> organizationListQuery(QueryPage page, String message) throws Exception;
 
 
-
+    /**
+     * 新增卫生管理机构
+     * @param entity
+     * @return
+     * @throws Exception
+     */
     int add(OrgBaseInfo entity)throws Exception;
 
+    /**
+     * 卫生管理机构信息更新
+     * @param orgBaseInfo
+     * @return
+     * @throws Exception
+     */
     boolean UpdateOrgBaseInfo(OrgBaseInfo orgBaseInfo) throws Exception;
 
+    /**
+     * 3）卫生管理机构信息查询
+     * @param code
+     * @param deptName
+     * @return
+     * @throws Exception
+     */
     List<OrgBaseInfo> orgBaseInfoDetailQuery(String code, String deptName) throws Exception;
 
+    /**
+     * 4）卫生机构（科室）信息删除
+     * @param id
+     * @return
+     * @throws Exception
+     */
     boolean OrgabaseInfoDelete(String id) throws Exception;
 
+    /**
+     * 5）医疗卫生机构（科室）信息删除
+     * @param code
+     * @param key
+     * @param page
+     * @return
+     * @throws Exception
+     */
     PageList<OrgBaseInfo> orgBaseInfoPageListQuery(String code, String key, QueryPage page) throws Exception;
 
 }

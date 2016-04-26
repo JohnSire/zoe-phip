@@ -2,6 +2,7 @@ package com.zoe.phip.register.service.impl;
 
 import com.zoe.phip.register.BaseTest;
 import com.zoe.phip.register.service.impl.external.OrganizationRegisterImpl;
+import com.zoe.phip.register.service.impl.internal.OrganizationRegisterInImpl;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,6 +13,9 @@ public class OrganizationRegisterTest extends BaseTest {
 
     @Autowired
     private OrganizationRegisterImpl impl;
+
+    @Autowired
+    private OrganizationRegisterInImpl implIn;
    // @Test
     public void testAdd() throws Exception {
         String patientInput ="<PRPM_IN401030UV01 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN401030UV01.xsd\">\n" +
@@ -157,4 +161,20 @@ public class OrganizationRegisterTest extends BaseTest {
 
         System.out.println(message);
     }
+
+
+    @Test
+    public void testDictItemListQuery(){
+
+       // List<OrgDeptInfo> list= implIn.dictItemListQuery("0234567890");
+    }
+    @Test
+    public void organizationDelete(){
+
+
+
+    }
+
+
+
 }
