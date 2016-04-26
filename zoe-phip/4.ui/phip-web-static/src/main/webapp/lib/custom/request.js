@@ -16,7 +16,8 @@
         ajaxParam: {
             isTip: true,
             timeout: 180000,
-            success: function (data) { }
+            success: function (data) {
+            }
         }
     });
     r.include({
@@ -33,10 +34,10 @@
         },
 
         post: function () {
-            this.ajax($.extend(true, { type: "POST" }, arguments[0]));
+            this.ajax($.extend(true, {type: "POST"}, arguments[0]));
         },
         get: function () {
-            this.ajax($.extend(true, { type: "GET" }, arguments[0]));
+            this.ajax($.extend(true, {type: "GET"}, arguments[0]));
         },
         ajax: function () {
             if (arguments) {
@@ -48,17 +49,22 @@
                 url += ct + (new Date()).toUTCString();
                 var onSuccess = null;
                 if (this.param.isTip) {
-                    var successObj = $.extend(true, {}, { success: arguments[0].success });
+                    var successObj = $.extend(true, {}, {success: arguments[0].success});
                     var success = function (data) {
                         var msgCss = data.isSuccess ? "Success" : "Error";
-
                         var msgContext = "";
-                        if (!data.isSuccess&&data.messages&&data.messages.length > 0) {
+
+                        if (data.isSuccess && (data.messages && data.messages.length == 0)) {
+                            msgContext = "操作成功!"
+                        }
+
+
+                        if (!data.isSuccess && data.messages && data.messages.length > 0) {
                             $.each(data.messages, function (index, item) {
                                 msgContext += item["content"]
                             });
                         }
-                       common.jsmsg(msgContext, msgCss, function () {
+                        common.jsmsg(msgContext, msgCss, function () {
                             successObj.success(data);
                         })
                     };
@@ -70,7 +76,7 @@
                         var sessionStatus = xhr.getResponseHeader('sessionstatus');
                         //null为手动清空cookie时；timeout为超时session 丢失
                         if (sessionStatus == 'timeout' || sessionStatus == null) {
-                           //var top = common.getTopWindowDom(); top.location.href = webRoot + "Frame/Login"
+                            //var top = common.getTopWindowDom(); top.location.href = webRoot + "Frame/Login"
                         } else {
                             if ($.isFunction(complete)) {
                                 complete();
@@ -78,7 +84,7 @@
                         }
                     }
                 }
-                this.param = $.extend(true, this.param, { url: url }, arguments[0]);
+                this.param = $.extend(true, this.param, {url: url}, arguments[0]);
                 this.request = $.ajax(this.param);
 
             }
@@ -94,7 +100,9 @@
         // 退出数据请求
         abort: function () {
             /// <summary>退出数据请求</summary>
-            if (this.request) { this.request.abort(); }
+            if (this.request) {
+                this.request.abort();
+            }
         }
     });
 })(window);
