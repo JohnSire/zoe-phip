@@ -1,6 +1,8 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.exception.BusinessException;
+import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.dao.IAreaBaseInfoMapper;
 import com.zoe.phip.register.model.AreaBaseInfo;
@@ -26,7 +28,7 @@ import java.util.TreeMap;
  * Created by zengjiyang on 2016/4/11.
  */
 @Repository("AreaRegister")
-@Service(interfaceClass = IAreaRegister.class, proxy = "sdpf",protocol = {"webservice"},dynamic = true)
+@Service(interfaceClass = IAreaRegister.class, proxy = "sdpf", protocol = {"webservice"}, dynamic = true)
 public class AreaRegisterImpl implements IAreaRegister {
 
     private static final Logger logger = LoggerFactory.getLogger(AreaRegisterImpl.class);
@@ -40,6 +42,7 @@ public class AreaRegisterImpl implements IAreaRegister {
         Document document = ProcessXmlUtil.load(message);
         AreaBaseInfo areaBaseInfo;
         Acknowledgement acknowledgement = new Acknowledgement();
+        String errorMsg = "";
         try {
             areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class, null);
             if (ifCodeExist(areaBaseInfo.getCode())) {
@@ -48,6 +51,8 @@ public class AreaRegisterImpl implements IAreaRegister {
                 return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
             }
             areaRegisterIn.addAreaRequest(areaBaseInfo);
+        } catch (BusinessException e) {
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, areaRegisterIn.getClass());
         } catch (Exception ex) {
             logger.error("error", ex);
             return "false:" + ex.getMessage();
@@ -60,6 +65,7 @@ public class AreaRegisterImpl implements IAreaRegister {
         Document document = ProcessXmlUtil.load(message);
         AreaBaseInfo areaBaseInfo;
         Acknowledgement acknowledgement = new Acknowledgement();
+        String errorMsg = "";
         try {
             areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class, null);
             if (ifCodeExist(areaBaseInfo.getCode())) {
@@ -68,6 +74,8 @@ public class AreaRegisterImpl implements IAreaRegister {
                 return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
             }
             areaRegisterIn.update(areaBaseInfo);
+        } catch (BusinessException e) {
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, areaRegisterIn.getClass());
         } catch (Exception ex) {
             logger.error("error", ex);
             return "false:" + ex.getMessage();
@@ -86,7 +94,7 @@ public class AreaRegisterImpl implements IAreaRegister {
             AreaBaseInfo baseInfo = areaRegisterIn.getAreaBaseInfo(map);
             map.clear();
             map = null;
-            return RegisterUtil.registerMessage(RegisterType.AREA_QUERY,baseInfo);
+            return RegisterUtil.registerMessage(RegisterType.AREA_QUERY, baseInfo);
         } catch (Exception ex) {
             logger.error("error", ex);
             return "false:" + ex.getMessage();
@@ -104,7 +112,7 @@ public class AreaRegisterImpl implements IAreaRegister {
             List<AreaBaseInfo> baseInfoList = areaRegisterIn.getChildren(map);
             map.clear();
             map = null;
-            return RegisterUtil.registerMessage(RegisterType.AREA_QUERY_CHILDREN,baseInfoList);
+            return RegisterUtil.registerMessage(RegisterType.AREA_QUERY_CHILDREN, baseInfoList);
         } catch (Exception ex) {
             logger.error("error", ex);
             return "false:" + ex.getMessage();
@@ -122,7 +130,7 @@ public class AreaRegisterImpl implements IAreaRegister {
             AreaBaseInfo baseInfo = areaRegisterIn.getAreaBaseInfo(map);
             map.clear();
             map = null;
-            return RegisterUtil.registerMessage(RegisterType.AREA_QUERY,baseInfo);
+            return RegisterUtil.registerMessage(RegisterType.AREA_QUERY, baseInfo);
         } catch (Exception ex) {
             logger.error("error", ex);
             return "false:" + ex.getMessage();

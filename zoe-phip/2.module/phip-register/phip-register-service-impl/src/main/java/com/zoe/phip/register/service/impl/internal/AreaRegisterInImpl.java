@@ -21,9 +21,12 @@ import java.util.UUID;
  */
 @Repository("AreaRegisterIn")
 @Service(interfaceClass = IAreaRegisterIn.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
+@ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
+@ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
+@ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
 public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBaseInfoMapper> implements IAreaBaseInfoMapper {
 
-    @ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
+
     public AreaBaseInfo addAreaRequest(AreaBaseInfo areaBaseInfo) throws Exception {
         String id = StringUtil.isNullOrWhiteSpace(areaBaseInfo.getId()) ? UUID.randomUUID().toString() : areaBaseInfo.getId();
         if (ifCodeExist(id, areaBaseInfo.getCode(), 1)) {
@@ -35,7 +38,7 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
 
     }
 
-    @ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
+
     public AreaBaseInfo updateAreaRequest(AreaBaseInfo areaBaseInfo) throws Exception {
         //String id = StringUtil.isNullOrWhiteSpace(areaBaseInfo.getId()) ? UUID.randomUUID().toString() : areaBaseInfo.getId();
         if (ifCodeExist(areaBaseInfo.getId(), areaBaseInfo.getCode(), 1)) {
@@ -46,7 +49,7 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
         return areaBaseInfo;
     }
 
-    @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
+
     public AreaBaseInfo areaDetailQuery(String id) throws Exception {
         //todo 字典赋值
         AreaBaseInfo baseInfo = getMapper().selectByPrimaryKey(id);
