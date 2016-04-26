@@ -23,10 +23,10 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: 'dict/getOIDList',
                     columns: [
-                        {display: '编码', code: 'code', width: 120, align: 'left'},
-                        {display: '代码', name: 'name', width: 120, align: 'left'},
-                        {display: '名称', name: 'code_system', width: 120, align: 'left'},
-                        {display: '标准', name: 'standard_code', width: 120, align: 'left'},
+                        {display: '编码', name: 'code', width: 120, align: 'left'},
+                        {display: '代码', name: 'codeSystem', width: 120, align: 'left'},
+                        {display: '名称', name: 'name', width: 120, align: 'left'},
+                        {display: '标准', name: 'dictCode', width: 120, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,
@@ -43,8 +43,8 @@ define(function (require, exports, module) {
                     edit: {title: "编辑OID"},
                     common: {
                         url: 'dict/view/oiddetail',
-                        width: 360,
-                        height: 260
+                        width: 680,
+                        height: 300
                     }
                 }
             })
