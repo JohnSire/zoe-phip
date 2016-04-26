@@ -8,8 +8,8 @@ define(function (require, exports, module) {
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
                 deleteUrl: {
-                    deleteInfo: "",
-                    deleteList: ""
+                    deleteInfo: "dict/delOIDInfo",
+                    deleteList: "dict/delOIDList"
                 },
                 tools: {
                     btnbox: {
@@ -21,7 +21,7 @@ define(function (require, exports, module) {
                     ]
                 },
                 gridParam: {
-                    url: '',
+                    url: 'dict/getOIDList',
                     columns: [
                         {display: '编码', code: 'code', width: 120, align: 'left'},
                         {display: '代码', name: 'name', width: 120, align: 'left'},
