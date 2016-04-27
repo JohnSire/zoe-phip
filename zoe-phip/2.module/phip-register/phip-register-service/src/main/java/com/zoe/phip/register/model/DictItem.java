@@ -33,6 +33,12 @@ public class DictItem extends MasterEntity {
     @Column(name = "FK_CATALOG_CODE")
     private String fkCatalogCode;
 
+    /**
+     * 字典分类名称
+     */
+    @Transient
+    private String fkCatalogName;
+
     public String getCode() {
         return this.code;
     }
@@ -55,5 +61,13 @@ public class DictItem extends MasterEntity {
 
     public void setFkCatalogCode(String fkCatalogCode) {
         this.fkCatalogCode = fkCatalogCode;
+    }
+
+    public String getFkCatalogName() {
+        return fkCatalogName;
+    }
+
+    public void setFkCatalogName(String fkCatalogName) {
+        this.fkCatalogName = fkCatalogName;
     }
 }
