@@ -214,4 +214,9 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         }
         return catalog;
     }
+
+    @Override
+    public int defaultUpdate(DictCatalog t) {
+        return getMapper().defaultUpdate(t);
+    }
 }
