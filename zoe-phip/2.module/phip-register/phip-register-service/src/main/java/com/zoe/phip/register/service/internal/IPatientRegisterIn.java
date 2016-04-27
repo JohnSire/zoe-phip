@@ -17,7 +17,7 @@ public interface IPatientRegisterIn extends IBaseInService<XmanBaseInfo> {
      * @param xmanBaseInfo
      * @return
      */
-    ServiceResultT<XmanBaseInfo> addPatientRegistry(SystemData systemData, XmanBaseInfo xmanBaseInfo, XmanCard xmanCard);
+    ServiceResultT<XmanBaseInfo> addPatientRegistry(SystemData systemData, XmanBaseInfo xmanBaseInfo);
 
     /**
      * 个人信息更新
@@ -25,7 +25,7 @@ public interface IPatientRegisterIn extends IBaseInService<XmanBaseInfo> {
      * @param xmanBaseInfo
      * @return
      */
-    ServiceResultT<XmanBaseInfo> updatePatientRegistry(SystemData systemData, XmanBaseInfo xmanBaseInfo, XmanCard xmanCard);
+    ServiceResultT<XmanBaseInfo> updatePatientRegistry(SystemData systemData, XmanBaseInfo xmanBaseInfo);
 
     /**
      * 个人身份合并
