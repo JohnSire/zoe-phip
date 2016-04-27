@@ -11,6 +11,7 @@ import com.zoe.phip.module.service.mapper.IMyMapper;
 import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.MedicalStaffInfo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,10 +41,10 @@ public interface IMedicalStaffInfoMapper extends IServiceMapper<MedicalStaffInfo
     /**
      * 医护人员查询
      *
-     * @param map
+     * @param id
      * @return
      */
-    MedicalStaffInfo providerDetailsQuery(Map<String, Object> map) throws Exception;
+    MedicalStaffInfo providerDetailsQuery(String id) throws Exception;
 
     /**
      * 医护人员删除
@@ -56,8 +57,20 @@ public interface IMedicalStaffInfoMapper extends IServiceMapper<MedicalStaffInfo
     /**
      * 查询医疗卫生人员列表
      *
-     * @param message
+     * @param key
      * @return
      */
-    PageList<MedicalStaffInfo> providerListQuery(QueryPage page, String message) throws Exception;
+    PageList<MedicalStaffInfo> providerListQuery(QueryPage page, String key) throws Exception;
+
+
+    /**
+     * 根据ID或者EXTENSION_ID
+     * 获取人员信息
+     * @param id
+     * @return
+     */
+    MedicalStaffInfo getProvider(String id);
+
+
+    List<MedicalStaffInfo> getProviderList(Map<String, Object> map);
 }

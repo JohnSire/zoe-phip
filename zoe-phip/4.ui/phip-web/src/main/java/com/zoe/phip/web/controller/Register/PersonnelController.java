@@ -5,8 +5,8 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
+import com.zoe.phip.register.model.MedicalStaffInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
-import com.zoe.phip.register.model.XmanCard;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 
@@ -58,7 +58,7 @@ public class PersonnelController extends BaseController {
     @RequestMapping(value = "/getXmanInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResultT<XmanBaseInfo> getXmanInfo(String patientId) {
+    public ServiceResult getXmanInfo(String patientId) {
         return ServiceFactory.getPatientRegisterIn().patientRegistryQuery(ComSession.getUserInfo(), patientId);
     }
 
@@ -66,28 +66,26 @@ public class PersonnelController extends BaseController {
      * 个人信息新增
      *
      * @param xmanBaseInfo
-     * @param xmanCard
      * @return
      */
     @RequestMapping(value = "/addXmanInfo", method = RequestMethod.POST)
     @ResponseBody
-    @AuthAction(permission = {Permission.Add}, name = "新增")
-    public ServiceResultT<XmanBaseInfo> addXmanInfo(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) {
-        return ServiceFactory.getPatientRegisterIn().addPatientRegistry(ComSession.getUserInfo(), xmanBaseInfo, xmanCard);
+    @AuthAction(permission = {Permission.Add}, name = "更新")
+    public ServiceResult addXmanInfo(XmanBaseInfo xmanBaseInfo) {
+        return ServiceFactory.getPatientRegisterIn().addPatientRegistry(ComSession.getUserInfo(), xmanBaseInfo);
     }
 
     /**
      * 个人信息更新
      *
      * @param xmanBaseInfo
-     * @param xmanCard
      * @return
      */
-    @RequestMapping(value = "/updateXmanInfo")
+    @RequestMapping(value = "/updateXmanInfo", method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Update}, name = "更新")
-    public ServiceResultT<XmanBaseInfo> updateXmanInfo(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) {
-        return ServiceFactory.getPatientRegisterIn().updatePatientRegistry(ComSession.getUserInfo(), xmanBaseInfo, xmanCard);
+    public ServiceResult updateXmanInfo(XmanBaseInfo xmanBaseInfo) {
+        return ServiceFactory.getPatientRegisterIn().updatePatientRegistry(ComSession.getUserInfo(), xmanBaseInfo);
     }
 
     /**
@@ -139,6 +137,84 @@ public class PersonnelController extends BaseController {
     @RequestMapping("/view/medicalstaffdetail")
     public String ToMedicalStaffDetail(HttpServletRequest request, Model model) {
         return "/Register/Personnel/medicalStaffDetail";
+    }
+
+    /**
+     * 查询医疗卫生人员列表
+     *
+     * @param keyWord
+     * @return
+     */
+    @RequestMapping(value = "/getMedStfList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<MedicalStaffInfo>> getMedStfList(String keyWord) {
+        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), keyWord, getQueryPage());
+    }
+
+    /**
+     * 查询卫生医疗人员信息
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/getMedStfInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<MedicalStaffInfo> getMedStfInfo(String id) {
+        return ServiceFactory.getMedicalStaffRegisterIn().providerDetailsQuery(ComSession.getUserInfo(), id);
+    }
+
+    /**
+     * 新增医护人员
+     *
+     * @param medicalStaffInfo
+     * @return
+     */
+    @RequestMapping(value = "/addMedStaffInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Add}, name = "新增")
+    public ServiceResultT<MedicalStaffInfo> addMedStfInfo(MedicalStaffInfo medicalStaffInfo) {
+        return ServiceFactory.getMedicalStaffRegisterIn().addProvider(ComSession.getUserInfo(), medicalStaffInfo);
+    }
+
+    /**
+     * 医护人员信息更新
+     *
+     * @param medicalStaffInfo
+     * @return
+     */
+    @RequestMapping(value = "/updateMedStfInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Update}, name = "更新")
+    public ServiceResultT<MedicalStaffInfo> updateMedStfInfo(MedicalStaffInfo medicalStaffInfo) {
+        return ServiceFactory.getMedicalStaffRegisterIn().updateProvider(ComSession.getUserInfo(), medicalStaffInfo);
+    }
+
+    /**
+     * 删除医护人员信息
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delMedStfInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult delMedStfInfo(String id) {
+        return ServiceFactory.getMedicalStaffRegisterIn().deleteById(ComSession.getUserInfo(), id);
+    }
+
+    /**
+     * 批量删除医护人员信息
+     *
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/delMedStfList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult delMedStfList(String ids) {
+        return ServiceFactory.getMedicalStaffRegisterIn().deleteByIds(ComSession.getUserInfo(), ids);
     }
     //endregion
 

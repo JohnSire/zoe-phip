@@ -12,6 +12,9 @@ define(function (require, exports, module) {
                 addUrl: 'personnel/addXmanInfo',//新增接口Url
                 updateUrl: 'personnel/updateXmanInfo',//修改接口Url
                 loadPageEvent: function () {
+                },
+                dialogParam: {
+                    primaryKey: 'patientId',//主键
                 }
             })
         },

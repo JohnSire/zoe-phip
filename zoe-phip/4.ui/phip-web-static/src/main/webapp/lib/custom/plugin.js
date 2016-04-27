@@ -35,7 +35,6 @@
                 case "text":
                     if (edittype == "date") {
                         if (o) {
-                            o = o.replace("/Date(", "").replace(")/", "");
                             o = new Date(parseInt(o));
                             var year = o.getFullYear();
                             var month = o.getMonth() + 1;
@@ -45,7 +44,8 @@
                             var second = o.getSeconds();
                             o = year + "-" + month + "-" + date;
                         }
-                        jqObj.ligerGetDateEditorManager().setValue(o)
+                        jqObj.val(o);
+                        jqObj.trigger("change");
                     } else {
                         jqObj.val(o);
                         jqObj.trigger("setValue", obj);
@@ -177,7 +177,7 @@
             },
             //渲染插件
             render: function (self) {
-              
+
             },
             //ajax请求
             //need reuqest.js

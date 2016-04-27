@@ -15,9 +15,11 @@ define(function (require, exports, module) {
                 treeId: 'tree',
                 btnBox: 'treeBtns',
                 url: {
-                    getTreeList: 'menu/getMenuList',
+                    getTreeList: 'dict/getDictCatalogList',
                 },
-                treeParam: {}
+                treeParam: {
+
+                }
 
             })
         },
@@ -26,7 +28,7 @@ define(function (require, exports, module) {
                 gridId: 'dictGrid',
                 toolsBoxId: 'dictTools',
                 deleteUrl: {
-                    deleteInfo: "",
+                    deleteInfo: "dict/delDictItemInfo",
                     deleteList: ""
                 },
                 tools: {
@@ -43,7 +45,7 @@ define(function (require, exports, module) {
                 },
                 gridParam: {
                     dataAction: "local",
-                    url: '',
+                    url: 'dict/getDictItemList',
                     columns: [
                         {display: '编码', name: 'code', width: 400, align: 'left'},
                         {display: '名称', name: 'name', width: 400, align: 'left'},

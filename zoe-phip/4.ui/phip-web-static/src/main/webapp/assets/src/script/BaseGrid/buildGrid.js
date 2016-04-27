@@ -68,7 +68,11 @@ define(function (require, exports, module) {
                 if (internal.param["dialogParam"]["titleKey"]) {
                     titleDescr = rowdata[internal.param["dialogParam"]["titleKey"]];
                 }
-                var str = "<a class='icon-grid icon-grid-edit' title='编辑' onclick='javascript:winEditGridRow(\"" + rowdata.id + "\",\"" + titleDescr + "\")'></a> ";
+
+                var reqInfoKey = internal.param["reqInfoKey"];// patientId
+                var reqInfoValue = rowdata[reqInfoKey];
+
+                var str = "<a class='icon-grid icon-grid-edit' title='编辑' onclick='javascript:winEditGridRow(\"" + reqInfoValue + "\",\"" + titleDescr + "\")'></a> ";
                 return str;
             },
             del: function (rowdata) {
@@ -90,11 +94,12 @@ define(function (require, exports, module) {
     }
     window.winEditGridRow = function (id, titleDescr) {
         var dialogParam = internal.param["dialogParam"];
+        var reqInfoKey = internal.param["reqInfoKey"];
         var editParam = $.extend(true, {}, internal.param["dialogParam"]["common"], internal.param["dialogParam"]["edit"]);
         if (titleDescr) {
             editParam["title"] = editParam["title"] + "--" + titleDescr;
         }
-        editParam["url"] = editParam["url"] + "?state=edit&&id=" + id;
+        editParam["url"] = editParam["url"] + "?state=edit&&" + reqInfoKey + "=" + id;
 
         var urlParam = "";
         if (typeof(editParam["otherUrlParam"]) == "function") {
