@@ -49,4 +49,6 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
     int selectChildCountById(Map<String, Object> args);
 
     DictCatalog dictCatalogDetailQueryById(String dictCatalogId) throws Exception;
+
+    DictItem dictItemDetailQueryById(String dictItemId) throws Exception;
 }

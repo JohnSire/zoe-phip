@@ -92,4 +92,11 @@ public interface IDictRegisterIn extends IBaseInService<DictCatalog> {
      * @return
      */
     ServiceResultT<DictCatalog> dictCatalogDetailQueryById(SystemData systemData, String dictCatalogId);
+
+    /**
+     *12)	根据字典项id查询
+     * @param dictItemId
+     * @return
+     */
+    ServiceResultT<DictItem> dictItemDetailQueryById(SystemData systemData, String dictItemId);
 }
