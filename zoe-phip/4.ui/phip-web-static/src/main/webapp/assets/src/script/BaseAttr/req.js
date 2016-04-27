@@ -21,7 +21,7 @@ define(function (require, exports, module) {
         },
         editInfo: function (ajaxParam, callback) {
 
-
+            //document.write((JSON.stringify(ajaxParam["data"])));
 
             var req = new Request(ajaxParam["url"]);
             req.post({

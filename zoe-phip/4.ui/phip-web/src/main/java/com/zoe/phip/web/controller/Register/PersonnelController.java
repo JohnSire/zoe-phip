@@ -6,7 +6,6 @@ import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
 import com.zoe.phip.register.model.XmanBaseInfo;
-import com.zoe.phip.register.model.XmanCard;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 
@@ -70,10 +69,9 @@ public class PersonnelController extends BaseController {
      */
     @RequestMapping(value = "/addXmanInfo", method = RequestMethod.POST)
     @ResponseBody
+    @AuthAction(permission = {Permission.Add}, name = "更新")
     public ServiceResult addXmanInfo(XmanBaseInfo xmanBaseInfo) {
-
-        XmanCard xmanCard = null;
-        return ServiceFactory.getPatientRegisterIn().addPatientRegistry(ComSession.getUserInfo(), xmanBaseInfo, xmanCard);
+        return ServiceFactory.getPatientRegisterIn().addPatientRegistry(ComSession.getUserInfo(), xmanBaseInfo);
     }
 
     /**
@@ -86,8 +84,7 @@ public class PersonnelController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Update}, name = "更新")
     public ServiceResult updateXmanInfo(XmanBaseInfo xmanBaseInfo) {
-        XmanCard xmanCard = null;
-        return ServiceFactory.getPatientRegisterIn().updatePatientRegistry(ComSession.getUserInfo(), xmanBaseInfo, xmanCard);
+        return ServiceFactory.getPatientRegisterIn().updatePatientRegistry(ComSession.getUserInfo(), xmanBaseInfo);
     }
 
     /**
