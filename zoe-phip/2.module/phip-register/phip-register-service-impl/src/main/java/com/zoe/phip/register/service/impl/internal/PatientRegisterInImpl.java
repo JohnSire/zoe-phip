@@ -65,6 +65,13 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         return xmanBaseInfo;
     }
 
+    public XmanBaseInfo addPatientRegistry(XmanBaseInfo xmanBaseInfo) throws Exception {
+        XmanCard xmanCard = new XmanCard();
+        xmanCard.setXcCardCode(xmanBaseInfo.getCardCode());
+        xmanCard.setHealthRecordNo(xmanBaseInfo.getHealthRecordNo());
+        return addPatientRegistry(xmanBaseInfo, xmanCard);
+    }
+
     @Override
     public XmanBaseInfo updatePatientRegistry(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) throws Exception {
         //数据是否存在判断
@@ -81,6 +88,13 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         return xmanBaseInfo;
     }
 
+    public XmanBaseInfo updatePatientRegistry(XmanBaseInfo xmanBaseInfo) throws Exception {
+        XmanCard xmanCard = new XmanCard();
+        xmanCard.setXcCardCode(xmanBaseInfo.getCardCode());
+        xmanCard.setHealthRecordNo(xmanBaseInfo.getHealthRecordNo());
+        return updatePatientRegistry(xmanBaseInfo, xmanCard);
+    }
+
     @Override
     public XmanBaseInfo mergePatientRegistry(String newPatientId, String oldPatientId) throws Exception {
         XmanBaseInfo oldPatient = getMapper().getPatient(oldPatientId);
@@ -90,16 +104,16 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
             throw new BusinessException("003");
         }
         //赋值
-        copyValue(XmanBaseInfo.class,newPatient, oldPatient);
+        copyValue(XmanBaseInfo.class, newPatient, oldPatient);
         //
         //保存到数据库
         getMapper().defaultUpdate(newPatient);
         getMapper().delete(oldPatient);
         //卡的赋值
-        XmanCard newCard=cardMapper.getXmanCard(newPatient.getId());
-        XmanCard oldCard=cardMapper.getXmanCard(oldPatient.getId());
-        if(newCard!=null&&oldCard!=null){
-            copyValue(XmanCard.class,newCard,oldCard);
+        XmanCard newCard = cardMapper.getXmanCard(newPatient.getId());
+        XmanCard oldCard = cardMapper.getXmanCard(oldPatient.getId());
+        if (newCard != null && oldCard != null) {
+            copyValue(XmanCard.class, newCard, oldCard);
             newPatient.setXmanCard(newCard);
         }
         return newPatient;
@@ -120,8 +134,8 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
     @Override
     public PageList<XmanBaseInfo> patientRegistryListQuery(String key, QueryPage page) {
         PageList<XmanBaseInfo> pageList = new PageList<XmanBaseInfo>();
-        if(StringUtil.isNullOrWhiteSpace(page.getOrderBy())){
-                page.setOrderBy(" B.CREATE_AT ");
+        if (StringUtil.isNullOrWhiteSpace(page.getOrderBy())) {
+            page.setOrderBy(" B.CREATE_AT ");
         }
         //分页
         SqlHelper.startPage(page);
@@ -149,13 +163,14 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
     }
     //endregion
 
-     /**
+    /**
      * 将旧实体的值，赋到新实体上
+     *
      * @param cl
      * @param newObj
      * @param oldObj
      */
-    private void copyValue(Class<?> cl,Object newObj, Object oldObj) {
+    private void copyValue(Class<?> cl, Object newObj, Object oldObj) {
         Field[] fields = cl.getDeclaredFields();
         for (Field field : fields) {
             String fieldName = field.getName();

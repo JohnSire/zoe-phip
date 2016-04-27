@@ -35,7 +35,7 @@
                 case "text":
                     if (edittype == "date") {
                         if (o) {
-                            o = o.replace("/Date(", "").replace(")/", "");
+                            //o = o.replace("/Date(", "").replace(")/", "");
                             o = new Date(parseInt(o));
                             var year = o.getFullYear();
                             var month = o.getMonth() + 1;
