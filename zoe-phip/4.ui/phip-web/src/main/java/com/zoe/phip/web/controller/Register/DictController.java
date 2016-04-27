@@ -5,6 +5,8 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
+import com.zoe.phip.register.model.DictCatalog;
+import com.zoe.phip.register.model.DictItem;
 import com.zoe.phip.register.model.NationalStandards;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
@@ -100,7 +102,7 @@ public class DictController extends BaseController {
     /**
      * 批量删除OID
      *
-     * @param id
+     * @param ids
      * @return
      */
     @RequestMapping(value = "/delOIDList")
@@ -122,6 +124,80 @@ public class DictController extends BaseController {
     public String ToDictCategoryDetail(HttpServletRequest request, Model model) {
         return "/Register/Dict/dictCategoryDetail";
     }
+
+    /**
+     * 根据code获取字典分类（字典）信息
+     * @param code
+     * @return
+     */
+    @RequestMapping(value = "/getDictCatalogInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<DictCatalog> getDictCatalogInfo(String code) {
+        return ServiceFactory.getDictRegisterIn().dictCatalogDetailQuery(ComSession.getUserInfo(), code);
+    }
+
+    /**
+     * 根据id获取字典分类（字典）信息
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/getDictCatalogInfoById")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<DictCatalog> getDictCatalogInfoById(String id) {
+        return ServiceFactory.getDictRegisterIn().dictCatalogDetailQueryById(ComSession.getUserInfo(), id);
+    }
+
+    /**
+     * 新增字典分类（字典）
+     * @param dc
+     * @return
+     */
+
+    @RequestMapping(value = "/addDictCatalogInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Add}, name = "新增")
+    public ServiceResult addDictCatalogInfo(DictCatalog dc, HttpServletRequest request) {
+        return ServiceFactory.getDictRegisterIn().addDictCatalogRequest(ComSession.getUserInfo(), dc);
+    }
+
+    /**
+     * 更新字典分类（字典）
+     * @param dc
+     * @return
+     */
+    @RequestMapping(value = "/updateDictCatalogInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Update}, name = "更新")
+    public ServiceResult updateDictCatalogInfo(DictCatalog dc, HttpServletRequest request) {
+        return ServiceFactory.getDictRegisterIn().updateDictCatalogRequest(ComSession.getUserInfo(), dc);
+    }
+
+    /**
+     * 删除字典分类（字典）
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delDictCatalogInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult delDictCatalogInfo(String id) {
+        ServiceResult result = ServiceFactory.getDictRegisterIn().dictCatalogDetailDelete(ComSession.getUserInfo(), id);
+        return result;
+    }
+
+    /**
+     * 根据关键字获取字典分类（字典）列表
+     * @param keyWord
+     * @return
+     */
+    @RequestMapping(value = "/getDictCatalogList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<DictCatalog>> getDictCatalogList(String keyWord) {
+        return ServiceFactory.getDictRegisterIn().dictCatalogListQuery(ComSession.getUserInfo(), getQueryPage(), keyWord);
+    }
     //endregion
 
     //region 字典(字典列表）
@@ -134,6 +210,70 @@ public class DictController extends BaseController {
     @RequestMapping("/view/dictdetail")
     public String ToDictDetail(HttpServletRequest request, Model model) {
         return "Register/Dict/dictDetail";
+    }
+
+    /**
+     * 根据code获取字典项信息
+     * @param code
+     * @return
+     */
+    @RequestMapping(value = "/getDictItemInfoById")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<DictItem> getDictItemInfoById(String code) {
+        return ServiceFactory.getDictRegisterIn().dictItemDetailQuery(ComSession.getUserInfo(), code);
+    }
+
+    /**
+     * 新增字典项
+     * @param di
+     * @return
+     */
+
+    @RequestMapping(value = "/addDictItemInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Add}, name = "新增")
+    public ServiceResult addDictItemInfo(DictItem di, HttpServletRequest request) {
+        return ServiceFactory.getDictRegisterIn().addDictItemRequest(ComSession.getUserInfo(), di);
+    }
+
+
+
+    /**
+     * 更新字典项
+     * @param di
+     * @return
+     */
+    @RequestMapping(value = "/updateDictItemInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Update}, name = "更新")
+    public ServiceResult updateDictItemInfo(DictItem di, HttpServletRequest request) {
+        return ServiceFactory.getDictRegisterIn().updateDictItemRequest(ComSession.getUserInfo(), di);
+    }
+
+    /**
+     * 删除字典项
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delDictItemInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult delDictItemInfo(String id) {
+        ServiceResult result = ServiceFactory.getDictRegisterIn().dictItemDetailDelete(ComSession.getUserInfo(), id);
+        return result;
+    }
+
+    /**
+     * 根据关键字获取字典分类（字典）列表
+     * @param keyWord
+     * @return
+     */
+    @RequestMapping(value = "/getDictItemList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<DictItem>> getDictItemList(String keyWord, String catalogCode) {
+        return ServiceFactory.getDictRegisterIn().dictItemListQuery(ComSession.getUserInfo(), catalogCode,  getQueryPage(), keyWord);
     }
     //endregion
 }

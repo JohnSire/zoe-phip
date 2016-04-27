@@ -30,9 +30,6 @@
     <select id="getDictCatalogList" resultMap="MultiResultMap" parameterType="java.util.Map">
         SELECT pdc.*,ppdc.NAME PARENT_NAME FROM PHIP_DICT_CATALOG pdc
         <where>
-            <if test="pid !=null and pid !=''">
-                AND pdc.PID = #{pid,jdbcType=VARCHAR}
-            </if>
             <if test="key !=null and key !=''">
                 AND (UPPER(pdc.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(pdc.CODE) LIKE #{key,jdbcType=VARCHAR})
             </if>
@@ -44,14 +41,14 @@
 
     <select id="selectChildCountById" resultType="java.lang.Integer" parameterType="java.util.Map">
         SELECT COUNT(1) COUNT
-        FROM (SELECT COUNT(1)
+        FROM (SELECT PDC.ID, PDC.CODE
           FROM (SELECT PDC.ID, PDC.CODE, PDC.NAME
                   FROM PHIP_DICT_CATALOG PDC
                  WHERE PDC.ID = #{id,jdbcType=VARCHAR}) PDC
          INNER JOIN PHIP_DICT_CATALOG PPDC
             ON PDC.ID = PPDC.PID
         UNION ALL
-        SELECT COUNT(1)
+        SELECT PDC.ID, PDC.CODE
           FROM (SELECT PDC.ID, PDC.CODE, PDC.NAME
                   FROM PHIP_DICT_CATALOG PDC
                  WHERE PDC.ID = #{id,jdbcType=VARCHAR}) PDC

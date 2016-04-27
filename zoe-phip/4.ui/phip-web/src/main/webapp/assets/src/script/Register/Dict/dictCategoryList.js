@@ -8,7 +8,7 @@ define(function (require, exports, module) {
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
                 deleteUrl: {
-                    deleteInfo: "",
+                    deleteInfo: "dict/delDictCatalogInfo",
                     deleteList: ""
                 },
                 tools: {
@@ -21,10 +21,10 @@ define(function (require, exports, module) {
                     ]
                 },
                 gridParam: {
-                    url: '',
+                    url: 'dict/getDictCatalogList',
                     columns: [
-                        {display: '编码', code: 'code', width: 120, align: 'left'},
-                        {display: '名称', name: 'code_system', width: 120, align: 'left'},
+                        {display: '编码', name: 'code', width: 120, align: 'left'},
+                        {display: '名称', name: 'name', width: 120, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,

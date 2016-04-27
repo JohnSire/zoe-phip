@@ -40,11 +40,13 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
     boolean dictItemDetailDelete(String dictItemId);
 
-    PageList<DictCatalog> dictCatalogListQuery(String pId, QueryPage page, String key);
+    PageList<DictCatalog> dictCatalogListQuery(QueryPage page, String key);
 
     PageList<DictItem> dictItemListQuery(String catalogCode, QueryPage page, String key);
 
     List<DictCatalog> getDictCatalogList(Map<String, Object> args);
 
     int selectChildCountById(Map<String, Object> args);
+
+    DictCatalog dictCatalogDetailQueryById(String dictCatalogId) throws Exception;
 }

@@ -93,7 +93,7 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public PageList<DictCatalog> dictCatalogListQuery(String pId, QueryPage queryPage, String key) {
+    public PageList<DictCatalog> dictCatalogListQuery(QueryPage queryPage, String key) {
         PageList<DictCatalog> pageList = new PageList<DictCatalog>();
         if(StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())){
             queryPage.setOrderBy(" pdc.CREATE_AT ");
@@ -101,7 +101,6 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         //分页
         SqlHelper.startPage(queryPage);
         Map<String, Object> paras = new HashMap<String, Object>();
-        paras.put("pid",pId);
         if (!StringUtil.isNullOrWhiteSpace(key)) {
             paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
         }
@@ -123,11 +122,22 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
+    public DictCatalog dictCatalogDetailQueryById(String dictCatalogId) throws Exception {
+        Example example = new Example(DictCatalog.class);
+        example.createCriteria().andEqualTo("id", dictCatalogId);
+        DictCatalog catalog = getMapper().selectByExample(example).get(0);
+        if (catalog == null) {
+            throw new BusinessException("003");
+        }
+        return catalog;
+    }
+
+    @Override
     @ErrorMessage(code = "004", message = "由于内容重复注册，注册失败")
     public DictItem addDictItemRequest(DictItem dictItem) throws Exception {
         //数据是否存在判断
         Example example = new Example(DictItem.class);
-        example.createCriteria().andEqualTo("code", dictItem.getCode());
+        example.createCriteria().andEqualTo("id", dictItem.getCode());
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
             throw new BusinessException("004");
