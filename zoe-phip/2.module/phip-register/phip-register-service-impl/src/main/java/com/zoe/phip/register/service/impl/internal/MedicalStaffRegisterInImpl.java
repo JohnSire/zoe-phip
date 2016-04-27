@@ -51,13 +51,13 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     }
 
     @Override
-    public PageList<MedicalStaffInfo> providerListQuery(QueryPage page, String message) throws Exception {
+    public PageList<MedicalStaffInfo> providerListQuery(QueryPage page, String keyWord) throws Exception {
         PageList<MedicalStaffInfo> pageList = new PageList<MedicalStaffInfo>();
         Example example = new Example(MedicalStaffInfo.class);
         SqlHelper.startPage(page);
-        if (!StringUtil.isNullOrWhiteSpace(message)) {
-            example.createCriteria().andLike("idNo", "%" + message + "%");
-            example.or(example.createCriteria().andLike("name", "%" + message + "%"));
+        if (!StringUtil.isNullOrWhiteSpace(keyWord)) {
+            example.createCriteria().andLike("idNo", "%" + keyWord + "%");
+            example.or(example.createCriteria().andLike("name", "%" + keyWord + "%"));
         }
         List<MedicalStaffInfo> results = getMapper().selectByExample(example);
         PageInfo<MedicalStaffInfo> pageInfo = new PageInfo<>(results);

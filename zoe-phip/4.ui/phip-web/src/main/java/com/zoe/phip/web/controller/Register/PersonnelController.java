@@ -5,6 +5,7 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
+import com.zoe.phip.register.model.MedicalStaffInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.XmanCard;
 import com.zoe.phip.web.context.ComSession;
@@ -139,6 +140,71 @@ public class PersonnelController extends BaseController {
     @RequestMapping("/view/medicalstaffdetail")
     public String ToMedicalStaffDetail(HttpServletRequest request, Model model) {
         return "/Register/Personnel/medicalStaffDetail";
+    }
+
+    /**
+     * 查询医疗卫生人员列表
+     *
+     * @param message
+     * @return
+     */
+    @RequestMapping(value = "/getMedStfList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<MedicalStaffInfo>> getMedStfList(String message) {
+        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), message);
+    }
+
+    /**
+     * 医护人员注册
+     *
+     * @param medicalStaffInfo
+     * @return
+     */
+    @RequestMapping(value = "/addMedStaffInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Add}, name = "新增")
+    public ServiceResultT<MedicalStaffInfo> addMedStfInfo(MedicalStaffInfo medicalStaffInfo) {
+        return ServiceFactory.getMedicalStaffRegisterIn().addProvider(ComSession.getUserInfo(), medicalStaffInfo);
+    }
+
+    /**
+     * 医护人员信息更新
+     *
+     * @param medicalStaffInfo
+     * @return
+     */
+    @RequestMapping(value = "/updateMedStfInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Update}, name = "更新")
+    public ServiceResultT<MedicalStaffInfo> updateMedStfInfo(MedicalStaffInfo medicalStaffInfo) {
+        return ServiceFactory.getMedicalStaffRegisterIn().updateProvider(ComSession.getUserInfo(), medicalStaffInfo);
+    }
+
+    /**
+     * 删除医护人员信息
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delMedStfInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult delMedStfInfo(String id) {
+        return ServiceFactory.getMedicalStaffRegisterIn().deleteById(ComSession.getUserInfo(), id);
+    }
+
+    /**
+     * 批量删除医护人员信息
+     *
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/delMedStfList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult delMedStfList(String ids) {
+        return ServiceFactory.getMedicalStaffRegisterIn().deleteByIds(ComSession.getUserInfo(), ids);
     }
     //endregion
 
