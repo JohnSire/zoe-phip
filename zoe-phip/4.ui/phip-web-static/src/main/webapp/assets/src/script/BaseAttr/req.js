@@ -20,6 +20,9 @@ define(function (require, exports, module) {
             })
         },
         editInfo: function (ajaxParam, callback) {
+
+
+
             var req = new Request(ajaxParam["url"]);
             req.post({
                 data: ajaxParam["data"],

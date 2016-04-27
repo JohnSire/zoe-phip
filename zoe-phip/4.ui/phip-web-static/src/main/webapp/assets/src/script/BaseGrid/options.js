@@ -20,10 +20,10 @@ define(function (require, exports, module) {
             deleteList: ""
         },
         //扩展参数（如分类传入的参数）
-
         extendParam: function () {
             //return { id: "fff" };
         },
+        reqInfoKey: 'id',//获取单条信息的key
         gridParam: {
             checkbox: true,
             dataAction: "server",
