@@ -23,11 +23,21 @@ import java.util.Date;
  */
 @Table(name = "PHIP_ORG_DEPT_INFO")
 public class OrgDeptInfo extends RegisterEntity {
+
     /**
      * 医疗卫生机构（科室）标识
      */
-    @Column(name = "CODE")
-    private String code;
+    @Column(name="EXTENSION_ID")
+    private String extensionId;
+
+
+    /**
+     * DEPT_CODE
+     */
+    @Column(name="DEPT_CODE")
+    private String deptCode;
+
+
 
     /**
      * 医疗卫生机构（科室）实体名称
@@ -124,6 +134,256 @@ public class OrgDeptInfo extends RegisterEntity {
     @Column(name = "SORT_NUM")
     private int sortNum;
 
+
+
+
+
+    /**
+     * 角色名称
+     */
+    @Column(name = "ROLE_NAME")
+    private String roleName;
+
+
+    /**
+     * 角色状态
+     */
+    @Column(name = "ROLE_STATE")
+    private String roleState;
+
+    /**
+     * 信息负责人
+     */
+    @Column(name = "CHARGE_INFO_PERSON")
+    private String chargeInfoPerson;
+    /**
+     * 负责人电话
+     */
+    @Column(name = "CHARGE_INFO_TEL")
+    private String chargeInfoTel;
+
+
+    /**
+     * 投诉电话
+     */
+    @Column(name = "COMPLAINTS_HOTLINE")
+    private String complaintsHotline;
+
+    /**
+     * 法人代表
+     */
+    @Column(name = "LEGAL_REPRESENTATIVE")
+    private String legalRepresentative;
+
+
+    /**
+     * 网址
+     */
+    @Column(name = "WEB_URL")
+    private String webUrl;
+    /**
+     * 邮件
+     */
+    @Column(name = "EMAIL")
+    private String email;
+    /**
+     * 邮政编码
+     */
+    @Column(name = "POSTCODE")
+    private String postcode;
+
+
+    /**
+     * 维度
+     */
+    @Column(name = "G_LATITUDE")
+    private double glatitude;
+    /**
+     * 经度
+     */
+    @Column(name = "G_LONGITUDE")
+    private double glongitude;
+    /**
+     * 省份编码
+     */
+    @Column(name = "PROVINCE_CODE")
+    private String provinceCode;
+
+
+    /**
+     * 市级编码
+     */
+    @Column(name = "CITY_CODE")
+    private String cityCode;
+
+    /**
+     * 区县级编码
+     */
+    @Column(name = "COUNTY_CODE")
+    private String countyCode;
+
+
+    /**
+     * 街道编码
+     */
+    @Column(name = "STREET_CODE")
+    private String streetCode;
+
+
+    /**
+     * 居委会编码
+     */
+    @Column(name = "NEIGHBORHOOD_CODE")
+    private String neighborhoodCode;
+
+
+    public String getNeighborhoodCode() {
+        return neighborhoodCode;
+    }
+
+    public void setNeighborhoodCode(String neighborhoodCode) {
+        this.neighborhoodCode = neighborhoodCode;
+    }
+
+    public String getExtensionId() {
+        return extensionId;
+    }
+
+    public void setExtensionId(String extensionId) {
+        this.extensionId = extensionId;
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getRoleState() {
+        return roleState;
+    }
+
+    public void setRoleState(String roleState) {
+        this.roleState = roleState;
+    }
+
+    public String getChargeInfoPerson() {
+        return chargeInfoPerson;
+    }
+
+    public void setChargeInfoPerson(String chargeInfoPerson) {
+        this.chargeInfoPerson = chargeInfoPerson;
+    }
+
+    public String getChargeInfoTel() {
+        return chargeInfoTel;
+    }
+
+    public void setChargeInfoTel(String chargeInfoTel) {
+        this.chargeInfoTel = chargeInfoTel;
+    }
+
+    public String getComplaintsHotline() {
+        return complaintsHotline;
+    }
+
+    public void setComplaintsHotline(String complaintsHotline) {
+        this.complaintsHotline = complaintsHotline;
+    }
+
+    public String getLegalRepresentative() {
+        return legalRepresentative;
+    }
+
+    public void setLegalRepresentative(String legalRepresentative) {
+        this.legalRepresentative = legalRepresentative;
+    }
+
+    public String getWebUrl() {
+        return webUrl;
+    }
+
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
+
+
+
+
+    public String getProvinceCode() {
+        return provinceCode;
+    }
+
+    public void setProvinceCode(String provinceCode) {
+        this.provinceCode = provinceCode;
+    }
+
+    public String getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
+    }
+
+    public String getCountyCode() {
+        return countyCode;
+    }
+
+    public void setCountyCode(String countyCode) {
+        this.countyCode = countyCode;
+    }
+
+    public String getStreetCode() {
+        return streetCode;
+    }
+
+    public void setStreetCode(String streetCode) {
+        this.streetCode = streetCode;
+    }
+
+    public double getGlongitude() {
+        return glongitude;
+    }
+
+    public void setGlongitude(double glongitude) {
+        this.glongitude = glongitude;
+    }
+
+    public double getGlatitude() {
+        return glatitude;
+    }
+
+    public void setGlatitude(double glatitude) {
+        this.glatitude = glatitude;
+    }
 
     public String getDeptName() {
         return this.deptName;
@@ -254,13 +514,7 @@ public class OrgDeptInfo extends RegisterEntity {
     }
 
 
-    public String getCode() {
-        return code;
-    }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
 
 
     public int getSortNum() {
