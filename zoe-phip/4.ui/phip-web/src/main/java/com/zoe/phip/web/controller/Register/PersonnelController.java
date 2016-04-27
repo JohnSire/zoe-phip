@@ -58,7 +58,7 @@ public class PersonnelController extends BaseController {
     @RequestMapping(value = "/getXmanInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResultT<XmanBaseInfo> getXmanInfo(String patientId) {
+    public ServiceResult getXmanInfo(String patientId) {
         return ServiceFactory.getPatientRegisterIn().patientRegistryQuery(ComSession.getUserInfo(), patientId);
     }
 
@@ -66,13 +66,13 @@ public class PersonnelController extends BaseController {
      * 个人信息新增
      *
      * @param xmanBaseInfo
-     * @param xmanCard
      * @return
      */
     @RequestMapping(value = "/addXmanInfo", method = RequestMethod.POST)
     @ResponseBody
-    @AuthAction(permission = {Permission.Add}, name = "新增")
-    public ServiceResultT<XmanBaseInfo> addXmanInfo(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) {
+    public ServiceResult addXmanInfo(XmanBaseInfo xmanBaseInfo) {
+
+        XmanCard xmanCard = null;
         return ServiceFactory.getPatientRegisterIn().addPatientRegistry(ComSession.getUserInfo(), xmanBaseInfo, xmanCard);
     }
 
@@ -80,13 +80,13 @@ public class PersonnelController extends BaseController {
      * 个人信息更新
      *
      * @param xmanBaseInfo
-     * @param xmanCard
      * @return
      */
-    @RequestMapping(value = "/updateXmanInfo")
+    @RequestMapping(value = "/updateXmanInfo", method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Update}, name = "更新")
-    public ServiceResultT<XmanBaseInfo> updateXmanInfo(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) {
+    public ServiceResult updateXmanInfo(XmanBaseInfo xmanBaseInfo) {
+        XmanCard xmanCard = null;
         return ServiceFactory.getPatientRegisterIn().updatePatientRegistry(ComSession.getUserInfo(), xmanBaseInfo, xmanCard);
     }
 
