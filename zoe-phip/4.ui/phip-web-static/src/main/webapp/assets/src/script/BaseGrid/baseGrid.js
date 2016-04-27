@@ -59,8 +59,6 @@ define(function (require, exports, module) {
             });
             gridObj.reload();
             //extendParam={};
-
-
         }
     })
     module.exports = baseGrid;
