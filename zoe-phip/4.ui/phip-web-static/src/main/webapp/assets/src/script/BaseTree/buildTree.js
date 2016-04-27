@@ -9,7 +9,7 @@ define(function (require, exports, module) {
 
             internal.req.getList({url: options["url"]["getTreeList"]}, function (data) {
                 var jqTree = $("#" + options["treeId"]);
-                var treeData = data.result;
+                var treeData = data.result.rows;
                 treeParam["data"] = treeData;
                 jqTree.ligerTree(treeParam)
 
