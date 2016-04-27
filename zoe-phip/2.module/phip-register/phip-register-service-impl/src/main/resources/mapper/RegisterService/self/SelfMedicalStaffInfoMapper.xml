@@ -7,8 +7,8 @@
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
         update PHIP_MEDICAL_STAFF_INFO
         <set>
-            <if test="staffId != null">
-                STAFF_ID = #{staffId,jdbcType=VARCHAR},
+            <if test="extensionId != null">
+                EXTENSION_ID = #{extensionId,jdbcType=VARCHAR},
             </if>
             <if test="name != null">
                 NAME = #{name,jdbcType=VARCHAR},
@@ -93,8 +93,8 @@
     <select id="getStaff" parameterType="java.util.Map" resultMap="BaseResultMap">
         SELECT * FROM PHIP_MEDICAL_STAFF_INFO PMSI
         WHERE 1 = 1
-        <if test="_parameter.containsKey('staffId')">
-            AND PMSI.STAFF_ID = #{staffId,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('extensionId')">
+            AND PMSI.EXTENSION_ID = #{extensionId,jdbcType=VARCHAR}
         </if>
         <if test="_parameter.containsKey('staffName')">
             AND PMSI.NAME = #{staffName,jdbcType=VARCHAR}

@@ -157,14 +157,14 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             String msgId = document.selectSingleNode("//id/@extension").getText();
             String idRoot = document.selectSingleNode("//id/@root").getText(); //消息IDroot属性
             Date creationTime = DateUtil.stringToDateTime(document.selectSingleNode("//creationTime/@value").getText());
-            String staffId = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerID/value/@extension").getText();
+            String extensionId = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerID/value/@extension").getText();
 
             String genderCode = document.selectSingleNode("//controlActProcess/queryByParameterPayload/administrativeGender/value/@code").getText();
             String staffName = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerName/value").getText();
             String birthDate = document.selectSingleNode("//controlActProcess/queryByParameterPayload/dOB/value/@value").getText();
 
             Map<String, Object> map = new TreeMap<>();
-            if (!StringUtil.isNullOrWhiteSpace(staffId)) map.put("staffId", staffId);
+            if (!StringUtil.isNullOrWhiteSpace(extensionId)) map.put("extensionId", extensionId);
             if (!StringUtil.isNullOrWhiteSpace(staffName)) map.put("staffName", staffName);
             if (!StringUtil.isNullOrWhiteSpace(genderCode)) map.put("genderCode", genderCode);
             if (!StringUtil.isNullOrWhiteSpace(birthDate)) map.put("birthDate", birthDate);

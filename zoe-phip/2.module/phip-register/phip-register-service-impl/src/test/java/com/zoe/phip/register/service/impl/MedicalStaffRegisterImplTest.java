@@ -163,7 +163,7 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
                 "        <subject1 typeCode=\"SBJ\">\n" +
                 "          <healthCareProvider classCode=\"PROV\">\n" +
                 "            <!--医务人员ID-->\n" +
-                "            <id root=\"2.16.156.10011.1.4\" extension=\"120109197706015519\"/>\n" +
+                "            <id root=\"2.16.156.10011.1.4\" extension=\"120109197706015518\"/>\n" +
                 "            <!--专业技术职务代码-->\n" +
                 "            <code code=\"231\" displayName=\" 主任医师\"\n" +
                 "            codeSystem=\"2.16.156.10011.2.3.3.10\" codeSystemName=\"专业技术职务代码( GB/T 8561)\"/>\n" +
@@ -175,20 +175,20 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
                 "            <statusCode code=\"active\"/>\n" +
                 "            <!--角色有效期间-->\n" +
                 "            <effectiveTime>\n" +
-                "              <low value=\"20100103\"/>\n" +
-                "              <high value=\"20501230\"/>\n" +
+                "              <low value=\"20100101\"/>\n" +
+                "              <high value=\"20501231\"/>\n" +
                 "            </effectiveTime>\n" +
                 "            <healthCarePrincipalPerson classCode=\"PSN\"\n" +
                 "            determinerCode=\"INSTANCE\">\n" +
                 "              <!--身份证号-->\n" +
-                "              <id root=\"2.16.156.10011.1.3\" extension=\"120109197706015510\"/>\n" +
+                "              <id root=\"2.16.156.10011.1.3\" extension=\"120109197706015518\"/>\n" +
                 "              <!--姓名-->\n" +
-                "              <name use=\"L\">张医生</name>\n" +
+                "              <name use=\"L\">李医生</name>\n" +
                 "              <!--性别-->\n" +
                 "              <administrativeGenderCode code=\"1\"\n" +
                 "              codeSystem=\"2.16.156.10011.2.3.3.4\" displayName=\"男性\" codeSystemName=\"生理性别代码表(GB/T 2261.1)\"/>\n" +
                 "              <!--出生日期-->\n" +
-                "              <birthTime value=\"19570523\"/>\n" +
+                "              <birthTime value=\"19570323\"/>\n" +
                 "              <!--隶属-->\n" +
                 "              <asAffiliate classCode=\"AFFL\">\n" +
                 "                <code/>\n" +
@@ -197,7 +197,7 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
                 "                determinerCode=\"INSTANCE\">\n" +
                 "                  <!--科室号标识-->\n" +
                 "                  <id root=\"2.16.156.10011.1.26\" extension=\"xxx12345-X\"/>\n" +
-                "                  <name>消化内科</name>\n" +
+                "                  <name>呼吸内科</name>\n" +
                 "                </affiliatedPrincipalOrganization>\n" +
                 "              </asAffiliate>\n" +
                 "              <!--出生地-->\n" +

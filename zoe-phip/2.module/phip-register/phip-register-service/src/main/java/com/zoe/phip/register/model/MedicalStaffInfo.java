@@ -22,8 +22,8 @@ public class MedicalStaffInfo extends RegisterEntity {
     /**
      * 医务人员ID
      */
-    @Column(name = "STAFF_ID")
-    private String staffId;
+    @Column(name = "EXTENSION_ID")
+    private String extensionId;
     /**
      * 姓名
      */
@@ -197,13 +197,13 @@ public class MedicalStaffInfo extends RegisterEntity {
         this.interactionId = interactionId;
     }
 
-    public String getStaffId() {
-        return this.staffId;
+    public String getExtensionId() {
+        return this.extensionId;
     }
 
 
-    public void setStaffId(String staffId) {
-        this.staffId = staffId;
+    public void setExtensionId(String extensionId) {
+        this.extensionId = extensionId;
     }
 
     public String getName() {
