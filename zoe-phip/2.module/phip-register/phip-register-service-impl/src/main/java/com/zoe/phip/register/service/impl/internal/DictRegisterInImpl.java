@@ -193,4 +193,9 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         pageList.setRows(results);
         return pageList;
     }
+
+    @Override
+    public int defaultUpdate(DictCatalog t) {
+        return getMapper().defaultUpdate(t);
+    }
 }

@@ -110,5 +110,8 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return getMapper().getOrgDeptInfo(map);
     }
 
-
+    @Override
+    public int defaultUpdate(OrgDeptInfo t) {
+        return getMapper().defaultUpdate(t);
+    }
 }

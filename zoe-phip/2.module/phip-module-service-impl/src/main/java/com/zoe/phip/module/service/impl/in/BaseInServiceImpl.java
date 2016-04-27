@@ -120,6 +120,10 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
         return pageList;
     }
 
+   /* public int defaultUpdate(T t) {
+        return mapper.defaultUpdate(t);
+    }*/
+
     //region //空函数，转接
 
     @Override
@@ -218,9 +222,6 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
     }
 
 
-    public int defaultUpdate(T t) {
-        return getMapper().defaultUpdate(t);
-    }
 
     //endregion
 }

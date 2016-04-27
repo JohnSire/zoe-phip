@@ -12,6 +12,7 @@ import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.register.dao.IAreaBaseInfoMapper;
 import com.zoe.phip.register.model.AreaBaseInfo;
+import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.service.internal.IAreaRegisterIn;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
@@ -110,5 +111,10 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
     @Override
     public List<AreaBaseInfo> getDataList(Map<String, Object> map) {
         return getMapper().getDataList(map);
+    }
+
+    @Override
+    public int defaultUpdate(AreaBaseInfo t) {
+        return getMapper().defaultUpdate(t);
     }
 }
