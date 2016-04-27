@@ -17,7 +17,9 @@ define(function (require, exports, module) {
                 url: {
                     getTreeList: 'dict/getDictCatalogList',
                 },
-                treeParam: {}
+                treeParam: {
+
+                }
 
             })
         },
