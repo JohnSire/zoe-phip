@@ -1,7 +1,6 @@
 package com.zoe.phip.register.service.internal;
 
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.model.DictItem;
@@ -38,7 +37,7 @@ public interface IDictRegisterIn extends IBaseInService<DictCatalog> {
      * @param catalogId
      * @return
      */
-    ServiceResult dictCatalogDetailDelete(String catalogId);
+    ServiceResult dictCatalogDetailDelete(SystemData systemData, String catalogId);
 
     /**
      *5)	新增字典项
@@ -66,5 +65,25 @@ public interface IDictRegisterIn extends IBaseInService<DictCatalog> {
      * @param dictItemId
      * @return
      */
-    ServiceResult dictItemDetailDelete(String dictItemId);
+    ServiceResult dictItemDetailDelete(SystemData systemData, String dictItemId);
+
+    /**
+     *9)	字典分类（字典）列表查询
+     * @param systemData
+     * @param pId
+     * @param queryPage
+     * @param key
+     * @return
+     */
+    ServiceResultT<PageList<DictCatalog>> dictCatalogListQuery(SystemData systemData, String pId, QueryPage queryPage, String key);
+
+    /**
+     *10)	字典项列表查询
+     * @param systemData
+     * @param catalogCode
+     * @param queryPage
+     * @param key
+     * @return
+     */
+    ServiceResultT<PageList<DictItem>> dictItemListQuery(SystemData systemData, String catalogCode, QueryPage queryPage, String key);
 }

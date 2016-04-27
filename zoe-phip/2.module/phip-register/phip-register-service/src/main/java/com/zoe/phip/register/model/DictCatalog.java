@@ -41,6 +41,13 @@ public class DictCatalog extends MasterEntity {
      */
     @Column(name = "PID")
     private String pid;
+
+    /**
+     * 字典父分类名称
+     */
+    @Transient
+    private String parentName;
+
     /**
      * 字典分类类别
      */
@@ -70,5 +77,13 @@ public class DictCatalog extends MasterEntity {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 }
