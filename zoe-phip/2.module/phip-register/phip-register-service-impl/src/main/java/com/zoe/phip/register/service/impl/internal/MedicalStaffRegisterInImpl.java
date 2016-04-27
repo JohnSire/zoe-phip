@@ -76,7 +76,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
 
     public MedicalStaffInfo addProvider(MedicalStaffInfo medicalStaffInfo) throws Exception {
         Example example = new Example(MedicalStaffInfo.class);
-        example.createCriteria().andEqualTo("staffId", medicalStaffInfo.getStaffId());
+        example.createCriteria().andEqualTo("extensionId", medicalStaffInfo.getExtensionId());
         //数据是否存在判断
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
@@ -93,7 +93,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     public MedicalStaffInfo updateProvider(MedicalStaffInfo medicalStaffInfo) throws Exception {
         ErrorMessage[] errorMessages = this.getClass().getAnnotationsByType(ErrorMessage.class);
         Example example = new Example(MedicalStaffInfo.class);
-        example.createCriteria().andEqualTo("staffId", medicalStaffInfo.getStaffId());
+        example.createCriteria().andEqualTo("extensionId", medicalStaffInfo.getExtensionId());
         //数据是否存在判断
         int count = getMapper().selectCountByExample(example);
         if (count == 0) {
