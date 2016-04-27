@@ -8,8 +8,8 @@ define(function (require, exports, module) {
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
                 deleteUrl: {
-                    deleteInfo: "",
-                    deleteList: ""
+                    deleteInfo: "personnel/delXmanInfo",
+                    deleteList: "personnel/delXmanList"
                 },
                 tools: {
                     btnbox: {
@@ -26,18 +26,18 @@ define(function (require, exports, module) {
                     ]
                 },
                 gridParam: {
-                    url: '',
+                    url: 'personnel/getXmanList',
                     columns: [
                         {display: '卡号', name: 'id', width: 120, align: 'left'},
                         {display: '姓名', name: 'name', width: 120, align: 'left'},
-                        {display: '性别', name: 'sex', width: 120, align: 'left'},
-                        {display: '身份证号', name: 'idcard', width: 120, align: 'left'},
-                        {display: '健康档案编号', name: 'telecom', width: 120, align: 'left'},
+                        {display: '性别', name: 'sexCodeName', width: 120, align: 'left'},
+                        {display: '身份证号', name: 'idNo', width: 120, align: 'left'},
+                        {display: '健康档案编号', name: 'healthRecordNo', width: 120, align: 'left'},
                         {
-                            display: '出生日期', name: 'birthday', width: 120, align: 'left', type: 'date',
+                            display: '出生日期', name: 'birthDate', width: 120, align: 'left', type: 'date',
                             format: 'yyyy-mm-dd'
                         },
-                        {display: '联系电话', name: 'telecom', width: 120, align: 'left'},
+                        {display: '联系电话', name: 'telNo', width: 120, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,

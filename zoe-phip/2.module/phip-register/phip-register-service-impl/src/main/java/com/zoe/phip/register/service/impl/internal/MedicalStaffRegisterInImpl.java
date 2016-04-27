@@ -51,13 +51,13 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     }
 
     @Override
-    public PageList<MedicalStaffInfo> providerListQuery(QueryPage page, String message) throws Exception {
+    public PageList<MedicalStaffInfo> providerListQuery(QueryPage page, String keyWord) throws Exception {
         PageList<MedicalStaffInfo> pageList = new PageList<MedicalStaffInfo>();
         Example example = new Example(MedicalStaffInfo.class);
         SqlHelper.startPage(page);
-        if (!StringUtil.isNullOrWhiteSpace(message)) {
-            example.createCriteria().andLike("idNo", "%" + message + "%");
-            example.or(example.createCriteria().andLike("name", "%" + message + "%"));
+        if (!StringUtil.isNullOrWhiteSpace(keyWord)) {
+            example.createCriteria().andLike("idNo", "%" + keyWord + "%");
+            example.or(example.createCriteria().andLike("name", "%" + keyWord + "%"));
         }
         List<MedicalStaffInfo> results = getMapper().selectByExample(example);
         PageInfo<MedicalStaffInfo> pageInfo = new PageInfo<>(results);
@@ -76,7 +76,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
 
     public MedicalStaffInfo addProvider(MedicalStaffInfo medicalStaffInfo) throws Exception {
         Example example = new Example(MedicalStaffInfo.class);
-        example.createCriteria().andEqualTo("staffId", medicalStaffInfo.getStaffId());
+        example.createCriteria().andEqualTo("extensionId", medicalStaffInfo.getExtensionId());
         //数据是否存在判断
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
@@ -93,7 +93,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     public MedicalStaffInfo updateProvider(MedicalStaffInfo medicalStaffInfo) throws Exception {
         ErrorMessage[] errorMessages = this.getClass().getAnnotationsByType(ErrorMessage.class);
         Example example = new Example(MedicalStaffInfo.class);
-        example.createCriteria().andEqualTo("staffId", medicalStaffInfo.getStaffId());
+        example.createCriteria().andEqualTo("extensionId", medicalStaffInfo.getExtensionId());
         //数据是否存在判断
         int count = getMapper().selectCountByExample(example);
         if (count == 0) {
