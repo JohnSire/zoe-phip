@@ -79,8 +79,17 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public int dictCatalogDetailDelete(String catalogId) {
-        return getMapper().deleteByPrimaryKey(catalogId);
+    @ErrorMessage(code = "007", message = "由于删除字典分类（字典）存在下级分类（字典项），删除失败！")
+    public boolean dictCatalogDetailDelete(String catalogId) throws Exception {
+        //判断时候存在字典项或下级
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("Id",catalogId);
+
+        int count = getMapper().selectChildCountById(paras);
+        if (count > 0) {
+            throw new BusinessException("007");
+        }
+        return getMapper().deleteByPrimaryKey(catalogId) > 0;
     }
 
     @Override
@@ -106,6 +115,11 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     @Override
     public List<DictCatalog> getDictCatalogList(Map<String, Object> args) {
         return getMapper().getDictCatalogList(args);
+    }
+
+    @Override
+    public int selectChildCountById(Map<String, Object> args) {
+        return getMapper().selectChildCountById(args);
     }
 
     @Override
@@ -156,8 +170,8 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public int dictItemDetailDelete(String dictItemId) {
-        return dictItemMapper.deleteByPrimaryKey(dictItemId);
+    public boolean dictItemDetailDelete(String dictItemId) {
+        return dictItemMapper.deleteByPrimaryKey(dictItemId) > 0;
     }
 
     @Override
