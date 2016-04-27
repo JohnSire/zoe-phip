@@ -5,10 +5,6 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.junit.Test;
 
-import java.io.File;
-
-import static org.junit.Assert.*;
-
 /**
  * Created by zengjiyang on 2016/4/13.
  */
@@ -16,7 +12,7 @@ public class ProcessXmlUtilTest {
 
     @Test
     public void testLoadXmlFile() throws Exception {
-        ProcessXmlUtil.loadXmlFile("响应消息结果");
+       // ProcessXmlUtil.loadXmlFile("响应消息结果");
     }
 
     @Test

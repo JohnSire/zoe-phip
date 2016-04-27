@@ -16,7 +16,7 @@ public class OrganizationRegisterTest extends BaseTest {
 
     @Autowired
     private OrganizationRegisterInImpl implIn;
-   // @Test
+   @Test
     public void testAdd() throws Exception {
         String patientInput ="<PRPM_IN401030UV01 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN401030UV01.xsd\">\n" +
                 "  <id root=\"040CD76A-ED0E-400B-9FD3-60387BCDE0EB\" extension=\"8D73520B-D489-4B70-8F4B-7B5C2D7961B5\"/>\n" +
@@ -45,7 +45,7 @@ public class OrganizationRegisterTest extends BaseTest {
                 "            <!--医疗卫生机构（科室）标识-科室为例-->\n" +
                 "            <id root=\"2.16.156.10011.1.26\" extension=\"1234567890\"/>\n" +
                 "            <!--医疗卫生机构（科室）类别-科室为例-->\n" +
-                "            <code code=\"A03.01\" displayName=\" 呼吸内科专业\"\n" +
+                "            <code code=\"A03.01\" displayName=\" 呼吸内科专业55\"\n" +
                 "            codeSystem=\"2.16.156.10011.2.3.2.62\" codeSystemName=\"医疗卫生机构业务科室分类与代码表\"/>\n" +
                 "            <!--医疗卫生机构（科室）角色名称-->\n" +
                 "            <name>管理</name>\n" +
@@ -63,7 +63,7 @@ public class OrganizationRegisterTest extends BaseTest {
                 "            <assignedPrincipalOrganization classCode=\"ORG\"\n" +
                 "            determinerCode=\"INSTANCE\">\n" +
                 "              <!--医疗卫生机构（科室）实体名称-->\n" +
-                "              <name>呼吸内科</name>\n" +
+                "              <name>呼吸内科e</name>\n" +
                 "              <asAffiliate classCode=\"AFFL\">\n" +
                 "                <code/>\n" +
                 "                <effectiveTime/>\n" +
@@ -104,8 +104,8 @@ public class OrganizationRegisterTest extends BaseTest {
                 "</PRPM_IN401030UV01>";
 
 
-      //  String result = impl.addOrganization(patientInput);
-        String result = impl.updateOrganization(patientInput);
+     // String result = impl.addOrganization(patientInput);
+       String result = impl.updateOrganization(patientInput);
 
         System.out.println(result);
     }
@@ -167,6 +167,8 @@ public class OrganizationRegisterTest extends BaseTest {
     public void testDictItemListQuery(){
 
        // List<OrgDeptInfo> list= implIn.dictItemListQuery("0234567890");
+
+
     }
     @Test
     public void organizationDelete(){

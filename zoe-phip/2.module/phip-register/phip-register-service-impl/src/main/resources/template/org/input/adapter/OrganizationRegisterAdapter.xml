@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <Code descr = "医疗卫生机构（科室）标识" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/id/@extension"/>
+    <ExtensionId descr = "医疗卫生机构（科室）标识" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/id/@extension"/>
+    <DeptCode descr = "DeptCode" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/id/@root"/>
     <DeptName descr = "医疗卫生机构（科室）实体名称" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/assignedPrincipalOrganization/name"/>
     <DeptTypeCode descr = "医疗卫生机构（科室）类别代码" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/code/@code"/>
     <DeptTypeName descr = "医疗卫生机构（科室）类别名称" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/code/@displayName"/>

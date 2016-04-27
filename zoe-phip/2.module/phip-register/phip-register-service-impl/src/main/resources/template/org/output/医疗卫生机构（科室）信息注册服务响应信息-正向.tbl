@@ -38,7 +38,7 @@ var creationTime=Model.creationTime;
         <subject1 typeCode="SBJ">
           <assignedEntity classCode="ASSIGNED ">
             <!--医疗卫生机构（科室）标识-科室为例-->
-            <id root="2.16.156.10011.1.26" extension="${Model.code}" />
+            <id root="${Model.deptCode}" extension="${Model.extensionId}" />
             <!--医疗卫生机构（科室）类别-科室为例-->
             <code code="${Model.deptTypeCode}" displayName="${Model.deptTypeName}" codeSystem="2.16.156.10011.2.3.2.62" codeSystemName="医疗卫生机构业务科室分类与代码表" />
             <!--医疗卫生机构（科室）角色名称-->
