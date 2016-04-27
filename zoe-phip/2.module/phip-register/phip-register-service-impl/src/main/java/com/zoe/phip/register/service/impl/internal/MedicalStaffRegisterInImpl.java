@@ -34,10 +34,9 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     private static final Logger logger = LoggerFactory.getLogger(MedicalStaffRegisterInImpl.class);
 
     @Override
-
-    public MedicalStaffInfo providerDetailsQuery(Map<String, Object> map) throws Exception {
+    public MedicalStaffInfo providerDetailsQuery(String id) throws Exception {
         //todo 字典赋�
-        MedicalStaffInfo staffInfo = getMapper().getStaff(map);
+        MedicalStaffInfo staffInfo = getMapper().getProvider(id);
         if (staffInfo == null) {
             throw new BusinessException("003");
         }
@@ -51,19 +50,30 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     }
 
     @Override
-    public PageList<MedicalStaffInfo> providerListQuery(QueryPage page, String keyWord) throws Exception {
+    public PageList<MedicalStaffInfo> providerListQuery(QueryPage page, String key) throws Exception {
         PageList<MedicalStaffInfo> pageList = new PageList<MedicalStaffInfo>();
         Example example = new Example(MedicalStaffInfo.class);
         SqlHelper.startPage(page);
-        if (!StringUtil.isNullOrWhiteSpace(keyWord)) {
-            example.createCriteria().andLike("idNo", "%" + keyWord + "%");
-            example.or(example.createCriteria().andLike("name", "%" + keyWord + "%"));
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            example.createCriteria().andLike("idNo", "%" + key + "%");
+            example.or(example.createCriteria().andLike("name", "%" + key + "%"));
         }
         List<MedicalStaffInfo> results = getMapper().selectByExample(example);
         PageInfo<MedicalStaffInfo> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
         return pageList;
+    }
+
+
+    @Override
+    public MedicalStaffInfo getProvider(String id) {
+        return getMapper().getProvider(id);
+    }
+
+    @Override
+    public List<MedicalStaffInfo> getProviderList(Map<String, Object> map) {
+        return getMapper().getProviderList(map);
     }
 
 
