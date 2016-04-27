@@ -72,9 +72,7 @@ public class PersonnelController extends BaseController {
     @RequestMapping(value = "/addXmanInfo", method = RequestMethod.POST)
     @ResponseBody
     public ServiceResult addXmanInfo(XmanBaseInfo xmanBaseInfo) {
-
-        XmanCard xmanCard = null;
-        return ServiceFactory.getPatientRegisterIn().addPatientRegistry(ComSession.getUserInfo(), xmanBaseInfo, xmanCard);
+        return ServiceFactory.getPatientRegisterIn().addPatientRegistry(ComSession.getUserInfo(), xmanBaseInfo);
     }
 
     /**
@@ -87,8 +85,7 @@ public class PersonnelController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Update}, name = "更新")
     public ServiceResult updateXmanInfo(XmanBaseInfo xmanBaseInfo) {
-        XmanCard xmanCard = null;
-        return ServiceFactory.getPatientRegisterIn().updatePatientRegistry(ComSession.getUserInfo(), xmanBaseInfo, xmanCard);
+        return ServiceFactory.getPatientRegisterIn().updatePatientRegistry(ComSession.getUserInfo(), xmanBaseInfo);
     }
 
     /**
@@ -145,18 +142,31 @@ public class PersonnelController extends BaseController {
     /**
      * 查询医疗卫生人员列表
      *
-     * @param message
+     * @param keyWord
      * @return
      */
     @RequestMapping(value = "/getMedStfList")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResultT<PageList<MedicalStaffInfo>> getMedStfList(String message) {
-        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), message);
+    public ServiceResultT<PageList<MedicalStaffInfo>> getMedStfList(String keyWord) {
+        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), keyWord, getQueryPage());
     }
 
     /**
-     * 医护人员注册
+     * 查询卫生医疗人员信息
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/getMedStfInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<MedicalStaffInfo> getMedStfInfo(String id) {
+        return ServiceFactory.getMedicalStaffRegisterIn().providerDetailsQuery(ComSession.getUserInfo(), id);
+    }
+
+    /**
+     * 新增医护人员
      *
      * @param medicalStaffInfo
      * @return
