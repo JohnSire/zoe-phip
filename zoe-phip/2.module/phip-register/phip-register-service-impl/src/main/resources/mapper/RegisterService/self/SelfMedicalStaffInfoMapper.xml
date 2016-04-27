@@ -106,4 +106,19 @@
             AND to_char(PMSI.BIRTH_TIME,'yyyyMMdd') = #{birthDate,jdbcType=VARCHAR}
         </if>
     </select>
+
+    <select id="getProvider" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM PHIP_MEDICAL_STAFF_INFO M WHERE M.ID=#{id} OR M.EXTENSION_ID=#{id} AND ROWNUM=1
+    </select>
+
+    <select id="getProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT * FROM PHIP_MEDICAL_STAFF_INFO M
+        <where>
+            <if test="_parameter.containsKey('key') and _parameter.containsKey('key')!=''">
+                (UPPER(M.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(M.ID_NO) LIKE
+                #{key,jdbcType=VARCHAR})
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+    </select>
 </mapper>

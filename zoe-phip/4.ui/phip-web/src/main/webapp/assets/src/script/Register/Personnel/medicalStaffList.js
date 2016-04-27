@@ -26,8 +26,8 @@ define(function (require, exports, module) {
                 gridId: 'medicalStaffGrid',
                 toolsBoxId: 'medicalStaffTools',
                 deleteUrl: {
-                    deleteInfo: "",
-                    deleteList: ""
+                    deleteInfo: "personnel/delMedStfInfo",
+                    deleteList: "personnel/delMedStfList"
                 },
                 tools: {
                     btnbox: {
@@ -43,16 +43,16 @@ define(function (require, exports, module) {
                 },
                 gridParam: {
                     dataAction: "local",
-                    url: '',
+                    url: 'personnel/getMedStfList',
                     columns: [
-                        {display: '身份证号', name: 'code', width: 100, align: 'left'},
+                        {display: '身份证号', name: 'idNo', width: 100, align: 'left'},
                         {display: '姓名', name: 'name', width: 80, align: 'left'},
-                        {display: '职务', name: 'name', width: 100, align: 'left'},
+                        {display: '职务', name: 'technicalName', width: 100, align: 'left'},
                         {display: '机构名称', name: 'name', width: 120, align: 'left'},
-                        {display: '科室名称', name: 'name', width: 120, align: 'left'},
-                        {display: '性别', name: 'name', width: 80, align: 'left'},
-                        {display: '出生日期', name: 'name', width: 100, align: 'left'},
-                        {display: '联系电话', name: 'name', width: 100, align: 'left'},
+                        {display: '科室名称', name: 'affiliatedOrgCode', width: 120, align: 'left'},
+                        {display: '性别', name: 'genderName', width: 80, align: 'left'},
+                        {display: '出生日期', name: 'birthTime', width: 100, align: 'left'},
+                        {display: '联系电话', name: 'employerTelNo', width: 100, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     frozen: false,
