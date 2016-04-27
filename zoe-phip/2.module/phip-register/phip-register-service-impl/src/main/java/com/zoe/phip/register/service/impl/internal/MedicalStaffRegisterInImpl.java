@@ -43,6 +43,15 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
         return staffInfo;
     }
 
+    public MedicalStaffInfo providerDetailsQuery(Map<String, Object> map) throws Exception {
+        //todo 字典赋�
+        MedicalStaffInfo staffInfo = getMapper().getStaff(map);
+        if (staffInfo == null) {
+            throw new BusinessException("003");
+        }
+        return staffInfo;
+    }
+
     @Override
 
     public boolean providerDelete(MedicalStaffInfo staffInfo) throws Exception {
