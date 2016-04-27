@@ -140,7 +140,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMa
     }
 
     @Override
-    @ErrorMessage(code="002",message = "还没有为该用户分配菜�")
+    @ErrorMessage(code="002",message = "还没有为该用户分配菜")
     public List<MenuData> getCompetenceMenuByUser(String userId) throws Exception {
         List<MenuData> menus = getMapper().getCompetenceMenuByUser(userId);
         if (menus.size() == 0) {
@@ -190,6 +190,4 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMa
             });
         }
     }
-
-
 }
