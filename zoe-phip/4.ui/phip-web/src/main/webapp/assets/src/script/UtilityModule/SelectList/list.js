@@ -66,18 +66,15 @@ define(function (require, exports, module) {
             var displayField = options.displayField;//显示内容
             //初始化绑定值
             $('input[name="' + name + '"]').on("setValue", function (event, argument) {
-
-
-
                 options["selectParam"]["selfId"] = argument["id"];
                 $(targetObj).find("input").val(argument[name]);
 
                 if (argument[pName]) {
                     $(targetObj).find(".text-line-content").text(argument[pName]);
                 } else {
-                    if (argument[name] && !argument[pName]) {
+                    //if (argument[name] && !argument[pName]) {
                         $(targetObj).find(".text-line-content").text(options["fkNullContent"]);
-                    }
+                    //}
                 }
             });
 

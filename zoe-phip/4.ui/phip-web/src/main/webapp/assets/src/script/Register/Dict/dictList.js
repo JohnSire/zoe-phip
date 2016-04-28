@@ -14,11 +14,13 @@ define(function (require, exports, module) {
             var treeObj = new BaseTree({
                 treeId: 'tree',
                 btnBox: 'treeBtns',
+                reqInfoKey: 'id',//根据哪个值进去获取对象
                 tools: {
                     btns: {'add': false, 'edit': false, 'del': false}
                 },
                 url: {
                     getTreeList: 'dict/getDictCatalogList',
+                    delTreeInfo: 'dict/delDictCatalogInfo'
                 },
                 treeParam: {
                     idFieldName: 'id',
@@ -30,12 +32,6 @@ define(function (require, exports, module) {
                     winName: "win_dict_detail_dialog",
                     winCallback: "win_dict_detail_callback",
                     titleKey: null,//弹窗标题索引 如"编辑用户--张三"其中张三是通过索'userName'获取
-                    common: {
-                        url: 'dict/view/dictdetail',
-                        //otherUrlParam: {},//用来存除id外的其他url参数
-                        width: 360,
-                        height: 260
-                    },
                     //新增参数
                     add: {
                         title: "新增信息"
@@ -43,6 +39,11 @@ define(function (require, exports, module) {
                     //编辑参数
                     edit: {
                         title: "编辑信息"
+                    },
+                    common: {
+                        url: 'dict/view/dictdetail',
+                        width: 360,
+                        height: 260
                     }
                 }
             })
@@ -53,7 +54,7 @@ define(function (require, exports, module) {
                 toolsBoxId: 'dictTools',
                 deleteUrl: {
                     deleteInfo: "dict/delDictItemInfo",
-                    deleteList: ""
+                    deleteList: "dict/delDictItemList",
                 },
                 tools: {
                     btnbox: {
@@ -78,7 +79,7 @@ define(function (require, exports, module) {
                     frozen: false,
                     usePage: true,
                     width: "100%",
-                    height: "99%"//$("body").innerHeight() - $("#dictItemTools").outerHeight() - 76//500
+                    height: "99%"
                 },
                 dialogParam: {
                     winName: "win_oid_detail_dialog",//弹窗对象变量名称

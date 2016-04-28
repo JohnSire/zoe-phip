@@ -113,6 +113,8 @@ public class DictController extends BaseController {
     }
 
     //endregion
+
+
     //region 字典分类
     @RequestMapping("/view/dictcategorylist")
     @AuthAction(permission = {Permission.View}, name = "查看")
