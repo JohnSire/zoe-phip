@@ -7,6 +7,7 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
+import com.zoe.phip.infrastructure.util.UtilString;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.register.dao.IDictCatalogMapper;
@@ -128,6 +129,14 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         DictCatalog catalog = getMapper().selectByExample(example).get(0);
         if (catalog == null) {
             throw new BusinessException("003");
+        }
+        if(!UtilString.isEmptyOrNullWildcard(catalog.getPid())) {
+            Example emp = new Example(DictCatalog.class);
+            emp.createCriteria().andEqualTo("id", catalog.getPid());
+            DictCatalog ca = getMapper().selectByExample(emp).get(0);
+            if(ca != null){
+                catalog.setParentCatalog(ca);
+            }
         }
         return catalog;
     }

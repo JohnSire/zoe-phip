@@ -13,10 +13,9 @@ define(function (require, exports, module) {
                 addUrl: 'dict/addDictCatalogInfo',//新增接口Url
                 updateUrl: 'dict/updateDictCatalogInfo',//修改接口Url
                 loadPageEvent: function () {
-                    $(".btn-switch-outer").btnSwitch({name: 'state'});
                     internal.selectList.dialog('dictCatalog', {
                         target: $("#btnParentCatalog"),
-                        name: 'pId',
+                        name: 'pid',
                         fkObj: 'parentCatalog',
                         displayField: 'name',
                         valueField: 'id',
