@@ -56,6 +56,12 @@
                  WHERE PDC.ID = #{id,jdbcType=VARCHAR}) PDC
          INNER JOIN PHIP_DICT_ITEM PDI
             ON PDC.CODE = PDI.FK_CATALOG_CODE)
+    </select>
 
+    <select id="getDictCatalogById" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT pdc.*, ppdc.NAME PARENT_NAME FROM(
+        SELECT pdc.* FROM PHIP_DICT_CATALOG pdc WHERE pdc.ID = #{id,jdbcType=VARCHAR}) pdc
+        LEFT JOIN PHIP_DICT_CATALOG ppdc
+        ON pdc.PID = ppdc.ID
     </select>
 </mapper>
