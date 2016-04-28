@@ -136,7 +136,7 @@
 
 
     <select id="getOrgDeptInfoList" resultMap="BaseResultMap" parameterType="java.util.Map">
-        select * from PHIP_ORG_DEPT_INFO
+        select * from PHIP_ORG_DEPT_INFO PODI
         <where>
             <if test="key !=null and key !=''">AND (UPPER(NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(EXTENSION_ID) LIKE
                 #{key,jdbcType=VARCHAR} OR UPPER(DEPT_NAME) LIKE #{key,jdbcType=VARCHAR})</if>

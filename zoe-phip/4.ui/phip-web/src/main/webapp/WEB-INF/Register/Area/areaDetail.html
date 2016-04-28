@@ -6,8 +6,8 @@ var bodySection = {
         <ul class="y-dialog-lists clearfix">
             <li class="list">
                 <p class="column-two">
-                    <label class="label" for="name"><span class="text-mark">*</span>区域代码：</label>
-                    <input type="text" name="name" class="text" datatype="*1-30" errormsg="名称长度应为1-30位！"
+                    <label class="label" for="code"><span class="text-mark">*</span>区域代码：</label>
+                    <input type="text" name="code" class="text" datatype="*1-30" errormsg="名称长度应为1-30位！"
                            nullmsg="请填写名称！"/>
                 </p>
                 <p class="column-two">
@@ -20,17 +20,24 @@ var bodySection = {
 
             <li class="list">
                 <p class="column-two">
-                    <label class="label" for="loginName"><span class="text-mark">*</span>成立时间：</label>
+                    <label class="label" for="Pid"><span class="text-mark">*</span>父级区域：</label>
+                    <input type="text" name="Pid" class="text" datatype="*1-30" errormsg="名称长度应为1-30位！"
+                           nullmsg="请填写名称！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="buildTime"><span class="text-mark">*</span>成立时间：</label>
                     <span class="text-line-outer">
-                    <input edittype="date" type="text" name="APPLICANT_ID" class="text" datatype="*1-36"
+                    <input edittype="date" type="text" name="buildTime" class="text" datatype="*1-36"
                            errormsg="成立时间长度应为1~36位！"
                            nullmsg="请填写成立时间！"/>
                     </span>
                 </p>
+            </li>
+            <li class="list">
                 <p class="column-two">
-                    <label class="label" for="name">注销时间：</label>
+                    <label class="label" for="areaCancellationDate">注销时间：</label>
                     <span class="text-line-outer">
-                    <input edittype="date" type="text" name="APPLICANT_ID" class="text" datatype="*1-36"
+                    <input edittype="date" type="text" name="areaCancellationDate" class="text" datatype="*1-36"
                            errormsg="注销时间长度应为1~36位！"
                            nullmsg="请填写注销时间！"/>
                     </span>
@@ -38,14 +45,12 @@ var bodySection = {
             </li>
 
 
-
             <li class="list">
                 <p class="column-one">
-                    <label class="label label-textarea">描述：</label>
-                    <textarea rows="3" class="textarea" style="width:508px;height:60px;" name="Descr"></textarea>
+                    <label class="label label-textarea">注销原因：</label>
+                    <textarea rows="3" class="textarea" style="width:508px;height:60px;" name="areaCancelReason"></textarea>
                 </p>
             </li>
-
 
 
         </ul>
@@ -65,5 +70,5 @@ var scriptSection={
 </script>
 <%};%>
 <%
-include("/WEB-INF/Shared/_baseAttr.html",{title:"行政区划详情",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_baseAttr.html",{title:"行政区划详情",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
 %>

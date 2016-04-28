@@ -9,8 +9,8 @@ define(function (require, exports, module) {
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
                 deleteUrl: {
-                    deleteInfo: "user/delUserInfo",
-                    deleteList: "user/delUserList"
+                    deleteInfo: "area/delAreaInfo",
+                    deleteList: "area/delAreaList"
                 },
                 tools: {
                     btnbox: {
@@ -22,13 +22,13 @@ define(function (require, exports, module) {
                     ]
                 },
                 gridParam: {
-                    url: 'user/getUserList',
+                    url: 'area/getAreaList',
                     columns: [
-                        {display: '代码', name: 'name', width: 160, align: 'left'},
-                        {display: '名称', name: 'loginName', width: 180, align: 'left'},
+                        {display: '代码', name: 'code', width: 160, align: 'left'},
+                        {display: '名称', name: 'name', width: 180, align: 'left'},
                         {
                             display: '成立时间',
-                            name: 'createAt',
+                            name: 'buildTime',
                             width: 120,
                             align: 'left',
                             type: 'date',
