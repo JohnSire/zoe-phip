@@ -9,7 +9,7 @@ package com.zoe.phip.register.dao;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.register.mapper.IServiceMapper;
-import com.zoe.phip.register.model.DictItem;
+import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.model.OrgDeptInfo;
 
 import java.util.List;
@@ -25,10 +25,11 @@ public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
 
     PageList<OrgDeptInfo> organizationListQuery(String deptTypeCode, String key, QueryPage page);
 
-    List<DictItem> dictItemListQuery(String fkCatalogCode);
+    DictCatalog dictItemListQuery(String code ,String fkCatalogCode);
 
     boolean organizationDelete(String id);
 
 
     List<OrgDeptInfo> getOrgDeptInfoList(Map<String, Object> paras);
+    List<OrgDeptInfo> getOrgDeptInfoListByType(Map<String, Object> paras) throws Exception ;
 }

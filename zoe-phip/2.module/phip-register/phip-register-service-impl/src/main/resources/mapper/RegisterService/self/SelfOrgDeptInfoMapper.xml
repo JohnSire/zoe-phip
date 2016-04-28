@@ -146,4 +146,15 @@
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
     </select>
+
+
+    <select id="getOrgDeptInfoListByType" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select * from PHIP_ORG_DEPT_INFO PODI join phip_dict_item PDI on PODI.dept_type_code=PDI.code
+        <where>
+            <if test="type !=null and type !=''">
+                AND PDI.FK_CATALOG_CODE = #{type,jdbcType=VARCHAR}
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+    </select>
 </mapper>
