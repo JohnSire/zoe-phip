@@ -31,17 +31,16 @@ import java.util.*;
  */
 @Repository("nationalStandardsService")
 @Service(interfaceClass = INationalStandardsService.class, protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
-
+@ErrorMessage(code = "001", message = "国家标准{0}已存在!")
 public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStandards, INationalStandardsMapper> implements INationalStandardsMapper {
 
-    public PageList<NationalStandards> getDataListByPage(String key, QueryPage queryPage) {
+    public PageList<NationalStandards> getDataPageList(String key, QueryPage queryPage) {
         PageList<NationalStandards> pageList = new PageList<>();
         //分页
         SqlHelper.startPage(queryPage);
-        key = StringUtil.isNullOrWhiteSpace(key) ? "" : key.toUpperCase();
         Map<String, Object> params = new HashMap<>();
         params.put("key", SqlHelper.getLikeStr(key));
-        List<NationalStandards> results = getMapper().getDataListByPage(params);
+        List<NationalStandards> results = getMapper().getDataPageList(params);
         PageInfo<NationalStandards> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
@@ -52,7 +51,7 @@ public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStan
     private SqlSession sqlSession;
 
     @Override
-    @ErrorMessage(code = "001", message = "国家标准{0}已存在!")
+
     public int add(NationalStandards entity) throws Exception {
         Collection<String> cols= sqlSession.getConfiguration().getMappedStatementNames();
         Map<String, Object> map = new TreeMap<>();
@@ -66,7 +65,6 @@ public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStan
     }
 
     @Override
-    @ErrorMessage(code = "001", message = "国家标准{0}已存在!")
     public int update(NationalStandards entity) throws Exception {
         Map<String, Object> map = new TreeMap<>();
         map.put("code", entity.getCode());
@@ -80,8 +78,8 @@ public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStan
     }
 
     @Override
-    public List<NationalStandards> getDataListByPage(Map<String, Object> map) {
-        return getMapper().getDataListByPage(map);
+    public List<NationalStandards> getDataPageList(Map<String, Object> map) {
+        return getMapper().getDataPageList(map);
     }
 
     @Override
