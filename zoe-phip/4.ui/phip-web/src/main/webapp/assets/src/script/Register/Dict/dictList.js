@@ -14,7 +14,8 @@ define(function (require, exports, module) {
             var treeObj = new BaseTree({
                 treeId: 'tree',
                 btnBox: 'treeBtns',
-                reqInfoKey: 'id',//根据哪个值进去获取对�                tools: {
+                reqInfoKey: 'id',//根据哪个值进去获取对�
+                tools: {
                     btns: {'add': false, 'edit': false, 'del': false}
                 },
                 url: {
@@ -29,7 +30,7 @@ define(function (require, exports, module) {
                 dialogParam: {
                     winName: "win_dict_detail_dialog",
                     winCallback: "win_dict_detail_callback",
-                    titleKey: null,//弹窗标题索引 �编辑用户--张三"其中张三是通过�userName'获取
+                    titleKey: null,//弹窗标题索引 �编辑用户--张三"其中张三是通过�userName'获取
                     //新增参数
                     add: {
                         title: "新增信息"
@@ -60,7 +61,7 @@ define(function (require, exports, module) {
                         'del': true
                     },
                     searchbox: [
-                        {label: '关键�, name: 'keyWord', type: 'text'}
+                        {label: '关键字', name: 'keyWord', type: 'text'}
                     ]
                 },
                 extendParam: function () {

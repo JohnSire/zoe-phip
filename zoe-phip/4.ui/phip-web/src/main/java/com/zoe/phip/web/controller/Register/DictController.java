@@ -298,7 +298,7 @@ public class DictController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<DictItem>> getDictItemListByCatalogId(String keyWord, String catalogId) {
-        return ServiceFactory.getDictRegisterIn().dictItemListQueryByCatalogCode(ComSession.getUserInfo(), catalogId,  getQueryPage(), keyWord);
+        return ServiceFactory.getDictRegisterIn().dictItemListQueryByCatalogId(ComSession.getUserInfo(), catalogId,  getQueryPage(), keyWord);
     }
     //endregion
 }
