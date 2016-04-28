@@ -60,19 +60,22 @@ define(function (require, exports, module) {
             internal.options = options;
             var targetObj = options["target"];
             var name = options.name;//字典名称
-            var fkObj = options.fkObj;//外键对象
+            var pName = options.parentName;//外键对象
+
+
             var displayField = options.displayField;//显示内容
             //初始化绑定值
             $('input[name="' + name + '"]').on("setValue", function (event, argument) {
 
-                options["selectParam"]["selfId"] = argument["id"];
 
+
+                options["selectParam"]["selfId"] = argument["id"];
                 $(targetObj).find("input").val(argument[name]);
-                if (argument[fkObj]) {
-                    $(targetObj).find(".text-line-content").text(argument[fkObj][displayField]);
+
+                if (argument[pName]) {
+                    $(targetObj).find(".text-line-content").text(argument[pName]);
                 } else {
-                    //菜单特殊处理
-                    if (argument[name] && !argument[fkObj]) {
+                    if (argument[name] && !argument[pName]) {
                         $(targetObj).find(".text-line-content").text(options["fkNullContent"]);
                     }
                 }
