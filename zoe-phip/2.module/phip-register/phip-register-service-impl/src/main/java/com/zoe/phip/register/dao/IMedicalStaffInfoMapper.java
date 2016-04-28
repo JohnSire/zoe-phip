@@ -60,7 +60,7 @@ public interface IMedicalStaffInfoMapper extends IServiceMapper<MedicalStaffInfo
      * @param key
      * @return
      */
-    PageList<MedicalStaffInfo> providerListQuery(QueryPage page, String key) throws Exception;
+    PageList<MedicalStaffInfo> providerListQuery(String key,QueryPage page) throws Exception;
 
 
     /**

@@ -59,7 +59,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     }
 
     @Override
-    public PageList<MedicalStaffInfo> providerListQuery(QueryPage page, String key) throws Exception {
+    public PageList<MedicalStaffInfo> providerListQuery(String key,QueryPage page) throws Exception {
         PageList<MedicalStaffInfo> pageList = new PageList<MedicalStaffInfo>();
         Example example = new Example(MedicalStaffInfo.class);
         SqlHelper.startPage(page);
