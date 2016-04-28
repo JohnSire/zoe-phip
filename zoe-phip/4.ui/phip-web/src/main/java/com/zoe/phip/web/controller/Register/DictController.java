@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by linqinghuang on 2016/4/21.
@@ -188,15 +189,26 @@ public class DictController extends BaseController {
     }
 
     /**
-     * 根据关键字获取字典分类（字典）列表
+     * 根据关键字获取字典分类列表（不包括字典）
      * @param keyWord
      * @return
      */
-    @RequestMapping(value = "/getDictCatalogList")
+    @RequestMapping(value = "/dictCatalogListQueryPage")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResultT<PageList<DictCatalog>> getDictCatalogList(String keyWord) {
-        return ServiceFactory.getDictRegisterIn().dictCatalogListQuery(ComSession.getUserInfo(), getQueryPage(), keyWord);
+    public ServiceResultT<PageList<DictCatalog>> getDictCatalogListPage(String keyWord) {
+        return ServiceFactory.getDictRegisterIn().dictCatalogListQueryPage(ComSession.getUserInfo(), getQueryPage(), keyWord);
+    }
+
+    /**
+     * 获取字典分类列表(包括字典)
+     * @return
+     */
+    @RequestMapping(value = "/dictCatalogTreeQuery")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<DictCatalog>> getDictCatalogList() {
+        return ServiceFactory.getDictRegisterIn().dictCatalogTreeQuery(ComSession.getUserInfo());
     }
     //endregion
 
@@ -275,15 +287,16 @@ public class DictController extends BaseController {
     }
 
     /**
-     * 根据关键字获取字典分类（字典）列表
+     * 根据关键字获取字典项列表
      * @param keyWord
+     * @param catalogId
      * @return
      */
-    @RequestMapping(value = "/getDictItemList")
+    @RequestMapping(value = "/getDictItemListByCatalogId")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResultT<PageList<DictItem>> getDictItemList(String keyWord, String catalogCode) {
-        return ServiceFactory.getDictRegisterIn().dictItemListQuery(ComSession.getUserInfo(), catalogCode,  getQueryPage(), keyWord);
+    public ServiceResultT<PageList<DictItem>> getDictItemListByCatalogId(String keyWord, String catalogId) {
+        return ServiceFactory.getDictRegisterIn().dictItemListQueryByCatalogCode(ComSession.getUserInfo(), catalogId,  getQueryPage(), keyWord);
     }
     //endregion
 }

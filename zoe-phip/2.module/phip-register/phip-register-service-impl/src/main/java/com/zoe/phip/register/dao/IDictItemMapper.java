@@ -19,5 +19,8 @@ import java.util.Map;
  * @date 2016-04-12
  */
 public interface IDictItemMapper extends IServiceMapper<DictItem> {
-    List<DictItem> getDictItemList(Map<String, Object> args);
+
+    List<DictItem> getDictItemListByCatalogCode(Map<String, Object> args);
+
+    List<DictItem> getDictItemListByCatalogId(Map<String, Object> args);
 }

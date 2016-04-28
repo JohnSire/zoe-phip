@@ -27,10 +27,11 @@
         where id = #{id}
     </update>
 
-    <select id="getDictCatalogList" resultMap="MultiResultMap" parameterType="java.util.Map">
+    <select id="getDictCatalogListPage" resultMap="MultiResultMap" parameterType="java.util.Map">
         SELECT pdc.*,ppdc.NAME PARENT_NAME FROM(
         SELECT pdc.* FROM PHIP_DICT_CATALOG pdc
         <where>
+            pdc.TYPE = '0'
             <if test="key !=null and key !=''">
                 AND (UPPER(pdc.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(pdc.CODE) LIKE #{key,jdbcType=VARCHAR})
             </if>
@@ -61,6 +62,14 @@
     <select id="getDictCatalogById" resultMap="MultiResultMap" parameterType="java.util.Map">
         SELECT pdc.*, ppdc.NAME PARENT_NAME FROM(
         SELECT pdc.* FROM PHIP_DICT_CATALOG pdc WHERE pdc.ID = #{id,jdbcType=VARCHAR}) pdc
+        LEFT JOIN PHIP_DICT_CATALOG ppdc
+        ON pdc.PID = ppdc.ID
+    </select>
+
+    <select id="getDictCatalogListByPIdPage" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT pdc.*,ppdc.NAME PARENT_NAME FROM(
+        SELECT pdc.* FROM PHIP_DICT_CATALOG pdc WHERE pdc.PID = #{pid,jdbcType=VARCHAR}
+        ) pdc
         LEFT JOIN PHIP_DICT_CATALOG ppdc
         ON pdc.PID = ppdc.ID
     </select>

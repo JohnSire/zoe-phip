@@ -24,33 +24,43 @@ import java.util.Map;
  */
 public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
+    //字典分类（字典）
     DictCatalog addDictCatalogRequest(DictCatalog dictCatalog) throws Exception;
 
     DictCatalog updateDictCatalogRequest(DictCatalog dictCatalog) throws Exception;
 
     DictCatalog dictCatalogDetailQuery(String dictCatalogCode) throws Exception;
 
+    DictCatalog dictCatalogDetailQueryById(String dictCatalogId) throws Exception;
+
+    DictCatalog getDictCatalogById(Map<String, Object> args);
+
     boolean dictCatalogDetailDelete(String catalogId) throws Exception;
 
+    int selectChildCountById(Map<String, Object> args);
+
+    PageList<DictCatalog> dictCatalogTreeQuery();
+
+    PageList<DictCatalog> dictCatalogListQueryPage(QueryPage queryPage, String key);
+
+    List<DictCatalog> getDictCatalogListPage(Map<String, Object> args);
+
+    PageList<DictCatalog> dictCatalogListQueryByPIdPage(String pId, QueryPage queryPage);
+
+    List<DictCatalog> getDictCatalogListByPIdPage(Map<String, Object> args);
+
+    //字典项
     DictItem addDictItemRequest(DictItem dictItem) throws Exception;
 
     DictItem updateDictItemRequest(DictItem dictItem) throws Exception;
 
     DictItem dictItemDetailQuery(String dictItemCode) throws Exception;
 
-    boolean dictItemDetailDelete(String dictItemId);
-
-    PageList<DictCatalog> dictCatalogListQuery(QueryPage page, String key);
-
-    PageList<DictItem> dictItemListQuery(String catalogCode, QueryPage page, String key);
-
-    List<DictCatalog> getDictCatalogList(Map<String, Object> args);
-
-    int selectChildCountById(Map<String, Object> args);
-
-    DictCatalog dictCatalogDetailQueryById(String dictCatalogId) throws Exception;
-
     DictItem dictItemDetailQueryById(String dictItemId) throws Exception;
 
-    DictCatalog getDictCatalogById(Map<String, Object> args);
+    boolean dictItemDetailDelete(String dictItemId) throws Exception;
+
+    PageList<DictItem> dictItemListQueryByCatalogCode(String catalogCode, QueryPage queryPage, String key);
+
+    PageList<DictItem> dictItemListQueryByCatalogId(String catalogId, QueryPage queryPage, String key);
 }
