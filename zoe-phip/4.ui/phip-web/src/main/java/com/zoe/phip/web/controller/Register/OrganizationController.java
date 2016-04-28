@@ -1,7 +1,9 @@
 package com.zoe.phip.web.controller.Register;
 
+import com.zoe.phip.infrastructure.annotation.AuthAction;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.security.Permission;
 import com.zoe.phip.register.model.DictItem;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.web.context.ComSession;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -36,16 +39,22 @@ public class OrganizationController extends BaseController {
      * @param orgDeptInfo 机构科室信息
      * @return
      */
-    public ServiceResult addMedicalOrgInfo(OrgDeptInfo orgDeptInfo) {
-       return ServiceFactory.getOrganizationRegisterIn().addOrganization(ComSession.getUserInfo(),orgDeptInfo);
+    @RequestMapping(value = "/addMedicalOrgInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Add}, name = "新增")
+    public ServiceResult addMedicalOrgInfo(OrgDeptInfo orgDeptInfo, HttpServletRequest request) {
+        return ServiceFactory.getOrganizationRegisterIn().addOrganization(ComSession.getUserInfo(), orgDeptInfo);
     }
 
     /**
      * @param orgDeptInfo
      * @return
      */
-    public ServiceResult updateMedicalOrgInfo(OrgDeptInfo orgDeptInfo) {
-        return ServiceFactory.getOrganizationRegisterIn().updateOrg(ComSession.getUserInfo(),orgDeptInfo);
+    @RequestMapping(value = "/updateMedicalOrgInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Update}, name = "更新")
+    public ServiceResult updateMedicalOrgInfo(OrgDeptInfo orgDeptInfo, HttpServletRequest request) {
+        return ServiceFactory.getOrganizationRegisterIn().updateOrg(ComSession.getUserInfo(), orgDeptInfo);
     }
 
     /**
@@ -54,9 +63,12 @@ public class OrganizationController extends BaseController {
      * @param id
      * @return
      */
+    @RequestMapping(value = "/delMedicalOrgInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult delMedicalOrgInfo(String id) {
 
-        return ServiceFactory.getOrganizationRegisterIn().deleteById(ComSession.getUserInfo(),id);
+        return ServiceFactory.getOrganizationRegisterIn().deleteById(ComSession.getUserInfo(), id);
     }
 
     /**
@@ -65,8 +77,11 @@ public class OrganizationController extends BaseController {
      * @param ids
      * @return
      */
+    @RequestMapping(value = "/delMedicalOrgList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult delMedicalOrgList(String ids) {
-        return ServiceFactory.getOrganizationRegisterIn().deleteByIds(ComSession.getUserInfo(),ids);
+        return ServiceFactory.getOrganizationRegisterIn().deleteByIds(ComSession.getUserInfo(), ids);
     }
 
     /**
@@ -75,8 +90,11 @@ public class OrganizationController extends BaseController {
      * @param id
      * @return
      */
+    @RequestMapping(value = "/getMedicalOrgInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResult getMedicalOrgInfo(String id) {
-        return ServiceFactory.getOrganizationRegisterIn().getById(ComSession.getUserInfo(),id);
+        return ServiceFactory.getOrganizationRegisterIn().getById(ComSession.getUserInfo(), id);
     }
 
     /**
@@ -86,11 +104,12 @@ public class OrganizationController extends BaseController {
      * @param deptTypeCode
      * @return
      */
-    @RequestMapping("/getMedicalOrgList")
+    @RequestMapping(value = "/getMedicalOrgList")
     @ResponseBody
-    public ServiceResult getMedicalOrgList( String deptTypeCode,String keyWord) {
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResult getMedicalOrgList(String deptTypeCode, String keyWord) {
 
-        return ServiceFactory.getOrganizationRegisterIn().organizationListQuery(ComSession.getUserInfo(),deptTypeCode,keyWord,getQueryPage());
+        return ServiceFactory.getOrganizationRegisterIn().organizationListQuery(ComSession.getUserInfo(), deptTypeCode, keyWord, getQueryPage());
     }
 
     /**
