@@ -10,9 +10,13 @@
             var outTimes = 0;
             while (true) {
                 //如果取不到，会一直卡下去--默认10次
-                if (obj.document.getElementById("flag_top_window")) { return obj; }
+                if (obj.document.getElementById("flag_top_window")) {
+                    return obj;
+                }
                 obj = obj.window.parent;
-                if (outTimes > 10) { return obj; }
+                if (outTimes > 10) {
+                    return obj;
+                }
                 outTimes++;
             }
         },
@@ -60,7 +64,11 @@
             var str = "<div id=\"msgprint\" class=\"" + cssname + "\">" + msgtitle + "</div>";
             $("body").append(str);
             var bodyWidth = $("body").innerWidth(), msgprintWidth = $("#msgprint").outerWidth();
-            $("#msgprint").css({ "left": (bodyWidth - msgprintWidth) / 2 - 2, width: msgprintWidth, "z-index": 999999999 });
+            $("#msgprint").css({
+                "left": (bodyWidth - msgprintWidth) / 2 - 2,
+                width: msgprintWidth,
+                "z-index": 999999999
+            });
             $("#msgprint").show();
             //1秒后清除提示
             setTimeout(function () {
@@ -100,7 +108,11 @@
                             if ($(this).hasClass("Validform_error")) {
                                 var postion = $(this).offset();
                                 var left = postion.left, top = postion.top;
-                                $(".text-up-tips").css({ left: left, top: top - 26, "z-index": 999 }).show().find(".msg").text(msg);
+                                $(".text-up-tips").css({
+                                    left: left,
+                                    top: top - 26,
+                                    "z-index": 999
+                                }).show().find(".msg").text(msg);
                             }
                         });
                         $(o.obj).blur(function () {
@@ -125,7 +137,37 @@
             var ordAlpah = (order == "desc") ? '>' : '<';
             var sortFun = new Function('a', 'b', 'return a.' + sortBy + ordAlpah + 'b.' + sortBy + '?1:-1');
             return sortFun;
+        },
+
+        //将线性结构转成树形结构的:data为要转换的数据，idKey，为pidKey的关联键， pid是为线性结构标识key，children为转成层级结构后的编码
+        pidToChildren: function (data, idKey, pidKey, childrenKey) {
+            //筛选出顶级节点的数据
+            var result = [];
+            $.each(data, function (index, item) {
+                var isExist = false;
+                $.each(data, function (index1, item1) {
+                    //如果这个的父级节点存在，说明它不是顶级节点
+                    if (item[pidKey] == item1[pidkey]) {
+                        isExist = true;
+                    }
+                });
+                if (!isExist) {
+                    result.push(item);
+                }
+            });
+            //根据顶级节点开始组装子级节点
+            $.each(result, function (index, item) {
+                $.each(data, function (inedx1, item1) {
+                    if (item[idKey] == item1[pidKey]) {
+                        result[index][childrenKey] = item1;
+                    }
+                })
+            })
+
+
+            return result;
         }
+
     }
     exports.common = com;
 })(window);
