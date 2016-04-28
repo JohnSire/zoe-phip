@@ -121,34 +121,10 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/getMedicalOrgCategoryTree")
     @ResponseBody
     public ServiceResultT<List<DictItem>> getMedicalOrgCategoryList(String category) {
+        //category为空时，查询机构分类，不为空时，为具体的某个机构分类如：医疗机构分类
         return ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo(), category);
     }
 
 
-    //endregion
 
-    // TODO: 2016/4/21
-
-    //region 卫生管理机构
-    @RequestMapping("/view/healthOrgList")
-    public String ToHealthOrgList() {
-        return "Register/Organization/healthOrgList";
-    }
-
-    @RequestMapping("/view/healthOrgDetail")
-    public String ToHealthOrgDetail() {
-        return "Register/Organization/healthOrgDetail";
-    }
-    //endregion
-
-    // TODO: 2016/4/21
-    //region 第三方机构管理
-    public String ToThirdOrgList() {
-        return null;
-    }
-
-    public String ToThirdOrgDetail() {
-        return null;
-    }
-    //endregion
 }
