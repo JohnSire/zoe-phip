@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
@@ -47,7 +46,6 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
     }
 
     public AreaBaseInfo getAreaBaseInfo(String id) throws Exception {
-        //todo 字典赋�
         AreaBaseInfo baseInfo = getMapper().selectByPrimaryKey(id);
         if (baseInfo == null) {
             throw new BusinessException("003");
@@ -70,13 +68,20 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
         return pageList;
     }
 
-    public List<AreaBaseInfo> getAreaChildrenRegistry(String id) {
+    public PageList<AreaBaseInfo> getAreaChildrenRegistry(String id,QueryPage queryPage) {
+        PageList<AreaBaseInfo> pageList = new PageList<>();
+        //分页
+        SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();
         map.put("id", id);
         List<AreaBaseInfo> result = getMapper().getChildren(map);
+        PageInfo<AreaBaseInfo> pageInfo = new PageInfo<>();
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(result);
         map.clear();
         map = null;
-        return result;
+        return pageList;
+
     }
 
     public AreaBaseInfo areaHistoryRegistryQuery(String code) {
@@ -110,5 +115,10 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
     @Override
     public List<AreaBaseInfo> getDataList(Map<String, Object> map) {
         return getMapper().getDataList(map);
+    }
+
+    @Override
+    public int defaultUpdate(AreaBaseInfo t) {
+        return getMapper().defaultUpdate(t);
     }
 }

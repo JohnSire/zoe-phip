@@ -89,4 +89,8 @@ public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStan
         return getMapper().getNationalStandard(map);
     }
 
+    @Override
+    public int defaultUpdate(NationalStandards t) {
+        return getMapper().defaultUpdate(t);
+    }
 }

@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.web.dao.sm.IMenuDataMapper">
     <resultMap id="MultiBaseResultMap" type="com.zoe.phip.web.model.sm.MenuData" extends="BaseResultMap">
-        <association property="parentMenu" column="FK_PARENT_MENU_ID" select="getParentMenuById" fetchType="lazy"/>
+        <result column="PARENT_ID" property="parentId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="PARENT_NAME" property="parentName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <!--<association property="parentMenu" column="FK_PARENT_MENU_ID" select="getParentMenuById" fetchType="lazy"/>-->
     </resultMap>
 
     <!--<select id="getMenusByParentId" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
@@ -22,19 +24,18 @@
         order by t.SORT ASC
     </select>
 
-    <select id="getMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap" >
-        SELECT *
-        from SYS_MENU_DATA t
-        WHERE t.ID=#{id}
+    <select id="getMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
+        SELECT T1.*,T2.ID AS PARENT_ID,T2.NAME AS PARENT_NAME FROM SYS_MENU_DATA T1 LEFT JOIN SYS_MENU_DATA T2 ON T2.ID=T1.FK_PARENT_MENU_ID
+        WHERE T1.ID=#{id}
     </select>
 
 
-    <select id="getParentMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
+   <!-- <select id="getParentMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
         SELECT *
         from SYS_MENU_DATA t
         WHERE t.ID=#{id}
-    </select>
-    <select id="getMenuPages" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
+    </select>-->
+    <select id="getMenuPages" parameterType="java.lang.String" resultMap="BaseResultMap">
 --         SELECT *
 --         FROM SYS_MENU_DATA t
 --         where 1=1 and UPPER (t.ADDRESS) LIKE UPPER (CONCAT(CONCAT('%',#{key,jdbcType=VARCHAR}),'%'))
@@ -47,7 +48,8 @@
         select * from SYS_MENU_DATA
         <where>
             <if test="key !=null and key !=''">AND (UPPER(NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(CODE) LIKE
-                #{key,jdbcType=VARCHAR} OR UPPER(ADDRESS) LIKE #{key,jdbcType=VARCHAR})</if>
+                #{key,jdbcType=VARCHAR} OR UPPER(ADDRESS) LIKE #{key,jdbcType=VARCHAR})
+            </if>
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
     </select>

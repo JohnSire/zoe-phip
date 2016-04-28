@@ -40,7 +40,6 @@ import java.util.Map;
 @ErrorMessage(code = "003", message = "由于合并内容不存在，合并失败")
 @ErrorMessage(code = "004", message = "由于查询内容不存在，查询失败")
 public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXmanBaseInfoMapper> implements IXmanBaseInfoMapper {
-
     @Autowired
     private IXmanCardMapper cardMapper;
 
@@ -190,6 +189,11 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public int defaultUpdate(XmanBaseInfo t) {
+        return getMapper().defaultUpdate(t);
     }
 
 }

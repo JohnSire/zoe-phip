@@ -21,11 +21,9 @@ import java.util.List;
  * Created by qiuyungen on 2016/3/26.
  */
 public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
-    private final Class interfaceClass;
 
     public DynamicProxyInvoker(T proxy, Class<T> type, URL url) {
         super(proxy, type, url);
-        this.interfaceClass = proxy.getClass().getAnnotation(Service.class).interfaceClass();
     }
 
     private final static Class<?>[] makeClass(final Class<?>[] parameterTypes) {
@@ -83,9 +81,6 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
         }
     }
 
-    public Class getInterfaceClass() {
-        return interfaceClass;
-    }
 
     @Override
     protected Object doInvoke(T proxy, String methodName, Class<?>[] parameterTypes, Object[] arguments) throws Throwable {
@@ -93,10 +88,10 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
         Object instance = proxy;
 
         //处理webservice
-        if(this.getUrl().getProtocol().equals("webservice")){
+        if (this.getUrl().getProtocol().equals("webservice")) {
             Method method = instance.getClass().getMethod(methodName, parameterTypes);
-            ErrorMessage[] errors=method.getAnnotationsByType(ErrorMessage.class);
-            return SafeExecuteUtil.executeWebService(()->method.invoke(instance,arguments),errors);
+            ErrorMessage[] errors = method.getAnnotationsByType(ErrorMessage.class);
+            return SafeExecuteUtil.executeWebService(() -> method.invoke(instance, arguments), errors);
         }
 
         // arguments
@@ -110,66 +105,37 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
                 ((IBaseInService) instance).setSystemData(token);
                 boolean isAuth = SystemCredential.checkCredential(token.getUserId(), token.getUserName(), token.getCredential());
                 if (!isAuth) {
-                    ServiceResult result=new ServiceResult();
-                    result.addMessage(ErrorCode.SESSION_EXPIRED,"Session过期,请重新登录!");
+                    ServiceResult result = new ServiceResult();
+                    result.addMessage(ErrorCode.SESSION_EXPIRED, "Session过期,请重新登录!");
                     return result;
                 }
             } else {
-                ServiceResult result=new ServiceResult();
-                result.addMessage(ErrorCode.DEFAULT,"方法的第一个参数必须为SystemData类型");
+                ServiceResult result = new ServiceResult();
+                result.addMessage(ErrorCode.DEFAULT, "方法的第一个参数必须为SystemData类型");
                 return result;
             }
         }
 
-        //methodName.startsWith   ||methodName.startsWith("update")
-        ///验证例子
-     /*   if (methodName.startsWith("add")) {
-            for (Object o : arguments) {
-                if(o instanceof BaseEntity){
-                    ValidationResult result = ValidationAppendUtils.validateEntity(o);
-                    if(result.isHasErrors()){
-                        ServiceResult serviceResult=new ServiceResult();
-                        serviceResult.addMessage(ErrorCode.VALIDATOR_ERROR,result.getErrorMessage());
-                        return serviceResult;
-                    }
-
-                }
-            }
-        }
-        if (methodName.startsWith("update")) {
-            for (Object o : arguments) {
-                if(o instanceof BaseEntity){
-                    ValidationResult result = ValidationAppendUtils.validateEntity(o,First.class);
-                    if(result.isHasErrors()){
-                        ServiceResult serviceResult=new ServiceResult();
-                        serviceResult.addMessage(ErrorCode.VALIDATOR_ERROR,result.getErrorMessage());
-                        return serviceResult;
-                    }
-
-                }
-            }
-        }*/
-
         final Class<?>[] types = makeClass(parameterTypes);
         Method method = instance.getClass().getMethod(methodName, types);
-        ErrorMessage[] errors=method.getAnnotationsByType(ErrorMessage.class);
-        if(errors==null){
-            errors=instance.getClass().getAnnotationsByType(ErrorMessage.class);
+        ErrorMessage[] errors = method.getAnnotationsByType(ErrorMessage.class);
+        if (errors == null) {
+            errors = instance.getClass().getAnnotationsByType(ErrorMessage.class);
         }
         final boolean withResult = method.getAnnotation(WithResult.class) != null;
 
         if (method.getReturnType() == Boolean.class && !withResult) {
             return SafeExecuteUtil.execute(() ->
-                    execute(() -> (Boolean) method.invoke(instance, objects)),errors
+                    execute(() -> (Boolean) method.invoke(instance, objects)), errors
             );
         }
         if (method.getReturnType() == int.class && !withResult) {
             return SafeExecuteUtil.execute(() ->
-                    execute(() -> ((int) method.invoke(instance, objects) >= 0)),errors
+                    execute(() -> ((int) method.invoke(instance, objects) >= 0)), errors
             );
         }
         return SafeExecuteUtil.execute0(() ->
-                execute(() -> method.invoke(instance, objects)),errors
+                execute(() -> method.invoke(instance, objects)), errors
         );
     }
 }

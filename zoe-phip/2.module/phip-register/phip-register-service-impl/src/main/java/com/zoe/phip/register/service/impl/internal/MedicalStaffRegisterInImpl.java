@@ -123,4 +123,9 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
         getMapper().defaultUpdate(medicalStaffInfo);
         return medicalStaffInfo;
     }
+
+    @Override
+    public int defaultUpdate(MedicalStaffInfo t) {
+        return getMapper().defaultUpdate(t);
+    }
 }

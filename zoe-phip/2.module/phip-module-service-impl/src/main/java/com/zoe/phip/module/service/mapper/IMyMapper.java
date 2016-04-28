@@ -20,6 +20,6 @@ public interface IMyMapper<T extends BaseEntity> extends Mapper<T> {
 
     int deleteByIds(String[] ids) throws Exception;
 
-    int defaultUpdate(T t);
+//    int defaultUpdate(T t);
 
 }

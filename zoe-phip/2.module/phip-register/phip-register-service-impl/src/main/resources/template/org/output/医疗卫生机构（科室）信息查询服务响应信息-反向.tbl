@@ -36,7 +36,7 @@
       <statusCode code="new" />
       <!--医疗卫生机构（科室）ID-->
       <organizationID>
-        <value root="2.16.156.10011.1.26" extension="${Model.code}" />
+        <value  root="${Model.deptCode}" extension="${Model.extensionId}" />
         <semanticsText>AssignedEntity.id</semanticsText>
       </organizationID>
       <!--医疗卫生机构（科室）实体名称-->

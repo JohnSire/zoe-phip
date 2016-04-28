@@ -217,11 +217,23 @@ public class DictController extends BaseController {
      * @param code
      * @return
      */
+    @RequestMapping(value = "/getDictItemInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<DictItem> getDictItemInfo(String code) {
+        return ServiceFactory.getDictRegisterIn().dictItemDetailQuery(ComSession.getUserInfo(), code);
+    }
+
+    /**
+     * 根据id获取字典项信息
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/getDictItemInfoById")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResultT<DictItem> getDictItemInfoById(String code) {
-        return ServiceFactory.getDictRegisterIn().dictItemDetailQuery(ComSession.getUserInfo(), code);
+    public ServiceResultT<DictItem> getDictItemInfoById(String id) {
+        return ServiceFactory.getDictRegisterIn().dictItemDetailQueryById(ComSession.getUserInfo(), id);
     }
 
     /**
@@ -236,8 +248,6 @@ public class DictController extends BaseController {
     public ServiceResult addDictItemInfo(DictItem di, HttpServletRequest request) {
         return ServiceFactory.getDictRegisterIn().addDictItemRequest(ComSession.getUserInfo(), di);
     }
-
-
 
     /**
      * 更新字典项

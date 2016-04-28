@@ -203,4 +203,20 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         pageList.setRows(results);
         return pageList;
     }
+
+    @Override
+    public DictItem dictItemDetailQueryById(String dictItemId) throws Exception {
+        Example example = new Example(DictItem.class);
+        example.createCriteria().andEqualTo("id", dictItemId);
+        DictItem catalog = dictItemMapper.selectByExample(example).get(0);
+        if (catalog == null) {
+            throw new BusinessException("006");
+        }
+        return catalog;
+    }
+
+    @Override
+    public int defaultUpdate(DictCatalog t) {
+        return getMapper().defaultUpdate(t);
+    }
 }
