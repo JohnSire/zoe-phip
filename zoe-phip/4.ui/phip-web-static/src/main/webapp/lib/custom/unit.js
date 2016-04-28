@@ -147,7 +147,11 @@
                 var isExist = false;
                 $.each(data, function (index1, item1) {
                     //如果这个的父级节点存在，说明它不是顶级节点
-                    if (item[pidKey] == item1[pidkey]) {
+
+                    //alert(item[idKey])
+                    //alert(item[pidKey]);
+
+                    if (item[pidKey] == item1[idKey]) {
                         isExist = true;
                     }
                 });
@@ -159,7 +163,12 @@
             $.each(result, function (index, item) {
                 $.each(data, function (inedx1, item1) {
                     if (item[idKey] == item1[pidKey]) {
-                        result[index][childrenKey] = item1;
+                        if (result[index][childrenKey]) {
+                            result[index][childrenKey].push(item1);
+                        } else {
+                            result[index][childrenKey] = [];
+                            result[index][childrenKey].push(item1);
+                        }
                     }
                 })
             })
