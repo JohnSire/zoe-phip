@@ -3,17 +3,17 @@
  */
 define(function (require, exports, module) {
     var options = {
+        treeId: 'tree',
+        btnBox: 'treeBtns',
         tools: {
             /*'add':true,'edit':true,'del':true,'refresh':true*/
-            btnbox: {},
-            searchbox: []
+            btns: {'add': false, 'edit': false, 'del': false},
+            search: []
         },
         url: {
             getTreeList: ""
         },
-        treeParam: {
-
-        },
+        treeParam: {},
         dialogParam: {
             winName: "",
             winCallback: "",

@@ -7,6 +7,7 @@ import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
 import com.zoe.phip.register.model.AreaBaseInfo;
 import com.zoe.phip.web.context.ComSession;
+import com.zoe.phip.web.context.DataContext;
 import com.zoe.phip.web.context.ServiceFactory;
 import com.zoe.phip.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
@@ -67,7 +68,9 @@ public class AreaController extends BaseController {
     @RequestMapping(value = "/addAreaInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Add}, name = "新增")
-    public ServiceResult addAreaInfo(AreaBaseInfo areaBaseInfo, HttpServletRequest request) {
+    public ServiceResult addAreaInfo(HttpServletRequest request) {
+        String StrAreaBaseInfo = DataContext.Request["areaBaseInfo"];
+        AreaBaseInfo areaBaseInfo = new AreaBaseInfo();
         return ServiceFactory.getAreaRegisterIn().add(ComSession.getUserInfo(), areaBaseInfo);
     }
 

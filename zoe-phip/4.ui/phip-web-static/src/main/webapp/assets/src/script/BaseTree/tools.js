@@ -4,15 +4,15 @@
 define(function (require, exports, module) {
     //工具管理
     var internal = {
+        req: require("./req"),
         btns: {
             "add": '<a class="icon-grid icon-grid-add" title="添加"></a>',
             "edit": '<a class="icon-grid icon-grid-edit" title="编辑"></a>',
             "del": '<a class="icon-grid icon-grid-del" title="删除"></a>',
         },
         btnBuild: function (options) {
-            var btnbox = options["tools"]["btnbox"];
+            var btnbox = options["tools"]["btns"];
             var jqBtnBox = $("#" + options["btnBox"]);
-            $("#gridTools");
             $.each(btnbox, function (index, item) {
                 switch (index) {
                     case "add":
@@ -45,6 +45,17 @@ define(function (require, exports, module) {
                 var editParam = $.extend(true, {}, options["dialogParam"]["common"], options["dialogParam"]["edit"]);
                 editParam["winName"] = options["dialogParam"]["winName"];
                 editParam["winCallback"] = options["dialogParam"]["winCallback"];
+
+                var treeObj = liger.get(options["treeId"]);
+
+                if (treeObj) {
+                    var data = treeObj.getSelected();
+                    //alert(JSON.stringify(data));
+                }
+
+
+                editParam["url"] = editParam["url"] + "?state=edit&&id=" + id;
+
                 editParam.buttons[0]["onclick"] = function (item, dialog) {
                     var top = common.getTopWindowDom();
                     var callback = function () {
@@ -55,6 +66,9 @@ define(function (require, exports, module) {
                 top[options["dialogParam"]["winName"]] = common.dialog(editParam)
             },
             "del": function (options) {
+                var delParam = $.extend(true, {}, options);
+
+                alert(delParam["url"]["delTreeInfo"]);
 
             }
         }
