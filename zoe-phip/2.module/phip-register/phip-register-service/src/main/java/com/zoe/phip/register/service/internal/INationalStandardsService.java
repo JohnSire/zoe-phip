@@ -30,6 +30,6 @@ public interface INationalStandardsService extends IBaseInService<NationalStanda
      * @param queryPage
      * @return
      */
-    ServiceResultT<PageList<NationalStandards>> getDataListByPage(SystemData systemData, String key, QueryPage queryPage);
+    ServiceResultT<PageList<NationalStandards>> getDataPageList(SystemData systemData, String key, QueryPage queryPage);
 
 }

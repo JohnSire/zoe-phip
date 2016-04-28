@@ -46,7 +46,7 @@ public class DictController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<NationalStandards>> getOIDList(String keyWord) {
-        return ServiceFactory.getNationalStandardsService().getDataListByPage(ComSession.getUserInfo(), keyWord, getQueryPage());
+        return ServiceFactory.getNationalStandardsService().getDataPageList(ComSession.getUserInfo(), keyWord, getQueryPage());
     }
 
     /**
