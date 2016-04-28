@@ -149,7 +149,7 @@ public class PersonnelController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<MedicalStaffInfo>> getMedStfList(String keyWord) {
-        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), keyWord, getQueryPage());
+        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), keyWord,"", getQueryPage());
     }
 
     /**
