@@ -16,7 +16,7 @@ define(function (require, exports, module) {
                     $(".btn-switch-outer").btnSwitch({name: 'state'});
                     internal.selectList.dialog('dictCatalog', {
                         target: $("#btnParentCatalog"),
-                        name: 'pId',
+                        name: 'pid',
                         parentName: 'parentName',
                         valueField: 'id',
                         displayField: 'name',
@@ -28,8 +28,8 @@ define(function (require, exports, module) {
                         },
                         buttonsExtend: [{
                             text: '根级节点', onclick: function (item, dialog) {
-                                $('input[name="pId"]').val(0);
-                                $("#btnFkParent").find(".text-line-content").text("根级节点");
+                                $('input[name="pid"]').val(0);
+                                $("#btnParentCatalog").find(".text-line-content").text("根级节点");
                                 dialog.close();
                             }
                         }]

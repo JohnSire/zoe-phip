@@ -18,7 +18,10 @@ define(function (require, exports, module) {
                     getTreeList: 'dict/getDictCatalogList',
                 },
                 treeParam: {
-
+                    idFieldName: 'id',
+                    parentIDFieldName: 'pid',
+                    textFieldName: 'name',
+                    checkbox: false
                 }
             })
         },
