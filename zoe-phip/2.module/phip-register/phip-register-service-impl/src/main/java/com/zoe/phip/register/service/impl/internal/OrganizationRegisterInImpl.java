@@ -99,7 +99,7 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     }
 
     public List<DictItem> dictItemListQuery(String fkCatalogCode) {
-        Example example = new Example(OrgDeptInfo.class);
+        Example example = new Example(DictItem.class);
         example.createCriteria().andEqualTo("fkCatalogCode", fkCatalogCode);
         return dictItemMapper.selectByExample(example);
     }
