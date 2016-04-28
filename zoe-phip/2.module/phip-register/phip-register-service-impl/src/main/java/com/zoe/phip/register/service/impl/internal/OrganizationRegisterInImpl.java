@@ -64,6 +64,22 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return orgDeptInfo;
     }
 
+    @ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
+    public OrgDeptInfo updateOrg(OrgDeptInfo orgDeptInfo) throws Exception {
+        //数据是否存在判断
+        Example example = new Example(OrgDeptInfo.class);
+        example.createCriteria().andEqualTo("id", orgDeptInfo.getId());
+        int count = getMapper().selectCountByExample(example);
+        if (count == 0) {
+            throw new BusinessException("002");
+        }
+        //保存到数据库
+        super.update(orgDeptInfo);
+        return orgDeptInfo;
+    }
+
+
+
 
     @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败！")
     public OrgDeptInfo organizationDetailQuery(Map<String, Object> map) throws Exception {
@@ -93,7 +109,9 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         //分页
         SqlHelper.startPage(page);
         Map<String, Object> paras = new HashMap<String, Object>();
-        paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        }
         paras.put("deptTypeCode", deptTypeCode);
         List<OrgDeptInfo> results=  ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoList(paras);
 

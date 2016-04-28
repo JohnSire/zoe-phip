@@ -18,14 +18,14 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
      * @param orgDeptInfo
      * @return
      */
-    ServiceResultT<OrgDeptInfo> addOrganization(OrgDeptInfo orgDeptInfo);
+    ServiceResultT<OrgDeptInfo> addOrganization(SystemData systemData,OrgDeptInfo orgDeptInfo);
 
     /**
      *	医疗卫生机构信息更新
      * @param orgDeptInfo
      * @return
      */
-    ServiceResultT<OrgDeptInfo> updateOrganization(OrgDeptInfo orgDeptInfo);
+    ServiceResultT<OrgDeptInfo> updateOrg(SystemData systemData,OrgDeptInfo orgDeptInfo);
 
     /**
      * 	医疗卫生机构信息查询

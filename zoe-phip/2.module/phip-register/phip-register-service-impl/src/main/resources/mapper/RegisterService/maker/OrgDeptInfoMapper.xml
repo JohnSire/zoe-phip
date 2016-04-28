@@ -44,7 +44,7 @@
             jdbcType="VARCHAR"/>
     <result column="CREATION_TIME" property="creationTime" javaType="java.sql.Date"
             jdbcType="DATE"/>
-    <result column="SORT_NUM" property="sortNum" javaType="java.math.BigDecimal"
+    <result column="SORT_NUM" property="sortNum" javaType="java.lang.Integer"
             jdbcType="DECIMAL"/>
     <result column="CHARGE_INFO_PERSON" property="chargeInfoPerson" javaType="java.lang.String"
             jdbcType="VARCHAR"/>
@@ -60,9 +60,9 @@
             jdbcType="VARCHAR"/>
     <result column="POSTCODE" property="postcode" javaType="java.lang.String"
             jdbcType="VARCHAR"/>
-    <result column="G_LONGITUDE" property="glongitude" javaType="java.math.BigDecimal"
+    <result column="G_LONGITUDE" property="glongitude" javaType="java.lang.Double"
             jdbcType="DECIMAL"/>
-    <result column="G_LATITUDE" property="glatitude" javaType="java.math.BigDecimal"
+    <result column="G_LATITUDE" property="glatitude" javaType="java.lang.Double"
             jdbcType="DECIMAL"/>
     <result column="PROVINCE_CODE" property="provinceCode" javaType="java.lang.String"
             jdbcType="VARCHAR"/>

@@ -13,8 +13,6 @@ import com.zoe.phip.register.dao.IDictCatalogMapper;
 import com.zoe.phip.register.dao.IDictItemMapper;
 import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.model.DictItem;
-import com.zoe.phip.register.model.OrgDeptInfo;
-import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.service.internal.IDictRegisterIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
