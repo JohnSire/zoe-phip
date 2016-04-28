@@ -18,7 +18,7 @@ import java.util.Map;
  * @date 2016-04-25
  */
 public interface INationalStandardsMapper extends IServiceMapper<NationalStandards> {
-    List<NationalStandards> getDataListByPage(Map<String, Object> map);
+    List<NationalStandards> getDataPageList(Map<String, Object> map);
 
     int getNationalStandard(Map<String,Object> map);
 }

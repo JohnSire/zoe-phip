@@ -46,7 +46,7 @@ public class NationalStandardsServiceImplTest extends BaseTest {
 
     @Test
     public void getDataListByPage() throws Exception {
-        PageList<NationalStandards> list = impl.getDataListByPage("e",new QueryPage());
+        PageList<NationalStandards> list = impl.getDataPageList("e",new QueryPage());
         System.out.println(JSON.json(list));
     }
 
