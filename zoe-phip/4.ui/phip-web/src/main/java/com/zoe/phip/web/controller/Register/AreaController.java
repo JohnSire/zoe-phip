@@ -68,9 +68,7 @@ public class AreaController extends BaseController {
     @RequestMapping(value = "/addAreaInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Add}, name = "新增")
-    public ServiceResult addAreaInfo(HttpServletRequest request) {
-        String StrAreaBaseInfo = DataContext.Request["areaBaseInfo"];
-        AreaBaseInfo areaBaseInfo = new AreaBaseInfo();
+    public ServiceResult addAreaInfo(AreaBaseInfo areaBaseInfo, HttpServletRequest request) {
         return ServiceFactory.getAreaRegisterIn().add(ComSession.getUserInfo(), areaBaseInfo);
     }
 

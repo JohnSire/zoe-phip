@@ -12,13 +12,6 @@ define(function (require, exports, module) {
                 addUrl: 'area/addAreaInfo',//新增接口Url
                 updateUrl: 'area/updateAreaInfo',//修改接口Url
                 loadPageEvent: function () {
-                    var type = common.getParamFromUrl("state");
-                    if (type == "edit") {
-
-                    }
-                    else {
-
-                    }
                 }
             })
         }
