@@ -3,6 +3,7 @@ package com.zoe.phip.module.service.util;
 import com.github.pagehelper.PageHelper;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.entity.SortOrder;
+import com.zoe.phip.infrastructure.util.StringUtil;
 
 import java.text.MessageFormat;
 
@@ -22,14 +23,17 @@ public final class SqlHelper {
     }
 
     public static String getLikeStr(String input) {
+        input = StringUtil.isNullOrWhiteSpace(input) ? "" : input.toUpperCase();
         return MessageFormat.format("%{0}%", input);
     }
 
     public static String getStartWithStr(String input) {
+        input = StringUtil.isNullOrWhiteSpace(input) ? "" : input.toUpperCase();
         return MessageFormat.format("{0}%", input);
     }
 
     public static String getEndWithStr(String input) {
+        input = StringUtil.isNullOrWhiteSpace(input) ? "" : input.toUpperCase();
         return MessageFormat.format("%{0}", input);
     }
 }
