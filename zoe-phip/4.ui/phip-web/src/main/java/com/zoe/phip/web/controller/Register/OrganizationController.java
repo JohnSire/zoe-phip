@@ -3,11 +3,9 @@ package com.zoe.phip.web.controller.Register;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.register.model.DictItem;
-import com.zoe.phip.web.context.ComSession;
-import com.zoe.phip.web.context.ServiceFactory;
+import com.zoe.phip.register.model.OrgDeptInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.zoe.phip.register.model.OrgDeptInfo;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -81,10 +79,10 @@ public class OrganizationController {
      * 根据机构（科室）编码获取机构列表
      *
      * @param keyWord
-     * @param deptParentCode
+     * @param deptTypeCode
      * @return
      */
-    public ServiceResult getMedicalOrgList(String keyWord, String deptParentCode) {
+    public ServiceResult getMedicalOrgList( String deptTypeCode,String keyWord) {
         return null;
     }
 

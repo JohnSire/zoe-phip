@@ -9,6 +9,7 @@ package com.zoe.phip.web.model.sm;
  * Since 2008 - 2016
  */
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.Column;
@@ -31,7 +32,7 @@ public class MenuData extends MasterEntity {
      */
 
     @Transient
-//    @JSONField(name = "Childrens")
+    @JSONField(serialize = false)
     public List<MenuData> children;
     /// <summary>
     /// 对应的权限标�
@@ -73,7 +74,17 @@ public class MenuData extends MasterEntity {
     @Column(name = "FK_PARENT_MENU_ID")
 //    @JSONField(name = "FkParentMenuId")
     private String fkParentMenuId;
+
     @Transient
+    private String parentId;
+
+    @Transient
+    private String parentName;
+
+
+
+    @Transient
+    @JSONField(serialize = false)
     private MenuData parentMenu;
 
     public MenuData() {
@@ -172,5 +183,21 @@ public class MenuData extends MasterEntity {
 
     public void setNamePath(String namePath) {
         this.namePath = namePath;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 }

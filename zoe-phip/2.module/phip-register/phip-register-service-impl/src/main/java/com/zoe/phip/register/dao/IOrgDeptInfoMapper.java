@@ -23,10 +23,12 @@ import java.util.Map;
 public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
     OrgDeptInfo getOrgDeptInfo(Map<String, Object> map);
 
-    PageList<OrgDeptInfo> organizationListQuery(String deptParentCode, String key, QueryPage page);
+    PageList<OrgDeptInfo> organizationListQuery(String deptTypeCode, String key, QueryPage page);
 
     List<DictItem> dictItemListQuery(String fkCatalogCode);
 
     boolean organizationDelete(String id);
 
+
+    List<OrgDeptInfo> getOrgDeptInfoList(Map<String, Object> paras);
 }

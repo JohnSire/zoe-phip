@@ -28,13 +28,15 @@
     </update>
 
     <select id="getDictCatalogList" resultMap="MultiResultMap" parameterType="java.util.Map">
-        SELECT pdc.*,ppdc.NAME PARENT_NAME FROM PHIP_DICT_CATALOG pdc
+        SELECT pdc.*,ppdc.NAME PARENT_NAME FROM(
+        SELECT pdc.* FROM PHIP_DICT_CATALOG pdc
         <where>
             <if test="key !=null and key !=''">
                 AND (UPPER(pdc.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(pdc.CODE) LIKE #{key,jdbcType=VARCHAR})
             </if>
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
+        ) pdc
         LEFT JOIN PHIP_DICT_CATALOG ppdc
         ON pdc.PID = ppdc.ID
     </select>

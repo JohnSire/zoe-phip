@@ -11,7 +11,7 @@ define(function (require, exports, module) {
                 displayField: 'loginName',
                 valueField: 'id',
                 gridParam: {
-                    url: webRoot + '/user/getUserList',
+                    url: 'user/getUserList',
                     columns: [
                         {display: '名称', name: 'name', width: 180, align: 'left'},
                         {display: '登录名', name: 'loginName', width: 220, align: 'left'}

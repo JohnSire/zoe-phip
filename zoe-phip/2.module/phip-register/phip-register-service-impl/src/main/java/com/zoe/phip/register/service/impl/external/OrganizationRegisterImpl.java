@@ -138,7 +138,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
 
             Map<String, Object> map = new TreeMap<>();
             map.clear();
-            map.put("code", strDeptId);
+            map.put("extensionId", strDeptId);
             map.put("deptName", strDeptName);
             OrgDeptInfo result = organizationRegisterIn.organizationDetailQuery(map);
 

@@ -52,12 +52,12 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
 
     /**
      * 查询医疗机构（科室）列表，内部使用
-     * @param deptParentCode
+     * @param deptTypeCode
      * @param key
      * @param page
      * @return
      */
-    ServiceResultT<PageList<OrgDeptInfo>> organizationListQuery(SystemData systemData,String deptParentCode, String key, QueryPage page);
+    ServiceResultT<PageList<OrgDeptInfo>> organizationListQuery(SystemData systemData,String deptTypeCode, String key, QueryPage page);
 
 
     
