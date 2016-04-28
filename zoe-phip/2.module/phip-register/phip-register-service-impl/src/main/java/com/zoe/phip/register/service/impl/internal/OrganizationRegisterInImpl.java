@@ -99,9 +99,15 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     }
 
     public List<DictItem> dictItemListQuery(String fkCatalogCode) {
-        Example example = new Example(DictItem.class);
-        example.createCriteria().andEqualTo("fkCatalogCode", fkCatalogCode);
-        return dictItemMapper.selectByExample(example);
+        if(!StringUtil.isNullOrWhiteSpace(fkCatalogCode)){
+            Example example = new Example(DictItem.class);
+            example.createCriteria().andEqualTo("fkCatalogCode", fkCatalogCode);
+            return dictItemMapper.selectByExample(example);
+        }else {
+            Map<String, Object> paras = new HashMap<String, Object>();
+            paras.put("pid", "1");
+            return  dictItemMapper.getDictItemList(paras);
+        }
     }
 
     public PageList<OrgDeptInfo> organizationListQuery(String deptTypeCode, String key, QueryPage page) {
@@ -127,6 +133,8 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return getMapper().getOrgDeptInfoList(args);
 
     }
+
+
 
     @Override
     public OrgDeptInfo getOrgDeptInfo(Map<String, Object> map) {
