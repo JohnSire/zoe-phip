@@ -106,7 +106,7 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         }else {
             Map<String, Object> paras = new HashMap<String, Object>();
             paras.put("pid", "1");
-            return  dictItemMapper.getDictItemList(paras);
+            return  dictItemMapper.getDictItemOrgList(paras);
         }
     }
 
