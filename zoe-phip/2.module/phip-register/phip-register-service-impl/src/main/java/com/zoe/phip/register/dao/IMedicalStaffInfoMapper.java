@@ -60,12 +60,13 @@ public interface IMedicalStaffInfoMapper extends IServiceMapper<MedicalStaffInfo
      * @param key
      * @return
      */
-    PageList<MedicalStaffInfo> providerListQuery(String key,QueryPage page) throws Exception;
+    PageList<MedicalStaffInfo> providerListQuery(String key, String deptExtensionId, QueryPage page) throws Exception;
 
 
     /**
      * 根据ID或者EXTENSION_ID
      * 获取人员信息
+     *
      * @param id
      * @return
      */

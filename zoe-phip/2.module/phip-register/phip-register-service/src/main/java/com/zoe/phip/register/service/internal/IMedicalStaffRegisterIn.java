@@ -46,9 +46,11 @@ public interface IMedicalStaffRegisterIn extends IBaseInService<MedicalStaffInfo
 
     /**
      * 查询医疗卫生人员列表
-     *
-     * @param key
+     * @param systemData 权限验证
+     * @param key 查询关键字
+     * @param deptExtensionId 所在科室extensionId
+     * @param page 分页信息
      * @return
      */
-    ServiceResultT<PageList<MedicalStaffInfo>> providerListQuery(SystemData systemData, String key, QueryPage page);
+    ServiceResultT<PageList<MedicalStaffInfo>> providerListQuery(SystemData systemData, String key, String deptExtensionId, QueryPage page);
 }
