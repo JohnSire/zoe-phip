@@ -148,8 +148,6 @@
                 $.each(data, function (index1, item1) {
                     //如果这个的父级节点存在，说明它不是顶级节点
 
-                    //alert(item[idKey])
-                    //alert(item[pidKey]);
 
                     if (item[pidKey] == item1[idKey]) {
                         isExist = true;

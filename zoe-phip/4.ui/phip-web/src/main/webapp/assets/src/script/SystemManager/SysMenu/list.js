@@ -65,7 +65,7 @@
                     common: {
                         url: 'menu/detail',
                         width: 360,
-                        height: 280
+                        height: 320
                     }
                 }
             })
