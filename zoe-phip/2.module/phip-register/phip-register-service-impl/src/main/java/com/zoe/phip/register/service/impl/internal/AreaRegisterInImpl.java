@@ -96,8 +96,11 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
 
     private boolean ifCodeExist(String id, String code, int type) {
         Example example = new Example(AreaBaseInfo.class);
-        example.createCriteria().andEqualTo("code", code);
-        if (type != 0) example.createCriteria().andNotEqualTo("id", id);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("code", code);
+        if (type != 0) {
+            criteria.andNotEqualTo("id",id);
+        }
         int count = getMapper().selectCountByExample(example);
         return count > 0;
     }
