@@ -13,7 +13,7 @@
     //时间初始化
     $.fn.formInitDate = function () {
         $("[edittype='date']").ligerDateEditor({
-            format: "yyyy-MM-dd",
+            format: "MM/dd/yyyy",
             cancelable: true,
             absolute: true
         });
@@ -42,7 +42,7 @@
                             var hour = o.getHours();
                             var minute = o.getMinutes();
                             var second = o.getSeconds();
-                            o = year + "-" + month + "-" + date;
+                            o = +month + "/" + date + "/" + year;
                         }
                         jqObj.val(o);
                         jqObj.trigger("change");
