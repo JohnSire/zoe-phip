@@ -10,9 +10,8 @@ define(function (require, exports, module) {
             "del": '<a class="icon-grid icon-grid-del" title="删除"></a>',
         },
         btnBuild: function (options) {
-            var btnbox = options["tools"]["btnbox"];
+            var btnbox = options["tools"]["btns"];
             var jqBtnBox = $("#" + options["btnBox"]);
-            $("#gridTools");
             $.each(btnbox, function (index, item) {
                 switch (index) {
                     case "add":
