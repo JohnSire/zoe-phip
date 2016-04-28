@@ -13,8 +13,8 @@
                     $(".btn-switch-outer").btnSwitch({name: 'state'});
                     internal.selectList.dialog('menu', {
                         target: $("#btnFkParent"),
-                        name: 'fkParentMenuId',
-                        fkObj: 'parentMenu',
+                        name: 'fkParentMenuId',//绑定value值
+                        parentName: 'parentName',//绑定name值
                         displayField: 'name',
                         valueField: 'id',
                         fkNullContent: '菜单根节点',

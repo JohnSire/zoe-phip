@@ -23,7 +23,7 @@ define(function (require, exports, module) {
             gridParam["onCheckRow"] = internal.onCheckRow;
             gridParam["onCheckAllRow"] = internal.onCheckAllRow;
             gridParam["isChecked"] = internal.isChecked;
-            gridParam["onBeforeCheckRow"]=internal.onBeforeCheckRow;
+            gridParam["onBeforeCheckRow"] = internal.onBeforeCheckRow;
             var gridObj = $("#grid").ligerGrid(gridParam);
             //如果是非多选的，则移除全选框
             if (!internal.multiselect) {
@@ -57,7 +57,7 @@ define(function (require, exports, module) {
             return false;
         },
         //点击选中前先验证
-        onBeforeCheckRow:function(checked, data, rowid, rowdata){
+        onBeforeCheckRow: function (checked, data, rowid, rowdata) {
             if (internal.isTreeVaild && internal.selfId == data[internal.valueField]) {
                 internal.top.common.jsmsgError(internal.treeVaildMsg);
                 return false;
