@@ -76,9 +76,6 @@ public class MenuData extends MasterEntity {
     private String fkParentMenuId;
 
     @Transient
-    private String parentId;
-
-    @Transient
     private String parentName;
 
 
@@ -183,14 +180,6 @@ public class MenuData extends MasterEntity {
 
     public void setNamePath(String namePath) {
         this.namePath = namePath;
-    }
-
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
     }
 
     public String getParentName() {

@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.web.dao.sm.IMenuDataMapper">
     <resultMap id="MultiBaseResultMap" type="com.zoe.phip.web.model.sm.MenuData" extends="BaseResultMap">
-        <result column="PARENT_ID" property="parentId" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="PARENT_NAME" property="parentName" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <!--<association property="parentMenu" column="FK_PARENT_MENU_ID" select="getParentMenuById" fetchType="lazy"/>-->
     </resultMap>
@@ -25,7 +24,7 @@
     </select>
 
     <select id="getMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
-        SELECT T1.*,T2.ID AS PARENT_ID,T2.NAME AS PARENT_NAME FROM SYS_MENU_DATA T1 LEFT JOIN SYS_MENU_DATA T2 ON T2.ID=T1.FK_PARENT_MENU_ID
+        SELECT T1.*,T2.NAME AS PARENT_NAME FROM SYS_MENU_DATA T1 LEFT JOIN SYS_MENU_DATA T2 ON T2.ID=T1.FK_PARENT_MENU_ID
         WHERE T1.ID=#{id}
     </select>
 
