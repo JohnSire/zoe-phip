@@ -71,7 +71,7 @@ public class PersonnelController extends BaseController {
     @RequestMapping(value = "/addXmanInfo", method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Add}, name = "更新")
-    public ServiceResult addXmanInfo(XmanBaseInfo xmanBaseInfo) {
+    public ServiceResult addXmanInfo(XmanBaseInfo xmanBaseInfo, HttpServletRequest request) {
         return ServiceFactory.getPatientRegisterIn().addPatientRegistry(ComSession.getUserInfo(), xmanBaseInfo);
     }
 
@@ -84,7 +84,7 @@ public class PersonnelController extends BaseController {
     @RequestMapping(value = "/updateXmanInfo", method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Update}, name = "更新")
-    public ServiceResult updateXmanInfo(XmanBaseInfo xmanBaseInfo) {
+    public ServiceResult updateXmanInfo(XmanBaseInfo xmanBaseInfo, HttpServletRequest request) {
         return ServiceFactory.getPatientRegisterIn().updatePatientRegistry(ComSession.getUserInfo(), xmanBaseInfo);
     }
 
@@ -149,7 +149,7 @@ public class PersonnelController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<MedicalStaffInfo>> getMedStfList(String keyWord) {
-        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), keyWord, getQueryPage());
+        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), keyWord,"", getQueryPage());
     }
 
     /**

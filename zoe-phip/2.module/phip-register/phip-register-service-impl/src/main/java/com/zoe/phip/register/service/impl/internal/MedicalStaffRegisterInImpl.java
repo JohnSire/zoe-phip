@@ -18,6 +18,7 @@ import com.zoe.phip.register.service.internal.IMedicalStaffRegisterIn;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,22 +53,20 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
         return staffInfo;
     }
 
-    @Override
-
-    public boolean providerDelete(MedicalStaffInfo staffInfo) throws Exception {
-        return getMapper().deleteByPrimaryKey(staffInfo.getId()) > 0;
-    }
 
     @Override
-    public PageList<MedicalStaffInfo> providerListQuery(String key,QueryPage page) throws Exception {
+    public PageList<MedicalStaffInfo> providerListQuery(String key, String deptExtensionId, QueryPage page) throws Exception {
         PageList<MedicalStaffInfo> pageList = new PageList<MedicalStaffInfo>();
-        Example example = new Example(MedicalStaffInfo.class);
+        //分页
         SqlHelper.startPage(page);
+        Map<String, Object> paras = new HashMap<String, Object>();
         if (!StringUtil.isNullOrWhiteSpace(key)) {
-            example.createCriteria().andLike("idNo", "%" + key + "%");
-            example.or(example.createCriteria().andLike("name", "%" + key + "%"));
+            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
         }
-        List<MedicalStaffInfo> results = getMapper().selectByExample(example);
+        if (!StringUtil.isNullOrWhiteSpace(deptExtensionId)) {
+            paras.put("extensionId", deptExtensionId);
+        }
+        List<MedicalStaffInfo> results = getProviderList(paras);
         PageInfo<MedicalStaffInfo> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
@@ -76,23 +75,6 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
 
 
     @Override
-    public MedicalStaffInfo getProvider(String id) {
-        return getMapper().getProvider(id);
-    }
-
-    @Override
-    public List<MedicalStaffInfo> getProviderList(Map<String, Object> map) {
-        return getMapper().getProviderList(map);
-    }
-
-
-    @Override
-    public MedicalStaffInfo getStaff(Map<String, Object> map) {
-        return getMapper().getStaff(map);
-    }
-
-    @Override
-
     public MedicalStaffInfo addProvider(MedicalStaffInfo medicalStaffInfo) throws Exception {
         Example example = new Example(MedicalStaffInfo.class);
         example.createCriteria().andEqualTo("extensionId", medicalStaffInfo.getExtensionId());
@@ -108,24 +90,50 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     }
 
     @Override
-
     public MedicalStaffInfo updateProvider(MedicalStaffInfo medicalStaffInfo) throws Exception {
-        ErrorMessage[] errorMessages = this.getClass().getAnnotationsByType(ErrorMessage.class);
-        Example example = new Example(MedicalStaffInfo.class);
-        example.createCriteria().andEqualTo("extensionId", medicalStaffInfo.getExtensionId());
-        //数据是否存在判断
-        int count = getMapper().selectCountByExample(example);
-        if (count == 0) {
-            throw new BusinessException("002");
-        }
-        //保存到数据库
+        if (StringUtil.isNullOrWhiteSpace(medicalStaffInfo.getId())) {
+            Example example = new Example(MedicalStaffInfo.class);
+            example.createCriteria().andEqualTo("extensionId", medicalStaffInfo.getExtensionId());
+            //数据是否存在判断
+            int count = getMapper().selectCountByExample(example);
+            if (count == 0) {
+                throw new BusinessException("002");
+            }
+            //保存到数据库
 //        medicalStaffInfo.setId(StringUtil.getUUID());
-        getMapper().defaultUpdate(medicalStaffInfo);
+            getMapper().defaultUpdate(medicalStaffInfo);
+        } else {
+            super.update(medicalStaffInfo);
+        }
+
         return medicalStaffInfo;
     }
+
+    //region 接口转接
+    @Override
+    public MedicalStaffInfo getProvider(String id) {
+        return getMapper().getProvider(id);
+    }
+
+    @Override
+    public List<MedicalStaffInfo> getProviderList(Map<String, Object> map) {
+        return getMapper().getProviderList(map);
+    }
+
+    @Override
+    public MedicalStaffInfo getStaff(Map<String, Object> map) {
+        return getMapper().getStaff(map);
+    }
+
 
     @Override
     public int defaultUpdate(MedicalStaffInfo t) {
         return getMapper().defaultUpdate(t);
     }
+
+    @Override
+    public boolean providerDelete(MedicalStaffInfo staffInfo) throws Exception {
+        return getMapper().deleteByPrimaryKey(staffInfo.getId()) > 0;
+    }
+    //endregion
 }

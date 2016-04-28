@@ -47,7 +47,7 @@ public class DictController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<NationalStandards>> getOIDList(String keyWord) {
-        return ServiceFactory.getNationalStandardsService().getDataListByPage(ComSession.getUserInfo(), keyWord, getQueryPage());
+        return ServiceFactory.getNationalStandardsService().getDataPageList(ComSession.getUserInfo(), keyWord, getQueryPage());
     }
 
     /**
@@ -114,6 +114,8 @@ public class DictController extends BaseController {
     }
 
     //endregion
+
+
     //region 字典分类
     @RequestMapping("/view/dictcategorylist")
     @AuthAction(permission = {Permission.View}, name = "查看")

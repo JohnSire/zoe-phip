@@ -14,6 +14,9 @@ define(function (require, exports, module) {
             var treeObj = new BaseTree({
                 treeId: 'tree',
                 btnBox: 'treeBtns',
+                reqInfoKey: 'id',//根据哪个值进去获取对�                tools: {
+                    btns: {'add': false, 'edit': false, 'del': false}
+                },
                 url: {
                     getTreeList: 'dict/dictCatalogTreeQuery',
                 },
@@ -22,6 +25,24 @@ define(function (require, exports, module) {
                     parentIDFieldName: 'pid',
                     textFieldName: 'name',
                     checkbox: false
+                },
+                dialogParam: {
+                    winName: "win_dict_detail_dialog",
+                    winCallback: "win_dict_detail_callback",
+                    titleKey: null,//弹窗标题索引 �编辑用户--张三"其中张三是通过�userName'获取
+                    //新增参数
+                    add: {
+                        title: "新增信息"
+                    },
+                    //编辑参数
+                    edit: {
+                        title: "编辑信息"
+                    },
+                    common: {
+                        url: 'dict/view/dictdetail',
+                        width: 360,
+                        height: 260
+                    }
                 }
             })
         },
@@ -31,7 +52,7 @@ define(function (require, exports, module) {
                 toolsBoxId: 'dictTools',
                 deleteUrl: {
                     deleteInfo: "dict/delDictItemInfo",
-                    deleteList: ""
+                    deleteList: "dict/delDictItemList",
                 },
                 tools: {
                     btnbox: {
@@ -39,7 +60,7 @@ define(function (require, exports, module) {
                         'del': true
                     },
                     searchbox: [
-                        {label: '关键字', name: 'keyWord', type: 'text'}
+                        {label: '关键�, name: 'keyWord', type: 'text'}
                     ]
                 },
                 extendParam: function () {
@@ -56,7 +77,7 @@ define(function (require, exports, module) {
                     frozen: false,
                     usePage: true,
                     width: "100%",
-                    height: "99%"//$("body").innerHeight() - $("#dictItemTools").outerHeight() - 76//500
+                    height: "99%"
                 },
                 dialogParam: {
                     winName: "win_oid_detail_dialog",//弹窗对象变量名称

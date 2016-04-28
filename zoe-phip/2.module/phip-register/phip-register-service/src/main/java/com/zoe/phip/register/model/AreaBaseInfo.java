@@ -8,6 +8,7 @@ package com.zoe.phip.register.model;
 import javax.persistence.*;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.infrastructure.annotation.XPath;
 import com.zoe.phip.module.service.entity.MasterEntity;
 
@@ -59,6 +60,7 @@ public class AreaBaseInfo extends MasterEntity {
      */
     @Column(name = "AREA_CANCELLATION_DATE")
     @XPath(value = "//areaCancellationDate/@value")
+    @JSONField(format = "yyyy-MM-dd")
     private Date areaCancellationDate;
 
     public String getAreaCancelReason() {

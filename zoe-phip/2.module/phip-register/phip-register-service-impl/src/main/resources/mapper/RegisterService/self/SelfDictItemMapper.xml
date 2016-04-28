@@ -55,4 +55,16 @@
         ) pdi
         ON pdc.CODE = pdi.FK_CATALOG_CODE
     </select>
+
+
+
+    <select id="getDictItemOrgList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select * from PHIP_DICT_ITEM PDIT
+        <where>
+            <if test="pid !=null and pid !=''">
+                AND  PDIT.FK_CATALOG_CODE in (select code from phip_dict_catalog where pid= #{pid,jdbcType=VARCHAR})
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+    </select>
 </mapper>

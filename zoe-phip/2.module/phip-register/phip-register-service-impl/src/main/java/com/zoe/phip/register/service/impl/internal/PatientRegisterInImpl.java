@@ -73,17 +73,27 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
 
     @Override
     public XmanBaseInfo updatePatientRegistry(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) throws Exception {
-        //数据是否存在判断
-        Example example = new Example(XmanBaseInfo.class);
-        example.createCriteria().andEqualTo("healthRecordNo", xmanBaseInfo.getHealthRecordNo());
-        int count = getMapper().selectCountByExample(example);
-        if (count == 0) {
-            throw new BusinessException("002");
+        if (StringUtil.isNullOrWhiteSpace(xmanBaseInfo.getId())) {
+            //数据是否存在判断
+            Example example = new Example(XmanBaseInfo.class);
+            example.createCriteria().andEqualTo("healthRecordNo", xmanBaseInfo.getHealthRecordNo());
+            int count = getMapper().selectCountByExample(example);
+            if (count == 0) {
+                throw new BusinessException("002");
+            }
+            //保存到数据库
+            getMapper().defaultUpdate(xmanBaseInfo);
+            cardMapper.defaultUpdate(xmanCard);
+            xmanBaseInfo.setXmanCard(xmanCard);
+        } else {
+            super.update(xmanBaseInfo);
+            XmanCard card = cardMapper.getXmanCard(xmanBaseInfo.getId());
+            if (card != null) {
+                card.setXcCardCode(xmanCard.getXcCardCode());
+                card.setHealthRecordNo(xmanCard.getHealthRecordNo());
+                cardMapper.updateByPrimaryKey(card);
+            }
         }
-        //保存到数据库
-        getMapper().defaultUpdate(xmanBaseInfo);
-        cardMapper.defaultUpdate(xmanCard);
-        xmanBaseInfo.setXmanCard(xmanCard);
         return xmanBaseInfo;
     }
 
@@ -150,18 +160,6 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         return pageList;
     }
 
-    //region 接口转接
-    @Override
-    public XmanBaseInfo getPatient(String id) {
-        return getMapper().getPatient(id);
-    }
-
-    @Override
-    public List<XmanBaseInfo> getPatientList(Map<String, Object> args) {
-        return getMapper().getPatientList(args);
-    }
-    //endregion
-
     /**
      * 将旧实体的值，赋到新实体上
      *
@@ -191,9 +189,20 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         }
     }
 
+    //region 接口转接
+    @Override
+    public XmanBaseInfo getPatient(String id) {
+        return getMapper().getPatient(id);
+    }
+
+    @Override
+    public List<XmanBaseInfo> getPatientList(Map<String, Object> args) {
+        return getMapper().getPatientList(args);
+    }
+
     @Override
     public int defaultUpdate(XmanBaseInfo t) {
         return getMapper().defaultUpdate(t);
     }
-
+    //endregion
 }
