@@ -20,9 +20,14 @@ var bodySection = {
 
             <li class="list">
                 <p class="column-two">
-                    <label class="label" for="pid"><span class="text-mark">*</span>父级区域：</label>
-                    <input type="text" name="pid" class="text" datatype="*1-30" errormsg="名称长度应为1-30位！"
-                           nullmsg="请填写名称！"/>
+                    <label class="label" for="pid">父级区域：</label>
+                        <span class="text-line-outer" id="btnArea">
+                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
                 </p>
                 <p class="column-two">
                     <label class="label" for="buildTime"><span class="text-mark">*</span>成立时间：</label>
@@ -48,7 +53,8 @@ var bodySection = {
             <li class="list">
                 <p class="column-one">
                     <label class="label label-textarea">注销原因：</label>
-                    <textarea rows="3" class="textarea" style="width:508px;height:60px;" name="areaCancelReason"></textarea>
+                    <textarea rows="3" class="textarea" style="width:508px;height:60px;"
+                              name="areaCancelReason"></textarea>
                 </p>
             </li>
 
@@ -63,7 +69,7 @@ var scriptSection={
 %>
 <script type="text/javascript">
     $(function () {
-        seajs.use('{dir}/Register/Area/areaDetail.js', function (a) {
+        seajs.use('{dir}/Register/Area/areaDetail', function (a) {
             a.init();
         });
     })

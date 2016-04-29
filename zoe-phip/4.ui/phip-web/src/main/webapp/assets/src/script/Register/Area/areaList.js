@@ -36,9 +36,17 @@ define(function (require, exports, module) {
                         },
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
-                    usePage: true,
-                    width: $("body").innerWidth() - 2,
-                    height: $("body").innerHeight() - $("#gridTools").outerHeight() - 38//500
+                    usePager: false,
+                    height: "100%",
+                    heightDiff: 29,
+                    tree: {
+                        columnId: 'id',
+                        columnName: 'name',
+                        idField: 'id',
+                        parentIDField: 'pid'
+                    }
+                    /*width: $("body").innerWidth() - 2,
+                     height: $("body").innerHeight() - $("#gridTools").outerHeight() - 38//500*/
                 },
                 dialogParam: {
                     winName: "win_area_detail_dialog",//弹窗对象变量名称
