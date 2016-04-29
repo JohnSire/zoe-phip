@@ -1,6 +1,8 @@
 package com.zoe.phip.register.service.impl;
 
+import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.register.BaseTest;
+import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.service.impl.external.OrganizationRegisterImpl;
 import com.zoe.phip.register.service.impl.internal.OrganizationRegisterInImpl;
 import org.junit.Test;
@@ -167,7 +169,7 @@ public class OrganizationRegisterTest extends BaseTest {
     public void testDictItemListQuery(){
 
        // List<OrgDeptInfo> list= implIn.dictItemListQuery("0234567890");
-
+        PageList<OrgDeptInfo> pageList=implIn.orgListQuery();
 
     }
     @Test

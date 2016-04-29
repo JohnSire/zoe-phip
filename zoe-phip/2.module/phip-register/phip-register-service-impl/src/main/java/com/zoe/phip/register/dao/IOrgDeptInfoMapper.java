@@ -32,4 +32,7 @@ public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
 
     List<OrgDeptInfo> getOrgDeptInfoList(Map<String, Object> paras);
     List<OrgDeptInfo> getOrgDeptInfoListByType(Map<String, Object> paras) throws Exception ;
+
+
+    PageList<OrgDeptInfo> orgListQuery();
 }

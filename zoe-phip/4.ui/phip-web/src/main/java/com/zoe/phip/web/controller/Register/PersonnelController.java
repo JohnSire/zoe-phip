@@ -11,7 +11,6 @@ import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
-
 import com.zoe.phip.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * Created by linqinghuang on 2016/4/21.
@@ -155,7 +153,7 @@ public class PersonnelController extends BaseController {
         if(StringUtil.isNullOrWhiteSpace(keyWord)){
             keyWord="0101";
         }
-        return ServiceFactory.getOrganizationRegisterIn().getDeptInfoListByType(ComSession.getUserInfo(), keyWord);
+        return ServiceFactory.getOrganizationRegisterIn().orgListQuery(ComSession.getUserInfo());
     }
 
 
