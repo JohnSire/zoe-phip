@@ -139,25 +139,6 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
 
 
 
-    public PageList<OrgDeptInfo> organizationListQueryT(String type,String deptTypeCode, String key) {
-        PageList<OrgDeptInfo> pageList = new PageList<OrgDeptInfo>();
-        //分页
-        Map<String, Object> paras = new HashMap<String, Object>();
-        if (!StringUtil.isNullOrWhiteSpace(key)) {
-            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
-        }
-        if(type.equals("2")){
-            paras.put("deptTypeCode", deptTypeCode);
-        }
-        //        SqlHelper.setOrder(paras,queryPage);
-        List<OrgDeptInfo> results=  ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoList(paras);
-        PageInfo<OrgDeptInfo> pageInfo = new PageInfo<OrgDeptInfo>(results);
-        pageList.setTotal((int) pageInfo.getTotal());
-        pageList.setRows(results);
-        return pageList;
-    }
-
-
 
 
     public PageList<OrgDeptInfo> orgListQuery( ) {

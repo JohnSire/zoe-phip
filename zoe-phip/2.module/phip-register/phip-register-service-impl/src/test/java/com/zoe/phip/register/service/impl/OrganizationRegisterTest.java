@@ -171,7 +171,7 @@ public class OrganizationRegisterTest extends BaseTest {
 
     //  DictCatalog dictCatalog= implIn.dictItemListQuery();
 
-        implIn.organizationListQueryT("1","","");
+       // implIn.organizationListQueryT("1","","");
 
     }
     @Test
