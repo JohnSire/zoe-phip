@@ -245,6 +245,17 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
+    public boolean dictItemListDelete(String[] dictItemIds) throws Exception {
+        boolean result = false;
+        try {
+            result = dictItemMapper.deleteByIds(dictItemIds) > 0;
+        } catch (Exception e) {
+            throw e;
+        }
+        return result;
+    }
+
+    @Override
     public PageList<DictItem> dictItemListQueryByCatalogCode(String catalogCode, QueryPage queryPage, String key) {
         PageList<DictItem> pageList = new PageList<DictItem>();
         if(StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())){
