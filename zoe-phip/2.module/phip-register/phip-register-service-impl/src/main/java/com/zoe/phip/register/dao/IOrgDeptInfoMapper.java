@@ -23,9 +23,9 @@ import java.util.Map;
 public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
     OrgDeptInfo getOrgDeptInfo(Map<String, Object> map);
 
-    PageList<OrgDeptInfo> organizationListQuery(String deptTypeCode, String key, QueryPage page);
+    PageList<OrgDeptInfo> organizationListQuery(String type,String deptTypeCode, String key, QueryPage page);
 
-    DictCatalog dictItemListQuery(String code ,String fkCatalogCode);
+    DictCatalog dictItemListQuery();
 
     boolean organizationDelete(String id);
 
