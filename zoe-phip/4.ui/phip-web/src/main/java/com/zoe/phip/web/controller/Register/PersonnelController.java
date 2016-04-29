@@ -64,6 +64,19 @@ public class PersonnelController extends BaseController {
     }
 
     /**
+     * 根据patientid查询病人信息
+     *
+     * @param patientId
+     * @return
+     */
+    @RequestMapping(value = "/getXmanInfoByPatientId")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<XmanBaseInfo> getXmanInfoByPatientId(String patientId) {
+        return ServiceFactory.getPatientRegisterIn().patientRegistryQuery(ComSession.getUserInfo(), patientId);
+    }
+
+    /**
      * 个人信息新增
      *
      * @param xmanBaseInfo
@@ -150,8 +163,8 @@ public class PersonnelController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<OrgDeptInfo>> getMedDept(String keyWord) {
-        if(StringUtil.isNullOrWhiteSpace(keyWord)){
-            keyWord="0101";
+        if (StringUtil.isNullOrWhiteSpace(keyWord)) {
+            keyWord = "0101";
         }
         return ServiceFactory.getOrganizationRegisterIn().orgListQuery(ComSession.getUserInfo());
     }
@@ -167,7 +180,7 @@ public class PersonnelController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<MedicalStaffInfo>> getMedStfList(String keyWord) {
-        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), keyWord,"", getQueryPage());
+        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), keyWord, "", getQueryPage());
     }
 
     /**
