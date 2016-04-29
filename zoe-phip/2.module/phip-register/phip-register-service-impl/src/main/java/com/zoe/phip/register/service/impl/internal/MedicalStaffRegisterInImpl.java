@@ -36,7 +36,6 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
 
     @Override
     public MedicalStaffInfo providerDetailsQuery(String id) throws Exception {
-        //todo 字典赋�
         MedicalStaffInfo staffInfo = getMapper().getProvider(id);
         if (staffInfo == null) {
             throw new BusinessException("003");
@@ -45,7 +44,6 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     }
 
     public MedicalStaffInfo providerDetailsQuery(Map<String, Object> map) throws Exception {
-        //todo 字典赋�
         MedicalStaffInfo staffInfo = getMapper().getStaff(map);
         if (staffInfo == null) {
             throw new BusinessException("003");
