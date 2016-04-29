@@ -73,4 +73,23 @@
         LEFT JOIN PHIP_DICT_CATALOG ppdc
         ON pdc.PID = ppdc.ID
     </select>
+
+    <select id="dictCatalogAndItemListByCode" resultMap="MultiResultMap" parameterType="java.util.Map">
+    SELECT T1.*, T2.NAME PARENTNAME
+      FROM (SELECT ID, CODE, NAME, PID
+          FROM PHIP_DICT_CATALOG
+         START WITH CODE = #{code,jdbcType=VARCHAR}
+        CONNECT BY PRIOR ID = PID) T1
+      LEFT JOIN PHIP_DICT_CATALOG T2
+        ON T1.PID = T2.ID
+    UNION ALL
+    SELECT PDI.ID, PDI.CODE, PDI.NAME, PDC.ID PID, PDC.NAME PARENTNAME
+      FROM (SELECT PDI.ID, PDI.CODE, PDI.NAME, PDI.FK_CATALOG_CODE
+          FROM PHIP_DICT_ITEM PDI) PDI
+      INNER JOIN (SELECT ID, CODE, NAME, PID
+                FROM PHIP_DICT_CATALOG
+              START WITH CODE = #{code,jdbcType=VARCHAR}
+             CONNECT BY PRIOR ID = PID) PDC
+        ON PDI.FK_CATALOG_CODE = PDC.CODE
+    </select>
 </mapper>

@@ -178,6 +178,23 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public List<DictCatalog> getDictCatalogListByPIdPage(Map<String, Object> args) {
         return getMapper().getDictCatalogListByPIdPage(args);
     }
+
+    @Override
+    public PageList<DictCatalog> dictCatalogAndItemListByCode(String catalogCode) {
+        PageList<DictCatalog> pageList = new PageList<DictCatalog>();
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("code",catalogCode);
+        List<DictCatalog> results = getMapper().dictCatalogAndItemListByCode(paras);
+        PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
+    @Override
+    public List<DictCatalog> dictCatalogAndItemListByCode(Map<String, Object> args) {
+        return getMapper().dictCatalogAndItemListByCode(args);
+    }
     /**********字典分类（字典）-- 结束**********/
 
     /**********字典项 -- 开始 **********/

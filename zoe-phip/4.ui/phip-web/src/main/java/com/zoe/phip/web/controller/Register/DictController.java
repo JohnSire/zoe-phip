@@ -186,8 +186,7 @@ public class DictController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult delDictCatalogInfo(String id) {
-        ServiceResult result = ServiceFactory.getDictRegisterIn().dictCatalogDetailDelete(ComSession.getUserInfo(), id);
-        return result;
+        return ServiceFactory.getDictRegisterIn().dictCatalogDetailDelete(ComSession.getUserInfo(), id);
     }
 
     /**
