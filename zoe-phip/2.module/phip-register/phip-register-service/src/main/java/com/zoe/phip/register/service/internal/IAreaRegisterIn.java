@@ -29,7 +29,7 @@ public interface IAreaRegisterIn extends IBaseInService<AreaBaseInfo> {
      * @param id
      * @return
      */
-    ServiceResultT<PageList<AreaBaseInfo>> getAreaChildrenRegistry(SystemData systemData,String id,QueryPage queryPage);
+    ServiceResultT<PageList<AreaBaseInfo>> getAreaChildrenRegistry(SystemData systemData,String id,String key,QueryPage queryPage);
 
     /**
      * 	历史行政区域信息查询

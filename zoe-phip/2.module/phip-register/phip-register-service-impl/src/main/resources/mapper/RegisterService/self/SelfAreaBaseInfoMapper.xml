@@ -48,6 +48,9 @@
 
     <select id="getChildren" resultMap="BaseResultMap" parameterType="java.util.Map">
         SELECT * FROM PHIP_AREA_BASE_INFO PABI  WHERE PABI.PID  = #{id,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('key')">
+            AND UPPER(CONCAT(PABI.CODE,PABI.NAME )) LIKE UPPER (CONCAT(CONCAT('%',#{key,jdbcType=VARCHAR}),'%'))
+        </if>
     </select>
 
     <select id="getDataList" resultMap="BaseResultMap" parameterType="java.util.Map">

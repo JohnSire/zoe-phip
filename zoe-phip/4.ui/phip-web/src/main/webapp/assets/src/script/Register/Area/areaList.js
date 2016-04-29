@@ -32,7 +32,7 @@ define(function (require, exports, module) {
                             width: 120,
                             align: 'left',
                             type: 'date',
-                            format: 'yyyy-mm-dd'
+                            format: 'yyyy-MM-dd'
                         },
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
