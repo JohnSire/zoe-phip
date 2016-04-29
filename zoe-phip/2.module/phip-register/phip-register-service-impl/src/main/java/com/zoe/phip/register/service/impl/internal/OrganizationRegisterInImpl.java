@@ -9,12 +9,15 @@ import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
+import com.zoe.phip.register.dao.IDictCatalogMapper;
 import com.zoe.phip.register.dao.IDictItemMapper;
 import com.zoe.phip.register.dao.IOrgDeptInfoMapper;
+import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.model.DictItem;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.service.internal.IOrganizationRegisterIn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
@@ -27,12 +30,20 @@ import java.util.Map;
  */
 @Repository("OrganizationRegisterIn")
 @Service(interfaceClass = IOrganizationRegisterIn.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
+@ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
+@ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
+@ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败！")
 public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, IOrgDeptInfoMapper> implements IOrgDeptInfoMapper {
 
     @Autowired
     private IDictItemMapper dictItemMapper;
 
-    @ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
+
+    @Autowired
+    @Qualifier(value = "IDictCatalogMapper")
+    private IDictCatalogMapper dictCatalogMapper;
+
+
     public OrgDeptInfo addOrganization(OrgDeptInfo orgDeptInfo) throws Exception {
 
         //数据是否存在判断
@@ -50,7 +61,6 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     }
 
 
-    @ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
     public OrgDeptInfo updateOrganization(OrgDeptInfo orgDeptInfo) throws Exception {
         //数据是否存在判断
         Example example = new Example(OrgDeptInfo.class);
@@ -64,7 +74,6 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return orgDeptInfo;
     }
 
-    @ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
     public OrgDeptInfo updateOrg(OrgDeptInfo orgDeptInfo) throws Exception {
         //数据是否存在判断
         Example example = new Example(OrgDeptInfo.class);
@@ -81,7 +90,7 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
 
 
 
-    @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败！")
+
     public OrgDeptInfo organizationDetailQuery(Map<String, Object> map) throws Exception {
         //todo 字典赋值
         OrgDeptInfo baseInfo = getMapper().getOrgDeptInfo(map);
@@ -98,16 +107,21 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return getMapper().deleteByExample(e) > 0;
     }
 
-    public List<DictItem> dictItemListQuery(String fkCatalogCode) {
+    public DictCatalog dictItemListQuery(String code ,String fkCatalogCode) {
+        Example exampleTwo = new Example(DictCatalog.class);
+        exampleTwo.createCriteria().andEqualTo("code",code);
+        DictCatalog dictCatalog=dictCatalogMapper.selectByExample(exampleTwo).get(0);
         if(!StringUtil.isNullOrWhiteSpace(fkCatalogCode)){
             Example example = new Example(DictItem.class);
             example.createCriteria().andEqualTo("fkCatalogCode", fkCatalogCode);
-            return dictItemMapper.selectByExample(example);
+            dictCatalog.setDictItemList(dictItemMapper.selectByExample(example));
+
         }else {
             Map<String, Object> paras = new HashMap<String, Object>();
             paras.put("pid", "1");
-            return  dictItemMapper.getDictItemOrgList(paras);
+            dictCatalog.setDictItemList( dictItemMapper.getDictItemOrgList(paras));
         }
+        return dictCatalog;
     }
 
     public PageList<OrgDeptInfo> organizationListQuery(String deptTypeCode, String key, QueryPage page) {
@@ -136,6 +150,7 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
 
 
 
+
     @Override
     public OrgDeptInfo getOrgDeptInfo(Map<String, Object> map) {
         return getMapper().getOrgDeptInfo(map);
@@ -145,4 +160,21 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     public int defaultUpdate(OrgDeptInfo t) {
         return getMapper().defaultUpdate(t);
     }
+
+
+    @ErrorMessage(code = "004", message = "由于参数为空，查不到内容！")
+    public List<OrgDeptInfo> getDeptInfoListByType(String type)throws Exception {
+        if(StringUtil.isNullOrWhiteSpace(type)){
+            throw new BusinessException("004");
+        }
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("type",type);
+        return ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoListByType(paras);
+    }
+
+    @Override
+    public List<OrgDeptInfo> getOrgDeptInfoListByType(Map<String, Object> paras) throws Exception {
+        return getMapper().getOrgDeptInfoListByType(paras);
+    }
+
 }

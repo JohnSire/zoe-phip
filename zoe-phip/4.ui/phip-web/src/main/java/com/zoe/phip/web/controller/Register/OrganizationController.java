@@ -4,7 +4,7 @@ import com.zoe.phip.infrastructure.annotation.AuthAction;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
-import com.zoe.phip.register.model.DictItem;
+import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
@@ -14,15 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-
 /**
  * Created by linqinghuang on 2016/4/21.
  */
 @Controller
 @RequestMapping("/organization")
 public class OrganizationController extends BaseController {
-    //region 医疗机构(科室）
+    //region 医疗机构(科室)
     @RequestMapping("/view/medicalorglist")
     public String ToMedicalOrgList() {
         return "Register/Organization/medicalOrgList";
@@ -120,9 +118,11 @@ public class OrganizationController extends BaseController {
 
     @RequestMapping("/getMedicalOrgCategoryTree")
     @ResponseBody
-    public ServiceResultT<List<DictItem>> getMedicalOrgCategoryList(String category) {
+    public ServiceResultT<DictCatalog> getMedicalOrgCategoryList(String category) {
+        //ServiceFactory.getOrganizationRegisterIn().getDeptInfoListByType(ComSession.getUserInfo(), OrgCode.MedicalInstitution.getCode());
         //category为空时，查询机构分类，不为空时，为具体的某个机构分类如：医疗机构分类
-        return ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo(), category);
+       return ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo(), "01",category);
+
     }
 
 

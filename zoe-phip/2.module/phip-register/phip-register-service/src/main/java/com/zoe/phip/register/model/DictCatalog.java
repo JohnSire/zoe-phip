@@ -7,7 +7,10 @@ package com.zoe.phip.register.model;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.util.List;
 
 
 /**
@@ -53,6 +56,17 @@ public class DictCatalog extends MasterEntity {
      */
     @Column(name = "TYPE")
     private int type;
+
+    @Transient
+    private List<DictItem> dictItemList;
+
+    public List<DictItem> getDictItemList() {
+        return dictItemList;
+    }
+
+    public void setDictItemList(List<DictItem> dictItemList) {
+        this.dictItemList = dictItemList;
+    }
 
     public String getCode() {
         return this.code;
