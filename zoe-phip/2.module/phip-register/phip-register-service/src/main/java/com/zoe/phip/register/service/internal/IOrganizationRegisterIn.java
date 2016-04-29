@@ -59,6 +59,6 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
      */
     ServiceResultT<PageList<OrgDeptInfo>> organizationListQuery(SystemData systemData,String deptTypeCode, String key, QueryPage page);
 
-    ServiceResultT<List<OrgDeptInfo>>   getDeptInfoListByType(SystemData systemData,String type);
+    ServiceResultT<PageList<OrgDeptInfo>>   getDeptInfoListByType(SystemData systemData,String type);
     
 }

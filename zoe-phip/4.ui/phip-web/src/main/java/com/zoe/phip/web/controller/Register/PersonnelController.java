@@ -5,7 +5,9 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.register.model.MedicalStaffInfo;
+import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by linqinghuang on 2016/4/21.
@@ -138,6 +141,23 @@ public class PersonnelController extends BaseController {
     public String ToMedicalStaffDetail(HttpServletRequest request, Model model) {
         return "/Register/Personnel/medicalStaffDetail";
     }
+
+    /**
+     * 查询医疗卫生人员科室
+     *
+     * @param keyWord
+     * @return
+     */
+    @RequestMapping(value = "/getMedDeptList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<OrgDeptInfo>> getMedDept(String keyWord) {
+        if(StringUtil.isNullOrWhiteSpace(keyWord)){
+            keyWord="0101";
+        }
+        return ServiceFactory.getOrganizationRegisterIn().getDeptInfoListByType(ComSession.getUserInfo(), keyWord);
+    }
+
 
     /**
      * 查询医疗卫生人员列表

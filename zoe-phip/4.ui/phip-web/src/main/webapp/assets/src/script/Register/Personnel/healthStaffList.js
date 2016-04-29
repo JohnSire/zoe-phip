@@ -15,9 +15,14 @@ define(function (require, exports, module) {
                 treeId: 'tree',
                 btnBox: 'treeBtns',
                 url: {
-                    getTreeList: 'menu/getMenuList',
+                    getTreeList: 'personnel/getMedDeptList?keyWord=0103',
                 },
-                treeParam: {}
+                treeParam: {
+                    idFieldName: 'deptCode',
+                    parentIDFieldName: 'deptParentCode',
+                    textFieldName: 'deptName',
+                    checkbox: false
+                }
 
             })
         },
