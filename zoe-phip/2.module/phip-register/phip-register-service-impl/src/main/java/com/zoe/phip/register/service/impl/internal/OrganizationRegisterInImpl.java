@@ -163,13 +163,18 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
 
 
     @ErrorMessage(code = "004", message = "由于参数为空，查不到内容！")
-    public List<OrgDeptInfo> getDeptInfoListByType(String type)throws Exception {
+    public PageList<OrgDeptInfo> getDeptInfoListByType(String type)throws Exception {
+        PageList<OrgDeptInfo> pageList = new PageList<OrgDeptInfo>();
         if(StringUtil.isNullOrWhiteSpace(type)){
             throw new BusinessException("004");
         }
         Map<String, Object> paras = new HashMap<String, Object>();
         paras.put("type",type);
-        return ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoListByType(paras);
+        List<OrgDeptInfo> results =  (getMapper()).getOrgDeptInfoListByType(paras);
+        PageInfo<OrgDeptInfo> pageInfo = new PageInfo<OrgDeptInfo>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
     }
 
     @Override
