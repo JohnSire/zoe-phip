@@ -52,14 +52,14 @@ public class PersonnelController extends BaseController {
     /**
      * 个人基本信息查询
      *
-     * @param patientId
+     * @param id
      * @return
      */
     @RequestMapping(value = "/getXmanInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResult getXmanInfo(String patientId) {
-        return ServiceFactory.getPatientRegisterIn().patientRegistryQuery(ComSession.getUserInfo(), patientId);
+    public ServiceResult getXmanInfo(String id) {
+        return ServiceFactory.getPatientRegisterIn().getById(ComSession.getUserInfo(), id);
     }
 
     /**
