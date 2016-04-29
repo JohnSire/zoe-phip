@@ -14,13 +14,12 @@ define(function (require, exports, module) {
             var treeObj = new BaseTree({
                 treeId: 'tree',
                 btnBox: 'treeBtns',
-                reqInfoKey: 'id',//根据哪个值进去获取对象
+                reqInfoKey: 'id',//根据哪个值进去获取对�
                 tools: {
                     btns: {'add': false, 'edit': false, 'del': false}
                 },
                 url: {
-                    getTreeList: 'dict/getDictCatalogList',
-                    delTreeInfo: 'dict/delDictCatalogInfo'
+                    getTreeList: 'dict/dictCatalogTreeQuery',
                 },
                 treeParam: {
                     idFieldName: 'id',
@@ -31,7 +30,7 @@ define(function (require, exports, module) {
                 dialogParam: {
                     winName: "win_dict_detail_dialog",
                     winCallback: "win_dict_detail_callback",
-                    titleKey: null,//弹窗标题索引 如"编辑用户--张三"其中张三是通过索'userName'获取
+                    titleKey: null,//弹窗标题索引 �编辑用户--张三"其中张三是通过�userName'获取
                     //新增参数
                     add: {
                         title: "新增信息"
@@ -70,7 +69,7 @@ define(function (require, exports, module) {
                 },
                 gridParam: {
                     dataAction: "local",
-                    url: 'dict/getDictItemList',
+                    url: 'dict/getDictItemListByCatalogId',
                     columns: [
                         {display: '编码', name: 'code', width: 400, align: 'left'},
                         {display: '名称', name: 'name', width: 400, align: 'left'},

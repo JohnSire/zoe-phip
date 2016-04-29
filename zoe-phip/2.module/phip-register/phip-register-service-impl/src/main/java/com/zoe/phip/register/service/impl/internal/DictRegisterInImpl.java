@@ -32,13 +32,14 @@ import java.util.Map;
 @ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
 @ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
 @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败！")
-@ErrorMessage(code = "007", message = "由于删除字典分类（字典）存在下级分类（字典项），删除失败！")
-
+@ErrorMessage(code = "004", message = "由于删除字典分类（字典）存在下级分类（字典项），删除失败！")
+@ErrorMessage(code = "005", message = "由于删除内容不存在，删除失败！")
 public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCatalogMapper> implements IDictCatalogMapper {
 
     @Autowired
     private IDictItemMapper dictItemMapper;
 
+    /**********字典分类（字典）-- 开始**********/
     @Override
     public DictCatalog addDictCatalogRequest(DictCatalog dictCatalog) throws Exception {
         //数据是否存在判断
@@ -69,6 +70,11 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
+    public int defaultUpdate(DictCatalog dictCatalog) {
+        return getMapper().defaultUpdate(dictCatalog);
+    }
+
+    @Override
     public DictCatalog dictCatalogDetailQuery(String dictCatalogCode) throws Exception {
         Example example = new Example(DictCatalog.class);
         example.createCriteria().andEqualTo("code", dictCatalogCode);
@@ -77,53 +83,6 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
             throw new BusinessException("003");
         }
         return catalog;
-    }
-
-    @Override
-    public boolean dictCatalogDetailDelete(String catalogId) throws Exception {
-        //判断时候存在字典项或下级
-        Map<String, Object> paras = new HashMap<String, Object>();
-        paras.put("Id",catalogId);
-
-        int count = getMapper().selectChildCountById(paras);
-        if (count > 0) {
-            throw new BusinessException("004");
-        }
-        return getMapper().deleteByPrimaryKey(catalogId) > 0;
-    }
-
-    @Override
-    public PageList<DictCatalog> dictCatalogListQuery(QueryPage queryPage, String key) {
-        PageList<DictCatalog> pageList = new PageList<DictCatalog>();
-        if(StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())){
-            queryPage.setOrderBy(" pdc.CREATE_AT ");
-        }
-        //分页
-        SqlHelper.startPage(queryPage);
-        Map<String, Object> paras = new HashMap<String, Object>();
-        if (!StringUtil.isNullOrWhiteSpace(key)) {
-            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
-        }
-        List<DictCatalog> results = getMapper().getDictCatalogList(paras);
-        PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
-        pageList.setTotal((int) pageInfo.getTotal());
-        pageList.setRows(results);
-        return pageList;
-    }
-
-    @Override
-    public List<DictCatalog> getDictCatalogList(Map<String, Object> args) {
-        return getMapper().getDictCatalogList(args);
-    }
-
-    @Override
-    public int selectChildCountById(Map<String, Object> args) {
-        return getMapper().selectChildCountById(args);
-    }
-
-    @Override
-    public DictCatalog getDictCatalogById(Map<String, Object> args) {
-        return getMapper().getDictCatalogById(args);
     }
 
     @Override
@@ -137,6 +96,91 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         return catalog;
     }
 
+    @Override
+    public DictCatalog getDictCatalogById(Map<String, Object> args) {
+        return getMapper().getDictCatalogById(args);
+    }
+
+    @Override
+    public boolean dictCatalogDetailDelete(String catalogId) throws Exception {
+        //判断删除项是否存在
+        if(getMapper().selectByPrimaryKey(catalogId) == null){
+            throw new BusinessException("005");
+        }
+        //判断是否存在字典项或下级
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("Id",catalogId);
+
+        int count = getMapper().selectChildCountById(paras);
+        if (count > 0) {
+            throw new BusinessException("004");
+        }
+        return getMapper().deleteByPrimaryKey(catalogId) > 0;
+    }
+
+    @Override
+    public int selectChildCountById(Map<String, Object> args) {
+        return getMapper().selectChildCountById(args);
+    }
+
+    @Override
+    public PageList<DictCatalog> dictCatalogTreeQuery() {
+        PageList<DictCatalog> pageList = new PageList<DictCatalog>();
+        List<DictCatalog> results = getMapper().selectAll();
+        PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
+    @Override
+    public PageList<DictCatalog> dictCatalogListQueryPage(QueryPage queryPage, String key) {
+        PageList<DictCatalog> pageList = new PageList<DictCatalog>();
+        if(StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())){
+            queryPage.setOrderBy(" pdc.CREATE_AT ");
+        }
+        //分页
+        SqlHelper.startPage(queryPage);
+        Map<String, Object> paras = new HashMap<String, Object>();
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        }
+        List<DictCatalog> results = getMapper().getDictCatalogListPage(paras);
+        PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
+    @Override
+    public List<DictCatalog> getDictCatalogListPage(Map<String, Object> args) {
+        return getMapper().getDictCatalogListPage(args);
+    }
+
+    @Override
+    public PageList<DictCatalog> dictCatalogListQueryByPIdPage(String pId, QueryPage queryPage) {
+        PageList<DictCatalog> pageList = new PageList<DictCatalog>();
+        if(StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())){
+            queryPage.setOrderBy(" pdc.CREATE_AT ");
+        }
+        //分页
+        SqlHelper.startPage(queryPage);
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("pid",pId);
+        List<DictCatalog> results = getMapper().getDictCatalogListByPIdPage(paras);
+        PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
+    @Override
+    public List<DictCatalog> getDictCatalogListByPIdPage(Map<String, Object> args) {
+        return getMapper().getDictCatalogListByPIdPage(args);
+    }
+    /**********字典分类（字典）-- 结束**********/
+
+    /**********字典项 -- 开始 **********/
     @Override
     public DictItem addDictItemRequest(DictItem dictItem) throws Exception {
         //数据是否存在判断
@@ -182,12 +226,26 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public boolean dictItemDetailDelete(String dictItemId) {
+    public DictItem dictItemDetailQueryById(String dictItemId) throws Exception {
+        Example example = new Example(DictItem.class);
+        example.createCriteria().andEqualTo("id", dictItemId);
+        DictItem catalog = dictItemMapper.selectByExample(example).get(0);
+        if (catalog == null) {
+            throw new BusinessException("003");
+        }
+        return catalog;
+    }
+
+    @Override
+    public boolean dictItemDetailDelete(String dictItemId) throws Exception {
+        if(dictItemMapper.selectByPrimaryKey(dictItemId) == null){
+            throw new BusinessException("005");
+        }
         return dictItemMapper.deleteByPrimaryKey(dictItemId) > 0;
     }
 
     @Override
-    public PageList<DictItem> dictItemListQuery(String catalogCode, QueryPage queryPage, String key) {
+    public PageList<DictItem> dictItemListQueryByCatalogCode(String catalogCode, QueryPage queryPage, String key) {
         PageList<DictItem> pageList = new PageList<DictItem>();
         if(StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())){
             queryPage.setOrderBy(" pdi.CREATE_AT ");
@@ -199,7 +257,7 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         if (!StringUtil.isNullOrWhiteSpace(key)) {
             paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
         }
-        List<DictItem> results = dictItemMapper.getDictItemList(paras);
+        List<DictItem> results = dictItemMapper.getDictItemListByCatalogCode(paras);
         PageInfo<DictItem> pageInfo = new PageInfo<DictItem>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
@@ -207,19 +265,23 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public DictItem dictItemDetailQueryById(String dictItemId) throws Exception {
-        Example example = new Example(DictItem.class);
-        example.createCriteria().andEqualTo("id", dictItemId);
-        DictItem catalog = dictItemMapper.selectByExample(example).get(0);
-        if (catalog == null) {
-            throw new BusinessException("003");
+    public PageList<DictItem> dictItemListQueryByCatalogId(String catalogId, QueryPage queryPage, String key) {
+        PageList<DictItem> pageList = new PageList<DictItem>();
+        if(StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())){
+            queryPage.setOrderBy(" pdi.CREATE_AT ");
         }
-        return catalog;
+        //分页
+        SqlHelper.startPage(queryPage);
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("id",catalogId);
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        }
+        List<DictItem> results = dictItemMapper.getDictItemListByCatalogId(paras);
+        PageInfo<DictItem> pageInfo = new PageInfo<DictItem>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
     }
-
-
-    @Override
-    public int defaultUpdate(DictCatalog t) {
-        return getMapper().defaultUpdate(t);
-    }
+    /**********字典项 -- 结束 **********/
 }

@@ -49,12 +49,6 @@ public class DictCatalog extends MasterEntity {
     private String parentName;
 
     /**
-     * 字典父分类
-     */
-    @Transient
-    private DictCatalog parentCatalog;
-
-    /**
      * 字典分类类别
      */
     @Column(name = "TYPE")
@@ -93,11 +87,4 @@ public class DictCatalog extends MasterEntity {
         this.parentName = parentName;
     }
 
-    public DictCatalog getParentCatalog() {
-        return parentCatalog;
-    }
-
-    public void setParentCatalog(DictCatalog parentCatalog) {
-        this.parentCatalog = parentCatalog;
-    }
 }

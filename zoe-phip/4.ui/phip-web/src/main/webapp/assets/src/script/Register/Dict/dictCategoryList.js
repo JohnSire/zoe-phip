@@ -21,7 +21,7 @@ define(function (require, exports, module) {
                     ]
                 },
                 gridParam: {
-                    url: 'dict/getDictCatalogList',
+                    url: 'dict/dictCatalogListQueryPage',
                     columns: [
                         {display: '名称', name: 'name', width: 120, align: 'left'},
                         {display: '编码', name: 'code', width: 120, align: 'left'},
