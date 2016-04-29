@@ -14,10 +14,10 @@ var bodySection = {
                            nullmsg="请填写姓名！"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="sexCode"><span class="text-mark">*</span>性别：</label>
-                    <label><input name="sexCode" type="radio" value="0"/>男 </label>
-                    <label><input name="sexCode" type="radio" value="1"/>女 </label>
-                    <label><input name="sexCode" type="radio" value="2"/>未知 </label>
+                    <label class="label" for="sexCodeName"><span class="text-mark">*</span>性别：</label>
+                    <label><input name="sexCodeName" type="radio" value="0"/>男 </label>
+                    <label><input name="sexCodeName" type="radio" value="1"/>女 </label>
+                    <label><input name="sexCodeName" type="radio" value="2"/>未知 </label>
                 </p>
                 <p class="column-three">
                     <label class="label" for="birthDate"><span class="text-mark">*</span>出生日期：</label>
@@ -40,8 +40,8 @@ var bodySection = {
                            nullmsg="请填写联系电话！"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="xcCardCode"><span class="text-mark">*</span>健康卡号：</label>
-                    <input type="text" name="xcCardCode" class="text" datatype="*1-128" errormsg="健康卡号长度应为1~128位！"
+                    <label class="label" for="cardCode"><span class="text-mark">*</span>健康卡号：</label>
+                    <input type="text" name="cardCode" class="text" datatype="*1-128" errormsg="健康卡号长度应为1~128位！"
                            nullmsg="请填写健康卡号！"/>
                 </p>
             </li>
@@ -60,6 +60,13 @@ var bodySection = {
                     <label class="label" for="healthRecordNo"><span class="text-mark">*</span>健康档案编号：</label>
                     <input type="text" name="healthRecordNo" class="text" datatype="*1-128" errormsg="健康档案编号长度应为1~128位！"
                            nullmsg="请填写健康档案编号！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="address"><span class="text-mark">*</span>联系地址：</label>
+                    <input type="text" name="address" class="text" datatype="*1-128" errormsg="婚姻状况长度应为1~128位！"
+                           nullmsg="请填写婚姻状况！"/>
                 </p>
             </li>
         </ul>
@@ -93,8 +100,8 @@ var bodySection = {
                            nullmsg="请填写邮政编码！"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="xcOrgId"><span class="text-mark">*</span>健康卡发放机构：</label>
-                    <input type="text" name="xcOrgId" class="text" datatype="*1-128" errormsg="健康卡发放机构长度应为1~128位！"
+                    <label class="label" for="xcOrgCode"><span class="text-mark">*</span>健康卡发放机构：</label>
+                    <input type="text" name="xcOrgCode" class="text" datatype="*1-128" errormsg="健康卡发放机构长度应为1~128位！"
                            nullmsg="请填写健康卡发放机构！"/>
                 </p>
                 <p class="column-three">
@@ -122,16 +129,16 @@ var bodySection = {
                 </p>
             </li>
             <li class="list">
-                <p class="column-three">
-                    <label class="label" for="orgCode"><span class="text-mark">*</span>登记机构代码：</label>
-                    <input type="text" name="orgCode" class="text" datatype="*1-16" errormsg="登记机构代码长度应为1~16位！"
-                           nullmsg="请填写登记机构代码！"/>
-                </p>
-                <p class="column-three">
-                    <label class="label" for="orgName"><span class="text-mark">*</span>登记机构名称：</label>
-                    <input type="text" name="orgName" class="text" datatype="*1-16" errormsg="登记机构名称长度应为1~16位！"
-                           nullmsg="请填写登记机构名称！"/>
-                </p>
+                       <p class="column-three">
+                            <label class="label" for="orgCode"><span class="text-mark">*</span>登记机构代码：</label>
+                            <input type="text" name="orgCode" class="text" datatype="*1-16" errormsg="登记机构代码长度应为1~16位！"
+                                   nullmsg="请填写登记机构代码！"/>
+                        </p>
+                        <p class="column-three">
+                            <label class="label" for="orgName"><span class="text-mark">*</span>登记机构名称：</label>
+                            <input type="text" name="orgName" class="text" datatype="*1-16" errormsg="登记机构名称长度应为1~16位！"
+                                   nullmsg="请填写登记机构名称！"/>
+                        </p>
                 <p class="column-three">
                     <label class="label" for="assignedPersonName"><span class="text-mark">*</span>作者人：</label>
                     <input type="text" name="assignedPersonName" class="text" datatype="*1-16" errormsg="作者人长度应为1~16位！"

@@ -119,8 +119,8 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
         final Class<?>[] types = makeClass(parameterTypes);
         Method method = instance.getClass().getMethod(methodName, types);
         ErrorMessage[] errors = method.getAnnotationsByType(ErrorMessage.class);
-        if (errors == null) {
-            errors = instance.getClass().getAnnotationsByType(ErrorMessage.class);
+        if (errors == null||errors.length==0) {
+            errors = instance.getClass().getSuperclass().getAnnotationsByType(ErrorMessage.class);
         }
         final boolean withResult = method.getAnnotation(WithResult.class) != null;
 

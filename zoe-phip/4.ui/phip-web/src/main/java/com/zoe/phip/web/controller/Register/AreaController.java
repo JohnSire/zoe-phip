@@ -121,7 +121,7 @@ public class AreaController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<AreaBaseInfo>> getAreaChildrenRegistry(String id) {
-        return ServiceFactory.getAreaRegisterIn().getAreaChildrenRegistry(ComSession.getUserInfo(), id, getQueryPage());
+        return ServiceFactory.getAreaRegisterIn().getAreaChildrenRegistry(ComSession.getUserInfo(), id, "", getQueryPage());
     }
 
     //endregion
