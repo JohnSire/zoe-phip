@@ -60,6 +60,8 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
     boolean dictItemDetailDelete(String dictItemId) throws Exception;
 
+    boolean dictItemListDelete(String[] dictItemIds) throws Exception;
+
     PageList<DictItem> dictItemListQueryByCatalogCode(String catalogCode, QueryPage queryPage, String key);
 
     PageList<DictItem> dictItemListQueryByCatalogId(String catalogId, QueryPage queryPage, String key);
