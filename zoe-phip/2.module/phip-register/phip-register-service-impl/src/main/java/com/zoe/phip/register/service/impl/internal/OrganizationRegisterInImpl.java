@@ -142,6 +142,24 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     }
 
 
+
+
+    public PageList<OrgDeptInfo> orgListQuery( QueryPage page) {
+        PageList<OrgDeptInfo> pageList = new PageList<OrgDeptInfo>();
+        //分页
+        SqlHelper.startPage(page);
+        Map<String, Object> paras = new HashMap<String, Object>();
+        List<OrgDeptInfo> results=  ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoList(paras);
+        PageInfo<OrgDeptInfo> pageInfo = new PageInfo<OrgDeptInfo>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
+
+
+
+
     @Override
     public List<OrgDeptInfo> getOrgDeptInfoList(Map<String, Object> args) {
         return getMapper().getOrgDeptInfoList(args);
