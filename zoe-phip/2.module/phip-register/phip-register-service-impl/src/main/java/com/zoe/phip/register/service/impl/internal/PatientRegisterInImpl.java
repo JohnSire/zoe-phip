@@ -66,6 +66,7 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
 
     public XmanBaseInfo addPatientRegistry(XmanBaseInfo xmanBaseInfo) throws Exception {
         XmanCard xmanCard = new XmanCard();
+        xmanCard.setXcOrgCode(xmanBaseInfo.getOrgCode());
         xmanCard.setXcCardCode(xmanBaseInfo.getCardCode());
         xmanCard.setHealthRecordNo(xmanBaseInfo.getHealthRecordNo());
         return addPatientRegistry(xmanBaseInfo, xmanCard);
