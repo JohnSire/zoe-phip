@@ -45,7 +45,7 @@ public class FrameController extends BaseController {
         ServiceResult result = new ServiceResult();
         if (request.getParameter("userCode") != null && request.getParameter("userPwd") != null) {
             ServiceResultT<LoginCredentials> serviceResult = ServiceFactory.getUserService().login(request.getParameter("userCode"),
-                    request.getParameter("userPwd"), 1000*60*10);//session默认为10分钟
+                    request.getParameter("userPwd"), 1000 * 60 * 100);//session默认为10分钟
             result.setIsSuccess(serviceResult.getIsSuccess());
             result.setMessages(serviceResult.getMessages());
             //存储用户session

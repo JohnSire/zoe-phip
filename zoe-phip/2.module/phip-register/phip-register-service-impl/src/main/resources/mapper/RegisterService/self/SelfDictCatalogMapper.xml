@@ -73,4 +73,23 @@
         LEFT JOIN PHIP_DICT_CATALOG ppdc
         ON pdc.PID = ppdc.ID
     </select>
+
+    <select id="getDictCategoryOrg" resultMap="BaseResultMap" parameterType="java.util.Map">
+
+
+        select pdc.* from sys_system_dict_item sdi join sys_system_dict_category sdc
+        on sdi.FK_SYSTEM_DICT_CATEGORY_ID = sdc.id
+        join phip_dict_catalog pdc on sdi.name = pdc.code
+
+
+        <where>
+            <if test="sdiCode !=null and sdiCode !=''">
+                and sdi.code= #{sdiCode,jdbcType=VARCHAR}
+            </if>
+
+            <if test="sdcCode !=null and sdcCode !=''">
+                and sdc.code= #{sdcCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
 </mapper>

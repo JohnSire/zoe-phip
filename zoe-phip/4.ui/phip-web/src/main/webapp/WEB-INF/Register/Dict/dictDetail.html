@@ -11,16 +11,27 @@ var bodySection = {
                            nullmsg="请填写编码！"/>
                 </p>
                 <p class="column-one">
-                    <label class="label" for="code_system"><span class="text-mark">*</span>名称：</label>
-                    <input type="text" name="code_system" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！"
+                    <label class="label" for="name"><span class="text-mark">*</span>名称：</label>
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！"
                            nullmsg="请填写名称！"/>
+                </p>
+            </li>
+            <li class="list" style="display: none">
+                <p class="column-one">
+                    <label class="label" for="type"><span class="text-mark">*</span>类型：</label>
+                    <input type="text" name="type" class="text" value="1"/>
                 </p>
             </li>
             <li class="list">
                 <p class="column-one">
-                    <label class="label" for="standard_code"><span class="text-mark">*</span>所属分类：</label>
-                    <input type="text" name="standard_code" class="text" datatype="*1-128" errormsg="所属分类长度应为1~128位！"
-                           nullmsg="请填写所属分类！"/>
+                    <label class="label" for="pid">所属分类：</label>
+                        <span class="text-line-outer" id="btnParentCatalog">
+                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
                 </p>
             </li>
         </ul>

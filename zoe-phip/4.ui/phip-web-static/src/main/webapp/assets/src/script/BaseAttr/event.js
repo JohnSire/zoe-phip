@@ -59,7 +59,7 @@ define(function (require, exports, module) {
 
                 var preOPData = {};
                 if (typeof (param["beforeSaveEvent"]) == "function") {
-                    preOPData = param["beforeSave"](data);
+                    preOPData = param["beforeSaveEvent"](data);
                 }
                 data = $.extend(true, {}, data, preOPData || {});
                 var url = "";

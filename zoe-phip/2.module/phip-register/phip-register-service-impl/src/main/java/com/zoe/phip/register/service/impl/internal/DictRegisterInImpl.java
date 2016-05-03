@@ -7,7 +7,6 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
-import com.zoe.phip.infrastructure.util.UtilString;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.register.dao.IDictCatalogMapper;
@@ -178,6 +177,23 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public List<DictCatalog> getDictCatalogListByPIdPage(Map<String, Object> args) {
         return getMapper().getDictCatalogListByPIdPage(args);
     }
+
+    @Override
+    public PageList<DictCatalog> dictCatalogAndItemListByCode(String catalogCode) {
+        PageList<DictCatalog> pageList = new PageList<DictCatalog>();
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("code",catalogCode);
+        List<DictCatalog> results = getMapper().dictCatalogAndItemListByCode(paras);
+        PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
+    @Override
+    public List<DictCatalog> dictCatalogAndItemListByCode(Map<String, Object> args) {
+        return getMapper().dictCatalogAndItemListByCode(args);
+    }
     /**********字典分类（字典）-- 结束**********/
 
     /**********字典项 -- 开始 **********/
@@ -293,6 +309,11 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
         return pageList;
+    }
+
+    @Override
+    public DictCatalog getDictCategoryOrg(Map<String, Object> args) {
+        return getMapper().getDictCategoryOrg(args);
     }
     /**********字典项 -- 结束 **********/
 }

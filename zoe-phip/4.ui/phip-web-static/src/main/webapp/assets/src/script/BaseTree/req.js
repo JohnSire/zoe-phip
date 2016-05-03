@@ -5,7 +5,7 @@ define(function (require, exports, module) {
     var internal = {
         //删除选中列表
         deleteInfo: function (param, callback) {
-            common.confirm('是否删除该记录?', function () {
+            common.getTopWindowDom().common.confirm('是否删除该记录?', function () {
                 var req = new Request(param["url"]);
                 req.get({
                     data: {id: param["id"]},

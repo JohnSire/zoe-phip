@@ -44,10 +44,10 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
 
     /**
      * 查询医疗机构（科室）类别字典列表，用于构造树
-     * @param fkCatalogCode
+     * @param
      * @return
      */
-    ServiceResultT<DictCatalog> dictItemListQuery(SystemData systemData, String code,String fkCatalogCode);
+    ServiceResultT<DictCatalog> dictItemListQuery(SystemData systemData);
 
     /**
      * 查询医疗机构（科室）列表，内部使用
@@ -56,7 +56,7 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
      * @param page
      * @return
      */
-    ServiceResultT<PageList<OrgDeptInfo>> organizationListQuery(SystemData systemData,String deptTypeCode, String key, QueryPage page);
+    ServiceResultT<PageList<OrgDeptInfo>> organizationListQuery(SystemData systemData,String type, String deptTypeCode, String key, QueryPage page);
 
     ServiceResultT<PageList<OrgDeptInfo>>   getDeptInfoListByType(SystemData systemData,String type);
 

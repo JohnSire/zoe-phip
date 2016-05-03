@@ -8,8 +8,6 @@ package com.zoe.phip.register.dao;
 
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.exception.BusinessException;
-import com.zoe.phip.module.service.mapper.IMyMapper;
 import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.model.DictItem;
@@ -49,6 +47,10 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
     List<DictCatalog> getDictCatalogListByPIdPage(Map<String, Object> args);
 
+    PageList<DictCatalog> dictCatalogAndItemListByCode(String catalogCode);
+
+    List<DictCatalog> dictCatalogAndItemListByCode(Map<String, Object> args);
+
     //字典项
     DictItem addDictItemRequest(DictItem dictItem) throws Exception;
 
@@ -65,4 +67,6 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
     PageList<DictItem> dictItemListQueryByCatalogCode(String catalogCode, QueryPage queryPage, String key);
 
     PageList<DictItem> dictItemListQueryByCatalogId(String catalogId, QueryPage queryPage, String key);
+
+    DictCatalog   getDictCategoryOrg(Map<String, Object> args);
 }
