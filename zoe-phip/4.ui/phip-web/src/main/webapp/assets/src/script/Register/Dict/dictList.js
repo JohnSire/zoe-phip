@@ -138,15 +138,15 @@ define(function (require, exports, module) {
                     height: "99%"
                 },
                 dialogParam: {
-                    winName: "win_dict_detail_dialog",//弹窗对象变量名称
-                    winCallback: "win_dict_detail_callback",//弹窗回调函数
+                    winName: "win_dict_item_detail_dialog",//弹窗对象变量名称
+                    winCallback: "win_dict_item_detail_callback",//弹窗回调函数
                     titleKey: "name",
                     //新增参数
-                    add: {title: "新增字典信息"},
+                    add: {title: "新增字典项信息"},
                     //编辑参数
-                    edit: {title: "编辑字典信息"},
+                    edit: {title: "编辑字典项信息"},
                     common: {
-                        url: 'dict/view/dictdetail',
+                        url: 'dict/view/dictItemDetail',
                         width: 360,
                         height: 260
                     }

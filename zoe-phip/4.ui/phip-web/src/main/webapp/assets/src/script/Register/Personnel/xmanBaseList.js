@@ -16,6 +16,7 @@ define(function (require, exports, module) {
                         'custom': {
                             text: "合并", click: function () {
 
+
                             }
                         },
                         'add': true,
@@ -25,7 +26,7 @@ define(function (require, exports, module) {
                         {label: '关键字', name: 'keyWord', type: 'text'}
                     ]
                 },
-               // reqInfoKey:'patientId',
+                // reqInfoKey:'patientId',
                 gridParam: {
                     url: 'personnel/getXmanList',
                     columns: [
@@ -60,6 +61,8 @@ define(function (require, exports, module) {
                     }
                 }
             })
+        },
+        merge: function () {
         }
 
     };
