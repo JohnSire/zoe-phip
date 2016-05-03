@@ -237,7 +237,7 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         //数据是否存在判断
         Example example = new Example(DictItem.class);
         example.createCriteria().andEqualTo("id", dictItem.getCode());
-        int count = getMapper().selectCountByExample(example);
+        int count = dictItemMapper.selectCountByExample(example);
         if (count > 0) {
             throw new BusinessException("001");
         }
@@ -255,7 +255,7 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         //数据是否存在判断
         Example example = new Example(DictItem.class);
         example.createCriteria().andEqualTo("id", dictItem.getId());
-        int count = getMapper().selectCountByExample(example);
+        int count = dictItemMapper.selectCountByExample(example);
         if (count == 0) {
             throw new BusinessException("002");
         }
