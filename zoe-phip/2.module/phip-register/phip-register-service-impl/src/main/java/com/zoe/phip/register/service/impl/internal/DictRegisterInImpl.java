@@ -158,6 +158,27 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         if (!StringUtil.isNullOrWhiteSpace(key)) {
             paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
         }
+        paras.put("type","0");
+        List<DictCatalog> results = getMapper().getDictCatalogListPage(paras);
+        PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
+    @Override
+    public PageList<DictCatalog> dictListQueryPage(QueryPage queryPage, String key) {
+        PageList<DictCatalog> pageList = new PageList<DictCatalog>();
+        if(StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())){
+            queryPage.setOrderBy(" pdc.CREATE_AT ");
+        }
+        //分页
+        SqlHelper.startPage(queryPage);
+        Map<String, Object> paras = new HashMap<String, Object>();
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        }
+        paras.put("type","1");
         List<DictCatalog> results = getMapper().getDictCatalogListPage(paras);
         PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
         pageList.setTotal((int) pageInfo.getTotal());
@@ -256,22 +277,22 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public DictItem dictItemDetailQuery(String dictItemCode) throws Exception {
         Example example = new Example(DictItem.class);
         example.createCriteria().andEqualTo("code", dictItemCode);
-        DictItem catalog = dictItemMapper.selectByExample(example).get(0);
-        if (catalog == null) {
+        DictItem dictItem = dictItemMapper.selectByExample(example).get(0);
+        if (dictItem == null) {
             throw new BusinessException("003");
         }
-        return catalog;
+        return dictItem;
     }
 
     @Override
     public DictItem dictItemDetailQueryById(String dictItemId) throws Exception {
-        Example example = new Example(DictItem.class);
-        example.createCriteria().andEqualTo("id", dictItemId);
-        DictItem catalog = dictItemMapper.selectByExample(example).get(0);
-        if (catalog == null) {
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("id", dictItemId);
+        DictItem dictItem = dictItemMapper.getDictItemById(paras);
+        if (dictItem == null) {
             throw new BusinessException("003");
         }
-        return catalog;
+        return dictItem;
     }
 
     @Override

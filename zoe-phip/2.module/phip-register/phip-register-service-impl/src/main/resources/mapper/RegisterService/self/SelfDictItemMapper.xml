@@ -42,7 +42,12 @@
         SELECT pdi.*,pdc.NAME PARENT_NAME FROM (
         SELECT * FROM PHIP_DICT_ITEM pdi
         <where>
-            pdi.FK_CATALOG_ID = #{id,jdbcType=VARCHAR}
+            pdi.FK_CATALOG_ID IN (
+            SELECT ID
+            FROM PHIP_DICT_CATALOG
+            START WITH ID = #{id,jdbcType=VARCHAR}
+            CONNECT BY PRIOR ID = PID
+            )
             <if test="key !=null and key !=''">
                 AND (UPPER(pdi.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(pdi.CODE) LIKE #{key,jdbcType=VARCHAR})
             </if>
@@ -72,5 +77,10 @@
         AND CODE = #{code,jdbcType=VARCHAR}
     </select>
 
-
+    <select id="getDictItemById" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT pdi.*,pdc.NAME CATALOG_NAME FROM (
+        SELECT * FROM PHIP_DICT_ITEM pdi WHERE pdi.ID = #{id,jdbcType=VARCHAR}) pdi
+        LEFT JOIN PHIP_DICT_CATALOG pdc
+        ON pdi.FK_CATALOG_ID = pdc.ID
+    </select>
 </mapper>

@@ -31,7 +31,7 @@
         SELECT pdc.*,ppdc.NAME PARENT_NAME FROM(
         SELECT pdc.* FROM PHIP_DICT_CATALOG pdc
         <where>
-            pdc.TYPE = '0'
+            pdc.TYPE = #{type,jdbcType=VARCHAR}
             <if test="key !=null and key !=''">
                 AND (UPPER(pdc.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(pdc.CODE) LIKE #{key,jdbcType=VARCHAR})
             </if>
