@@ -11,6 +11,7 @@ import javax.persistence.*;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.infrastructure.annotation.XPath;
 import com.zoe.phip.module.service.entity.MasterEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -45,6 +46,7 @@ public class AreaBaseInfo extends MasterEntity {
      */
     @Column(name = "BUILD_TIME")
     @XPath(value = "//buildTime/@value")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date buildTime;
 
     public Date getAreaCancellationDate() {
@@ -60,7 +62,7 @@ public class AreaBaseInfo extends MasterEntity {
      */
     @Column(name = "AREA_CANCELLATION_DATE")
     @XPath(value = "//areaCancellationDate/@value")
-    @JSONField(format = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date areaCancellationDate;
 
     public String getAreaCancelReason() {

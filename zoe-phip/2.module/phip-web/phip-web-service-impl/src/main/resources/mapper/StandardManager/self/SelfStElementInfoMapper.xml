@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStElementInfoMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StElementInfo" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StElementInfo">
+        update PHIP_ST_ELEMENT_INFO
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="fkSourceId != null">
+                FK_SOURCE_ID = #{fkSourceId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkTypeId != null">
+                FK_TYPE_ID = #{fkTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkDictId != null">
+                FK_DICT_ID = #{fkDictId,jdbcType=VARCHAR},
+            </if>
+            <if test="dataType != null">
+                DATA_TYPE = #{dataType,jdbcType=VARCHAR},
+            </if>
+            <if test="dataFormat != null">
+                DATA_FORMAT = #{dataFormat,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                START_TIME = #{startTime,jdbcType=DATE},
+            </if>
+            <if test="endTime != null">
+                END_TIME = #{endTime,jdbcType=DATE},
+            </if>
+            <if test="allowValue != null">
+                ALLOW_VALUE = #{allowValue,jdbcType=VARCHAR},
+            </if>
+            <if test="define != null">
+                DEFINE = #{define,jdbcType=VARCHAR},
+            </if>
+            <if test="descr != null">
+                DESCR = #{descr,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
