@@ -28,7 +28,12 @@
         </dependency>
 
     </dependencies>
-
+    <!--
+    部署修改点：
+    1.修改phip-web/../UrlExpand 中的staticResourcePath
+    2.修改phip-web/../_default.html中webRoot
+    3.修改phip-web/../config.js 中staticDir
+    -->
     <build>
         <plugins>
             <plugin>
@@ -64,6 +69,9 @@
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                     <resource>META-INF/spring.schemas</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/cxf/bus-extensions.txt</resource>
                                 </transformer>
                             </transformers>
                         </configuration>

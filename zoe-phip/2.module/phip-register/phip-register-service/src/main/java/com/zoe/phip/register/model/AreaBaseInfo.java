@@ -62,7 +62,7 @@ public class AreaBaseInfo extends MasterEntity {
      */
     @Column(name = "AREA_CANCELLATION_DATE")
     @XPath(value = "//areaCancellationDate/@value")
-    @JSONField(format = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date areaCancellationDate;
 
     public String getAreaCancelReason() {
