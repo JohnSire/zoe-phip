@@ -7,7 +7,10 @@ package com.zoe.phip.register.model;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.util.List;
 
 
 /**
@@ -41,6 +44,15 @@ public class NationalStandards extends MasterEntity {
     @Column(name = "DICT_CODE")
     private String dictCode;
 
+    /**
+     * 描述
+     */
+    @Column(name = "DESCR")
+    private String descr;
+
+    @Transient
+    private List<DictItem> dictItemList;
+
     public String getDictCode() {
         return this.dictCode;
     }
@@ -48,11 +60,7 @@ public class NationalStandards extends MasterEntity {
     public void setDictCode(String dictCode) {
         this.dictCode = dictCode;
     }
-    /**
-     * 描述
-     */
-    @Column(name = "DESCR")
-    private String descr;
+
 
     public String getCode() {
         return this.code;
@@ -88,5 +96,12 @@ public class NationalStandards extends MasterEntity {
 
     public void setDescr(String descr) {
         this.descr = descr;
+    }
+    public List<DictItem> getDictItemList() {
+        return dictItemList;
+    }
+
+    public void setDictItemList(List<DictItem> dictItemList) {
+        this.dictItemList = dictItemList;
     }
 }

@@ -20,6 +20,5 @@ public class OrganizationRegisterInImplTest extends BaseTest {
 
     @Test
     public void testGetDeptInfoListByType() throws Exception {
-        PageList<OrgDeptInfo> list= organizationRegisterIn.getDeptInfoListByType("0101");
     }
 }

@@ -2,7 +2,7 @@ package com.zoe.phip.register.service.internal;
 
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.module.service.service.in.IBaseInService;
-import com.zoe.phip.register.model.DictCatalog;
+import com.zoe.phip.register.model.NationalStandards;
 import com.zoe.phip.register.model.OrgDeptInfo;
 
 import java.util.Map;
@@ -42,24 +42,37 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
 
     ServiceResult  organizationDelete(SystemData systemData, String id);
 
-    /**
-     * 查询医疗机构（科室）类别字典列表，用于构造树
-     * @param
-     * @return
-     */
-    ServiceResultT<DictCatalog> dictItemListQuery(SystemData systemData);
 
     /**
-     * 查询医疗机构（科室）列表，内部使用
+     * 查询机构类别列表，用于构造树
+     * @param systemData
+     * @param codeSystem  NationalStandards表里的字段：code_system
+     * @return
+     */
+    ServiceResultT<NationalStandards> dictItemListQueryByCodeSystem(SystemData systemData,String codeSystem);
+
+    /**
+     * 查询机构列表，内部使用
      * @param deptTypeCode
      * @param key
      * @param page
-     * type
+     * @param type 1:是指点击机构分类，全部数据，2是指单个分类数据
      * @return
      */
     ServiceResultT<PageList<OrgDeptInfo>> organizationListQuery(SystemData systemData,String type, String deptTypeCode, String key, QueryPage page);
 
-    ServiceResultT<PageList<OrgDeptInfo>>   getDeptInfoListByType(SystemData systemData,String type);
+    /**
+     *
+     * @param type：1:是指点击科室分类，全部数据，2是指单个分类数据
+     * @param deptTypeCode
+     * @param deptParentCode
+     * @param key
+     * @param page
+     * @return
+     */
+    ServiceResultT<PageList<OrgDeptInfo>> DepartmentListQuery(String type, String deptTypeCode,String deptParentCode ,String key, QueryPage page);
+
+
 
     ServiceResultT<PageList<OrgDeptInfo>>   orgListQuery(SystemData systemData);
     

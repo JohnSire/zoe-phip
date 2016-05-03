@@ -24,4 +24,6 @@ public interface IDictItemMapper extends IServiceMapper<DictItem> {
     List<DictItem> getDictItemListByCatalogId(Map<String, Object> args);
     List<DictItem> getDictItemOrgList(Map<String, Object> args);
 
+    List<DictItem> getDictItemNewOrgTree(Map<String, Object> args);
+
 }

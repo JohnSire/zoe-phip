@@ -7,8 +7,8 @@
 <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.OrgDeptInfo">
     update PHIP_ORG_DEPT_INFO
     <set>
-        <if test="extensionId != null">
-            EXTENSION_ID = #{extensionId,jdbcType=VARCHAR},
+        <if test="DIVISION_ROOT != null">
+            DIVISION_ROOT = #{divisionRoot,jdbcType=VARCHAR},
         </if>
         <if test="deptCode != null">
             DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
@@ -120,14 +120,14 @@
         </if>
         MODIFY_AT=sysdate
 </set>
-        where EXTENSION_ID = #{extensionId}
+        where DEPT_CODE = #{deptCode}
         </update>
 
     <select id="getOrgDeptInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
         SELECT  * FROM PHIP_ORG_DEPT_INFO PODI
         WHERE  1=1
-        <if test="_parameter.containsKey('extensionId')">
-            AND PODI.EXTENSION_ID = #{extensionId,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('deptCode')">
+            AND PODI.DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
         </if>
         <if test="_parameter.containsKey('deptName')">
             AND PODI.DEPT_NAME = #{deptName,jdbcType=VARCHAR}
@@ -138,23 +138,18 @@
     <select id="getOrgDeptInfoList" resultMap="BaseResultMap" parameterType="java.util.Map">
         select * from PHIP_ORG_DEPT_INFO PODI
         <where>
-            <if test="key !=null and key !=''">AND (UPPER(NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(EXTENSION_ID) LIKE
+            <if test="key !=null and key !=''">AND   UPPER(DEPT_CODE) LIKE
                 #{key,jdbcType=VARCHAR} OR UPPER(DEPT_NAME) LIKE #{key,jdbcType=VARCHAR})</if>
             <if test="deptTypeCode !=null and deptTypeCode !=''">
                 AND PODI.DEPT_TYPE_CODE = #{deptTypeCode,jdbcType=VARCHAR}
             </if>
-            <include refid="com.zoe.phip.module.service.selfWhere"/>
-        </where>
-    </select>
-
-
-    <select id="getOrgDeptInfoListByType" resultMap="BaseResultMap" parameterType="java.util.Map">
-        select * from PHIP_ORG_DEPT_INFO PODI join phip_dict_item PDI on PODI.dept_type_code=PDI.code
-        <where>
-            <if test="type !=null and type !=''">
-                AND PDI.FK_CATALOG_CODE = #{type,jdbcType=VARCHAR}
+            <if test="deptParentCode !=null and deptParentCode !=''">
+                AND PODI.DEPT_PARENT_CODE = #{deptParentCode,jdbcType=VARCHAR}
             </if>
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
     </select>
+
+
+
 </mapper>

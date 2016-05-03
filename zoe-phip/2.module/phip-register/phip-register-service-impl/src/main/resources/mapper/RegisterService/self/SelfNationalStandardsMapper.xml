@@ -43,4 +43,21 @@
             AND PNS.id != #{id,jdbcType=VARCHAR}
         </if>
     </select>
+
+    <select id="getNationalStandardDescr" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT pns.* from PHIP_NATIONAL_STANDARDS PNS
+        <where>
+            <if test="codeSystem !=null and codeSystem !=''">
+                AND pns.code_system = #{codeSystem,jdbcType=VARCHAR}
+            </if>
+            <if test="dictCode !=null and dictCode !=''">
+                AND pns.dict_code = #{dictCode,jdbcType=VARCHAR}
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+    </select>
+
+
+
+
 </mapper>

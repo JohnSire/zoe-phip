@@ -70,7 +70,19 @@
     </select>
 
 
-
+    <select id="getDictItemNewOrgTree" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select pdi.* from Phip_National_Standards pns join phip_dict_catalog pdc  on pns.dict_code= pdc.code join
+        phip_dict_item pdi  on pdc.id =pdi.fk_catalog_id
+        <where>
+            <if test="codeSystem !=null and codeSystem !=''">
+                AND pns.code_system = #{codeSystem,jdbcType=VARCHAR}
+            </if>
+            <if test="dictCode !=null and dictCode !=''">
+                AND pns.dict_code = #{dictCode,jdbcType=VARCHAR}
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+    </select>
 
 
 </mapper>

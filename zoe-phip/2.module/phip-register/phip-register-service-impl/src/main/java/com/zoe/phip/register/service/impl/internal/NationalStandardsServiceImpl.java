@@ -5,19 +5,17 @@
 
 package com.zoe.phip.register.service.impl.internal;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
-import com.zoe.phip.infrastructure.annotation.ErrorMessages;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
-import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.register.dao.INationalStandardsMapper;
 import com.zoe.phip.register.model.NationalStandards;
 import com.zoe.phip.register.service.internal.INationalStandardsService;
-import com.alibaba.dubbo.config.annotation.Service;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -85,6 +83,11 @@ public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStan
     @Override
     public int getNationalStandard(Map<String, Object> map) {
         return getMapper().getNationalStandard(map);
+    }
+
+    @Override
+    public NationalStandards getNationalStandardDescr(Map<String, Object> map) {
+        return getMapper().getNationalStandardDescr(map);
     }
 
     @Override
