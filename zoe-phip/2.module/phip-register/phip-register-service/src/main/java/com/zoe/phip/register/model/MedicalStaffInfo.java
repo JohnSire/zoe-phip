@@ -7,6 +7,7 @@ package com.zoe.phip.register.model;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
 import com.zoe.phip.register.model.base.RegisterEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -43,6 +44,7 @@ public class MedicalStaffInfo extends RegisterEntity {
      * 出生日期
      */
     @Column(name = "BIRTH_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthTime;
     /**
      * 出生地
@@ -80,11 +82,13 @@ public class MedicalStaffInfo extends RegisterEntity {
      * 角色有效期间(起始日期)
      */
     @Column(name = "EFFECTIVE_TIME_LOW")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date effectiveTimeLow;
     /**
      * 角色有效期间(截止日期)
      */
     @Column(name = "EFFECTIVE_TIME_HIGH")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date effectiveTimeHigh;
     /**
      * 科室号

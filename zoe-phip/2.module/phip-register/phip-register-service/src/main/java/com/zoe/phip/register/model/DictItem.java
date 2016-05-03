@@ -28,10 +28,10 @@ public class DictItem extends MasterEntity {
     @Column(name = "NAME")
     private String name;
     /**
-     * 字典分类编码
+     * 字典分类id
      */
-    @Column(name = "FK_CATALOG_CODE")
-    private String fkCatalogCode;
+    @Column(name = "Fk_CATALOG_ID")
+    private String fkCatalogId;
 
     /**
      * 字典分类名称
@@ -55,12 +55,12 @@ public class DictItem extends MasterEntity {
         this.name = name;
     }
 
-    public String getFkCatalogCode() {
-        return this.fkCatalogCode;
+    public String getFkCatalogId() {
+        return fkCatalogId;
     }
 
-    public void setFkCatalogCode(String fkCatalogCode) {
-        this.fkCatalogCode = fkCatalogCode;
+    public void setFkCatalogId(String fkCatalogId) {
+        this.fkCatalogId = fkCatalogId;
     }
 
     public String getFkCatalogName() {

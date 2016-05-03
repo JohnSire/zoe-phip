@@ -56,7 +56,7 @@
                   FROM PHIP_DICT_CATALOG PDC
                  WHERE PDC.ID = #{id,jdbcType=VARCHAR}) PDC
          INNER JOIN PHIP_DICT_ITEM PDI
-            ON PDC.CODE = PDI.FK_CATALOG_CODE)
+            ON PDC.ID = PDI.FK_CATALOG_ID)
     </select>
 
     <select id="getDictCatalogById" resultMap="MultiResultMap" parameterType="java.util.Map">
@@ -91,5 +91,31 @@
                 and sdc.code= #{sdcCode,jdbcType=VARCHAR}
             </if>
         </where>
+    </select>
+
+    <select id="getDictCatalogAndItemListByCode" resultMap="MultiResultMap" parameterType="java.util.Map">
+        WITH CATALOG_LIST AS (SELECT ID, CODE, NAME, PID
+        FROM PHIP_DICT_CATALOG
+        START WITH CODE = #{code,jdbcType=VARCHAR}
+        CONNECT BY PRIOR ID = PID)
+        SELECT T1.*, T2.NAME PARENTNAME
+        FROM CATALOG_LIST T1
+        LEFT JOIN PHIP_DICT_CATALOG T2
+        ON T1.PID = T2.ID
+        UNION ALL
+        SELECT PDI.ID, PDI.CODE, PDI.NAME, PDC.ID PID, PDC.NAME PARENTNAME
+        FROM (SELECT PDI.ID, PDI.CODE, PDI.NAME, PDI.FK_CATALOG_ID
+        FROM PHIP_DICT_ITEM PDI) PDI
+        INNER JOIN CATALOG_LIST PDC
+        ON PDI.FK_CATALOG_ID = PDC.ID
+    </select>
+
+    <select id="dictCatalogExist" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT COUNT(1) FROM　PHIP_DICT_CATALOG
+        WHERE ID != #{id,jdbcType=VARCHAR}
+        AND CODE = #{code,jdbcType=VARCHAR}
+        AND TYPE IN (SELECT TYPE
+                    FROM PHIP_DICT_CATALOG
+                   WHERE ID = #{id,jdbcType=VARCHAR})
     </select>
 </mapper>
