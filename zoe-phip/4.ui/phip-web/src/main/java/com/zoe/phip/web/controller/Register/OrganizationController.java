@@ -119,9 +119,7 @@ public class OrganizationController extends BaseController {
 
     @RequestMapping("/getMedicalOrgCategoryTree")
     @ResponseBody
-    public ServiceResultT<DictCatalog> getMedicalOrgCategoryList(String category) {
-        //ServiceFactory.getOrganizationRegisterIn().getDeptInfoListByType(ComSession.getUserInfo(), OrgCode.MedicalInstitution.getCode());
-        //category为空时，查询机构分类，不为空时，为具体的某个机构分类如：医疗机构分类
+    public ServiceResultT<DictCatalog> getMedicalOrgCategoryList() {
        return ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo());
 
     }
