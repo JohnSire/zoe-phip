@@ -1,12 +1,19 @@
 package com.zoe.phip.web.context;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
 /**
  * Created by linqinghuang on 2016/4/11.
  */
+@Component("UrlExpand")
 public class UrlExpand {
+
+    private static String path;
+
     //设置静态资源路径，
     public static String SetStaticRoot(String filePath) {
         String version = UrlExpand.GetVersion();

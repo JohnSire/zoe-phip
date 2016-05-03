@@ -29,7 +29,7 @@ define(function (require, exports, module) {
                     parentIDFieldName: 'pid',
                     textFieldName: 'name',
                     checkbox: false,
-                    nodewidth: 330,
+                    nodeWidth: 330,
                     //选择
                     onSelect: function (data) {
                         internal.catalogId = data["data"]["id"];
@@ -129,9 +129,9 @@ define(function (require, exports, module) {
                     dataAction: "local",
                     url: 'dict/getDictItemListByCatalogId',
                     columns: [
-                        {display: '编码', name: 'code', width: 400, align: 'left'},
-                        {display: '名称', name: 'name', width: 400, align: 'left'},
-                        {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
+                        {display: '编码', name: 'code', width: 220, align: 'left'},
+                        {display: '名称', name: 'name', width: 380, align: 'left'},
+                        {display: '操作', isSort: false, width: 100, icons: ['edit', 'del']}
                     ],
                     frozen: false,
                     usePage: true,

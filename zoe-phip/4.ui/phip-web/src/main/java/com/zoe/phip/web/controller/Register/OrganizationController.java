@@ -4,7 +4,7 @@ import com.zoe.phip.infrastructure.annotation.AuthAction;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
-import com.zoe.phip.register.model.DictCatalog;
+import com.zoe.phip.register.model.NationalStandards;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
@@ -112,15 +112,15 @@ public class OrganizationController extends BaseController {
     }
 
     /**
-     * 获取机构（科室）分类列表
+     * 获取机构（科室）分类列表 分类树
      *
      * @return
      */
 
     @RequestMapping("/getMedicalOrgCategoryTree")
     @ResponseBody
-    public ServiceResultT<DictCatalog> getMedicalOrgCategoryList() {
-       return ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo());
+    public ServiceResultT<NationalStandards> getMedicalOrgCategoryList(String codeSystem) {
+       return ServiceFactory.getOrganizationRegisterIn().dictItemListQueryByCodeSystem(ComSession.getUserInfo(),codeSystem);
 
     }
 

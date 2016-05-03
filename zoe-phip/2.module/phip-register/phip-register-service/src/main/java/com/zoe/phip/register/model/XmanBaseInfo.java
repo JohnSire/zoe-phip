@@ -166,7 +166,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 民族名称
      */
     @Transient
-    @Column(name = "NATIONALITY_NAME")
+//    @Column(name = "NATIONALITY_NAME")
     private String nationalityName;
 
 
@@ -223,7 +223,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 婚姻状况名称
      */
     @Transient
-    @Column(name = "MARRIAGE_Name")
+//    @Column(name = "MARRIAGE_Name")
     private String marriageName;
 
 

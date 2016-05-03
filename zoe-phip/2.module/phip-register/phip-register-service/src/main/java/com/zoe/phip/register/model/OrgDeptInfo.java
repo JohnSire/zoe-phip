@@ -26,17 +26,17 @@ import java.util.Date;
 public class OrgDeptInfo extends RegisterEntity {
 
     /**
-     * 医疗卫生机构（科室）标识
-     */
-    @Column(name="EXTENSION_ID")
-    private String extensionId;
-
-
-    /**
-     * DEPT_CODE
+     * 医疗卫生机构（科室）标识：xml的id的extension的值
      */
     @Column(name="DEPT_CODE")
     private String deptCode;
+
+
+    /**
+     * 区别科室还是机构
+     */
+    @Column(name="DIVISION_ROOT")
+    private String divisionRoot;
 
 
 
@@ -249,13 +249,7 @@ public class OrgDeptInfo extends RegisterEntity {
         this.neighborhoodCode = neighborhoodCode;
     }
 
-    public String getExtensionId() {
-        return extensionId;
-    }
 
-    public void setExtensionId(String extensionId) {
-        this.extensionId = extensionId;
-    }
 
     public String getDeptCode() {
         return deptCode;
@@ -518,8 +512,13 @@ public class OrgDeptInfo extends RegisterEntity {
     }
 
 
+    public String getDivisionRoot() {
+        return divisionRoot;
+    }
 
-
+    public void setDivisionRoot(String divisionRoot) {
+        this.divisionRoot = divisionRoot;
+    }
 
     public int getSortNum() {
         return this.sortNum;

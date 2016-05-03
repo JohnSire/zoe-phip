@@ -8,7 +8,7 @@ define(function (require, exports, module) {
     var internal = {
         dict: {
             winName: 'win_dict_select_list',
-            title: '用户选择列表',
+            title: '字典选择列表',
             selectParam: {
                 storage: [],
                 displayField: 'name',

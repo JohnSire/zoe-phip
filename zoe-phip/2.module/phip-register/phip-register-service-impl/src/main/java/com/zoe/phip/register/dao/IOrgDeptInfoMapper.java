@@ -10,6 +10,7 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.DictCatalog;
+import com.zoe.phip.register.model.NationalStandards;
 import com.zoe.phip.register.model.OrgDeptInfo;
 
 import java.util.List;
@@ -31,8 +32,10 @@ public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
 
 
     List<OrgDeptInfo> getOrgDeptInfoList(Map<String, Object> paras);
-    List<OrgDeptInfo> getOrgDeptInfoListByType(Map<String, Object> paras) throws Exception ;
 
 
     PageList<OrgDeptInfo> orgListQuery();
+
+    PageList<OrgDeptInfo> DepartmentListQuery(String type, String deptTypeCode,String deptParentCode ,String key, QueryPage page);
+    NationalStandards dictItemListQueryByDictCode(String dictCode);
 }

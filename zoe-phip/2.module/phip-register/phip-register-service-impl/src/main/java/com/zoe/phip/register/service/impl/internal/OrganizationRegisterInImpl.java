@@ -6,13 +6,16 @@ import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
+import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.register.dao.IDictCatalogMapper;
 import com.zoe.phip.register.dao.IDictItemMapper;
+import com.zoe.phip.register.dao.INationalStandardsMapper;
 import com.zoe.phip.register.dao.IOrgDeptInfoMapper;
 import com.zoe.phip.register.model.DictCatalog;
+import com.zoe.phip.register.model.NationalStandards;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.service.internal.IOrganizationRegisterIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +44,16 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     @Qualifier(value = "IDictCatalogMapper")
     private IDictCatalogMapper dictCatalogMapper;
 
+    @Autowired
+    @Qualifier(value = "INationalStandardsMapper")
+    private INationalStandardsMapper nationalStandardsMapper;
+
 
     public OrgDeptInfo addOrganization(OrgDeptInfo orgDeptInfo) throws Exception {
 
         //数据是否存在判断
         Example example = new Example(OrgDeptInfo.class);
-        example.createCriteria().andEqualTo("extensionId", orgDeptInfo.getExtensionId());
+        example.createCriteria().andEqualTo("deptCode", orgDeptInfo.getDeptCode());
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
             throw new BusinessException("001");
@@ -62,7 +69,7 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     public OrgDeptInfo updateOrganization(OrgDeptInfo orgDeptInfo) throws Exception {
         //数据是否存在判断
         Example example = new Example(OrgDeptInfo.class);
-        example.createCriteria().andEqualTo("extensionId", orgDeptInfo.getExtensionId());
+        example.createCriteria().andEqualTo("deptCode", orgDeptInfo.getDeptCode());
         int count = getMapper().selectCountByExample(example);
         if (count == 0) {
             throw new BusinessException("002");
@@ -86,9 +93,6 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     }
 
 
-
-
-
     public OrgDeptInfo organizationDetailQuery(Map<String, Object> map) throws Exception {
         //todo 字典赋值
         OrgDeptInfo baseInfo = getMapper().getOrgDeptInfo(map);
@@ -107,18 +111,47 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
 
     public DictCatalog dictItemListQuery() {
         Map<String, Object> paras = new HashMap<String, Object>();
-        paras.put("sdiCode","org_code");//系统字典项的code
-        paras.put("sdcCode","STD_ORG_TYPE");//系统字典里的code
+        paras.put("sdiCode", "org_code");//系统字典项的code
+        paras.put("sdcCode", "STD_ORG_TYPE");//系统字典里的code
         DictCatalog dictCatalog = dictCatalogMapper.getDictCategoryOrg(paras);
-        if(null!=dictCatalog && null !=dictCatalog.getId()){
-            Map<String, Object> parasTwo= new HashMap<String, Object>();
+        if (null != dictCatalog && null != dictCatalog.getId()) {
+            Map<String, Object> parasTwo = new HashMap<String, Object>();
             parasTwo.put("pid", dictCatalog.getId());
-            dictCatalog.setDictItemList( dictItemMapper.getDictItemOrgList(paras));
+            dictCatalog.setDictItemList(dictItemMapper.getDictItemOrgList(paras));
         }
+
         return dictCatalog;
     }
 
-    public PageList<OrgDeptInfo> organizationListQuery(String type,String deptTypeCode, String key, QueryPage page) {
+    public NationalStandards dictItemListQueryByCodeSystem(String codeSystem) {
+        NationalStandards nationalStandards = nationalStandardsMapper.getNationalStandardDescr(
+                MapUtil.createMap(m -> {
+                    m.put("codeSystem", codeSystem);
+                })
+        );
+        if (null != nationalStandards) {
+            nationalStandards.setDictItemList(dictItemMapper.getDictItemNewOrgTree(MapUtil.createMap(m -> {
+                m.put("codeSystem", codeSystem);
+            })));
+        }
+        return nationalStandards;
+    }
+
+    public NationalStandards dictItemListQueryByDictCode(String dictCode) {
+        NationalStandards nationalStandards = nationalStandardsMapper.getNationalStandardDescr(
+                MapUtil.createMap(m -> {
+                    m.put("dictCode", dictCode);
+                })
+        );
+        if (null != nationalStandards) {
+            nationalStandards.setDictItemList(dictItemMapper.getDictItemNewOrgTree(MapUtil.createMap(m -> {
+                m.put("dictCode", dictCode);
+            })));
+        }
+        return nationalStandards;
+    }
+
+    public PageList<OrgDeptInfo> organizationListQuery(String type, String deptTypeCode, String key, QueryPage page) {
         PageList<OrgDeptInfo> pageList = new PageList<OrgDeptInfo>();
         //分页
         SqlHelper.startPage(page);
@@ -126,11 +159,31 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         if (!StringUtil.isNullOrWhiteSpace(key)) {
             paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
         }
-        if(type.equals("1")){
+        if (type.equals("1")) {
             paras.put("deptTypeCode", deptTypeCode);
         }
         //        SqlHelper.setOrder(paras,queryPage);
-        List<OrgDeptInfo> results=  ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoList(paras);
+        List<OrgDeptInfo> results = ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoList(paras);
+        PageInfo<OrgDeptInfo> pageInfo = new PageInfo<OrgDeptInfo>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
+    public PageList<OrgDeptInfo> DepartmentListQuery(String type, String deptTypeCode,String deptParentCode ,String key, QueryPage page) {
+        PageList<OrgDeptInfo> pageList = new PageList<OrgDeptInfo>();
+        //分页
+        SqlHelper.startPage(page);
+        Map<String, Object> paras = new HashMap<String, Object>();
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        }
+        if (type.equals("1")) {
+            paras.put("deptTypeCode", deptTypeCode);
+        }
+        paras.put("deptParentCode",deptParentCode);
+        //        SqlHelper.setOrder(paras,queryPage);
+        List<OrgDeptInfo> results = ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoList(paras);
         PageInfo<OrgDeptInfo> pageInfo = new PageInfo<OrgDeptInfo>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
@@ -138,21 +191,15 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     }
 
 
-
-
-
-    public PageList<OrgDeptInfo> orgListQuery( ) {
+    public PageList<OrgDeptInfo> orgListQuery() {
         PageList<OrgDeptInfo> pageList = new PageList<OrgDeptInfo>();
         Map<String, Object> paras = new HashMap<String, Object>();
-        List<OrgDeptInfo> results=  ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoList(paras);
+        List<OrgDeptInfo> results = ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoList(paras);
         PageInfo<OrgDeptInfo> pageInfo = new PageInfo<OrgDeptInfo>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
         return pageList;
     }
-
-
-
 
 
     @Override
@@ -160,8 +207,6 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return getMapper().getOrgDeptInfoList(args);
 
     }
-
-
 
 
     @Override
@@ -175,25 +220,8 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     }
 
 
-    @ErrorMessage(code = "004", message = "由于参数为空，查不到内容！")
-    public PageList<OrgDeptInfo> getDeptInfoListByType(String type)throws Exception {
-        PageList<OrgDeptInfo> pageList = new PageList<OrgDeptInfo>();
-        if(StringUtil.isNullOrWhiteSpace(type)){
-            throw new BusinessException("004");
-        }
-        Map<String, Object> paras = new HashMap<String, Object>();
-        paras.put("type",type);
-        List<OrgDeptInfo> results =  (getMapper()).getOrgDeptInfoListByType(paras);
-        PageInfo<OrgDeptInfo> pageInfo = new PageInfo<OrgDeptInfo>(results);
-        pageList.setTotal((int) pageInfo.getTotal());
-        pageList.setRows(results);
-        return pageList;
-    }
 
-    @Override
-    public List<OrgDeptInfo> getOrgDeptInfoListByType(Map<String, Object> paras) throws Exception {
-        return getMapper().getOrgDeptInfoListByType(paras);
-    }
+
 
 
 
