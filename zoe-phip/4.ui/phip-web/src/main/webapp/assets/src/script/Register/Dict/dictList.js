@@ -29,7 +29,7 @@ define(function (require, exports, module) {
                     parentIDFieldName: 'pid',
                     textFieldName: 'name',
                     checkbox: false,
-                    nodewidth: 330,
+                    nodeWidth: 330,
                     //选择
                     onSelect: function (data) {
                         internal.catalogId = data["data"]["id"];
