@@ -77,7 +77,7 @@
         AND CODE = #{code,jdbcType=VARCHAR}
     </select>
 
-    <select id="getDictItemById" resultMap="BaseResultMap" parameterType="java.util.Map">
+    <select id="getDictItemById" resultMap="MultiResultMap" parameterType="java.util.Map">
         SELECT pdi.*,pdc.NAME CATALOG_NAME FROM (
         SELECT * FROM PHIP_DICT_ITEM pdi WHERE pdi.ID = #{id,jdbcType=VARCHAR}) pdi
         LEFT JOIN PHIP_DICT_CATALOG pdc
