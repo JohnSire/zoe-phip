@@ -321,5 +321,12 @@ public class DictController extends BaseController {
         return "/Register/Dict/dictItemDetail";
     }
 
+
+    @RequestMapping(value = "/getDictList")
+    @ResponseBody
+    public ServiceResultT<PageList<DictCatalog>> dictListQueryPage(String keyWord) {
+        return ServiceFactory.getDictRegisterIn().dictListQueryPage(ComSession.getUserInfo(), getQueryPage(), keyWord);
+    }
+
     //endregion
 }

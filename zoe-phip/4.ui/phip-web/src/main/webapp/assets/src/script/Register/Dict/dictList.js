@@ -29,6 +29,7 @@ define(function (require, exports, module) {
                     parentIDFieldName: 'pid',
                     textFieldName: 'name',
                     checkbox: false,
+                    nodewidth: 330,
                     //选择
                     onSelect: function (data) {
                         internal.catalogId = data["data"]["id"];
@@ -41,8 +42,8 @@ define(function (require, exports, module) {
                     },
                     //取消选择
                     onCancelselect: function (data) {
-                        var dictGrid = common.getGrid("dictGrid");
-                        dictGrid.loadData({rows: [], total: 0});
+                        //var dictGrid = common.getGrid("dictGrid");
+                        //dictGrid.loadData({rows: [], total: 0});
                     }
                 },
                 validate: {
@@ -116,7 +117,7 @@ define(function (require, exports, module) {
                         add: {
                             isValidate: false,
                             fn: function () {
-                                alert(1);
+
                             }
                         },
                     }
