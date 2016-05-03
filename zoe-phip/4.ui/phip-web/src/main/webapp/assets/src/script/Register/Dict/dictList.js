@@ -4,8 +4,10 @@
 define(function (require, exports, module) {
     var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
     var BaseTree = require("{staticDir}/BaseTree/baseTree");
+
     var internal = {
         dictGrid: null,
+        catalogId: null,
         init: function () {
             internal.dictList();
             internal.dictTree();
@@ -26,7 +28,22 @@ define(function (require, exports, module) {
                     idFieldName: 'id',
                     parentIDFieldName: 'pid',
                     textFieldName: 'name',
-                    checkbox: false
+                    checkbox: false,
+                    //选择
+                    onSelect: function (data) {
+                        internal.catalogId = data["data"]["id"];
+                        var itemGrid = common.getGrid("dictGrid");
+                        if (itemGrid.get("dataAction") == "local") {
+                            internal.dictGrid.setServer();
+                        } else {
+                            internal.dictGrid.reload();
+                        }
+                    },
+                    //取消选择
+                    onCancelselect: function (data) {
+                        var dictGrid = common.getGrid("dictGrid");
+                        dictGrid.loadData({rows: [], total: 0});
+                    }
                 },
                 validate: {
                     //点击新增按钮验证
@@ -35,7 +52,6 @@ define(function (require, exports, module) {
                         fn: function () {
 
                         }
-
                     },
                     //点击编辑按钮验证
                     edit: {
@@ -47,7 +63,6 @@ define(function (require, exports, module) {
                             }
                             return true;
                         }
-
                     },
                     //点击删除按钮验证
                     del: {
@@ -61,8 +76,6 @@ define(function (require, exports, module) {
                         }
                     }
                 },
-
-
                 dialogParam: {
                     winName: "win_dict_detail_dialog",
                     winCallback: "win_dict_detail_callback",
@@ -98,10 +111,18 @@ define(function (require, exports, module) {
                     },
                     searchbox: [
                         {label: '关键字', name: 'keyWord', type: 'text'}
-                    ]
+                    ],
+                    validate: {
+                        add: {
+                            isValidate: false,
+                            fn: function () {
+                                alert(1);
+                            }
+                        },
+                    }
                 },
                 extendParam: function () {
-                    return {categoryId: internal.categoryId};
+                    return {catalogId: internal.catalogId};
                 },
                 gridParam: {
                     dataAction: "local",
@@ -117,8 +138,8 @@ define(function (require, exports, module) {
                     height: "99%"
                 },
                 dialogParam: {
-                    winName: "win_oid_detail_dialog",//弹窗对象变量名称
-                    winCallback: "win_oid_detail_callback",//弹窗回调函数
+                    winName: "win_dict_detail_dialog",//弹窗对象变量名称
+                    winCallback: "win_dict_detail_callback",//弹窗回调函数
                     titleKey: "name",
                     //新增参数
                     add: {title: "新增字典信息"},

@@ -6,20 +6,20 @@
                 jdbcType="VARCHAR"/>
         <result column="NAME" property="name" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="FK_CATALOG_CODE" property="fkCatalogCode" javaType="java.lang.String"
+        <result column="FK_CATALOG_ID" property="fkCatalogId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO PHIP_DICT_ITEM (
         CODE,
         NAME,
-        FK_CATALOG_CODE,
+        FK_CATALOG_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
             #{item.code,jdbcType=VARCHAR},
             #{item.name,jdbcType=VARCHAR},
-            #{item.fkCatalogCode,jdbcType=VARCHAR},
+            #{item.fkCatalogId,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -28,12 +28,12 @@
         INSERT INTO PHIP_DICT_ITEM (
         CODE,
         NAME,
-        FK_CATALOG_CODE,
+        FK_CATALOG_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES (
             #{code,jdbcType=VARCHAR},
             #{name,jdbcType=VARCHAR},
-            #{fkCatalogCode,jdbcType=VARCHAR},
+            #{fkCatalogId,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
@@ -59,8 +59,8 @@
                 <if test="item.name != null">
                     NAME = #{item.name,jdbcType=VARCHAR},
                 </if>
-                <if test="item.fkCatalogCode != null">
-                    FK_CATALOG_CODE = #{item.fkCatalogCode,jdbcType=VARCHAR},
+                <if test="item.fkCatalogId != null">
+                    FK_CATALOG_ID = #{item.fkCatalogId,jdbcType=VARCHAR},
                 </if>
                 <if test="item.state != null">
                     STATE = #{item.state,jdbcType=DECIMAL},

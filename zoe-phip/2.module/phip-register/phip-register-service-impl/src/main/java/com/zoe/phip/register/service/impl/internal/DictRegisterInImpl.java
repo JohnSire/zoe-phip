@@ -33,6 +33,7 @@ import java.util.Map;
 @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败！")
 @ErrorMessage(code = "004", message = "由于删除字典分类（字典）存在下级分类（字典项），删除失败！")
 @ErrorMessage(code = "005", message = "由于删除内容不存在，删除失败！")
+@ErrorMessage(code = "006", message = "由于更新内容的编码已存在，更新失败！")
 public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCatalogMapper> implements IDictCatalogMapper {
 
     @Autowired
@@ -58,14 +59,27 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public DictCatalog updateDictCatalogRequest(DictCatalog dictCatalog) throws Exception {
         //数据是否存在判断
         Example example = new Example(DictCatalog.class);
-        example.createCriteria().andEqualTo("code", dictCatalog.getCode());
+        example.createCriteria().andEqualTo("id", dictCatalog.getId());
         int count = getMapper().selectCountByExample(example);
         if (count == 0) {
             throw new BusinessException("002");
         }
+        //编码重复判断
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("id", dictCatalog.getId());
+        paras.put("code", dictCatalog.getCode());
+        int cn = getMapper().dictCatalogExist(paras);
+        if (cn > 0) {
+            throw new BusinessException("006");
+        }
         //保存到数据库
         super.update(dictCatalog);
         return dictCatalog;
+    }
+
+    @Override
+    public int dictCatalogExist(Map<String, Object> args) {
+        return getMapper().dictCatalogExist(args);
     }
 
     @Override
@@ -144,6 +158,27 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         if (!StringUtil.isNullOrWhiteSpace(key)) {
             paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
         }
+        paras.put("type","0");
+        List<DictCatalog> results = getMapper().getDictCatalogListPage(paras);
+        PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
+    @Override
+    public PageList<DictCatalog> dictListQueryPage(QueryPage queryPage, String key) {
+        PageList<DictCatalog> pageList = new PageList<DictCatalog>();
+        if(StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())){
+            queryPage.setOrderBy(" pdc.CREATE_AT ");
+        }
+        //分页
+        SqlHelper.startPage(queryPage);
+        Map<String, Object> paras = new HashMap<String, Object>();
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        }
+        paras.put("type","1");
         List<DictCatalog> results = getMapper().getDictCatalogListPage(paras);
         PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
         pageList.setTotal((int) pageInfo.getTotal());
@@ -179,11 +214,11 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public PageList<DictCatalog> dictCatalogAndItemListByCode(String catalogCode) {
+    public PageList<DictCatalog> getDictCatalogAndItemListByCode(String catalogCode) {
         PageList<DictCatalog> pageList = new PageList<DictCatalog>();
         Map<String, Object> paras = new HashMap<String, Object>();
         paras.put("code",catalogCode);
-        List<DictCatalog> results = getMapper().dictCatalogAndItemListByCode(paras);
+        List<DictCatalog> results = getMapper().getDictCatalogAndItemListByCode(paras);
         PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
@@ -191,8 +226,8 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public List<DictCatalog> dictCatalogAndItemListByCode(Map<String, Object> args) {
-        return getMapper().dictCatalogAndItemListByCode(args);
+    public List<DictCatalog> getDictCatalogAndItemListByCode(Map<String, Object> args) {
+        return getMapper().getDictCatalogAndItemListByCode(args);
     }
     /**********字典分类（字典）-- 结束**********/
 
@@ -219,10 +254,18 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public DictItem updateDictItemRequest(DictItem dictItem) throws Exception {
         //数据是否存在判断
         Example example = new Example(DictItem.class);
-        example.createCriteria().andEqualTo("code", dictItem.getCode());
+        example.createCriteria().andEqualTo("id", dictItem.getId());
         int count = getMapper().selectCountByExample(example);
         if (count == 0) {
             throw new BusinessException("002");
+        }
+        //编码重复判断
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("id", dictItem.getId());
+        paras.put("code", dictItem.getCode());
+        int cn = dictItemMapper.dictItemExist(paras);
+        if (cn > 0) {
+            throw new BusinessException("006");
         }
         //保存到数据库
         dictItem.setModifyAt(new Date());
@@ -234,22 +277,22 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public DictItem dictItemDetailQuery(String dictItemCode) throws Exception {
         Example example = new Example(DictItem.class);
         example.createCriteria().andEqualTo("code", dictItemCode);
-        DictItem catalog = dictItemMapper.selectByExample(example).get(0);
-        if (catalog == null) {
+        DictItem dictItem = dictItemMapper.selectByExample(example).get(0);
+        if (dictItem == null) {
             throw new BusinessException("003");
         }
-        return catalog;
+        return dictItem;
     }
 
     @Override
     public DictItem dictItemDetailQueryById(String dictItemId) throws Exception {
-        Example example = new Example(DictItem.class);
-        example.createCriteria().andEqualTo("id", dictItemId);
-        DictItem catalog = dictItemMapper.selectByExample(example).get(0);
-        if (catalog == null) {
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("id", dictItemId);
+        DictItem dictItem = dictItemMapper.getDictItemById(paras);
+        if (dictItem == null) {
             throw new BusinessException("003");
         }
-        return catalog;
+        return dictItem;
     }
 
     @Override

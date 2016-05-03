@@ -27,6 +27,8 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
     DictCatalog updateDictCatalogRequest(DictCatalog dictCatalog) throws Exception;
 
+    int dictCatalogExist(Map<String, Object> args);
+
     DictCatalog dictCatalogDetailQuery(String dictCatalogCode) throws Exception;
 
     DictCatalog dictCatalogDetailQueryById(String dictCatalogId) throws Exception;
@@ -41,15 +43,17 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
     PageList<DictCatalog> dictCatalogListQueryPage(QueryPage queryPage, String key);
 
+    PageList<DictCatalog> dictListQueryPage(QueryPage queryPage, String key);
+
     List<DictCatalog> getDictCatalogListPage(Map<String, Object> args);
 
     PageList<DictCatalog> dictCatalogListQueryByPIdPage(String pId, QueryPage queryPage);
 
     List<DictCatalog> getDictCatalogListByPIdPage(Map<String, Object> args);
 
-    PageList<DictCatalog> dictCatalogAndItemListByCode(String catalogCode);
+    PageList<DictCatalog> getDictCatalogAndItemListByCode(String catalogCode);
 
-    List<DictCatalog> dictCatalogAndItemListByCode(Map<String, Object> args);
+    List<DictCatalog> getDictCatalogAndItemListByCode(Map<String, Object> args);
 
     //字典项
     DictItem addDictItemRequest(DictItem dictItem) throws Exception;

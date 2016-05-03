@@ -35,6 +35,15 @@ define(function (require, exports, module) {
                 addParam.buttons[0]["onclick"] = function (item, dialog) {
                     var top = common.getTopWindowDom();
                     var callback = function () {
+
+                        internal.req.getList({url: options["url"]["getTreeList"]}, function (data) {
+                            var treeId = options["treeId"];
+                            var treeData = data.result.rows;
+                            var treeObj = $("#" + treeId).ligerGetTreeManager();
+                            treeObj.reloadNode(null, treeData);
+                        });
+
+
                         //树重新加载（或者新增一个节点）
                     }
                     top[options["dialogParam"]["winCallback"]](callback);
@@ -45,9 +54,7 @@ define(function (require, exports, module) {
                 var editParam = $.extend(true, {}, options["dialogParam"]["common"], options["dialogParam"]["edit"]);
                 editParam["winName"] = options["dialogParam"]["winName"];
                 editParam["winCallback"] = options["dialogParam"]["winCallback"];
-
                 var treeObj = liger.get(options["treeId"]);
-
                 var id = "";
                 if (treeObj) {
                     var data = treeObj.getSelected();
@@ -55,7 +62,6 @@ define(function (require, exports, module) {
                         common.jsmsgError("请选择相应的节点!");
                         return;
                     }
-
                     var validate = options["validate"]["edit"];
                     if (validate["isValidate"]) {
                         var isisPassValidate = true;
@@ -66,8 +72,6 @@ define(function (require, exports, module) {
                             return;
                         }
                     }
-
-
                     id = data["data"]["id"];
                 }
 
@@ -78,8 +82,14 @@ define(function (require, exports, module) {
                     var top = common.getTopWindowDom();
                     var callback = function () {
                         //修改树的一个节点
+                        internal.req.getList({url: options["url"]["getTreeList"]}, function (data) {
+                            var treeId = options["treeId"];
+                            var treeData = data.result.rows;
+                            var treeObj = $("#" + treeId).ligerGetTreeManager();
+                            treeObj.reloadNode(null, treeData);
+                        });
                     }
-                    top[options["dialogParam"]["winCallback"]] = common.dialog(editParam);
+                    top[options["dialogParam"]["winCallback"]](callback);
                 }
                 top[options["dialogParam"]["winName"]] = common.dialog(editParam)
             },
@@ -94,7 +104,6 @@ define(function (require, exports, module) {
                         common.jsmsgError("请选择要删除的节点!");
                         return;
                     }
-
                     var validate = options["validate"]["del"];
                     if (validate["isValidate"]) {
                         var isisPassValidate = true;
@@ -111,9 +120,15 @@ define(function (require, exports, module) {
                     id: id,
                     url: options["url"]["delTreeInfo"]
                 }
-
                 internal.req.deleteInfo(param, function (data) {
-                    alert(JSON.stringify(data));
+                    internal.req.getList({url: options["url"]["getTreeList"]}, function (data) {
+                        var treeId = options["treeId"];
+                        var treeData = data.result.rows;
+                        var treeObj = $("#" + treeId).ligerGetTreeManager();
+                        treeObj.reloadNode(null, treeData);
+                    });
+
+                    //alert(JSON.stringify(data));
                 })
 
             }

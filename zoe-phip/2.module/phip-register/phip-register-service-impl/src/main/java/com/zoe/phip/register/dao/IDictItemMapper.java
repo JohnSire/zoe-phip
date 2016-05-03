@@ -11,6 +11,7 @@ import com.zoe.phip.register.model.DictItem;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author
@@ -23,5 +24,9 @@ public interface IDictItemMapper extends IServiceMapper<DictItem> {
 
     List<DictItem> getDictItemListByCatalogId(Map<String, Object> args);
     List<DictItem> getDictItemOrgList(Map<String, Object> args);
+
+    int dictItemExist(Map<String, Object> args);
+
+    DictItem getDictItemById(Map<String,Object> args);
 
 }

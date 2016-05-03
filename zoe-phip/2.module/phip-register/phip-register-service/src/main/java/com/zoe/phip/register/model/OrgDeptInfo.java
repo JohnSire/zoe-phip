@@ -10,6 +10,7 @@ import com.zoe.phip.infrastructure.util.XmlUtil;
 import com.zoe.phip.register.model.base.RegisterEntity;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -73,11 +74,13 @@ public class OrgDeptInfo extends RegisterEntity {
      * 角色有效期间(起始日期)
      */
     @Column(name = "EFFECTIVE_TIME_LOW")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date effectiveTimeLow;
     /**
      * 角色有效期间(截止日期)
      */
     @Column(name = "EFFECTIVE_TIME_HIGH")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date effectiveTimeHigh;
     /**
      * 工作地址
@@ -94,6 +97,7 @@ public class OrgDeptInfo extends RegisterEntity {
      * 创建时间
      */
     @Column(name = "CREATION_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date creationTime;
 
     /**
