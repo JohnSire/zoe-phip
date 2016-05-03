@@ -29,6 +29,7 @@ define(function (require, exports, module) {
                     parentIDFieldName: 'pid',
                     textFieldName: 'name',
                     checkbox: false,
+                    nodeWidth: 330,
                     //选择
                     onSelect: function (data) {
                         internal.catalogId = data["data"]["id"];
@@ -41,8 +42,8 @@ define(function (require, exports, module) {
                     },
                     //取消选择
                     onCancelselect: function (data) {
-                        var dictGrid = common.getGrid("dictGrid");
-                        dictGrid.loadData({rows: [], total: 0});
+                        //var dictGrid = common.getGrid("dictGrid");
+                        //dictGrid.loadData({rows: [], total: 0});
                     }
                 },
                 validate: {
@@ -116,7 +117,7 @@ define(function (require, exports, module) {
                         add: {
                             isValidate: false,
                             fn: function () {
-                                alert(1);
+
                             }
                         },
                     }
@@ -128,9 +129,9 @@ define(function (require, exports, module) {
                     dataAction: "local",
                     url: 'dict/getDictItemListByCatalogId',
                     columns: [
-                        {display: '编码', name: 'code', width: 400, align: 'left'},
-                        {display: '名称', name: 'name', width: 400, align: 'left'},
-                        {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
+                        {display: '编码', name: 'code', width: 220, align: 'left'},
+                        {display: '名称', name: 'name', width: 380, align: 'left'},
+                        {display: '操作', isSort: false, width: 100, icons: ['edit', 'del']}
                     ],
                     frozen: false,
                     usePage: true,
@@ -138,15 +139,15 @@ define(function (require, exports, module) {
                     height: "99%"
                 },
                 dialogParam: {
-                    winName: "win_dict_detail_dialog",//弹窗对象变量名称
-                    winCallback: "win_dict_detail_callback",//弹窗回调函数
+                    winName: "win_dict_item_detail_dialog",//弹窗对象变量名称
+                    winCallback: "win_dict_item_detail_callback",//弹窗回调函数
                     titleKey: "name",
                     //新增参数
-                    add: {title: "新增字典信息"},
+                    add: {title: "新增字典项信息"},
                     //编辑参数
-                    edit: {title: "编辑字典信息"},
+                    edit: {title: "编辑字典项信息"},
                     common: {
-                        url: 'dict/view/dictdetail',
+                        url: 'dict/view/dictItemDetail',
                         width: 360,
                         height: 260
                     }
