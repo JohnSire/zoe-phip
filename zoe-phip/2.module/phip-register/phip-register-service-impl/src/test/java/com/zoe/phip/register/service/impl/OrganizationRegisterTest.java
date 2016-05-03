@@ -167,7 +167,11 @@ public class OrganizationRegisterTest extends BaseTest {
     public void testDictItemListQuery(){
 
        // List<OrgDeptInfo> list= implIn.dictItemListQuery("0234567890");
+       // PageList<OrgDeptInfo> pageList=implIn.orgListQuery();
 
+    //  DictCatalog dictCatalog= implIn.dictItemListQuery();
+
+       // implIn.organizationListQueryT("1","","");
 
     }
     @Test

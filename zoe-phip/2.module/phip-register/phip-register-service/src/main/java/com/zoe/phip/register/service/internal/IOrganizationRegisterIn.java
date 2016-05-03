@@ -5,7 +5,6 @@ import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.model.OrgDeptInfo;
 
-import java.util.List;
 import java.util.Map;
 
 /**医疗机构注册服务
@@ -45,10 +44,10 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
 
     /**
      * 查询医疗机构（科室）类别字典列表，用于构造树
-     * @param fkCatalogCode
+     * @param
      * @return
      */
-    ServiceResultT<DictCatalog> dictItemListQuery(SystemData systemData, String code,String fkCatalogCode);
+    ServiceResultT<DictCatalog> dictItemListQuery(SystemData systemData);
 
     /**
      * 查询医疗机构（科室）列表，内部使用
@@ -57,8 +56,10 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
      * @param page
      * @return
      */
-    ServiceResultT<PageList<OrgDeptInfo>> organizationListQuery(SystemData systemData,String deptTypeCode, String key, QueryPage page);
+    ServiceResultT<PageList<OrgDeptInfo>> organizationListQuery(SystemData systemData,String type, String deptTypeCode, String key, QueryPage page);
 
-    ServiceResultT<List<OrgDeptInfo>>   getDeptInfoListByType(SystemData systemData,String type);
+    ServiceResultT<PageList<OrgDeptInfo>>   getDeptInfoListByType(SystemData systemData,String type);
+
+    ServiceResultT<PageList<OrgDeptInfo>>   orgListQuery(SystemData systemData);
     
 }

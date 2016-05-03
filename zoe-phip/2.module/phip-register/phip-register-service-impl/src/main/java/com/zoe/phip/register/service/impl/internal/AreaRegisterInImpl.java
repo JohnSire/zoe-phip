@@ -52,7 +52,6 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
         }
         return baseInfo;
     }
-
     public PageList<AreaBaseInfo> getDataList(String key, QueryPage queryPage) {
         PageList<AreaBaseInfo> pageList = new PageList<>();
         SqlHelper.startPage(queryPage);
@@ -68,12 +67,14 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
         return pageList;
     }
 
-    public PageList<AreaBaseInfo> getAreaChildrenRegistry(String id,QueryPage queryPage) {
+    public PageList<AreaBaseInfo> getAreaChildrenRegistry(String id,String key,QueryPage queryPage) {
         PageList<AreaBaseInfo> pageList = new PageList<>();
         //分页
         SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();
         map.put("id", id);
+        if(!StringUtil.isNullOrWhiteSpace(key))
+            map.put("key",key);
         List<AreaBaseInfo> result = getMapper().getChildren(map);
         PageInfo<AreaBaseInfo> pageInfo = new PageInfo<>();
         pageList.setTotal((int) pageInfo.getTotal());

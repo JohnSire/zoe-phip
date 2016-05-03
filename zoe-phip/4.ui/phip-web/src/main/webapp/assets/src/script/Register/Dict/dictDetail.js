@@ -19,16 +19,20 @@ define(function (require, exports, module) {
                         parentName: 'parentName',
                         valueField: 'id',
                         displayField: 'name',
+                        fkNullContent: '根级节点',
                         selectParam: {
+                            isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
+                            treeVaildMsg: '父级分类不能是其本身!',
                             multiselect: false
-                        }
-
+                        },
+                        buttonsExtend: [{
+                            text: '根级节点', onclick: function (item, dialog) {
+                                $('input[name="pid"]').val(0);
+                                $("#btnParentCatalog").find(".text-line-content").text("根级节点");
+                                dialog.close();
+                            }
+                        }]
                     });
-                },
-                //只能添加类型为1的字典
-                beforeSaveEvent: function (data) {
-                    var data = $.extend(true, {}, data, {type: '1'});
-                    return data;
                 }
             })
         },

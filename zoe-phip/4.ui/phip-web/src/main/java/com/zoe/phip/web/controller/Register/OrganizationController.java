@@ -105,9 +105,10 @@ public class OrganizationController extends BaseController {
     @RequestMapping(value = "/getMedicalOrgList")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResult getMedicalOrgList(String deptTypeCode, String keyWord) {
+    public ServiceResult getMedicalOrgList(String type,String deptTypeCode, String keyWord) {
 
-        return ServiceFactory.getOrganizationRegisterIn().organizationListQuery(ComSession.getUserInfo(), deptTypeCode, keyWord, getQueryPage());
+        return ServiceFactory.getOrganizationRegisterIn().organizationListQuery(ComSession.getUserInfo(),type, deptTypeCode, keyWord, getQueryPage());
+
     }
 
     /**
@@ -121,7 +122,7 @@ public class OrganizationController extends BaseController {
     public ServiceResultT<DictCatalog> getMedicalOrgCategoryList(String category) {
         //ServiceFactory.getOrganizationRegisterIn().getDeptInfoListByType(ComSession.getUserInfo(), OrgCode.MedicalInstitution.getCode());
         //category为空时，查询机构分类，不为空时，为具体的某个机构分类如：医疗机构分类
-       return ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo(), "01",category);
+       return ServiceFactory.getOrganizationRegisterIn().dictItemListQuery(ComSession.getUserInfo());
 
     }
 

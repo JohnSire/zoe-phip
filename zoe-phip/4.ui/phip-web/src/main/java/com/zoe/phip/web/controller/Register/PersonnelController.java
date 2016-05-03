@@ -5,11 +5,12 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.register.model.MedicalStaffInfo;
+import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
-
 import com.zoe.phip.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,13 +53,26 @@ public class PersonnelController extends BaseController {
     /**
      * 个人基本信息查询
      *
-     * @param patientId
+     * @param id
      * @return
      */
     @RequestMapping(value = "/getXmanInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResult getXmanInfo(String patientId) {
+    public ServiceResult getXmanInfo(String id) {
+        return ServiceFactory.getPatientRegisterIn().getById(ComSession.getUserInfo(), id);
+    }
+
+    /**
+     * 根据patientid查询病人信息
+     *
+     * @param patientId
+     * @return
+     */
+    @RequestMapping(value = "/getXmanInfoByPatientId")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<XmanBaseInfo> getXmanInfoByPatientId(String patientId) {
         return ServiceFactory.getPatientRegisterIn().patientRegistryQuery(ComSession.getUserInfo(), patientId);
     }
 
@@ -140,6 +154,23 @@ public class PersonnelController extends BaseController {
     }
 
     /**
+     * 查询医疗卫生人员科室
+     *
+     * @param keyWord
+     * @return
+     */
+    @RequestMapping(value = "/getMedDeptList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<OrgDeptInfo>> getMedDept(String keyWord) {
+        if (StringUtil.isNullOrWhiteSpace(keyWord)) {
+            keyWord = "0101";
+        }
+        return ServiceFactory.getOrganizationRegisterIn().orgListQuery(ComSession.getUserInfo());
+    }
+
+
+    /**
      * 查询医疗卫生人员列表
      *
      * @param keyWord
@@ -149,7 +180,7 @@ public class PersonnelController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<MedicalStaffInfo>> getMedStfList(String keyWord) {
-        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), keyWord,"", getQueryPage());
+        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), keyWord, "", getQueryPage());
     }
 
     /**

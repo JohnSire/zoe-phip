@@ -14,7 +14,7 @@ define(function (require, exports, module) {
                 loadPageEvent: function () {
                 },
                 dialogParam: {
-                    primaryKey: 'patientId',//主键
+                    primaryKey: 'id',//主键
                 }
             })
         },

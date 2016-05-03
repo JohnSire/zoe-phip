@@ -25,7 +25,7 @@ define(function (require, exports, module) {
                         {label: '关键字', name: 'keyWord', type: 'text'}
                     ]
                 },
-                reqInfoKey:'patientId',
+               // reqInfoKey:'patientId',
                 gridParam: {
                     url: 'personnel/getXmanList',
                     columns: [

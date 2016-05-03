@@ -110,7 +110,14 @@ public interface IDictRegisterIn extends IBaseInService<DictCatalog> {
     ServiceResult dictItemDetailDelete(SystemData systemData, String dictItemId);
 
     /**
-     *14)	根据字典Code获取字典项列表
+     *14)	字典项批量删除
+     * @param dictItemIds
+     * @return
+     */
+    ServiceResult dictItemListDelete(SystemData systemData, String[] dictItemIds);
+
+    /**
+     *15)	根据字典Code获取字典项列表
      * @param systemData
      * @param catalogCode
      * @param queryPage
@@ -120,7 +127,7 @@ public interface IDictRegisterIn extends IBaseInService<DictCatalog> {
     ServiceResultT<PageList<DictItem>> dictItemListQueryByCatalogCode(SystemData systemData, String catalogCode, QueryPage queryPage, String key);
 
     /**
-     *15)	根据字典ID获取字典项列表
+     *16)	根据字典ID获取字典项列表
      * @param systemData
      * @param catalogId
      * @param queryPage
@@ -128,4 +135,13 @@ public interface IDictRegisterIn extends IBaseInService<DictCatalog> {
      * @return
      */
     ServiceResultT<PageList<DictItem>> dictItemListQueryByCatalogId(SystemData systemData, String catalogId, QueryPage queryPage, String key);
+
+    /**
+     *17)	根据字典分类（字典）Code获取所有子级字典分类（字典）和字典项列表
+     * @param systemData
+     * @param catalogCode
+     * @return
+     */
+    ServiceResultT<PageList<DictCatalog>> dictCatalogAndItemListByCode(SystemData systemData, String catalogCode);
+
 }
