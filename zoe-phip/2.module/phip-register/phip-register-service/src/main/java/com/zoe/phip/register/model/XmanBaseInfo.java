@@ -7,6 +7,7 @@ package com.zoe.phip.register.model;
 
 import com.zoe.phip.infrastructure.annotation.XPath;
 import com.zoe.phip.register.model.base.RegisterEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -66,6 +67,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 出生日期
      */
     @Column(name = "BIRTH_DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     /**
@@ -255,6 +257,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 建档时间
      */
     @Column(name = "CREATE_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
 
@@ -262,6 +265,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 登记日期
      */
     @Column(name = "REQISTER_DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date reqisterDate;
 
     public Date getReqisterDate() {
