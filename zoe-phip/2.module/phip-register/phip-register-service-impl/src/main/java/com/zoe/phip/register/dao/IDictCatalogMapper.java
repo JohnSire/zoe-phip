@@ -27,6 +27,8 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
     DictCatalog updateDictCatalogRequest(DictCatalog dictCatalog) throws Exception;
 
+    int dictCatalogExist(Map<String, Object> args);
+
     DictCatalog dictCatalogDetailQuery(String dictCatalogCode) throws Exception;
 
     DictCatalog dictCatalogDetailQueryById(String dictCatalogId) throws Exception;

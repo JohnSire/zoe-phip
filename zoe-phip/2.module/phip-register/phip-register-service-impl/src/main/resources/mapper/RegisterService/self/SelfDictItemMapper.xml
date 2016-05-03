@@ -28,32 +28,27 @@
         SELECT pdi.*,pdc.NAME CATALOG_NAME FROM(
         SELECT pdi.* FROM PHIP_DICT_ITEM pdi
         <where>
-            <if test="fkCatalogCode !=null and fkCatalogCode !=''">
-                AND pdi.FK_CATALOG_CODE = #{fkCatalogCode,jdbcType=VARCHAR}
-            </if>
             <if test="key !=null and key !=''">
                 AND (UPPER(pdi.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(pdi.CODE) LIKE #{key,jdbcType=VARCHAR})
             </if>
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
         ) pdi
-        LEFT JOIN PHIP_DICT_CATALOG pdc
-        ON pdi.FK_CATALOG_CODE = pdc.CODE
+        INNER JOIN SELECT pdc.* FROM PHIP_DICT_CATALOG pdc WHERE pdc.CODE = #{fkCatalogCode,jdbcType=VARCHAR}
+        ON pdi.FK_CATALOG_ID = pdc.ID
     </select>
 
     <select id="getDictItemListByCatalogId" resultMap="MultiResultMap" parameterType="java.util.Map">
-        SELECT pdi.*, pdc.NAME CATALOG_NAME
-        FROM (SELECT CODE, NAME FROM PHIP_DICT_CATALOG WHERE ID = #{id,jdbcType=VARCHAR}) pdc
-        INNER JOIN(
-        SELECT pdi.* FROM PHIP_DICT_ITEM pdi
+        SELECT pdi.*,pdc.NAME PARENT_NAME FROM PHIP_DICT_ITEM pdi
         <where>
+            pdi.FK_CATALOG_ID = #{id,jdbcType=VARCHAR}
             <if test="key !=null and key !=''">
                 AND (UPPER(pdi.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(pdi.CODE) LIKE #{key,jdbcType=VARCHAR})
             </if>
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
-        ) pdi
-        ON pdc.CODE = pdi.FK_CATALOG_CODE
+        LEFT JOIN PHIP_DICT_CATALOG pdc
+        ON pdi.FK_CATALOG_ID = pdc.ID
     </select>
 
 
@@ -70,7 +65,10 @@
     </select>
 
 
-
+    <select id="dictItemExist" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT COUNT(1) FROM　PHIP_DICT_ITEM WHERE ID != #{id,jdbcType=VARCHAR}
+        AND CODE = #{code,jdbcType=VARCHAR}
+    </select>
 
 
 </mapper>

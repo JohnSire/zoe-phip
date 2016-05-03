@@ -33,6 +33,7 @@ import java.util.Map;
 @ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败！")
 @ErrorMessage(code = "004", message = "由于删除字典分类（字典）存在下级分类（字典项），删除失败！")
 @ErrorMessage(code = "005", message = "由于删除内容不存在，删除失败！")
+@ErrorMessage(code = "006", message = "由于更新内容的编码已存在，更新失败！")
 public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCatalogMapper> implements IDictCatalogMapper {
 
     @Autowired
@@ -58,14 +59,27 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public DictCatalog updateDictCatalogRequest(DictCatalog dictCatalog) throws Exception {
         //数据是否存在判断
         Example example = new Example(DictCatalog.class);
-        example.createCriteria().andEqualTo("code", dictCatalog.getCode());
+        example.createCriteria().andEqualTo("id", dictCatalog.getId());
         int count = getMapper().selectCountByExample(example);
         if (count == 0) {
             throw new BusinessException("002");
         }
+        //编码重复判断
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("id", dictCatalog.getId());
+        paras.put("code", dictCatalog.getCode());
+        int cn = getMapper().dictCatalogExist(paras);
+        if (cn > 0) {
+            throw new BusinessException("006");
+        }
         //保存到数据库
         super.update(dictCatalog);
         return dictCatalog;
+    }
+
+    @Override
+    public int dictCatalogExist(Map<String, Object> args) {
+        return getMapper().dictCatalogExist(args);
     }
 
     @Override
@@ -219,10 +233,18 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public DictItem updateDictItemRequest(DictItem dictItem) throws Exception {
         //数据是否存在判断
         Example example = new Example(DictItem.class);
-        example.createCriteria().andEqualTo("code", dictItem.getCode());
+        example.createCriteria().andEqualTo("id", dictItem.getId());
         int count = getMapper().selectCountByExample(example);
         if (count == 0) {
             throw new BusinessException("002");
+        }
+        //编码重复判断
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("id", dictItem.getId());
+        paras.put("code", dictItem.getCode());
+        int cn = dictItemMapper.dictItemExist(paras);
+        if (cn > 0) {
+            throw new BusinessException("006");
         }
         //保存到数据库
         dictItem.setModifyAt(new Date());
