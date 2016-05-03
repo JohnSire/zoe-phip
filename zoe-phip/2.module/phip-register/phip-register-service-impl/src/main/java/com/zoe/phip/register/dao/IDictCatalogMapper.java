@@ -47,9 +47,9 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
     List<DictCatalog> getDictCatalogListByPIdPage(Map<String, Object> args);
 
-    PageList<DictCatalog> dictCatalogAndItemListByCode(String catalogCode);
+    PageList<DictCatalog> getDictCatalogAndItemListByCode(String catalogCode);
 
-    List<DictCatalog> dictCatalogAndItemListByCode(Map<String, Object> args);
+    List<DictCatalog> getDictCatalogAndItemListByCode(Map<String, Object> args);
 
     //字典项
     DictItem addDictItemRequest(DictItem dictItem) throws Exception;

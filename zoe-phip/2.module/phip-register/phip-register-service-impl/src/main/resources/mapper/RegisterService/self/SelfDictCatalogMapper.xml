@@ -92,4 +92,21 @@
             </if>
         </where>
     </select>
+
+    <select id="getDictCatalogAndItemListByCode" resultMap="MultiResultMap" parameterType="java.util.Map">
+        WITH CATALOG_LIST AS (SELECT ID, CODE, NAME, PID
+        FROM PHIP_DICT_CATALOG
+        START WITH CODE = #{code,jdbcType=VARCHAR}
+        CONNECT BY PRIOR ID = PID)
+        SELECT T1.*, T2.NAME PARENTNAME
+        FROM CATALOG_LIST T1
+        LEFT JOIN PHIP_DICT_CATALOG T2
+        ON T1.PID = T2.ID
+        UNION ALL
+        SELECT PDI.ID, PDI.CODE, PDI.NAME, PDC.ID PID, PDC.NAME PARENTNAME
+        FROM (SELECT PDI.ID, PDI.CODE, PDI.NAME, PDI.FK_CATALOG_CODE
+        FROM PHIP_DICT_ITEM PDI) PDI
+        INNER JOIN CATALOG_LIST PDC
+        ON PDI.FK_CATALOG_CODE = PDC.CODE
+    </select>
 </mapper>

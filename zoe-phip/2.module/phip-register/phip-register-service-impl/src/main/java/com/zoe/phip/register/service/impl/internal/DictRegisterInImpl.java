@@ -179,11 +179,11 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public PageList<DictCatalog> dictCatalogAndItemListByCode(String catalogCode) {
+    public PageList<DictCatalog> getDictCatalogAndItemListByCode(String catalogCode) {
         PageList<DictCatalog> pageList = new PageList<DictCatalog>();
         Map<String, Object> paras = new HashMap<String, Object>();
         paras.put("code",catalogCode);
-        List<DictCatalog> results = getMapper().dictCatalogAndItemListByCode(paras);
+        List<DictCatalog> results = getMapper().getDictCatalogAndItemListByCode(paras);
         PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
@@ -191,8 +191,8 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public List<DictCatalog> dictCatalogAndItemListByCode(Map<String, Object> args) {
-        return getMapper().dictCatalogAndItemListByCode(args);
+    public List<DictCatalog> getDictCatalogAndItemListByCode(Map<String, Object> args) {
+        return getMapper().getDictCatalogAndItemListByCode(args);
     }
     /**********字典分类（字典）-- 结束**********/
 
