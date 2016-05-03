@@ -14,12 +14,13 @@ define(function (require, exports, module) {
             var treeObj = new BaseTree({
                 treeId: 'tree',
                 btnBox: 'treeBtns',
-                reqInfoKey: 'id',//根据哪个值进去获取对�
+                reqInfoKey: 'id',//根据哪个值进去获取对象
                 tools: {
                     btns: {'add': false, 'edit': false, 'del': false}
                 },
                 url: {
                     getTreeList: 'dict/dictCatalogTreeQuery',
+                    delTreeInfo: 'dict/delDictCatalogInfo',
                 },
                 treeParam: {
                     idFieldName: 'id',
@@ -27,6 +28,41 @@ define(function (require, exports, module) {
                     textFieldName: 'name',
                     checkbox: false
                 },
+                validate: {
+                    //点击新增按钮验证
+                    add: {
+                        isValidate: false,
+                        fn: function () {
+
+                        }
+
+                    },
+                    //点击编辑按钮验证
+                    edit: {
+                        isValidate: true,
+                        fn: function (data) {
+                            if (data["type"] == 0) {
+                                common.jsmsgError("分类不能做编辑,选择字典进行编辑！");
+                                return false;
+                            }
+                            return true;
+                        }
+
+                    },
+                    //点击删除按钮验证
+                    del: {
+                        isValidate: true,
+                        fn: function (data) {
+                            if (data["type"] == 0) {
+                                common.jsmsgError("分类不能做删除,选择字典进行删除！");
+                                return false;
+                            }
+                            return true;
+                        }
+                    }
+                },
+
+
                 dialogParam: {
                     winName: "win_dict_detail_dialog",
                     winCallback: "win_dict_detail_callback",

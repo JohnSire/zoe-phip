@@ -13,6 +13,30 @@ define(function (require, exports, module) {
         url: {
             getTreeList: ""
         },
+
+        validate: {
+            //点击新增按钮验证
+            add: {
+                isValidate: false,
+                fn: function (data) {
+                    return false;//验证是否通过
+                }
+            },
+            //点击编辑按钮验证
+            edit: {
+                isValidate: false,
+                fn: function (data) {
+                    return false;//验证是否通过
+                }
+            },
+            //点击删除按钮验证
+            del: {
+                isValidate: false,
+                fn: function (data) {
+                    return false;//验证是否通过
+                }
+            }
+        },
         treeParam: {},
         dialogParam: {
             winName: "",

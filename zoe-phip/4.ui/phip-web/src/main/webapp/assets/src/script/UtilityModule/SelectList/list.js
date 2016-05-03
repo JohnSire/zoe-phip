@@ -72,9 +72,7 @@ define(function (require, exports, module) {
                 if (argument[pName]) {
                     $(targetObj).find(".text-line-content").text(argument[pName]);
                 } else {
-                    //if (argument[name] && !argument[pName]) {
-                        $(targetObj).find(".text-line-content").text(options["fkNullContent"]);
-                    //}
+                    $(targetObj).find(".text-line-content").text(options["fkNullContent"]);
                 }
             });
 
@@ -127,6 +125,7 @@ define(function (require, exports, module) {
                                         internal.top.common.jsmsgError(emptyMsg);
                                     }
                                 };
+
                                 var data = internal.top[options["selectParam"]["winCallback"]]();
                                 bindData(data)
                             }

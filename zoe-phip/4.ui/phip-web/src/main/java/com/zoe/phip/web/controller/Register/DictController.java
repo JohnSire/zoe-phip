@@ -52,7 +52,7 @@ public class DictController extends BaseController {
 
     /**
      * 根据id获取OID信息
-
+     *
      * @return
      */
     @RequestMapping(value = "/getOIDInfo")
@@ -130,6 +130,7 @@ public class DictController extends BaseController {
 
     /**
      * 根据code获取字典分类（字典）信息
+     *
      * @param code
      * @return
      */
@@ -142,6 +143,7 @@ public class DictController extends BaseController {
 
     /**
      * 根据id获取字典分类（字典）信息
+     *
      * @param id
      * @return
      */
@@ -154,6 +156,7 @@ public class DictController extends BaseController {
 
     /**
      * 新增字典分类（字典）
+     *
      * @param dc
      * @return
      */
@@ -167,6 +170,7 @@ public class DictController extends BaseController {
 
     /**
      * 更新字典分类（字典）
+     *
      * @param dc
      * @return
      */
@@ -179,6 +183,7 @@ public class DictController extends BaseController {
 
     /**
      * 删除字典分类（字典）
+     *
      * @param id
      * @return
      */
@@ -192,6 +197,7 @@ public class DictController extends BaseController {
 
     /**
      * 根据关键字获取字典分类列表（不包括字典）
+     *
      * @param keyWord
      * @return
      */
@@ -204,6 +210,7 @@ public class DictController extends BaseController {
 
     /**
      * 获取字典分类列表(包括字典)
+     *
      * @return
      */
     @RequestMapping(value = "/dictCatalogTreeQuery")
@@ -220,14 +227,18 @@ public class DictController extends BaseController {
         return "/Register/Dict/dictList";
     }
 
-    //region 字典详细
     @RequestMapping("/view/dictdetail")
     public String ToDictDetail(HttpServletRequest request, Model model) {
         return "Register/Dict/dictDetail";
     }
 
+
+    //endregion
+    //region 字典详细
+
     /**
      * 根据code获取字典项信息
+     *
      * @param code
      * @return
      */
@@ -240,6 +251,7 @@ public class DictController extends BaseController {
 
     /**
      * 根据id获取字典项信息
+     *
      * @param id
      * @return
      */
@@ -252,6 +264,7 @@ public class DictController extends BaseController {
 
     /**
      * 新增字典项
+     *
      * @param di
      * @return
      */
@@ -265,6 +278,7 @@ public class DictController extends BaseController {
 
     /**
      * 更新字典项
+     *
      * @param di
      * @return
      */
@@ -277,6 +291,7 @@ public class DictController extends BaseController {
 
     /**
      * 删除字典项
+     *
      * @param id
      * @return
      */
@@ -290,6 +305,7 @@ public class DictController extends BaseController {
 
     /**
      * 根据关键字获取字典项列表
+     *
      * @param keyWord
      * @param catalogId
      * @return
@@ -298,7 +314,7 @@ public class DictController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<DictItem>> getDictItemListByCatalogId(String keyWord, String catalogId) {
-        return ServiceFactory.getDictRegisterIn().dictItemListQueryByCatalogId(ComSession.getUserInfo(), catalogId,  getQueryPage(), keyWord);
+        return ServiceFactory.getDictRegisterIn().dictItemListQueryByCatalogId(ComSession.getUserInfo(), catalogId, getQueryPage(), keyWord);
     }
     //endregion
 }

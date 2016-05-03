@@ -4,7 +4,7 @@
 define(function (require, exports, module) {
     //工具管理
     var internal = {
-        req: require("./req"),
+        req: require("./req").req,
         btns: {
             "add": '<a class="icon-grid icon-grid-add" title="添加"></a>',
             "edit": '<a class="icon-grid icon-grid-edit" title="编辑"></a>',
@@ -48,9 +48,27 @@ define(function (require, exports, module) {
 
                 var treeObj = liger.get(options["treeId"]);
 
+                var id = "";
                 if (treeObj) {
                     var data = treeObj.getSelected();
-                    //alert(JSON.stringify(data));
+                    if (!data) {
+                        common.jsmsgError("请选择相应的节点!");
+                        return;
+                    }
+
+                    var validate = options["validate"]["edit"];
+                    if (validate["isValidate"]) {
+                        var isisPassValidate = true;
+                        if (typeof (validate["fn"]) == "function") {
+                            isPassValidate = validate["fn"](data["data"]);
+                        }
+                        if (!isPassValidate) {
+                            return;
+                        }
+                    }
+
+
+                    id = data["data"]["id"];
                 }
 
 
@@ -68,7 +86,35 @@ define(function (require, exports, module) {
             "del": function (options) {
                 var delParam = $.extend(true, {}, options);
 
-                alert(delParam["url"]["delTreeInfo"]);
+                var treeObj = liger.get(options["treeId"]);
+                var id = "";
+                if (treeObj) {
+                    var data = treeObj.getSelected();
+                    if (!data) {
+                        common.jsmsgError("请选择要删除的节点!");
+                        return;
+                    }
+
+                    var validate = options["validate"]["del"];
+                    if (validate["isValidate"]) {
+                        var isisPassValidate = true;
+                        if (typeof (validate["fn"]) == "function") {
+                            isPassValidate = validate["fn"](data["data"]);
+                        }
+                        if (!isPassValidate) {
+                            return;
+                        }
+                    }
+                    id = data["data"]["id"];
+                }
+                var param = {
+                    id: id,
+                    url: options["url"]["delTreeInfo"]
+                }
+
+                internal.req.deleteInfo(param, function (data) {
+                    alert(JSON.stringify(data));
+                })
 
             }
         }

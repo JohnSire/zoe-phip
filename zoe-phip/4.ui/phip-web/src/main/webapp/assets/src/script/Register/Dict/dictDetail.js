@@ -3,6 +3,7 @@
  */
 define(function (require, exports, module) {
     var internal = {
+        selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
             var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
             var baseAttr = new BaseAttr({
@@ -12,6 +13,22 @@ define(function (require, exports, module) {
                 addUrl: 'dict/addDictCatalogInfo',//新增接口Url
                 updateUrl: 'dict/updateDictCatalogInfo',//修改接口Url
                 loadPageEvent: function () {
+                    internal.selectList.dialog('dictCatalog', {
+                        target: $("#btnParentCatalog"),
+                        name: 'pid',
+                        parentName: 'parentName',
+                        valueField: 'id',
+                        displayField: 'name',
+                        selectParam: {
+                            multiselect: false
+                        }
+
+                    });
+                },
+                //只能添加类型为1的字典
+                beforeSaveEvent: function (data) {
+                    var data = $.extend(true, {}, data, {type: '1'});
+                    return data;
                 }
             })
         },
