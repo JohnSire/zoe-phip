@@ -39,7 +39,8 @@
     </select>
 
     <select id="getDictItemListByCatalogId" resultMap="MultiResultMap" parameterType="java.util.Map">
-        SELECT pdi.*,pdc.NAME PARENT_NAME FROM PHIP_DICT_ITEM pdi
+        SELECT pdi.*,pdc.NAME PARENT_NAME FROM (
+        SELECT * FROM PHIP_DICT_ITEM pdi
         <where>
             pdi.FK_CATALOG_ID = #{id,jdbcType=VARCHAR}
             <if test="key !=null and key !=''">
@@ -47,6 +48,7 @@
             </if>
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
+        ) pdi
         LEFT JOIN PHIP_DICT_CATALOG pdc
         ON pdi.FK_CATALOG_ID = pdc.ID
     </select>
