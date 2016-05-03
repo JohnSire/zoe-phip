@@ -241,4 +241,11 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
     public List<SystemDictItem> getDataItemList(Map map) {
         return getMapper().getDataItemList(map);
     }
+
+    @Override
+    public SystemDictItem getSysDataItemByCode(String code){
+        Example example = new Example(SystemDictItem.class);
+        example.createCriteria().andEqualTo("code", code);
+        return getMapper().selectByExample(example).get(0);
+    }
 }

@@ -13,7 +13,6 @@ import com.zoe.phip.register.dao.IDictCatalogMapper;
 import com.zoe.phip.register.dao.IDictItemMapper;
 import com.zoe.phip.register.dao.IOrgDeptInfoMapper;
 import com.zoe.phip.register.model.DictCatalog;
-import com.zoe.phip.register.model.DictItem;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.register.service.internal.IOrganizationRegisterIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,6 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
 
     @Autowired
     private IDictItemMapper dictItemMapper;
-
 
     @Autowired
     @Qualifier(value = "IDictCatalogMapper")
@@ -107,24 +105,20 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return getMapper().deleteByExample(e) > 0;
     }
 
-    public DictCatalog dictItemListQuery(String code ,String fkCatalogCode) {
-        Example exampleTwo = new Example(DictCatalog.class);
-        exampleTwo.createCriteria().andEqualTo("code",code);
-        DictCatalog dictCatalog=dictCatalogMapper.selectByExample(exampleTwo).get(0);
-        if(!StringUtil.isNullOrWhiteSpace(fkCatalogCode)){
-            Example example = new Example(DictItem.class);
-            example.createCriteria().andEqualTo("fkCatalogCode", fkCatalogCode);
-            dictCatalog.setDictItemList(dictItemMapper.selectByExample(example));
-
-        }else {
-            Map<String, Object> paras = new HashMap<String, Object>();
-            paras.put("pid", "1");
+    public DictCatalog dictItemListQuery() {
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("sdiCode","org_code");//系统字典项的code
+        paras.put("sdcCode","STD_ORG_TYPE");//系统字典里的code
+        DictCatalog dictCatalog = dictCatalogMapper.getDictCategoryOrg(paras);
+        if(null!=dictCatalog && null !=dictCatalog.getId()){
+            Map<String, Object> parasTwo= new HashMap<String, Object>();
+            parasTwo.put("pid", dictCatalog.getId());
             dictCatalog.setDictItemList( dictItemMapper.getDictItemOrgList(paras));
         }
         return dictCatalog;
     }
 
-    public PageList<OrgDeptInfo> organizationListQuery(String deptTypeCode, String key, QueryPage page) {
+    public PageList<OrgDeptInfo> organizationListQuery(String type,String deptTypeCode, String key, QueryPage page) {
         PageList<OrgDeptInfo> pageList = new PageList<OrgDeptInfo>();
         //分页
         SqlHelper.startPage(page);
@@ -132,14 +126,17 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         if (!StringUtil.isNullOrWhiteSpace(key)) {
             paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
         }
-        paras.put("deptTypeCode", deptTypeCode);
+        if(type.equals("1")){
+            paras.put("deptTypeCode", deptTypeCode);
+        }
+        //        SqlHelper.setOrder(paras,queryPage);
         List<OrgDeptInfo> results=  ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoList(paras);
-
         PageInfo<OrgDeptInfo> pageInfo = new PageInfo<OrgDeptInfo>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
         return pageList;
     }
+
 
 
 
@@ -197,5 +194,7 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     public List<OrgDeptInfo> getOrgDeptInfoListByType(Map<String, Object> paras) throws Exception {
         return getMapper().getOrgDeptInfoListByType(paras);
     }
+
+
 
 }

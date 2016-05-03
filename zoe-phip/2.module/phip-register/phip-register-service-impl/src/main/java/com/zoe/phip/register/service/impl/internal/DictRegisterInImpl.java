@@ -7,7 +7,6 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
-import com.zoe.phip.infrastructure.util.UtilString;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.register.dao.IDictCatalogMapper;
@@ -310,6 +309,11 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
         return pageList;
+    }
+
+    @Override
+    public DictCatalog getDictCategoryOrg(Map<String, Object> args) {
+        return getMapper().getDictCategoryOrg(args);
     }
     /**********字典项 -- 结束 **********/
 }
