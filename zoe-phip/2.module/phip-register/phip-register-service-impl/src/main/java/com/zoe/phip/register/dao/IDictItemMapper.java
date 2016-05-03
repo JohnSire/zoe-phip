@@ -29,4 +29,6 @@ public interface IDictItemMapper extends IServiceMapper<DictItem> {
 
     DictItem getDictItemById(Map<String,Object> args);
 
+    List<DictItem> getDictItemNewOrgTree(Map<String, Object> args);
+
 }

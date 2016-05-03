@@ -5,7 +5,6 @@
 
 package com.zoe.phip.register.dao;
 
-import com.zoe.phip.module.service.mapper.IMyMapper;
 import com.zoe.phip.register.mapper.IServiceMapper;
 import com.zoe.phip.register.model.NationalStandards;
 
@@ -21,4 +20,6 @@ public interface INationalStandardsMapper extends IServiceMapper<NationalStandar
     List<NationalStandards> getDataPageList(Map<String, Object> map);
 
     int getNationalStandard(Map<String,Object> map);
+
+    NationalStandards getNationalStandardDescr(Map<String,Object> map);
 }

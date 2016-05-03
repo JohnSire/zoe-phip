@@ -172,6 +172,7 @@ public class OrganizationRegisterTest extends BaseTest {
     //  DictCatalog dictCatalog= implIn.dictItemListQuery();
 
        // implIn.organizationListQueryT("1","","");
+        implIn.dictItemListQueryByCodeSystem("2.16.156.10011.2.3.4.1");
 
     }
     @Test
