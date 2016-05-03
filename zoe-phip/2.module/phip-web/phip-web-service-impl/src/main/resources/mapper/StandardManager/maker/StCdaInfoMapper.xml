@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStCdaInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.web.model.sdm.StCdaInfo"
+               extends="com.zoe.phip.module.service.MasterEntityResultMap">
+        <result column="CODE" property="code" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="FK_NORM_SOURCE_ID" property="fkNormSourceId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DEFINE" property="define" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="TO_HTML_XSL" property="toHtmlXsl" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="TO_SUMMARY_XSL" property="toSummaryXsl" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="TO_SET_XSL" property="toSetXsl" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="SAMPLE_XML" property="sampleXml" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="FORM_XML" property="formXml" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="QUESTION_HTML" property="questionHtml" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ARCHIVES_TYPE" property="archivesType" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DESCR" property="descr" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="addList" parameterType="com.zoe.phip.web.model.sdm.StCdaInfo">
+        INSERT INTO PHIP_ST_CDA_INFO (
+        CODE,
+        NAME,
+        FK_NORM_SOURCE_ID,
+        DEFINE,
+        TO_HTML_XSL,
+        TO_SUMMARY_XSL,
+        TO_SET_XSL,
+        SAMPLE_XML,
+        FORM_XML,
+        QUESTION_HTML,
+        ARCHIVES_TYPE,
+        DESCR,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+            SELECT
+            #{item.code,jdbcType=VARCHAR},
+            #{item.name,jdbcType=VARCHAR},
+            #{item.fkNormSourceId,jdbcType=VARCHAR},
+            #{item.define,jdbcType=VARCHAR},
+            #{item.toHtmlXsl,jdbcType=CLOB},
+            #{item.toSummaryXsl,jdbcType=CLOB},
+            #{item.toSetXsl,jdbcType=CLOB},
+            #{item.sampleXml,jdbcType=CLOB},
+            #{item.formXml,jdbcType=CLOB},
+            #{item.questionHtml,jdbcType=CLOB},
+            #{item.archivesType,jdbcType=VARCHAR},
+            #{item.descr,jdbcType=VARCHAR},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
+            FROM DUAL
+        </foreach>
+    </insert>
+    <insert id="defaultAdd" parameterType="java.util.List">
+        INSERT INTO PHIP_ST_CDA_INFO (
+        CODE,
+        NAME,
+        FK_NORM_SOURCE_ID,
+        DEFINE,
+        TO_HTML_XSL,
+        TO_SUMMARY_XSL,
+        TO_SET_XSL,
+        SAMPLE_XML,
+        FORM_XML,
+        QUESTION_HTML,
+        ARCHIVES_TYPE,
+        DESCR,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES(
+        #{code,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR},
+        #{fkNormSourceId,jdbcType=VARCHAR},
+        #{define,jdbcType=VARCHAR},
+        #{toHtmlXsl,jdbcType=CLOB},
+        #{toSummaryXsl,jdbcType=CLOB},
+        #{toSetXsl,jdbcType=CLOB},
+        #{sampleXml,jdbcType=CLOB},
+        #{formXml,jdbcType=CLOB},
+        #{questionHtml,jdbcType=CLOB},
+        #{archivesType,jdbcType=VARCHAR},
+        #{descr,jdbcType=VARCHAR},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
+    <delete id="deleteByIds" parameterType="java.lang.String">
+        delete from PHIP_ST_CDA_INFO where ID in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <delete id="deleteByList" parameterType="java.util.List">
+        delete from PHIP_ST_CDA_INFO where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
+            update PHIP_ST_CDA_INFO
+            <set>
+                <if test="item.code != null">
+                    CODE = #{item.code,jdbcType=VARCHAR},
+                </if>
+                <if test="item.name != null">
+                    NAME = #{item.name,jdbcType=VARCHAR},
+                </if>
+                <if test="item.fkNormSourceId != null">
+                    FK_NORM_SOURCE_ID = #{item.fkNormSourceId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.define != null">
+                    DEFINE = #{item.define,jdbcType=VARCHAR},
+                </if>
+                <if test="item.toHtmlXsl != null">
+                    TO_HTML_XSL = #{item.toHtmlXsl,jdbcType=CLOB},
+                </if>
+                <if test="item.toSummaryXsl != null">
+                    TO_SUMMARY_XSL = #{item.toSummaryXsl,jdbcType=CLOB},
+                </if>
+                <if test="item.toSetXsl != null">
+                    TO_SET_XSL = #{item.toSetXsl,jdbcType=CLOB},
+                </if>
+                <if test="item.sampleXml != null">
+                    SAMPLE_XML = #{item.sampleXml,jdbcType=CLOB},
+                </if>
+                <if test="item.formXml != null">
+                    FORM_XML = #{item.formXml,jdbcType=CLOB},
+                </if>
+                <if test="item.questionHtml != null">
+                    QUESTION_HTML = #{item.questionHtml,jdbcType=CLOB},
+                </if>
+                <if test="item.archivesType != null">
+                    ARCHIVES_TYPE = #{item.archivesType,jdbcType=VARCHAR},
+                </if>
+                <if test="item.descr != null">
+                    DESCR = #{item.descr,jdbcType=VARCHAR},
+                </if>
+                <if test="item.state != null">
+                    STATE = #{item.state,jdbcType=DECIMAL},
+                </if>
+                MODIFY_AT=sysdate
+            </set>
+            where id = #{item.id};
+        </foreach>
+    </update>
+
+</mapper>
