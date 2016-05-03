@@ -144,4 +144,13 @@ public interface IDictRegisterIn extends IBaseInService<DictCatalog> {
      */
     ServiceResultT<PageList<DictCatalog>> dictCatalogAndItemListByCode(SystemData systemData, String catalogCode);
 
+    /**
+     *18)	获取字典列表（不包含分类）
+     * @param systemData
+     * @param queryPage
+     * @param key
+     * @return
+     */
+    ServiceResultT<PageList<DictCatalog>> dictListQueryPage(SystemData systemData, QueryPage queryPage, String key);
+
 }
