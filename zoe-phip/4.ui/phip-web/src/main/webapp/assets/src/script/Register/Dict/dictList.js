@@ -32,7 +32,7 @@ define(function (require, exports, module) {
                     //选择
                     onSelect: function (data) {
                         internal.catalogId = data["data"]["id"];
-                        var itemGrid = liger.get("dictGrid");
+                        var itemGrid = common.getGrid("dictGrid");
                         if (itemGrid.get("dataAction") == "local") {
                             internal.dictGrid.setServer();
                         } else {
@@ -41,7 +41,8 @@ define(function (require, exports, module) {
                     },
                     //取消选择
                     onCancelselect: function (data) {
-
+                        var dictGrid = common.getGrid("dictGrid");
+                        dictGrid.loadData({rows: [], total: 0});
                     }
                 },
                 validate: {
