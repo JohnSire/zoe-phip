@@ -55,6 +55,14 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
     List<DictCatalog> getDictCatalogAndItemListByCode(Map<String, Object> args);
 
+    PageList<DictCatalog> dictListWithoutFkCatalog(QueryPage queryPage, String key);
+
+    List<DictCatalog> dictListWithoutFkCatalog(Map<String, Object> args);
+
+    int updateDictWithFkCatalog(String pId, String catalogIds);
+
+    int updateDictWithFkCatalog(Map<String, Object> args);
+
     //字典项
     DictItem addDictItemRequest(DictItem dictItem) throws Exception;
 
@@ -66,7 +74,7 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
     boolean dictItemDetailDelete(String dictItemId) throws Exception;
 
-    boolean dictItemListDelete(String[] dictItemIds) throws Exception;
+    boolean dictItemListDelete(String dictItemIds) throws Exception;
 
     PageList<DictItem> dictItemListQueryByCatalogCode(String catalogCode, QueryPage queryPage, String key);
 

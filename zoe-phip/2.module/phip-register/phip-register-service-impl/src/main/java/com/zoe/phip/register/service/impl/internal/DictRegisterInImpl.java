@@ -7,6 +7,7 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
+import com.zoe.phip.infrastructure.util.UtilString;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.register.dao.IDictCatalogMapper;
@@ -229,6 +230,37 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public List<DictCatalog> getDictCatalogAndItemListByCode(Map<String, Object> args) {
         return getMapper().getDictCatalogAndItemListByCode(args);
     }
+
+    @Override
+    public PageList<DictCatalog> dictListWithoutFkCatalog(QueryPage queryPage, String key) {
+        PageList<DictCatalog> pageList = new PageList<DictCatalog>();
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("key",key);
+        List<DictCatalog> results = getMapper().dictListWithoutFkCatalog(paras);
+        PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
+    @Override
+    public List<DictCatalog> dictListWithoutFkCatalog(Map<String, Object> args) {
+        return getMapper().dictListWithoutFkCatalog(args);
+    }
+
+    @Override
+    public int updateDictWithFkCatalog(String pId, String catalogIds) {
+        String[] ids = UtilString.commaDelimitedListToStringArray(catalogIds);
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("catalogIds",ids);
+        paras.put("pId",pId);
+        return getMapper().updateDictWithFkCatalog(paras);
+    }
+
+    @Override
+    public int updateDictWithFkCatalog(Map<String, Object> args) {
+        return getMapper().updateDictWithFkCatalog(args);
+    }
     /**********字典分类（字典）-- 结束**********/
 
     /**********字典项 -- 开始 **********/
@@ -269,7 +301,7 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         }
         //保存到数据库
         dictItem.setModifyAt(new Date());
-        dictItemMapper.updateByPrimaryKey(dictItem);
+        dictItemMapper.defaultUpdate(dictItem);
         return dictItem;
     }
 
@@ -304,10 +336,11 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public boolean dictItemListDelete(String[] dictItemIds) throws Exception {
+    public boolean dictItemListDelete(String dictItemIds) throws Exception {
+        String[] ids = UtilString.commaDelimitedListToStringArray(dictItemIds);
         boolean result = false;
         try {
-            result = dictItemMapper.deleteByIds(dictItemIds) > 0;
+            result = dictItemMapper.deleteByIds(ids) > 0;
         } catch (Exception e) {
             throw e;
         }

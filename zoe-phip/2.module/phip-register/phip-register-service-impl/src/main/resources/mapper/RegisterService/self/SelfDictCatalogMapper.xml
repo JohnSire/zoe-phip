@@ -118,4 +118,19 @@
                     FROM PHIP_DICT_CATALOG
                    WHERE ID = #{id,jdbcType=VARCHAR})
     </select>
+
+    <select id="dictListWithoutFkCatalog" resultMap="MultiResultMap"  parameterType="java.util.Map">
+        SELECT * FROM PHIP_DICT_ITEM WHERE TYPE = '1' AND FK_CATALOG_ID IS NULL
+    </select>
+
+    <select id="updateDictWithFkCatalog" parameterType="java.util.Map">
+        <foreach collection="catalogIds" item="item" index="index" open="begin" close="end;" separator="">
+            update PHIP_DICT_CATALOG
+            <set>
+                PID = #{pid,jdbcType=VARCHAR},
+                MODIFY_AT=sysdate
+            </set>
+            where id = #{item};
+        </foreach>
+    </select>
 </mapper>

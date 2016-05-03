@@ -75,6 +75,9 @@
     <select id="dictItemExist" resultType="java.lang.Integer" parameterType="java.util.Map">
         SELECT COUNT(1) FROM　PHIP_DICT_ITEM WHERE ID != #{id,jdbcType=VARCHAR}
         AND CODE = #{code,jdbcType=VARCHAR}
+        AND FK_CATALOG_ID IN (
+        SELECT FK_CATALOG_ID FROM PHIP_DICT_ITEM WHERE ID = #{id,jdbcType=VARCHAR}
+        )
     </select>
 
     <select id="getDictItemById" resultMap="MultiResultMap" parameterType="java.util.Map">
