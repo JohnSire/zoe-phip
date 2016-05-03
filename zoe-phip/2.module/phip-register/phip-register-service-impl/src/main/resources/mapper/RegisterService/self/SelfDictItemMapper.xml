@@ -13,8 +13,8 @@
             <if test="name != null">
                 NAME = #{name,jdbcType=VARCHAR},
             </if>
-            <if test="fkCatalogCode != null">
-                FK_CATALOG_CODE = #{fkCatalogCode,jdbcType=VARCHAR},
+            <if test="fkCatalogId != null">
+                FK_CATALOG_ID = #{fkCatalogId,jdbcType=VARCHAR},
             </if>
             <if test="state != null">
                 STATE = #{state,jdbcType=DECIMAL},
@@ -28,8 +28,8 @@
         SELECT pdi.*,pdc.NAME CATALOG_NAME FROM(
         SELECT pdi.* FROM PHIP_DICT_ITEM pdi
         <where>
-            <if test="fkCatalogCode !=null and fkCatalogCode !=''">
-                AND pdi.FK_CATALOG_CODE = #{fkCatalogCode,jdbcType=VARCHAR}
+            <if test="fkCatalogId !=null and fkCatalogCode !=''">
+                AND pdi.FK_CATALOG_ID = #{fkCatalogId,jdbcType=VARCHAR}
             </if>
             <if test="key !=null and key !=''">
                 AND (UPPER(pdi.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(pdi.CODE) LIKE #{key,jdbcType=VARCHAR})
@@ -38,7 +38,7 @@
         </where>
         ) pdi
         LEFT JOIN PHIP_DICT_CATALOG pdc
-        ON pdi.FK_CATALOG_CODE = pdc.CODE
+        ON pdi.FK_CATALOG_ID = pdc.id
     </select>
 
     <select id="getDictItemListByCatalogId" resultMap="MultiResultMap" parameterType="java.util.Map">
@@ -53,7 +53,7 @@
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
         ) pdi
-        ON pdc.CODE = pdi.FK_CATALOG_CODE
+        ON pdc.id = pdi.FK_CATALOG_ID
     </select>
 
 
@@ -62,7 +62,7 @@
         select * from PHIP_DICT_ITEM PDIT
         <where>
             <if test="pid !=null and pid !=''">
-                AND  PDIT.FK_CATALOG_CODE in (select code from phip_dict_catalog where pid= #{pid,jdbcType=VARCHAR})
+                AND  PDIT.FK_CATALOG_ID in (select id from phip_dict_catalog where pid= #{pid,jdbcType=VARCHAR})
             </if>
 
             <include refid="com.zoe.phip.module.service.selfWhere"/>
