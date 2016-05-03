@@ -8,8 +8,7 @@ define(function (require, exports, module) {
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
                 deleteUrl: {
-                    deleteInfo: "dict/delDictCatalogInfo",
-                    deleteList: ""
+                    deleteInfo: "dict/delDictCatalogInfo"
                 },
                 tools: {
                     btnbox: {
