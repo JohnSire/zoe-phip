@@ -32,6 +32,12 @@ public interface IXmanBaseInfoMapper extends IServiceMapper<XmanBaseInfo> {
      */
     XmanBaseInfo getPatient(String id);
 
+    /**
+     * 根据主键获取病人信息
+     * @param id
+     * @return
+     */
+    XmanBaseInfo getPatientByPrimaryKey(String id);
 
     XmanBaseInfo addPatientRegistry(XmanBaseInfo xmanBaseInfo, XmanCard xmanCard) throws Exception;
 
@@ -45,5 +51,7 @@ public interface IXmanBaseInfoMapper extends IServiceMapper<XmanBaseInfo> {
     List<XmanBaseInfo> getPatientList(Map<String, Object> args);
 
     PageList<XmanBaseInfo> patientRegistryListQuery(String key, QueryPage page);
+
+
 
 }
