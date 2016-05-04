@@ -54,8 +54,8 @@ define(function (require, exports, module) {
                 gridId: 'medicalOrgGrid',
                 toolsBoxId: 'medicalOrgTools',
                 deleteUrl: {
-                    deleteInfo: "dict/deleteItem",
-                    deleteList: "dict/deleteItemList"
+                    deleteInfo: "organization/delMedicalOrgInfo",
+                    deleteList: "organization/delMedicalOrgList"
                 },
                 tools: {
                     btnbox: {
@@ -73,8 +73,8 @@ define(function (require, exports, module) {
                     dataAction: "local",
                     url: 'organization/getMedicalOrgList',
                     columns: [
-                        {display: '机构(科室)代码', name: 'deptCode', width: 300, align: 'left'},
-                        {display: '机构(科室)名称', name: 'deptName', width: 300, align: 'left'},
+                        {display: '机构代码', name: 'deptCode', width: 300, align: 'left'},
+                        {display: '机构名称', name: 'deptName', width: 300, align: 'left'},
                         {display: '联系电话', name: 'employerTelNo', width: 200, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
