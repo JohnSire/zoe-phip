@@ -53,7 +53,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
 
 
     @Override
-    public PageList<MedicalStaffInfo> providerListQuery(String key, String deptExtensionId, QueryPage page) throws Exception {
+    public PageList<MedicalStaffInfo> providerListQuery(String key, String deptcode, QueryPage page) throws Exception {
         PageList<MedicalStaffInfo> pageList = new PageList<MedicalStaffInfo>();
         //分页
         SqlHelper.startPage(page);
@@ -61,8 +61,8 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
         if (!StringUtil.isNullOrWhiteSpace(key)) {
             paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
         }
-        if (!StringUtil.isNullOrWhiteSpace(deptExtensionId)) {
-            paras.put("extensionId", deptExtensionId);
+        if (!StringUtil.isNullOrWhiteSpace(deptcode)) {
+            paras.put("deptcode", deptcode);
         }
         List<MedicalStaffInfo> results = getProviderList(paras);
         PageInfo<MedicalStaffInfo> pageInfo = new PageInfo<>(results);

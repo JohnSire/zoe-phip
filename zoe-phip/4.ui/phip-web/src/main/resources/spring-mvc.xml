@@ -41,16 +41,15 @@
         </property>
         <property name="webBindingInitializer">
             <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
-                <property name="conversionService" ref="conversionService" />
+                <property name="conversionService" ref="conService" />
             </bean>
         </property>
     </bean>
 
-    <bean id="conversionService" class="org.springframework.format.support.DefaultFormattingConversionService"/>
+    <bean id="conService" class="org.springframework.format.support.DefaultFormattingConversionService"/>
 
-
+    <!--AOP处理-->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-
     <bean id="LoggerInterceptor" class="com.zoe.phip.web.aop.OperationBehavior"></bean>
 
     <bean name="beetlConfig" class="org.beetl.ext.spring.BeetlGroupUtilConfiguration" init-method="init">
@@ -73,7 +72,8 @@
         <property name="suffix" value=".jsp"/>
 
     </bean>
-    <mvc:resources mapping="/assets/**" location="/assets/"/>
+    <mvc:resources mapping="/assets/**" location="assets/"/>
+
     <!-- 引入配置文件 -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -91,5 +91,9 @@
     </bean>
 
     <bean id="beanFactory" class="com.zoe.phip.web.bean.BeanFactory"></bean>
+    <bean id="urlExpand" class="com.zoe.phip.web.context.UrlExpand">
+        <property name="path" value="${static-web.url}"/>
+        <property name="version" value="${web.version}"/>
+    </bean>
 
 </beans>
