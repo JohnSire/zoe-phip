@@ -18,10 +18,12 @@ define(function (require, exports, module) {
                     case "add":
                     case "edit":
                     case "del":
-                        var jqBtn = $(internal.btns[index]).on("click", function () {
-                            internal.event[index](options);
-                        });
-                        $(jqBtnBox).append(jqBtn);
+                        if (options["tools"]["btns"][index]) {
+                            var jqBtn = $(internal.btns[index]).on("click", function () {
+                                internal.event[index](options);
+                            });
+                            $(jqBtnBox).append(jqBtn);
+                        }
                         break;
                 }
             });
