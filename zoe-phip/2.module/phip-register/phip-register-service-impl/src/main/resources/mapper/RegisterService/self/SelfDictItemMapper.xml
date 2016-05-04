@@ -89,6 +89,8 @@
             <if test="dictCode !=null and dictCode !=''">
                 AND pns.dict_code = #{dictCode,jdbcType=VARCHAR}
             </if>
+            <if test="key !=null and key !=''">AND (  UPPER(pdi.CODE) LIKE
+                #{key,jdbcType=VARCHAR} OR UPPER(pdi.NAME) LIKE #{key,jdbcType=VARCHAR})</if>
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
     </select>

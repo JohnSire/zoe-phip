@@ -138,13 +138,16 @@
     <select id="getOrgDeptInfoList" resultMap="BaseResultMap" parameterType="java.util.Map">
         select * from PHIP_ORG_DEPT_INFO PODI
         <where>
-            <if test="key !=null and key !=''">AND   UPPER(DEPT_CODE) LIKE
+            <if test="key !=null and key !=''">AND (  UPPER(DEPT_CODE) LIKE
                 #{key,jdbcType=VARCHAR} OR UPPER(DEPT_NAME) LIKE #{key,jdbcType=VARCHAR})</if>
             <if test="deptTypeCode !=null and deptTypeCode !=''">
                 AND PODI.DEPT_TYPE_CODE = #{deptTypeCode,jdbcType=VARCHAR}
             </if>
             <if test="deptParentCode !=null and deptParentCode !=''">
                 AND PODI.DEPT_PARENT_CODE = #{deptParentCode,jdbcType=VARCHAR}
+            </if>
+            <if test="divisionRoot !=null and divisionRoot !=''">
+                AND PODI.DIVISION_ROOT = #{divisionRoot,jdbcType=VARCHAR}
             </if>
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
