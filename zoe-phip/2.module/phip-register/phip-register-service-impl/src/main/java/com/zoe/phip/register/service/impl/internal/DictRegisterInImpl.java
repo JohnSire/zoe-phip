@@ -140,11 +140,16 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     @Override
     public PageList<DictCatalog> dictCatalogTreeQuery() {
         PageList<DictCatalog> pageList = new PageList<DictCatalog>();
-        List<DictCatalog> results = getMapper().selectAll();
+        List<DictCatalog> results = getMapper().getDictCatalogTree();
         PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
         return pageList;
+    }
+
+    @Override
+    public List<DictCatalog> getDictCatalogTree() {
+        return getMapper().getDictCatalogTree();
     }
 
     @Override

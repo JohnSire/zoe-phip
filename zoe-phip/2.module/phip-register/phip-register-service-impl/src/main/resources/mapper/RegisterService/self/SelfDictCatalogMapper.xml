@@ -119,6 +119,10 @@
                    WHERE ID = #{id,jdbcType=VARCHAR})
     </select>
 
+    <select id="getDictCatalogTree" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT * FROM PHIP_DICT_CATALOG ORDER BY TYPE,CREATE_AT
+    </select>
+
     <select id="dictListWithoutFkCatalog" resultMap="MultiResultMap"  parameterType="java.util.Map">
         SELECT * FROM PHIP_DICT_ITEM WHERE TYPE = '1' AND FK_CATALOG_ID IS NULL
     </select>
