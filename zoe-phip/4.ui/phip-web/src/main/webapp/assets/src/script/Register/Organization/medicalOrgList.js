@@ -9,7 +9,6 @@ define(function (require, exports, module) {
         init: function () {
             internal.medicalOrgList();
             internal.medicalOrgCategoryTree();
-
         },
         medicalOrgCategoryTree: function () {
             var treeObj = new BaseTree({
@@ -18,12 +17,34 @@ define(function (require, exports, module) {
                 url: {
                     getTreeList: 'organization/getMedicalOrgCategoryTree',
                 },
+                renderData: function (data) {
+                    var treeData = [];
+                    var parentNode = {
+                        id: data.result.id,
+                        name: data.result.descr,
+                        code: data.result.code,
+                        type: 0,
+                        children: []
+                    };
+                    parentNode["children"] = data.result.dictItemList;
+                    treeData.push(parentNode);
+                    return treeData;
+                },
                 treeParam: {
-                    idFieldName: 'assignedCode',
-                    parentIDFieldName: 'deptParentCode',
-                    textFieldName: 'assignedDeptName',
-                    checkbox: false
-
+                    nodeWidth: 350,
+                    idFieldName: 'id',
+                    textFieldName: 'name',
+                    checkbox: false,
+                    onSelect: function (data) {
+                        internal.deptTypeCode = data["data"]["code"];
+                        internal.type = data["data"]["type"] == 0 ? 0 : 1;
+                        var medicalOrgGrid = common.getGrid("medicalOrgGrid");
+                        if (medicalOrgGrid.get("dataAction") == "local") {
+                            internal.medicalOrgGrid.setServer();
+                        } else {
+                            internal.medicalOrgGrid.reload();
+                        }
+                    }
                 }
 
             })
@@ -46,15 +67,15 @@ define(function (require, exports, module) {
                     ]
                 },
                 extendParam: function () {
-                    return {categoryId: internal.categoryId};
+                    return {deptTypeCode: internal.deptTypeCode, type: internal.type};
                 },
                 gridParam: {
                     dataAction: "local",
-                    url: 'dict/getItemPageList',
+                    url: 'organization/getMedicalOrgList',
                     columns: [
-                        {display: '机构(科室)代码', name: 'code', width: 300, align: 'left'},
-                        {display: '机构(科室)名称', name: 'name', width: 300, align: 'left'},
-                        {display: '联系电话', name: 'name', width: 200, align: 'left'},
+                        {display: '机构(科室)代码', name: 'deptCode', width: 300, align: 'left'},
+                        {display: '机构(科室)名称', name: 'deptName', width: 300, align: 'left'},
+                        {display: '联系电话', name: 'employerTelNo', width: 200, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     frozen: false,
