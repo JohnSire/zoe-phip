@@ -41,6 +41,8 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
     PageList<DictCatalog> dictCatalogTreeQuery();
 
+    List<DictCatalog> getDictCatalogTree();
+
     PageList<DictCatalog> dictCatalogListQueryPage(QueryPage queryPage, String key);
 
     PageList<DictCatalog> dictListQueryPage(QueryPage queryPage, String key);
