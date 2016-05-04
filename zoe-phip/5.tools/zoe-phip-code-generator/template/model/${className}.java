@@ -6,7 +6,7 @@
         import javax.persistence.*;
 
 
-        import ${basepackage}.model.base.BaseEntity;
+        import com.zoe.phip.module.service.entity.MasterEntity;
 
 
 /**

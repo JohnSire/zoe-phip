@@ -91,5 +91,9 @@
     </bean>
 
     <bean id="beanFactory" class="com.zoe.phip.web.bean.BeanFactory"></bean>
+    <bean id="urlExpand" class="com.zoe.phip.web.context.UrlExpand">
+        <property name="path" value="${static-web.url}"/>
+        <property name="version" value="${web.version}"/>
+    </bean>
 
 </beans>

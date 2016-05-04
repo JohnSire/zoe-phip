@@ -6,7 +6,7 @@
 
         import ${basepackage}.model.${className};
         import ${basepackage}.service.in.BaseInService;
-
+        import ${basepackage}.service.service.in.IBaseInService;
 /**
  * 对外发布的服务接口
  *
@@ -14,6 +14,6 @@
  * @version 1.0
  * @date ${now?string("yyyy-MM-dd")}
  */
-public interface ${className}Service extends BaseInService<${className}>{
+public interface I${className}Service extends IBaseInService<${className}>{
 
         }

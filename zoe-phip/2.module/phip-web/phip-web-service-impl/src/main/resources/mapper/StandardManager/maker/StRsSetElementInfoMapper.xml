@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStRsSetElementInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.web.model.sdm.StRsSetElementInfo"
+               extends="com.zoe.phip.module.service.MasterEntityResultMap">
+        <result column="FK_SET_ID" property="fkSetId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ELEMENT_CODE" property="elementCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ELEMENT_NAME" property="elementName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="IS_PRIMARY_KEY" property="isPrimaryKey" javaType="java.math.BigDecimal"
+                jdbcType="DECIMAL"/>
+        <result column="IS_INDEX_KEY" property="isIndexKey" javaType="java.math.BigDecimal"
+                jdbcType="DECIMAL"/>
+        <result column="IS_NULLABLE" property="isNullable" javaType="java.math.BigDecimal"
+                jdbcType="DECIMAL"/>
+        <result column="FK_BASE_ELEMENT_ID" property="fkBaseElementId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="FK_DICT_ID" property="fkDictId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DATA_TYPE" property="dataType" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DATA_LENGTH" property="dataLength" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DATA_ACCURACY" property="dataAccuracy" javaType="java.lang.Integer"
+                jdbcType="DECIMAL"/>
+        <result column="DEFINE" property="define" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="EXPECT_TYPE" property="expectType" javaType="java.lang.Integer"
+                jdbcType="DECIMAL"/>
+        <result column="EXPECT_VALUE" property="expectValue" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="STANDARD_ID" property="standardId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="COLUMN_SORT" property="columnSort" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="OTHERS" property="others" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="STANDARD_CODE" property="standardCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DATA_ALLOW_VALUE" property="dataAllowValue" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="VERSION" property="version" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="addList" parameterType="com.zoe.phip.web.model.sdm.StRsSetElementInfo">
+        INSERT INTO PHIP_ST_RS_SET_ELEMENT_INFO (
+        FK_SET_ID,
+        ELEMENT_CODE,
+        ELEMENT_NAME,
+        IS_PRIMARY_KEY,
+        IS_INDEX_KEY,
+        IS_NULLABLE,
+        FK_BASE_ELEMENT_ID,
+        FK_DICT_ID,
+        DATA_TYPE,
+        DATA_LENGTH,
+        DATA_ACCURACY,
+        DEFINE,
+        EXPECT_TYPE,
+        EXPECT_VALUE,
+        STANDARD_ID,
+        COLUMN_SORT,
+        OTHERS,
+        STANDARD_CODE,
+        DATA_ALLOW_VALUE,
+        VERSION,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+            SELECT
+            #{item.fkSetId,jdbcType=VARCHAR},
+            #{item.elementCode,jdbcType=VARCHAR},
+            #{item.elementName,jdbcType=VARCHAR},
+            #{item.isPrimaryKey,jdbcType=DECIMAL},
+            #{item.isIndexKey,jdbcType=DECIMAL},
+            #{item.isNullable,jdbcType=DECIMAL},
+            #{item.fkBaseElementId,jdbcType=VARCHAR},
+            #{item.fkDictId,jdbcType=VARCHAR},
+            #{item.dataType,jdbcType=VARCHAR},
+            #{item.dataLength,jdbcType=VARCHAR},
+            #{item.dataAccuracy,jdbcType=DECIMAL},
+            #{item.define,jdbcType=VARCHAR},
+            #{item.expectType,jdbcType=DECIMAL},
+            #{item.expectValue,jdbcType=VARCHAR},
+            #{item.standardId,jdbcType=VARCHAR},
+            #{item.columnSort,jdbcType=VARCHAR},
+            #{item.others,jdbcType=VARCHAR},
+            #{item.standardCode,jdbcType=VARCHAR},
+            #{item.dataAllowValue,jdbcType=VARCHAR},
+            #{item.version,jdbcType=VARCHAR},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
+            FROM DUAL
+        </foreach>
+    </insert>
+    <insert id="defaultAdd" parameterType="java.util.List">
+        INSERT INTO PHIP_ST_RS_SET_ELEMENT_INFO (
+        FK_SET_ID,
+        ELEMENT_CODE,
+        ELEMENT_NAME,
+        IS_PRIMARY_KEY,
+        IS_INDEX_KEY,
+        IS_NULLABLE,
+        FK_BASE_ELEMENT_ID,
+        FK_DICT_ID,
+        DATA_TYPE,
+        DATA_LENGTH,
+        DATA_ACCURACY,
+        DEFINE,
+        EXPECT_TYPE,
+        EXPECT_VALUE,
+        STANDARD_ID,
+        COLUMN_SORT,
+        OTHERS,
+        STANDARD_CODE,
+        DATA_ALLOW_VALUE,
+        VERSION,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES(
+        #{fkSetId,jdbcType=VARCHAR},
+        #{elementCode,jdbcType=VARCHAR},
+        #{elementName,jdbcType=VARCHAR},
+        #{isPrimaryKey,jdbcType=DECIMAL},
+        #{isIndexKey,jdbcType=DECIMAL},
+        #{isNullable,jdbcType=DECIMAL},
+        #{fkBaseElementId,jdbcType=VARCHAR},
+        #{fkDictId,jdbcType=VARCHAR},
+        #{dataType,jdbcType=VARCHAR},
+        #{dataLength,jdbcType=VARCHAR},
+        #{dataAccuracy,jdbcType=DECIMAL},
+        #{define,jdbcType=VARCHAR},
+        #{expectType,jdbcType=DECIMAL},
+        #{expectValue,jdbcType=VARCHAR},
+        #{standardId,jdbcType=VARCHAR},
+        #{columnSort,jdbcType=VARCHAR},
+        #{others,jdbcType=VARCHAR},
+        #{standardCode,jdbcType=VARCHAR},
+        #{dataAllowValue,jdbcType=VARCHAR},
+        #{version,jdbcType=VARCHAR},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
+    <delete id="deleteByIds" parameterType="java.lang.String">
+        delete from PHIP_ST_RS_SET_ELEMENT_INFO where ID in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <delete id="deleteByList" parameterType="java.util.List">
+        delete from PHIP_ST_RS_SET_ELEMENT_INFO where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
+            update PHIP_ST_RS_SET_ELEMENT_INFO
+            <set>
+                <if test="item.fkSetId != null">
+                    FK_SET_ID = #{item.fkSetId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.elementCode != null">
+                    ELEMENT_CODE = #{item.elementCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.elementName != null">
+                    ELEMENT_NAME = #{item.elementName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.isPrimaryKey != null">
+                    IS_PRIMARY_KEY = #{item.isPrimaryKey,jdbcType=DECIMAL},
+                </if>
+                <if test="item.isIndexKey != null">
+                    IS_INDEX_KEY = #{item.isIndexKey,jdbcType=DECIMAL},
+                </if>
+                <if test="item.isNullable != null">
+                    IS_NULLABLE = #{item.isNullable,jdbcType=DECIMAL},
+                </if>
+                <if test="item.fkBaseElementId != null">
+                    FK_BASE_ELEMENT_ID = #{item.fkBaseElementId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.fkDictId != null">
+                    FK_DICT_ID = #{item.fkDictId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.dataType != null">
+                    DATA_TYPE = #{item.dataType,jdbcType=VARCHAR},
+                </if>
+                <if test="item.dataLength != null">
+                    DATA_LENGTH = #{item.dataLength,jdbcType=VARCHAR},
+                </if>
+                <if test="item.dataAccuracy != null">
+                    DATA_ACCURACY = #{item.dataAccuracy,jdbcType=DECIMAL},
+                </if>
+                <if test="item.define != null">
+                    DEFINE = #{item.define,jdbcType=VARCHAR},
+                </if>
+                <if test="item.expectType != null">
+                    EXPECT_TYPE = #{item.expectType,jdbcType=DECIMAL},
+                </if>
+                <if test="item.expectValue != null">
+                    EXPECT_VALUE = #{item.expectValue,jdbcType=VARCHAR},
+                </if>
+                <if test="item.standardId != null">
+                    STANDARD_ID = #{item.standardId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.columnSort != null">
+                    COLUMN_SORT = #{item.columnSort,jdbcType=VARCHAR},
+                </if>
+                <if test="item.others != null">
+                    OTHERS = #{item.others,jdbcType=VARCHAR},
+                </if>
+                <if test="item.standardCode != null">
+                    STANDARD_CODE = #{item.standardCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.dataAllowValue != null">
+                    DATA_ALLOW_VALUE = #{item.dataAllowValue,jdbcType=VARCHAR},
+                </if>
+                <if test="item.version != null">
+                    VERSION = #{item.version,jdbcType=VARCHAR},
+                </if>
+                MODIFY_AT=sysdate
+            </set>
+            where id = #{item.id};
+        </foreach>
+    </update>
+
+</mapper>
