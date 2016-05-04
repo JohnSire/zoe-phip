@@ -6,13 +6,14 @@ define(function (require, exports, module) {
         req: require("./req").req,
         buildTree: function (options) {
             var treeParam = options["treeParam"];
-
             internal.req.getList({url: options["url"]["getTreeList"]}, function (data) {
                 var jqTree = $("#" + options["treeId"]);
-                var treeData = data.result.rows;
+                if (typeof (options["renderData"]) == "function") {
+                    data = options["renderData"](data);
+                }
+                var treeData = data;
                 treeParam["data"] = treeData;
-                jqTree.ligerTree(treeParam)
-
+                jqTree.ligerTree(treeParam);
             });
         }
     };

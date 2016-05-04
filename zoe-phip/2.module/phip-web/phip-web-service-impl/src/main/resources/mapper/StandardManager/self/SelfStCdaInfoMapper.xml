@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStCdaInfoMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StCdaInfo" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StCdaInfo">
+        update PHIP_ST_CDA_INFO
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="fkNormSourceId != null">
+                FK_NORM_SOURCE_ID = #{fkNormSourceId,jdbcType=VARCHAR},
+            </if>
+            <if test="define != null">
+                DEFINE = #{define,jdbcType=VARCHAR},
+            </if>
+            <if test="toHtmlXsl != null">
+                TO_HTML_XSL = #{toHtmlXsl,jdbcType=CLOB},
+            </if>
+            <if test="toSummaryXsl != null">
+                TO_SUMMARY_XSL = #{toSummaryXsl,jdbcType=CLOB},
+            </if>
+            <if test="toSetXsl != null">
+                TO_SET_XSL = #{toSetXsl,jdbcType=CLOB},
+            </if>
+            <if test="sampleXml != null">
+                SAMPLE_XML = #{sampleXml,jdbcType=CLOB},
+            </if>
+            <if test="formXml != null">
+                FORM_XML = #{formXml,jdbcType=CLOB},
+            </if>
+            <if test="questionHtml != null">
+                QUESTION_HTML = #{questionHtml,jdbcType=CLOB},
+            </if>
+            <if test="archivesType != null">
+                ARCHIVES_TYPE = #{archivesType,jdbcType=VARCHAR},
+            </if>
+            <if test="descr != null">
+                DESCR = #{descr,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

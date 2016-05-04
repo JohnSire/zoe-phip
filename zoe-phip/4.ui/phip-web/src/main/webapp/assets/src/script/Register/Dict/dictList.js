@@ -18,11 +18,14 @@ define(function (require, exports, module) {
                 btnBox: 'treeBtns',
                 reqInfoKey: 'id',//根据哪个值进去获取对象
                 tools: {
-                    btns: {'add': false, 'edit': false, 'del': false}
+                    btns: {'add': true, 'edit': true, 'del': true}
                 },
                 url: {
                     getTreeList: 'dict/dictCatalogTreeQuery',
                     delTreeInfo: 'dict/delDictCatalogInfo',
+                },
+                renderData: function (data) {
+                    return data.result.rows;
                 },
                 treeParam: {
                     idFieldName: 'id',

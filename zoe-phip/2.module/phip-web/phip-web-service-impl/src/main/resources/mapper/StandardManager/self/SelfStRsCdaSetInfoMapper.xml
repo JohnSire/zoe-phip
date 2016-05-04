@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStRsCdaSetInfoMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StRsCdaSetInfo" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StRsCdaSetInfo">
+        update PHIP_ST_RS_CDA_SET_INFO
+        <set>
+            <if test="fkCdaId != null">
+                FK_CDA_ID = #{fkCdaId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkSetId != null">
+                FK_SET_ID = #{fkSetId,jdbcType=VARCHAR},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStRsSetElementInfoMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StRsSetElementInfo" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StRsSetElementInfo">
+        update PHIP_ST_RS_SET_ELEMENT_INFO
+        <set>
+            <if test="fkSetId != null">
+                FK_SET_ID = #{fkSetId,jdbcType=VARCHAR},
+            </if>
+            <if test="elementCode != null">
+                ELEMENT_CODE = #{elementCode,jdbcType=VARCHAR},
+            </if>
+            <if test="elementName != null">
+                ELEMENT_NAME = #{elementName,jdbcType=VARCHAR},
+            </if>
+            <if test="isPrimaryKey != null">
+                IS_PRIMARY_KEY = #{isPrimaryKey,jdbcType=DECIMAL},
+            </if>
+            <if test="isIndexKey != null">
+                IS_INDEX_KEY = #{isIndexKey,jdbcType=DECIMAL},
+            </if>
+            <if test="isNullable != null">
+                IS_NULLABLE = #{isNullable,jdbcType=DECIMAL},
+            </if>
+            <if test="fkBaseElementId != null">
+                FK_BASE_ELEMENT_ID = #{fkBaseElementId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkDictId != null">
+                FK_DICT_ID = #{fkDictId,jdbcType=VARCHAR},
+            </if>
+            <if test="dataType != null">
+                DATA_TYPE = #{dataType,jdbcType=VARCHAR},
+            </if>
+            <if test="dataLength != null">
+                DATA_LENGTH = #{dataLength,jdbcType=VARCHAR},
+            </if>
+            <if test="dataAccuracy != null">
+                DATA_ACCURACY = #{dataAccuracy,jdbcType=DECIMAL},
+            </if>
+            <if test="define != null">
+                DEFINE = #{define,jdbcType=VARCHAR},
+            </if>
+            <if test="expectType != null">
+                EXPECT_TYPE = #{expectType,jdbcType=DECIMAL},
+            </if>
+            <if test="expectValue != null">
+                EXPECT_VALUE = #{expectValue,jdbcType=VARCHAR},
+            </if>
+            <if test="standardId != null">
+                STANDARD_ID = #{standardId,jdbcType=VARCHAR},
+            </if>
+            <if test="columnSort != null">
+                COLUMN_SORT = #{columnSort,jdbcType=VARCHAR},
+            </if>
+            <if test="others != null">
+                OTHERS = #{others,jdbcType=VARCHAR},
+            </if>
+            <if test="standardCode != null">
+                STANDARD_CODE = #{standardCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dataAllowValue != null">
+                DATA_ALLOW_VALUE = #{dataAllowValue,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                VERSION = #{version,jdbcType=VARCHAR},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

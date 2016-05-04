@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by linqinghuang on 2016/4/21.
  */
@@ -105,9 +106,9 @@ public class OrganizationController extends BaseController {
     @RequestMapping(value = "/getMedicalOrgList")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResult getMedicalOrgList(String type,String deptTypeCode, String keyWord) {
+    public ServiceResult getMedicalOrgList(String type, String deptTypeCode, String keyWord) {
 
-        return ServiceFactory.getOrganizationRegisterIn().organizationListQuery(ComSession.getUserInfo(),type, deptTypeCode, keyWord, getQueryPage());
+        return ServiceFactory.getOrganizationRegisterIn().organizationListQuery(ComSession.getUserInfo(), type, deptTypeCode, keyWord, getQueryPage());
 
     }
 
@@ -120,10 +121,10 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/getMedicalOrgCategoryTree")
     @ResponseBody
     public ServiceResultT<NationalStandards> getMedicalOrgCategoryList(String codeSystem) {
-       return ServiceFactory.getOrganizationRegisterIn().dictItemListQueryByCodeSystem(ComSession.getUserInfo(),codeSystem);
+        codeSystem = "2.16.156.10011.2.3.4.1";
+        return ServiceFactory.getOrganizationRegisterIn().dictItemListQueryByCodeSystem(ComSession.getUserInfo(), codeSystem);
 
     }
-
 
 
 }

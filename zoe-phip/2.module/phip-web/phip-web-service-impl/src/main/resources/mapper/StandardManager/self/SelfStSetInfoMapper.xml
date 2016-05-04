@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStSetInfoMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StSetInfo" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StSetInfo">
+        update PHIP_ST_SET_INFO
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                PID = #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="alias != null">
+                ALIAS = #{alias,jdbcType=VARCHAR},
+            </if>
+            <if test="fkNormSourceId != null">
+                FK_NORM_SOURCE_ID = #{fkNormSourceId,jdbcType=VARCHAR},
+            </if>
+            <if test="xpath != null">
+                XPATH = #{xpath,jdbcType=VARCHAR},
+            </if>
+            <if test="bussTimeFieldId != null">
+                BUSS_TIME_FIELD_ID = #{bussTimeFieldId,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                VERSION = #{version,jdbcType=DECIMAL},
+            </if>
+            <if test="descr != null">
+                DESCR = #{descr,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
