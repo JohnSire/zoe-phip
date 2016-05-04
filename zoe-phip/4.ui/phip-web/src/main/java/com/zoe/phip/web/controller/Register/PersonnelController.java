@@ -179,7 +179,7 @@ public class PersonnelController extends BaseController {
     @RequestMapping(value = "/getMedStfList")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResultT<PageList<MedicalStaffInfo>> getMedStfList(String deptCode,String keyWord) {
+    public ServiceResultT<PageList<MedicalStaffInfo>> getMedStfList(String keyWord,String deptCode) {
         return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), keyWord, deptCode, getQueryPage());
     }
 
@@ -247,6 +247,9 @@ public class PersonnelController extends BaseController {
     public ServiceResult delMedStfList(String ids) {
         return ServiceFactory.getMedicalStaffRegisterIn().deleteByIds(ComSession.getUserInfo(), ids);
     }
+
+
+
     //endregion
 
     // TODO: 2016/4/21

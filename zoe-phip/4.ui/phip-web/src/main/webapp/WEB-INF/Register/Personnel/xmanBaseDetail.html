@@ -14,7 +14,7 @@ var bodySection = {
                            nullmsg="请填写姓名！"/>
                 </p>
                 <div class="column-three">
-                    <label class="label" for="sexCode"><span class="text-mark">*</span>性别：</label>
+                    <label class="label" for="sexCode">性别：</label>
 
                     <div class="simulate-select" id="selFkParent">
                         <span class="text" title="--请选择性别--">--请选择性别--</span>
@@ -34,11 +34,9 @@ var bodySection = {
 
                 </div>
                 <p class="column-three">
-                    <label class="label" for="birthDate"><span class="text-mark">*</span>出生日期：</label>
+                    <label class="label" for="birthDate">出生日期：</label>
                     <span class="text-line-outer">
-                    <input edittype="date" type="text" name="birthDate" class="text" datatype="*1-36"
-                           errormsg="出生日期长度应为1~36位！"
-                           nullmsg="请填写出生日期！"/>
+                    <input edittype="date" type="text" name="birthDate" class="text"/>
                     </span>
                 </p>
             </li>
@@ -49,9 +47,9 @@ var bodySection = {
                            nullmsg="请填写身份证件号！"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="telNo"><span class="text-mark">*</span>联系电话：</label>
-                    <input type="text" name="telNo" class="text" datatype="*1-128" errormsg="联系电话长度应为1~128位！"
-                           nullmsg="请填写联系电话！"/>
+                    <label class="label" for="patientId"><span class="text-mark">*</span>编码：</label>
+                    <input type="text" name="patientId" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"
+                           nullmsg="请填写编码！"/>
                 </p>
                 <p class="column-three">
                     <label class="label" for="cardCode"><span class="text-mark">*</span>健康卡号：</label>
@@ -61,7 +59,7 @@ var bodySection = {
             </li>
             <li class="list">
                 <div class="column-three">
-                    <label class="label" for="sexCodeName"><span class="text-mark">*</span>婚姻状况：</label>
+                    <label class="label" for="sexCodeName">婚姻状况：</label>
                     <div class="simulate-select" id="">
                         <span class="text" title="--请选择性别--">--请选择婚姻状况--</span>
                         <i class="icon-grid icon-grid-fold-gray"></i>
@@ -97,10 +95,13 @@ var bodySection = {
                 </p>
             </li>
             <li class="list">
-                <p class="column-one">
-                    <label class="label" for="address"><span class="text-mark">*</span>联系地址：</label>
-                    <input type="text" name="address" class="text" datatype="*1-128" errormsg="婚姻状况长度应为1~128位！"
-                           nullmsg="请填写婚姻状况！"/>
+                <p class="column-three">
+                    <label class="label" for="telNo">联系电话：</label>
+                    <input type="text" name="telNo" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="address">联系地址：</label>
+                    <input type="text" name="address" class="text"/>
                 </p>
             </li>
         </ul>
@@ -112,29 +113,25 @@ var bodySection = {
         <ul class="y-dialog-lists clearfix">
             <li class="list">
                 <p class="column-three">
-                    <label class="label" for="employerName"><span class="text-mark">*</span>工作单位：</label>
-                    <input type="text" name="employerName" class="text" datatype="*1-128" errormsg="工作单位长度应为1~128位！"
-                           nullmsg="请填写工作单位！"/>
+                    <label class="label" for="employerName">工作单位：</label>
+                    <input type="text" name="employerName" class="text"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="employerTelNo"><span class="text-mark">*</span>工作联系电话：</label>
-                    <input type="text" name="employerTelNo" class="text" datatype="*1-256" errormsg="工作联系电话长度应为1~256位！"
-                           nullmsg="请填写工作联系电话！"/>
+                    <label class="label" for="employerTelNo">工作联系电话：</label>
+                    <input type="text" name="employerTelNo" class="text"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="occupationName"><span class="text-mark">*</span>职业类别：</label>
-                    <input type="text" name="occupationName" class="text" datatype="*1-256" errormsg="职业类别长度应为1~256位！"
-                           nullmsg="请填写职业类别！"/>
+                    <label class="label" for="occupationName">职业类别：</label>
+                    <input type="text" name="occupationName" class="text"/>
                 </p>
             </li>
             <li class="list">
                 <p class="column-three">
-                    <label class="label" for="postalCode"><span class="text-mark">*</span>邮政编码：</label>
-                    <input type="text" name="postalCode" class="text" datatype="*1-128" errormsg="邮政编码长度应为1~128位！"
-                           nullmsg="请填写邮政编码！"/>
+                    <label class="label" for="postalCode">邮政编码：</label>
+                    <input type="text" name="postalCode" class="text"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="xcOrgCode"><span class="text-mark">*</span>健康卡发放机构：</label>
+                    <label class="label" for="xcOrgCode">健康卡发放机构：</label>
                     <input type="text" name="xcOrgCode" class="text" datatype="*1-128" errormsg="健康卡发放机构长度应为1~128位！"
                            nullmsg="请填写健康卡发放机构！"/>
                 </p>
@@ -147,19 +144,16 @@ var bodySection = {
             </li>
             <li class="list">
                 <p class="column-three">
-                    <label class="label" for="relName"><span class="text-mark">*</span>联系人：</label>
-                    <input type="text" name="relName" class="text" datatype="*1-128" errormsg="联系人长度应为1~128位！"
-                           nullmsg="请填写联系人！"/>
+                    <label class="label" for="relName">联系人：</label>
+                    <input type="text" name="relName" class="text"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="relTelNo"><span class="text-mark">*</span>联系人电话：</label>
-                    <input type="text" name="relTelNo" class="text" datatype="*1-128" errormsg="联系人电话长度应为1~128位！"
-                           nullmsg="请填写联系人电话！"/>
+                    <label class="label" for="relTelNo">联系人电话：</label>
+                    <input type="text" name="relTelNo" class="text"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="codeSysName"><span class="text-mark">*</span>医保类型：</label>
-                    <input type="text" name="codeSysName" class="text" datatype="*1-16" errormsg="医保类型长度应为1~16位！"
-                           nullmsg="请填写医保类型！"/>
+                    <label class="label" for="codeSysName">医保类型：</label>
+                    <input type="text" name="codeSysName" class="text"/>
                 </p>
             </li>
             <li class="list">

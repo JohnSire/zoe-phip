@@ -21,7 +21,16 @@ define(function (require, exports, module) {
                     idFieldName: 'deptCode',
                     parentIDFieldName: 'deptParentCode',
                     textFieldName: 'deptName',
-                    checkbox: false
+                    checkbox: false,
+                    onSelect: function (data) {
+                        internal.deptCode = data["data"]["deptCode"];
+                        var medicalStaffGrid = common.getGrid("medicalStaffGrid");
+                        if (medicalStaffGrid.get("dataAction") == "local") {
+                            internal.medicalStaffGrid.setServer();
+                        } else {
+                            internal.medicalStaffGrid.reload();
+                        }
+                    }
                 }
 
             })
@@ -44,7 +53,7 @@ define(function (require, exports, module) {
                     ]
                 },
                 extendParam: function () {
-                    return {categoryId: internal.categoryId};
+                    return {deptCode: internal.deptCode};
                 },
                 gridParam: {
                     dataAction: "local",
