@@ -46,9 +46,13 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         //数据是否存在判断
         Example example = new Example(DictCatalog.class);
         example.createCriteria().andEqualTo("code", dictCatalog.getCode());
-        int count = getMapper().selectCountByExample(example);
-        if (count > 0) {
-            throw new BusinessException("001");
+        List<DictCatalog> catalogs = getMapper().selectByExample(example);
+        if (catalogs.size() > 0) {
+            for (DictCatalog catalog:catalogs) {
+                if(catalog.getType() == dictCatalog.getType()) {
+                    throw new BusinessException("001");
+                }
+            }
         }
         //保存到数据库
         dictCatalog.setId(StringUtil.getUUID());
@@ -273,10 +277,14 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public DictItem addDictItemRequest(DictItem dictItem) throws Exception {
         //数据是否存在判断
         Example example = new Example(DictItem.class);
-        example.createCriteria().andEqualTo("id", dictItem.getCode());
-        int count = dictItemMapper.selectCountByExample(example);
-        if (count > 0) {
-            throw new BusinessException("001");
+        example.createCriteria().andEqualTo("code", dictItem.getCode());
+        List<DictItem> dictItems = dictItemMapper.selectByExample(example);
+        if (dictItems.size() > 0) {
+            for (DictItem di:dictItems) {
+                if(di.getFkCatalogId() == dictItem.getFkCatalogId()) {
+                    throw new BusinessException("001");
+                }
+            }
         }
         //保存到数据库
         dictItem.setId(StringUtil.getUUID());
