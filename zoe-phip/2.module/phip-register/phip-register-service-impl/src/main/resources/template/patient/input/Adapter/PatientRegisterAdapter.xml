@@ -35,7 +35,7 @@
     <AssignedPersonCode descr="作者职工代码" path="//controlActProcess/subject/registrationRequest/author/assignedEntity/id/@extension"/>
     <AssignedPersonName descr="作者姓名" path="//controlActProcess/subject/registrationRequest/author/assignedEntity/assignedPerson/name"/>
     <CreateTime descr="建档时间" path="//creationTime/@value"/>
-    <ReqisterDate descr="登记日期" path="//controlActProcess/subject/registrationRequest/subject1/patient/effectiveTime/@value"/>
+    <EffectiveTime descr="患者登记时间" path="//controlActProcess/subject/registrationRequest/subject1/patient/effectiveTime/@value"/>
     <HealthRecordNo descr="城乡居民健康档案编号" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/@extension"/>
     <HealthRecordOrgCode descr="建档机构代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/scopingOrganization/id/@extension"/>
     <PatientId descr="病人ID" path="//controlActProcess/subject/registrationRequest/subject1/patient/id/@extension"/>

@@ -118,8 +118,8 @@
             <if test="statusCode != null">
                 STATUS_CODE = #{statusCode,jdbcType=VARCHAR},
             </if>
-            <if test="reqisterDate != null">
-                REQISTER_DATE = #{reqisterDate,jdbcType=TIMESTAMP},
+            <if test="effectiveTime != null">
+                EFFECTIVE_TIME = #{effectiveTime,jdbcType=TIMESTAMP},
             </if>
             <if test="employerTelNo != null">
                 EMPLOYER_TEL_NO = #{employerTelNo,jdbcType=VARCHAR},
@@ -128,18 +128,18 @@
         </set>
         where HEALTH_RECORD_NO = #{healthRecordNo,jdbcType=VARCHAR}
     </update>
-    <select id="getPatient" parameterType="java.lang.String" resultMap="BaseResultMap">
-        SELECT * FROM PHIP_XMAN_BASE_INFO T WHERE T.PATIENT_ID=#{id} OR T.HEALTH_RECORD_NO=#{id} AND ROWNUM=1
+    <select id="getPatient" parameterType="java.lang.String" resultMap="MultiResultMap">
+        <include refid="patientSelect"/>
+        WHERE P.PATIENT_ID=#{id} OR P.HEALTH_RECORD_NO=#{id} AND ROWNUM=1
     </select>
     <select id="getPatientList" resultMap="MultiResultMap" parameterType="java.util.Map">
         SELECT B.*,C.XC_CARD_CODE,S.NAME AS SEX_CODE_NAME FROM PHIP_XMAN_BASE_INFO B
         LEFT JOIN PHIP_XMAN_CARD C ON B.ID=C.XC_XMAN_ID
         LEFT JOIN (
-        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
-        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
-        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
-        WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.4' --性别
-        ) S ON B.SEX_CODE=S.CODE
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON B.SEX_CODE=S.CODE --性别
         <where>
             <if test="_parameter.containsKey('key') and _parameter.containsKey('key')!=''">
                 (UPPER(B.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(B.HEALTH_RECORD_NO) LIKE
@@ -148,40 +148,46 @@
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
     </select>
+
     <select id="getPatientByPrimaryKey" parameterType="java.lang.String" resultMap="MultiResultMap">
-        SELECT P.*,S.NAME AS SEX_CODE_NAME,N.NAME AS NATIONALITY_NAME,O.NAME AS OCCUPATION_NAME
-        ,M.NAME AS MARRIAGE_NAME,C.NAME AS CODE_SYS_NAME,X.XC_CARD_CODE FROM PHIP_XMAN_BASE_INFO P
-        LEFT JOIN (
-        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
-        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
-        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
-        WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.4' --性别
-        ) S ON P.SEX_CODE=S.CODE
-        LEFT JOIN (
-        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
-        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
-        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
-        WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.3' --民族
-        ) N ON P.NATIONALITY_CODE=N.CODE
-        LEFT JOIN (
-        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
-        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
-        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
-        WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.7' --职业
-        ) O ON P.OCCUPATION_CODE=N.CODE
-        LEFT JOIN (
-        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
-        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
-        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
-        WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.5' --婚姻状况
-        ) M ON P.MARRIAGE_CODE=M.CODE
-        LEFT JOIN (
-        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
-        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
-        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
-        WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.1.248' --医疗保险类别
-        ) C ON P.CODE_SYS_CODE=C.CODE
-        LEFT JOIN PHIP_XMAN_CARD X ON P.ID=X.XC_XMAN_ID
+        <include refid="patientSelect"/>
         WHERE P.ID=#{id}
     </select>
+    <sql id="patientSelect">
+        SELECT P.*,S.NAME AS SEX_CODE_NAME,N.NAME AS NATIONALITY_NAME,O.NAME AS OCCUPATION_NAME,
+        M.NAME AS MARRIAGE_NAME,C.NAME AS CODE_SYS_NAME,X.XC_CARD_CODE
+        FROM PHIP_XMAN_BASE_INFO P
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON P.SEX_CODE=S.CODE --性别
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.3"/>
+        </include>
+        ) N ON P.NATIONALITY_CODE=N.CODE --民族
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.7"/>
+        </include>
+        ) O ON P.OCCUPATION_CODE=N.CODE --职业
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.5"/>
+        </include>
+        ) M ON P.MARRIAGE_CODE=M.CODE --婚姻状况
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.1.248"/>
+        </include>
+        ) C ON P.CODE_SYS_CODE=C.CODE
+        LEFT JOIN PHIP_XMAN_CARD X ON P.ID=X.XC_XMAN_ID --医疗保险类别
+    </sql>
+    <sql id="oidSelect">
+        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
+        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
+        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
+        WHERE PNS.CODE_SYSTEM = '${oidValue}'
+    </sql>
 </mapper>

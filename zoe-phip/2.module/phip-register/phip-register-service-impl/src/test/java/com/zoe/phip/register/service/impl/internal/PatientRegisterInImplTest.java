@@ -28,4 +28,10 @@ public class PatientRegisterInImplTest extends BaseTest {
     public void testGetById() throws Exception {
         XmanBaseInfo result= patientRegister.getById("ecd03ef24b7143d29aa4d57574f192c2");
     }
+
+    @Test
+    public void testGetPatient() throws Exception {
+        XmanBaseInfo result= patientRegister.getPatient("123456789");
+
+    }
 }
