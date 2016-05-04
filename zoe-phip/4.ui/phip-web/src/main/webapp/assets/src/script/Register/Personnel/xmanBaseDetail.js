@@ -14,10 +14,10 @@ define(function (require, exports, module) {
                 loadPageEvent: function () {
                 },
                 dialogParam: {
-                    primaryKey: 'id',//主键
+                    primaryKey: 'id'//主键
                 }
             })
-        },
+        }
     }
     exports.init = function () {
         internal.init();
