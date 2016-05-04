@@ -14,7 +14,7 @@ define(function (require, exports, module) {
             getTreeList: ""
         },
         renderData: function (data) {
-            return data;
+            return data.result.rows;
         },
         validate: {
             //点击新增按钮验证

@@ -14,7 +14,7 @@ var bodySection = {
                            nullmsg="请填写姓名！"/>
                 </p>
                 <p class="column-two">
-                    <label class="label" for="genderName"><span class="text-mark">*</span>性别：</label>
+                    <label class="label" for="genderName">性别：</label>
                     <input name="genderName" type="radio"/> <label>男 </label>
                     <input name="genderName" type="radio"/><label>女 </label>
                     <input name="genderName" type="radio"/><label>未知 </label>
@@ -28,44 +28,34 @@ var bodySection = {
                            nullmsg="请填写身份证件号！"/>
                 </p>
                 <p class="column-two">
-                    <label class="label" for="technicalName"><span class="text-mark">*</span>职务：</label>
-                    <input type="text" name="technicalName" class="text" datatype="*1-128" errormsg="职务长度应为1~128位！"
-                           nullmsg="请填写联系职务！"/>
+                    <label class="label" for="technicalName">职务：</label>
+                    <input type="text" name="technicalName" class="text"/>
                 </p>
             </li>
             <li class="list">
                 <p class="column-two">
-                    <label class="label" for="birthTime"><span class="text-mark">*</span>出生日期：</label>
+                    <label class="label" for="birthTime">出生日期：</label>
                     <span class="text-line-outer">
-                    <input edittype="date" type="text" name="birthTime" class="text" datatype="*1-36"
-                           errormsg="出生日期开始长度应为1~36位！"
-                           nullmsg="请填写出生日期！"/>
+                    <input edittype="date" type="text" name="birthTime" class="text"/>
                     </span>
                 </p>
                 <p class="column-two">
-                    <label class="label" for="CATALOG_ID"><span class="text-mark">*</span>隶属：</label>
-                    <input type="text" name="CATALOG_ID" class="text" datatype="*1-128" errormsg="隶属长度应为1~128位！"
-                           nullmsg="请填写隶属！"/>
+                    <label class="label" for="CATALOG_ID">隶属：</label>
+                    <input type="text" name="CATALOG_ID" class="text"/>
                 </p>
             </li>
 
             <li class="list">
                 <p class="column-one">
-                    <label class="label" for="birthplaceAddr"><span class="text-mark">*</span>出生地：</label>
-                    <input type="text" name="birthplaceAddr" class="text" style="width:520px;height:20px;"
-                           datatype="*1-256"
-                           errormsg="出生地长度应为1~256位！"
-                           nullmsg="请填写出生地！"/>
+                    <label class="label" for="birthplaceAddr">出生地：</label>
+                    <input type="text" name="birthplaceAddr" class="text" style="width:520px;height:20px;"/>
                 </p>
             </li>
 
             <li class="list">
                 <p class="column-one">
-                    <label class="label" for="employerAddr"><span class="text-mark">*</span>工作地址：</label>
-                    <input type="text" name="employerAddr" class="text" style="width:520px;height:20px;"
-                           datatype="*1-256"
-                           errormsg="工作地址长度应为1~256位！"
-                           nullmsg="请填写工作地址！"/>
+                    <label class="label" for="employerAddr">工作地址：</label>
+                    <input type="text" name="employerAddr" class="text" style="width:520px;height:20px;"/>
                 </p>
             </li>
         </ul>
@@ -77,41 +67,32 @@ var bodySection = {
         <ul class="y-dialog-lists clearfix">
             <li class="list">
                 <p class="column-two">
-                    <label class="label" for="effectiveTimeLow"><span class="text-mark">*</span>有效期开始：</label>
+                    <label class="label" for="effectiveTimeLow">有效期开始：</label>
                     <span class="text-line-outer">
-                    <input edittype="date" type="text" name="effectiveTimeLow" class="text" datatype="*1-36"
-                           errormsg="角色有效期开始长度应为1~36位！"
-                           nullmsg="请填写角色有效期开始！"/>
+                    <input edittype="date" type="text" name="effectiveTimeLow" class="text" />
                     </span>
                 </p>
                 <p class="column-two">
-                    <label class="label" for="effectiveTimeHigh"><span class="text-mark">*</span>有效期结束：</label>
+                    <label class="label" for="effectiveTimeHigh">有效期结束：</label>
                     <span class="text-line-outer">
-                    <input edittype="date" type="text" name="effectiveTimeHigh" class="text" datatype="*1-36"
-                           errormsg="角色有效期结束长度应为1~36位！"
-                           nullmsg="请填写角色有效期结束！"/>
+                    <input edittype="date" type="text" name="effectiveTimeHigh" class="text"/>
                     </span>
                 </p>
             </li>
             <li class="list">
                 <p class="column-two">
-                    <label class="label" for="assignedName"><span class="text-mark">*</span>申请人：</label>
-                    <input type="text" name="assignedName" class="text" datatype="*1-256" errormsg="申请人长度应为1~256位！"
-                           nullmsg="请填写申请人！"/>
+                    <label class="label" for="assignedName">申请人：</label>
+                    <input type="text" name="assignedName" class="text"/>
                 </p>
                 <p class="column-two">
-                    <label class="label" for="assignedDeptName"><span class="text-mark">*</span>申请人所属科室：</label>
-                    <input type="text" name="assignedDeptName" class="text" datatype="*1-256"
-                           errormsg="申请人所属科室长度应为1~256位！"
-                           nullmsg="请填写申请人所属科室！"/>
+                    <label class="label" for="assignedDeptName">申请人所属科室：</label>
+                    <input type="text" name="assignedDeptName" class="text"/>
                 </p>
             </li>
             <li class="list">
                 <p class="column-two">
-                    <label class="label" for="assignedContactPerson"><span class="text-mark">*</span>联系人：</label>
-                    <input type="text" name="assignedContactPerson" class="text" datatype="*1-256"
-                           errormsg="联系人长度应为1~256位！"
-                           nullmsg="请填写联系人！"/>
+                    <label class="label" for="assignedContactPerson">联系人：</label>
+                    <input type="text" name="assignedContactPerson" class="text"/>
                 </p>
             </li>
         </ul>

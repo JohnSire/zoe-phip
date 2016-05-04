@@ -148,6 +148,7 @@ public class MedicalStaffInfo extends RegisterEntity {
 
     //@Transient
     @Column(name = "CREATION_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd ")
     private Date creationTime;
 
 

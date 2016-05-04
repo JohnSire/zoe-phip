@@ -1,9 +1,9 @@
 package com.zoe.phip.web.controller.Register;
 
 import com.zoe.phip.infrastructure.annotation.AuthAction;
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.infrastructure.security.Permission;
+import com.zoe.phip.register.model.DictItem;
 import com.zoe.phip.register.model.NationalStandards;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.web.context.ComSession;
@@ -121,9 +121,13 @@ public class OrganizationController extends BaseController {
     @ResponseBody
     public ServiceResultT<NationalStandards> getMedicalOrgCategoryList(String codeSystem) {
         codeSystem = "2.16.156.10011.2.3.4.1";
-        //codeSystem= "2.16.156.10011.2.3.2.62";
         return ServiceFactory.getOrganizationRegisterIn().dictItemListQueryByCodeSystem(ComSession.getUserInfo(), codeSystem);
+    }
 
+    @RequestMapping("/getMedicalOrgCategoryList")
+    @ResponseBody
+    public ServiceResultT<PageList<DictItem>> getMedicalOrgCategoryList(String codeSystem, String keyWord) {
+        return ServiceFactory.getOrganizationRegisterIn().getDictItemPage(ComSession.getUserInfo(), codeSystem, keyWord, getQueryPage());
     }
 
 

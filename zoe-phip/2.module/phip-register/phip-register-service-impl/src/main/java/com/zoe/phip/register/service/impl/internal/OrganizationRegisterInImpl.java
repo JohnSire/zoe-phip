@@ -233,7 +233,11 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
        List<DictItem> results =
        dictItemMapper.getDictItemNewOrgTree(MapUtil.createMap(m -> {
            m.put("codeSystem", codeSystem);
-           m.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+           if (!StringUtil.isNullOrWhiteSpace(key)) {
+               m.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+           }
+
+
        }));
        PageInfo<DictItem> pageInfo = new PageInfo<DictItem>(results);
        pageList.setTotal((int) pageInfo.getTotal());

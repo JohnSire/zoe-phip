@@ -58,7 +58,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 性别名称
      */
     @Transient
-    @Column(name = "SEX_CODE_NAME")
+//    @Column(name = "SEX_CODE_NAME")
     private String sexCodeName;
 
 
@@ -238,7 +238,6 @@ public class XmanBaseInfo extends RegisterEntity {
      * 医疗保险类别名称
      */
     @Transient
-    @Column(name = "CODE_SYS_NAME")
     private String codeSysName;
 
     /**

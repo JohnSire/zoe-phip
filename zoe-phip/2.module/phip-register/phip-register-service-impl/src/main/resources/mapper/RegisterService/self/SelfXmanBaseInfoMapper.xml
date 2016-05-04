@@ -3,6 +3,11 @@
 <mapper namespace="com.zoe.phip.register.dao.IXmanBaseInfoMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.XmanBaseInfo" extends="BaseResultMap">
         <result column="XC_CARD_CODE" property="cardCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="SEX_CODE_NAME" property="sexCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="NATIONALITY_NAME" property="nationalityName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="OCCUPATION_NAME" property="occupationName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="MARRIAGE_NAME" property="marriageName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CODE_SYS_NAME" property="codeSysName" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.XmanBaseInfo">
         update PHIP_XMAN_BASE_INFO
@@ -127,7 +132,14 @@
         SELECT * FROM PHIP_XMAN_BASE_INFO T WHERE T.PATIENT_ID=#{id} OR T.HEALTH_RECORD_NO=#{id} AND ROWNUM=1
     </select>
     <select id="getPatientList" resultMap="MultiResultMap" parameterType="java.util.Map">
-        SELECT B.*,C.XC_CARD_CODE FROM PHIP_XMAN_BASE_INFO B LEFT JOIN PHIP_XMAN_CARD C ON B.ID=C.XC_XMAN_ID
+        SELECT B.*,C.XC_CARD_CODE,S.NAME AS SEX_CODE_NAME FROM PHIP_XMAN_BASE_INFO B
+        LEFT JOIN PHIP_XMAN_CARD C ON B.ID=C.XC_XMAN_ID
+        LEFT JOIN (
+        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
+        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
+        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
+        WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.4' --性别
+        ) S ON B.SEX_CODE=S.CODE
         <where>
             <if test="_parameter.containsKey('key') and _parameter.containsKey('key')!=''">
                 (UPPER(B.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(B.HEALTH_RECORD_NO) LIKE
@@ -135,5 +147,41 @@
             </if>
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
+    </select>
+    <select id="getPatientByPrimaryKey" parameterType="java.lang.String" resultMap="MultiResultMap">
+        SELECT P.*,S.NAME AS SEX_CODE_NAME,N.NAME AS NATIONALITY_NAME,O.NAME AS OCCUPATION_NAME
+        ,M.NAME AS MARRIAGE_NAME,C.NAME AS CODE_SYS_NAME,X.XC_CARD_CODE FROM PHIP_XMAN_BASE_INFO P
+        LEFT JOIN (
+        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
+        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
+        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
+        WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.4' --性别
+        ) S ON P.SEX_CODE=S.CODE
+        LEFT JOIN (
+        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
+        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
+        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
+        WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.3' --民族
+        ) N ON P.NATIONALITY_CODE=N.CODE
+        LEFT JOIN (
+        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
+        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
+        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
+        WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.7' --职业
+        ) O ON P.OCCUPATION_CODE=N.CODE
+        LEFT JOIN (
+        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
+        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
+        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
+        WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.5' --婚姻状况
+        ) M ON P.MARRIAGE_CODE=M.CODE
+        LEFT JOIN (
+        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
+        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
+        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
+        WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.1.248' --医疗保险类别
+        ) C ON P.CODE_SYS_CODE=C.CODE
+        LEFT JOIN PHIP_XMAN_CARD X ON P.ID=X.XC_XMAN_ID
+        WHERE P.ID=#{id}
     </select>
 </mapper>
