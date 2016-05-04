@@ -12,9 +12,17 @@ define(function (require, exports, module) {
                 addUrl: 'personnel/addXmanInfo',//新增接口Url
                 updateUrl: 'personnel/updateXmanInfo',//修改接口Url
                 loadPageEvent: function () {
-                },
-                dialogParam: {
-                    primaryKey: 'id'//主键
+                    $("#selSex").select({
+                        isAsync: true,//是否异步加载，点击时加载数据，如果已经请求过的就不在请求
+                        ajaxParam: {
+                            type: "get",
+                            url: 'organization/getMedicalOrgCategoryTree',//url 请求的地址
+                        },
+                        data: [],
+                        value: '',//值
+                        text: '',//展示的内容
+                        rows: 6//显示几行，如果超过的则出现滚动条，如果少于不影响
+                    });
                 }
             })
         }

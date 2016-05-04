@@ -54,7 +54,8 @@
                 case "select":
                     jqObj.find("option[value='" + o + "']").attr("selected", "selected");
                     jqObj.val(o);
-                    $("select[name='" + i + "']").trigger("change", o);//配合switch插件用；radio值绑定时,switch会自动切换；
+                    jqObj.trigger("setValue", obj);//配合select插件用
+
                     break;
                 case "radio":
                     $("input[name='" + i + "'][value='" + o + "']").prop("checked", true);
@@ -162,9 +163,13 @@
             defaultOptions: {
                 isAsync: true,//是否异步加载，点击时加载数据，如果已经请求过的就不在请求
                 ajaxParam: {
-                    type: "get",
+                    type: "post",
                     url: '',//url 请求的地址
-                    data: {}
+                    data: [],
+                    success: function (data) {
+
+                    }
+
                 },
                 data: [],
                 preText: '',//预加载显示内容
@@ -178,28 +183,33 @@
             },
             //渲染插件
             render: function (self) {
-
+                internal.req(self["param"], function (data) {
+                    //alert(JSON.stringify(data));
+                })
             },
             //ajax请求
             //need reuqest.js
             req: function (options, callback) {
                 options["ajaxParam"]["isTip"] = false;
                 options["ajaxParam"]["success"] = function (data) {
-                    if (typeof(data) == "string") {
-                        data = $.parseJSON(data);
-                    }
                     if ($.isFunction(callback) && data.isSuccess) {
-                        callback(data.result);
+                        //callback(data);
                     }
                 }
-                var req = new Request(options["ajaxParam"]["url"]);
+                var url = options["ajaxParam"]["url"];
+                var req = new Request(url);
+                $.each(options["ajaxParam"], function (index, item) {
+                    if (index == "url") {
+                        delete  options["ajaxParam"]["url"];
+                    }
+                })
                 if (options["ajaxParam"]["type"] == "get") {
                     req.get(options["ajaxParam"]);
                 } else {
                     req.post(options["ajaxParam"]);
                 }
 
-            }
+            },
         }
         var target = this;
         $(target).each(function () {

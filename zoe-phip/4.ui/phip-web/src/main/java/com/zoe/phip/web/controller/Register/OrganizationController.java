@@ -123,7 +123,6 @@ public class OrganizationController extends BaseController {
     public ServiceResultT<NationalStandards> getMedicalOrgCategoryList(String codeSystem) {
         codeSystem = "2.16.156.10011.2.3.4.1";
         return ServiceFactory.getOrganizationRegisterIn().dictItemListQueryByCodeSystem(ComSession.getUserInfo(), codeSystem);
-
     }
 
 
