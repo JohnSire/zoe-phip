@@ -2,7 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.web.dao.sdm.IStCdaInfoMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StCdaInfo" extends="BaseResultMap">
-
+    </resultMap>
+    <resultMap id="SqlResultMap" type="com.zoe.phip.web.model.sdm.StCdaInfo"
+               extends="com.zoe.phip.module.service.MasterEntityResultMap">
+        <result column="DA_NAME" property="archiveName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CODE" property="code" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="FK_NORM_SOURCE_ID" property="fkNormSourceId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DEFINE" property="define" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ARCHIVES_TYPE" property="archivesType" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DESCR" property="descr" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StCdaInfo">
         update PHIP_ST_CDA_INFO
@@ -50,4 +65,31 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="getDataPageList" parameterType="java.util.Map" resultMap="SqlResultMap">
+        SELECT PSCI.ID,
+        PSCI.CODE,
+        PSCI.NAME,
+        PSCI.FK_NORM_SOURCE_ID,
+        PSCI.DEFINE,
+        PSCI.ARCHIVES_TYPE,
+        PSCI.DESCR,
+        ssdi.NAME DA_NAME
+        FROM PHIP_ST_CDA_INFO PSCI
+        LEFT JOIN SYS_SYSTEM_DICT_ITEM SSDI
+        ON PSCI.ID = SSDI.ID
+        WHERE 1 = 1
+        <if test="_parameter.containsKey('key')">
+            AND UPPER (CONCAT(PSCI.CODE,PSCI.name) ) LIKE UPPER (CONCAT(CONCAT('%', #{key, jdbcType=VARCHAR}),'%'))
+        </if>
+    </select>
+
+    <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT (1) from PHIP_ST_CDA_INFO PSCI
+        WHERE UPPER (PSCI.CODE) = UPPER (#{code, jdbcType=VARCHAR})
+        <if test="_parameter.containsKey('id')">
+            and PSCI.id != #{id, jdbcType=VARCHAR}
+        </if>
+    </select>
+
 </mapper>

@@ -143,4 +143,15 @@ public class StSetInfo extends MasterEntity {
     public void setDescr(String descr) {
         this.descr = descr;
     }
+
+    @Transient
+    private String sourceName;
+
+    public String getSourceName() {
+        return sourceName;
+    }
+
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+    }
 }

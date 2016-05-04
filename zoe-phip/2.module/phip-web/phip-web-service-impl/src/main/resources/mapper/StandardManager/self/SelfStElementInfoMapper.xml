@@ -2,7 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.web.dao.sdm.IStElementInfoMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StElementInfo" extends="BaseResultMap">
-
+        <result column="SOURCE_NAME" property="sourceName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DICT_CODE" property="dictCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DICT_NAME" property="dictName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="TYPE_NAME" property="typeName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StElementInfo">
         update PHIP_ST_ELEMENT_INFO
@@ -50,4 +57,39 @@
         </set>
         where id = #{id}
     </update>
+    <select id="getDataPageList" parameterType="java.util.Map" resultMap="MultiResultMap">
+        SELECT PSEI.*,
+        PSNSI.NAME SOURCE_NAME,
+        SSDI.NAME TYPE_NAME,
+        PDC.NAME DICT_NAME,
+        PDC.CODE DICT_CODE
+        FROM PHIP_ST_ELEMENT_INFO PSEI
+        LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
+        ON PSEI.FK_SOURCE_ID = PSNSI.ID
+        LEFT JOIN SYS_SYSTEM_DICT_ITEM SSDI
+        ON SSDI.ID = PSEI.FK_TYPE_ID
+        LEFT JOIN PHIP_DICT_CATALOG PDC
+        ON PSEI.FK_DICT_ID = PDC.ID
+        WHERE 1=1
+        <if test="_parameter.containsKey('key')">
+            AND UPPER(CONCAT(PSEI.CODE,PSEI.NAME)) LIKE UPPER (#{key, jdbcType=VARCHAR})
+        </if>
+        <if test="_parameter.containsKey('fkSourceId')">
+            AND PSEI.FK_SOURCE_ID = (#{fkSourceId, jdbcType=VARCHAR})
+        </if>
+        <if test="_parameter.containsKey('fkTypeId')">
+            AND PSEI.FK_TYPE_ID = (#{fkTypeId, jdbcType=VARCHAR})
+        </if>
+        <if test="_parameter.containsKey('fkDictId')">
+            AND PSEI.FK_DICT_ID = (#{fkDictId, jdbcType=VARCHAR})
+        </if>
+    </select>
+
+    <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT (1) from PHIP_ST_ELEMENT_INFO PSEI
+        WHERE UPPER (PSEI.CODE) = UPPER (#{code, jdbcType=VARCHAR})
+        <if test="_parameter.containsKey('id')">
+            AND PSEI.id != #{id, jdbcType=VARCHAR}
+        </if>
+    </select>
 </mapper>

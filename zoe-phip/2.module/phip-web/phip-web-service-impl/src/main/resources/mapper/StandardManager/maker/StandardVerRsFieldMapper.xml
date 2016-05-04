@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStandardVerRsFieldMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.web.model.sdm.StandardVerRsField"
+               extends="com.zoe.phip.module.service.MasterEntityResultMap">
+        <result column="FK_VERSION_ID" property="fkVersionId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="FK_DICT_ID" property="fkDictId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="addList" parameterType="com.zoe.phip.web.model.sdm.StandardVerRsField">
+        INSERT INTO PHIP_STANDARD_VER_RS_FIELD (
+        FK_VERSION_ID,
+        FK_DICT_ID,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+            SELECT
+            #{item.fkVersionId,jdbcType=VARCHAR},
+            #{item.fkDictId,jdbcType=VARCHAR},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
+            FROM DUAL
+        </foreach>
+    </insert>
+    <insert id="defaultAdd" parameterType="java.util.List">
+        INSERT INTO PHIP_STANDARD_VER_RS_FIELD (
+        FK_VERSION_ID,
+        FK_DICT_ID,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES(
+        #{fkVersionId,jdbcType=VARCHAR},
+        #{fkDictId,jdbcType=VARCHAR},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
+    <delete id="deleteByIds" parameterType="java.lang.String">
+        delete from PHIP_STANDARD_VER_RS_FIELD where ID in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <delete id="deleteByList" parameterType="java.util.List">
+        delete from PHIP_STANDARD_VER_RS_FIELD where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
+            update PHIP_STANDARD_VER_RS_FIELD
+            <set>
+                <if test="item.fkVersionId != null">
+                    FK_VERSION_ID = #{item.fkVersionId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.fkDictId != null">
+                    FK_DICT_ID = #{item.fkDictId,jdbcType=VARCHAR},
+                </if>
+                MODIFY_AT=sysdate
+            </set>
+            where id = #{item.id};
+        </foreach>
+    </update>
+
+</mapper>

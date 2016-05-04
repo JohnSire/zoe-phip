@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.web.dao.sdm.IStNormSourceInfoMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StNormSourceInfo" extends="BaseResultMap">
-
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StNormSourceInfo">
         update PHIP_ST_NORM_SOURCE_INFO
@@ -35,4 +34,12 @@
         </set>
         where id = #{id}
     </update>
+    <select id="getDataPageList" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT *FROM PHIP_ST_NORM_SOURCE_INFO PSNSI
+        WHERE 1 = 1
+        <if test="_parameter.containsKey('key')">
+            AND UPPER (CONCAT(PSNSI.CODE,PSNSI.name) ) LIKE UPPER (CONCAT(CONCAT('%', #{key, jdbcType=VARCHAR}),'%'))
+        </if>
+    </select>
+
 </mapper>
