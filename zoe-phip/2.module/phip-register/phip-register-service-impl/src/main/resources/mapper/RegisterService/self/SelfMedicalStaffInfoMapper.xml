@@ -118,12 +118,12 @@
                 (UPPER(M.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(M.ID_NO) LIKE
                 #{key,jdbcType=VARCHAR})
             </if>
-            <if test="_parameter.containsKey('extensionId') and _parameter.containsKey('extensionId')!=''">
+            <if test="_parameter.containsKey('deptcode') and _parameter.containsKey('deptcode')!=''">
                 AND M.AFFILIATED_ORG_CODE IN (
-                SELECT  EXTENSION_ID
+                SELECT  DEPT_CODE
                 FROM PHIP_ORG_DEPT_INFO
-                START WITH EXTENSION_ID=#{extensionId,jdbcType=VARCHAR}
-                CONNECT BY PRIOR EXTENSION_ID = DEPT_PARENT_CODE)
+                START WITH DEPT_CODE=#{deptcode,jdbcType=VARCHAR}
+                CONNECT BY PRIOR DEPT_CODE = DEPT_PARENT_CODE)
             </if>
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
