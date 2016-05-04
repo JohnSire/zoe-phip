@@ -14,7 +14,7 @@ define(function (require, exports, module) {
                 loadPageEvent: function () {
                 }
             })
-        },
+        }
     }
     exports.init = function () {
         internal.init();
