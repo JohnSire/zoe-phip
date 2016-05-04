@@ -14,6 +14,7 @@ define(function (require, exports, module) {
                 updateUrl: 'personnel/updateXmanInfo',//修改接口Url
                 loadPageEvent: function () {
                     $("#selSex").select({
+                        name: 'sexCode',
                         isAsync: true,//是否异步加载，点击时加载数据，如果已经请求过的就不在请求
                         ajaxParam: {
                             type: "get",

@@ -48,7 +48,7 @@
                         jqObj.trigger("change");
                     } else {
                         jqObj.val(o);
-                        jqObj.trigger("setValue", obj);
+                        jqObj.trigger("setValue", obj);//配合dialogSelect使用
                     }
                     break;
                 case "select":
@@ -160,6 +160,7 @@
     $.fn.select = function (options) {
         var internal = {
             defaultOptions: {
+                name: '',
                 isAsync: true,//是否异步加载，点击时加载数据，如果已经请求过的就不在请求
                 ajaxParam: {
                     type: "post",
@@ -168,7 +169,6 @@
                     success: function (data) {
 
                     }
-
                 },
                 data: [],
                 preText: '',//预加载显示内容
@@ -182,9 +182,18 @@
             },
             //渲染插件
             render: function (self) {
+                var name = self["param"][""]
+                $('input[name="' + name + '"]').on("setValue", function () {
+
+                });
+
                 internal.req(self["param"], function (data) {
                     alert(JSON.stringify(data));
-                })
+                });
+
+            },
+            bindData: function () {
+
             },
             //ajax请求
             //need reuqest.js
