@@ -55,8 +55,6 @@
                 jdbcType="DECIMAL"/>
         <result column="CODE_SYS_CODE" property="codeSysCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="CODE_SYS_NAME" property="codeSysName" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
         <result column="ASSIGNED_PERSON_CODE" property="assignedPersonCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="ASSIGNED_PERSON_NAME" property="assignedPersonName" javaType="java.lang.String"
@@ -104,7 +102,6 @@
         OCCUPATION_CODE,
         MARRIAGE_CODE,
         CODE_SYS_CODE,
-        CODE_SYS_NAME,
         ASSIGNED_PERSON_CODE,
         ASSIGNED_PERSON_NAME,
         CREATE_TIME,
@@ -143,7 +140,6 @@
             #{item.occupationCode,jdbcType=VARCHAR},
             #{item.marriageCode,jdbcType=DECIMAL},
             #{item.codeSysCode,jdbcType=VARCHAR},
-            #{item.codeSysName,jdbcType=VARCHAR},
             #{item.assignedPersonCode,jdbcType=VARCHAR},
             #{item.assignedPersonName,jdbcType=VARCHAR},
             #{item.createTime,jdbcType=TIMESTAMP},
@@ -185,7 +181,6 @@
         OCCUPATION_CODE,
         MARRIAGE_CODE,
         CODE_SYS_CODE,
-        CODE_SYS_NAME,
         ASSIGNED_PERSON_CODE,
         ASSIGNED_PERSON_NAME,
         CREATE_TIME,
@@ -223,7 +218,6 @@
         #{occupationCode,jdbcType=VARCHAR},
         #{marriageCode,jdbcType=DECIMAL},
         #{codeSysCode,jdbcType=VARCHAR},
-        #{codeSysName,jdbcType=VARCHAR},
         #{assignedPersonCode,jdbcType=VARCHAR},
         #{assignedPersonName,jdbcType=VARCHAR},
         #{createTime,jdbcType=TIMESTAMP},
@@ -329,9 +323,6 @@
                 </if>
                 <if test="item.codeSysCode != null">
                     CODE_SYS_CODE = #{item.codeSysCode,jdbcType=VARCHAR},
-                </if>
-                <if test="item.codeSysName != null">
-                    CODE_SYS_NAME = #{item.codeSysName,jdbcType=VARCHAR},
                 </if>
                 <if test="item.assignedPersonCode != null">
                     ASSIGNED_PERSON_CODE = #{item.assignedPersonCode,jdbcType=VARCHAR},

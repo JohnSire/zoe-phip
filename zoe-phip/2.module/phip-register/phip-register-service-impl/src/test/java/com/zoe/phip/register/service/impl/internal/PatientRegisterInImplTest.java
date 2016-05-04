@@ -23,4 +23,9 @@ public class PatientRegisterInImplTest extends BaseTest {
         PageList<XmanBaseInfo> result=
                 patientRegister.patientRegistryListQuery("3827",new QueryPage());
     }
+
+    @Test
+    public void testGetById() throws Exception {
+        XmanBaseInfo result= patientRegister.getById("ecd03ef24b7143d29aa4d57574f192c2");
+    }
 }

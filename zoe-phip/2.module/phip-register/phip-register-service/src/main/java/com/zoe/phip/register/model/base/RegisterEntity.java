@@ -1,5 +1,6 @@
 package com.zoe.phip.register.model.base;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.Transient;
@@ -10,9 +11,11 @@ import javax.persistence.Transient;
  */
 public class RegisterEntity extends MasterEntity {
 
+    @JSONField(serialize = false)
     @Transient
     private Acknowledgement acknowledgement;
 
+    @JSONField(serialize = false)
     @Transient
     private ReceiverSender receiverSender;
 
