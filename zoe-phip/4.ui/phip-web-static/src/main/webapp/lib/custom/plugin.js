@@ -161,6 +161,7 @@
         var internal = {
             defaultOptions: {
                 name: '',
+                display: '',
                 isAsync: true,//是否异步加载，点击时加载数据，如果已经请求过的就不在请求
                 ajaxParam: {
                     type: "post",
@@ -169,6 +170,9 @@
                     success: function (data) {
 
                     }
+                },
+                renderData: function (data) {
+                    return data.result.rows;
                 },
                 data: [],
                 preText: '',//预加载显示内容
@@ -182,35 +186,60 @@
             },
             //渲染插件
             render: function (self) {
-                var name = self["param"][""]
-                $('input[name="' + name + '"]').on("setValue", function () {
-
+                var name = self["param"]["name"];
+                var display = self["param"]["display"];
+                $('select[name="' + name + '"]').on("setValue", function (event, argument) {
+                    $(self).find("span").text(argument[display]);
                 });
-
-                internal.req(self["param"], function (data) {
-                    alert(JSON.stringify(data));
+                $(self).on("click", function (e) {
+                    e.stopPropagation();
+                    var jqUl = $(self).find("ul");
+                    if (!(self.isLoadData)) {
+                        internal.req(self["param"], function (data) {
+                            data = self["param"]["renderData"](data);
+                            var value = self["param"]["value"];
+                            var text = self["param"]["text"];
+                            $.each(data, function (index, item) {
+                                var jqLi = $("<li></li>");
+                                jqLi.attr({"value": item[value]})
+                                    .addClass("simulate-select-list")
+                                    .text(item[text])
+                                    .on("click", function () {
+                                        alert(item[value]);
+                                    });
+                                jqUl.append(jqLi);
+                            });
+                            jqUl.show();
+                            self.isLoadData = true;
+                        });
+                    } else {
+                        jqUl.show();
+                    }
                 });
-
-            },
-            bindData: function () {
+                $(document).on("click", function () {
+                    $(self).find("ul").hide();
+                })
 
             },
             //ajax请求
             //need reuqest.js
             req: function (options, callback) {
+                options = $.extend(true, {}, options);
                 options["ajaxParam"]["isTip"] = false;
                 options["ajaxParam"]["success"] = function (data) {
                     if ($.isFunction(callback) && data.isSuccess) {
                         callback(data);
                     }
                 }
-                var url = options["ajaxParam"]["url"];
+                var url = options["ajaxParam"]["url"]
+
                 var req = new Request(url);
                 $.each(options["ajaxParam"], function (index, item) {
                     if (index == "url") {
                         delete  options["ajaxParam"]["url"];
                     }
                 })
+                //alert(JSON.stringify(options));
                 if (options["ajaxParam"]["type"] == "get") {
                     req.get(options["ajaxParam"]);
                 } else {
