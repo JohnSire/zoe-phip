@@ -8,6 +8,7 @@ package com.zoe.phip.register.model;
 import javax.persistence.*;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -73,6 +74,7 @@ public class EhrDataInfo extends MasterEntity {
      * 活动服务结束时间
      */
     @Column(name = "OUT_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date outTime;
     /**
      * 标题

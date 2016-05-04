@@ -6,6 +6,7 @@
 package com.zoe.phip.register.model;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -53,11 +54,13 @@ public class OrgBaseInfo extends MasterEntity {
      * 有效时间（开始）
      */
     @Column(name = "EFFECTIVE_TIME_LOW")
+    @DateTimeFormat(pattern = "yyyy-MM-dd ")
     private Date effectiveTimeLow;
     /**
      * 有效时间（结束）
      */
     @Column(name = "EFFECTIVE_TIME_HIGH")
+    @DateTimeFormat(pattern = "yyyy-MM-dd ")
     private Date effectiveTimeHigh;
     /**
      * 科室名称
