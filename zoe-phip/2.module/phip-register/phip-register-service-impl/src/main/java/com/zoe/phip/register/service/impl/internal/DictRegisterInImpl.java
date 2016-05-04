@@ -123,7 +123,7 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         }
         //判断是否存在字典项或下级
         Map<String, Object> paras = new HashMap<String, Object>();
-        paras.put("Id",catalogId);
+        paras.put("id",catalogId);
 
         int count = getMapper().selectChildCountById(paras);
         if (count > 0) {
