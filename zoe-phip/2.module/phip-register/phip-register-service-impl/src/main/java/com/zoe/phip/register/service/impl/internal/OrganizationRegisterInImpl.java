@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SortOrder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
@@ -227,17 +228,17 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
 
    public PageList<DictItem> getDictItemPage(String codeSystem, String key, QueryPage page){
        PageList<DictItem> pageList = new PageList<DictItem>();
+       page.setOrderBy("pdi.CREATE_AT");
+       page.setSortOrder(SortOrder.DESC);
        //分页
        SqlHelper.startPage(page);
        //        SqlHelper.setOrder(paras,queryPage);
        List<DictItem> results =
        dictItemMapper.getDictItemNewOrgTree(MapUtil.createMap(m -> {
            m.put("codeSystem", codeSystem);
-           if (!StringUtil.isNullOrWhiteSpace(key)) {
-               m.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+         if (!StringUtil.isNullOrWhiteSpace(key)) {
+               m.put("key", SqlHelper.getLikeStr("男".toUpperCase()));
            }
-
-
        }));
        PageInfo<DictItem> pageInfo = new PageInfo<DictItem>(results);
        pageList.setTotal((int) pageInfo.getTotal());
