@@ -281,7 +281,7 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
         List<DictItem> dictItems = dictItemMapper.selectByExample(example);
         if (dictItems.size() > 0) {
             for (DictItem di:dictItems) {
-                if(di.getFkCatalogId() == dictItem.getFkCatalogId()) {
+                if(di.getFkCatalogId().equals(dictItem.getFkCatalogId())) {
                     throw new BusinessException("001");
                 }
             }
