@@ -6,6 +6,8 @@ import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.module.service.entity.LoginCredentials;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
+import com.zoe.phip.web.context.UrlExpand;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/frame")
 public class FrameController extends BaseController {
+
+
+
     //平台首页
     @RequestMapping("/index")
     public String ToIndex(HttpServletRequest request, Model model) {

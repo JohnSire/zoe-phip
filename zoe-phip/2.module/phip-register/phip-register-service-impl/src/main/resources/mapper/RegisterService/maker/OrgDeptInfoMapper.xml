@@ -2,7 +2,7 @@
         <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IOrgDeptInfoMapper">
 <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.OrgDeptInfo" extends="com.zoe.phip.module.service.MasterEntityResultMap">
-    <result column="EXTENSION_ID" property="extensionId" javaType="java.lang.String"
+    <result column="DIVISION_ROOT" property="divisionRoot" javaType="java.lang.String"
             jdbcType="VARCHAR"/>
     <result column="DEPT_CODE" property="deptCode" javaType="java.lang.String"
             jdbcType="VARCHAR"/>
@@ -77,7 +77,7 @@
         </resultMap>
 <insert id="addList" parameterType="com.zoe.phip.register.model.OrgDeptInfo">
 INSERT INTO PHIP_ORG_DEPT_INFO (
-EXTENSION_ID,
+DIVISION_ROOT,
 DEPT_CODE,
 DEPT_NAME,
 DEPT_TYPE_CODE,
@@ -116,7 +116,7 @@ NEIGHBORHOOD_CODE,
 <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
 <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
 SELECT
-#{item.extensionId,jdbcType=VARCHAR},
+#{item.divisionRoot,jdbcType=VARCHAR},
 #{item.deptCode,jdbcType=VARCHAR},
 #{item.deptName,jdbcType=VARCHAR},
 #{item.deptTypeCode,jdbcType=VARCHAR},
@@ -158,7 +158,7 @@ SELECT
         </insert>
 <insert id="defaultAdd" parameterType="java.util.List">
 INSERT INTO PHIP_ORG_DEPT_INFO (
-EXTENSION_ID,
+DIVISION_ROOT,
 DEPT_CODE,
 DEPT_NAME,
 DEPT_TYPE_CODE,
@@ -196,7 +196,7 @@ STREET_CODE,
 NEIGHBORHOOD_CODE,
 <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
  VALUES(
-#{extensionId,jdbcType=VARCHAR},
+#{divisionRoot,jdbcType=VARCHAR},
 #{deptCode,jdbcType=VARCHAR},
 #{deptName,jdbcType=VARCHAR},
 #{deptTypeCode,jdbcType=VARCHAR},
@@ -252,7 +252,7 @@ delete from PHIP_ORG_DEPT_INFO where ID in
     update PHIP_ORG_DEPT_INFO
     <set>
         <if test="item.extensionId != null">
-            EXTENSION_ID = #{item.extensionId,jdbcType=VARCHAR},
+            DIVISION_ROOT = #{item.divisionRoot,jdbcType=VARCHAR},
         </if>
         <if test="item.deptCode != null">
             DEPT_CODE = #{item.deptCode,jdbcType=VARCHAR},

@@ -35,7 +35,7 @@ define(function (require, exports, module) {
                     });
                 }
             })
-        },
+        }
     }
     exports.init = function () {
         internal.init();

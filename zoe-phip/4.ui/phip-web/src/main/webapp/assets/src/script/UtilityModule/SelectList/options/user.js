@@ -8,7 +8,7 @@ define(function (require, exports, module) {
             title: '用户选择列表',
             selectParam: {
                 storage: [],
-                displayField: 'loginName',
+                displayField: 'name',
                 valueField: 'id',
                 gridParam: {
                     url: 'user/getUserList',
@@ -24,5 +24,5 @@ define(function (require, exports, module) {
             }
         }
     };
-    exports.user=internal.user;
+    exports.user = internal.user;
 })

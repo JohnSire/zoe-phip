@@ -114,7 +114,7 @@ public interface IDictRegisterIn extends IBaseInService<DictCatalog> {
      * @param dictItemIds
      * @return
      */
-    ServiceResult dictItemListDelete(SystemData systemData, String[] dictItemIds);
+    ServiceResult dictItemListDelete(SystemData systemData, String dictItemIds);
 
     /**
      *15)	根据字典Code获取字典项列表
@@ -143,5 +143,32 @@ public interface IDictRegisterIn extends IBaseInService<DictCatalog> {
      * @return
      */
     ServiceResultT<PageList<DictCatalog>> dictCatalogAndItemListByCode(SystemData systemData, String catalogCode);
+
+    /**
+     *18)	获取字典列表（不包含分类）
+     * @param systemData
+     * @param queryPage
+     * @param key
+     * @return
+     */
+    ServiceResultT<PageList<DictCatalog>> dictListQueryPage(SystemData systemData, QueryPage queryPage, String key);
+
+    /**
+     *19)	获取字典列表（不包含分类且字典不属于任何分类）
+     * @param systemData
+     * @param queryPage
+     * @param key
+     * @return
+     */
+    ServiceResultT<PageList<DictCatalog>> dictListWithoutFkCatalog(SystemData systemData, QueryPage queryPage, String key);
+
+    /**
+     *20)	批量更新字典所属分类
+     * @param systemData
+     * @param pId
+     * @param catalogIds
+     * @return
+     */
+    ServiceResult updateDictWithFkCatalog(SystemData systemData, String pId, String catalogIds);
 
 }

@@ -24,11 +24,11 @@ import java.util.Map;
  */
 public abstract class BaseController {
 
-    @InitBinder
+    /*@InitBinder
     protected void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-    }
+    }*/
 
     protected int getPageSize() {
         String pageSize = DataContext.getRequest().getParameter("pagesize");

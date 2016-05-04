@@ -1,0 +1,54 @@
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
+                    <input type="text" name="code" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"
+                           nullmsg="请填写编码！"/>
+                </p>
+                <p class="column-one">
+                    <label class="label" for="name"><span class="text-mark">*</span>名称：</label>
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！"
+                           nullmsg="请填写名称！"/>
+                </p>
+            </li>
+            <li class="list" style="display: none">
+                <p class="column-one">
+                    <label class="label" for="type"><span class="text-mark">*</span>类型：</label>
+                    <input type="text" name="type" class="text" value="1"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="pid">所属字典：</label>
+                        <span class="text-line-outer" id="btnParentCatalog">
+                            <input type="text" name="fkCatalogId" class="text-line" datatype="*"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Dict/dictItemDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"字典列表详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>
