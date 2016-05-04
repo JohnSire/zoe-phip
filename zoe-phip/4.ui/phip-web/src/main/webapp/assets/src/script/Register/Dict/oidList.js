@@ -23,9 +23,9 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: 'dict/getOIDList',
                     columns: [
-                        {display: '编码', name: 'code', width: 120, align: 'left'},
-                        {display: '代码', name: 'codeSystem', width: 120, align: 'left'},
-                        {display: '名称', name: 'name', width: 120, align: 'left'},
+                        {display: '编码', name: 'code', width: 100, align: 'left'},
+                        {display: '代码', name: 'codeSystem', width: 200, align: 'left'},
+                        {display: '名称', name: 'name', width: 200, align: 'left'},
                         {display: '标准', name: 'dictCode', width: 120, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
