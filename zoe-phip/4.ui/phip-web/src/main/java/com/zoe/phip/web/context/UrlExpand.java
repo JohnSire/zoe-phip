@@ -1,6 +1,5 @@
 package com.zoe.phip.web.context;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -9,16 +8,23 @@ import java.text.SimpleDateFormat;
 /**
  * Created by linqinghuang on 2016/4/11.
  */
-@Component("UrlExpand")
 public class UrlExpand {
 
-    private static String path;
+    public static String staticPath;
+    public static String versionValue;
+
+    // 通过配置文件注入值
+    public void setPath(String pathUrl) {
+        staticPath = pathUrl;
+    }
+    public void setVersion(String v) {
+        versionValue = v;
+    }
 
     //设置静态资源路径，
     public static String SetStaticRoot(String filePath) {
         String version = UrlExpand.GetVersion();
-        // TODO: 2016/4/11
-        String staticResourcePath="http://localhost:8082";//此静态资源路径从配置文件中获取
+        String staticResourcePath=staticPath;//此静态资源路径从配置文件中获取
         staticResourcePath += "/";
         return staticResourcePath+filePath+"?Version="+version;
     }
@@ -33,7 +39,7 @@ public class UrlExpand {
 
     public static String GetVersion() {
         // TODO: 2016/4/11
-        String version = "";//此version 从配置中获取
+        String version = versionValue;//此version 从配置中获取
         if (version == null || version.equals("")) {
             Date now = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmm");
