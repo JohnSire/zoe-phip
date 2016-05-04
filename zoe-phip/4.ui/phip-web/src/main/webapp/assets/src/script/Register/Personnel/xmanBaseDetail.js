@@ -5,6 +5,7 @@ define(function (require, exports, module) {
     var internal = {
         init: function () {
             var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
+            var oidCodeConfig = require("{dir}/JsConfig/oidCodeConfig").oidCodeConfig;
             var baseAttr = new BaseAttr({
                 winName: "win_xmanbase_detail_dialog",//弹窗对象变量名称
                 winCallback: "win_xmanbase_detail_callback",//弹窗回调函数
@@ -16,7 +17,8 @@ define(function (require, exports, module) {
                         isAsync: true,//是否异步加载，点击时加载数据，如果已经请求过的就不在请求
                         ajaxParam: {
                             type: "get",
-                            url: 'organization/getMedicalOrgCategoryTree',//url 请求的地址
+                            url: 'organization/getMedicalOrgCategoryList',//url 请求的地址
+                            data: {codeSystem: oidCodeConfig.sex},
                         },
                         data: [],
                         value: '',//值

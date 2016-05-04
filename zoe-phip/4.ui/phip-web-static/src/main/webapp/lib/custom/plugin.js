@@ -55,7 +55,6 @@
                     jqObj.find("option[value='" + o + "']").attr("selected", "selected");
                     jqObj.val(o);
                     jqObj.trigger("setValue", obj);//配合select插件用
-
                     break;
                 case "radio":
                     $("input[name='" + i + "'][value='" + o + "']").prop("checked", true);
@@ -184,7 +183,7 @@
             //渲染插件
             render: function (self) {
                 internal.req(self["param"], function (data) {
-                    //alert(JSON.stringify(data));
+                    alert(JSON.stringify(data));
                 })
             },
             //ajax请求
@@ -193,7 +192,7 @@
                 options["ajaxParam"]["isTip"] = false;
                 options["ajaxParam"]["success"] = function (data) {
                     if ($.isFunction(callback) && data.isSuccess) {
-                        //callback(data);
+                        callback(data);
                     }
                 }
                 var url = options["ajaxParam"]["url"];
