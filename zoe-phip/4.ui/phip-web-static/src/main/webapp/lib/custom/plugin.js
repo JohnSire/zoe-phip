@@ -162,6 +162,7 @@
             defaultOptions: {
                 isAsync: true,//是否异步加载，点击时加载数据，如果已经请求过的就不在请求
                 ajaxParam: {
+                    type: "get",
                     url: '',//url 请求的地址
                     data: {}
                 },
@@ -192,7 +193,12 @@
                     }
                 }
                 var req = new Request(options["ajaxParam"]["url"]);
-                req.post(options["ajaxParam"]);
+                if (options["ajaxParam"]["type"] == "get") {
+                    req.get(options["ajaxParam"]);
+                } else {
+                    req.post(options["ajaxParam"]);
+                }
+
             }
         }
         var target = this;

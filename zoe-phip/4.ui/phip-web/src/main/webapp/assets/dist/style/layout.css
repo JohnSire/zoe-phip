@@ -2711,6 +2711,8 @@ a.btn-dialog-gray {
     position: relative;
     display: inline-block;
     width: 188px;
+    height: 23px;
+    vertical-align: middle;
 }
 .simulate-select .text{
     width: 168px;
