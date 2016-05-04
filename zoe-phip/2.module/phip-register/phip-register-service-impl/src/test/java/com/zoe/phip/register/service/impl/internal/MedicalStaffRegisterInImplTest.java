@@ -23,5 +23,5 @@ public class MedicalStaffRegisterInImplTest extends BaseTest {
                 medicalStaffRegisterIn.providerListQuery("","12345678900",new QueryPage());
     }
 
-    
+
 }
