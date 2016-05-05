@@ -17,7 +17,9 @@ import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.web.dao.sdm.IStCdaInfoMapper;
 import com.zoe.phip.web.model.sdm.StCdaInfo;
 import com.zoe.phip.web.model.sdm.StElementInfo;
+import com.zoe.phip.web.model.sdm.StRsCdaSetInfo;
 import com.zoe.phip.web.service.sdm.IStCdaInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.alibaba.dubbo.config.annotation.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -36,6 +38,9 @@ import java.util.TreeMap;
 @ErrorMessage(code = "001", message = "CDA标识({0})已经存在!")
 public class StCdaInfoServiceImpl extends BaseInServiceImpl<StCdaInfo, IStCdaInfoMapper> implements IStCdaInfoMapper {
 
+    @Autowired
+    private StRsCdaSetInfoServiceImpl infoServiceImpl;
+
     public PageList<StCdaInfo> getDataPageList(String key, QueryPage queryPage) {
         PageList<StCdaInfo> pageList = new PageList<>();
         Example example = new Example(StCdaInfo.class);
@@ -48,6 +53,15 @@ public class StCdaInfoServiceImpl extends BaseInServiceImpl<StCdaInfo, IStCdaInf
         pageList.setRows(results);
         return pageList;
     }
+
+    public int cdaSetRsUpdate(List<StRsCdaSetInfo> infoList) throws Exception {
+        return infoServiceImpl.addList(infoList);
+    }
+
+    public int updateByCdaId(String fkCdaId, List<StRsCdaSetInfo> infoList) throws Exception {
+        return infoServiceImpl.updateByCdaId(fkCdaId, infoList);
+    }
+
 
     @Override
     public List<StCdaInfo> getDataPageList(Map<String, Object> map) {
@@ -77,4 +91,6 @@ public class StCdaInfoServiceImpl extends BaseInServiceImpl<StCdaInfo, IStCdaInf
         if (getSingle(map) > 0) throw new BusinessException("001", entity.getCode());
         return super.update(entity);
     }
+
+
 }

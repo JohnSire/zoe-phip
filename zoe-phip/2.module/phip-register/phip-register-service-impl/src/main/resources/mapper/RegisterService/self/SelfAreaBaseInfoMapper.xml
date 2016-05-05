@@ -45,9 +45,13 @@
             AND PABI.HISTORY_AREA_ID = #{historyId,jdbcType=VARCHAR}
         </if>
     </select>
+    <select id="getTopAreaBaseInfo" resultMap="BaseResultMap">
+      select * from PHIP_AREA_BASE_INFO t WHERE NVL(t.PID,'0') ='0'
+AND ROWNUM=1
+    </select>
 
     <select id="getChildren" resultMap="BaseResultMap" parameterType="java.util.Map">
-        SELECT * FROM PHIP_AREA_BASE_INFO PABI  WHERE PABI.PID  = #{id,jdbcType=VARCHAR}
+        SELECT * FROM PHIP_AREA_BASE_INFO PABI WHERE PABI.PID = #{id,jdbcType=VARCHAR}
         <if test="_parameter.containsKey('key')">
             AND UPPER(CONCAT(PABI.CODE,PABI.NAME )) LIKE UPPER (CONCAT(CONCAT('%',#{key,jdbcType=VARCHAR}),'%'))
         </if>
