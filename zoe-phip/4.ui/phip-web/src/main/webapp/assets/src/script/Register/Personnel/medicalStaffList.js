@@ -21,6 +21,7 @@ define(function (require, exports, module) {
                     idFieldName: 'deptCode',
                     parentIDFieldName: 'deptParentCode',
                     textFieldName: 'deptName',
+                    nodeWidth: 320,
                     checkbox: false,
                     onSelect: function (data) {
                         internal.deptCode = data["data"]["deptCode"];
