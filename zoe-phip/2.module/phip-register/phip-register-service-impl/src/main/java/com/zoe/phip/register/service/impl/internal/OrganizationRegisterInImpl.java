@@ -165,7 +165,7 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
             paras.put("deptTypeCode", deptTypeCode);
         }else{
             //读取所有机构排除科室数据
-          //  paras.put("divisionRoot", "2.16.156.10011.1.5");
+            paras.put("divisionRoot", "2.16.156.10011.1.5");
         }
         //        SqlHelper.setOrder(paras,queryPage);
         List<OrgDeptInfo> results = ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoList(paras);
@@ -185,6 +185,9 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         }
         if (type.equals("1")) {
             paras.put("deptTypeCode", deptTypeCode);
+        }else{
+            //读取所有科室排除机构数据
+            paras.put("divisionRoot", "2.16.156.10011.1.26");
         }
         paras.put("deptParentCode",deptParentCode);
         //        SqlHelper.setOrder(paras,queryPage);
