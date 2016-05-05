@@ -40,7 +40,7 @@ public interface IStandardVersionService extends IBaseInService<StandardVersion>
      * @param fieldList  版本数据集字段关系实体
      * @return
      */
-    ServiceResult versionStandardStruct(SystemData systemData, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList);
+    ServiceResult versionStandardStruct(SystemData systemData, String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList);
 
     /**
      * 标准版本字典维护
@@ -49,5 +49,5 @@ public interface IStandardVersionService extends IBaseInService<StandardVersion>
      * @param infoList   版本字典关系
      * @return
      */
-    ServiceResult versionDictUpdate(SystemData systemData, List<StandardVerRsDict> infoList);
+    ServiceResult versionDictUpdate(SystemData systemData, String fkVersionId, List<StandardVerRsDict> infoList);
 }

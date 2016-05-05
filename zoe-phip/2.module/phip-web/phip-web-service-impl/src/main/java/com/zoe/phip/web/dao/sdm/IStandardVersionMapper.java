@@ -6,9 +6,11 @@
 
 package com.zoe.phip.web.dao.sdm;
 
+import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.module.service.mapper.IMyMapper;
-import com.zoe.phip.web.model.sdm.StandardVersion;
+import com.zoe.phip.web.model.sdm.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,5 +21,12 @@ import java.util.Map;
 public interface IStandardVersionMapper extends IMyMapper<StandardVersion> {
 
     int getSingleVersion(Map<String, Object> map);
+
+    List<StandardVersion> getDataPageList(Map<String, Object> map);
+
+
+    int versionStandardStruct(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList) throws Exception;
+
+    int versionDictUpdate(String fkVersionId, List<StandardVerRsDict> infoList) throws Exception;
 
 }
