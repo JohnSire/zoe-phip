@@ -27,6 +27,8 @@ public interface IAreaBaseInfoMapper extends IServiceMapper<AreaBaseInfo> {
      */
     AreaBaseInfo getAreaBaseInfo(Map<String, Object> map);
 
+    AreaBaseInfo getTopAreaBaseInfo();
+
     /**
      * 所辖行政区域信息查询
      * @param map

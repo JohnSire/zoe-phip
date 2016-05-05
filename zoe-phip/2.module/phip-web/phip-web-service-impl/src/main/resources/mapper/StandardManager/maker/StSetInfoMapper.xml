@@ -17,6 +17,10 @@
                 jdbcType="VARCHAR"/>
         <result column="BUSS_TIME_FIELD_ID" property="bussTimeFieldId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
+        <result column="START_TIME" property="startTime" javaType="java.sql.Date"
+                jdbcType="DATE"/>
+        <result column="END_TIME" property="endTime" javaType="java.sql.Date"
+                jdbcType="DATE"/>
         <result column="VERSION" property="version" javaType="java.math.BigDecimal"
                 jdbcType="DECIMAL"/>
         <result column="DESCR" property="descr" javaType="java.lang.String"
@@ -31,6 +35,8 @@
         FK_NORM_SOURCE_ID,
         XPATH,
         BUSS_TIME_FIELD_ID,
+        START_TIME,
+        END_TIME,
         VERSION,
         DESCR,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
@@ -43,6 +49,8 @@
             #{item.fkNormSourceId,jdbcType=VARCHAR},
             #{item.xpath,jdbcType=VARCHAR},
             #{item.bussTimeFieldId,jdbcType=VARCHAR},
+            #{item.startTime,jdbcType=DATE},
+            #{item.endTime,jdbcType=DATE},
             #{item.version,jdbcType=DECIMAL},
             #{item.descr,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
@@ -58,6 +66,8 @@
         FK_NORM_SOURCE_ID,
         XPATH,
         BUSS_TIME_FIELD_ID,
+        START_TIME,
+        END_TIME,
         VERSION,
         DESCR,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
@@ -69,6 +79,8 @@
         #{fkNormSourceId,jdbcType=VARCHAR},
         #{xpath,jdbcType=VARCHAR},
         #{bussTimeFieldId,jdbcType=VARCHAR},
+        #{startTime,jdbcType=DATE},
+        #{endTime,jdbcType=DATE},
         #{version,jdbcType=DECIMAL},
         #{descr,jdbcType=VARCHAR},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
@@ -110,6 +122,12 @@
                 </if>
                 <if test="item.bussTimeFieldId != null">
                     BUSS_TIME_FIELD_ID = #{item.bussTimeFieldId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.startTime != null">
+                    START_TIME = #{item.startTime,jdbcType=DATE},
+                </if>
+                <if test="item.endTime != null">
+                    END_TIME = #{item.endTime,jdbcType=DATE},
                 </if>
                 <if test="item.version != null">
                     VERSION = #{item.version,jdbcType=DECIMAL},

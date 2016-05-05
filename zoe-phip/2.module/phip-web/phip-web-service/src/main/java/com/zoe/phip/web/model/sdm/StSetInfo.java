@@ -6,7 +6,10 @@
 package com.zoe.phip.web.model.sdm;
 
 import javax.persistence.*;
+
 import com.zoe.phip.module.service.entity.MasterEntity;
+
+import java.sql.Date;
 
 
 /**
@@ -52,11 +55,25 @@ public class StSetInfo extends MasterEntity {
      */
     @Column(name = "BUSS_TIME_FIELD_ID")
     private String bussTimeFieldId;
+
+    /**
+     * 起用时间
+     */
+    @Column(name = "START_TIME")
+    private java.sql.Date startTime;
+    /**
+     * 停用时间
+     */
+    @Column(name = "END_TIME")
+    private java.sql.Date endTime;
+
+
     /**
      * 版本
      */
     @Column(name = "VERSION")
     private java.math.BigDecimal version;
+
     /**
      *
      */
@@ -123,7 +140,24 @@ public class StSetInfo extends MasterEntity {
 
 
     public void setBussTimeFieldId(String bussTimeFieldId) {
+
         this.bussTimeFieldId = bussTimeFieldId;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public java.math.BigDecimal getVersion() {
@@ -154,4 +188,6 @@ public class StSetInfo extends MasterEntity {
     public void setSourceName(String sourceName) {
         this.sourceName = sourceName;
     }
+
+
 }
