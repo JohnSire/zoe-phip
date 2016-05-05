@@ -21,8 +21,11 @@ define(function (require, exports, module) {
                         {label: '关键字', name: 'keyWord', type: 'text'}
                     ]
                 },
+                extendParam: function () {
+                    return {id: "86"};
+                },
                 gridParam: {
-                    url: 'area/getAreaList',
+                    url: 'area/getAreaListByPid',
                     columns: [
                         {display: '代码', name: 'code', width: 160, align: 'left'},
                         {display: '名称', name: 'name', width: 180, align: 'left'},
