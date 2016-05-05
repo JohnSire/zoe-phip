@@ -35,7 +35,7 @@ define(function (require, exports, module) {
                         }
                     });
                     internal.selectList.dialog('dept', {
-                        target: $("#btnFkDept"),
+                        target: $("#btnFkAssignedDept"),
                         name: 'code',//绑定value值
                         parentName: 'name',//绑定name值
                         displayField: 'name',

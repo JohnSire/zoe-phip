@@ -56,18 +56,8 @@ var bodySection = {
                     </span>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="affiliatedOrgName">机构：</label>
+                    <label class="label" for="affiliatedOrgName">隶属：</label>
                     <span class="text-line-outer" id="btnFkOrganization">
-                        <input type="text" name="affiliatedOrgName" class="text-line"/>
-                        <span class="text-line-setting">
-                            <span class="icon-grid icon-grid-setting" title="配置"></span>
-                            <span class="text-line-content"></span>
-                        </span>
-                    </span>
-                </p>
-                <p class="column-three">
-                    <label class="label" for="affiliatedOrgName">科室：</label>
-                    <span class="text-line-outer" id="btnFkDept">
                         <input type="text" name="affiliatedOrgName" class="text-line"/>
                         <span class="text-line-setting">
                             <span class="icon-grid icon-grid-setting" title="配置"></span>
@@ -118,7 +108,13 @@ var bodySection = {
             <li class="list">
                 <p class="column-three">
                     <label class="label" for="assignedDeptName">申请人所属科室：</label>
-                    <input type="text" name="assignedDeptName" class="text"/>
+                    <span class="text-line-outer" id="btnFkAssignedDept">
+                        <input type="text" name="assignedDeptName" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="配置"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
                 </p>
                 <p class="column-three">
                     <label class="label" for="assignedContactPerson">联系人：</label>
