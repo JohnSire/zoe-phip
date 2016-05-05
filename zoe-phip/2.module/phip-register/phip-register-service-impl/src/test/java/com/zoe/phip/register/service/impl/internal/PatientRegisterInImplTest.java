@@ -21,7 +21,7 @@ public class PatientRegisterInImplTest extends BaseTest {
     @Test
     public void testPatientRegistryListQuery() throws Exception {
         PageList<XmanBaseInfo> result=
-                patientRegister.patientRegistryListQuery("3827",new QueryPage());
+                patientRegister.patientRegistryListQuery("",new QueryPage());
     }
 
     @Test
