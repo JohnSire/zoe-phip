@@ -185,4 +185,63 @@ public class StElementInfo extends MasterEntity {
     public void setDescr(String descr) {
         this.descr = descr;
     }
+
+    /**
+     * 标准来源名称
+     */
+    @Transient
+    private String sourceName;
+
+    private String DictCode;
+
+    public String getSourceName() {
+        return sourceName;
+    }
+
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+    }
+
+    /**
+     * 字典代码
+     */
+    @Transient
+    private String dictCode;
+
+    /**
+     * 字典名称
+     */
+    @Transient
+    private String dictName;
+
+
+    public String getDictCode() {
+        return dictCode;
+    }
+
+    public void setDictCode(String dictCode) {
+        this.dictCode = dictCode;
+    }
+
+    public String getDictName() {
+        return dictName;
+    }
+
+    public void setDictName(String dictName) {
+        this.dictName = dictName;
+    }
+
+    /**
+     * 分类名称
+     */
+    @Transient
+    private String typeName;
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
 }

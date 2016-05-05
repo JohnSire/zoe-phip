@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.web.dao.sdm.IStSetInfoMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StSetInfo" extends="BaseResultMap">
-
+        <result column="SOURCE_NAME" property="sourceName" javaType="java.lang.String" jdbcType="VARCHAR"></result>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StSetInfo">
         update PHIP_ST_SET_INFO
@@ -41,4 +41,49 @@
         </set>
         where id = #{id}
     </update>
+    <select id="getDataPageList" parameterType="java.util.Map" resultMap="MultiResultMap">
+        SELECT PSSI.*, PSNSI.NAME SOURCE_NAME
+        FROM PHIP_ST_SET_INFO PSSI
+        LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
+        ON PSSI.FK_NORM_SOURCE_ID = PSNSI.ID
+        WHERE 1 = 1
+        <if test="_parameter.containsKey('key')">
+            AND UPPER(CONCAT(PSSI.CODE,PSSI.NAME)) LIKE UPPER (#{key, jdbcType=VARCHAR})
+        </if>
+        <if test="_parameter.containsKey('fkSourceId')">
+            AND PSSI.FK_SOURCE_ID = (#{fkSourceId, jdbcType=VARCHAR})
+        </if>
+    </select>
+    <select id="getByCdaId" parameterType="java.util.Map" resultMap="MultiResultMap">
+        SELECT PSSI.*, PSNSI.NAME SOURCE_NAME
+        FROM PHIP_ST_SET_INFO PSSI
+        INNER JOIN PHIP_ST_RS_CDA_SET_INFO RCSI
+        ON PSSI.ID = RCSI.FK_SET_ID
+        LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
+        ON PSSI.FK_NORM_SOURCE_ID = PSNSI.ID
+        WHERE RCSI.FK_CDA_ID = (#{fkCdaId, jdbcType=VARCHAR})
+        <if test="_parameter.containsKey('key')">
+            AND UPPER(CONCAT(PSSI.CODE,PSSI.NAME)) LIKE UPPER (#{key, jdbcType=VARCHAR})
+        </if>
+        <if test="_parameter.containsKey('fkSourceId')">
+            AND PSSI.FK_SOURCE_ID = (#{fkSourceId, jdbcType=VARCHAR})
+        </if>
+    </select>
+
+    <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT (1) from PHIP_ST_SET_INFO PSSI
+        WHERE UPPER (PSSI.CODE) = UPPER (#{code, jdbcType=VARCHAR})
+        <if test="_parameter.containsKey('id')">
+            and PSSI.id != #{id, jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getByPid" parameterType="java.lang.String" resultMap="MultiResultMap">
+        SELECT PSSI.*, PSNSI.NAME SOURCE_NAME
+        FROM PHIP_ST_SET_INFO PSSI
+        LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
+        ON PSSI.FK_NORM_SOURCE_ID = PSNSI.ID
+        WHERE PSSI.PID =   #{pid, jdbcType=VARCHAR}
+
+    </select>
 </mapper>
