@@ -33,7 +33,8 @@ public class XmanBaseInfo extends RegisterEntity {
     /**
      * 注册机构名称
      */
-    @Column(name = "ORG_NAME")
+//    @Column(name = "ORG_NAME"
+    @Transient
     private String orgName;
 
     /**
@@ -197,7 +198,7 @@ public class XmanBaseInfo extends RegisterEntity {
 
 
     /**
-     * 职业类别代码  todo 是否加入到数据库
+     * 职业类别代码
      */
     @Transient
     private String occupationName;
@@ -279,10 +280,16 @@ public class XmanBaseInfo extends RegisterEntity {
     private String healthRecordNo;
 
     /**
-     * 建档机构代码
+     * 建档医疗机构组织机构代码
      */
     @Column(name = "HEALTH_RECORD_ORG_CODE")
     private String healthRecordOrgCode;
+
+    /**
+     * 建档医疗机构组织机构名称
+     */
+    @Transient
+    private String healthRecordOrgName;
 
     /**
      * 病人ID
@@ -611,6 +618,14 @@ public class XmanBaseInfo extends RegisterEntity {
         this.healthRecordOrgCode = healthRecordOrgCode;
     }
 
+    public String getHealthRecordOrgName() {
+        return healthRecordOrgName;
+    }
+
+    public void setHealthRecordOrgName(String healthRecordOrgName) {
+        this.healthRecordOrgName = healthRecordOrgName;
+    }
+
     public String getPatientId() {
         return this.patientId;
     }
@@ -678,5 +693,34 @@ public class XmanBaseInfo extends RegisterEntity {
     public void setCardCode(String cardCode) {
         this.cardCode = cardCode;
     }
+
+    /**
+     *健康卡发放机构代码
+     */
+    @Transient
+    private String xcOrgCode;
+
+    /**
+     *健康卡发放机构名称
+     */
+    @Transient
+    private String xcOrgName;
+
+    public String getXcOrgCode() {
+        return xcOrgCode;
+    }
+
+    public void setXcOrgCode(String xcOrgCode) {
+        this.xcOrgCode = xcOrgCode;
+    }
+
+    public String getXcOrgName() {
+        return xcOrgName;
+    }
+
+    public void setXcOrgName(String xcOrgName) {
+        this.xcOrgName = xcOrgName;
+    }
+
     //endregion
 }
