@@ -27,7 +27,7 @@ public class StRsCdaSetInfoServiceImpl extends BaseInServiceImpl<StRsCdaSetInfo,
 
     public int updateByCdaId(String fkCdaId, List<StRsCdaSetInfo> infoList) throws Exception {
         Example example = new Example(StRsCdaSetInfo.class);
-        example.createCriteria().andEqualTo("fkCdaId",fkCdaId);
+        example.createCriteria().andEqualTo("fkCdaId", fkCdaId);
         int i = super.deleteByExample(example);
         int j = super.addList(infoList);
         return j;

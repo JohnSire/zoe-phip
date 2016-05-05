@@ -56,6 +56,7 @@ public interface IMedicalStaffInfoMapper extends IServiceMapper<MedicalStaffInfo
 
     /**
      * 查询医疗卫生人员列表
+     *
      * @param key
      * @param deptcode
      * @param page

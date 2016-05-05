@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy={NotNullValidator.class})
+@Constraint(validatedBy = {NotNullValidator.class})
 /**
  *
  * @author by hyf
@@ -22,19 +22,18 @@ import java.lang.annotation.Target;
  * bean验证：被注释的元素必须不为 null
  */
 public @interface ValidateNotNull {
-  String message() default "{javax.validation.constraints.NotNull.message}";
-  
-  Class<?>[] groups() default {};
-  
-  Class<? extends Payload>[] payload() default {};
-  
-  @Target({java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.PARAMETER})
-  @Retention(RetentionPolicy.RUNTIME)
-  @Documented
-  public static @interface List
-  {
-    ValidateNotNull[] value();
-  }
+    String message() default "{javax.validation.constraints.NotNull.message}";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+
+    @Target({java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.PARAMETER})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Documented
+    public static @interface List {
+        ValidateNotNull[] value();
+    }
 }
 
 

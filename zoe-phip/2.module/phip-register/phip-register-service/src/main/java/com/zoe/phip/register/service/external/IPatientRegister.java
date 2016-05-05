@@ -8,20 +8,23 @@ public interface IPatientRegister {
 
     /**
      * 个人信息新增
+     *
      * @param message
      * @return
      */
-    String addPatientRegistry (String message);
+    String addPatientRegistry(String message);
 
     /**
      * 个人信息更新
+     *
      * @param message
      * @return
      */
-    String updatePatientRegistry (String message);
+    String updatePatientRegistry(String message);
 
     /**
      * 个人身份合并
+     *
      * @param message
      * @return
      */
@@ -29,6 +32,7 @@ public interface IPatientRegister {
 
     /**
      * 个人基本信息查询
+     *
      * @param message
      * @return
      */

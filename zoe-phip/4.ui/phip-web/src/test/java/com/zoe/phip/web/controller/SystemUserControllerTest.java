@@ -33,17 +33,17 @@ public class SystemUserControllerTest extends BaseControllerTest {
 
 
     @Test
-    public void userAddTest(){
+    public void userAddTest() {
        /* SystemUser user=new SystemUser();
         user.setState(1);
        user.setName("2");
         user.setPassword("1");
         user.setLoginName("1test4");
        ServiceResult result=systemUserController.addUserInfo(user);*/
-        NationalStandards nationalStandards=new NationalStandards();
+        NationalStandards nationalStandards = new NationalStandards();
         nationalStandards.setName("123");
         nationalStandards.setCode("456");
-        ServiceFactory.getNationalStandardsService().add(ComSession.getUserInfo(),nationalStandards);
-     //  Assert.assertTrue(result.getIsSuccess());
+        ServiceFactory.getNationalStandardsService().add(ComSession.getUserInfo(), nationalStandards);
+        //  Assert.assertTrue(result.getIsSuccess());
     }
 }

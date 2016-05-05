@@ -26,6 +26,7 @@ public interface IMenuCompetenceService extends IBaseInService<MenuCompetence> {
 
     /**
      * 添加菜单权限
+     *
      * @param systemData
      * @param competenceCategoryId
      * @param list
@@ -35,6 +36,7 @@ public interface IMenuCompetenceService extends IBaseInService<MenuCompetence> {
 
     /**
      * 通过权限类别获取菜单列表
+     *
      * @param systemData
      * @param categoryId
      * @param key
@@ -44,7 +46,8 @@ public interface IMenuCompetenceService extends IBaseInService<MenuCompetence> {
     ServiceResultT<PageList<MenuData>> getMenuListByCompetenceCategory(SystemData systemData, String categoryId, String key, QueryPage page);
 
     /**
-     *获取菜单权限列表
+     * 获取菜单权限列表
+     *
      * @param systemData
      * @param categoryId
      * @return
@@ -53,6 +56,7 @@ public interface IMenuCompetenceService extends IBaseInService<MenuCompetence> {
 
     /**
      * 取消菜单权限
+     *
      * @param systemData
      * @param id
      * @return
@@ -61,6 +65,7 @@ public interface IMenuCompetenceService extends IBaseInService<MenuCompetence> {
 
     /**
      * 通过菜单ID检查是否在当前权限下存在
+     *
      * @param systemData
      * @param categoryId
      * @param menuId
@@ -70,6 +75,7 @@ public interface IMenuCompetenceService extends IBaseInService<MenuCompetence> {
 
     /**
      * 通过菜单编码检查是否在当前权限下存在
+     *
      * @param systemData
      * @param categoryId
      * @param menuCode
@@ -79,6 +85,7 @@ public interface IMenuCompetenceService extends IBaseInService<MenuCompetence> {
 
     /**
      * 通过菜单ID获取权限类别
+     *
      * @param systemData
      * @param menuId
      * @return

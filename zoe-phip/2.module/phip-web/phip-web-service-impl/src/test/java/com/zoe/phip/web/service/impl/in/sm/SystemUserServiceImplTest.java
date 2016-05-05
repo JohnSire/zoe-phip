@@ -18,16 +18,16 @@ public class SystemUserServiceImplTest {
     private SystemUserServiceImpl systemUserService;
 
 
-/*    @org.junit.Test
-    public void testUpdatePassword() throws Exception {
-        systemUserService.updateState("123",1);
+    /*    @org.junit.Test
+        public void testUpdatePassword() throws Exception {
+            systemUserService.updateState("123",1);
 
-    }*/
+        }*/
     @org.junit.Test
-    public void testAdd()throws Exception {
+    public void testAdd() throws Exception {
         SystemUser s = new SystemUser();
-       // s.setName("1");
-       s.setPassword("1");
+        // s.setName("1");
+        s.setPassword("1");
         s.setLoginName("admin");
         s.setName("1");
         s.setState(1);
@@ -79,6 +79,6 @@ public class SystemUserServiceImplTest {
 
         systemUserService.add(s);
 
-        }
+    }
 
 }

@@ -21,7 +21,7 @@ public final class SystemCredential {
 
     public static String createCredential(String userId, String userName, int expiresTime) {
         String credentialKey = getCredentialKey(userId, userName);
-        logger.info("add user session,userName:"+userName);
+        logger.info("add user session,userName:" + userName);
         credentialMap.put(credentialKey, new CredentialItem(userId, userName, credentialKey, expiresTime));
         return credentialKey;
     }
@@ -32,10 +32,10 @@ public final class SystemCredential {
             long timeDiff = new Date().getTime() - v.getActivateTime().getTime();
             if (timeDiff > v.getExpiresTime()) {
                 expires.add(v.getCredential());
-                logger.info("remove user session,userName:"+v.getUserName());
+                logger.info("remove user session,userName:" + v.getUserName());
             }
         });
-        expires.forEach(e->{
+        expires.forEach(e -> {
             credentialMap.remove(e);
         });
         return true;
@@ -48,7 +48,7 @@ public final class SystemCredential {
         if (!credential.equals(getCredentialKey(userId, userName))) {
             return false;
         }
-        logger.info("check user credential success,userName:"+userName);
+        logger.info("check user credential success,userName:" + userName);
         //重新设置超时时间
         CredentialItem item = credentialMap.get(credential);
         item.setActivateTime(new Date());

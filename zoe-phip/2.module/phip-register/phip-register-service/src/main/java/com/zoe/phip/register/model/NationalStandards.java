@@ -37,7 +37,6 @@ public class NationalStandards extends MasterEntity {
     private String codeSystem;
 
 
-
     /**
      * 标准编码
      */
@@ -97,6 +96,7 @@ public class NationalStandards extends MasterEntity {
     public void setDescr(String descr) {
         this.descr = descr;
     }
+
     public List<DictItem> getDictItemList() {
         return dictItemList;
     }

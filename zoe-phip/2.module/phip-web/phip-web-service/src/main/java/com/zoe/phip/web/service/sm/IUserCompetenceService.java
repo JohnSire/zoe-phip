@@ -19,6 +19,7 @@ public interface IUserCompetenceService extends IBaseInService<UserCompetence> {
 
     /**
      * 添加用户权限
+     *
      * @param systemData
      * @param competenceCategoryId
      * @param list
@@ -28,6 +29,7 @@ public interface IUserCompetenceService extends IBaseInService<UserCompetence> {
 
     /**
      * 通过权限类别获取用户列表
+     *
      * @param systemData
      * @param categoryId
      * @param key
@@ -38,6 +40,7 @@ public interface IUserCompetenceService extends IBaseInService<UserCompetence> {
 
     /**
      * 获取用户权限列表
+     *
      * @param systemData
      * @param categoryId
      * @return
@@ -46,6 +49,7 @@ public interface IUserCompetenceService extends IBaseInService<UserCompetence> {
 
     /**
      * 取消用户权限
+     *
      * @param id
      * @return
      */
@@ -53,6 +57,7 @@ public interface IUserCompetenceService extends IBaseInService<UserCompetence> {
 
     /**
      * 检查该用户权限是否存在
+     *
      * @param systemData
      * @param categoryId
      * @param userId
@@ -62,6 +67,7 @@ public interface IUserCompetenceService extends IBaseInService<UserCompetence> {
 
     /**
      * 通过用户ID获取该用户的所有权限类别
+     *
      * @param systemData
      * @param userId
      * @return

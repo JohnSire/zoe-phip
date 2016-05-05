@@ -166,7 +166,7 @@ public class XmlBeanUtilTest {
         try {
             Document document = DocumentHelper.parseText(xmlString);
 
-            BaseInfo baseInfo = XmlBeanUtil.toBean(document, BaseInfo.class,null);
+            BaseInfo baseInfo = XmlBeanUtil.toBean(document, BaseInfo.class, null);
             System.out.println();
 
 
@@ -188,7 +188,7 @@ class BaseInfo {
         this.orgName = orgName;
     }
 
-    @XPath(value =   "//controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/name", descr = "机构名称")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/name", descr = "机构名称")
     //@Column(name = "ORG_NAME")
     public String orgName;
 
@@ -200,7 +200,7 @@ class BaseInfo {
         this.sexCode = sexCode;
     }
 
-    @XPath(value =  "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@code", descr = "性别代码")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@code", descr = "性别代码")
     private Integer sexCode;
 
     public Date getBirthDate() {
@@ -223,7 +223,7 @@ class BaseInfo {
         this.healthRecordNo = healthRecordNo;
     }
 
-    @XPath(value =  "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/@extension", descr = "出生日期")
+    @XPath(value = "//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/@extension", descr = "出生日期")
     private String healthRecordNo;
 
 }

@@ -30,26 +30,27 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/user")
-@AuthController(code= MenuCode.SystemUser)
+@AuthController(code = MenuCode.SystemUser)
 public class SystemUserController extends BaseController {
     //region 用户管理视图开始
     //用户管理列表
     @RequestMapping("/list")
-    @AuthAction(permission = {Permission.View},name = "查看")
+    @AuthAction(permission = {Permission.View}, name = "查看")
     public String ToList(HttpServletRequest request, Model model) {
 
         return "SystemManage/SysUser/list";
     }
+
     //用户详详情
     @RequestMapping("/detail")
-    @AuthAction(permission = {Permission.View},name = "查看")
+    @AuthAction(permission = {Permission.View}, name = "查看")
     public String ToDetail(HttpServletRequest request, Model model) {
         return "SystemManage/SysUser/detail";
     }
 
     //修改密码
     @RequestMapping("/update/pwd")
-    @AuthAction(permission = {Permission.View},name = "查看")
+    @AuthAction(permission = {Permission.View}, name = "查看")
     public String ToPwd(HttpServletRequest request, Model model) {
         return "SystemManage/SysUser/updatePwd";
     }
@@ -57,13 +58,15 @@ public class SystemUserController extends BaseController {
 
 
     //region 方法
+
     /**
      * 获取用户列表
+     *
      * @return
      */
     @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
     @ResponseBody
-    @AuthAction(permission = {Permission.Query},name = "查询")
+    @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<SystemUser>> getUserList(HttpServletRequest request) {
         return ServiceFactory.getUserService()
                 .getUserList(ComSession.getUserInfo(), null, request.getParameter("keyWord"), getQueryPage());
@@ -79,47 +82,51 @@ public class SystemUserController extends BaseController {
      */
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
     @ResponseBody
-    @AuthAction(permission = {Permission.Query},name = "查询")
+    @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<SystemUser> getUserInfo(HttpServletRequest request, Model model) {
         String id = request.getParameter("id");
-        ServiceResultT<SystemUser> user = ServiceFactory.getUserService().getById(ComSession.getUserInfo(),id );
+        ServiceResultT<SystemUser> user = ServiceFactory.getUserService().getById(ComSession.getUserInfo(), id);
         return user;
     }
 
 
     /**
      * 新增用户
+     *
      * @param userInfo
      * @return
      */
     @RequestMapping(value = "/addUserInfo", method = RequestMethod.POST)
     @ResponseBody
-    @AuthAction(permission = {Permission.Add},name = "新增")
-    public ServiceResult addUserInfo( SystemUser userInfo) {
+    @AuthAction(permission = {Permission.Add}, name = "新增")
+    public ServiceResult addUserInfo(SystemUser userInfo) {
         return ServiceFactory.getUserService().add(ComSession.getUserInfo(), userInfo);
     }
+
     /**
      * 更新用户
+     *
      * @param userInfo
      * @return
      */
     @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
     @ResponseBody
-    @AuthAction(permission = {Permission.Update},name = "修改")
+    @AuthAction(permission = {Permission.Update}, name = "修改")
     public ServiceResult updateUserInfo(SystemUser userInfo) {
         return ServiceFactory.getUserService().update(ComSession.getUserInfo(), userInfo);
     }
 
     /**
      * 更新用户状态
+     *
      * @param
      * @return
      */
     @RequestMapping(value = "/updateState", method = RequestMethod.POST)
     @ResponseBody
-    @AuthAction(permission = {Permission.Update},name = "修改")
-    public ServiceResult updateState(String id,int state) {
-        return ServiceFactory.getUserService().updateState(ComSession.getUserInfo(),id,state);
+    @AuthAction(permission = {Permission.Update}, name = "修改")
+    public ServiceResult updateState(String id, int state) {
+        return ServiceFactory.getUserService().updateState(ComSession.getUserInfo(), id, state);
     }
 
     /**
@@ -130,30 +137,32 @@ public class SystemUserController extends BaseController {
      */
     @RequestMapping(value = "/delUserInfo", method = RequestMethod.GET)
     @ResponseBody
-    @AuthAction(permission = {Permission.Delete},name = "删除")
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult deleteUserInfo(String id) {
         return ServiceFactory.getUserService().deleteById(ComSession.getUserInfo(), id);
     }
 
     /**
      * 批量删除
+     *
      * @param ids
      * @return
      */
     @RequestMapping(value = "/delUserList", method = RequestMethod.POST)
     @ResponseBody
-    @AuthAction(permission = {Permission.Delete},name = "删除")
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult deleteUserList(String ids) {
         return ServiceFactory.getUserService().deleteByIds(ComSession.getUserInfo(), ids);
     }
 
     /**
      * 获取用户关联菜单
+     *
      * @return
      */
     @RequestMapping("/menu")
     @ResponseBody
-    @AuthAction(permission = {Permission.Query},name = "查询")
+    @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<List<MenuData>> getUserMenu() {
         return ServiceFactory.getMenuDataService().getCompetenceMenuByUser(ComSession.getUserInfo(), ComSession.getUserInfo().getUserId());
     }
@@ -162,36 +171,38 @@ public class SystemUserController extends BaseController {
 
     /**
      * 添加用户权限
+     *
      * @param catalogId
      * @param ids
      * @return
      */
     @RequestMapping(value = "/addUserAcc")
     @ResponseBody
-    @AuthAction(permission = {Permission.Add},name = "新增")
+    @AuthAction(permission = {Permission.Add}, name = "新增")
     public ServiceResult addUserAcc(@RequestParam("catalogId") String catalogId, @RequestParam("ids") String ids) {
         List<UserCompetence> models = new ArrayList<UserCompetence>();
-        String [] arrayids = ids.split(",");
-        for(String  id:arrayids){
-            if(StringUtil.isNullOrWhiteSpace(id))continue;
+        String[] arrayids = ids.split(",");
+        for (String id : arrayids) {
+            if (StringUtil.isNullOrWhiteSpace(id)) continue;
             UserCompetence menu = new UserCompetence();
             menu.setFkCompetenceCategoryId(catalogId);
             menu.setFkUserId(id);
             models.add(menu);
         }
-        return ServiceFactory.getUserCompetenceService().saveList(ComSession.getUserInfo(),catalogId,models);
+        return ServiceFactory.getUserCompetenceService().saveList(ComSession.getUserInfo(), catalogId, models);
     }
 
     /**
      * 删除用户权限
+     *
      * @param ids
      * @return
      */
     @RequestMapping(value = "/delUserAcc")
     @ResponseBody
-    @AuthAction(permission = {Permission.Add},name = "新增")
-    public ServiceResult delUserAcc( @RequestParam("ids") String ids) {
-        return ServiceFactory.getUserCompetenceService().deleteByIds(ComSession.getUserInfo(),ids);
+    @AuthAction(permission = {Permission.Add}, name = "新增")
+    public ServiceResult delUserAcc(@RequestParam("ids") String ids) {
+        return ServiceFactory.getUserCompetenceService().deleteByIds(ComSession.getUserInfo(), ids);
     }
 
 }

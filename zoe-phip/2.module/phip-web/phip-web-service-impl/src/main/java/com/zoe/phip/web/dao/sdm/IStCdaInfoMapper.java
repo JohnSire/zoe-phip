@@ -20,5 +20,5 @@ import java.util.Map;
 public interface IStCdaInfoMapper extends IMyMapper<StCdaInfo> {
     List<StCdaInfo> getDataPageList(Map<String, Object> map);
 
-    int getSingle(Map<String,Object> map);
+    int getSingle(Map<String, Object> map);
 }

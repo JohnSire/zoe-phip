@@ -17,14 +17,13 @@ public class MyPasswordValidator implements ConstraintValidator<MyPassword, Stri
     private static Pattern pattern = Pattern.compile("(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}");
 
 
-
     @Override
     public void initialize(MyPassword myPassword) {
 
     }
 
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        if( value==null ){
+        if (value == null) {
             return false;
         }
         Matcher m = pattern.matcher(value);

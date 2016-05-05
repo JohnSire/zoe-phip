@@ -21,7 +21,8 @@ import java.util.Map;
 public interface IAreaBaseInfoMapper extends IServiceMapper<AreaBaseInfo> {
 
     /**
-     *行政区域基本信息查询
+     * 行政区域基本信息查询
+     *
      * @param map
      * @return
      */
@@ -31,16 +32,18 @@ public interface IAreaBaseInfoMapper extends IServiceMapper<AreaBaseInfo> {
 
     /**
      * 所辖行政区域信息查询
+     *
      * @param map
      * @return
      */
-    List<AreaBaseInfo> getChildren(Map<String,Object> map);
+    List<AreaBaseInfo> getChildren(Map<String, Object> map);
 
     /**
      * 根据关键字查询区域信息
+     *
      * @param map
      * @return
      */
-    List<AreaBaseInfo> getDataList(Map<String,Object> map);
+    List<AreaBaseInfo> getDataList(Map<String, Object> map);
 
 }

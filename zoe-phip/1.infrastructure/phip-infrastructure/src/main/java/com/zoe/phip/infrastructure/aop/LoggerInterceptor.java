@@ -25,18 +25,18 @@ public class LoggerInterceptor {
     public void doBefore(JoinPoint joinPoint) {
         //如果方法的第一个参数不是SystemData，则报异常
         String methodName = joinPoint.getSignature().getName();
-        if(!methodName.equals("login")){
+        if (!methodName.equals("login")) {
             Class[] cls = ((MethodSignature) joinPoint.getSignature()).getParameterTypes();
-            if(cls.length==0){
+            if (cls.length == 0) {
                 throw new RuntimeException("该方法没有SystemData类型的参数!");
             }
-            if(!cls[0].getName().equals(SystemData.class.getName())){
+            if (!cls[0].getName().equals(SystemData.class.getName())) {
                 throw new RuntimeException("方法的第一个参数必须为SystemData类型");
             }
-            SystemData token= (SystemData)joinPoint.getArgs()[0];
-            boolean isAuth=SystemCredential.checkCredential(token.getUserId(),token.getUserName(),token.getCredential());
-            if(!isAuth){
-                throw  new RuntimeException("Session过期,请重新登录!");
+            SystemData token = (SystemData) joinPoint.getArgs()[0];
+            boolean isAuth = SystemCredential.checkCredential(token.getUserId(), token.getUserName(), token.getCredential());
+            if (!isAuth) {
+                throw new RuntimeException("Session过期,请重新登录!");
             }
         }
         // TODO: 2016/3/17 相关权限验证

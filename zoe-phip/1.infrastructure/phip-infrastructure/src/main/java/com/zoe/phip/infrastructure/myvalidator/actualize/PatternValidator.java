@@ -12,30 +12,29 @@ import java.util.regex.PatternSyntaxException;
 
 public class PatternValidator implements ConstraintValidator<ValidatePattern, CharSequence> {
 
-	private static final Log log = LoggerFactory.make();
+    private static final Log log = LoggerFactory.make();
 
-	private java.util.regex.Pattern pattern;
+    private java.util.regex.Pattern pattern;
 
-	public void initialize(ValidatePattern parameters) {
-		ValidatePattern.Flag[] flags = parameters.flags();
-		int intFlag = 0;
-		for ( ValidatePattern.Flag flag : flags ) {
-			intFlag = intFlag | flag.getValue();
-		}
+    public void initialize(ValidatePattern parameters) {
+        ValidatePattern.Flag[] flags = parameters.flags();
+        int intFlag = 0;
+        for (ValidatePattern.Flag flag : flags) {
+            intFlag = intFlag | flag.getValue();
+        }
 
-		try {
-			pattern = java.util.regex.Pattern.compile( parameters.regexp(), intFlag );
-		}
-		catch ( PatternSyntaxException e ) {
-			throw log.getInvalidRegularExpressionException( e );
-		}
-	}
+        try {
+            pattern = java.util.regex.Pattern.compile(parameters.regexp(), intFlag);
+        } catch (PatternSyntaxException e) {
+            throw log.getInvalidRegularExpressionException(e);
+        }
+    }
 
-	public boolean isValid(CharSequence value, ConstraintValidatorContext constraintValidatorContext) {
-		if ( value == null ) {
-			return true;
-		}
-		Matcher m = pattern.matcher( value );
-		return m.matches();
-	}
+    public boolean isValid(CharSequence value, ConstraintValidatorContext constraintValidatorContext) {
+        if (value == null) {
+            return true;
+        }
+        Matcher m = pattern.matcher(value);
+        return m.matches();
+    }
 }

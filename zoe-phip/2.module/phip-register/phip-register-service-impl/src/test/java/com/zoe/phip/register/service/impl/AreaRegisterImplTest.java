@@ -37,7 +37,7 @@ public class AreaRegisterImplTest extends BaseTest {
 
     @Test
     public void testUpdateAreaRequest() throws Exception {
-        String doc="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+        String doc = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<root>\n" +
                 "    <code value=\"xiamen\"/>\n" +
                 "\t<name value=\"厦门\"/>\n" +
@@ -67,7 +67,7 @@ public class AreaRegisterImplTest extends BaseTest {
         AreaBaseInfo b2 = new AreaBaseInfo();
         b2.setCode("351008");
         baseInfoList.add(b2);
-        String message= RegisterUtil.registerMessage(RegisterType.AREA_QUERY_CHILDREN,baseInfoList);
+        String message = RegisterUtil.registerMessage(RegisterType.AREA_QUERY_CHILDREN, baseInfoList);
 
         System.out.println(message);
     }

@@ -13,9 +13,9 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
-@Target({ TYPE })
+@Target({TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = { ScriptAssertValidator.class})
+@Constraint(validatedBy = {ScriptAssertValidator.class})
 @Documented
 /**
  *
@@ -26,26 +26,26 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 public @interface ValidateScriptAssert {
 
-	String message() default "{org.hibernate.validator.constraints.ScriptAssert.message}";
+    String message() default "{org.hibernate.validator.constraints.ScriptAssert.message}";
 
-	Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default { };
-
-
-	String lang();
+    Class<? extends Payload>[] payload() default {};
 
 
-	String script();
+    String lang();
 
 
-	String alias() default "_this";
+    String script();
 
 
-	@Target({ TYPE })
-	@Retention(RUNTIME)
-	@Documented
-	public @interface List {
-		ValidateScriptAssert[] value();
-	}
+    String alias() default "_this";
+
+
+    @Target({TYPE})
+    @Retention(RUNTIME)
+    @Documented
+    public @interface List {
+        ValidateScriptAssert[] value();
+    }
 }

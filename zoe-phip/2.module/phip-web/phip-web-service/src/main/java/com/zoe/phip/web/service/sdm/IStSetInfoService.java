@@ -39,7 +39,7 @@ public interface IStSetInfoService extends IBaseInService<StSetInfo> {
 
     ServiceResult rsSetElementUpdate(SystemData systemData, StRsSetElementInfo info);
 
-    ServiceResult rsSetElementDel(SystemData systemData,String id);
+    ServiceResult rsSetElementDel(SystemData systemData, String id);
 
 
 }

@@ -79,7 +79,6 @@ public class MenuData extends MasterEntity {
     private String parentName;
 
 
-
     @Transient
     @JSONField(serialize = false)
     private MenuData parentMenu;

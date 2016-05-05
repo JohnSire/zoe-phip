@@ -34,6 +34,7 @@ public interface IXmanBaseInfoMapper extends IServiceMapper<XmanBaseInfo> {
 
     /**
      * 根据主键获取病人信息
+     *
      * @param id
      * @return
      */
@@ -51,7 +52,6 @@ public interface IXmanBaseInfoMapper extends IServiceMapper<XmanBaseInfo> {
     List<XmanBaseInfo> getPatientList(Map<String, Object> args);
 
     PageList<XmanBaseInfo> patientRegistryListQuery(String key, QueryPage page);
-
 
 
 }

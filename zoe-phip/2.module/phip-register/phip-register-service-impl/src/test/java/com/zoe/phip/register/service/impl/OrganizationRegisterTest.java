@@ -16,9 +16,10 @@ public class OrganizationRegisterTest extends BaseTest {
 
     @Autowired
     private OrganizationRegisterInImpl implIn;
-   @Test
+
+    @Test
     public void testAdd() throws Exception {
-        String patientInput ="<PRPM_IN401030UV01 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN401030UV01.xsd\">\n" +
+        String patientInput = "<PRPM_IN401030UV01 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\" xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN401030UV01.xsd\">\n" +
                 "  <id root=\"040CD76A-ED0E-400B-9FD3-60387BCDE0EB\" extension=\"8D73520B-D489-4B70-8F4B-7B5C2D7961B5\"/>\n" +
                 "  <creationTime value=\"20130116112855\"/>\n" +
                 "  <interactionId root=\"2.16.840.1.113883.1.6\" extension=\"PRPM_IN401030UV01\"/>\n" +
@@ -104,15 +105,15 @@ public class OrganizationRegisterTest extends BaseTest {
                 "</PRPM_IN401030UV01>";
 
 
-     // String result = impl.addOrganization(patientInput);
-       String result = impl.updateOrganization(patientInput);
+        // String result = impl.addOrganization(patientInput);
+        String result = impl.updateOrganization(patientInput);
 
         System.out.println(result);
     }
 
     @Test
-    public void  testQuery() throws Exception{
-        String  query = "<PRPM_IN406010UV01 xmlns=\"urn:hl7-org:v3\" \n" +
+    public void testQuery() throws Exception {
+        String query = "<PRPM_IN406010UV01 xmlns=\"urn:hl7-org:v3\" \n" +
                 "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\" \n" +
                 "xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN406010UV01.xsd\">\n" +
                 "  <id root=\"140CD76A-ED0E-400B-9FD3-60387BCDE0EQ\"\n" +
@@ -164,24 +165,23 @@ public class OrganizationRegisterTest extends BaseTest {
 
 
     @Test
-    public void testDictItemListQuery(){
+    public void testDictItemListQuery() {
 
-       // List<OrgDeptInfo> list= implIn.dictItemListQuery("0234567890");
-       // PageList<OrgDeptInfo> pageList=implIn.orgListQuery();
+        // List<OrgDeptInfo> list= implIn.dictItemListQuery("0234567890");
+        // PageList<OrgDeptInfo> pageList=implIn.orgListQuery();
 
-    //  DictCatalog dictCatalog= implIn.dictItemListQuery();
+        //  DictCatalog dictCatalog= implIn.dictItemListQuery();
 
-       // implIn.organizationListQueryT("1","","");
+        // implIn.organizationListQueryT("1","","");
         implIn.dictItemListQueryByCodeSystem("2.16.156.10011.2.3.4.1");
 
     }
-    @Test
-    public void organizationDelete(){
 
+    @Test
+    public void organizationDelete() {
 
 
     }
-
 
 
 }

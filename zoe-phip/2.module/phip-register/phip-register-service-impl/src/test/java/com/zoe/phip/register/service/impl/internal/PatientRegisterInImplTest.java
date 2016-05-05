@@ -20,18 +20,18 @@ public class PatientRegisterInImplTest extends BaseTest {
 
     @Test
     public void testPatientRegistryListQuery() throws Exception {
-        PageList<XmanBaseInfo> result=
-                patientRegister.patientRegistryListQuery("",new QueryPage());
+        PageList<XmanBaseInfo> result =
+                patientRegister.patientRegistryListQuery("", new QueryPage());
     }
 
     @Test
     public void testGetById() throws Exception {
-        XmanBaseInfo result= patientRegister.getById("ecd03ef24b7143d29aa4d57574f192c2");
+        XmanBaseInfo result = patientRegister.getById("ecd03ef24b7143d29aa4d57574f192c2");
     }
 
     @Test
     public void testGetPatient() throws Exception {
-        XmanBaseInfo result= patientRegister.getPatient("123456789");
+        XmanBaseInfo result = patientRegister.getPatient("123456789");
 
     }
 }

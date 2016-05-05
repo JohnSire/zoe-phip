@@ -17,51 +17,51 @@ public final class XmlBeanUtil {
 
     /**
      * 将xml转换成java bean
-     * @param document 要转换的xml
-     * @param clazz 转换后的实体类
+     *
+     * @param document  要转换的xml
+     * @param clazz     转换后的实体类
      * @param parserDoc 转换适配xml
      * @param <T>
      * @return
      * @throws Exception
      */
-    public static <T> T toBean(Document document, Class<T> clazz,Document parserDoc) throws Exception {
-        if(document==null||parserDoc==null){
+    public static <T> T toBean(Document document, Class<T> clazz, Document parserDoc) throws Exception {
+        if (document == null || parserDoc == null) {
             throw new Exception("document or parserDoc could not be null!");
         }
         //获取所有的属性
         Field[] fields = clazz.getDeclaredFields();
 
-        T instance =  clazz.newInstance();
+        T instance = clazz.newInstance();
         for (Field field : fields) {
             //属性名
             String fieldName = field.getName();
 
             //将第一位转化为大写，便于获取实体类中set,get方法
             fieldName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
-            XPath x = parserDoc.createXPath("//"+fieldName);
+            XPath x = parserDoc.createXPath("//" + fieldName);
             //路径
-            if(x.selectSingleNode(parserDoc)==null
-                    ||((Element)x.selectSingleNode(parserDoc)).attribute("path")==null){
+            if (x.selectSingleNode(parserDoc) == null
+                    || ((Element) x.selectSingleNode(parserDoc)).attribute("path") == null) {
                 continue;
             }
-            Attribute pathAttr=((Element)x.selectSingleNode(parserDoc)).attribute("path");
-            String path =pathAttr.getValue();// xPath.value();
+            Attribute pathAttr = ((Element) x.selectSingleNode(parserDoc)).attribute("path");
+            String path = pathAttr.getValue();// xPath.value();
             //默认值
-            String defValue =((Element)x.selectSingleNode(parserDoc)).attribute("defValue")!=null?
-                    ((Element)x.selectSingleNode(parserDoc)).attribute("defValue").getValue():"";
+            String defValue = ((Element) x.selectSingleNode(parserDoc)).attribute("defValue") != null ?
+                    ((Element) x.selectSingleNode(parserDoc)).attribute("defValue").getValue() : "";
             String fieldType = field.getType().toString();
             String value = defValue;
-            if(!StringUtil.isNullOrWhiteSpace(path))
-            {
-                XPath xpath= document.createXPath(path);
-                value=xpath.selectSingleNode(document).getText();
+            if (!StringUtil.isNullOrWhiteSpace(path)) {
+                XPath xpath = document.createXPath(path);
+                value = xpath.selectSingleNode(document).getText();
             }
             System.out.println(path);//todo 删除这句代码
             System.out.println(value);//todo 删除这句代码
-            if(value==""){
+            if (value == "") {
                 continue;
             }
-            Method method = clazz.getMethod("set" + fieldName,field.getType());
+            Method method = clazz.getMethod("set" + fieldName, field.getType());
             if (fieldType.endsWith("String")) {
                 //获得set方法
                 method.invoke(instance, value);

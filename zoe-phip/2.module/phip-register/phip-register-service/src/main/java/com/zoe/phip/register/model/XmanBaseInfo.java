@@ -62,7 +62,6 @@ public class XmanBaseInfo extends RegisterEntity {
     private String sexCodeName;
 
 
-
     /**
      * 出生日期
      */
@@ -82,7 +81,6 @@ public class XmanBaseInfo extends RegisterEntity {
      */
     @Column(name = "EMPLOYER_NAME")
     private String employerName;
-
 
 
     /**
@@ -227,7 +225,6 @@ public class XmanBaseInfo extends RegisterEntity {
     private String marriageName;
 
 
-
     /**
      * 医疗保险类别代码
      */
@@ -307,6 +304,7 @@ public class XmanBaseInfo extends RegisterEntity {
 
     /**
      * 状态代码
+     *
      * @return
      */
     public String getStatusCode() {

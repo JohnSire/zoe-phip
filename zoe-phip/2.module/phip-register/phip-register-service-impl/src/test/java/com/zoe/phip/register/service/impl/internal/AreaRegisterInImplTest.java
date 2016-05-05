@@ -38,7 +38,7 @@ public class AreaRegisterInImplTest extends BaseTest {
     public void query() throws Exception {
 
 
-        PageList<AreaBaseInfo> result=  impl.getAreaChildrenRegistry("cdd9be10-7077-463c-b764-eba040de904c","351000",new QueryPage());
+        PageList<AreaBaseInfo> result = impl.getAreaChildrenRegistry("cdd9be10-7077-463c-b764-eba040de904c", "351000", new QueryPage());
         System.out.println(JSON.toJSON(result));
     }
 

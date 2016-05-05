@@ -40,11 +40,11 @@ import java.util.stream.Collectors;
  * @date 2016-03-29
  */
 @Repository("UserCompetenceService")
-@Service(interfaceClass = IUserCompetenceService.class, proxy = "sdpf",protocol = {"dubbo"}, dynamic = true)
+@Service(interfaceClass = IUserCompetenceService.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
 public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence, IUserCompetenceMapper> implements IUserCompetenceMapper {
 
     @Override
-    @ErrorMessage(code = "001",message = "权限分类不能为空!")
+    @ErrorMessage(code = "001", message = "权限分类不能为空!")
     public boolean saveList(String competenceCategoryId, List<UserCompetence> list) throws Exception {
         if (StringUtil.isNullOrWhiteSpace(competenceCategoryId))
             throw new BusinessException("001");
@@ -169,13 +169,13 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
         for (ConstraintViolation<SystemUser> constraintViolation : set) {
             System.out.println(constraintViolation.getMessage());
             //字段名:如name.
-            String columnName=constraintViolation.getPropertyPath().toString();
+            String columnName = constraintViolation.getPropertyPath().toString();
             //class:如：systemuser
             constraintViolation.getRootBeanClass();
 
 
-            Class<?> bean=constraintViolation.getRootBeanClass();
-            String columnNotesName="";
+            Class<?> bean = constraintViolation.getRootBeanClass();
+            String columnNotesName = "";
             Field[] fields = bean.getDeclaredFields();
             if (fields != null) {
                 for (int i = 0; i < fields.length; i++) {
@@ -186,10 +186,10 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
                         try {
                             Method method = Column.class.getMethod("name");
                             name = (String) method.invoke(annotation);
-                            if(name.equals(columnName.toUpperCase())){
+                            if (name.equals(columnName.toUpperCase())) {
                                 Annotation annotationTwo = field.getAnnotation(ColumnNotes.class);
                                 Method methodTwo = ColumnNotes.class.getMethod("name");
-                                columnNotesName=(String)methodTwo.invoke(annotationTwo);
+                                columnNotesName = (String) methodTwo.invoke(annotationTwo);
                                 break;
                             }
                         } catch (Exception e) {
@@ -199,7 +199,7 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
                     }
                 }
             }
-            System.out.println(columnNotesName+constraintViolation.getMessage());
+            System.out.println(columnNotesName + constraintViolation.getMessage());
         }
     }
 }

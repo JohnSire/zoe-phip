@@ -16,4 +16,4 @@ import com.zoe.phip.register.model.EhrDataInfo;
  */
 public interface IEhrDataInfoMapper extends IServiceMapper<EhrDataInfo> {
 
-        }
+}

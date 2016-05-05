@@ -22,23 +22,21 @@ import java.lang.annotation.Target;
  * bean验证：被注释的元素必须是一个数字，其值必须小于等于指定的最大值
  */
 
-public @interface ValidateMax
-{
-  String message() default "{javax.validation.constraints.Max.message}";
-  
-  Class<?>[] groups() default {};
-  
-  Class<? extends Payload>[] payload() default {};
-  
-  long value();
-  
-  @Target({java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.PARAMETER})
-  @Retention(RetentionPolicy.RUNTIME)
-  @Documented
-  public static @interface List
-  {
-    ValidateMax[] value();
-  }
+public @interface ValidateMax {
+    String message() default "{javax.validation.constraints.Max.message}";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+
+    long value();
+
+    @Target({java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.PARAMETER})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Documented
+    public static @interface List {
+        ValidateMax[] value();
+    }
 }
 
 

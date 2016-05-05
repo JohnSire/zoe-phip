@@ -26,6 +26,7 @@ public interface IMenuDataService extends IBaseInService<MenuData> {
 
     /**
      * 通过关键字分页获取菜单列表
+     *
      * @param systemData
      * @param key
      * @param page
@@ -35,6 +36,7 @@ public interface IMenuDataService extends IBaseInService<MenuData> {
 
     /**
      * 通过关键字获取菜单列表
+     *
      * @param systemData
      * @param key
      * @return
@@ -43,6 +45,7 @@ public interface IMenuDataService extends IBaseInService<MenuData> {
 
     /**
      * 通过编码获得菜单列表
+     *
      * @param systemData
      * @param code
      * @return
@@ -51,6 +54,7 @@ public interface IMenuDataService extends IBaseInService<MenuData> {
 
     /**
      * 获取子菜单列表
+     *
      * @param systemData
      * @param parentMenuId
      * @return
@@ -59,6 +63,7 @@ public interface IMenuDataService extends IBaseInService<MenuData> {
 
     /**
      * 获取用户的菜单权限
+     *
      * @param systemData
      * @param userId
      * @return
@@ -66,9 +71,9 @@ public interface IMenuDataService extends IBaseInService<MenuData> {
     ServiceResultT<List<MenuData>> getCompetenceMenuByUser(SystemData systemData, String userId);
 
 
-
     /**
      * 更新菜单状态
+     *
      * @param systemData
      * @param id
      * @param state
@@ -79,6 +84,7 @@ public interface IMenuDataService extends IBaseInService<MenuData> {
 
     /**
      * 通过关键字查询菜单数据
+     *
      * @param systemData
      * @param key
      * @param page
