@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IMedicalStaffInfoMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.MedicalStaffInfo" extends="BaseResultMap">
-
+        <result column="GENDER_NAME" property="genderName" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
         update PHIP_MEDICAL_STAFF_INFO
@@ -15,9 +15,6 @@
             </if>
             <if test="genderCode != null">
                 GENDER_CODE = #{genderCode,jdbcType=VARCHAR},
-            </if>
-            <if test="genderName != null">
-                GENDER_NAME = #{genderName,jdbcType=VARCHAR},
             </if>
             <if test="birthTime != null">
                 BIRTH_TIME = #{birthTime,jdbcType=TIMESTAMP},
@@ -112,18 +109,30 @@
     </select>
 
     <select id="getProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
-        SELECT * FROM PHIP_MEDICAL_STAFF_INFO M
+        SELECT M.*,S.NAME AS GENDER_NAME FROM PHIP_MEDICAL_STAFF_INFO M
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON M.GENDER_CODE=S.CODE --性别
         <where>
             <if test="_parameter.containsKey('key') and _parameter.containsKey('key')!=''">
                 (UPPER(M.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(M.ID_NO) LIKE
                 #{key,jdbcType=VARCHAR})
             </if>
-                AND M.AFFILIATED_ORG_CODE IN (
-                SELECT  DEPT_CODE
-                FROM PHIP_ORG_DEPT_INFO
-                START WITH DEPT_CODE=#{deptCode,jdbcType=VARCHAR}
-                CONNECT BY PRIOR DEPT_CODE = DEPT_PARENT_CODE)
+            AND M.AFFILIATED_ORG_CODE IN (
+            SELECT DEPT_CODE
+            FROM PHIP_ORG_DEPT_INFO
+            START WITH DEPT_CODE=#{deptCode,jdbcType=VARCHAR}
+            CONNECT BY PRIOR DEPT_CODE = DEPT_PARENT_CODE)
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
     </select>
+
+    <sql id="oidSelect">
+        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
+        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
+        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
+        WHERE PNS.CODE_SYSTEM = '${oidValue}'
+    </sql>
 </mapper>

@@ -9,8 +9,6 @@
                 jdbcType="VARCHAR"/>
         <result column="GENDER_CODE" property="genderCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="GENDER_NAME" property="genderName" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
         <result column="BIRTH_TIME" property="birthTime" javaType="java.sql.Timestamp"
                 jdbcType="TIMESTAMP"/>
         <result column="BIRTHPLACE_ADDR" property="birthplaceAddr" javaType="java.lang.String"
@@ -55,7 +53,6 @@
         EXTENSION_ID,
         NAME,
         GENDER_CODE,
-        GENDER_NAME,
         BIRTH_TIME,
         BIRTHPLACE_ADDR,
         ID_NO,
@@ -81,7 +78,6 @@
             #{item.extensionId,jdbcType=VARCHAR},
             #{item.name,jdbcType=VARCHAR},
             #{item.genderCode,jdbcType=VARCHAR},
-            #{item.genderName,jdbcType=VARCHAR},
             #{item.birthTime,jdbcType=TIMESTAMP},
             #{item.birthplaceAddr,jdbcType=VARCHAR},
             #{item.idNo,jdbcType=VARCHAR},
@@ -110,7 +106,6 @@
         EXTENSION_ID,
         NAME,
         GENDER_CODE,
-        GENDER_NAME,
         BIRTH_TIME,
         BIRTHPLACE_ADDR,
         ID_NO,
@@ -135,7 +130,6 @@
         #{extensionId,jdbcType=VARCHAR},
         #{name,jdbcType=VARCHAR},
         #{genderCode,jdbcType=VARCHAR},
-        #{genderName,jdbcType=VARCHAR},
         #{birthTime,jdbcType=TIMESTAMP},
         #{birthplaceAddr,jdbcType=VARCHAR},
         #{idNo,jdbcType=VARCHAR},
@@ -182,9 +176,6 @@
                 </if>
                 <if test="item.genderCode != null">
                     GENDER_CODE = #{item.genderCode,jdbcType=VARCHAR},
-                </if>
-                <if test="item.genderName != null">
-                    GENDER_NAME = #{item.genderName,jdbcType=VARCHAR},
                 </if>
                 <if test="item.birthTime != null">
                     BIRTH_TIME = #{item.birthTime,jdbcType=TIMESTAMP},
