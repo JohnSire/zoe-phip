@@ -73,6 +73,8 @@
                 jdbcType="VARCHAR"/>
         <result column="STATUS_CODE" property="statusCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
+        <result column="EFFECTIVE_TIME" property="effectiveTime" javaType="java.sql.Timestamp"
+                jdbcType="TIMESTAMP"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO PHIP_XMAN_BASE_INFO (
@@ -111,6 +113,7 @@
         MSG_ID,
         EMPLOYER_TEL_NO,
         STATUS_CODE,
+        EFFECTIVE_TIME,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
@@ -149,6 +152,7 @@
             #{item.msgId,jdbcType=VARCHAR},
             #{item.employerTelNo,jdbcType=VARCHAR},
             #{item.statusCode,jdbcType=VARCHAR},
+            #{item.effectiveTime,jdbcType=TIMESTAMP},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -190,6 +194,7 @@
         MSG_ID,
         EMPLOYER_TEL_NO,
         STATUS_CODE,
+        EFFECTIVE_TIME,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>
         ) VALUES (
         #{orgCode,jdbcType=VARCHAR},
@@ -227,6 +232,7 @@
         #{msgId,jdbcType=VARCHAR},
         #{employerTelNo,jdbcType=VARCHAR},
         #{statusCode,jdbcType=VARCHAR},
+        #{item.effectiveTime,jdbcType=TIMESTAMP},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
@@ -348,11 +354,14 @@
                 <if test="item.employerTelNo != null">
                     EMPLOYER_TEL_NO = #{item.employerTelNo,jdbcType=VARCHAR},
                 </if>
-                <if test="item.employerTelNo != null">
+                <if test="item.statusCode != null">
                     STATUS_CODE = #{item.statusCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.state != null">
                     STATE = #{item.state,jdbcType=DECIMAL},
+                </if>
+                <if test="item.effectiveTime != null">
+                    EFFECTIVE_TIME = #{item.effectiveTime,jdbcType=TIMESTAMP},
                 </if>
                 MODIFY_AT=sysdate
             </set>

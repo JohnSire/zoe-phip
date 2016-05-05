@@ -15,23 +15,19 @@ var bodySection = {
                 </p>
                 <div class="column-three">
                     <label class="label" for="sexCode">性别：</label>
-
-                    <div class="simulate-select" id="selFkParent">
-                        <span class="text" title="--请选择性别--">--请选择性别--</span>
+                    <div class="simulate-select" id="selSex">
+                        <span class="text">--请选择性别--</span>
                         <i class="icon-grid icon-grid-fold-gray"></i>
                         <ul class="simulate-select-lists" style="display:none;">
                             <li class="simulate-select-list">--请选择性别--</li>
-                            <li class="simulate-select-list">男</li>
-                            <li class="simulate-select-list active">女</li>
-                            <li class="simulate-select-list">未知</li>
+                            <!--<li class="simulate-select-list">男</li>-->
+                            <!--<li class="simulate-select-list active">女</li>-->
+                            <!--<li class="simulate-select-list">未知</li>-->
                         </ul>
                         <div class="clear"></div>
                     </div>
-
-
-                    <select name="sexCode" datatype="*" errormsg="请选择标准版本！" nullmsg="请选择!" style="display: none;">
+                    <select name="sexCode" style="display: none;">
                     </select>
-
                 </div>
                 <p class="column-three">
                     <label class="label" for="birthDate">出生日期：</label>
@@ -47,59 +43,52 @@ var bodySection = {
                            nullmsg="请填写身份证件号！"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="patientId"><span class="text-mark">*</span>编码：</label>
-                    <input type="text" name="patientId" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"
-                           nullmsg="请填写编码！"/>
-                </p>
-                <p class="column-three">
-                    <label class="label" for="cardCode"><span class="text-mark">*</span>健康卡号：</label>
-                    <input type="text" name="cardCode" class="text" datatype="*1-128" errormsg="健康卡号长度应为1~128位！"
-                           nullmsg="请填写健康卡号！"/>
-                </p>
-            </li>
-            <li class="list">
-                <div class="column-three">
-                    <label class="label" for="sexCodeName">婚姻状况：</label>
-                    <div class="simulate-select" id="">
-                        <span class="text" title="--请选择性别--">--请选择婚姻状况--</span>
-                        <i class="icon-grid icon-grid-fold-gray"></i>
-                        <ul class="simulate-select-lists" style="display:none;">
-                            <li class="simulate-select-list">--请选择婚姻状况--</li>
-                            <li class="simulate-select-list">已婚</li>
-                            <li class="simulate-select-list active">未婚</li>
-                            <li class="simulate-select-list">离异</li>
-                        </ul>
-                        <div class="clear"></div>
-                    </div>
-                    <select name="FkStandardId" datatype="*" errormsg="请选择标准版本！" nullmsg="请选择!" style="display: none;">
-                    </select>
-
-                </div>
-
-                <p class="column-three">
-                    <label class="label" for="fkParentMenuId">民族：</label>
-                        <span class="text-line-outer" id="btnFkParent">
-                            <input type="text" name="fkParentMenuId" class="text-line" datatype="*"
-                                   errormsg="菜单父节点不能为空"/>
-                            <span class="text-line-setting">
-                                <span class="icon-grid icon-grid-setting" title="配置"></span>
-                                <span class="text-line-content"></span>
-                            </span>
-                        </span>
-                </p>
-
-                <p class="column-three">
-                    <label class="label" for="healthRecordNo"><span class="text-mark">*</span>健康档案编号：</label>
-                    <input type="text" name="healthRecordNo" class="text" datatype="*1-128" errormsg="健康档案编号长度应为1~128位！"
-                           nullmsg="请填写健康档案编号！"/>
-                </p>
-            </li>
-            <li class="list">
-                <p class="column-three">
                     <label class="label" for="telNo">联系电话：</label>
                     <input type="text" name="telNo" class="text"/>
                 </p>
                 <p class="column-three">
+                    <label class="label" for="cardCode">健康卡号：</label>
+                    <input type="text" name="cardCode" class="text"/>
+                </p>
+            </li>
+            <li class="list">
+                <!--<p class="column-three">-->
+                <!--<label class="label" for="marriageName">婚姻状况：</label>-->
+                <!--<input type="text" name="marriageName" class="text"/>-->
+                <!--</p>-->
+
+                <div class="column-three">
+                    <label class="label" for="marriageCode">婚姻状况：</label>
+                    <div class="simulate-select" id="selMarriage">
+                        <span class="text" title="--婚姻状况--">--婚姻状况--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--婚姻状况--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="marriageCode" style="display: none;">
+                    </select>
+                </div>
+
+                <p class="column-three">
+                    <label class="label" for="nationalityCode">民族：</label>
+                    <!--<input type="text" name="nationalityName" class="text"/>-->
+                    <span class="text-line-outer" id="btnFkNationality">
+                        <input type="text" name="nationalityCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="配置"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="healthRecordNo">健康档案编号：</label>
+                    <input type="text" name="healthRecordNo" class="text"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
                     <label class="label" for="address">联系地址：</label>
                     <input type="text" name="address" class="text"/>
                 </p>
@@ -131,21 +120,20 @@ var bodySection = {
                     <input type="text" name="postalCode" class="text"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="xcOrgCode">健康卡发放机构：</label>
+                    <label class="label" for="xcOrgCode"><span class="text-mark">*</span>健康卡发放机构：</label>
                     <input type="text" name="xcOrgCode" class="text" datatype="*1-128" errormsg="健康卡发放机构长度应为1~128位！"
                            nullmsg="请填写健康卡发放机构！"/>
                 </p>
                 <p class="column-three">
                     <label class="label" for="healthRecordOrgCode"><span class="text-mark">*</span>建档机构组织代码：</label>
                     <input type="text" name="healthRecordOrgCode" class="text" datatype="*1-128"
-                           errormsg="建档机构组织代码长度应为1~128位！"
-                           nullmsg="请填写建档机构组织代码！"/>
+                           errormsg="建档机构组织代码长度应为1~128位！"/>
                 </p>
             </li>
             <li class="list">
                 <p class="column-three">
                     <label class="label" for="relName">联系人：</label>
-                    <input type="text" name="relName" class="text"/>
+                    <input type="text" name="relName" class="text" datatype="*1-128" errormsg="联系人长度应为1~128位！"/>
                 </p>
                 <p class="column-three">
                     <label class="label" for="relTelNo">联系人电话：</label>

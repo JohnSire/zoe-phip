@@ -25,4 +25,6 @@ public interface IOrganizationRegister {
      * @return
      */
     String organizationDetailQuery(String message);
+
+
 }
