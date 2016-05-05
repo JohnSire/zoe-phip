@@ -19,12 +19,12 @@ import org.springframework.stereotype.Repository;
  * Created by zengjiyang on 2016/4/11.
  */
 @Repository("DictRegister")
-@Service(interfaceClass = IDictRegister.class, proxy = "sdpf",protocol = {"webservice"}, dynamic = true)
+@Service(interfaceClass = IDictRegister.class, proxy = "sdpf", protocol = {"webservice"}, dynamic = true)
 public class DictRegisterImpl implements IDictRegister {
 
     private static final Logger logger = LoggerFactory.getLogger(DictRegisterImpl.class);
-    private final String catalogAdapterPath="/template/dict/input/adapter/DictCatalogAdapter.xml";
-    private final String itemAdapterPath="/template/dict/input/adapter/DictItemAdapter.xml";
+    private final String catalogAdapterPath = "/template/dict/input/adapter/DictCatalogAdapter.xml";
+    private final String itemAdapterPath = "/template/dict/input/adapter/DictItemAdapter.xml";
 
     @Autowired
     private DictRegisterInImpl dictRegisterIn;
@@ -38,10 +38,10 @@ public class DictRegisterImpl implements IDictRegister {
         try {
             parserDoc = reader.read(this.getClass().getResourceAsStream(catalogAdapterPath));
             catalog = XmlBeanUtil.toBean(document, DictCatalog.class, parserDoc);
-            DictCatalog result= dictRegisterIn.addDictCatalogRequest(catalog);
+            DictCatalog result = dictRegisterIn.addDictCatalogRequest(catalog);
         } catch (Exception e) {
-            logger.error("error",e);
-            return "新增失败:"+e.getMessage();
+            logger.error("error", e);
+            return "新增失败:" + e.getMessage();
         }
         return "新增成功";
     }

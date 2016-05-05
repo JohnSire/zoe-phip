@@ -24,7 +24,7 @@ import java.util.Map;
 public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
     OrgDeptInfo getOrgDeptInfo(Map<String, Object> map);
 
-    PageList<OrgDeptInfo> organizationListQuery(String type,String deptTypeCode, String key, QueryPage page);
+    PageList<OrgDeptInfo> organizationListQuery(String type, String deptTypeCode, String key, QueryPage page);
 
     DictCatalog dictItemListQuery();
 
@@ -36,6 +36,7 @@ public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
 
     PageList<OrgDeptInfo> orgListQuery();
 
-    PageList<OrgDeptInfo> DepartmentListQuery(String type, String deptTypeCode,String deptParentCode ,String key, QueryPage page);
+    PageList<OrgDeptInfo> DepartmentListQuery(String type, String deptTypeCode, String deptParentCode, String key, QueryPage page);
+
     NationalStandards dictItemListQueryByDictCode(String dictCode);
 }

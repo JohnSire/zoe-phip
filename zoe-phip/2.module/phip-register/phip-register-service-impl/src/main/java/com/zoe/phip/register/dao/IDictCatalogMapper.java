@@ -82,5 +82,5 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
     PageList<DictItem> dictItemListQueryByCatalogId(String catalogId, QueryPage queryPage, String key);
 
-    DictCatalog   getDictCategoryOrg(Map<String, Object> args);
+    DictCatalog getDictCategoryOrg(Map<String, Object> args);
 }

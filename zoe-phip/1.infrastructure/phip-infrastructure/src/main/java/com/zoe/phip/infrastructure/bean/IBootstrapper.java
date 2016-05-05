@@ -12,6 +12,7 @@ public interface IBootstrapper {
 
     /**
      * 执行顺序
+     *
      * @return
      */
     int getExecutionOrder();

@@ -31,7 +31,7 @@ import java.util.*;
  * @date 2016-03-18
  */
 @Repository("SystemUserService")
-@Service(interfaceClass = ISystemUserService.class, proxy = "sdpf",protocol = {"dubbo"}, dynamic = true)
+@Service(interfaceClass = ISystemUserService.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
 public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystemUserMapper> implements ISystemUserMapper {
 
 
@@ -42,6 +42,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
 
     /**
      * 用户登录
+     *
      * @param loginName
      * @param passWord
      * @param expiresTime session过期时间 毫秒
@@ -49,9 +50,9 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
      * @throws Exception
      */
     @Override
-    @ErrorMessage(code="001",message = "用户名错误!")
-    @ErrorMessage(code="002",message = "用户不可用!")
-    @ErrorMessage(code="003",message = "密码错误!")
+    @ErrorMessage(code = "001", message = "用户名错误!")
+    @ErrorMessage(code = "002", message = "用户不可用!")
+    @ErrorMessage(code = "003", message = "密码错误!")
     public LoginCredentials login(String loginName, String passWord, int expiresTime) throws Exception {
 
         List<SystemUser> list = getUserByLoginName(loginName);
@@ -72,15 +73,16 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
 
     /**
      * 修改密码
-     * @param id 用户id
+     *
+     * @param id     用户id
      * @param oldPwd 旧密码
      * @param newPwd 新密码
      * @return
      * @throws Exception
      */
     @Override
-    @ErrorMessage(code = "004",message = "未找到该用户!")
-    @ErrorMessage(code = "005",message = "旧密码错!")
+    @ErrorMessage(code = "004", message = "未找到该用户!")
+    @ErrorMessage(code = "005", message = "旧密码错!")
     public int updatePassword(String id, String oldPwd, String newPwd) throws Exception {
         SystemUser user = getMapper().selectByPrimaryKey(id);
         if (user == null) {
@@ -97,13 +99,14 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
 
     /**
      * 重设密码
+     *
      * @param id
      * @param newPwd
      * @return
      * @throws Exception
      */
     @Override
-    @ErrorMessage(code = "006",message = "未找到该用户!")
+    @ErrorMessage(code = "006", message = "未找到该用户!")
     public int resetPassword(String id, String newPwd) throws Exception {
         SystemUser user = getMapper().selectByPrimaryKey(id);
         if (user == null) {
@@ -116,13 +119,14 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
 
     /**
      * 更新用户状态
+     *
      * @param id
      * @param state
      * @return
      * @throws Exception
      */
     @Override
-    @ErrorMessage(code = "007",message = "未找到该用户!")
+    @ErrorMessage(code = "007", message = "未找到该用户!")
     public int updateState(String id, int state) throws Exception {
         SystemUser user = getMapper().selectByPrimaryKey(id);
         if (user == null) {
@@ -135,6 +139,7 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
 
     /**
      * 获取用户列表
+     *
      * @param state
      * @param key
      * @param queryPage
@@ -163,14 +168,15 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
 
     /**
      * 新增用户
+     *
      * @param entity
      * @return
      * @throws Exception
      */
     @Override
-    @ErrorMessage(code = "008",message = "已存在登录名({0})的用户！")
-    public int add(  SystemUser entity) throws Exception {
-       //判断是否存在用户
+    @ErrorMessage(code = "008", message = "已存在登录名({0})的用户！")
+    public int add(SystemUser entity) throws Exception {
+        //判断是否存在用户
         List<SystemUser> list = getUserByLoginName(entity.getLoginName());
         if (list != null && list.size() > 0) {
             throw new BusinessException("008", entity.getLoginName());
@@ -182,12 +188,13 @@ public class SystemUserServiceImpl extends BaseInServiceImpl<SystemUser, ISystem
 
     /**
      * 批量新增
+     *
      * @param entities
      * @return
      * @throws Exception
      */
     @Override
-    @ErrorMessage(code = "009",message = "已存在登录名({0})的用户!")
+    @ErrorMessage(code = "009", message = "已存在登录名({0})的用户!")
     public int addList(List<SystemUser> entities) throws Exception {
 
         List<String> loginNames = new ArrayList<String>();

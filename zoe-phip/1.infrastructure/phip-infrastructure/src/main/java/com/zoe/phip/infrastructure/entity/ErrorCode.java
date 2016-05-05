@@ -13,5 +13,4 @@ public class ErrorCode {
     public static final String VALIDATOR_ERROR = "8001";
 
 
-
 }

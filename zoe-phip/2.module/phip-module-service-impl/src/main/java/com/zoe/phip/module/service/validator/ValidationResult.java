@@ -21,7 +21,7 @@ public class ValidationResult {
     }
 
     //校验错误信息
-    private Map<String,String> errorMsg;
+    private Map<String, String> errorMsg;
 
     public boolean isHasErrors() {
         return hasErrors;

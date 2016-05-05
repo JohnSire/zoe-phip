@@ -21,7 +21,7 @@ public interface IStElementInfoMapper extends IMyMapper<StElementInfo> {
 
     List<StElementInfo> getDataPageList(Map<String, Object> map);
 
-    int getSingle(Map<String,Object> Map);
+    int getSingle(Map<String, Object> Map);
 
 
 }

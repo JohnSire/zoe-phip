@@ -71,4 +71,12 @@
         </set>
         where id = #{id}
     </update>
+    <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT (1) FROM PHIP_ST_RS_SET_ELEMENT_INFO PSRSEI
+        WHERE FK_SET_ID = #{fkSetId,jdbcType=VARCHAR}
+        and ELEMENT_CODE =#{elementCode,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('id')">
+            AND PSRSEI.id != #{id, jdbcType=VARCHAR}
+        </if>
+    </select>
 </mapper>

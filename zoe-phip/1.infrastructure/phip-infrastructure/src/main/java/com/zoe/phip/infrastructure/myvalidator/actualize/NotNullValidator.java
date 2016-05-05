@@ -9,11 +9,11 @@ import javax.validation.ConstraintValidatorContext;
 
 public class NotNullValidator implements ConstraintValidator<ValidateNotNull, Object> {
 
-	public void initialize(ValidateNotNull parameters) {
-	}
+    public void initialize(ValidateNotNull parameters) {
+    }
 
-	public boolean isValid(Object object, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(Object object, ConstraintValidatorContext constraintValidatorContext) {
 
-		return object != null;
-	}
+        return object != null;
+    }
 }

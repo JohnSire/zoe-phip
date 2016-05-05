@@ -9,11 +9,11 @@ import javax.validation.ConstraintValidatorContext;
 
 public class AssertFalseValidator implements ConstraintValidator<ValidateAssertFalse, Boolean> {
 
-	public void initialize(ValidateAssertFalse constraintAnnotation) {
-	}
+    public void initialize(ValidateAssertFalse constraintAnnotation) {
+    }
 
-	public boolean isValid(Boolean bool, ConstraintValidatorContext constraintValidatorContext) {
-		return bool == null || !bool;
-	}
+    public boolean isValid(Boolean bool, ConstraintValidatorContext constraintValidatorContext) {
+        return bool == null || !bool;
+    }
 
 }

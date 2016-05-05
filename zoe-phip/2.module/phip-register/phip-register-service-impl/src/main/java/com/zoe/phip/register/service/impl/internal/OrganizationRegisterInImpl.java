@@ -163,9 +163,9 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         }
         if (type.equals("1")) {
             paras.put("deptTypeCode", deptTypeCode);
-        }else{
+        } else {
             //读取所有机构排除科室数据
-          //  paras.put("divisionRoot", "2.16.156.10011.1.5");
+            paras.put("divisionRoot", "2.16.156.10011.1.5");
         }
         //        SqlHelper.setOrder(paras,queryPage);
         List<OrgDeptInfo> results = ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoList(paras);
@@ -175,7 +175,7 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return pageList;
     }
 
-    public PageList<OrgDeptInfo> DepartmentListQuery(String type, String deptTypeCode,String deptParentCode ,String key, QueryPage page) {
+    public PageList<OrgDeptInfo> DepartmentListQuery(String type, String deptTypeCode, String deptParentCode, String key, QueryPage page) {
         PageList<OrgDeptInfo> pageList = new PageList<OrgDeptInfo>();
         //分页
         SqlHelper.startPage(page);
@@ -185,8 +185,11 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         }
         if (type.equals("1")) {
             paras.put("deptTypeCode", deptTypeCode);
+        } else {
+            //读取所有科室排除机构数据
+            paras.put("divisionRoot", "2.16.156.10011.1.26");
         }
-        paras.put("deptParentCode",deptParentCode);
+        paras.put("deptParentCode", deptParentCode);
         //        SqlHelper.setOrder(paras,queryPage);
         List<OrgDeptInfo> results = ((IOrgDeptInfoMapper) getMapper()).getOrgDeptInfoList(paras);
         PageInfo<OrgDeptInfo> pageInfo = new PageInfo<OrgDeptInfo>(results);
@@ -225,27 +228,25 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
     }
 
 
-
-   public PageList<DictItem> getDictItemPage(String codeSystem, String key, QueryPage page){
-       PageList<DictItem> pageList = new PageList<DictItem>();
-       page.setOrderBy("pdi.CREATE_AT");
-       page.setSortOrder(SortOrder.DESC);
-       //分页
-       SqlHelper.startPage(page);
-       //        SqlHelper.setOrder(paras,queryPage);
-       List<DictItem> results =
-       dictItemMapper.getDictItemNewOrgTree(MapUtil.createMap(m -> {
-           m.put("codeSystem", codeSystem);
-         if (!StringUtil.isNullOrWhiteSpace(key)) {
-               m.put("key", SqlHelper.getLikeStr("男".toUpperCase()));
-           }
-       }));
-       PageInfo<DictItem> pageInfo = new PageInfo<DictItem>(results);
-       pageList.setTotal((int) pageInfo.getTotal());
-       pageList.setRows(results);
-       return pageList;
-   }
-
+    public PageList<DictItem> getDictItemPage(String codeSystem, String key, QueryPage page) {
+        PageList<DictItem> pageList = new PageList<DictItem>();
+        page.setOrderBy("pdi.CREATE_AT");
+        page.setSortOrder(SortOrder.DESC);
+        //分页
+        SqlHelper.startPage(page);
+        //        SqlHelper.setOrder(paras,queryPage);
+        List<DictItem> results =
+                dictItemMapper.getDictItemNewOrgTree(MapUtil.createMap(m -> {
+                    m.put("codeSystem", codeSystem);
+                    if (!StringUtil.isNullOrWhiteSpace(key)) {
+                        m.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+                    }
+                }));
+        PageInfo<DictItem> pageInfo = new PageInfo<DictItem>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
 
 
 }

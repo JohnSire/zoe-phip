@@ -14,7 +14,7 @@ public class Bootstrapper implements IBootstrapper {
     public static void main(String[] args) throws Exception {
 
         //todo 待注释
-        Bootstrapper bootstrapper=new Bootstrapper();
+        Bootstrapper bootstrapper = new Bootstrapper();
         bootstrapper.startService();
 
         /*System.out.println("按任意键退出");

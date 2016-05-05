@@ -16,8 +16,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 @Documented
-@Constraint(validatedBy = {EmailValidator.class })
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Constraint(validatedBy = {EmailValidator.class})
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
 @Retention(RUNTIME)
 @ReportAsSingleViolation
 @ValidatePattern(regexp = "")
@@ -29,23 +29,23 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * bean验证：被注释的元素必须是电子邮箱地址
  */
 public @interface ValidateEmail {
-	String message() default "{org.hibernate.validator.constraints.Email.message}";
+    String message() default "{org.hibernate.validator.constraints.Email.message}";
 
-	Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default { };
-
-
-	@OverridesAttribute(constraint = ValidatePattern.class, name = "regexp") String regexp() default ".*";
+    Class<? extends Payload>[] payload() default {};
 
 
-	@OverridesAttribute(constraint = ValidatePattern.class, name = "flags") ValidatePattern.Flag[] flags() default { };
+    @OverridesAttribute(constraint = ValidatePattern.class, name = "regexp") String regexp() default ".*";
 
 
-	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
-	@Retention(RUNTIME)
-	@Documented
-	public @interface List {
-		ValidateEmail[] value();
-	}
+    @OverridesAttribute(constraint = ValidatePattern.class, name = "flags") ValidatePattern.Flag[] flags() default {};
+
+
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+    @Retention(RUNTIME)
+    @Documented
+    public @interface List {
+        ValidateEmail[] value();
+    }
 }

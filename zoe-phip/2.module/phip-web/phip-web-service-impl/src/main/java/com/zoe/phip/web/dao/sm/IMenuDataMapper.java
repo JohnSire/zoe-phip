@@ -26,6 +26,7 @@ public interface IMenuDataMapper extends IMyMapper<MenuData> {
 
     /**
      * 通过关键字分页获取菜单列表
+     *
      * @param key
      * @param page
      * @return
@@ -35,6 +36,7 @@ public interface IMenuDataMapper extends IMyMapper<MenuData> {
 
     /**
      * 通过关键字获取菜单列表
+     *
      * @param key
      * @return
      * @throws Exception
@@ -43,6 +45,7 @@ public interface IMenuDataMapper extends IMyMapper<MenuData> {
 
     /**
      * 通过菜单编码获取菜单列表
+     *
      * @param code
      * @return
      * @throws Exception
@@ -51,6 +54,7 @@ public interface IMenuDataMapper extends IMyMapper<MenuData> {
 
     /**
      * 获取子菜单列表
+     *
      * @param parentMenuId
      * @return
      * @throws Exception
@@ -59,6 +63,7 @@ public interface IMenuDataMapper extends IMyMapper<MenuData> {
 
     /**
      * 获取用户的菜单权限
+     *
      * @param userId
      * @return
      * @throws Exception
@@ -67,6 +72,7 @@ public interface IMenuDataMapper extends IMyMapper<MenuData> {
 
     /**
      * 更新菜单状态
+     *
      * @param id
      * @param state
      * @return
@@ -77,6 +83,7 @@ public interface IMenuDataMapper extends IMyMapper<MenuData> {
 
     /**
      * 通过关键字查询菜单数据
+     *
      * @param key
      * @param page
      * @return
@@ -86,6 +93,7 @@ public interface IMenuDataMapper extends IMyMapper<MenuData> {
 
     /**
      * 插入菜单及其子菜单
+     *
      * @param menuData
      * @return
      */
@@ -93,6 +101,7 @@ public interface IMenuDataMapper extends IMyMapper<MenuData> {
 
     /**
      * 通过ID获取菜单
+     *
      * @param id
      * @return
      */

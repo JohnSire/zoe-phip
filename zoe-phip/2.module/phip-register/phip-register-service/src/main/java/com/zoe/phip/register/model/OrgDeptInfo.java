@@ -28,16 +28,15 @@ public class OrgDeptInfo extends RegisterEntity {
     /**
      * 医疗卫生机构（科室）标识：xml的id的extension的值
      */
-    @Column(name="DEPT_CODE")
+    @Column(name = "DEPT_CODE")
     private String deptCode;
 
 
     /**
      * 区别科室还是机构
      */
-    @Column(name="DIVISION_ROOT")
+    @Column(name = "DIVISION_ROOT")
     private String divisionRoot;
-
 
 
     /**
@@ -137,9 +136,6 @@ public class OrgDeptInfo extends RegisterEntity {
     ////
     @Column(name = "SORT_NUM")
     private int sortNum;
-
-
-
 
 
     /**
@@ -250,7 +246,6 @@ public class OrgDeptInfo extends RegisterEntity {
     }
 
 
-
     public String getDeptCode() {
         return deptCode;
     }
@@ -330,9 +325,6 @@ public class OrgDeptInfo extends RegisterEntity {
     public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
-
-
-
 
 
     public String getProvinceCode() {
@@ -627,7 +619,7 @@ public class OrgDeptInfo extends RegisterEntity {
 
         try {
             Document document = DocumentHelper.parseText(xmlString);
-            baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class,null);
+            baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

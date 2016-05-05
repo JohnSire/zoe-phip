@@ -65,12 +65,12 @@ public class OperationBehavior {
         } catch (Throwable e) {
             logger.error("error:", e);
             ServiceResult executeResult;
-            if(cl==ServiceResult.class){
+            if (cl == ServiceResult.class) {
                 executeResult = new ServiceResult();
-            }else {
+            } else {
                 executeResult = new ServiceResultT();
             }
-            executeResult.addMessage("",e.toString());
+            executeResult.addMessage("", e.toString());
             executeResult.addLogData(e.toString());
             executeResult.addLogData(SafeExecuteUtil.getStackMsg(e));
             executeResult.setIsSuccess(false);

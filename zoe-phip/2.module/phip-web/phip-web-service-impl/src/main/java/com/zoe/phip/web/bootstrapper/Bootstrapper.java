@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository;
 public class Bootstrapper implements IBootstrapper {
 
     @Override
-    public void startService(){
+    public void startService() {
         start();
 //        initData();
     }
 
-    private void start(){
+    private void start() {
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext(new String[]{"web-context-provider.xml", "spring-mybatis.xml"});
         context.start();
@@ -27,7 +27,7 @@ public class Bootstrapper implements IBootstrapper {
         return 1;
     }
 
-    private void initData(){
+    private void initData() {
         MenuInit.toDatabase();
     }
 }

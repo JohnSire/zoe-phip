@@ -242,13 +242,9 @@ public class OrgBaseInfo extends MasterEntity {
     }
 
 
-
-
     public void setEffectiveTimeLow(java.sql.Date effectiveTimeLow) {
         this.effectiveTimeLow = effectiveTimeLow;
     }
-
-
 
 
     public void setEffectiveTimeHigh(java.sql.Date effectiveTimeHigh) {
@@ -281,7 +277,6 @@ public class OrgBaseInfo extends MasterEntity {
     public void setApplicantId(String applicantId) {
         this.applicantId = applicantId;
     }
-
 
 
     public String getRepresentative() {

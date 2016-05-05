@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class LogMessage implements Serializable {
 
-//    @JSONField(name = "Content")
+    //    @JSONField(name = "Content")
     private String content;
 
     public String getContent() {

@@ -14,8 +14,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 @Documented
-@Constraint(validatedBy = { LengthValidator.class})
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Constraint(validatedBy = {LengthValidator.class})
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
 @Retention(RUNTIME)
 /**
  *
@@ -25,21 +25,21 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * bean验证：被注释的字符串的大小必须在指定的范围内
  */
 public @interface ValidateLength {
-	int min() default 0;
+    int min() default 0;
 
-	int max() default Integer.MAX_VALUE;
+    int max() default Integer.MAX_VALUE;
 
-	String message() default "{org.hibernate.validator.constraints.Length.message}";
+    String message() default "{org.hibernate.validator.constraints.Length.message}";
 
-	Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default { };
+    Class<? extends Payload>[] payload() default {};
 
 
-	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
-	@Retention(RUNTIME)
-	@Documented
-	public @interface List {
-		ValidateLength[] value();
-	}
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+    @Retention(RUNTIME)
+    @Documented
+    public @interface List {
+        ValidateLength[] value();
+    }
 }

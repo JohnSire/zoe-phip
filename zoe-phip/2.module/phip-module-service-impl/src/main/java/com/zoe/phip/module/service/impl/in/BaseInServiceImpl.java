@@ -47,7 +47,7 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
     }
 
     @Override
-    public int add( T entity) throws Exception {
+    public int add(T entity) throws Exception {
         entity.setCreateAt(new Date());
         entity.setModifyAt(new Date());
         entity.setState(1);//状态设置为1
@@ -67,19 +67,19 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
 
     @Override
     public int deleteById(String id) throws Exception {
-        if(StringUtil.isNullOrWhiteSpace(id))
+        if (StringUtil.isNullOrWhiteSpace(id))
             throw new BusinessException("删除参数不能为空");
         return mapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public int deleteByIds(String ids) throws Exception {
-        if(StringUtil.isNullOrWhiteSpace(ids))
+        if (StringUtil.isNullOrWhiteSpace(ids))
             throw new BusinessException("批量删除参数不能为空");
         return mapper.deleteByIds(ids.split(","));
     }
 
-    public int deleteByIds(String[] ids) throws Exception{
+    public int deleteByIds(String[] ids) throws Exception {
         return mapper.deleteByIds(ids);
     }
 
@@ -220,7 +220,6 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
     public Object $invoke(String s, String[] strings, Object[] objects) throws GenericException {
         return null;
     }
-
 
 
     //endregion

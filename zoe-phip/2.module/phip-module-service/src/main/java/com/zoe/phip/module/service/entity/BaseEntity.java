@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * Created by linqinghuang on 2016/1/26.
  */
-public class BaseEntity implements Serializable,First {
+public class BaseEntity implements Serializable, First {
 
     /**
      * 主键id
@@ -21,7 +21,7 @@ public class BaseEntity implements Serializable,First {
     @Id
     @Column(name = "ID")
     @GeneratedValue(generator = "UUID")
-    @ValidateNotNull(message = "id不能为空",groups = {First.class})
+    @ValidateNotNull(message = "id不能为空", groups = {First.class})
 //    @JSONField(name = "Id")
     private String id;
     /**
@@ -76,7 +76,6 @@ public class BaseEntity implements Serializable,First {
     }
 
 
-
     public String getCreateBy() {
         return createBy;
     }
@@ -84,7 +83,6 @@ public class BaseEntity implements Serializable,First {
     public void setCreateBy(String createBy) {
         this.createBy = createBy;
     }
-
 
 
 }

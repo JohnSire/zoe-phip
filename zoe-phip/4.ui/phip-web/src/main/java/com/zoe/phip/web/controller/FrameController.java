@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 public class FrameController extends BaseController {
 
 
-
     //平台首页
     @RequestMapping("/index")
     public String ToIndex(HttpServletRequest request, Model model) {

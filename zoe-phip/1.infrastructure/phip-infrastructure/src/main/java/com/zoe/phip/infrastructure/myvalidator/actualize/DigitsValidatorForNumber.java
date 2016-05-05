@@ -11,43 +11,42 @@ import java.math.BigDecimal;
 
 public class DigitsValidatorForNumber implements ConstraintValidator<ValidateDigits, Number> {
 
-	private static final Log log = LoggerFactory.make();
-	
-	private int maxIntegerLength;
-	private int maxFractionLength;
+    private static final Log log = LoggerFactory.make();
 
-	public void initialize(ValidateDigits constraintAnnotation) {
-		this.maxIntegerLength = constraintAnnotation.integer();
-		this.maxFractionLength = constraintAnnotation.fraction();
-		validateParameters();
-	}
+    private int maxIntegerLength;
+    private int maxFractionLength;
 
-	public boolean isValid(Number num, ConstraintValidatorContext constraintValidatorContext) {
-		//null values are valid
-		if ( num == null ) {
-			return true;
-		}
+    public void initialize(ValidateDigits constraintAnnotation) {
+        this.maxIntegerLength = constraintAnnotation.integer();
+        this.maxFractionLength = constraintAnnotation.fraction();
+        validateParameters();
+    }
 
-		BigDecimal bigNum;
-		if ( num instanceof BigDecimal ) {
-			bigNum = ( BigDecimal ) num;
-		}
-		else {
-			bigNum = new BigDecimal( num.toString() ).stripTrailingZeros();
-		}
+    public boolean isValid(Number num, ConstraintValidatorContext constraintValidatorContext) {
+        //null values are valid
+        if (num == null) {
+            return true;
+        }
 
-		int integerPartLength = bigNum.precision() - bigNum.scale();
-		int fractionPartLength = bigNum.scale() < 0 ? 0 : bigNum.scale();
+        BigDecimal bigNum;
+        if (num instanceof BigDecimal) {
+            bigNum = (BigDecimal) num;
+        } else {
+            bigNum = new BigDecimal(num.toString()).stripTrailingZeros();
+        }
 
-		return ( maxIntegerLength >= integerPartLength && maxFractionLength >= fractionPartLength );
-	}
+        int integerPartLength = bigNum.precision() - bigNum.scale();
+        int fractionPartLength = bigNum.scale() < 0 ? 0 : bigNum.scale();
 
-	private void validateParameters() {
-		if ( maxIntegerLength < 0 ) {
-			throw log.getInvalidLengthForIntegerPartException();
-		}
-		if ( maxFractionLength < 0 ) {
-			throw log.getInvalidLengthForFractionPartException();
-		}
-	}
+        return (maxIntegerLength >= integerPartLength && maxFractionLength >= fractionPartLength);
+    }
+
+    private void validateParameters() {
+        if (maxIntegerLength < 0) {
+            throw log.getInvalidLengthForIntegerPartException();
+        }
+        if (maxFractionLength < 0) {
+            throw log.getInvalidLengthForFractionPartException();
+        }
+    }
 }

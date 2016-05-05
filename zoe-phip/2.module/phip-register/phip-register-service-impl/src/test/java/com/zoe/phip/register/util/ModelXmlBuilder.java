@@ -22,12 +22,12 @@ public class ModelXmlBuilder extends BaseTest {
         buffer.append("\r\n");
         Class clazz = AreaBaseInfo.class;
         Field[] fields = clazz.getDeclaredFields();
-        String className = clazz.getName().substring(clazz.getName().lastIndexOf(".")+1, clazz.getName().length());
+        String className = clazz.getName().substring(clazz.getName().lastIndexOf(".") + 1, clazz.getName().length());
 
-        buffer.append("<" + className+ ">" + "\r\n");
+        buffer.append("<" + className + ">" + "\r\n");
         for (Field field : fields) {
             String fieldName = field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
-            buffer.append("<" + fieldName + " descr = \"\" path=" + "\"//" + fieldName + "/@value\"" +  "/>");
+            buffer.append("<" + fieldName + " descr = \"\" path=" + "\"//" + fieldName + "/@value\"" + "/>");
             buffer.append("\r\n");
         }
         buffer.append("</" + className + ">");

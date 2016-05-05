@@ -51,7 +51,7 @@ public class NationalStandardsServiceImpl extends BaseInServiceImpl<NationalStan
     @Override
 
     public int add(NationalStandards entity) throws Exception {
-        Collection<String> cols= sqlSession.getConfiguration().getMappedStatementNames();
+        Collection<String> cols = sqlSession.getConfiguration().getMappedStatementNames();
         Map<String, Object> map = new TreeMap<>();
         map.put("code", entity.getCode());
         if (getNationalStandard(map) > 0) {

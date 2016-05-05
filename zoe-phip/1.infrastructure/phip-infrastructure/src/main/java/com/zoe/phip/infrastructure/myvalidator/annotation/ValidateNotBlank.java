@@ -16,8 +16,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 @Documented
-@Constraint(validatedBy = {NotBlankValidator.class })
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Constraint(validatedBy = {NotBlankValidator.class})
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
 @Retention(RUNTIME)
 @ReportAsSingleViolation
 @ValidateNotNull
@@ -29,16 +29,16 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * bean验证：验证字符串非null，且长度必须大于0
  */
 public @interface ValidateNotBlank {
-	String message() default "{org.hibernate.validator.constraints.NotBlank.message}";
+    String message() default "{org.hibernate.validator.constraints.NotBlank.message}";
 
-	Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default { };
+    Class<? extends Payload>[] payload() default {};
 
-	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
-	@Retention(RUNTIME)
-	@Documented
-	public @interface List {
-		ValidateNotBlank[] value();
-	}
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+    @Retention(RUNTIME)
+    @Documented
+    public @interface List {
+        ValidateNotBlank[] value();
+    }
 }

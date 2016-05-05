@@ -47,6 +47,18 @@ public class AreaController extends BaseController {
     }
 
     /**
+     * @param id      根据父节点获取列表
+     * @param keyWord 关键字
+     * @return
+     */
+    @RequestMapping(value = "/getAreaListByPid")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<AreaBaseInfo>> getAreaChildrenRegistry(String id, String keyWord) {
+        return ServiceFactory.getAreaRegisterIn().getAreaChildrenRegistry(ComSession.getUserInfo(), id, keyWord, getQueryPage());
+    }
+
+    /**
      * 行政区域基本信息查询
      *
      * @param id
