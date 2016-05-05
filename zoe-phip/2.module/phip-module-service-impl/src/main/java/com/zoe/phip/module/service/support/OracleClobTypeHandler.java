@@ -1,4 +1,4 @@
-package com.zoe.phip.infrastructure.support;
+package com.zoe.phip.module.service.support;
 
 import oracle.sql.CLOB;
 import org.apache.ibatis.type.JdbcType;

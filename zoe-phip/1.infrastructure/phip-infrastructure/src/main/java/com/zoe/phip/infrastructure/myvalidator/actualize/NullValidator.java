@@ -10,12 +10,12 @@ import javax.validation.ConstraintValidatorContext;
 
 public class NullValidator implements ConstraintValidator<ValidateNull, Object> {
 
-	public void initialize(ValidateNull constraintAnnotation) {
+    public void initialize(ValidateNull constraintAnnotation) {
 
-	}
+    }
 
-	public boolean isValid(Object object, ConstraintValidatorContext constraintValidatorContext) {
-		return object == null;
-	}
+    public boolean isValid(Object object, ConstraintValidatorContext constraintValidatorContext) {
+        return object == null;
+    }
 
 }

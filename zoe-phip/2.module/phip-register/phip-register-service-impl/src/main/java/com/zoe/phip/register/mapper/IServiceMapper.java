@@ -10,6 +10,7 @@ public interface IServiceMapper<T extends BaseEntity> extends IMyMapper<T> {
 
     /**
      * 新增，会默认设置ID及当前时间
+     *
      * @param t
      * @return
      */

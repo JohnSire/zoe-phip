@@ -38,7 +38,8 @@ public class MedicalStaffInfo extends RegisterEntity {
     /**
      * 性别名称
      */
-    @Column(name = "GENDER_NAME")
+    @Transient
+//    @Column(name = "GENDER_NAME")
     private String genderName;
     /**
      * 出生日期

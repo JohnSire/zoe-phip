@@ -52,7 +52,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 性别代码
      */
     @Column(name = "SEX_CODE")
-    private int sexCode;
+    private Integer sexCode;
 
     /**
      * 性别名称
@@ -60,7 +60,6 @@ public class XmanBaseInfo extends RegisterEntity {
     @Transient
 //    @Column(name = "SEX_CODE_NAME")
     private String sexCodeName;
-
 
 
     /**
@@ -75,14 +74,13 @@ public class XmanBaseInfo extends RegisterEntity {
      */
     @XPath(defaultValue = "01")
     @Column(name = "ID_TYPE_CODE")
-    private int idTypeCode;
+    private Integer idTypeCode;
 
     /**
      * 工作单位名称
      */
     @Column(name = "EMPLOYER_NAME")
     private String employerName;
-
 
 
     /**
@@ -160,7 +158,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 民族代码
      */
     @Column(name = "NATIONALITY_CODE")
-    private int nationalityCode;
+    private Integer nationalityCode;
 
     /**
      * 民族名称
@@ -175,21 +173,21 @@ public class XmanBaseInfo extends RegisterEntity {
      */
     @XPath(descr = "5")
     @Column(name = "ABO_CODE")
-    private int aboCode;
+    private Integer aboCode;
 
     /**
      * rh血型代�
      */
     @XPath(descr = "3")
     @Column(name = "RH_CODE")
-    private int rhCode;
+    private Integer rhCode;
 
     /**
      * 学历代码
      */
     @XPath(defaultValue = "90")
     @Column(name = "EDUCATION_CODE")
-    private int educationCode;
+    private Integer educationCode;
 
     /**
      * 职业类别代码
@@ -217,7 +215,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 婚姻状况代码
      */
     @Column(name = "MARRIAGE_CODE")
-    private int marriageCode;
+    private Integer marriageCode;
 
     /**
      * 婚姻状况名称
@@ -225,7 +223,6 @@ public class XmanBaseInfo extends RegisterEntity {
     @Transient
 //    @Column(name = "MARRIAGE_Name")
     private String marriageName;
-
 
 
     /**
@@ -307,6 +304,7 @@ public class XmanBaseInfo extends RegisterEntity {
 
     /**
      * 状态代码
+     *
      * @return
      */
     public String getStatusCode() {
@@ -353,12 +351,12 @@ public class XmanBaseInfo extends RegisterEntity {
         this.name = name;
     }
 
-    public int getSexCode() {
+    public Integer getSexCode() {
         return this.sexCode;
     }
 
 
-    public void setSexCode(int sexCode) {
+    public void setSexCode(Integer sexCode) {
         this.sexCode = sexCode;
     }
 
@@ -371,12 +369,12 @@ public class XmanBaseInfo extends RegisterEntity {
         this.birthDate = birthDate;
     }
 
-    public int getIdTypeCode() {
+    public Integer getIdTypeCode() {
         return this.idTypeCode;
     }
 
 
-    public void setIdTypeCode(int idTypeCode) {
+    public void setIdTypeCode(Integer idTypeCode) {
         this.idTypeCode = idTypeCode;
     }
 
@@ -488,12 +486,12 @@ public class XmanBaseInfo extends RegisterEntity {
         this.postalCode = postalCode;
     }
 
-    public int getNationalityCode() {
+    public Integer getNationalityCode() {
         return this.nationalityCode;
     }
 
 
-    public void setNationalityCode(int nationalityCode) {
+    public void setNationalityCode(Integer nationalityCode) {
         this.nationalityCode = nationalityCode;
     }
 
@@ -505,30 +503,30 @@ public class XmanBaseInfo extends RegisterEntity {
         this.nationalityName = nationalityName;
     }
 
-    public int getAboCode() {
+    public Integer getAboCode() {
         return this.aboCode;
     }
 
 
-    public void setAboCode(int aboCode) {
+    public void setAboCode(Integer aboCode) {
         this.aboCode = aboCode;
     }
 
-    public int getRhCode() {
+    public Integer getRhCode() {
         return this.rhCode;
     }
 
 
-    public void setRhCode(int rhCode) {
+    public void setRhCode(Integer rhCode) {
         this.rhCode = rhCode;
     }
 
-    public int getEducationCode() {
+    public Integer getEducationCode() {
         return this.educationCode;
     }
 
 
-    public void setEducationCode(int educationCode) {
+    public void setEducationCode(Integer educationCode) {
         this.educationCode = educationCode;
     }
 
@@ -541,12 +539,12 @@ public class XmanBaseInfo extends RegisterEntity {
         this.occupationCode = occupationCode;
     }
 
-    public int getMarriageCode() {
+    public Integer getMarriageCode() {
         return this.marriageCode;
     }
 
 
-    public void setMarriageCode(int marriageCode) {
+    public void setMarriageCode(Integer marriageCode) {
         this.marriageCode = marriageCode;
     }
 

@@ -44,8 +44,6 @@ public interface IBaseInService<T extends MasterEntity> {
     int deleteById(String id) throws Exception;
 
 
-
-
     /**
      * 批量删除
      *

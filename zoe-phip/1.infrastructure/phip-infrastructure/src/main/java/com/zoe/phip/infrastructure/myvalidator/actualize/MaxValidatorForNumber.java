@@ -18,16 +18,14 @@ public class MaxValidatorForNumber implements ConstraintValidator<ValidateMax, N
     }
 
     public boolean isValid(Number value, ConstraintValidatorContext constraintValidatorContext) {
-        if ( value == null ) {
+        if (value == null) {
             return true;
         }
-        if ( value instanceof BigDecimal ) {
-            return ( ( BigDecimal ) value ).compareTo( BigDecimal.valueOf( maxValue ) ) != 1;
-        }
-        else if ( value instanceof BigInteger ) {
-            return ( ( BigInteger ) value ).compareTo( BigInteger.valueOf( maxValue ) ) != 1;
-        }
-        else {
+        if (value instanceof BigDecimal) {
+            return ((BigDecimal) value).compareTo(BigDecimal.valueOf(maxValue)) != 1;
+        } else if (value instanceof BigInteger) {
+            return ((BigInteger) value).compareTo(BigInteger.valueOf(maxValue)) != 1;
+        } else {
             long longValue = value.longValue();
             return longValue <= maxValue;
         }

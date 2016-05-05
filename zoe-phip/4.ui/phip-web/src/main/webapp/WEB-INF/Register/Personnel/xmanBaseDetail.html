@@ -20,9 +20,6 @@ var bodySection = {
                         <i class="icon-grid icon-grid-fold-gray"></i>
                         <ul class="simulate-select-lists" style="display:none;">
                             <li class="simulate-select-list">--请选择性别--</li>
-                            <!--<li class="simulate-select-list">男</li>-->
-                            <!--<li class="simulate-select-list active">女</li>-->
-                            <!--<li class="simulate-select-list">未知</li>-->
                         </ul>
                         <div class="clear"></div>
                     </div>
@@ -40,22 +37,21 @@ var bodySection = {
                 <p class="column-three">
                     <label class="label" for="idNo"><span class="text-mark">*</span>身份证件号：</label>
                     <input type="text" name="idNo" class="text" datatype="*1-256" errormsg="身份证件号长度应为1~256位！"
-                           nullmsg="请填写身份证件号！"/>
+                           nullmsg="请填写编码！"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="telNo">联系电话：</label>
-                    <input type="text" name="telNo" class="text"/>
+                    <label class="label" for="idNo"><span class="text-mark">*</span>编码：</label>
+                    <input type="text" name="patientId" class="text" datatype="*1-256" errormsg="身份证件号长度应为1~256位！"
+                           nullmsg="请填写身份证件号！"/>
                 </p>
                 <p class="column-three">
                     <label class="label" for="cardCode">健康卡号：</label>
                     <input type="text" name="cardCode" class="text"/>
                 </p>
+
+
             </li>
             <li class="list">
-                <!--<p class="column-three">-->
-                <!--<label class="label" for="marriageName">婚姻状况：</label>-->
-                <!--<input type="text" name="marriageName" class="text"/>-->
-                <!--</p>-->
 
                 <div class="column-three">
                     <label class="label" for="marriageCode">婚姻状况：</label>
@@ -74,7 +70,6 @@ var bodySection = {
 
                 <p class="column-three">
                     <label class="label" for="nationalityCode">民族：</label>
-                    <!--<input type="text" name="nationalityName" class="text"/>-->
                     <span class="text-line-outer" id="btnFkNationality">
                         <input type="text" name="nationalityCode" class="text-line"/>
                         <span class="text-line-setting">
@@ -89,7 +84,12 @@ var bodySection = {
                 </p>
             </li>
             <li class="list">
-                <p class="column-one">
+                <p class="column-three">
+                    <label class="label" for="telNo">联系电话：</label>
+                    <input type="text" name="telNo" class="text"/>
+                </p>
+
+                <p class="column-three">
                     <label class="label" for="address">联系地址：</label>
                     <input type="text" name="address" class="text"/>
                 </p>
@@ -110,10 +110,27 @@ var bodySection = {
                     <label class="label" for="employerTelNo">工作联系电话：</label>
                     <input type="text" name="employerTelNo" class="text"/>
                 </p>
-                <p class="column-three">
+                <!--<p class="column-three">-->
+                <!--<label class="label" for="occupationName">职业类别：</label>-->
+                <!--<input type="text" name="occupationName" class="text"/>-->
+                <!--</p>-->
+
+                <div class="column-three">
                     <label class="label" for="occupationName">职业类别：</label>
-                    <input type="text" name="occupationName" class="text"/>
-                </p>
+                    <!--<input type="text" name="codeSysName" class="text"/>-->
+                    <div class="simulate-select" id="selOccupationName">
+                        <span class="text">--请选择职业类别--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择职业类别--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="occupationName" style="display: none;">
+                    </select>
+
+                </div>
+
             </li>
             <li class="list">
                 <p class="column-three">
@@ -121,14 +138,28 @@ var bodySection = {
                     <input type="text" name="postalCode" class="text"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="xcOrgCode"><span class="text-mark">*</span>健康卡发放机构：</label>
-                    <input type="text" name="xcOrgCode" class="text" datatype="*1-128" errormsg="健康卡发放机构长度应为1~128位！"
-                           nullmsg="请填写健康卡发放机构！"/>
+                    <label class="label" for="xcOrgCode"><span class="text-mark">*</span>卡发放机构：</label>
+                    <!--<input type="text" name="xcOrgCode" class="text" datatype="*1-128" errormsg="健康卡发放机构长度应为1~128位！"-->
+                    <!--nullmsg="请填写健康卡发放机构！"/>-->
+                     <span class="text-line-outer" id="btnFkXcOrg">
+                        <input type="text" name="xcOrgCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="健康卡发放机构"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="healthRecordOrgCode"><span class="text-mark">*</span>建档机构组织代码：</label>
-                    <input type="text" name="healthRecordOrgCode" class="text" datatype="*1-128"
-                           errormsg="建档机构组织代码长度应为1~128位！"/>
+                    <label class="label" for="healthRecordOrgCode"><span class="text-mark">*</span>建档组织机构：</label>
+                    <!--<input type="text" name="healthRecordOrgCode" class="text" datatype="*1-128"-->
+                    <!--errormsg="建档机构组织代码长度应为1~128位！"/>-->
+                    <span class="text-line-outer" id="btnFkHealthRecordOrg">
+                        <input type="text" name="healthRecordOrgCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="建档机构组织代码"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
                 </p>
             </li>
             <li class="list">
@@ -140,22 +171,38 @@ var bodySection = {
                     <label class="label" for="relTelNo">联系人电话：</label>
                     <input type="text" name="relTelNo" class="text"/>
                 </p>
-                <p class="column-three">
+                <div class="column-three">
                     <label class="label" for="codeSysName">医保类型：</label>
-                    <input type="text" name="codeSysName" class="text"/>
-                </p>
+                    <!--<input type="text" name="codeSysName" class="text"/>-->
+                    <div class="simulate-select" id="selCodeSysName">
+                        <span class="text">--请选择医保类型--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择医保类型--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="codeSysName" style="display: none;">
+                    </select>
+
+                </div>
             </li>
             <li class="list">
                 <p class="column-three">
-                    <label class="label" for="orgCode"><span class="text-mark">*</span>登记机构代码：</label>
-                    <input type="text" name="orgCode" class="text" datatype="*1-16" errormsg="登记机构代码长度应为1~16位！"
-                           nullmsg="请填写登记机构代码！"/>
+                    <label class="label" for="orgCode"><span class="text-mark">*</span>登记机构：</label>
+                     <span class="text-line-outer" id="btnFkOrg">
+                        <input type="text" name="orgCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="选择登记机构"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
                 </p>
-                <p class="column-three">
-                    <label class="label" for="orgName"><span class="text-mark">*</span>登记机构名称：</label>
-                    <input type="text" name="orgName" class="text" datatype="*1-16" errormsg="登记机构名称长度应为1~16位！"
-                           nullmsg="请填写登记机构名称！"/>
-                </p>
+                <!--<p class="column-three">-->
+                    <!--<label class="label" for="orgName"><span class="text-mark">*</span>登记机构名称：</label>-->
+                    <!--<input type="text" name="orgName" class="text" datatype="*1-16" errormsg="登记机构名称长度应为1~16位！"-->
+                           <!--nullmsg="请填写登记机构名称！"/>-->
+                <!--</p>-->
                 <p class="column-three">
                     <label class="label" for="assignedPersonName"><span class="text-mark">*</span>作者人：</label>
                     <input type="text" name="assignedPersonName" class="text" datatype="*1-16" errormsg="作者人长度应为1~16位！"

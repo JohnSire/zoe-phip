@@ -22,6 +22,7 @@ import java.util.Map;
 public interface IStSetInfoMapper extends IMyMapper<StSetInfo> {
     /**
      * 根据关键字查询数据集
+     *
      * @param map
      * @return
      */
@@ -29,18 +30,20 @@ public interface IStSetInfoMapper extends IMyMapper<StSetInfo> {
 
     /**
      * 根据CDA查询数据集
+     *
      * @param map
      * @return
      */
 
-    List<StSetInfo> getByCdaId(Map<String,Object> map);
+    List<StSetInfo> getByCdaId(Map<String, Object> map);
 
     /**
      * 判断代码是否存在
+     *
      * @param map
      * @return
      */
-    int getSingle(Map<String,Object> map);
+    int getSingle(Map<String, Object> map);
 
     List<StSetInfo> getByPid(String pid);
 }

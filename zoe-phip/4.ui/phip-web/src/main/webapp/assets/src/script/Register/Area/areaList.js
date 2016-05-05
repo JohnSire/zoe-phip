@@ -3,8 +3,10 @@
  */
 define(function (require, exports, module) {
     var internal = {
+        path: require("./path").path,
         selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
+            internal.path.init();
             var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
@@ -20,6 +22,9 @@ define(function (require, exports, module) {
                     searchbox: [
                         {label: '关键字', name: 'keyWord', type: 'text'}
                     ]
+                },
+                extendParam: function () {
+                    return {id: "86"};
                 },
                 gridParam: {
                     url: 'area/getAreaList',
@@ -64,6 +69,7 @@ define(function (require, exports, module) {
                 }
             })
         }
+
 
     };
     exports.init = function () {

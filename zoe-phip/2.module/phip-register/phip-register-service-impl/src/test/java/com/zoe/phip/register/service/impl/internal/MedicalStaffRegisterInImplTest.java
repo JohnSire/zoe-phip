@@ -19,8 +19,8 @@ public class MedicalStaffRegisterInImplTest extends BaseTest {
 
     @Test
     public void testProviderListQuery() throws Exception {
-        PageList<MedicalStaffInfo> results=
-                medicalStaffRegisterIn.providerListQuery("","12345678900",new QueryPage());
+        PageList<MedicalStaffInfo> results =
+                medicalStaffRegisterIn.providerListQuery("", "2014006635", new QueryPage());
     }
 
 

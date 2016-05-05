@@ -17,15 +17,15 @@ public class Bootstrapper {
     @Autowired(required = true)
     private List<IBootstrapper> bootstrappers;
 
-    public void start(){
-        if(bootstrappers==null){
-            bootstrappers=new ArrayList<>();
+    public void start() {
+        if (bootstrappers == null) {
+            bootstrappers = new ArrayList<>();
             bootstrappers.add(new com.zoe.phip.web.bootstrapper.Bootstrapper());
             bootstrappers.add(new com.zoe.phip.register.bootstrapper.Bootstrapper());
         }
 
         Collections.sort(bootstrappers, (a, b) -> a.getExecutionOrder() - b.getExecutionOrder());
-        bootstrappers.forEach(e->{
+        bootstrappers.forEach(e -> {
             e.startService();
         });
     }

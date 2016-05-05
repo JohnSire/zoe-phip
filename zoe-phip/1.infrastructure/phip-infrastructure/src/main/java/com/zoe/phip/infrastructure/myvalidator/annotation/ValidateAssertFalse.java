@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy={AssertFalseValidator.class})
+@Constraint(validatedBy = {AssertFalseValidator.class})
 /**
  *
  * @author by hyf
@@ -21,21 +21,19 @@ import java.lang.annotation.Target;
  * @date 2016/4/14
  * bean验证：被注释的元素必须为 false
  */
-public @interface ValidateAssertFalse
-{
-  String message() default "{javax.validation.constraints.ValidateAssertFalse.message}";
-  
-  Class<?>[] groups() default {};
-  
-  Class<? extends Payload>[] payload() default {};
-  
-  @Target({java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.PARAMETER})
-  @Retention(RetentionPolicy.RUNTIME)
-  @Documented
-  public static @interface List
-  {
-    ValidateAssertFalse[] value();
-  }
+public @interface ValidateAssertFalse {
+    String message() default "{javax.validation.constraints.ValidateAssertFalse.message}";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+
+    @Target({java.lang.annotation.ElementType.METHOD, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.ANNOTATION_TYPE, java.lang.annotation.ElementType.CONSTRUCTOR, java.lang.annotation.ElementType.PARAMETER})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Documented
+    public static @interface List {
+        ValidateAssertFalse[] value();
+    }
 }
 
 

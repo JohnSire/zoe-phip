@@ -13,12 +13,14 @@ import java.lang.annotation.*;
 public @interface AuthAction {
     /**
      * 权限
+     *
      * @return
      */
     Permission[] permission();
 
     /**
      * 中文名称
+     *
      * @return
      */
     String name();

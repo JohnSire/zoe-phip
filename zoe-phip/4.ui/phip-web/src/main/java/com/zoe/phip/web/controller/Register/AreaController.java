@@ -11,6 +11,7 @@ import com.zoe.phip.web.context.DataContext;
 import com.zoe.phip.web.context.ServiceFactory;
 import com.zoe.phip.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -44,6 +45,25 @@ public class AreaController extends BaseController {
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<AreaBaseInfo>> getAreaList(String keyWord) {
         return ServiceFactory.getAreaRegisterIn().getDataList(ComSession.getUserInfo(), keyWord, getQueryPage());
+    }
+
+    @RequestMapping(value = "/getAreaTopNode")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<AreaBaseInfo> getTopAreaBaseInfo(String id, String keyWord) {
+        return ServiceFactory.getAreaRegisterIn().getTopAreaBaseInfo(ComSession.getUserInfo());
+    }
+
+    /**
+     * @param id      根据父节点获取列表
+     * @param keyWord 关键字
+     * @return
+     */
+    @RequestMapping(value = "/getAreaListByPid")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<AreaBaseInfo>> getAreaChildrenRegistry(String id, String keyWord) {
+        return ServiceFactory.getAreaRegisterIn().getAreaChildrenRegistry(ComSession.getUserInfo(), id, keyWord, getQueryPage());
     }
 
     /**

@@ -12,40 +12,36 @@ import java.math.BigInteger;
 
 public class DecimalMaxValidatorForNumber implements ConstraintValidator<ValidateDecimalMax, Number> {
 
-	private static final Log log = LoggerFactory.make();
+    private static final Log log = LoggerFactory.make();
 
-	private BigDecimal maxValue;
-	private boolean inclusive;
+    private BigDecimal maxValue;
+    private boolean inclusive;
 
-	public void initialize(ValidateDecimalMax maxValue) {
-		try {
-			this.maxValue = new BigDecimal( maxValue.value() );
-		}
-		catch ( NumberFormatException nfe ) {
-			throw log.getInvalidBigDecimalFormatException( maxValue.value(), nfe );
-		}
-		this.inclusive = maxValue.inclusive();
-	}
+    public void initialize(ValidateDecimalMax maxValue) {
+        try {
+            this.maxValue = new BigDecimal(maxValue.value());
+        } catch (NumberFormatException nfe) {
+            throw log.getInvalidBigDecimalFormatException(maxValue.value(), nfe);
+        }
+        this.inclusive = maxValue.inclusive();
+    }
 
-	public boolean isValid(Number value, ConstraintValidatorContext constraintValidatorContext) {
-		//null values are valid
-		if ( value == null ) {
-			return true;
-		}
+    public boolean isValid(Number value, ConstraintValidatorContext constraintValidatorContext) {
+        //null values are valid
+        if (value == null) {
+            return true;
+        }
 
-		int comparisonResult;
-		if ( value instanceof BigDecimal ) {
-			comparisonResult = ( (BigDecimal) value ).compareTo( maxValue );
-		}
-		else if ( value instanceof BigInteger ) {
-			comparisonResult = ( new BigDecimal( (BigInteger) value ) ).compareTo( maxValue );
-		}
-		else if ( value instanceof Long ) {
-			comparisonResult = ( BigDecimal.valueOf( value.longValue() ).compareTo( maxValue ) );
-		}
-		else {
-			comparisonResult = ( BigDecimal.valueOf( value.doubleValue() ).compareTo( maxValue ) );
-		}
-		return inclusive ? comparisonResult <= 0 : comparisonResult < 0;
-	}
+        int comparisonResult;
+        if (value instanceof BigDecimal) {
+            comparisonResult = ((BigDecimal) value).compareTo(maxValue);
+        } else if (value instanceof BigInteger) {
+            comparisonResult = (new BigDecimal((BigInteger) value)).compareTo(maxValue);
+        } else if (value instanceof Long) {
+            comparisonResult = (BigDecimal.valueOf(value.longValue()).compareTo(maxValue));
+        } else {
+            comparisonResult = (BigDecimal.valueOf(value.doubleValue()).compareTo(maxValue));
+        }
+        return inclusive ? comparisonResult <= 0 : comparisonResult < 0;
+    }
 }

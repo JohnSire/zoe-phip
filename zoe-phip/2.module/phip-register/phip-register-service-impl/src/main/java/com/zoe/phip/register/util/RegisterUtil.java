@@ -25,6 +25,7 @@ public final class RegisterUtil {
         map = null;
         return result;
     }
+
     public static String responseFailed(RegisterEntity entity, String errorMsg, String path) {
         Acknowledgement acknowledgement = new Acknowledgement();
         acknowledgement.setTypeCode("AE");

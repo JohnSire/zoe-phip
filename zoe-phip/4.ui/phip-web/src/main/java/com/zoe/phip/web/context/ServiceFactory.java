@@ -31,6 +31,7 @@ public final class ServiceFactory {
     public static ISystemParameterService getParameterService() {
         return BeanFactory.getBean(Constant.SYSTEM_PARAMETER_SERVICE);
     }
+
     public static IUserCompetenceService getUserCompetenceService() {
         return BeanFactory.getBean(Constant.USER_COMPETENCE_SERVICE);
     }

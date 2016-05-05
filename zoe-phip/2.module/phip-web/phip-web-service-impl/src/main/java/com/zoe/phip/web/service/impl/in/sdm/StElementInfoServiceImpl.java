@@ -40,11 +40,11 @@ public class StElementInfoServiceImpl extends BaseInServiceImpl<StElementInfo, I
 
     @Override
     public int add(StElementInfo entity) throws Exception {
-        Map<String,Object> map = MapUtil.createMap(m->{
-            m.put("code",entity.getCode());
+        Map<String, Object> map = MapUtil.createMap(m -> {
+            m.put("code", entity.getCode());
         });
         if (getSingle(map) > 0)
-            throw  new BusinessException("001",entity.getCode());
+            throw new BusinessException("001", entity.getCode());
         map.clear();
         map = null;
         return super.add(entity);
@@ -52,17 +52,16 @@ public class StElementInfoServiceImpl extends BaseInServiceImpl<StElementInfo, I
 
     @Override
     public int update(StElementInfo entity) throws Exception {
-        Map<String,Object> map = MapUtil.createMap(m->{
-            m.put("code",entity.getCode());
-            m.put("id",entity.getId());
+        Map<String, Object> map = MapUtil.createMap(m -> {
+            m.put("code", entity.getCode());
+            m.put("id", entity.getId());
         });
         if (getSingle(map) > 0)
-            throw  new BusinessException("001",entity.getCode());
+            throw new BusinessException("001", entity.getCode());
         map.clear();
         map = null;
         return super.update(entity);
     }
-
 
 
     public PageList<StElementInfo> getDataPageList(String key, QueryPage queryPage) {

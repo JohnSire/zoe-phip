@@ -17,6 +17,7 @@ public class UrlExpand {
     public void setPath(String pathUrl) {
         staticPath = pathUrl;
     }
+
     public void setVersion(String v) {
         versionValue = v;
     }
@@ -24,17 +25,17 @@ public class UrlExpand {
     //设置静态资源路径，
     public static String SetStaticRoot(String filePath) {
         String version = UrlExpand.GetVersion();
-        String staticResourcePath=staticPath;//此静态资源路径从配置文件中获取
+        String staticResourcePath = staticPath;//此静态资源路径从配置文件中获取
         staticResourcePath += "/";
-        return staticResourcePath+filePath+"?Version="+version;
+        return staticResourcePath + filePath + "?Version=" + version;
     }
 
     public static String SetWebRoot(String filePath) {
-        String version=UrlExpand.GetVersion();
+        String version = UrlExpand.GetVersion();
         // TODO: 2016/4/11
-        String webResourcePath="";//获取根目录
-        webResourcePath+="/";
-        return webResourcePath+filePath+"?Version="+version;
+        String webResourcePath = "";//获取根目录
+        webResourcePath += "/";
+        return webResourcePath + filePath + "?Version=" + version;
     }
 
     public static String GetVersion() {

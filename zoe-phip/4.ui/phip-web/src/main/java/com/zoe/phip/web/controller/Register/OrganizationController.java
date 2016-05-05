@@ -46,7 +46,8 @@ public class OrganizationController extends BaseController {
     }
 
     /**
-     *更新医疗机构（科室）信息
+     * 更新医疗机构（科室）信息
+     *
      * @param orgDeptInfo
      * @return
      */

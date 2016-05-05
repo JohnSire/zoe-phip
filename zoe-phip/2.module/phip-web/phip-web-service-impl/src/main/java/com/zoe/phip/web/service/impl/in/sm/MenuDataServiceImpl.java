@@ -28,11 +28,11 @@ import java.util.*;
  * @date 2016-03-21
  */
 @Repository("MenuDataService")
-@Service(interfaceClass = IMenuDataService.class, proxy = "sdpf",protocol = {"dubbo"}, dynamic = true)
+@Service(interfaceClass = IMenuDataService.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
 public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMapper> implements IMenuDataMapper {
 
     @Override
-    @ErrorMessage(code="001",message = "该菜单{0}已存在")
+    @ErrorMessage(code = "001", message = "该菜单{0}已存在")
     public int add(MenuData entity) throws Exception {
         Example example = new Example(MenuData.class);
         entity.setCreateAt(new Date());
@@ -61,7 +61,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMa
 
         if (!StringUtil.isNullOrWhiteSpace(key)) {
 
-            example.createCriteria().andLike("code","%" + key + "%");
+            example.createCriteria().andLike("code", "%" + key + "%");
             example.or(example.createCriteria().andLike("name", "%" + key + "%"));
             example.or(example.createCriteria().andLike("address", "%" + key + "%"));
 
@@ -74,15 +74,14 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMa
     }
 
 
-
     @Override
-    public PageList<MenuData> getMenuList( String key, QueryPage queryPage) throws Exception {
+    public PageList<MenuData> getMenuList(String key, QueryPage queryPage) throws Exception {
         PageList<MenuData> pageList = new PageList<MenuData>();
         //分页
         SqlHelper.startPage(queryPage);
         Map<String, Object> paras = new HashMap<String, Object>();
         paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
-        List<MenuData> results= ((IMenuDataMapper) getMapper()).getMenuDataList(paras);
+        List<MenuData> results = ((IMenuDataMapper) getMapper()).getMenuDataList(paras);
         PageInfo<MenuData> pageInfo = new PageInfo<MenuData>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
@@ -91,9 +90,9 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMa
 
     @Override
     public boolean insertMenuData(List<MenuData> menuData) {
-        menuData.forEach(e->{
+        menuData.forEach(e -> {
             e.setId(StringUtil.getUUID());
-            e.children.forEach(c->{
+            e.children.forEach(c -> {
                 c.setId(StringUtil.getUUID());
             });
         });
@@ -140,7 +139,7 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMa
     }
 
     @Override
-    @ErrorMessage(code="002",message = "还没有为该用户分配菜")
+    @ErrorMessage(code = "002", message = "还没有为该用户分配菜")
     public List<MenuData> getCompetenceMenuByUser(String userId) throws Exception {
         List<MenuData> menus = getMapper().getCompetenceMenuByUser(userId);
         if (menus.size() == 0) {
@@ -167,10 +166,10 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMa
     }
 
     @Override
-    @ErrorMessage(code="003",message = "未找到该菜单!")
+    @ErrorMessage(code = "003", message = "未找到该菜单!")
     public int updateState(String id, int state) throws Exception {
         MenuData menuData = getMapper().selectByPrimaryKey(id);
-        if(menuData == null){
+        if (menuData == null) {
             throw new BusinessException("003");
         }
         menuData.setState(state);

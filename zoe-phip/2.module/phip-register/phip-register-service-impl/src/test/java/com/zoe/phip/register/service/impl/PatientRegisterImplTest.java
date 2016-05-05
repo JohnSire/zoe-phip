@@ -180,8 +180,8 @@ public class PatientRegisterImplTest extends BaseTest {
     }
 
     @Test
-    public void testQueryPatient(){
-        String inputXml="<PRPA_IN201305UV02 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+    public void testQueryPatient() {
+        String inputXml = "<PRPA_IN201305UV02 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
                 "ITSVersion=\"XML_1.0\" xmlns=\"urn:hl7-org:v3\"\n" +
                 "xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPA_IN201305UV02.xsd\">\n" +
                 "  <id root=\"2.16.156.10011.0\" extension=\"22a0f9e0-4454-11dc-a6be-3603d6866807\"/>\n" +
@@ -223,7 +223,7 @@ public class PatientRegisterImplTest extends BaseTest {
                 "  </controlActProcess>\n" +
                 "</PRPA_IN201305UV02>";
 
-        String result= patientRegister.patientRegistryQuery(inputXml);
+        String result = patientRegister.patientRegistryQuery(inputXml);
         System.out.println(result);
     }
 }

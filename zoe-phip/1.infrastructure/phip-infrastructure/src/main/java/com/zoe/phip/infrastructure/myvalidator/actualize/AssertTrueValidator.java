@@ -9,12 +9,12 @@ import javax.validation.ConstraintValidatorContext;
 
 public class AssertTrueValidator implements ConstraintValidator<ValidateAssertTrue, Boolean> {
 
-	public void initialize(ValidateAssertTrue constraintAnnotation) {
-	}
+    public void initialize(ValidateAssertTrue constraintAnnotation) {
+    }
 
-	public boolean isValid(Boolean bool, ConstraintValidatorContext constraintValidatorContext) {
-		//null values are valid
-		return bool == null || bool;
-	}
+    public boolean isValid(Boolean bool, ConstraintValidatorContext constraintValidatorContext) {
+        //null values are valid
+        return bool == null || bool;
+    }
 
 }

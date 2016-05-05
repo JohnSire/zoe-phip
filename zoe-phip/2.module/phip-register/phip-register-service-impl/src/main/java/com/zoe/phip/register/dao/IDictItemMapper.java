@@ -22,11 +22,12 @@ public interface IDictItemMapper extends IServiceMapper<DictItem> {
     List<DictItem> getDictItemListByCatalogCode(Map<String, Object> args);
 
     List<DictItem> getDictItemListByCatalogId(Map<String, Object> args);
+
     List<DictItem> getDictItemOrgList(Map<String, Object> args);
 
     int dictItemExist(Map<String, Object> args);
 
-    DictItem getDictItemById(Map<String,Object> args);
+    DictItem getDictItemById(Map<String, Object> args);
 
     List<DictItem> getDictItemNewOrgTree(Map<String, Object> args);
 

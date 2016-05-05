@@ -16,8 +16,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 @Documented
-@Constraint(validatedBy = {URLValidator.class })
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Constraint(validatedBy = {URLValidator.class})
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
 @Retention(RUNTIME)
 @ReportAsSingleViolation
 @ValidatePattern(regexp = "")
@@ -30,31 +30,31 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 
 public @interface ValidateURL {
-	String message() default "{org.hibernate.validator.constraints.URL.message}";
+    String message() default "{org.hibernate.validator.constraints.URL.message}";
 
-	Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default { };
-
-
-	String protocol() default "";
+    Class<? extends Payload>[] payload() default {};
 
 
-	String host() default "";
+    String protocol() default "";
 
 
-	int port() default -1;
+    String host() default "";
 
 
-	@OverridesAttribute(constraint = ValidatePattern.class, name = "regexp") String regexp() default ".*";
-
-	@OverridesAttribute(constraint = ValidatePattern.class, name = "flags") ValidatePattern.Flag[] flags() default { };
+    int port() default -1;
 
 
-	@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
-	@Retention(RUNTIME)
-	@Documented
-	public @interface List {
-		ValidateURL[] value();
-	}
+    @OverridesAttribute(constraint = ValidatePattern.class, name = "regexp") String regexp() default ".*";
+
+    @OverridesAttribute(constraint = ValidatePattern.class, name = "flags") ValidatePattern.Flag[] flags() default {};
+
+
+    @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+    @Retention(RUNTIME)
+    @Documented
+    public @interface List {
+        ValidateURL[] value();
+    }
 }

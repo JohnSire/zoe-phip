@@ -33,7 +33,7 @@ import java.util.Map;
  * @date 2016-03-22
  */
 @Repository("SystemDictItemService")
-@Service(interfaceClass = ISystemDictItemService.class, proxy = "sdpf",protocol = {"dubbo"}, dynamic = true)
+@Service(interfaceClass = ISystemDictItemService.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
 public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem, ISystemDictItemMapper> implements ISystemDictItemMapper {
 
     @Autowired
@@ -84,6 +84,7 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
 
     /**
      * 判断字典分类是否存在字典项信息
+     *
      * @param categoryId 字典分类Id
      * @return
      * @throws Exception
@@ -99,9 +100,10 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
 
     /**
      * 根据字典分类Id和关键字查询字典项
+     *
      * @param categoryId 字典分类Id
-     * @param key 关键字
-     * @param page 分页参数
+     * @param key        关键字
+     * @param page       分页参数
      * @return
      */
     @Override
@@ -127,8 +129,9 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
 
     /**
      * 根据字典分类Id和关键字查询字典项
+     *
      * @param categoryId 字典分类Id
-     * @param key 关键字
+     * @param key        关键字
      * @return
      */
     @Override
@@ -147,6 +150,7 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
 
     /**
      * 根据字典分类编码获取字典项
+     *
      * @param categoryCode
      * @param page
      * @return
@@ -173,6 +177,7 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
 
     /**
      * 根据字典分类Id和字典项编码查询字典项信息
+     *
      * @param categoryId
      * @param code
      * @return
@@ -192,6 +197,7 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
 
     /**
      * 根据字典分类编码和字典项编码查询字典项信息
+     *
      * @param categoryCode
      * @param code
      * @return
@@ -214,6 +220,7 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
 
     /**
      * 根据字典分类编码查询字典项列表
+     *
      * @param categoryCode
      * @return
      * @throws Exception
@@ -243,7 +250,7 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
     }
 
     @Override
-    public SystemDictItem getSysDataItemByCode(String code){
+    public SystemDictItem getSysDataItemByCode(String code) {
         Example example = new Example(SystemDictItem.class);
         example.createCriteria().andEqualTo("code", code);
         return getMapper().selectByExample(example).get(0);

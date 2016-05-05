@@ -64,7 +64,7 @@ public class PatientRegisterImpl implements IPatientRegister {
         }
 
         Document document = ProcessXmlUtil.load(message);
-        String errorMsg="";
+        String errorMsg = "";
         XmanBaseInfo baseInfo = null;
         try {
             SAXReader reader = new SAXReader();
@@ -89,7 +89,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
         } catch (Exception ex) {
             logger.error("error:", ex);
-            errorMsg=ex.getMessage();
+            errorMsg = ex.getMessage();
         }
         return registerFailed(baseInfo, errorMsg);
 
@@ -109,7 +109,7 @@ public class PatientRegisterImpl implements IPatientRegister {
         }
         Document document = ProcessXmlUtil.load(message);
         XmanBaseInfo baseInfo = null;
-        String errorMsg="";
+        String errorMsg = "";
         try {
             SAXReader reader = new SAXReader();
             //XmanBaseInfo
@@ -132,7 +132,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
         } catch (Exception ex) {
             logger.error("error:", ex);
-            errorMsg=ex.getMessage();
+            errorMsg = ex.getMessage();
         }
         return updateFailed(baseInfo, errorMsg);
     }
@@ -150,7 +150,7 @@ public class PatientRegisterImpl implements IPatientRegister {
     public String mergePatientRegistry(String message) {
         String strResult = ProcessXmlUtil.verifyMessage(message);
         Acknowledgement acknowledgement = new Acknowledgement();
-        String errorMsg="";
+        String errorMsg = "";
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             acknowledgement.setTypeCode("AE");
@@ -179,7 +179,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
         } catch (Exception ex) {
             acknowledgement.setTypeCode("AE");
-            errorMsg=ex.getMessage();
+            errorMsg = ex.getMessage();
         }
         acknowledgement.setText(errorMsg);
         return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
@@ -189,7 +189,7 @@ public class PatientRegisterImpl implements IPatientRegister {
     public String patientRegistryQuery(String message) {
         String strResult = ProcessXmlUtil.verifyMessage(message);
         Acknowledgement acknowledgement = new Acknowledgement();
-        String errorMsg="";
+        String errorMsg = "";
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             acknowledgement.setTypeCode("AE");
@@ -211,12 +211,10 @@ public class PatientRegisterImpl implements IPatientRegister {
 
             XmanBaseInfo result = patientRegisterIn.patientRegistryQuery(patientId);
             return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_SUCCESS, result);
-        }
-        catch (BusinessException e) {
+        } catch (BusinessException e) {
             errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, patientRegisterIn.getClass());
-        }
-        catch (Exception ex) {
-            errorMsg=ex.getMessage();
+        } catch (Exception ex) {
+            errorMsg = ex.getMessage();
             logger.error("error:", ex);
         }
         acknowledgement.setText(errorMsg);

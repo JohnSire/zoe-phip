@@ -21,17 +21,17 @@ import javax.persistence.Transient;
  * @date 2016-03-18
  */
 @Table(name = "SYS_SYSTEM_USER")
-public class  SystemUser extends MasterEntity {
+public class SystemUser extends MasterEntity {
 
     /**
      * 名称
      */
     @Column(name = "NAME")
 //    @JSONField(name = "Name")
-    @ColumnNotes(name="真实字段名称为：名称")
+    @ColumnNotes(name = "真实字段名称为：名称")
     @ValidateNotBlank(message = "{SystemUser.name.ValidateNotBlank.illegal}")
     @ValidateLength(min = 5, max = 20, message = "{SystemUser.name.ValidateLength.illegal}")
-    @ValidatePattern(regexp = "[a-zA-Z]{5,20}",message = "{SystemUser.name.ValidatePattern.illegal}")
+    @ValidatePattern(regexp = "[a-zA-Z]{5,20}", message = "{SystemUser.name.ValidatePattern.illegal}")
     @ValidateNotNull(message = "{SystemUser.name.ValidateNotNull.illegal}")
     private String name;
 
@@ -47,7 +47,7 @@ public class  SystemUser extends MasterEntity {
      */
     @Column(name = "PASSWORD")
 //    @JSONField(name = "Password")
-   // @MyPassword(message = "{SystemUser.password.MyPassword.illegal}")
+    // @MyPassword(message = "{SystemUser.password.MyPassword.illegal}")
     private String password;
 /*
    @ValidateMax(message = "{SystemUser.password.ValidateMax.illegal}", value = 1)

@@ -22,7 +22,7 @@ public class NationalStandardsServiceImplTest extends BaseTest {
     private NationalStandardsServiceImpl impl;
 
     @Test
-    public void add() throws Exception{
+    public void add() throws Exception {
         NationalStandards model = new NationalStandards();
         model.setId(UUID.randomUUID().toString());
         model.setCode("10000");
@@ -33,7 +33,7 @@ public class NationalStandardsServiceImplTest extends BaseTest {
     }
 
     @Test
-    public void update() throws Exception{
+    public void update() throws Exception {
         NationalStandards model = new NationalStandards();
         model.setId("e898a9cc-40bc-406a-ae1e-0e859ea3b56f");
         model.setCode("10000");
@@ -46,7 +46,7 @@ public class NationalStandardsServiceImplTest extends BaseTest {
 
     @Test
     public void getDataListByPage() throws Exception {
-        PageList<NationalStandards> list = impl.getDataPageList("e",new QueryPage());
+        PageList<NationalStandards> list = impl.getDataPageList("e", new QueryPage());
         System.out.println(JSON.json(list));
     }
 

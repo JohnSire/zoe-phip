@@ -19,7 +19,7 @@ import java.util.Map;
 public interface INationalStandardsMapper extends IServiceMapper<NationalStandards> {
     List<NationalStandards> getDataPageList(Map<String, Object> map);
 
-    int getNationalStandard(Map<String,Object> map);
+    int getNationalStandard(Map<String, Object> map);
 
-    NationalStandards getNationalStandardDescr(Map<String,Object> map);
+    NationalStandards getNationalStandardDescr(Map<String, Object> map);
 }

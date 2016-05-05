@@ -17,7 +17,7 @@ public class ProcessXmlUtilTest {
 
     @Test
     public void testMixResponseXml() throws Exception {
-        String xml="<PRPA_IN201312UV02 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
+        String xml = "<PRPA_IN201312UV02 xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
                 "xsi:schemaLocation=\"urn:hl7-org:v3 ..\\multicacheschemas\\PRPA_IN201312UV02.xsd\" " +
                 "ITSVersion=\"XML_1.0\">\n" +
                 "  <id root=\"2.16.156.10011.0\" extension=\"22a0f9e0-4454-11dc-a6be-3603d6866807\" />\n" +
@@ -63,18 +63,18 @@ public class ProcessXmlUtilTest {
                 "    </subject>\n" +
                 "  </controlActProcess>\n" +
                 "</PRPA_IN201312UV02>\n";
-        Document document= DocumentHelper.parseText(xml);
+        Document document = DocumentHelper.parseText(xml);
         /*String result= ProcessXmlUtil.mixResponseXml(document,"PRPA_IN201312UV02","PRPA_IN201312UV02","AA","更新失败了啊","123456","987654");
         System.out.println(result);*/
 
 //        ProcessXmlUtil.verifyMessage(xml);
 
 
-        String result= XmlUtil.validateXsd("E:\\workplace\\ZOE.PHIP\\zoe-phip\\2.module\\phip-register\\phip-register-service-impl\\src\\main\\resources\\multicacheschemas"+"\\PRPA_IN201312UV02.xsd",xml);
+        String result = XmlUtil.validateXsd("E:\\workplace\\ZOE.PHIP\\zoe-phip\\2.module\\phip-register\\phip-register-service-impl\\src\\main\\resources\\multicacheschemas" + "\\PRPA_IN201312UV02.xsd", xml);
 
 
     }
 
-    public void testXsdValidate(){
+    public void testXsdValidate() {
     }
 }
