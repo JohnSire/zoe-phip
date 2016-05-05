@@ -37,4 +37,6 @@ public interface IAreaRegisterIn extends IBaseInService<AreaBaseInfo> {
      * @return
      */
     ServiceResultT<AreaBaseInfo> areaHistoryRegistryQuery(SystemData systemData,String message);
+
+    ServiceResultT<AreaBaseInfo> getTopAreaBaseInfo(SystemData systemData);
 }

@@ -52,12 +52,12 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
         }
         return baseInfo;
     }
+
     public PageList<AreaBaseInfo> getDataList(String key, QueryPage queryPage) {
         PageList<AreaBaseInfo> pageList = new PageList<>();
         SqlHelper.startPage(queryPage);
         Map map = new HashMap<>();
-        if (!StringUtil.isNullOrWhiteSpace(key))
-            map.put("key", key);
+        if (!StringUtil.isNullOrWhiteSpace(key)) map.put("key", key);
         List<AreaBaseInfo> results = getMapper().getDataList(map);
         PageInfo<AreaBaseInfo> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
@@ -67,14 +67,13 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
         return pageList;
     }
 
-    public PageList<AreaBaseInfo> getAreaChildrenRegistry(String id,String key,QueryPage queryPage) {
+    public PageList<AreaBaseInfo> getAreaChildrenRegistry(String id, String key, QueryPage queryPage) {
         PageList<AreaBaseInfo> pageList = new PageList<>();
         //分页
         SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();
         map.put("id", id);
-        if(!StringUtil.isNullOrWhiteSpace(key))
-            map.put("key",key);
+        if (!StringUtil.isNullOrWhiteSpace(key)) map.put("key", key);
         List<AreaBaseInfo> result = getMapper().getChildren(map);
         PageInfo<AreaBaseInfo> pageInfo = new PageInfo<>();
         pageList.setTotal((int) pageInfo.getTotal());
@@ -82,7 +81,6 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
         map.clear();
         map = null;
         return pageList;
-
     }
 
     public AreaBaseInfo areaHistoryRegistryQuery(String code) {
@@ -95,12 +93,16 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
 
     }
 
+    public AreaBaseInfo getTopAreaBaseInfo() {
+        return getMapper().getTopAreaBaseInfo();
+    }
+
     private boolean ifCodeExist(String id, String code, int type) {
         Example example = new Example(AreaBaseInfo.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("code", code);
         if (type != 0) {
-            criteria.andNotEqualTo("id",id);
+            criteria.andNotEqualTo("id", id);
         }
         int count = getMapper().selectCountByExample(example);
         return count > 0;
