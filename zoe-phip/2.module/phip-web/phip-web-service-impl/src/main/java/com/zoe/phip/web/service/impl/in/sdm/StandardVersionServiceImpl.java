@@ -39,6 +39,12 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
     @Autowired
     StandardVerRsSetServiceImpl setServiceImpl;
 
+    @Autowired
+    StandardVerRsCdaServiceImpl cdaServiceImpl;
+
+    @Autowired
+    StandardVerRsFieldServiceImpl fieldServiceImpl;
+
     @Override
     public int add(StandardVersion standardVersion) throws Exception {
         Example example = new Example(StandardVersion.class);
@@ -75,14 +81,15 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
 
 
     @Override
-    public int versionStandardStruct(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList) {
+    public int versionStandardStruct(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList) throws Exception {
         Example cda = new Example(StandardVerRsCda.class);
         cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
         int count = getMapper().selectCountByExample(cda);
 
-
-
-        return 0;
+        int i = setServiceImpl.versionStandardStruct(fkVersionId, setList);
+        int j = cdaServiceImpl.versionStandardStruct(fkVersionId, cdaList);
+        int p = fieldServiceImpl.versionStandardStruct(fkVersionId, fieldList);
+        return p;
     }
 
     @Override
