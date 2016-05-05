@@ -1,7 +1,0 @@
-﻿<GetDocumentStroedInfoRequest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3"
-                              xsi:schemaLocation="urn:hl7-org:v3 ../multicacheschemas/GetDocumentStroedInfoRequest.xsd">
-    <Id root="2.16.156.10011.0" extension="DDD34F6E-2E89-435A-9A62-F4CD3D4DE23B"/>
-    <HealthCardId>D50381539</HealthCardId>
-    <IdentityId>350204195609284015</IdentityId>
-    <DocumentTitle>门诊摘要</DocumentTitle>
-</GetDocumentStroedInfoRequest>
