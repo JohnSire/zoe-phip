@@ -78,7 +78,7 @@
         <result column="PARENT_DOCUMENT_ID" property="parentDocumentId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="CONTENT" property="content" javaType="java.sql.Clob"
-                jdbcType="CLOB"/>
+                jdbcType="CLOB" typeHandler="com.zoe.phip.module.service.support.OracleClobTypeHandler"/>
         <result column="RESPONSE_ID" property="responseId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="DOCUMENT_UNIQUE_ID" property="documentUniqueId" javaType="java.lang.String"
