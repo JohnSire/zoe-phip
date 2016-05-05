@@ -20,9 +20,6 @@ var bodySection = {
                         <i class="icon-grid icon-grid-fold-gray"></i>
                         <ul class="simulate-select-lists" style="display:none;">
                             <li class="simulate-select-list">--请选择性别--</li>
-                            <!--<li class="simulate-select-list">男</li>-->
-                            <!--<li class="simulate-select-list active">女</li>-->
-                            <!--<li class="simulate-select-list">未知</li>-->
                         </ul>
                         <div class="clear"></div>
                     </div>
@@ -40,22 +37,21 @@ var bodySection = {
                 <p class="column-three">
                     <label class="label" for="idNo"><span class="text-mark">*</span>身份证件号：</label>
                     <input type="text" name="idNo" class="text" datatype="*1-256" errormsg="身份证件号长度应为1~256位！"
-                           nullmsg="请填写身份证件号！"/>
+                           nullmsg="请填写编码！"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="telNo">联系电话：</label>
-                    <input type="text" name="telNo" class="text"/>
+                    <label class="label" for="idNo"><span class="text-mark">*</span>编码：</label>
+                    <input type="text" name="patientId" class="text" datatype="*1-256" errormsg="身份证件号长度应为1~256位！"
+                           nullmsg="请填写身份证件号！"/>
                 </p>
                 <p class="column-three">
                     <label class="label" for="cardCode">健康卡号：</label>
                     <input type="text" name="cardCode" class="text"/>
                 </p>
+
+
             </li>
             <li class="list">
-                <!--<p class="column-three">-->
-                <!--<label class="label" for="marriageName">婚姻状况：</label>-->
-                <!--<input type="text" name="marriageName" class="text"/>-->
-                <!--</p>-->
 
                 <div class="column-three">
                     <label class="label" for="marriageCode">婚姻状况：</label>
@@ -68,6 +64,7 @@ var bodySection = {
                         <div class="clear"></div>
                     </div>
                     <select name="marriageCode" style="display: none;">
+
                     </select>
                 </div>
 
@@ -88,7 +85,12 @@ var bodySection = {
                 </p>
             </li>
             <li class="list">
-                <p class="column-one">
+                <p class="column-three">
+                    <label class="label" for="telNo">联系电话：</label>
+                    <input type="text" name="telNo" class="text"/>
+                </p>
+
+                <p class="column-three">
                     <label class="label" for="address">联系地址：</label>
                     <input type="text" name="address" class="text"/>
                 </p>
