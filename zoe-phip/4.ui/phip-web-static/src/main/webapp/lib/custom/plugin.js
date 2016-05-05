@@ -219,7 +219,6 @@
                 $(document).on("click", function () {
                     $(self).find("ul").hide();
                 })
-
             },
             //ajax请求
             //need reuqest.js
@@ -232,14 +231,12 @@
                     }
                 }
                 var url = options["ajaxParam"]["url"]
-
                 var req = new Request(url);
                 $.each(options["ajaxParam"], function (index, item) {
                     if (index == "url") {
                         delete  options["ajaxParam"]["url"];
                     }
                 })
-                //alert(JSON.stringify(options));
                 if (options["ajaxParam"]["type"] == "get") {
                     req.get(options["ajaxParam"]);
                 } else {
