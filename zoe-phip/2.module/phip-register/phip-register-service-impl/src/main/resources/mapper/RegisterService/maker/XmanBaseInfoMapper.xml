@@ -51,8 +51,8 @@
                 jdbcType="INTEGER"/>
         <result column="OCCUPATION_CODE" property="occupationCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="MARRIAGE_CODE" property="marriageCode" javaType="java.lang.Byte"
-                jdbcType="DECIMAL"/>
+        <result column="MARRIAGE_CODE" property="marriageCode" javaType="java.lang.Integer"
+                jdbcType="INTEGER"/>
         <result column="CODE_SYS_CODE" property="codeSysCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="ASSIGNED_PERSON_CODE" property="assignedPersonCode" javaType="java.lang.String"
@@ -121,9 +121,9 @@
             #{item.orgName,jdbcType=VARCHAR},
             #{item.idNo,jdbcType=VARCHAR},
             #{item.name,jdbcType=VARCHAR},
-            #{item.sexCode,jdbcType=DECIMAL},
+            #{item.sexCode,jdbcType=INTEGER},
             #{item.birthDate,jdbcType=TIMESTAMP},
-            #{item.idTypeCode,jdbcType=DECIMAL},
+            #{item.idTypeCode,jdbcType=INTEGER},
             #{item.employerName,jdbcType=VARCHAR},
             #{item.telNo,jdbcType=VARCHAR},
             #{item.relName,jdbcType=VARCHAR},
@@ -136,12 +136,12 @@
             #{item.committeeCode,jdbcType=VARCHAR},
             #{item.houseNumber,jdbcType=VARCHAR},
             #{item.postalCode,jdbcType=VARCHAR},
-            #{item.nationalityCode,jdbcType=DECIMAL},
-            #{item.aboCode,jdbcType=DECIMAL},
-            #{item.rhCode,jdbcType=DECIMAL},
-            #{item.educationCode,jdbcType=DECIMAL},
+            #{item.nationalityCode,jdbcType=INTEGER},
+            #{item.aboCode,jdbcType=INTEGER},
+            #{item.rhCode,jdbcType=INTEGER},
+            #{item.educationCode,jdbcType=INTEGER},
             #{item.occupationCode,jdbcType=VARCHAR},
-            #{item.marriageCode,jdbcType=DECIMAL},
+            #{item.marriageCode,jdbcType=INTEGER},
             #{item.codeSysCode,jdbcType=VARCHAR},
             #{item.assignedPersonCode,jdbcType=VARCHAR},
             #{item.assignedPersonName,jdbcType=VARCHAR},
@@ -201,9 +201,9 @@
         #{orgName,jdbcType=VARCHAR},
         #{idNo,jdbcType=VARCHAR},
         #{name,jdbcType=VARCHAR},
-        #{sexCode,jdbcType=DECIMAL},
+        #{sexCode,jdbcType=INTEGER},
         #{birthDate,jdbcType=TIMESTAMP},
-        #{idTypeCode,jdbcType=DECIMAL},
+        #{idTypeCode,jdbcType=INTEGER},
         #{employerName,jdbcType=VARCHAR},
         #{telNo,jdbcType=VARCHAR},
         #{relName,jdbcType=VARCHAR},
@@ -216,12 +216,12 @@
         #{committeeCode,jdbcType=VARCHAR},
         #{houseNumber,jdbcType=VARCHAR},
         #{postalCode,jdbcType=VARCHAR},
-        #{nationalityCode,jdbcType=DECIMAL},
-        #{aboCode,jdbcType=DECIMAL},
-        #{rhCode,jdbcType=DECIMAL},
-        #{educationCode,jdbcType=DECIMAL},
+        #{nationalityCode,jdbcType=INTEGER},
+        #{aboCode,jdbcType=INTEGER},
+        #{rhCode,jdbcType=INTEGER},
+        #{educationCode,jdbcType=INTEGER},
         #{occupationCode,jdbcType=VARCHAR},
-        #{marriageCode,jdbcType=DECIMAL},
+        #{marriageCode,jdbcType=INTEGER},
         #{codeSysCode,jdbcType=VARCHAR},
         #{assignedPersonCode,jdbcType=VARCHAR},
         #{assignedPersonName,jdbcType=VARCHAR},
@@ -265,13 +265,13 @@
                     NAME = #{item.name,jdbcType=VARCHAR},
                 </if>
                 <if test="item.sexCode != null">
-                    SEX_CODE = #{item.sexCode,jdbcType=DECIMAL},
+                    SEX_CODE = #{item.sexCode,jdbcType=INTEGER},
                 </if>
                 <if test="item.birthDate != null">
                     BIRTH_DATE = #{item.birthDate,jdbcType=TIMESTAMP},
                 </if>
                 <if test="item.idTypeCode != null">
-                    ID_TYPE_CODE = #{item.idTypeCode,jdbcType=DECIMAL},
+                    ID_TYPE_CODE = #{item.idTypeCode,jdbcType=INTEGER},
                 </if>
                 <if test="item.employerName != null">
                     EMPLOYER_NAME = #{item.employerName,jdbcType=VARCHAR},
@@ -310,22 +310,22 @@
                     POSTAL_CODE = #{item.postalCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.nationalityCode != null">
-                    NATIONALITY_CODE = #{item.nationalityCode,jdbcType=DECIMAL},
+                    NATIONALITY_CODE = #{item.nationalityCode,jdbcType=INTEGER},
                 </if>
                 <if test="item.aboCode != null">
-                    ABO_CODE = #{item.aboCode,jdbcType=DECIMAL},
+                    ABO_CODE = #{item.aboCode,jdbcType=INTEGER},
                 </if>
                 <if test="item.rhCode != null">
-                    RH_CODE = #{item.rhCode,jdbcType=DECIMAL},
+                    RH_CODE = #{item.rhCode,jdbcType=INTEGER},
                 </if>
                 <if test="item.educationCode != null">
-                    EDUCATION_CODE = #{item.educationCode,jdbcType=DECIMAL},
+                    EDUCATION_CODE = #{item.educationCode,jdbcType=INTEGER},
                 </if>
                 <if test="item.occupationCode != null">
                     OCCUPATION_CODE = #{item.occupationCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.marriageCode != null">
-                    MARRIAGE_CODE = #{item.marriageCode,jdbcType=DECIMAL},
+                    MARRIAGE_CODE = #{item.marriageCode,jdbcType=INTEGER},
                 </if>
                 <if test="item.codeSysCode != null">
                     CODE_SYS_CODE = #{item.codeSysCode,jdbcType=VARCHAR},
@@ -358,7 +358,7 @@
                     STATUS_CODE = #{item.statusCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.state != null">
-                    STATE = #{item.state,jdbcType=DECIMAL},
+                    STATE = #{item.state,jdbcType=INTEGER},
                 </if>
                 <if test="item.effectiveTime != null">
                     EFFECTIVE_TIME = #{item.effectiveTime,jdbcType=TIMESTAMP},

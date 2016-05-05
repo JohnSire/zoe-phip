@@ -21,6 +21,7 @@ define(function (require, exports, module) {
                     idFieldName: 'deptCode',
                     parentIDFieldName: 'deptParentCode',
                     textFieldName: 'deptName',
+                    nodeWidth: 320,
                     checkbox: false,
                     onSelect: function (data) {
                         internal.deptCode = data["data"]["deptCode"];
@@ -62,11 +63,14 @@ define(function (require, exports, module) {
                         {display: '身份证号', name: 'idNo', width: 100, align: 'left'},
                         {display: '姓名', name: 'name', width: 80, align: 'left'},
                         {display: '职务', name: 'technicalName', width: 100, align: 'left'},
-                        {display: '机构名称', name: 'name', width: 120, align: 'left'},
-                        {display: '科室名称', name: 'affiliatedOrgCode', width: 120, align: 'left'},
+                        {display: '机构名称', name: 'name', width: 100, align: 'left'},
+                        {display: '科室名称', name: 'affiliatedOrgName', width: 100, align: 'left'},
                         {display: '性别', name: 'genderName', width: 80, align: 'left'},
-                        {display: '出生日期', name: 'birthTime', width: 100, align: 'left'},
-                        {display: '联系电话', name: 'employerTelNo', width: 100, align: 'left'},
+                        {
+                            display: '出生日期', name: 'birthTime', width: 120, align: 'left', type: 'date',
+                            format: 'yyyy-mm-dd'
+                        },
+                        {display: '联系电话', name: 'employerTelNo', width: 120, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     frozen: false,
@@ -84,8 +88,8 @@ define(function (require, exports, module) {
                     edit: {title: "编辑医护人员信息"},
                     common: {
                         url: 'personnel/view/medicalstaffdetail',
-                        width: 720,
-                        height: 450
+                        width: 1000,
+                        height: 500
                     }
                 }
             })
