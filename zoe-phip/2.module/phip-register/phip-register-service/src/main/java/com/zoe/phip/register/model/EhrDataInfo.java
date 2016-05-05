@@ -68,27 +68,27 @@ public class EhrDataInfo extends MasterEntity {
     @Column(name = "EMAIL_ADDRESS")
     private String emailAddress;
     /**
-     * 工作地址-市（地区）
+     * 工作地址-省（自治区、直辖市）
      */
     @Column(name = "ADDRESS_CITY")
     private String addressCity;
     /**
-     * 邮政编码--国家
+     * 工作地址-市（地区）
      */
     @Column(name = "ADDRESS_COUNTRY")
     private String addressCountry;
     /**
-     * 工作地址-邮编
+     * 工作地址-县（区）
      */
     @Column(name = "ADDRESS_POSTAL")
     private String addressPostal;
     /**
-     * 工作地址-省（自治区、直辖市）
+     * 工作地址-乡（镇、街道办事处）
      */
     @Column(name = "ADDRESS_STATE")
     private String addressState;
     /**
-     * 工作地址-乡（镇、街道办事处）
+     * 工作地址-村（街、路、弄等）
      */
     @Column(name = "ADDRESS_STREET")
     private String addressStreet;
