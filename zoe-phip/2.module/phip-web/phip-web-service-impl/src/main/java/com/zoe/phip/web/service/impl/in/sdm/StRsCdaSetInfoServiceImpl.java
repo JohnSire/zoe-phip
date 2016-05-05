@@ -12,6 +12,7 @@ import com.zoe.phip.web.model.sdm.StRsCdaSetInfo;
 import com.zoe.phip.web.service.sdm.IStRsCdaSetInfoService;
 import org.springframework.stereotype.Repository;
 import com.alibaba.dubbo.config.annotation.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -24,8 +25,11 @@ import java.util.List;
 @Service(interfaceClass = IStRsCdaSetInfoService.class, proxy = "sdpf", dynamic = true)
 public class StRsCdaSetInfoServiceImpl extends BaseInServiceImpl<StRsCdaSetInfo, IStRsCdaSetInfoMapper> implements IStRsCdaSetInfoMapper {
 
-    public int updateByCdaId(String fkCdaId, List<StRsCdaSetInfo> infoList){
-return 0;
+    public int updateByCdaId(String fkCdaId, List<StRsCdaSetInfo> infoList) throws Exception {
+        Example example = new Example(StRsCdaSetInfo.class);
+        example.createCriteria().andEqualTo("fkCdaId",fkCdaId);
+        int i = super.deleteByExample(example);
+        int j = super.addList(infoList);
+        return j;
     }
-
 }

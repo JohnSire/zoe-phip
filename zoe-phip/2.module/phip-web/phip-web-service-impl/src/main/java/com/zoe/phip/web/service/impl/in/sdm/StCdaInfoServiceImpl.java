@@ -58,6 +58,11 @@ public class StCdaInfoServiceImpl extends BaseInServiceImpl<StCdaInfo, IStCdaInf
         return infoServiceImpl.addList(infoList);
     }
 
+    public int updateByCdaId(String fkCdaId, List<StRsCdaSetInfo> infoList) throws Exception {
+        return infoServiceImpl.updateByCdaId(fkCdaId, infoList);
+    }
+
+
     @Override
     public List<StCdaInfo> getDataPageList(Map<String, Object> map) {
         return getMapper().getDataPageList(map);

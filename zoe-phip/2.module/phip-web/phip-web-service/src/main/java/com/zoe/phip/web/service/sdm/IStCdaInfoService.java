@@ -41,6 +41,6 @@ public interface IStCdaInfoService extends IBaseInService<StCdaInfo> {
      */
     ServiceResult cdaSetRsUpdate(SystemData systemData, List<StRsCdaSetInfo> infoList);
 
-    ServiceResult cdaSetRsUpdateByCdaId(SystemData systemData, String fkCdaId, List<StRsCdaSetInfo> infoList);
+    ServiceResult updateByCdaId(SystemData systemData, String fkCdaId, List<StRsCdaSetInfo> infoList);
 
 }
