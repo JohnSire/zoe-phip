@@ -33,7 +33,7 @@ public class XmanCard extends MasterEntity {
     @Column(name = "XC_XMAN_ID")
     private String xcXmanId;
     /**
-     * 系统的患者ID
+     * 城乡居民健康档案编号
      */
     @Column(name = "HEALTH_RECORD_NO")
     private String healthRecordNo;
