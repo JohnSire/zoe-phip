@@ -158,7 +158,10 @@
     }
     //select 选择封装
     $.fn.select = function (options) {
+
         var internal = {
+            selectValue: null,//选中的值
+            preText: null,//提示显示内容（--请选择--）
             defaultOptions: {
                 name: '',
                 display: '',
@@ -168,7 +171,6 @@
                     url: '',//url 请求的地址
                     data: [],
                     success: function (data) {
-
                     }
                 },
                 renderData: function (data) {
@@ -188,13 +190,34 @@
             render: function (self) {
                 var name = self["param"]["name"];
                 var display = self["param"]["display"];
+                if (!internal.preText) {
+                    internal.preText = $(self).find("ul li:first-child").text();
+                }
                 $('select[name="' + name + '"]').on("setValue", function (event, argument) {
                     $(self).find("span").text(argument[display]);
+                    internal.selectValue = argument[name] || "";
+
+                    if (!argument[display] && internal.preText) {
+                        $(self).find("span").text(internal.preText);
+                    }
+
                 });
                 $(self).on("click", function (e) {
                     e.stopPropagation();
                     var jqUl = $(self).find("ul");
+                    var jqSelect = $('select[name="' + name + '"]')
+
                     if (!(self.isLoadData)) {
+                        jqUl.empty();
+                        jqSelect.empty();
+                        if (internal.preText) {
+                            var jqLi = $("<li></li>");
+                            jqLi.addClass("simulate-select-list")
+                                .text(internal.preText);
+                            jqUl.append(jqLi);
+                            var jqOptions = $("<option></option>");
+                            jqOptions.text(internal.preText);
+                        }
                         internal.req(self["param"], function (data) {
                             data = self["param"]["renderData"](data);
                             var value = self["param"]["value"];
@@ -203,17 +226,26 @@
                                 var jqLi = $("<li></li>");
                                 jqLi.attr({"value": item[value]})
                                     .addClass("simulate-select-list")
-                                    .text(item[text])
-                                    .on("click", function () {
-                                        alert(item[value]);
-                                    });
+                                    .text(item[text]);
                                 jqUl.append(jqLi);
+                                var jqOptions = $("<option></option>");
+                                jqOptions.attr({value: item[value]})
+                                    .text(item[text]);
+                                jqSelect.append(jqOptions);
                             });
-                            jqUl.show();
+                            $(jqSelect).val(internal.selectValue);
                             self.isLoadData = true;
+                            $(jqUl).find("li").on("click", function () {
+                                internal.selectValue = $(this).attr("value") || "";
+                                $(self).find("span").text($(this).text());
+                                $(jqSelect).val(internal.selectValue);
+                            });
                         });
-                    } else {
+                    }
+                    if (jqUl.is(":hidden")) {
                         jqUl.show();
+                    } else {
+                        jqUl.hide();
                     }
                 });
                 $(document).on("click", function () {
@@ -242,8 +274,7 @@
                 } else {
                     req.post(options["ajaxParam"]);
                 }
-
-            },
+            }
         }
         var target = this;
         $(target).each(function () {
