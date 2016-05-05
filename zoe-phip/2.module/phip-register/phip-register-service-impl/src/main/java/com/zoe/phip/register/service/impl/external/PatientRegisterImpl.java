@@ -35,7 +35,6 @@ public class PatientRegisterImpl implements IPatientRegister {
     private static final Logger logger = LoggerFactory.getLogger(PatientRegisterImpl.class);
 
     private final String adapterPath = "/template/patient/input/adapter/PatientRegisterAdapter.xml";
-    private final String cardAdapterPath = "/template/patient/input/adapter/XmanCardAdapter.xml";
 
     @Autowired
     private PatientRegisterInImpl patientRegisterIn;
@@ -77,7 +76,6 @@ public class PatientRegisterImpl implements IPatientRegister {
             if (strResult.contains("error:数据集内容验证错误")) {
                 return registerFailed(baseInfo, strResult);
             }
-            Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardAdapterPath));
             XmanCard xmanCard = new XmanCard();
             xmanCard.setXcCardCode(baseInfo.getCardCode());
             xmanCard.setXcOrgCode(baseInfo.getXcOrgCode());
@@ -123,7 +121,6 @@ public class PatientRegisterImpl implements IPatientRegister {
                 return updateFailed(baseInfo, strResult);
             }
 
-            Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardAdapterPath));
             XmanCard xmanCard = new XmanCard();
             xmanCard.setXcCardCode(baseInfo.getCardCode());
             xmanCard.setXcOrgCode(baseInfo.getXcOrgCode());

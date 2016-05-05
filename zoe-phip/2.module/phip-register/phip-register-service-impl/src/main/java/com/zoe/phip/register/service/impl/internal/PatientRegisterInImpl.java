@@ -91,6 +91,7 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
             XmanCard card = cardMapper.getXmanCard(xmanBaseInfo.getId());
             if (card != null) {
                 card.setXcCardCode(xmanCard.getXcCardCode());
+                card.setXcOrgCode(xmanCard.getXcOrgCode());
                 card.setHealthRecordNo(xmanCard.getHealthRecordNo());
                 cardMapper.updateByPrimaryKeySelective(card);
             }
