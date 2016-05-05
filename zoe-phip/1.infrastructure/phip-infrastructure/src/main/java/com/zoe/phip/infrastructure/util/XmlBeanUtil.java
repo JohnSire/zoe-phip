@@ -1,9 +1,6 @@
 package com.zoe.phip.infrastructure.util;
 
-import org.dom4j.Attribute;
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.XPath;
+import org.dom4j.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -54,7 +51,10 @@ public final class XmlBeanUtil {
             String value = defValue;
             if (!StringUtil.isNullOrWhiteSpace(path)) {
                 XPath xpath = document.createXPath(path);
-                value = xpath.selectSingleNode(document).getText();
+                Node valueNode=xpath.selectSingleNode(document);
+                if(valueNode!=null){
+                    value = valueNode.getText();
+                }
             }
             System.out.println(path);//todo 删除这句代码
             System.out.println(value);//todo 删除这句代码
