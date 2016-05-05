@@ -14,6 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 
@@ -53,7 +54,7 @@ public class OrgDeptInfo extends RegisterEntity {
     /**
      * 医疗卫生机构（科室）类别名称
      */
-    @Column(name = "DEPT_TYPE_NAME")
+    @Transient
     private String deptTypeName;
     /**
      * 医疗卫生机构（科室）角色名称
@@ -68,7 +69,7 @@ public class OrgDeptInfo extends RegisterEntity {
     /**
      * 上级科室名称
      */
-    @Column(name = "DEPT_PARENT_NAME")
+    @Transient
     private String deptParentName;
     /**
      * 角色有效期间(起始日期)
@@ -123,7 +124,7 @@ public class OrgDeptInfo extends RegisterEntity {
     /**
      * 申请者科室名称
      */
-    @Column(name = "ASSIGNED_DEPT_NAME")
+    @Transient
     private String assignedDeptName;
     /**
      * 申请联系人

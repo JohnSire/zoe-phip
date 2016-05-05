@@ -19,17 +19,12 @@
         <if test="deptTypeCode != null">
             DEPT_TYPE_CODE = #{deptTypeCode,jdbcType=VARCHAR},
         </if>
-        <if test="deptTypeName != null">
-            DEPT_TYPE_NAME = #{deptTypeName,jdbcType=VARCHAR},
-        </if>
+
         <if test="deptRoleName != null">
             DEPT_ROLE_NAME = #{deptRoleName,jdbcType=VARCHAR},
         </if>
         <if test="deptParentCode != null">
             DEPT_PARENT_CODE = #{deptParentCode,jdbcType=VARCHAR},
-        </if>
-        <if test="deptParentName != null">
-            DEPT_PARENT_NAME = #{deptParentName,jdbcType=VARCHAR},
         </if>
         <if test="roleName != null">
             ROLE_NAME = #{roleName,jdbcType=VARCHAR},
@@ -60,9 +55,6 @@
         </if>
         <if test="assignedDeptCode != null">
             ASSIGNED_DEPT_CODE = #{assignedDeptCode,jdbcType=VARCHAR},
-        </if>
-        <if test="assignedDeptName != null">
-            ASSIGNED_DEPT_NAME = #{assignedDeptName,jdbcType=VARCHAR},
         </if>
         <if test="assignedContactPerson != null">
             ASSIGNED_CONTACT_PERSON = #{assignedContactPerson,jdbcType=VARCHAR},
