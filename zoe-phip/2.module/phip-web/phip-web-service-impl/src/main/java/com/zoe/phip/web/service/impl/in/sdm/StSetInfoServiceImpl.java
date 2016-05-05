@@ -34,7 +34,8 @@ import java.util.Map;
  */
 @Repository("stSetInfoService")
 @Service(interfaceClass = IStSetInfoService.class, proxy = "sdpf", dynamic = true)
-@ErrorMessage(code = "001", message = "数据集标识({0})已经存在!")
+@ErrorMessage(code = "001", message = "数据集标识({0})已经存在,新增失败!")
+@ErrorMessage(code = "002", message = "数据集标识({0})已经存在,更新失败!")
 public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInfoMapper> implements IStSetInfoMapper {
 
     @Autowired
@@ -83,7 +84,7 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
             m.put("code", entity.getCode());
             m.put("id", entity.getId());
         });
-        if (getSingle(map) > 0) throw new BusinessException("001", entity.getCode());
+        if (getSingle(map) > 0) throw new BusinessException("002", entity.getCode());
         return super.update(entity);
     }
 
