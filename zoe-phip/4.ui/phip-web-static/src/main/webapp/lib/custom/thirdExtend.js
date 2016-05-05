@@ -14,7 +14,7 @@
     var com = {
         dialog: function (param) {
             var top = com.getTopWindowDom();
-            param["url"]=webRoot + param["url"];
+            param["url"] = webRoot + param["url"];
             var dialogObj = top.$.ligerDialog.open(param);
             return dialogObj;
         },

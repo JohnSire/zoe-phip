@@ -76,7 +76,13 @@ define(function (require, exports, module) {
                         {display: '机构代码', name: 'deptCode', width: 300, align: 'left'},
                         {display: '机构名称', name: 'deptName', width: 300, align: 'left'},
                         {display: '联系电话', name: 'employerTelNo', width: 200, align: 'left'},
-                        {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
+                        {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']},
+                        {
+                            display: 'fff', isSort: false, width: 120, align: 'center', render: function () {
+                            return "<a onclick='javascript:winEditGridRow()'>fdsfsdf</a>"
+                        }
+                        }
+
                     ],
                     frozen: false,
                     usePage: true,
@@ -102,6 +108,13 @@ define(function (require, exports, module) {
                 }
             })
         }
+    };
+    window.winEditGridRow = function () {
+        common.dialog({
+            url: 'organization/view/medicalOrgDetail',
+            width: 1000,
+            height: 450
+        })
     };
     exports.init = function () {
         internal.init();
