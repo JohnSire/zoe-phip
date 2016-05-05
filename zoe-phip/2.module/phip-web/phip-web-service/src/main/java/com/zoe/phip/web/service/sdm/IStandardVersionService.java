@@ -35,18 +35,19 @@ public interface IStandardVersionService extends IBaseInService<StandardVersion>
      * 维护版本标准关系
      *
      * @param systemData
-     * @param cdaList   版本CDA关系实体
-     * @param setList 	版本数据集关系实体
-     * @param fieldList 版本数据集字段关系实体
+     * @param cdaList    版本CDA关系实体
+     * @param setList    版本数据集关系实体
+     * @param fieldList  版本数据集字段关系实体
      * @return
      */
-    ServiceResult versionStandardStruct(SystemData systemData, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList);
+    ServiceResult versionStandardStruct(SystemData systemData, String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList);
 
     /**
      * 标准版本字典维护
+     *
      * @param systemData
-     * @param infoList 版本字典关系
+     * @param infoList   版本字典关系
      * @return
      */
-    ServiceResult versionDictUpdate(SystemData systemData, List<StandardVerRsDict> infoList);
+    ServiceResult versionDictUpdate(SystemData systemData, String fkVersionId, List<StandardVerRsDict> infoList);
 }

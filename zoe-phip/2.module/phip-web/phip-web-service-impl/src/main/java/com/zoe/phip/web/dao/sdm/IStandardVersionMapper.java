@@ -25,8 +25,8 @@ public interface IStandardVersionMapper extends IMyMapper<StandardVersion> {
     List<StandardVersion> getDataPageList(Map<String, Object> map);
 
 
-    int versionStandardStruct(List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList);
+    int versionStandardStruct(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList);
 
-    int versionDictUpdate(List<StandardVerRsDict> infoList);
+    int versionDictUpdate(String fkVersionId, List<StandardVerRsDict> infoList) throws Exception;
 
 }

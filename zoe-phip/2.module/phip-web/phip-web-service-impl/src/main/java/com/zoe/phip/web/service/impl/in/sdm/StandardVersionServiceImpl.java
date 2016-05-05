@@ -15,6 +15,7 @@ import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.web.dao.sdm.IStandardVersionMapper;
 import com.zoe.phip.web.model.sdm.*;
 import com.zoe.phip.web.service.sdm.IStandardVersionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.alibaba.dubbo.config.annotation.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -31,6 +32,12 @@ import java.util.Map;
 @Service(interfaceClass = IStandardVersionService.class, proxy = "sdpf", dynamic = true)
 @ErrorMessage(code = "001", message = "标准版本标识({0})已经存在!")
 public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersion, IStandardVersionMapper> implements IStandardVersionMapper {
+
+    @Autowired
+    StandardVerRsDictServiceImpl dictServiceImpl;
+
+    @Autowired
+    StandardVerRsSetServiceImpl setServiceImpl;
 
     @Override
     public int add(StandardVersion standardVersion) throws Exception {
@@ -67,17 +74,20 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
     }
 
 
-
     @Override
-    public int versionStandardStruct(List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList) {
+    public int versionStandardStruct(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList) {
+        Example cda = new Example(StandardVerRsCda.class);
+        cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
+        int count = getMapper().selectCountByExample(cda);
+
 
 
         return 0;
     }
 
     @Override
-    public int versionDictUpdate(List<StandardVerRsDict> infoList) {
-        return 0;
+    public int versionDictUpdate(String fkVersionId, List<StandardVerRsDict> infoList) throws Exception {
+        return dictServiceImpl.versionDictUpdate(fkVersionId, infoList);
     }
 
 
