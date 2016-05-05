@@ -6,17 +6,20 @@
 package com.zoe.phip.web.service.impl.in.sdm;
 
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.web.dao.sdm.IStandardVersionMapper;
-import com.zoe.phip.web.model.sdm.StandardVersion;
+import com.zoe.phip.web.model.sdm.*;
 import com.zoe.phip.web.service.sdm.IStandardVersionService;
 import org.springframework.stereotype.Repository;
 import com.alibaba.dubbo.config.annotation.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -45,12 +48,36 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
 
     @Override
     public int update(StandardVersion standardVersion) throws Exception {
-        return 0;
+        Map<String, Object> map = MapUtil.createMap(m -> {
+            m.put("code", standardVersion.getCode());
+            m.put("id", standardVersion.getId());
+        });
+        if (getSingleVersion(map) > 0) throw new BusinessException("001", standardVersion.getCode());
+        return super.update(standardVersion);
     }
 
     @Override
     public int getSingleVersion(Map<String, Object> map) {
         return getMapper().getSingleVersion(map);
+    }
+
+    @Override
+    public List<StandardVersion> getDataPageList(Map<String, Object> map) {
+        return getMapper().getDataPageList(map);
+    }
+
+
+
+    @Override
+    public int versionStandardStruct(List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList) {
+
+
+        return 0;
+    }
+
+    @Override
+    public int versionDictUpdate(List<StandardVerRsDict> infoList) {
+        return 0;
     }
 
 
