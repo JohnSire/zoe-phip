@@ -10,14 +10,11 @@
             jdbcType="VARCHAR"/>
     <result column="DEPT_TYPE_CODE" property="deptTypeCode" javaType="java.lang.String"
             jdbcType="VARCHAR"/>
-    <result column="DEPT_TYPE_NAME" property="deptTypeName" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
     <result column="DEPT_ROLE_NAME" property="deptRoleName" javaType="java.lang.String"
             jdbcType="VARCHAR"/>
     <result column="DEPT_PARENT_CODE" property="deptParentCode" javaType="java.lang.String"
             jdbcType="VARCHAR"/>
-    <result column="DEPT_PARENT_NAME" property="deptParentName" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
+
     <result column="ROLE_NAME" property="roleName" javaType="java.lang.String"
             jdbcType="VARCHAR"/>
     <result column="ROLE_STATE" property="roleState" javaType="java.lang.String"
@@ -38,8 +35,7 @@
             jdbcType="VARCHAR"/>
     <result column="ASSIGNED_DEPT_CODE" property="assignedDeptCode" javaType="java.lang.String"
             jdbcType="VARCHAR"/>
-    <result column="ASSIGNED_DEPT_NAME" property="assignedDeptName" javaType="java.lang.String"
-            jdbcType="VARCHAR"/>
+
     <result column="ASSIGNED_CONTACT_PERSON" property="assignedContactPerson" javaType="java.lang.String"
             jdbcType="VARCHAR"/>
     <result column="CREATION_TIME" property="creationTime" javaType="java.sql.Date"
@@ -81,10 +77,9 @@ DIVISION_ROOT,
 DEPT_CODE,
 DEPT_NAME,
 DEPT_TYPE_CODE,
-DEPT_TYPE_NAME,
 DEPT_ROLE_NAME,
 DEPT_PARENT_CODE,
-DEPT_PARENT_NAME,
+
 ROLE_NAME,
 ROLE_STATE,
 EFFECTIVE_TIME_LOW,
@@ -95,7 +90,6 @@ MSG_ID,
 ASSIGNED_CODE,
 ASSIGNED_NAME,
 ASSIGNED_DEPT_CODE,
-ASSIGNED_DEPT_NAME,
 ASSIGNED_CONTACT_PERSON,
 CREATION_TIME,
 SORT_NUM,
@@ -120,10 +114,8 @@ SELECT
 #{item.deptCode,jdbcType=VARCHAR},
 #{item.deptName,jdbcType=VARCHAR},
 #{item.deptTypeCode,jdbcType=VARCHAR},
-#{item.deptTypeName,jdbcType=VARCHAR},
 #{item.deptRoleName,jdbcType=VARCHAR},
 #{item.deptParentCode,jdbcType=VARCHAR},
-#{item.deptParentName,jdbcType=VARCHAR},
 #{item.roleName,jdbcType=VARCHAR},
 #{item.roleState,jdbcType=VARCHAR},
 #{item.effectiveTimeLow,jdbcType=DATE},
@@ -134,7 +126,6 @@ SELECT
 #{item.assignedCode,jdbcType=VARCHAR},
 #{item.assignedName,jdbcType=VARCHAR},
 #{item.assignedDeptCode,jdbcType=VARCHAR},
-#{item.assignedDeptName,jdbcType=VARCHAR},
 #{item.assignedContactPerson,jdbcType=VARCHAR},
 #{item.creationTime,jdbcType=DATE},
 #{item.sortNum,jdbcType=DECIMAL},
@@ -162,10 +153,8 @@ DIVISION_ROOT,
 DEPT_CODE,
 DEPT_NAME,
 DEPT_TYPE_CODE,
-DEPT_TYPE_NAME,
 DEPT_ROLE_NAME,
 DEPT_PARENT_CODE,
-DEPT_PARENT_NAME,
 ROLE_NAME,
 ROLE_STATE,
 EFFECTIVE_TIME_LOW,
@@ -176,7 +165,6 @@ MSG_ID,
 ASSIGNED_CODE,
 ASSIGNED_NAME,
 ASSIGNED_DEPT_CODE,
-ASSIGNED_DEPT_NAME,
 ASSIGNED_CONTACT_PERSON,
 CREATION_TIME,
 SORT_NUM,
@@ -200,10 +188,8 @@ NEIGHBORHOOD_CODE,
 #{deptCode,jdbcType=VARCHAR},
 #{deptName,jdbcType=VARCHAR},
 #{deptTypeCode,jdbcType=VARCHAR},
-#{deptTypeName,jdbcType=VARCHAR},
 #{deptRoleName,jdbcType=VARCHAR},
 #{deptParentCode,jdbcType=VARCHAR},
-#{deptParentName,jdbcType=VARCHAR},
 #{roleName,jdbcType=VARCHAR},
 #{roleState,jdbcType=VARCHAR},
 #{effectiveTimeLow,jdbcType=DATE},
@@ -214,7 +200,6 @@ NEIGHBORHOOD_CODE,
 #{assignedCode,jdbcType=VARCHAR},
 #{assignedName,jdbcType=VARCHAR},
 #{assignedDeptCode,jdbcType=VARCHAR},
-#{assignedDeptName,jdbcType=VARCHAR},
 #{assignedContactPerson,jdbcType=VARCHAR},
 #{creationTime,jdbcType=DATE},
 #{sortNum,jdbcType=DECIMAL},
@@ -263,18 +248,14 @@ delete from PHIP_ORG_DEPT_INFO where ID in
         <if test="item.deptTypeCode != null">
             DEPT_TYPE_CODE = #{item.deptTypeCode,jdbcType=VARCHAR},
         </if>
-        <if test="item.deptTypeName != null">
-            DEPT_TYPE_NAME = #{item.deptTypeName,jdbcType=VARCHAR},
-        </if>
+
         <if test="item.deptRoleName != null">
             DEPT_ROLE_NAME = #{item.deptRoleName,jdbcType=VARCHAR},
         </if>
         <if test="item.deptParentCode != null">
             DEPT_PARENT_CODE = #{item.deptParentCode,jdbcType=VARCHAR},
         </if>
-        <if test="item.deptParentName != null">
-            DEPT_PARENT_NAME = #{item.deptParentName,jdbcType=VARCHAR},
-        </if>
+
         <if test="item.roleName != null">
             ROLE_NAME = #{item.roleName,jdbcType=VARCHAR},
         </if>
@@ -305,9 +286,7 @@ delete from PHIP_ORG_DEPT_INFO where ID in
         <if test="item.assignedDeptCode != null">
             ASSIGNED_DEPT_CODE = #{item.assignedDeptCode,jdbcType=VARCHAR},
         </if>
-        <if test="item.assignedDeptName != null">
-            ASSIGNED_DEPT_NAME = #{item.assignedDeptName,jdbcType=VARCHAR},
-        </if>
+
         <if test="item.assignedContactPerson != null">
             ASSIGNED_CONTACT_PERSON = #{item.assignedContactPerson,jdbcType=VARCHAR},
         </if>

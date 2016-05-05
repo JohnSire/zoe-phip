@@ -16,8 +16,6 @@ var bodySection={
                 <!--<a class="icon-grid icon-grid-del" title="删除"></a>-->
             </p>
         </ul>
-
-      
     </div>
     <div class="y-layout-tree" style="border:0;">
         <ul id="tree"></ul>
@@ -47,7 +45,7 @@ var scriptSection={
 %>
 <script type="text/javascript">
     $(function () {
-        seajs.use('{dir}/Register/Organization/medicalOrgList.js', function (a) {
+        seajs.use('{dir}/Register/Organization/medicalDepartmentList.js', function (a) {
             a.init();
         });
     })

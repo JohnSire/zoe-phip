@@ -15,7 +15,7 @@ define(function (require, exports, module) {
                 treeId: 'tree',
                 btnBox: 'treeBtns',
                 url: {
-                    getTreeList: 'organization/getMedicalOrgCategoryTree?codeSystem=2.16.156.10011.2.3.4.1',
+                    getTreeList: 'organization/getMedicalOrgCategoryTree?codeSystem=2.16.156.10011.2.3.2.62',
                 },
                 renderData: function (data) {
                     var treeData = [];
@@ -38,6 +38,7 @@ define(function (require, exports, module) {
                     onSelect: function (data) {
                         internal.deptTypeCode = data["data"]["code"];
                         internal.type = data["data"]["type"] == 0 ? 0 : 1;
+                        internal.deptParentCode = ${deptParentCode};
                         var medicalOrgGrid = common.getGrid("medicalOrgGrid");
                         if (medicalOrgGrid.get("dataAction") == "local") {
                             internal.medicalOrgGrid.setServer();
@@ -71,18 +72,11 @@ define(function (require, exports, module) {
                 },
                 gridParam: {
                     dataAction: "local",
-                    url: 'organization/getMedicalOrgList',
+                    url: 'organization/getMedicalDepartmentList',
                     columns: [
-                        {display: '机构代码', name: 'deptCode', width: 300, align: 'left'},
-                        {display: '机构名称', name: 'deptName', width: 300, align: 'left'},
-                        {display: '联系电话', name: 'employerTelNo', width: 200, align: 'left'},
-                        {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']},
-                        {
-                            display: '编辑科室', isSort: false, width: 120, align: 'center', render: function () {
-                            return "<a onclick='javascript:winEditGridRow()'>编辑科室</a>"
-                        }
-                        }
-
+                        {display: '科室代码', name: 'deptCode', width: 300, align: 'left'},
+                        {display: '科室名称', name: 'deptName', width: 300, align: 'left'},
+                        {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     frozen: false,
                     usePage: true,
@@ -94,9 +88,9 @@ define(function (require, exports, module) {
                     winCallback: "win_dict_item_callback",//弹窗回调函数
                     titleKey: "name",
                     //新增参数
-                    add: {title: "新增医疗机构（科室）信息"},
+                    add: {title: "新增科室信息"},
                     //编辑参数
-                    edit: {title: "编辑医疗机构（科室）信息"},
+                    edit: {title: "编辑科室信息"},
                     common: {
                         otherUrlParam: function () {
                             return {fkSystemDictCategoryId: internal.fkSystemDictCategoryId}
@@ -108,6 +102,13 @@ define(function (require, exports, module) {
                 }
             })
         }
+    };
+    window.winEditGridRow = function () {
+        common.dialog({
+            url: 'organization/view/medicalOrgDetail',
+            width: 1000,
+            height: 450
+        })
     };
     exports.init = function () {
         internal.init();
