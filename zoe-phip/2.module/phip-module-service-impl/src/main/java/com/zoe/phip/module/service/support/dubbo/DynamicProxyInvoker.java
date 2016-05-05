@@ -1,7 +1,6 @@
 package com.zoe.phip.module.service.support.dubbo;
 
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.ErrorCode;

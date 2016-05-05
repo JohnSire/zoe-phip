@@ -190,6 +190,12 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         }
     }
 
+
+    @Override
+    public XmanBaseInfo getById(String id) throws Exception {
+        return getPatientByPrimaryKey(id);
+    }
+
     //region 接口转接
     @Override
     public XmanBaseInfo getPatient(String id) {
@@ -204,6 +210,11 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
     @Override
     public int defaultUpdate(XmanBaseInfo t) {
         return getMapper().defaultUpdate(t);
+    }
+
+    @Override
+    public XmanBaseInfo getPatientByPrimaryKey(String id) {
+        return getMapper().getPatientByPrimaryKey(id);
     }
     //endregion
 }

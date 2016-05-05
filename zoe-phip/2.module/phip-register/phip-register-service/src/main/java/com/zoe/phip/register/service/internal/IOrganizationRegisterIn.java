@@ -2,6 +2,7 @@ package com.zoe.phip.register.service.internal;
 
 import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.module.service.service.in.IBaseInService;
+import com.zoe.phip.register.model.DictItem;
 import com.zoe.phip.register.model.NationalStandards;
 import com.zoe.phip.register.model.OrgDeptInfo;
 
@@ -75,5 +76,16 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
 
 
     ServiceResultT<PageList<OrgDeptInfo>>   orgListQuery(SystemData systemData);
+
+
+    /**
+     * 公共获取字典分类树
+     * @param systemData
+     * @param codeSystem
+     * @param key
+     * @param page
+     * @return
+     */
+    ServiceResultT<PageList<DictItem>>  getDictItemPage(SystemData systemData,String codeSystem,String key,QueryPage page);
     
 }

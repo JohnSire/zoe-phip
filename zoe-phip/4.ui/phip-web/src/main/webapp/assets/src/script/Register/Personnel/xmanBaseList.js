@@ -30,7 +30,7 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: 'personnel/getXmanList',
                     columns: [
-                        {display: '卡号', name: 'id', width: 120, align: 'left'},
+                        {display: '卡号', name: 'cardCode', width: 120, align: 'left'},
                         {display: '姓名', name: 'name', width: 120, align: 'left'},
                         {display: '性别', name: 'sexCodeName', width: 120, align: 'left'},
                         {display: '身份证号', name: 'idNo', width: 120, align: 'left'},

@@ -53,5 +53,5 @@ public interface IMedicalStaffRegisterIn extends IBaseInService<MedicalStaffInfo
      * @param page            分页信息
      * @return
      */
-    ServiceResultT<PageList<MedicalStaffInfo>> providerListQuery(SystemData systemData, String key, String deptcode, QueryPage page);
+    ServiceResultT<PageList<MedicalStaffInfo>> providerListQuery(SystemData systemData, String keyWord,String deptCode, QueryPage page);
 }

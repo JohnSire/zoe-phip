@@ -68,7 +68,6 @@ define(function (require, exports, module) {
             $('input[name="' + name + '"]').on("setValue", function (event, argument) {
                 options["selectParam"]["selfId"] = argument["id"];
                 $(targetObj).find("input").val(argument[name]);
-
                 if (argument[pName]) {
                     $(targetObj).find(".text-line-content").text(argument[pName]);
                 } else {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStandardVerRsFieldMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StandardVerRsField" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StandardVerRsField">
+        update PHIP_STANDARD_VER_RS_FIELD
+        <set>
+            <if test="fkVersionId != null">
+                FK_VERSION_ID = #{fkVersionId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkDictId != null">
+                FK_DICT_ID = #{fkDictId,jdbcType=VARCHAR},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

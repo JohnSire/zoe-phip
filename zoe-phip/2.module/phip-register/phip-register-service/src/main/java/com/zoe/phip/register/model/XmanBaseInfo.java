@@ -58,7 +58,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 性别名称
      */
     @Transient
-    @Column(name = "SEX_CODE_NAME")
+//    @Column(name = "SEX_CODE_NAME")
     private String sexCodeName;
 
 
@@ -238,7 +238,6 @@ public class XmanBaseInfo extends RegisterEntity {
      * 医疗保险类别名称
      */
     @Transient
-    @Column(name = "CODE_SYS_NAME")
     private String codeSysName;
 
     /**
@@ -262,18 +261,18 @@ public class XmanBaseInfo extends RegisterEntity {
 
 
     /**
-     * 登记日期
+     * 患者登记时间
      */
-    @Column(name = "REQISTER_DATE")
+    @Column(name = "EFFECTIVE_TIME")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date reqisterDate;
+    private Date effectiveTime;
 
-    public Date getReqisterDate() {
-        return reqisterDate;
+    public Date getEffectiveTime() {
+        return effectiveTime;
     }
 
-    public void setReqisterDate(Date reqisterDate) {
-        this.reqisterDate = reqisterDate;
+    public void setEffectiveTime(Date effectiveTime) {
+        this.effectiveTime = effectiveTime;
     }
 
     /**

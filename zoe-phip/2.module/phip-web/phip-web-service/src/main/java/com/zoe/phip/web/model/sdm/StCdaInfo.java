@@ -185,4 +185,18 @@ public class StCdaInfo extends MasterEntity {
     public void setDescr(String descr) {
         this.descr = descr;
     }
+
+    /**
+     * 档案类别名称
+     */
+    @Transient
+    private String archiveName;
+
+    public String getArchiveName() {
+        return archiveName;
+    }
+
+    public void setArchiveName(String archiveName) {
+        this.archiveName = archiveName;
+    }
 }
