@@ -102,20 +102,20 @@ public class PatientRegisterImplTest extends BaseTest {
                 "              </asEmployee>\n" +
                 "              <asOtherIDs classCode=\"PAT\">\n" +
                 "                <!--健康卡号-->\n" +
-                "                <id root=\"2.16.156.10011.1.19\" extension=\"38273N237\"/>\n" +
+                "                <id root=\"2.16.156.10011.1.19\" extension=\"健康卡号\"/>\n" +
                 "                <scopingOrganization classCode=\"ORG\"\n" +
                 "                determinerCode=\"INSTANCE\">\n" +
                 "                  <!--健康卡发放机构代码-->\n" +
-                "                  <id root=\"2.16.156.10011.1.5\" extension=\"XXXXX\"/>\n" +
+                "                  <id root=\"2.16.156.10011.1.5\" extension=\"健康卡发放机构代码\"/>\n" +
                 "                </scopingOrganization>\n" +
                 "              </asOtherIDs>\n" +
                 "              <asOtherIDs classCode=\"PAT\">\n" +
                 "                <!--城乡居民健康档案编号-->\n" +
-                "                <id root=\"2.16.156.10011.1.2\" extension=\"38273N237\"/>\n" +
+                "                <id root=\"2.16.156.10011.1.2\" extension=\"城乡居民健康档案编号\"/>\n" +
                 "                <scopingOrganization classCode=\"ORG\"\n" +
                 "                determinerCode=\"INSTANCE\">\n" +
                 "                  <!--建档医疗机构组织机构代码-->\n" +
-                "                  <id root=\"2.16.156.10011.1.5\" extension=\"XXXXX\"/>\n" +
+                "                  <id root=\"2.16.156.10011.1.5\" extension=\"建档医疗机构组织机构代码\"/>\n" +
                 "                </scopingOrganization>\n" +
                 "              </asOtherIDs>\n" +
                 "              <!--联系人-->\n" +

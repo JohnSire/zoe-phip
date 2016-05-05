@@ -37,7 +37,9 @@
     <CreateTime descr="建档时间" path="//creationTime/@value"/>
     <EffectiveTime descr="患者登记时间" path="//controlActProcess/subject/registrationRequest/subject1/patient/effectiveTime/@value"/>
     <HealthRecordNo descr="城乡居民健康档案编号" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/@extension"/>
-    <HealthRecordOrgCode descr="建档机构代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/scopingOrganization/id/@extension"/>
+    <HealthRecordOrgCode descr="建档医疗机构组织机构代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/following-sibling::*/id[@root='2.16.156.10011.1.5']/@extension"/>
+    <CardCode descr = "健康卡号" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.19']/@extension"/>
+    <XcOrgCode descr = "健康卡发放机构代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.19']/following-sibling::*/id[@root='2.16.156.10011.1.5']/@extension"/>
     <PatientId descr="病人ID" path="//controlActProcess/subject/registrationRequest/subject1/patient/id/@extension"/>
     <MsgId descr="消息ID" path="//id/@extension"/>
     <StatusCode descr="状态" path="//controlActProcess/subject/registrationRequest/statusCode/@code"/>
