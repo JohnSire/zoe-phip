@@ -43,4 +43,13 @@ public interface IStCdaInfoService extends IBaseInService<StCdaInfo> {
 
     ServiceResult updateByCdaId(SystemData systemData, String fkCdaId, List<StRsCdaSetInfo> infoList);
 
+    /**
+     * 根据标准来源和关键字查询CDA信息
+     * @param systemData
+     * @param key
+     * @param queryPage
+     * @return
+     */
+    ServiceResultT<PageList<StCdaInfo>> getBySourceId(SystemData systemData,String fkSourceId,String key, QueryPage queryPage);
+
 }

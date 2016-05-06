@@ -14,6 +14,7 @@ import com.zoe.phip.web.model.sdm.StRsSetElementInfo;
 import com.zoe.phip.web.service.sdm.IStRsSetElementInfoService;
 import org.springframework.stereotype.Repository;
 import com.alibaba.dubbo.config.annotation.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -28,6 +29,13 @@ import java.util.TreeMap;
 @ErrorMessage(code = "001", message = "数据列({0})已经存在,新增失败!")
 @ErrorMessage(code = "002", message = "数据列({0})已经存在,更新失败!")
 public class StRsSetElementInfoServiceImpl extends BaseInServiceImpl<StRsSetElementInfo, IStRsSetElementInfoMapper> implements IStRsSetElementInfoMapper {
+
+   public int deleteBySetId(String fkSetId){
+       Example example = new Example(StRsSetElementInfo.class);
+       example.createCriteria().andEqualTo("fkSetId",fkSetId);
+       return super.deleteByExample(example);
+   }
+
     @Override
     public int add(StRsSetElementInfo entity) throws Exception {
         Map<String, Object> map = MapUtil.createMap(map1 -> {

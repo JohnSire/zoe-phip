@@ -18,6 +18,8 @@
                 jdbcType="VARCHAR"/>
         <result column="DESCR" property="descr" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
+        <result column="SOURCE_NAME" property="sourceName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StCdaInfo">
         update PHIP_ST_CDA_INFO
@@ -78,9 +80,14 @@
         FROM PHIP_ST_CDA_INFO PSCI
         LEFT JOIN SYS_SYSTEM_DICT_ITEM SSDI
         ON PSCI.ID = SSDI.ID
+        LEFT  join PHIP_ST_NORM_SOURCE_INFO PSNSI
+        on PSCI.FK_NORM_SOURCE_ID = PSNSI.ID
         WHERE 1 = 1
         <if test="_parameter.containsKey('key')">
             AND UPPER (CONCAT(PSCI.CODE,PSCI.name) ) LIKE UPPER (CONCAT(CONCAT('%', #{key, jdbcType=VARCHAR}),'%'))
+        </if>
+        <if test="_parameter.containsKey('fkSourceId')">
+            AND FK_NORM_SOURCE_ID = #{fkSourceId, jdbcType=VARCHAR}
         </if>
     </select>
 
