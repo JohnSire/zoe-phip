@@ -106,7 +106,7 @@ define(function (require, exports, module) {
                 toolsBoxId: 'dictTools',
                 deleteUrl: {
                     deleteInfo: "dict/delDictItemInfo",
-                    deleteList: "dict/delDictItemList",
+                    deleteList: "dict/delDictItemList"
                 },
                 tools: {
                     btnbox: {
@@ -122,7 +122,7 @@ define(function (require, exports, module) {
                             fn: function () {
 
                             }
-                        },
+                        }
                     }
                 },
                 extendParam: function () {
