@@ -43,16 +43,33 @@ public class StCdaInfoServiceImpl extends BaseInServiceImpl<StCdaInfo, IStCdaInf
 
     public PageList<StCdaInfo> getDataPageList(String key, QueryPage queryPage) {
         PageList<StCdaInfo> pageList = new PageList<>();
-        Example example = new Example(StCdaInfo.class);
         SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();
         if (!StringUtil.isNullOrWhiteSpace(key)) map.put("key", key);
         List<StCdaInfo> results = getMapper().getDataPageList(map);
+        map.clear();
+        map =null;
         PageInfo<StCdaInfo> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
         return pageList;
     }
+
+    public PageList<StCdaInfo> getBySourceId(String fkSourceId, String key, QueryPage queryPage) {
+        PageList<StCdaInfo> pageList = new PageList<>();
+        SqlHelper.startPage(queryPage);
+        Map<String, Object> map = new TreeMap<>();
+        map.put("fkSourceId", fkSourceId);
+        if (!StringUtil.isNullOrWhiteSpace(key)) map.put("key", key);
+        List<StCdaInfo> results = getMapper().getDataPageList(map);
+        map.clear();
+        map =null;
+        PageInfo<StCdaInfo> pageInfo = new PageInfo<>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
 
     public int cdaSetRsUpdate(List<StRsCdaSetInfo> infoList) throws Exception {
         return infoServiceImpl.addList(infoList);

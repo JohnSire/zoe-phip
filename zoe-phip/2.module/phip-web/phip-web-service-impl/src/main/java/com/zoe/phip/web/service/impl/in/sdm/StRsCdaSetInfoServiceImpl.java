@@ -31,11 +31,15 @@ import java.util.Map;
 public class StRsCdaSetInfoServiceImpl extends BaseInServiceImpl<StRsCdaSetInfo, IStRsCdaSetInfoMapper> implements IStRsCdaSetInfoMapper {
 
     public int updateByCdaId(String fkCdaId, List<StRsCdaSetInfo> infoList) throws Exception {
-        Example example = new Example(StRsCdaSetInfo.class);
-        example.createCriteria().andEqualTo("fkCdaId", fkCdaId);
-        int i = super.deleteByExample(example);
+        deleteByCdaId(fkCdaId);
         int j = super.addList(infoList);
         return j;
+    }
+
+    public int deleteByCdaId(String fkCdaId) {
+        Example example = new Example(StRsCdaSetInfo.class);
+        example.createCriteria().andEqualTo("fkCdaId", fkCdaId);
+        return super.deleteByExample(example);
     }
 
     @Override

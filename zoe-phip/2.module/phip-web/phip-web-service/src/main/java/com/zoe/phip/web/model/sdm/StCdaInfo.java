@@ -199,4 +199,18 @@ public class StCdaInfo extends MasterEntity {
     public void setArchiveName(String archiveName) {
         this.archiveName = archiveName;
     }
+
+    /**
+     * 标准来源名称
+     */
+    @Transient
+    private String sourceName;
+
+    public String getSourceName() {
+        return sourceName;
+    }
+
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+    }
 }
