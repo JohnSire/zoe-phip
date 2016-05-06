@@ -36,7 +36,6 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/view/medicalDepartmentList")
     public String ToMedicalDepartmentList() {
         // return "Register/Organization/medicalOrgDetail";
-        setAttr("deptParentCode","yuyuyu");
         return "Register/Organization/medicalDepartmentList";
     }
 
@@ -147,7 +146,7 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/getMedicalOrgCategoryTree")
     @ResponseBody
     public ServiceResultT<NationalStandards> getMedicalOrgCategoryList(String codeSystem) {
-        //codeSystem = "2.16.156.10011.2.3.4.1";
+       // codeSystem = "2.16.156.10011.2.3.4.1";
        // codeSystem="2.16.156.10011.2.3.2.62";
         return ServiceFactory.getOrganizationRegisterIn().dictItemListQueryByCodeSystem(ComSession.getUserInfo(), codeSystem);
     }

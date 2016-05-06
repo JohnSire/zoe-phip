@@ -44,7 +44,7 @@ public class OrganizationRegisterTest extends BaseTest {
                 "        <subject1 typeCode=\"SBJ\">\n" +
                 "          <assignedEntity classCode=\"ASSIGNED \">\n" +
                 "            <!--医疗卫生机构（科室）标识-科室为例-->\n" +
-                "            <id root=\"2.16.156.10011.1.26\" extension=\"1234567890\"/>\n" +
+                "            <id root=\"2.16.156.10011.1.26\" extension=\"1112345678901\"/>\n" +
                 "            <!--医疗卫生机构（科室）类别-科室为例-->\n" +
                 "            <code code=\"A03.01\" displayName=\" 呼吸内科专业55\"\n" +
                 "            codeSystem=\"2.16.156.10011.2.3.2.62\" codeSystemName=\"医疗卫生机构业务科室分类与代码表\"/>\n" +
@@ -64,7 +64,7 @@ public class OrganizationRegisterTest extends BaseTest {
                 "            <assignedPrincipalOrganization classCode=\"ORG\"\n" +
                 "            determinerCode=\"INSTANCE\">\n" +
                 "              <!--医疗卫生机构（科室）实体名称-->\n" +
-                "              <name>呼吸内科e</name>\n" +
+                "              <name>呼吸内科edsjfksdj</name>\n" +
                 "              <asAffiliate classCode=\"AFFL\">\n" +
                 "                <code/>\n" +
                 "                <effectiveTime/>\n" +
@@ -105,7 +105,7 @@ public class OrganizationRegisterTest extends BaseTest {
                 "</PRPM_IN401030UV01>";
 
 
-        // String result = impl.addOrganization(patientInput);
+       // String result = impl.addOrganization(patientInput);
         String result = impl.updateOrganization(patientInput);
 
         System.out.println(result);
@@ -143,7 +143,7 @@ public class OrganizationRegisterTest extends BaseTest {
                 "      <statusCode code=\"new\"/>\n" +
                 "      <!--医疗卫生机构（科室）ID-->\n" +
                 "      <organizationID>\n" +
-                "        <value root=\"2.16.156.10011.1.26\" extension=\"1234567890\"/>\n" +
+                "        <value root=\"2.16.156.10011.1.26\" extension=\"11234567890\"/>\n" +
                 "        <semanticsText>AssignedEntity.id</semanticsText>\n" +
                 "      </organizationID>\n" +
                 "      <!--医疗卫生机构（科室）实体名称-->\n" +

@@ -7,7 +7,7 @@
 <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.OrgDeptInfo">
     update PHIP_ORG_DEPT_INFO
     <set>
-        <if test="DIVISION_ROOT != null">
+        <if test="divisionRoot != null">
             DIVISION_ROOT = #{divisionRoot,jdbcType=VARCHAR},
         </if>
         <if test="deptCode != null">

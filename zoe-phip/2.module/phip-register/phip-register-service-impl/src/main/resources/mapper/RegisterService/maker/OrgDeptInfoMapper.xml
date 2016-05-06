@@ -236,7 +236,7 @@ delete from PHIP_ORG_DEPT_INFO where ID in
 <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
     update PHIP_ORG_DEPT_INFO
     <set>
-        <if test="item.extensionId != null">
+        <if test="item.divisionRoot != null">
             DIVISION_ROOT = #{item.divisionRoot,jdbcType=VARCHAR},
         </if>
         <if test="item.deptCode != null">
