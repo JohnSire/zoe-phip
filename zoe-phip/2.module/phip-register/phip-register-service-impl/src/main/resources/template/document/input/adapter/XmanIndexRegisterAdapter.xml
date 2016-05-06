@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
     <MsgId descr="请求消息ID" path="//ID/@extension"/>
-    <PatientId descr="患者标识" path="//SourcePatientID"/>
-    <PatientName descr="患者姓名" path="//SourcePatientName"/>
-    <HealthCardId descr="居民健康档案编码" path="//HealthCardId"/>
-    <IdNo descr="居民身份证号" path="//IdentityId"/>
+    <AreaCode descr="档案地区编码" path=""/>
+    <XmanId descr="患者标识" path="//SourcePatientID"/>
     <OrgCode descr="机构组织机构代码" path="//Organization/@id"/>
     <OrgName descr="机构名称" path="//Organization/Name"/>
-    <AreaCode descr="上机构电话号码区号" path="//Organization/TelephoneNumber/@areaCode"/>
+    <EventNo descr="活动服务编号(如住院号、就诊号、会诊号等)" path="//RegistryPackage/SubmissionSet/EpisodeID"/>
+    <EventType descr="事件类型" path=""/>
+    <PatientName descr="患者姓名" path="//SourcePatientName"/>
+    <HealthCardId descr="健康卡号" path="//HealthCardId"/>
+    <IdNo descr="居民身份证号" path="//IdentityId"/>
+    <PhoneCode descr="上级机构电话号码区号" path="//Organization/TelephoneNumber/@areaCode"/>
     <TelNo descr="机构电话号码" path="//Organization/TelephoneNumber/@number"/>
     <EmailAddress descr="机构邮箱地址" path="//Organization/EmailAddress/@address"/>
     <AddressCity descr="工作地址-省（自治区、直辖市）" path="//Organization/Address/@city"/>
@@ -16,16 +19,9 @@
     <AddressState descr="工作地址-乡（镇、街道办事处）" path="//Organization/Address/@stateOrProvince"/>
     <AddressStreet descr="工作地址-村（街、路、弄等）" path="//Organization/Address/@street"/>
     <StreetNumber descr="工作地址-门牌号码" path="//Organization/Address/@streetNumber"/>
-    <CommitTime descr="提交时间" path="//RegistryPackage/SubmissionSet/SubmissionTime"/>
-    <UniqueId descr="共享文档注册唯一标识符(可以是提交时生成，也可以为空.)" path="//RegistryPackage/SubmissionSet/UniqueId"/>
-    <SourceId descr="源文档ID" path="//RegistryPackage/SubmissionSet/SourceId"/>
     <Comments descr="备注" path="//RegistryPackage/SubmissionSet/Comments"/>
     <Title descr="标题" path="//RegistryPackage/SubmissionSet/Title"/>
-    <CreateTime descr="创建时间" path="//RegistryPackage/SubmissionSet/CreateTime"/>
     <ServerOrgName descr="服务机构名称" path="//RegistryPackage/SubmissionSet/ServerOrganization"/>
-    <EpisodeId descr="活动服务编号(如住院号、就诊号、会诊号等)" path="//RegistryPackage/SubmissionSet/EpisodeID"/>
-    <InTime descr="活动服务开始时间" path="//RegistryPackage/SubmissionSet/InTime"/>
-    <OutTime descr="活动服务结束时间" path="//RegistryPackage/SubmissionSet/OutTime"/>
     <AdmissionDepart descr="负责人所属科室名称" path="//RegistryPackage/SubmissionSet/AdmissionDepart"/>
     <AdmissionDoctor descr="负责人姓名" path="//RegistryPackage/SubmissionSet/AdmissionDoctor"/>
     <AdmissionType descr="活动类型描述" path="//RegistryPackage/SubmissionSet/AdmissionType"/>
@@ -34,12 +30,8 @@
     <AuthorInstitution descr="数据记录者所属机构名称" path="//RegistryPackage/SubmissionSet/Author/AuthorInstitution"/>
     <AuthorSpecialty descr="数据记录者所属科室名称" path="//RegistryPackage/SubmissionSet/Author/AuthorSpecialty"/>
     <AuthorRole descr="数据记录者级别" path="//RegistryPackage/SubmissionSet/Author/AuthorRole"/>
-    <DocumentId descr="文档ID" path="//Document/@id"/>
-    <ParentDocumentRelationship descr="上级文档关联关系" path="//Document/@parentDocumentRelationship"/>
-    <ParentDocumentId descr="上级文档ID" path="//Document/@parentDocumentId"/>
-    <Content descr="文档内容" path="//Document/Content"/>
+    <StartTime descr="活动服务开始时间" path="//RegistryPackage/SubmissionSet/InTime"/>
+    <EndTime descr="活动服务结束时间" path="//RegistryPackage/SubmissionSet/OutTime"/>
     <DocumentUniqueId descr="共享文档平台注册ID(文档注册时生成的的唯一编号)" path="//DocumentRequest/RepositoryUniqueId"/>
     <RepositoryUniqueId descr="文档库唯一标识符(注册响应ID)" path="//DocumentRequest/RepositoryUniqueId"/>
-    <DoumentUrl descr="文档注册URL地址" path="//Response/@doumentUrl"/>
-    <MimeType descr="文档类型" path="//Document/@mimeType"/>
 </root>

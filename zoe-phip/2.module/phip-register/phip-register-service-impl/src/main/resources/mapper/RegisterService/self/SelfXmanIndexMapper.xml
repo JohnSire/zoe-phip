@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zoe.phip.register.dao.IEhrDataInfoMapper">
-    <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.EhrDataInfo" extends="BaseResultMap">
+<mapper namespace="com.zoe.phip.register.dao.IXmanIndexMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.XmanIndex" extends="BaseResultMap">
 
     </resultMap>
-    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.EhrDataInfo">
-        update PHIP_EHR_DATA_INFO
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.XmanIndex">
+        update PHIP_XMAN_INDEX
         <set>
-            <if test="msgId != null">
-                MSG_ID = #{msgId,jdbcType=VARCHAR},
+            <if test="areaCode != null">
+                AREA_CODE = #{areaCode,jdbcType=VARCHAR},
             </if>
-            <if test="patientId != null">
-                PATIENT_ID = #{patientId,jdbcType=VARCHAR},
+            <if test="xmanId != null">
+                XMAN_ID = #{xmanId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgCode != null">
+                ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null">
+                ORG_NAME = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="eventNo != null">
+                EVENT_NO = #{eventNo,jdbcType=VARCHAR},
+            </if>
+            <if test="eventType != null">
+                EVENT_TYPE = #{eventType,jdbcType=VARCHAR},
             </if>
             <if test="patientName != null">
                 PATIENT_NAME = #{patientName,jdbcType=VARCHAR},
@@ -22,14 +34,8 @@
             <if test="idNo != null">
                 ID_NO = #{idNo,jdbcType=VARCHAR},
             </if>
-            <if test="orgCode != null">
-                ORG_CODE = #{orgCode,jdbcType=VARCHAR},
-            </if>
-            <if test="orgName != null">
-                ORG_NAME = #{orgName,jdbcType=VARCHAR},
-            </if>
-            <if test="areaCode != null">
-                AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+            <if test="phoneCode != null">
+                PHONE_CODE = #{phoneCode,jdbcType=VARCHAR},
             </if>
             <if test="telNo != null">
                 TEL_NO = #{telNo,jdbcType=VARCHAR},
@@ -55,35 +61,14 @@
             <if test="streetNumber != null">
                 STREET_NUMBER = #{streetNumber,jdbcType=VARCHAR},
             </if>
-            <if test="commitTime != null">
-                COMMIT_TIME = #{commitTime,jdbcType=DATE},
-            </if>
-            <if test="uniqueId != null">
-                UNIQUE_ID = #{uniqueId,jdbcType=VARCHAR},
-            </if>
-            <if test="sourceId != null">
-                SOURCE_ID = #{sourceId,jdbcType=VARCHAR},
-            </if>
             <if test="comments != null">
                 COMMENTS = #{comments,jdbcType=VARCHAR},
             </if>
             <if test="title != null">
                 TITLE = #{title,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null">
-                CREATE_TIME = #{createTime,jdbcType=DATE},
-            </if>
             <if test="serverOrgName != null">
                 SERVER_ORG_NAME = #{serverOrgName,jdbcType=VARCHAR},
-            </if>
-            <if test="episodeId != null">
-                EPISODE_ID = #{episodeId,jdbcType=VARCHAR},
-            </if>
-            <if test="inTime != null">
-                IN_TIME = #{inTime,jdbcType=DATE},
-            </if>
-            <if test="outTime != null">
-                OUT_TIME = #{outTime,jdbcType=DATE},
             </if>
             <if test="admissionDepart != null">
                 ADMISSION_DEPART = #{admissionDepart,jdbcType=VARCHAR},
@@ -109,35 +94,11 @@
             <if test="authorRole != null">
                 AUTHOR_ROLE = #{authorRole,jdbcType=VARCHAR},
             </if>
-            <if test="documentId != null">
-                DOCUMENT_ID = #{documentId,jdbcType=VARCHAR},
+            <if test="startTime != null">
+                START_TIME = #{startTime,jdbcType=DATE},
             </if>
-            <if test="parentDocumentRelationship != null">
-                PARENT_DOCUMENT_RELATIONSHIP = #{parentDocumentRelationship,jdbcType=VARCHAR},
-            </if>
-            <if test="parentDocumentId != null">
-                PARENT_DOCUMENT_ID = #{parentDocumentId,jdbcType=VARCHAR},
-            </if>
-            <if test="content != null">
-                CONTENT = #{content,jdbcType=CLOB},
-            </if>
-            <if test="responseId != null">
-                RESPONSE_ID = #{responseId,jdbcType=VARCHAR},
-            </if>
-            <if test="documentUniqueId != null">
-                DOCUMENT_UNIQUE_ID = #{documentUniqueId,jdbcType=VARCHAR},
-            </if>
-            <if test="repositoryUniqueId != null">
-                REPOSITORY_UNIQUE_ID = #{repositoryUniqueId,jdbcType=VARCHAR},
-            </if>
-            <if test="doumentUrl != null">
-                DOUMENT_URL = #{doumentUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="mimeType != null">
-                MIME_TYPE = #{mimeType,jdbcType=VARCHAR},
-            </if>
-            <if test="eventNo != null">
-                EVENT_NO = #{eventNo,jdbcType=VARCHAR},
+            <if test="endTime != null">
+                END_TIME = #{endTime,jdbcType=DATE},
             </if>
             MODIFY_AT=sysdate
         </set>

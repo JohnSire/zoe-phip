@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zoe.phip.register.dao.IEhrDataInfoMapper">
-    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.EhrDataInfo"
+<mapper namespace="com.zoe.phip.register.dao.IXmanIndexMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.XmanIndex"
                extends="com.zoe.phip.module.service.MasterEntityResultMap">
-        <result column="MSG_ID" property="msgId" javaType="java.lang.String"
+        <result column="AREA_CODE" property="areaCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="PATIENT_ID" property="patientId" javaType="java.lang.String"
+        <result column="XMAN_ID" property="xmanId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ORG_CODE" property="orgCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ORG_NAME" property="orgName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="EVENT_NO" property="eventNo" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="EVENT_TYPE" property="eventType" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="PATIENT_NAME" property="patientName" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
@@ -13,11 +21,7 @@
                 jdbcType="VARCHAR"/>
         <result column="ID_NO" property="idNo" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="ORG_CODE" property="orgCode" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="ORG_NAME" property="orgName" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="AREA_CODE" property="areaCode" javaType="java.lang.String"
+        <result column="PHONE_CODE" property="phoneCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="TEL_NO" property="telNo" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
@@ -35,26 +39,12 @@
                 jdbcType="VARCHAR"/>
         <result column="STREET_NUMBER" property="streetNumber" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="COMMIT_TIME" property="commitTime" javaType="java.sql.Date"
-                jdbcType="DATE"/>
-        <result column="UNIQUE_ID" property="uniqueId" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="SOURCE_ID" property="sourceId" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
         <result column="COMMENTS" property="comments" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="TITLE" property="title" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="CREATE_TIME" property="createTime" javaType="java.sql.Date"
-                jdbcType="DATE"/>
         <result column="SERVER_ORG_NAME" property="serverOrgName" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="EPISODE_ID" property="episodeId" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="IN_TIME" property="inTime" javaType="java.sql.Date"
-                jdbcType="DATE"/>
-        <result column="OUT_TIME" property="outTime" javaType="java.sql.Date"
-                jdbcType="DATE"/>
         <result column="ADMISSION_DEPART" property="admissionDepart" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="ADMISSION_DOCTOR" property="admissionDoctor" javaType="java.lang.String"
@@ -71,37 +61,23 @@
                 jdbcType="VARCHAR"/>
         <result column="AUTHOR_ROLE" property="authorRole" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="DOCUMENT_ID" property="documentId" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="PARENT_DOCUMENT_RELATIONSHIP" property="parentDocumentRelationship" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="PARENT_DOCUMENT_ID" property="parentDocumentId" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="CONTENT" property="content" javaType="java.sql.Clob"
-                jdbcType="CLOB" typeHandler="com.zoe.phip.module.service.support.OracleClobTypeHandler"/>
-        <result column="RESPONSE_ID" property="responseId" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="DOCUMENT_UNIQUE_ID" property="documentUniqueId" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="REPOSITORY_UNIQUE_ID" property="repositoryUniqueId" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="DOUMENT_URL" property="doumentUrl" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="MIME_TYPE" property="mimeType" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="EVENT_NO" property="eventNo" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
+        <result column="START_TIME" property="startTime" javaType="java.sql.Date"
+                jdbcType="DATE"/>
+        <result column="END_TIME" property="endTime" javaType="java.sql.Date"
+                jdbcType="DATE"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
-        INSERT INTO PHIP_EHR_DATA_INFO (
-        MSG_ID,
-        PATIENT_ID,
+        INSERT INTO PHIP_XMAN_INDEX (
+        AREA_CODE,
+        XMAN_ID,
+        ORG_CODE,
+        ORG_NAME,
+        EVENT_NO,
+        EVENT_TYPE,
         PATIENT_NAME,
         HEALTH_CARD_ID,
         ID_NO,
-        ORG_CODE,
-        ORG_NAME,
-        AREA_CODE,
+        PHONE_CODE,
         TEL_NO,
         EMAIL_ADDRESS,
         ADDRESS_CITY,
@@ -110,16 +86,9 @@
         ADDRESS_STATE,
         ADDRESS_STREET,
         STREET_NUMBER,
-        COMMIT_TIME,
-        UNIQUE_ID,
-        SOURCE_ID,
         COMMENTS,
         TITLE,
-        CREATE_TIME,
         SERVER_ORG_NAME,
-        EPISODE_ID,
-        IN_TIME,
-        OUT_TIME,
         ADMISSION_DEPART,
         ADMISSION_DOCTOR,
         ADMISSION_TYPE,
@@ -128,27 +97,21 @@
         AUTHOR_INSTITUTION,
         AUTHOR_SPECIALTY,
         AUTHOR_ROLE,
-        DOCUMENT_ID,
-        PARENT_DOCUMENT_RELATIONSHIP,
-        PARENT_DOCUMENT_ID,
-        CONTENT,
-        RESPONSE_ID,
-        DOCUMENT_UNIQUE_ID,
-        REPOSITORY_UNIQUE_ID,
-        DOUMENT_URL,
-        MIME_TYPE,
-        EVENT_NO,
+        START_TIME,
+        END_TIME,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
-            #{item.msgId,jdbcType=VARCHAR},
-            #{item.patientId,jdbcType=VARCHAR},
+            #{item.areaCode,jdbcType=VARCHAR},
+            #{item.xmanId,jdbcType=VARCHAR},
+            #{item.orgCode,jdbcType=VARCHAR},
+            #{item.orgName,jdbcType=VARCHAR},
+            #{item.eventNo,jdbcType=VARCHAR},
+            #{item.eventType,jdbcType=VARCHAR},
             #{item.patientName,jdbcType=VARCHAR},
             #{item.healthCardId,jdbcType=VARCHAR},
             #{item.idNo,jdbcType=VARCHAR},
-            #{item.orgCode,jdbcType=VARCHAR},
-            #{item.orgName,jdbcType=VARCHAR},
-            #{item.areaCode,jdbcType=VARCHAR},
+            #{item.phoneCode,jdbcType=VARCHAR},
             #{item.telNo,jdbcType=VARCHAR},
             #{item.emailAddress,jdbcType=VARCHAR},
             #{item.addressCity,jdbcType=VARCHAR},
@@ -157,16 +120,9 @@
             #{item.addressState,jdbcType=VARCHAR},
             #{item.addressStreet,jdbcType=VARCHAR},
             #{item.streetNumber,jdbcType=VARCHAR},
-            #{item.commitTime,jdbcType=DATE},
-            #{item.uniqueId,jdbcType=VARCHAR},
-            #{item.sourceId,jdbcType=VARCHAR},
             #{item.comments,jdbcType=VARCHAR},
             #{item.title,jdbcType=VARCHAR},
-            #{item.createTime,jdbcType=DATE},
             #{item.serverOrgName,jdbcType=VARCHAR},
-            #{item.episodeId,jdbcType=VARCHAR},
-            #{item.inTime,jdbcType=DATE},
-            #{item.outTime,jdbcType=DATE},
             #{item.admissionDepart,jdbcType=VARCHAR},
             #{item.admissionDoctor,jdbcType=VARCHAR},
             #{item.admissionType,jdbcType=VARCHAR},
@@ -175,30 +131,24 @@
             #{item.authorInstitution,jdbcType=VARCHAR},
             #{item.authorSpecialty,jdbcType=VARCHAR},
             #{item.authorRole,jdbcType=VARCHAR},
-            #{item.documentId,jdbcType=VARCHAR},
-            #{item.parentDocumentRelationship,jdbcType=VARCHAR},
-            #{item.parentDocumentId,jdbcType=VARCHAR},
-            #{item.content,jdbcType=CLOB},
-            #{item.responseId,jdbcType=VARCHAR},
-            #{item.documentUniqueId,jdbcType=VARCHAR},
-            #{item.repositoryUniqueId,jdbcType=VARCHAR},
-            #{item.doumentUrl,jdbcType=VARCHAR},
-            #{item.mimeType,jdbcType=VARCHAR},
-            #{item.eventNo,jdbcType=VARCHAR},
+            #{item.startTime,jdbcType=DATE},
+            #{item.endTime,jdbcType=DATE},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
     </insert>
-    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.EhrDataInfo">
-        INSERT INTO PHIP_EHR_DATA_INFO (
-        MSG_ID,
-        PATIENT_ID,
+    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.XmanIndex">
+        INSERT INTO PHIP_XMAN_INDEX (
+        AREA_CODE,
+        XMAN_ID,
+        ORG_CODE,
+        ORG_NAME,
+        EVENT_NO,
+        EVENT_TYPE,
         PATIENT_NAME,
         HEALTH_CARD_ID,
         ID_NO,
-        ORG_CODE,
-        ORG_NAME,
-        AREA_CODE,
+        PHONE_CODE,
         TEL_NO,
         EMAIL_ADDRESS,
         ADDRESS_CITY,
@@ -207,16 +157,9 @@
         ADDRESS_STATE,
         ADDRESS_STREET,
         STREET_NUMBER,
-        COMMIT_TIME,
-        UNIQUE_ID,
-        SOURCE_ID,
         COMMENTS,
         TITLE,
-        CREATE_TIME,
         SERVER_ORG_NAME,
-        EPISODE_ID,
-        IN_TIME,
-        OUT_TIME,
         ADMISSION_DEPART,
         ADMISSION_DOCTOR,
         ADMISSION_TYPE,
@@ -225,26 +168,20 @@
         AUTHOR_INSTITUTION,
         AUTHOR_SPECIALTY,
         AUTHOR_ROLE,
-        DOCUMENT_ID,
-        PARENT_DOCUMENT_RELATIONSHIP,
-        PARENT_DOCUMENT_ID,
-        CONTENT,
-        RESPONSE_ID,
-        DOCUMENT_UNIQUE_ID,
-        REPOSITORY_UNIQUE_ID,
-        DOUMENT_URL,
-        MIME_TYPE,
-        EVENT_NO,
+        START_TIME,
+        END_TIME,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES(
-        #{msgId,jdbcType=VARCHAR},
-        #{patientId,jdbcType=VARCHAR},
+        #{areaCode,jdbcType=VARCHAR},
+        #{xmanId,jdbcType=VARCHAR},
+        #{orgCode,jdbcType=VARCHAR},
+        #{orgName,jdbcType=VARCHAR},
+        #{eventNo,jdbcType=VARCHAR},
+        #{eventType,jdbcType=VARCHAR},
         #{patientName,jdbcType=VARCHAR},
         #{healthCardId,jdbcType=VARCHAR},
         #{idNo,jdbcType=VARCHAR},
-        #{orgCode,jdbcType=VARCHAR},
-        #{orgName,jdbcType=VARCHAR},
-        #{areaCode,jdbcType=VARCHAR},
+        #{phoneCode,jdbcType=VARCHAR},
         #{telNo,jdbcType=VARCHAR},
         #{emailAddress,jdbcType=VARCHAR},
         #{addressCity,jdbcType=VARCHAR},
@@ -253,16 +190,9 @@
         #{addressState,jdbcType=VARCHAR},
         #{addressStreet,jdbcType=VARCHAR},
         #{streetNumber,jdbcType=VARCHAR},
-        #{commitTime,jdbcType=DATE},
-        #{uniqueId,jdbcType=VARCHAR},
-        #{sourceId,jdbcType=VARCHAR},
         #{comments,jdbcType=VARCHAR},
         #{title,jdbcType=VARCHAR},
-        #{createTime,jdbcType=DATE},
         #{serverOrgName,jdbcType=VARCHAR},
-        #{episodeId,jdbcType=VARCHAR},
-        #{inTime,jdbcType=DATE},
-        #{outTime,jdbcType=DATE},
         #{admissionDepart,jdbcType=VARCHAR},
         #{admissionDoctor,jdbcType=VARCHAR},
         #{admissionType,jdbcType=VARCHAR},
@@ -271,40 +201,44 @@
         #{authorInstitution,jdbcType=VARCHAR},
         #{authorSpecialty,jdbcType=VARCHAR},
         #{authorRole,jdbcType=VARCHAR},
-        #{documentId,jdbcType=VARCHAR},
-        #{parentDocumentRelationship,jdbcType=VARCHAR},
-        #{parentDocumentId,jdbcType=VARCHAR},
-        #{content,jdbcType=CLOB},
-        #{responseId,jdbcType=VARCHAR},
-        #{documentUniqueId,jdbcType=VARCHAR},
-        #{repositoryUniqueId,jdbcType=VARCHAR},
-        #{doumentUrl,jdbcType=VARCHAR},
-        #{mimeType,jdbcType=VARCHAR},
-        #{eventNo,jdbcType=VARCHAR},
+        #{startTime,jdbcType=DATE},
+        #{endTime,jdbcType=DATE},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
     <delete id="deleteByIds" parameterType="java.lang.String">
-        delete from PHIP_EHR_DATA_INFO where ID in
+        delete from PHIP_XMAN_INDEX where ID in
         <foreach collection="array" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
     </delete>
     <delete id="deleteByList" parameterType="java.util.List">
-        delete from PHIP_EHR_DATA_INFO where ID in
+        delete from PHIP_XMAN_INDEX where ID in
         <foreach collection="list" item="item" open="(" separator="," close=")">
             #{item.id}
         </foreach>
     </delete>
     <update id="updateList" parameterType="java.util.List">
         <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
-            update PHIP_EHR_DATA_INFO
+            update PHIP_XMAN_INDEX
             <set>
-                <if test="item.msgId != null">
-                    MSG_ID = #{item.msgId,jdbcType=VARCHAR},
+                <if test="item.areaCode != null">
+                    AREA_CODE = #{item.areaCode,jdbcType=VARCHAR},
                 </if>
-                <if test="item.patientId != null">
-                    PATIENT_ID = #{item.patientId,jdbcType=VARCHAR},
+                <if test="item.xmanId != null">
+                    XMAN_ID = #{item.xmanId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.orgCode != null">
+                    ORG_CODE = #{item.orgCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.orgName != null">
+                    ORG_NAME = #{item.orgName,jdbcType=VARCHAR},
+                </if>
+                <if test="item.eventNo != null">
+                    EVENT_NO = #{item.eventNo,jdbcType=VARCHAR},
+                </if>
+                <if test="item.eventType != null">
+                    EVENT_TYPE = #{item.eventType,jdbcType=VARCHAR},
                 </if>
                 <if test="item.patientName != null">
                     PATIENT_NAME = #{item.patientName,jdbcType=VARCHAR},
@@ -315,14 +249,8 @@
                 <if test="item.idNo != null">
                     ID_NO = #{item.idNo,jdbcType=VARCHAR},
                 </if>
-                <if test="item.orgCode != null">
-                    ORG_CODE = #{item.orgCode,jdbcType=VARCHAR},
-                </if>
-                <if test="item.orgName != null">
-                    ORG_NAME = #{item.orgName,jdbcType=VARCHAR},
-                </if>
-                <if test="item.areaCode != null">
-                    AREA_CODE = #{item.areaCode,jdbcType=VARCHAR},
+                <if test="item.phoneCode != null">
+                    PHONE_CODE = #{item.phoneCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.telNo != null">
                     TEL_NO = #{item.telNo,jdbcType=VARCHAR},
@@ -348,35 +276,14 @@
                 <if test="item.streetNumber != null">
                     STREET_NUMBER = #{item.streetNumber,jdbcType=VARCHAR},
                 </if>
-                <if test="item.commitTime != null">
-                    COMMIT_TIME = #{item.commitTime,jdbcType=DATE},
-                </if>
-                <if test="item.uniqueId != null">
-                    UNIQUE_ID = #{item.uniqueId,jdbcType=VARCHAR},
-                </if>
-                <if test="item.sourceId != null">
-                    SOURCE_ID = #{item.sourceId,jdbcType=VARCHAR},
-                </if>
                 <if test="item.comments != null">
                     COMMENTS = #{item.comments,jdbcType=VARCHAR},
                 </if>
                 <if test="item.title != null">
                     TITLE = #{item.title,jdbcType=VARCHAR},
                 </if>
-                <if test="item.createTime != null">
-                    CREATE_TIME = #{item.createTime,jdbcType=DATE},
-                </if>
                 <if test="item.serverOrgName != null">
                     SERVER_ORG_NAME = #{item.serverOrgName,jdbcType=VARCHAR},
-                </if>
-                <if test="item.episodeId != null">
-                    EPISODE_ID = #{item.episodeId,jdbcType=VARCHAR},
-                </if>
-                <if test="item.inTime != null">
-                    IN_TIME = #{item.inTime,jdbcType=DATE},
-                </if>
-                <if test="item.outTime != null">
-                    OUT_TIME = #{item.outTime,jdbcType=DATE},
                 </if>
                 <if test="item.admissionDepart != null">
                     ADMISSION_DEPART = #{item.admissionDepart,jdbcType=VARCHAR},
@@ -402,35 +309,11 @@
                 <if test="item.authorRole != null">
                     AUTHOR_ROLE = #{item.authorRole,jdbcType=VARCHAR},
                 </if>
-                <if test="item.documentId != null">
-                    DOCUMENT_ID = #{item.documentId,jdbcType=VARCHAR},
+                <if test="item.startTime != null">
+                    START_TIME = #{item.startTime,jdbcType=DATE},
                 </if>
-                <if test="item.parentDocumentRelationship != null">
-                    PARENT_DOCUMENT_RELATIONSHIP = #{item.parentDocumentRelationship,jdbcType=VARCHAR},
-                </if>
-                <if test="item.parentDocumentId != null">
-                    PARENT_DOCUMENT_ID = #{item.parentDocumentId,jdbcType=VARCHAR},
-                </if>
-                <if test="item.content != null">
-                    CONTENT = #{item.content,jdbcType=CLOB},
-                </if>
-                <if test="item.responseId != null">
-                    RESPONSE_ID = #{item.responseId,jdbcType=VARCHAR},
-                </if>
-                <if test="item.documentUniqueId != null">
-                    DOCUMENT_UNIQUE_ID = #{item.documentUniqueId,jdbcType=VARCHAR},
-                </if>
-                <if test="item.repositoryUniqueId != null">
-                    REPOSITORY_UNIQUE_ID = #{item.repositoryUniqueId,jdbcType=VARCHAR},
-                </if>
-                <if test="item.doumentUrl != null">
-                    DOUMENT_URL = #{item.doumentUrl,jdbcType=VARCHAR},
-                </if>
-                <if test="item.mimeType != null">
-                    MIME_TYPE = #{item.mimeType,jdbcType=VARCHAR},
-                </if>
-                <if test="item.eventNo != null">
-                    EVENT_NO = #{item.eventNo,jdbcType=VARCHAR},
+                <if test="item.endTime != null">
+                    END_TIME = #{item.endTime,jdbcType=DATE},
                 </if>
                 MODIFY_AT=sysdate
             </set>
