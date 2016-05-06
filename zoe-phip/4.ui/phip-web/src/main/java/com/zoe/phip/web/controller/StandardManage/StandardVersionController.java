@@ -1,24 +1,111 @@
 package com.zoe.phip.web.controller.StandardManage;
 
 import com.zoe.phip.infrastructure.annotation.AuthAction;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
+import com.zoe.phip.web.context.ComSession;
+import com.zoe.phip.web.context.ServiceFactory;
 import com.zoe.phip.web.controller.BaseController;
+import com.zoe.phip.web.model.sdm.StandardVersion;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by chenzhisen on 2016/5/6.
+ * Created by zhangxingcai on 2016/5/6 0006.
  */
 @Controller
-@RequestMapping("/StandardVersion")
+@RequestMapping("version")
 public class StandardVersionController extends BaseController {
-
-    @RequestMapping("/view/versionList")
-    @AuthAction(permission = {Permission.View}, name = "查看")
-    public String ToStandardVersionList(HttpServletRequest request, Model model) {
-        return "/StandardManage/StandardVersion/versionList";
+    //region 标准版本管理
+    @RequestMapping("view/versionlist")
+    public String ToVersionList() {
+        return "StandardManage/StandardVersion/versionList";
     }
+
+    @RequestMapping("view/versiondetail")
+    public String ToVersionDetail() {
+        return "StandardManage/StandardVersion/versionDetail";
+    }
+
+    /**
+     * 标准版本管理列表查询
+     *
+     * @param keyWord
+     * @return
+     */
+    @RequestMapping(value = "/getVersionList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<StandardVersion>> getVersionList(String keyWord) {
+        return ServiceFactory.getStandardVersionService().getDataPageList(ComSession.getUserInfo(), keyWord, getQueryPage());
+    }
+
+    /**
+     * 标准版本管理信息查询
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/getVersioninfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResult getVersionInfo(String id) {
+        return ServiceFactory.getStandardVersionService().getById(ComSession.getUserInfo(), id);
+    }
+
+    /**
+     * 新增标准版本管理
+     * @param standardVersion
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/addVersionInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Add}, name = "新增")
+    public ServiceResult addVersionInfo(StandardVersion standardVersion, HttpServletRequest request) {
+        return ServiceFactory.getStandardVersionService().add(ComSession.getUserInfo(), standardVersion);
+    }
+
+    /**
+     * 更新标准版本管理
+     * @param standardVersion
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "updateVersionInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Update}, name = "更新")
+    public ServiceResult updateVersionInfo(StandardVersion standardVersion, HttpServletRequest request) {
+        return ServiceFactory.getStandardVersionService().update(ComSession.getUserInfo(), standardVersion);
+    }
+
+    /**
+     * 删除标准版本管理信息
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delVersionInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult delVersionInfo(String id) {
+        return ServiceFactory.getStandardVersionService().deleteById(ComSession.getUserInfo(), id);
+    }
+
+    /**
+     * 批量删除标准管理信息
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/delVersionList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult delVersionList(String ids) {
+        return ServiceFactory.getStandardVersionService().deleteByIds(ComSession.getUserInfo(), ids);
+    }
+    //endregion
 }

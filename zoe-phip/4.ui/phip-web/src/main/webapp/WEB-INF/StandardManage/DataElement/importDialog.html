@@ -1,0 +1,29 @@
+<%
+var styleSection = {
+%>
+<style type="text/css">
+    .uploadlay {
+        position: absolute;
+        border: 1px green solid;
+        width: 268px;
+        height: 22px;
+        opacity: 0;
+        filter: alpha(opacity:0);
+        z-index: 999;
+    }
+</style>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/StandardManage/DataElement/importDialog', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_default.html",{title:"导入数据元",styleSection:styleSection,bodySection:null,scriptSection:scriptSection}){}
+%>

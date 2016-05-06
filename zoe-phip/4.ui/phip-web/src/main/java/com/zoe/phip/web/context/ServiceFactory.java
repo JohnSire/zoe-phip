@@ -4,6 +4,7 @@ import com.zoe.phip.register.service.internal.*;
 import com.zoe.phip.web.bean.BeanFactory;
 import com.zoe.phip.web.bean.Constant;
 import com.zoe.phip.web.service.sm.*;
+import com.zoe.phip.web.service.sdm.*;
 
 /**
  * 服务工厂类
@@ -63,6 +64,19 @@ public final class ServiceFactory {
 
     public static IPatientRegisterIn getPatientRegisterIn() {
         return BeanFactory.getBean(Constant.PATIENT_REGISTER_IN);
+    }
+
+    /*标准管理*/
+    public static IStNormSourceInfoService getStNormSourceService() {
+        return BeanFactory.getBean(Constant.NORM_SOURCE_SERVICE);
+    }
+
+    public static IStElementInfoService getStElementService() {
+        return BeanFactory.getBean(Constant.ST_ELEMENT_SERVICE);
+    }
+
+    public static IStandardVersionService getStandardVersionService() {
+        return BeanFactory.getBean(Constant.STANDARD_VERSION_SERVICE);
     }
 
 }

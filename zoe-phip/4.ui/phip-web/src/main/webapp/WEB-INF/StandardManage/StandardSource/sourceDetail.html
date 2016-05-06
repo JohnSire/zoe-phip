@@ -1,0 +1,73 @@
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-one">
+                    <label class="label"><span class="text-mark">*</span>名称:</label>
+                    <input type="text" class="text-big" name="name" value="" datatype="*1-60" errormsg="名称长度应为1-60位！"/>
+                </p>
+                <p class="column-one">
+                    <label class="label"><span class="text-mark">*</span>标识符:</label>
+                    <input type="text" class="text-big" name="code" value="" datatype="*1-16" errormsg="标识符长度应为1-16位！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label">标准类型:</label>
+                    <select name="standardType" class="select-big">
+                        <option value="-1">--请选择标准分类--</option>
+                        <option value="1">数据元来源</option>
+                        <option value="0">数据集来源</option>
+                    </select>
+                </p>
+                <!--    <p class="column-one">
+                        <label class="label">标准来源:</label>
+                        <select name="standardType" class="select-big">
+                            <option value="0">政府标准</option>
+                            <option value="1">自定义标准</option>
+                        </select>
+                    </p>-->
+            </li>
+            <li class="list" style="display:none;">
+                <p class="column-one">
+                    <label class="label">启用时间:</label>
+                        <span class="text-line-outer">
+                            <input type="text" style="background: aliceblue;" edittype="date"
+                                   class="attr-content required attr-textbox " readonly="" id="txb_st" name="startTime"
+                                   value="">
+                        </span>
+                    <label class="label" style="width:60px;">停用时间:</label>
+                        <span class="text-line-outer">
+                            <input type="text" style="background: aliceblue;" edittype="date"
+                                   class="attr-content required attr-textbox " readonly="" id="txb_et" name="endTime"
+                                   value="">
+                        </span>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label label-textarea">描述:</label>
+                    <textarea rows="3" class="textarea" style="width:382px;" name="descr"></textarea>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/StandardManage/StandardSource/sourceDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"标准来源详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>
