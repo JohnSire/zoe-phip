@@ -24,19 +24,19 @@ public class OrganizationController extends BaseController {
     //region 医疗机构(科室)
     @RequestMapping("/view/medicalorglist")
     public String ToMedicalOrgList() {
-        setAttr("aaaaa","kkkkkkkkkkkkkkkkkkkkkkkk");
+        setAttr("aaaaa", "kkkkkkkkkkkkkkkkkkkkkkkk");
         return "Register/Organization/medicalOrgList";
     }
 
     @RequestMapping("/view/medicalOrgDetail")
     public String ToMedicalOrgDetail() {
-         return "Register/Organization/medicalOrgDetail";
+        return "Register/Organization/medicalOrgDetail";
     }
 
     @RequestMapping("/view/medicalDepartmentList")
     public String ToMedicalDepartmentList() {
         // return "Register/Organization/medicalOrgDetail";
-        setAttr("deptParentCode","yuyuyu");
+        setAttr("deptParentCode", "yuyuyu");
         return "Register/Organization/medicalDepartmentList";
     }
 
@@ -123,17 +123,19 @@ public class OrganizationController extends BaseController {
 
     /**
      * 根据编码获取科室列表
-     * @param type
-     * @param deptTypeCode
-     * @param keyWord
+     *
+     * @param type           0代码全部，1代表具体科室
+     * @param deptTypeCode   科室code
+     * @param deptParentCode 所属机构的代码
+     * @param keyWord        关键
      * @return
      */
     @RequestMapping(value = "/getMedicalDepartmentList")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResult getMedicalDepartmentList(String type, String deptTypeCode, String keyWord,String deptParentCode) {
+    public ServiceResult getMedicalDepartmentList(String type, String deptTypeCode, String keyWord, String deptParentCode) {
 
-        return ServiceFactory.getOrganizationRegisterIn().DepartmentListQuery(ComSession.getUserInfo(), type, deptTypeCode,deptParentCode,keyWord, getQueryPage());
+        return ServiceFactory.getOrganizationRegisterIn().DepartmentListQuery(ComSession.getUserInfo(), type, deptTypeCode, deptParentCode, keyWord, getQueryPage());
 
     }
 
@@ -147,8 +149,6 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/getMedicalOrgCategoryTree")
     @ResponseBody
     public ServiceResultT<NationalStandards> getMedicalOrgCategoryList(String codeSystem) {
-        //codeSystem = "2.16.156.10011.2.3.4.1";
-       // codeSystem="2.16.156.10011.2.3.2.62";
         return ServiceFactory.getOrganizationRegisterIn().dictItemListQueryByCodeSystem(ComSession.getUserInfo(), codeSystem);
     }
 

@@ -5,6 +5,7 @@ define(function (require, exports, module) {
     var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
     var BaseTree = require("{staticDir}/BaseTree/baseTree");
     var internal = {
+        odiCodeConfig: require("{dir}/JsConfig/oidCodeConfig").oidCodeConfig,
         medicalOrgGrid: null,
         init: function () {
             internal.medicalOrgList();
@@ -15,7 +16,7 @@ define(function (require, exports, module) {
                 treeId: 'tree',
                 btnBox: 'treeBtns',
                 url: {
-                    getTreeList: 'organization/getMedicalOrgCategoryTree?codeSystem=2.16.156.10011.2.3.4.1',
+                    getTreeList: 'organization/getMedicalOrgCategoryTree?codeSystem=' + internal.odiCodeConfig.orgClassification,
                 },
                 renderData: function (data) {
                     var treeData = [];
@@ -90,20 +91,20 @@ define(function (require, exports, module) {
                     height: "99%"//$("body").innerHeight() - $("#dictItemTools").outerHeight() - 76//500
                 },
                 dialogParam: {
-                    winName: "win_dict_item_dialog",//弹窗对象变量名称
-                    winCallback: "win_dict_item_callback",//弹窗回调函数
-                    titleKey: "name",
+                    winName: "win_medical_org_detail_dialog",//弹窗对象变量名称
+                    winCallback: "win_medical_org_detail_callback",//弹窗回调函数
+                    titleKey: "deptName",
                     //新增参数
-                    add: {title: "新增医疗机构（科室）信息"},
+                    add: {title: "新增医疗机构信息"},
                     //编辑参数
-                    edit: {title: "编辑医疗机构（科室）信息"},
+                    edit: {title: "编辑医疗机构信息"},
                     common: {
                         otherUrlParam: function () {
                             return {fkSystemDictCategoryId: internal.fkSystemDictCategoryId}
                         },
                         url: 'organization/view/medicalOrgDetail',
                         width: 1000,
-                        height: 450
+                        height: 560
                     }
                 }
             })

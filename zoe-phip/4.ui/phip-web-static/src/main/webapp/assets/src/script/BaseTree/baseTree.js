@@ -9,6 +9,12 @@ define(function (require, exports, module) {
     baseTree.include({
         //生成
         init: function () {
+
+            //todo
+            var bHeight = $("body").innerHeight();
+            var tHeight = bHeight - $(".y-layout-header").outerHeight();
+            $(".y-layout-tree").outerHeight(tHeight);
+
             var self = this;
             self.initParam = $.extend(true, {}, defaultOptions, arguments[0]);
             var options = $.extend(true, {}, defaultOptions, arguments[0]);

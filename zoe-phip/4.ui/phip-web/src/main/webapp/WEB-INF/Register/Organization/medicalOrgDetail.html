@@ -19,26 +19,26 @@ var bodySection = {
                            nullmsg="请填写编码！"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="deptParentName"><span class="text-mark">*</span>上级机构：</label>
-                    <input type="text" name="deptParentName" class="text" datatype="*1-36" errormsg="上级机构长度应为1~36位！"
-                           nullmsg="请填写上级机构！"/>
-                </p>
-            </li>
-            <li class="list">
-                <p class="column-three">
-                    <label class="label" for="employerAddr"><span class="text-mark">*</span>地址：</label>
-                    <input type="text" name="employerAddr" class="text" datatype="*1-256" errormsg="地址长度应为1~256位！"
-                           nullmsg="请填写地址！"/>
-                </p>
-                <p class="column-three">
                     <label class="label" for="employerTelNo"><span class="text-mark">*</span>联系电话：</label>
                     <input type="text" name="employerTelNo" class="text" datatype="*1-128" errormsg="联系电话长度应为1~128位！"
                            nullmsg="请填写联系电话！"/>
                 </p>
+            </li>
+            <li class="list">
                 <p class="column-three">
                     <label class="label" for="deptTypeName"><span class="text-mark">*</span>类别：</label>
-                    <input type="text" name="deptTypeName" class="text" datatype="*1-128" errormsg="类别长度应为1~128位！"
+                    <input type="text" name="deptTypeName" class="text" datatype="*1-128"
+                           errormsg="类别长度应为1~128位！"
                            nullmsg="请填写类别！"/>
+                </p>
+                <p>
+            </li>
+            <li>
+                <p class="column-one">
+                    <label class="label" for="employerAddr"><span class="text-mark">*</span>地址：</label>
+                    <input type="text" name="employerAddr" style="width: 800px;" class="text" datatype="*1-256"
+                           errormsg="地址长度应为1~256位！"
+                           nullmsg="请填写地址！"/>
                 </p>
             </li>
         </ul>
@@ -51,7 +51,8 @@ var bodySection = {
             <li class="list">
                 <p class="column-three">
                     <label class="label" for="chargeInfoPerson"><span class="text-mark">*</span>信息负责人：</label>
-                    <input type="text" name="chargeInfoPerson" class="text" datatype="*1-256" errormsg="信息负责人长度应为1~256位！"
+                    <input type="text" name="chargeInfoPerson" class="text" datatype="*1-256"
+                           errormsg="信息负责人长度应为1~256位！"
                            nullmsg="请填写信息负责人！"/>
                 </p>
                 <p class="column-three">
@@ -61,12 +62,16 @@ var bodySection = {
                 </p>
                 <p class="column-three">
                     <label class="label" for="complaintsHotline"><span class="text-mark">*</span>投诉电话：</label>
-                    <input type="text" name="complaintsHotline" class="text" datatype="*1-256" errormsg="投诉电话长度应为1~256位！"
+                    <input type="text" name="complaintsHotline" class="text" datatype="*1-256"
+                           errormsg="投诉电话长度应为1~256位！"
                            nullmsg="请填写投诉电话！"/>
                 </p>
+            </li>
+            <li>
                 <p class="column-three">
                     <label class="label" for="legalRepresentative"><span class="text-mark">*</span>法人代表：</label>
-                    <input type="text" name="legalRepresentative" class="text" datatype="*1-256" errormsg="法人代表长度应为1~256位！"
+                    <input type="text" name="legalRepresentative" class="text" datatype="*1-256"
+                           errormsg="法人代表长度应为1~256位！"
                            nullmsg="请填写法人代表！"/>
                 </p>
                 <p class="column-three">
@@ -95,41 +100,51 @@ var bodySection = {
                            nullmsg="请填写纬度！"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for=""><span class="text-mark">*</span>地理区划：</label>
-                    <input type="text" name="" class="text" datatype="*1-128" errormsg="长度应为1~128位！"
-                           nullmsg="请填写所属！"/>
-                    <input type="text" name="" class="text" datatype="*1-128" errormsg="长度应为1~128位！"
-                           nullmsg="请填写所属！"/>
-                    <input type="text" name="" class="text" datatype="*1-128" errormsg="长度应为1~128位！"
-                           nullmsg="请填写所属！"/>
-                    <input type="text" name="" class="text" datatype="*1-128" errormsg="长度应为1~128位！"
-                           nullmsg="请填写所属！"/>
-                    <input type="text" name="" class="text" datatype="*1-128" errormsg="长度应为1~128位！"
-                           nullmsg="请填写所属！"/>
-                </p>
+                    <label class="label" for="assignedDeptName"><span class="text-mark">*</span>申请人：</label>
+                    <!--<input type="text" name="assignedDeptName" class="text" datatype="*1-128" errormsg="所属科室长度应为1~128位！"-->
+                    <!--nullmsg="请填写所属科室！"/>-->
+                    <span class="text-line-outer" id="btnParentCatalog">
+                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
 
-
-
-                <p class="column-three">
-                    <label class="label" for="assignedDeptName"><span class="text-mark">*</span>所属科室：</label>
-                    <input type="text" name="assignedDeptName" class="text" datatype="*1-128" errormsg="所属科室长度应为1~128位！"
-                           nullmsg="请填写所属科室！"/>
                 </p>
                 <p class="column-three">
                     <label class="label" for="roleName"><span class="text-mark">*</span>角色名称：</label>
                     <input type="text" name="roleName" class="text" datatype="*1-256" errormsg="角色名称长度应为1~256位！"
                            nullmsg="请填写角色名称！"/>
                 </p>
-                <p class="column-three">
-                    <label class="label" for="roleState"><span class="text-mark">*</span>角色状态：</label>
-                    <input type="text" name="roleState" class="text" atatype="*1-256" errormsg="角色名称长度应为1~256位！"
-                           nullmsg="请填写角色状态！"/>
-                </p>
+                <!--<p class="column-three">-->
+                <!--<label class="label" for="roleState"><span class="text-mark">*</span>角色状态：</label>-->
+                <!--<input type="text" name="roleState" class="text" atatype="*1-256" errormsg="角色名称长度应为1~256位！"-->
+                <!--nullmsg="请填写角色状态！"/>-->
+
+                <div class="column-three">
+                    <label class="label" for="roleState">角色状态：</label>
+                    <!--<input type="text" name="codeSysName" class="text"/>-->
+                    <div class="simulate-select" id="selCodeSysName">
+                        <span class="text">--请选择医保类型--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择医保类型--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="roleState" style="display: none;">
+                        <option value="active">激活</option>
+                    </select>
+
+                </div>
+                <!--</p>-->
             </li>
             <li class="list">
                 <p class="column-three">
                     <label class="label" for="assignedContactPerson"><span class="text-mark">*</span>联系人：</label>
-                    <input type="text" name="assignedContactPerson" class="text" datatype="*1-128" errormsg="联系人长度应为1~128位！"
+                    <input type="text" name="assignedContactPerson" class="text" datatype="*1-128"
+                           errormsg="联系人长度应为1~128位！"
                            nullmsg="请填写联系人！"/>
                 </p>
                 <p class="column-three">
@@ -150,18 +165,7 @@ var bodySection = {
                 </p>
 
             </li>
-            <li class="list">
-                <p class="column-three">
-                    <label class="label" for="assignedCode"><span class="text-mark">*</span>申请人标识：</label>
-                    <input type="text" name="assignedCode" class="text" datatype="*1-128" errormsg="申请人标识长度应为1~128位！"
-                           nullmsg="请填写申请人标识！"/>
-                </p>
-                <p class="column-three">
-                    <label class="label" for="assignedName"><span class="text-mark">*</span>申请人名称：</label>
-                    <input type="text" name="assignedName" class="text" datatype="*1-128" errormsg="申请人名称长度应为1~128位！"
-                           nullmsg="请填写申请人名称！"/>
-                </p>
-            </li>
+
         </ul>
     </div>
 </div>
