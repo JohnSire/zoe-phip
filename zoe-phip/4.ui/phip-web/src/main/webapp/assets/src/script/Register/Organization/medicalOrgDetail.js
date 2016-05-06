@@ -6,9 +6,9 @@ define(function (require, exports, module) {
         init: function () {
             var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
             var baseAttr = new BaseAttr({
-                winName: "win_medical_detail_dialog",//弹窗对象变量名称
-                winCallback: "win_medical_detail_callback",//弹窗回调函数
-                getUrl: '',//
+                winName: "win_medical_org_detail_dialog",//弹窗对象变量名称
+                winCallback: "win_medical_org_detail_callback",//弹窗回调函数
+                getUrl: 'organization/getMedicalOrgInfo',//
                 addUrl: '',//新增接口Url
                 updateUrl: '',//修改接口Url
                 loadPageEvent: function () {

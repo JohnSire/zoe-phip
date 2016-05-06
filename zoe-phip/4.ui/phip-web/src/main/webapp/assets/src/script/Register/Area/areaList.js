@@ -14,7 +14,6 @@ define(function (require, exports, module) {
             }, function (nodeId) {
                 internal.reload(nodeId);
             });
-
         },
         areaList: function () {
             var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
@@ -61,9 +60,6 @@ define(function (require, exports, module) {
                     usePage: true,
                     width: "100%",
                     height: "99%"//$("body").innerHeight() - $("#dictItemTools").outerHeight() - 76//500
-
-                    /*width: $("body").innerWidth() - 2,
-                     height: $("body").innerHeight() - $("#gridTools").outerHeight() - 38//500*/
                 },
                 dialogParam: {
                     winName: "win_area_detail_dialog",//弹窗对象变量名称
@@ -94,8 +90,6 @@ define(function (require, exports, module) {
 
             }
         }
-
-
     };
     window.drillPath = function (nodeId, nodeName) {
         internal.reload(nodeId);

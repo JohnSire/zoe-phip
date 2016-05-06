@@ -14,6 +14,7 @@ define(function (require, exports, module) {
                 addUrl: 'personnel/addXmanInfo',//新增接口Url
                 updateUrl: 'personnel/updateXmanInfo',//修改接口Url
                 loadPageEvent: function () {
+                    //性别
                     $("#selSex").select({
                         name: 'sexCode',
                         display: 'sexCodeName',
@@ -24,6 +25,7 @@ define(function (require, exports, module) {
                         value: 'code',//值
                         text: 'name'//展示的内容
                     });
+                    //婚姻状况
                     $("#selMarriage").select({
                         name: 'marriageCode',
                         display: 'marriageName',
@@ -35,8 +37,9 @@ define(function (require, exports, module) {
                         text: 'name'//展示的内容
 
                     });
-
-                    internal.selectList.dialog('menu', {
+                    //医疗保险
+                    //民族
+                    internal.selectList.dialog('dictItem', {
                         target: $("#btnFkNationality"),
                         name: 'nationalityCode',//绑定value值
                         parentName: 'nationalityName',//绑定name值
@@ -46,6 +49,52 @@ define(function (require, exports, module) {
                             multiselect: false
                         }
                     });
+                    //发卡机构
+                    internal.selectList.dialog('medicalOrg', {
+                        target: $("#btnFkXcOrg"),
+                        name: 'xcOrgCode',
+                        parentName: 'xcOrgName',
+                        displayField: 'deptName',
+                        valueField: 'deptCode',
+                        selectParam: {
+                            multiselect: false
+                        }
+                    });
+                    ////建档组织机构
+                    internal.selectList.dialog('medicalOrg', {
+                        target: $("#btnFkHealthRecordOrg"),
+                        name: 'healthRecordOrgCode',
+                        parentName: 'healthRecordOrgName',
+                        displayField: 'deptName',
+                        valueField: 'deptCode',
+                        selectParam: {
+                            multiselect: false
+                        }
+                    });
+                    //登记机构
+                    internal.selectList.dialog('medicalOrg', {
+                        target: $("#btnFkOrg"),
+                        name: 'orgCode',//绑定value值
+                        parentName: 'orgName',//绑定name值
+                        displayField: 'deptName',
+                        valueField: 'deptCode',
+                        selectParam: {
+                            multiselect: false
+                        }
+                    });
+                    //职业类别
+                    internal.selectList.dialog('dictItem', {
+                        target: $("#btnFkOccupation"),
+                        name: 'occupationCode',//绑定value值
+                        parentName: 'occupationName',//绑定name值
+                        displayField: 'name',
+                        valueField: 'code',
+                        selectParam: {
+                            multiselect: false
+                        }
+                    });
+
+
                 }
             })
         }

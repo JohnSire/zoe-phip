@@ -110,26 +110,33 @@ var bodySection = {
                     <label class="label" for="employerTelNo">工作联系电话：</label>
                     <input type="text" name="employerTelNo" class="text"/>
                 </p>
-                <!--<p class="column-three">-->
-                <!--<label class="label" for="occupationName">职业类别：</label>-->
-                <!--<input type="text" name="occupationName" class="text"/>-->
-                <!--</p>-->
-
-                <div class="column-three">
+                <p class="column-three">
                     <label class="label" for="occupationName">职业类别：</label>
-                    <!--<input type="text" name="codeSysName" class="text"/>-->
-                    <div class="simulate-select" id="selOccupationName">
-                        <span class="text">--请选择职业类别--</span>
-                        <i class="icon-grid icon-grid-fold-gray"></i>
-                        <ul class="simulate-select-lists" style="display:none;">
-                            <li class="simulate-select-list">--请选择职业类别--</li>
-                        </ul>
-                        <div class="clear"></div>
-                    </div>
-                    <select name="occupationName" style="display: none;">
-                    </select>
+                    <!--<input type="text" name="occupationName" class="text"/>-->
+                      <span class="text-line-outer" id="btnFkOccupation">
+                        <input type="text" name="occupationCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="配置"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
+                </p>
 
-                </div>
+                <!--<div class="column-three">-->
+                <!--<label class="label" for="occupationName">职业类别：</label>-->
+                <!--&lt;!&ndash;<input type="text" name="codeSysName" class="text"/>&ndash;&gt;-->
+                <!--<div class="simulate-select" id="selOccupation">-->
+                <!--<span class="text">&#45;&#45;请选择职业类别&#45;&#45;</span>-->
+                <!--<i class="icon-grid icon-grid-fold-gray"></i>-->
+                <!--<ul class="simulate-select-lists" style="display:none;">-->
+                <!--<li class="simulate-select-list">&#45;&#45;请选择职业类别&#45;&#45;</li>-->
+                <!--</ul>-->
+                <!--<div class="clear"></div>-->
+                <!--</div>-->
+                <!--<select name="occupationC" style="display: none;">-->
+                <!--</select>-->
+
+                <!--</div>-->
 
             </li>
             <li class="list">
@@ -156,7 +163,7 @@ var bodySection = {
                     <span class="text-line-outer" id="btnFkHealthRecordOrg">
                         <input type="text" name="healthRecordOrgCode" class="text-line"/>
                         <span class="text-line-setting">
-                            <span class="icon-grid icon-grid-setting" title="建档机构组织代码"></span>
+                            <span class="icon-grid icon-grid-setting" title="建档组织机构机构"></span>
                             <span class="text-line-content"></span>
                         </span>
                     </span>
@@ -199,9 +206,9 @@ var bodySection = {
                     </span>
                 </p>
                 <!--<p class="column-three">-->
-                    <!--<label class="label" for="orgName"><span class="text-mark">*</span>登记机构名称：</label>-->
-                    <!--<input type="text" name="orgName" class="text" datatype="*1-16" errormsg="登记机构名称长度应为1~16位！"-->
-                           <!--nullmsg="请填写登记机构名称！"/>-->
+                <!--<label class="label" for="orgName"><span class="text-mark">*</span>登记机构名称：</label>-->
+                <!--<input type="text" name="orgName" class="text" datatype="*1-16" errormsg="登记机构名称长度应为1~16位！"-->
+                <!--nullmsg="请填写登记机构名称！"/>-->
                 <!--</p>-->
                 <p class="column-three">
                     <label class="label" for="assignedPersonName"><span class="text-mark">*</span>作者人：</label>

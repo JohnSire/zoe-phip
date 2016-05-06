@@ -21,7 +21,7 @@ define(function (require, exports, module) {
 
         //调用
         invoke: function (fnName, options) {
-            internal.options = options;
+            internal.options = $.extend(true, {}, options);
             internal.getFn(fnName, function () {
                 var options = $.extend(true, {}, internal.defaultParam, internal["fn"][fnName], internal.options);
                 var selectParam = $.extend(true, {}, internal["fn"][fnName]["selectParam"], internal.options["selectParam"]);
@@ -57,16 +57,15 @@ define(function (require, exports, module) {
         },
 
         dialog: function (fnName, options) {
-            internal.options = options;
+            options = $.extend(true, {}, options);
+            internal.options = $.extend(true, {}, options);
             var targetObj = options["target"];
+            targetObj.data("options", options);
             var name = options.name;//字典名称
             var pName = options.parentName;//外键对象
-
-
             var displayField = options.displayField;//显示内容
             //初始化绑定值
             $('input[name="' + name + '"]').on("setValue", function (event, argument) {
-                options["selectParam"]["selfId"] = argument["id"];
                 $(targetObj).find("input").val(argument[name]);
                 if (argument[pName]) {
                     $(targetObj).find(".text-line-content").text(argument[pName]);
@@ -76,9 +75,11 @@ define(function (require, exports, module) {
             });
 
             $(targetObj).on("click", function () {
+                var self = this;
                 internal.getFn(fnName, function () {
-                    var options = $.extend(true, {}, internal.defaultParam, internal["fn"][fnName], internal.options);
-                    var selectParam = $.extend(true, {}, internal["fn"][fnName]["selectParam"], internal.options["selectParam"]);
+                    var options = $(self).data("options");
+                    options = $.extend(true, {}, internal.defaultParam, internal["fn"][fnName], options);
+                    var selectParam = $.extend(true, {}, internal["fn"][fnName]["selectParam"], options["selectParam"]);
                     selectParam["stroage"] = function () {
                         var data = [];
                         var value = $('input[name="' + name + '"]').val();
@@ -124,7 +125,6 @@ define(function (require, exports, module) {
                                         internal.top.common.jsmsgError(emptyMsg);
                                     }
                                 };
-
                                 var data = internal.top[options["selectParam"]["winCallback"]]();
                                 bindData(data)
                             }

@@ -16,6 +16,7 @@ define(function (require, exports, module) {
             internal.multiselect = options["multiselect"];//是否多选
             internal.displayField = options["displayField"];
             internal.valueField = options["valueField"];
+            //alert(internal.valueField);
             internal.storage = options["stroage"];
             internal.isTreeVaild = options["isTreeVaild"];
             internal.selfId = options["selfId"];
