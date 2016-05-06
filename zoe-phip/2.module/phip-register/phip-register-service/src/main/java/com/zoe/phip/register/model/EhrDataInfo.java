@@ -6,8 +6,8 @@
 package com.zoe.phip.register.model;
 
 import javax.persistence.*;
-
 import com.zoe.phip.module.service.entity.MasterEntity;
+import java.util.Date;
 
 
 /**
@@ -68,27 +68,27 @@ public class EhrDataInfo extends MasterEntity {
     @Column(name = "EMAIL_ADDRESS")
     private String emailAddress;
     /**
-     * 工作地址-市（地区）
+     * 工作地址-省（自治区、直辖市）
      */
     @Column(name = "ADDRESS_CITY")
     private String addressCity;
     /**
-     * 邮政编码--国家
+     * 工作地址-市（地区）
      */
     @Column(name = "ADDRESS_COUNTRY")
     private String addressCountry;
     /**
-     * 工作地址-邮编
+     * 工作地址-县（区）
      */
     @Column(name = "ADDRESS_POSTAL")
     private String addressPostal;
     /**
-     * 工作地址-省（自治区、直辖市）
+     * 工作地址-乡（镇、街道办事处）
      */
     @Column(name = "ADDRESS_STATE")
     private String addressState;
     /**
-     * 工作地址-乡（镇、街道办事处）
+     * 工作地址-村（街、路、弄等）
      */
     @Column(name = "ADDRESS_STREET")
     private String addressStreet;
@@ -101,7 +101,7 @@ public class EhrDataInfo extends MasterEntity {
      * 提交时间
      */
     @Column(name = "COMMIT_TIME")
-    private java.sql.Date commitTime;
+    private Date commitTime;
     /**
      * 共享文档注册唯一标识符(可以是提交时生成，也可以为空.)
      */
@@ -126,7 +126,7 @@ public class EhrDataInfo extends MasterEntity {
      * 创建时间
      */
     @Column(name = "CREATE_TIME")
-    private java.sql.Date createTime;
+    private Date createTime;
     /**
      * 服务机构名称
      */
@@ -141,12 +141,12 @@ public class EhrDataInfo extends MasterEntity {
      * 活动服务开始时间(y)
      */
     @Column(name = "IN_TIME")
-    private java.sql.Date inTime;
+    private Date inTime;
     /**
      * 活动服务结束时间(y)
      */
     @Column(name = "OUT_TIME")
-    private java.sql.Date outTime;
+    private Date outTime;
     /**
      * 负责人所属科室名称
      */
@@ -382,12 +382,12 @@ public class EhrDataInfo extends MasterEntity {
         this.streetNumber = streetNumber;
     }
 
-    public java.sql.Date getCommitTime() {
+    public Date getCommitTime() {
         return this.commitTime;
     }
 
 
-    public void setCommitTime(java.sql.Date commitTime) {
+    public void setCommitTime(Date commitTime) {
         this.commitTime = commitTime;
     }
 
@@ -427,12 +427,12 @@ public class EhrDataInfo extends MasterEntity {
         this.title = title;
     }
 
-    public java.sql.Date getCreateTime() {
+    public Date getCreateTime() {
         return this.createTime;
     }
 
 
-    public void setCreateTime(java.sql.Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
@@ -454,21 +454,21 @@ public class EhrDataInfo extends MasterEntity {
         this.episodeId = episodeId;
     }
 
-    public java.sql.Date getInTime() {
+    public Date getInTime() {
         return this.inTime;
     }
 
 
-    public void setInTime(java.sql.Date inTime) {
+    public void setInTime(Date inTime) {
         this.inTime = inTime;
     }
 
-    public java.sql.Date getOutTime() {
+    public Date getOutTime() {
         return this.outTime;
     }
 
 
-    public void setOutTime(java.sql.Date outTime) {
+    public void setOutTime(Date outTime) {
         this.outTime = outTime;
     }
 

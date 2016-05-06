@@ -2,12 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IXmanBaseInfoMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.XmanBaseInfo" extends="BaseResultMap">
+        <result column="ORG_NAME" property="orgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="XC_CARD_CODE" property="cardCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="SEX_CODE_NAME" property="sexCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="NATIONALITY_NAME" property="nationalityName" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="OCCUPATION_NAME" property="occupationName" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="MARRIAGE_NAME" property="marriageName" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="CODE_SYS_NAME" property="codeSysName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="XC_ORG_CODE" property="xcOrgCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="XC_ORG_NAME" property="xcOrgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="HEALTH_RECORD_ORG_NAME" property="healthRecordOrgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.XmanBaseInfo">
         update PHIP_XMAN_BASE_INFO
@@ -155,7 +159,8 @@
     </select>
     <sql id="patientSelect">
         SELECT P.*,S.NAME AS SEX_CODE_NAME,N.NAME AS NATIONALITY_NAME,O.NAME AS OCCUPATION_NAME,
-        M.NAME AS MARRIAGE_NAME,C.NAME AS CODE_SYS_NAME,X.XC_CARD_CODE
+        M.NAME AS MARRIAGE_NAME,C.NAME AS CODE_SYS_NAME,X.XC_CARD_CODE,O.DEPT_NAME AS ORG_NAME,
+        R.DEPT_NAME AS HEALTH_RECORD_ORG_NAME,X.XC_ORG_CODE,XC.DEPT_NAME AS XC_ORG_NAME
         FROM PHIP_XMAN_BASE_INFO P
         LEFT JOIN (
         <include refid="oidSelect">
@@ -183,11 +188,24 @@
         </include>
         ) C ON P.CODE_SYS_CODE=C.CODE
         LEFT JOIN PHIP_XMAN_CARD X ON P.ID=X.XC_XMAN_ID --医疗保险类别
+        LEFT JOIN (
+         <include refid="deptSelect"/>
+        ) O ON P.ORG_CODE=O.DEPT_CODE
+        LEFT JOIN (
+        <include refid="deptSelect"/>
+        ) R ON P.HEALTH_RECORD_ORG_CODE=R.DEPT_CODE
+        LEFT JOIN (
+        <include refid="deptSelect"/>
+        ) XC ON X.XC_ORG_CODE=XC.DEPT_CODE
     </sql>
     <sql id="oidSelect">
         SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
         JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
         JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
         WHERE PNS.CODE_SYSTEM = '${oidValue}'
+    </sql>
+    <sql id="deptSelect">
+         SELECT DEPT_CODE,DEPT_NAME FROM PHIP_ORG_DEPT_INFO
+         WHERE DIVISION_ROOT = '2.16.156.10011.1.5'
     </sql>
 </mapper>

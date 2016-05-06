@@ -16,6 +16,7 @@ import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
 import org.dom4j.Document;
+import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,6 @@ public class PatientRegisterImpl implements IPatientRegister {
     private static final Logger logger = LoggerFactory.getLogger(PatientRegisterImpl.class);
 
     private final String adapterPath = "/template/patient/input/adapter/PatientRegisterAdapter.xml";
-    private final String cardAdapterPath = "/template/patient/input/adapter/XmanCardAdapter.xml";
 
     @Autowired
     private PatientRegisterInImpl patientRegisterIn;
@@ -76,9 +76,10 @@ public class PatientRegisterImpl implements IPatientRegister {
             if (strResult.contains("error:数据集内容验证错误")) {
                 return registerFailed(baseInfo, strResult);
             }
-            Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardAdapterPath));
-            XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class, cardParDoc);
-
+            XmanCard xmanCard = new XmanCard();
+            xmanCard.setXcCardCode(baseInfo.getCardCode());
+            xmanCard.setXcOrgCode(baseInfo.getXcOrgCode());
+            xmanCard.setHealthRecordNo(baseInfo.getHealthRecordNo());
             XmanBaseInfo result = patientRegisterIn.addPatientRegistry(baseInfo, xmanCard);
 
             acknowledgement.setTypeCode("AA");
@@ -120,10 +121,12 @@ public class PatientRegisterImpl implements IPatientRegister {
                 return updateFailed(baseInfo, strResult);
             }
 
-            Document cardParDoc = reader.read(this.getClass().getResourceAsStream(cardAdapterPath));
-            XmanCard xmanCard = XmlBeanUtil.toBean(document, XmanCard.class, cardParDoc);
-
+            XmanCard xmanCard = new XmanCard();
+            xmanCard.setXcCardCode(baseInfo.getCardCode());
+            xmanCard.setXcOrgCode(baseInfo.getXcOrgCode());
+            xmanCard.setHealthRecordNo(baseInfo.getHealthRecordNo());
             XmanBaseInfo result = patientRegisterIn.updatePatientRegistry(baseInfo, xmanCard);
+
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("更新成功");
             baseInfo.setAcknowledgement(acknowledgement);

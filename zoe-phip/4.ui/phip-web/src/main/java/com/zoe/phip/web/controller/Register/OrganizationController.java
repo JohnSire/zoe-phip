@@ -24,12 +24,20 @@ public class OrganizationController extends BaseController {
     //region 医疗机构(科室)
     @RequestMapping("/view/medicalorglist")
     public String ToMedicalOrgList() {
+        setAttr("aaaaa","kkkkkkkkkkkkkkkkkkkkkkkk");
         return "Register/Organization/medicalOrgList";
     }
 
     @RequestMapping("/view/medicalOrgDetail")
     public String ToMedicalOrgDetail() {
-        return "Register/Organization/medicalOrgDetail";
+         return "Register/Organization/medicalOrgDetail";
+    }
+
+    @RequestMapping("/view/medicalDepartmentList")
+    public String ToMedicalDepartmentList() {
+        // return "Register/Organization/medicalOrgDetail";
+        setAttr("deptParentCode","yuyuyu");
+        return "Register/Organization/medicalDepartmentList";
     }
 
     /**
@@ -98,7 +106,7 @@ public class OrganizationController extends BaseController {
     }
 
     /**
-     * 根据机构（科室）编码获取机构列表
+     * 根据机构编码获取机构列表
      *
      * @param keyWord
      * @param deptTypeCode
@@ -114,7 +122,24 @@ public class OrganizationController extends BaseController {
     }
 
     /**
-     * 获取机构（科室）分类列表 分类树
+     * 根据编码获取科室列表
+     * @param type
+     * @param deptTypeCode
+     * @param keyWord
+     * @return
+     */
+    @RequestMapping(value = "/getMedicalDepartmentList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResult getMedicalDepartmentList(String type, String deptTypeCode, String keyWord,String deptParentCode) {
+
+        return ServiceFactory.getOrganizationRegisterIn().DepartmentListQuery(ComSession.getUserInfo(), type, deptTypeCode,deptParentCode,keyWord, getQueryPage());
+
+    }
+
+
+    /**
+     * 获取机构分类列表 分类树
      *
      * @return
      */
@@ -122,7 +147,8 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/getMedicalOrgCategoryTree")
     @ResponseBody
     public ServiceResultT<NationalStandards> getMedicalOrgCategoryList(String codeSystem) {
-        codeSystem = "2.16.156.10011.2.3.4.1";
+        //codeSystem = "2.16.156.10011.2.3.4.1";
+       // codeSystem="2.16.156.10011.2.3.2.62";
         return ServiceFactory.getOrganizationRegisterIn().dictItemListQueryByCodeSystem(ComSession.getUserInfo(), codeSystem);
     }
 

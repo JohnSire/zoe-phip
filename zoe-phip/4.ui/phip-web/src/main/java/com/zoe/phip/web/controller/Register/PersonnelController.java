@@ -163,9 +163,6 @@ public class PersonnelController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<OrgDeptInfo>> getMedDept(String keyWord) {
-        if (StringUtil.isNullOrWhiteSpace(keyWord)) {
-            keyWord = "0101";
-        }
         return ServiceFactory.getOrganizationRegisterIn().orgListQuery(ComSession.getUserInfo());
     }
 

@@ -15,7 +15,7 @@ define(function (require, exports, module) {
                 treeId: 'tree',
                 btnBox: 'treeBtns',
                 url: {
-                    getTreeList: 'organization/getMedicalOrgCategoryTree',
+                    getTreeList: 'organization/getMedicalOrgCategoryTree?codeSystem=2.16.156.10011.2.3.4.1',
                 },
                 renderData: function (data) {
                     var treeData = [];
@@ -78,8 +78,8 @@ define(function (require, exports, module) {
                         {display: '联系电话', name: 'employerTelNo', width: 200, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']},
                         {
-                            display: 'fff', isSort: false, width: 120, align: 'center', render: function () {
-                            return "<a onclick='javascript:winEditGridRow()'>fdsfsdf</a>"
+                            display: '编辑科室', isSort: false, width: 120, align: 'center', render: function () {
+                            return "<a onclick='javascript:winEditGridRow()'>编辑科室</a>"
                         }
                         }
 
@@ -108,13 +108,6 @@ define(function (require, exports, module) {
                 }
             })
         }
-    };
-    window.winEditGridRow = function () {
-        common.dialog({
-            url: 'organization/view/medicalOrgDetail',
-            width: 1000,
-            height: 450
-        })
     };
     exports.init = function () {
         internal.init();

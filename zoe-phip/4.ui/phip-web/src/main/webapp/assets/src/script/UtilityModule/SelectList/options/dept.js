@@ -11,10 +11,10 @@ define(function (require, exports, module) {
                 displayField: 'name',
                 valueField: 'id',
                 gridParam: {
-                    url: webRoot + 'personnel/getMedStfList',
+                    url: webRoot + 'personnel/getMedDeptList',
                     columns: [
-                        {display: '科室代码', name: 'code', width: 150, align: 'left'},
-                        {display: '科室名称', name: 'name', width: 150, align: 'left'}
+                        {display: '科室代码', name: 'affiliatedOrgCode', width: 150, align: 'left'},
+                        {display: '科室名称', name: 'affiliatedOrgName', width: 150, align: 'left'}
                     ],
                     usePager: true,
                     height: 250

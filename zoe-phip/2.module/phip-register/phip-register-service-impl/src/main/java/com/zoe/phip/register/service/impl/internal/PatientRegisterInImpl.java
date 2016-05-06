@@ -66,7 +66,7 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
 
     public XmanBaseInfo addPatientRegistry(XmanBaseInfo xmanBaseInfo) throws Exception {
         XmanCard xmanCard = new XmanCard();
-        xmanCard.setXcOrgCode(xmanBaseInfo.getOrgCode());
+        xmanCard.setXcOrgCode(xmanBaseInfo.getXcOrgCode());
         xmanCard.setXcCardCode(xmanBaseInfo.getCardCode());
         xmanCard.setHealthRecordNo(xmanBaseInfo.getHealthRecordNo());
         return addPatientRegistry(xmanBaseInfo, xmanCard);
@@ -91,6 +91,7 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
             XmanCard card = cardMapper.getXmanCard(xmanBaseInfo.getId());
             if (card != null) {
                 card.setXcCardCode(xmanCard.getXcCardCode());
+                card.setXcOrgCode(xmanCard.getXcOrgCode());
                 card.setHealthRecordNo(xmanCard.getHealthRecordNo());
                 cardMapper.updateByPrimaryKeySelective(card);
             }
@@ -101,6 +102,7 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
     public XmanBaseInfo updatePatientRegistry(XmanBaseInfo xmanBaseInfo) throws Exception {
         XmanCard xmanCard = new XmanCard();
         xmanCard.setXcCardCode(xmanBaseInfo.getCardCode());
+        xmanCard.setXcOrgCode(xmanBaseInfo.getXcOrgCode());
         xmanCard.setHealthRecordNo(xmanBaseInfo.getHealthRecordNo());
         return updatePatientRegistry(xmanBaseInfo, xmanCard);
     }
