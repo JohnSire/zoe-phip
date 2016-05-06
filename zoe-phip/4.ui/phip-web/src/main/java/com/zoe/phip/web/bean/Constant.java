@@ -21,4 +21,7 @@ public final class Constant {
     public static final String ORGANIZATION_REGISTER_IN = "OrganizationRegisterIn";
     public static final String PATIENT_REGISTER_IN = "PatientRegisterIn";
 
+    /*标准管理*/
+    public static final String NORM_SOURCE_SERVICE="StNormSourceInfoService";
+    public static final String ST_ELEMENT_SERVICE="StElementInfoService";
 }
