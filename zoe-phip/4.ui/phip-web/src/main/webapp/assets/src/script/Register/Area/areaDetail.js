@@ -12,6 +12,9 @@ define(function (require, exports, module) {
                 getUrl: 'area/getAreaInfo',//
                 addUrl: 'area/addAreaInfo',//新增接口Url
                 updateUrl: 'area/updateAreaInfo',//修改接口Url
+                dialogParam: {
+                    otherUrlParam: ['pid']
+                },
                 loadPageEvent: function () {
                     $(".btn-switch-outer").btnSwitch({name: 'state'});
                     internal.selectList.dialog('area', {

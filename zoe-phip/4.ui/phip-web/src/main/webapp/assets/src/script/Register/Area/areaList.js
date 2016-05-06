@@ -3,12 +3,22 @@
  */
 define(function (require, exports, module) {
     var internal = {
+        areaGrid: null,
         path: require("./path").path,
+        nodeId: null,
         selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
-            internal.path.init();
+            internal.areaList();
+            internal.path.init(function (nodeId) {
+                internal.reload(nodeId);
+            }, function (nodeId) {
+                internal.reload(nodeId);
+            });
+
+        },
+        areaList: function () {
             var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
-            var baseGrid = new BaseGrid({
+            internal.areaGrid = new BaseGrid({
                 gridId: 'grid',
                 deleteUrl: {
                     deleteInfo: "area/delAreaInfo",
@@ -23,14 +33,20 @@ define(function (require, exports, module) {
                         {label: '关键字', name: 'keyWord', type: 'text'}
                     ]
                 },
+                dataAction: "local",
                 extendParam: function () {
-                    return {id: "86"};
+                    return {pid: internal.nodeId};
                 },
                 gridParam: {
-                    url: 'area/getAreaList',
+                    url: 'area/getAreaListByPid',
                     columns: [
                         {display: '代码', name: 'code', width: 160, align: 'left'},
-                        {display: '名称', name: 'name', width: 180, align: 'left'},
+                        {
+                            display: '名称', name: 'name', width: 180, align: 'left',
+                            render: function (item) {
+                                return "<a style='text-decoration:underline' onclick='javascript:drillPath(\"" + item["id"] + "\",\"" + item["name"] + "\")'>" + item["name"] + "</a>";
+                            }
+                        },
                         {
                             display: '成立时间',
                             name: 'buildTime',
@@ -41,15 +57,11 @@ define(function (require, exports, module) {
                         },
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
-                    usePager: false,
-                    height: "100%",
-                    heightDiff: 29,
-                    tree: {
-                        columnId: 'id',
-                        columnName: 'name',
-                        idField: 'id',
-                        parentIDField: 'pid'
-                    }
+                    frozen: false,
+                    usePage: true,
+                    width: "100%",
+                    height: "99%"//$("body").innerHeight() - $("#dictItemTools").outerHeight() - 76//500
+
                     /*width: $("body").innerWidth() - 2,
                      height: $("body").innerHeight() - $("#gridTools").outerHeight() - 38//500*/
                 },
@@ -62,15 +74,34 @@ define(function (require, exports, module) {
                     //编辑参数
                     edit: {title: "编辑行政区划"},
                     common: {
+                        otherUrlParam: function () {
+                            return {pid: internal.nodeId}
+                        },
                         url: 'area/view/areadetail',
                         width: 680,
                         height: 450
                     }
                 }
             })
+        },
+        reload: function (nodeId) {
+            internal.nodeId = nodeId;
+            var itemGrid = liger.get("grid");
+            if (itemGrid.get("dataAction") == "local") {
+                internal.areaGrid.setServer();
+            } else {
+                internal.areaGrid.reload();
+
+            }
         }
 
 
+    };
+    window.drillPath = function (nodeId, nodeName) {
+        internal.reload(nodeId);
+        internal.path.addNode({id: nodeId, name: nodeName}, function (nodeId) {
+            internal.reload(nodeId);
+        })
     };
     exports.init = function () {
         internal.init();
