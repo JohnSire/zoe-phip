@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <Id descr="健康档案ID" path="//HealthCardId"/>
+    <IndexId descr="事件ID" path=""/>
+    <XmanId descr="个人主索引" path="//SourcePatientID"/>
+    <OrgCode descr="机构组织机构代码" path="//Organization/@id"/>
+    <PatientId descr="患者ID" path="//SourcePatientID"/>
+    <EventNo descr="事件号" path="//RegistryPackage/SubmissionSet/EpisodeID"/>
+    <EventType descr="事件类型" path=""/>
+    <CatalogCode descr="居民健康档案编码" path="//HealthCardId"/>
+    <Content descr="档案数据" path="//Document/Content"/>
+    <FlowType descr="流程类型" path=""/>
+</root>
