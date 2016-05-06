@@ -57,7 +57,7 @@ public class XmanEhrContent extends MasterEntity {
      * 档案数据
      */
     @Column(name = "CONTENT")
-    private java.sql.Clob content;
+    private String content;
     /**
      * 流程类型（0：归档流程，1：即时调用，3：档案注册）
      */
@@ -127,12 +127,12 @@ public class XmanEhrContent extends MasterEntity {
         this.catalogCode = catalogCode;
     }
 
-    public java.sql.Clob getContent() {
+    public String getContent() {
         return this.content;
     }
 
 
-    public void setContent(java.sql.Clob content) {
+    public void setContent(String content) {
         this.content = content;
     }
 

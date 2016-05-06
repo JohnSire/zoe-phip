@@ -24,7 +24,6 @@ public class OrganizationController extends BaseController {
     //region 医疗机构(科室)
     @RequestMapping("/view/medicalorglist")
     public String ToMedicalOrgList() {
-        setAttr("aaaaa", "kkkkkkkkkkkkkkkkkkkkkkkk");
         return "Register/Organization/medicalOrgList";
     }
 
@@ -123,7 +122,7 @@ public class OrganizationController extends BaseController {
     /**
      * 根据编码获取科室列表
      *
-     * @param type           0代码全部�代表具体科室
+     * @param type           0代码全部�代表具体科室
      * @param deptTypeCode   科室code
      * @param deptParentCode 所属机构的代码
      * @param keyWord        关键
@@ -140,7 +139,7 @@ public class OrganizationController extends BaseController {
 
 
     /**
-     * 获取机构分类列表 分类�
+     * 获取机构分类列表 分类�
      *
      * @return
      */

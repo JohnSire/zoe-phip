@@ -2,7 +2,6 @@ package com.zoe.phip.register.util;
 
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.infrastructure.util.XmlUtil;
-import com.zoe.phip.register.model.EhrDataInfo;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.io.SAXReader;
@@ -68,12 +67,10 @@ public class ProcessXmlUtilTest {
         Document document = ProcessXmlUtil.load(xml);
         String errorMsg = "";
         String adapterPath = "/template/ehr/input/adapter/EhrRegisterAdapter.xml";
-        EhrDataInfo baseInfo = null;
 
             SAXReader reader = new SAXReader();
             //XmanBaseInfo
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapterPath));
-            baseInfo = XmlBeanUtil.toBean(document, EhrDataInfo.class, parserDoc);
 
 
 

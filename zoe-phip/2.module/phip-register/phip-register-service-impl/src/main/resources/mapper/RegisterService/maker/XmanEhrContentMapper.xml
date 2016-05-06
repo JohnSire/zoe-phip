@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zoe.phip.register.IXmanEhrContentMapper">
+<mapper namespace="com.zoe.phip.register.dao.IXmanEhrContentMapper">
     <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.XmanEhrContent"
                extends="com.zoe.phip.module.service.MasterEntityResultMap">
         <result column="INDEX_ID" property="indexId" javaType="java.lang.String"
@@ -18,7 +18,7 @@
         <result column="CATALOG_CODE" property="catalogCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="CONTENT" property="content" javaType="java.sql.Clob"
-                jdbcType="CLOB"/>
+                jdbcType="CLOB" typeHandler="com.zoe.phip.module.service.support.OracleClobTypeHandler"/>
         <result column="FLOW_TYPE" property="flowType" javaType="java.math.BigDecimal"
                 jdbcType="DECIMAL"/>
     </resultMap>
