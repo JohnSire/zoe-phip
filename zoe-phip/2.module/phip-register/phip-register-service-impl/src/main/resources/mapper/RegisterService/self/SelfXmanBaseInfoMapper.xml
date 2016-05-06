@@ -29,7 +29,7 @@
                 NAME = #{name,jdbcType=VARCHAR},
             </if>
             <if test="sexCode != null">
-                SEX_CODE = #{sexCode,jdbcType=DECIMAL},
+                SEX_CODE = #{sexCode,jdbcType=VARCHAR},
             </if>
             <if test="birthDate != null">
                 BIRTH_DATE = #{birthDate,jdbcType=TIMESTAMP},
@@ -74,7 +74,7 @@
                 POSTAL_CODE = #{postalCode,jdbcType=VARCHAR},
             </if>
             <if test="nationalityCode != null">
-                NATIONALITY_CODE = #{nationalityCode,jdbcType=DECIMAL},
+                NATIONALITY_CODE = #{nationalityCode,jdbcType=VARCHAR},
             </if>
             <if test="aboCode != null">
                 ABO_CODE = #{aboCode,jdbcType=DECIMAL},
@@ -89,7 +89,7 @@
                 OCCUPATION_CODE = #{occupationCode,jdbcType=VARCHAR},
             </if>
             <if test="marriageCode != null">
-                MARRIAGE_CODE = #{marriageCode,jdbcType=DECIMAL},
+                MARRIAGE_CODE = #{marriageCode,jdbcType=VARCHAR},
             </if>
             <if test="codeSysCode != null">
                 CODE_SYS_CODE = #{codeSysCode,jdbcType=VARCHAR},

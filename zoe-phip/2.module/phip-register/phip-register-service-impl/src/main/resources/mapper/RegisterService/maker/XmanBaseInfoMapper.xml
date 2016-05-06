@@ -9,8 +9,8 @@
                 jdbcType="VARCHAR"/>
         <result column="NAME" property="name" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="SEX_CODE" property="sexCode" javaType="java.lang.Integer"
-                jdbcType="INTEGER"/>
+        <result column="SEX_CODE" property="sexCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
         <result column="BIRTH_DATE" property="birthDate" javaType="java.sql.Timestamp"
                 jdbcType="TIMESTAMP"/>
         <result column="ID_TYPE_CODE" property="idTypeCode" javaType="java.lang.Integer"
@@ -39,8 +39,8 @@
                 jdbcType="VARCHAR"/>
         <result column="POSTAL_CODE" property="postalCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="NATIONALITY_CODE" property="nationalityCode" javaType="java.lang.Integer"
-                jdbcType="INTEGER"/>
+        <result column="NATIONALITY_CODE" property="nationalityCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
         <result column="ABO_CODE" property="aboCode" javaType="java.lang.Integer"
                 jdbcType="INTEGER"/>
         <result column="RH_CODE" property="rhCode" javaType="java.lang.Integer"
@@ -49,8 +49,8 @@
                 jdbcType="INTEGER"/>
         <result column="OCCUPATION_CODE" property="occupationCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="MARRIAGE_CODE" property="marriageCode" javaType="java.lang.Integer"
-                jdbcType="INTEGER"/>
+        <result column="MARRIAGE_CODE" property="marriageCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
         <result column="CODE_SYS_CODE" property="codeSysCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="ASSIGNED_PERSON_CODE" property="assignedPersonCode" javaType="java.lang.String"
@@ -257,7 +257,7 @@
                     NAME = #{item.name,jdbcType=VARCHAR},
                 </if>
                 <if test="item.sexCode != null">
-                    SEX_CODE = #{item.sexCode,jdbcType=INTEGER},
+                    SEX_CODE = #{item.sexCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.birthDate != null">
                     BIRTH_DATE = #{item.birthDate,jdbcType=TIMESTAMP},
@@ -302,7 +302,7 @@
                     POSTAL_CODE = #{item.postalCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.nationalityCode != null">
-                    NATIONALITY_CODE = #{item.nationalityCode,jdbcType=INTEGER},
+                    NATIONALITY_CODE = #{item.nationalityCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.aboCode != null">
                     ABO_CODE = #{item.aboCode,jdbcType=INTEGER},
@@ -317,7 +317,7 @@
                     OCCUPATION_CODE = #{item.occupationCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.marriageCode != null">
-                    MARRIAGE_CODE = #{item.marriageCode,jdbcType=INTEGER},
+                    MARRIAGE_CODE = #{item.marriageCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.codeSysCode != null">
                     CODE_SYS_CODE = #{item.codeSysCode,jdbcType=VARCHAR},

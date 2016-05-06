@@ -53,7 +53,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 性别代码
      */
     @Column(name = "SEX_CODE")
-    private Integer sexCode;
+    private String sexCode;
 
     /**
      * 性别名称
@@ -159,7 +159,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 民族代码
      */
     @Column(name = "NATIONALITY_CODE")
-    private Integer nationalityCode;
+    private String nationalityCode;
 
     /**
      * 民族名称
@@ -216,7 +216,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 婚姻状况代码
      */
     @Column(name = "MARRIAGE_CODE")
-    private Integer marriageCode;
+    private String marriageCode;
 
     /**
      * 婚姻状况名称
@@ -358,12 +358,12 @@ public class XmanBaseInfo extends RegisterEntity {
         this.name = name;
     }
 
-    public Integer getSexCode() {
+    public String getSexCode() {
         return this.sexCode;
     }
 
 
-    public void setSexCode(Integer sexCode) {
+    public void setSexCode(String sexCode) {
         this.sexCode = sexCode;
     }
 
@@ -493,12 +493,12 @@ public class XmanBaseInfo extends RegisterEntity {
         this.postalCode = postalCode;
     }
 
-    public Integer getNationalityCode() {
+    public String getNationalityCode() {
         return this.nationalityCode;
     }
 
 
-    public void setNationalityCode(Integer nationalityCode) {
+    public void setNationalityCode(String nationalityCode) {
         this.nationalityCode = nationalityCode;
     }
 
@@ -546,12 +546,12 @@ public class XmanBaseInfo extends RegisterEntity {
         this.occupationCode = occupationCode;
     }
 
-    public Integer getMarriageCode() {
+    public String getMarriageCode() {
         return this.marriageCode;
     }
 
 
-    public void setMarriageCode(Integer marriageCode) {
+    public void setMarriageCode(String marriageCode) {
         this.marriageCode = marriageCode;
     }
 
