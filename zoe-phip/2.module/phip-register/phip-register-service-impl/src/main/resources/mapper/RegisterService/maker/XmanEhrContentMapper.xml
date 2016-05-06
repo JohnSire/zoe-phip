@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.register.IXmanEhrContentMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.XmanEhrContent"
+               extends="com.zoe.phip.module.service.MasterEntityResultMap">
+        <result column="INDEX_ID" property="indexId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="XMAN_ID" property="xmanId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ORG_CODE" property="orgCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="PATIENT_ID" property="patientId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="EVENT_NO" property="eventNo" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="EVENT_TYPE" property="eventType" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="CATALOG_CODE" property="catalogCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="CONTENT" property="content" javaType="java.sql.Clob"
+                jdbcType="CLOB"/>
+        <result column="FLOW_TYPE" property="flowType" javaType="java.math.BigDecimal"
+                jdbcType="DECIMAL"/>
+    </resultMap>
+    <insert id="addList" parameterType="java.util.List">
+        INSERT INTO PHIP_XMAN_EHR_CONTENT (
+        INDEX_ID,
+        XMAN_ID,
+        ORG_CODE,
+        PATIENT_ID,
+        EVENT_NO,
+        EVENT_TYPE,
+        CATALOG_CODE,
+        CONTENT,
+        FLOW_TYPE,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+            SELECT
+            #{item.indexId,jdbcType=VARCHAR},
+            #{item.xmanId,jdbcType=VARCHAR},
+            #{item.orgCode,jdbcType=VARCHAR},
+            #{item.patientId,jdbcType=VARCHAR},
+            #{item.eventNo,jdbcType=VARCHAR},
+            #{item.eventType,jdbcType=VARCHAR},
+            #{item.catalogCode,jdbcType=VARCHAR},
+            #{item.content,jdbcType=CLOB},
+            #{item.flowType,jdbcType=DECIMAL},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
+            FROM DUAL
+        </foreach>
+    </insert>
+    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.XmanEhrContent">
+        INSERT INTO PHIP_XMAN_EHR_CONTENT (
+        INDEX_ID,
+        XMAN_ID,
+        ORG_CODE,
+        PATIENT_ID,
+        EVENT_NO,
+        EVENT_TYPE,
+        CATALOG_CODE,
+        CONTENT,
+        FLOW_TYPE,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES(
+        #{indexId,jdbcType=VARCHAR},
+        #{xmanId,jdbcType=VARCHAR},
+        #{orgCode,jdbcType=VARCHAR},
+        #{patientId,jdbcType=VARCHAR},
+        #{eventNo,jdbcType=VARCHAR},
+        #{eventType,jdbcType=VARCHAR},
+        #{catalogCode,jdbcType=VARCHAR},
+        #{content,jdbcType=CLOB},
+        #{flowType,jdbcType=DECIMAL},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
+    <delete id="deleteByIds" parameterType="java.lang.String">
+        delete from PHIP_XMAN_EHR_CONTENT where ID in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <delete id="deleteByList" parameterType="java.util.List">
+        delete from PHIP_XMAN_EHR_CONTENT where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
+            update PHIP_XMAN_EHR_CONTENT
+            <set>
+                <if test="item.indexId != null">
+                    INDEX_ID = #{item.indexId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.xmanId != null">
+                    XMAN_ID = #{item.xmanId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.orgCode != null">
+                    ORG_CODE = #{item.orgCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.patientId != null">
+                    PATIENT_ID = #{item.patientId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.eventNo != null">
+                    EVENT_NO = #{item.eventNo,jdbcType=VARCHAR},
+                </if>
+                <if test="item.eventType != null">
+                    EVENT_TYPE = #{item.eventType,jdbcType=VARCHAR},
+                </if>
+                <if test="item.catalogCode != null">
+                    CATALOG_CODE = #{item.catalogCode,jdbcType=VARCHAR},
+                </if>
+                <if test="item.content != null">
+                    CONTENT = #{item.content,jdbcType=CLOB},
+                </if>
+                <if test="item.flowType != null">
+                    FLOW_TYPE = #{item.flowType,jdbcType=DECIMAL},
+                </if>
+                MODIFY_AT=sysdate
+            </set>
+            where id = #{item.id};
+        </foreach>
+    </update>
+
+</mapper>
