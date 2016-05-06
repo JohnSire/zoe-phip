@@ -4,8 +4,8 @@
 
 define(function (require, exports, module) {
     var internal = {
+        selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
-            window.toColumnList=toColumnList;
             var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
@@ -15,6 +15,20 @@ define(function (require, exports, module) {
                 },
                 tools: {
                     btnbox: {
+                        'custom': {
+                            text: "返回 CDA列表", click: function () {
+
+                                var top = common.getTopWindowDom();
+                                var link=webRoot+"cda/view/cdaList";
+                                top. frames["mainframe"].location.href = link;
+                            }
+
+
+
+                        },
+
+
+
                         'add': true,
                         'del': true
                     },
@@ -26,18 +40,12 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: 'personnel/getXmanList',
                     columns: [
-                        {display: '编码', name: 'cardCode', width: 120, align: 'left'},
-                        {display: '名称', name: 'name', width: 120, align: 'left'},
-                        {display: '标准来源名称', name: 'sexCodeName', width: 120, align: 'left'},
-                        {display: '描述', name: 'idNo', width: 120, align: 'left'},
-                        {display: '关联字段',  width: 120,render:function(rowdata, rowindex, value){
-                            var h = "";
-                            h += "<a class='icon-grid icon-grid-setting' title='配置'"
-                            + " onclick='javascript:toColumnList(\"" + rowdata.id + "\",\"" + rowdata.name + "\")'></a>";;
+                        {display: '数据集标识', name: 'cardCode', width: 120, align: 'left'},
+                        {display: '数据集名称', name: 'name', width: 120, align: 'left'},
+                        {display: '描述', name: 'sexCodeName', width: 120, align: 'left'},
 
-                            return h;
-                        }},
-                        {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
+
+                        {display: '操作', isSort: false, width: 120, icons: [ 'del']}
                     ],
                     usePage: true,
                     width: $("body").innerWidth() - 2,
@@ -52,22 +60,18 @@ define(function (require, exports, module) {
                     //编辑参数
                     edit: {title: "编辑数据集"},
                     common: {
-                        url: 'dataSet/view/dataSetDetail',
+                        url: '#',
                         width: 680,
                         height: 350
                     }
                 }
             })
+            var name=decodeURI(common.getParamFromUrl("cdaName"));
+            var html="<p style='margin-top: 9px; '>"+"当前列表为CDA（"+name+"）下的数据集</p>"
+            $("#gridTools").append(html)
         }
 
     };
-    function toColumnList(id,name){
-        var top = common.getTopWindowDom();
-        var link=webRoot+"dataSet/view/columnList?dataSetName="+name;
-        top. frames["mainframe"].location.href = link;
-
-    }
-
     exports.init = function () {
         internal.init();
     }

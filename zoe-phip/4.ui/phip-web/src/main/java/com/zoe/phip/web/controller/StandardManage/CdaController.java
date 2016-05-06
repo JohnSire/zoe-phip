@@ -22,8 +22,15 @@ public class CdaController extends BaseController {
         return "/StandardManage/cda/cdaList";
     }
 
+    @RequestMapping("/view/dataSetList")
+    @AuthAction(permission = {Permission.View}, name = "查看")
+    public String ToDataSetList(HttpServletRequest request, Model model) {
+        return "/StandardManage/cda/dataSetList";
+    }
+
     @RequestMapping("/view/cdaDetail")
     public String ToDataSetDetail(HttpServletRequest request, Model model) {
+
         return "/StandardManage/cda/cdaDetail";
     }
 }

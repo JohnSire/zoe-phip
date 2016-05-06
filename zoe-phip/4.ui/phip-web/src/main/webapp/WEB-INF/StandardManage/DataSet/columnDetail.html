@@ -1,0 +1,123 @@
+
+<%
+var bodySection = {
+
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="pid">数据元：</label>
+                        <span class="text-line-outer" id="btnParentCatalog">
+                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
+                </p>
+
+            </li>
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
+                    <input type="text" name="code" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"
+                           nullmsg="请填写编码！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="codeSystem"><span class="text-mark">*</span>代码：</label>
+                    <input type="text" name="codeSystem" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
+                           nullmsg="请填写代码！"/>
+                </p>
+            </li>
+
+            <li class="list">
+                <div class="column-two">
+                    <label class="label" for="sexCode">字段类型：</label>
+                    <div class="simulate-select" id="selSex">
+                        <span class="text">--请选择字段类型--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择字段类型--</li>
+                            <li value="VARCHAR2" class="simulate-select-list">VARCHAR2</li>
+                            <li value="NVARCHAR2" class="simulate-select-list">NVARCHAR2</li>
+                            <li value="NUMBER" class="simulate-select-list">NUMBER</li>
+                            <li value="CHAR" class="simulate-select-list">CHAR</li>
+                            <li value="DATE" class="simulate-select-list">DATE</li>
+                            <li value="BLOB" class="simulate-select-list">BLOB</li>
+                            <li value="CLOB" class="simulate-select-list">CLOB</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="sexCode" style="display: none;">
+                        <option value="VARCHAR2">VARCHAR2</option>
+                        <option value="NVARCHAR2">NVARCHAR2</option>
+                        <option value="NUMBER">NUMBER</option>
+                        <option value="CHAR">CHAR</option>
+                        <option value="DATE">DATE</option>
+                        <option value="BLOB">BLOB</option>
+                        <option value="CLOB">CLOB</option>
+                    </select>
+                </div>
+                <p class="column-two">
+                    <label class="label" for="codeSystem">字段长度：</label>
+                    <input type="text" name="codeSystem" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
+                           nullmsg="请填写代码！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="userState">是否主键：</label>
+                    <a class="btn-switch-outer">
+                            <span class="btn-switch btn-switch-on">
+                                <b class="btn-switch-inner"></b>
+                            </span>
+                    </a>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="userState">是否为空：</label>
+                    <a class="btn-switch-outer">
+                            <span class="btn-switch btn-switch-on">
+                                <b class="btn-switch-inner"></b>
+                            </span>
+                    </a>
+                </p>
+            </li>
+            <li class="list">
+
+                <p class="column-one">
+                    <label class="label" for="pid">参照字典：</label>
+                        <span class="text-line-outer" id="btnParentCatalog">
+                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label label-textarea">备注：</label>
+                    <textarea rows="3" class="textarea" style="width:505px;height:60px;" name="descr"></textarea>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/StandardManage/DataSet/columnDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"字段详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

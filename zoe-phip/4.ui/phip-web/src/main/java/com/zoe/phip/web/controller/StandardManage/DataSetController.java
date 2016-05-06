@@ -26,4 +26,15 @@ public class DataSetController extends BaseController {
     public String ToDataSetDetail(HttpServletRequest request, Model model) {
         return "/StandardManage/DataSet/dataSetDetail";
     }
+
+    @RequestMapping("/view/columnList")
+    @AuthAction(permission = {Permission.View}, name = "查看")
+    public String ToColumnList(HttpServletRequest request, Model model) {
+        return "/StandardManage/DataSet/columnList";
+    }
+
+    @RequestMapping("/view/columnDetail")
+    public String ToColumnDetail(HttpServletRequest request, Model model) {
+        return "/StandardManage/DataSet/columnDetail";
+    }
 }

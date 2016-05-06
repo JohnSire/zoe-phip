@@ -5,7 +5,6 @@
 define(function (require, exports, module) {
     var internal = {
         init: function () {
-            window.toColumnList=toColumnList;
             var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
@@ -15,6 +14,14 @@ define(function (require, exports, module) {
                 },
                 tools: {
                     btnbox: {
+                        'custom': {
+                            text: "返回 数据集列表", click: function () {
+
+                                var top = common.getTopWindowDom();
+                                var link=webRoot+"dataSet/view/dataSetList";
+                                top. frames["mainframe"].location.href = link;
+                            }
+                        },
                         'add': true,
                         'del': true
                     },
@@ -26,17 +33,14 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: 'personnel/getXmanList',
                     columns: [
-                        {display: '编码', name: 'cardCode', width: 120, align: 'left'},
-                        {display: '名称', name: 'name', width: 120, align: 'left'},
-                        {display: '标准来源名称', name: 'sexCodeName', width: 120, align: 'left'},
-                        {display: '描述', name: 'idNo', width: 120, align: 'left'},
-                        {display: '关联字段',  width: 120,render:function(rowdata, rowindex, value){
-                            var h = "";
-                            h += "<a class='icon-grid icon-grid-setting' title='配置'"
-                            + " onclick='javascript:toColumnList(\"" + rowdata.id + "\",\"" + rowdata.name + "\")'></a>";;
+                        {display: '名称', name: 'cardCode', width: 120, align: 'left'},
+                        {display: '字段编码', name: 'name', width: 120, align: 'left'},
+                        {display: '数据元', name: 'sexCodeName', width: 120, align: 'left'},
+                        {display: '参照字典', name: 'idNo', width: 120, align: 'left'},
+                        {display: '字段类型', name: 'idNo', width: 120, align: 'left'},
+                        {display: '为空', name: 'idNo', width: 120, align: 'left'},
+                        {display: '定义', name: 'idNo', width: 120, align: 'left'},
 
-                            return h;
-                        }},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,
@@ -48,26 +52,22 @@ define(function (require, exports, module) {
                     winCallback: "win_xmanbase_detail_callback",//弹窗回调函数
                     titleKey: "name",
                     //新增参数
-                    add: {title: "新增数据集"},
+                    add: {title: "新增字段"},
                     //编辑参数
-                    edit: {title: "编辑数据集"},
+                    edit: {title: "编辑字段"},
                     common: {
-                        url: 'dataSet/view/dataSetDetail',
+                        url: 'dataSet/view/columnDetail',
                         width: 680,
-                        height: 350
+                        height: 450
                     }
                 }
             })
+            var name=decodeURI(common.getParamFromUrl("dataSetName"));
+            var html="<p style='margin-top: 9px; '>"+"当前列表为数据集（"+name+"）下的字段</p>"
+            $("#gridTools").append(html)
         }
 
     };
-    function toColumnList(id,name){
-        var top = common.getTopWindowDom();
-        var link=webRoot+"dataSet/view/columnList?dataSetName="+name;
-        top. frames["mainframe"].location.href = link;
-
-    }
-
     exports.init = function () {
         internal.init();
     }

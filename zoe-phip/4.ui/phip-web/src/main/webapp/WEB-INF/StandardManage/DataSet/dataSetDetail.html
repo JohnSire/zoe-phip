@@ -1,97 +1,65 @@
-<%
-var styleSection = {
-%>
-<style>
-    .y-dialog-tabs-wrapper .list {border:0;font-weight:normal;height:auto;line-height:auto;}
-    .y-dialog-form .list {text-align:left;}
-    .y-dialog-form .text-big {width:532px;}
-    .y-dialog-form .select-big {width:540px;}
-</style>
-<%};%>
+
 <%
 var bodySection = {
+
 %>
-<div class="y-dialog-tabs">
-    <ul class="lists">
-        <li class="list active"><a class="link">基本信息</a></li>
-        <li class="list" style="display: none"><a class="link">字段关联</a></li>
-        <li class="list" style="display: none"><a class="link">数据集子集</a></li>
-    </ul>
-    <div class="y-dialog-tabs-wrapper">
-        <!--基本信息-->
-        <div class="y-dialog-tabs-content" style="display:block;">
-            <div class="y-dialog-tabs-inner">
-                <div class="y-dialog-form" style="margin:25px 0 0 10px;height:345px;">
+<div class="y-dialog-content">
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
+                    <input type="text" name="code" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"
+                           nullmsg="请填写编码！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="codeSystem"><span class="text-mark">*</span>代码：</label>
+                    <input type="text" name="codeSystem" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
+                           nullmsg="请填写代码！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="pid">业务时间列：</label>
+                        <span class="text-line-outer" id="btnParentCatalog">
+                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="pid">数据更新时间列：</label>
+                        <span class="text-line-outer" id="btnParentCatalog">
+                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
+                </p>
+            </li>
 
-                    <ul class="y-dialog-lists clearfix">
-                        <li class="list">
-                            <p class="column-one">
-                                <label class="label"><span class="text-mark">*</span>名称:</label>
-                                <input type="text" class="text-big" name="SetName" value="" datatype="*1-60" errormsg="名称长度应为1-60位！" />
-                            </p>
-                            <p class="column-one">
-                                <label class="label"><span class="text-mark">*</span>编码:</label>
-                                <input type="text" class="text-big" name="SetCode" value="" datatype="*1-30" errormsg="编码长度应为1-30位！" />
-                            </p>
-                        </li>
-                        <li class="list" style="display:none;">
-                            <p class="column-two">
-                                <label class="label">启用时间:</label>
-                                    <span class="text-line-outer" style="width:157px;">
-                                        <input type="text" style="background: aliceblue; " class="attr-content required attr-textbox" readonly="readonly" id="txb_st" name="EneableAt" value="" edittype="date">
-                                    </span>
-                            </p>
-                            <p class="column-two">
-                                <label class="label">停用时间:</label>
-                                    <span class="text-line-outer" style="width:157px;">
-                                        <input type="text" style="background: aliceblue;" class="attr-content required attr-textbox" readonly="readonly" id="txb_et" name="DisableAt" value="" edittype="date">
-                                    </span>
-                            </p>
-                        </li>
-                        <li class="list">
-                            <p class="column-one">
-                                <label class="label">业务时间列:</label>
-                                <select id="FkColumnId" name="FkColumnId" class="select-big"></select>
-                            </p>
-                            <p class="column-one">
-                                <label class="label">数据更新时间列:</label>
-                                <select id="FkDataColumnId" name="FkDataColumnId" class="select-big"></select>
-                            </p>
-                            <p class="column-one">
-                                <label class="label">父级数据集:</label>
-                                <select id="sel_parentSet" name="Pid" class="select-big">
-                                    <option value="">--请选择数据集--</option>
-                                </select>
-                            </p>
-                        </li>
-                        <li class="list">
-                            <p class="column-one">
-                                <label class="label label-textarea">描述:</label>
-                                <textarea rows="3" class="textarea" style="width:532px;height:120px;" name="Descr"></textarea>
-                            </p>
-                        </li>
-                    </ul>
-
-                </div>
-                <input type="hidden" id="hid_setId" value="@Request["id"]">
-            </div>
-        </div>
-        <!--字段关联-->
-        <div class="y-dialog-tabs-content">
-            <input id="btn_rsSetElement" style="display:none;margin:10px 0 0 20px;" type="button" class="btn btn-add" value="新增"/>
-            <div class="y-dialog-tabs-inner">
-                <div id="grid_rsSetElement" class="y-dialog-tabs-ligerUI noborder" style="width:100%;height:390px;">
-                </div>
-            </div>
-        </div>
-        <!--数据集子集-->
-        <div class="y-dialog-tabs-content">
-            <div class="y-dialog-tabs-inner">
-                <div id="grid_setChildren" class="y-dialog-tabs-ligerUI noborder" style="width:100%;height:390px;">
-                </div>
-            </div>
-        </div>
-        <!--数据集子集-->
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="pid">父级数据集：</label>
+                        <span class="text-line-outer" id="btnParentCatalog">
+                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label label-textarea">备注：</label>
+                    <textarea rows="3" class="textarea" style="width:505px;height:60px;" name="descr"></textarea>
+                </p>
+            </li>
+        </ul>
     </div>
 </div>
 <%};%>

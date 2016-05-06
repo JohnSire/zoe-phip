@@ -5,6 +5,7 @@
 define(function (require, exports, module) {
     var internal = {
         init: function () {
+            window.toDataSetList=toDataSetList;
             var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
@@ -29,7 +30,13 @@ define(function (require, exports, module) {
                         {display: '名称', name: 'name', width: 120, align: 'left'},
                         {display: '档案类别', name: 'sexCodeName', width: 120, align: 'left'},
                         {display: '描述', name: 'idNo', width: 120, align: 'left'},
+                        {display: '关联数据集',  width: 120,render:function(rowdata, rowindex, value){
+                            var h = "";
+                            h += "<a class='icon-grid icon-grid-setting' title='配置'"
+                            + " onclick='javascript:toDataSetList(\"" + rowdata.id + "\",\"" + rowdata.name + "\")'></a>";;
 
+                            return h;
+                        }},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,
@@ -53,7 +60,13 @@ define(function (require, exports, module) {
             })
         }
 
+
     };
+function toDataSetList(id,name){
+    var top = common.getTopWindowDom();
+    var link=webRoot+"cda/view/dataSetList?cdaName="+name;
+    top. frames["mainframe"].location.href = link;
+}
     exports.init = function () {
         internal.init();
     }
