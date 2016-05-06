@@ -46,20 +46,13 @@
         </if>
     </select>
     <select id="getDataPageList" resultType="com.zoe.phip.web.model.sdm.StandardVersion">
-        SELECT PSV.*,PSCI.NAME
-        FROM PHIP_STANDARD_VERSION PSV,
-        PHIP_STANDARD_VER_RS_CDA PSVRC,
-        PHIP_STANDARD_VER_RS_SET PSVRS,
-        PHIP_STANDARD_VER_RS_FIELD PSVRF,
-        PHIP_STANDARD_VER_RS_DICT PSVRD,
-        PHIP_ST_CDA_INFO PSCI,
-        PHIP_ST_SET_INFO PSSI,
-        PHIP_ST_RS_SET_ELEMENT_INFO PSRSEI,
-        PHIP_NATIONAL_STANDARDS PNS
-        WHERE 1=1 AND PSV.ID=PSVRC.FK_VERSION_ID
+        SELECT *
+        FROM PHIP_STANDARD_VERSION PSV
+        WHERE 1=1
+        <if test="_parameter.containsKey('key')">
+            AND UPPER (CONCAT(PSV.CODE,PSV.NAME) ) LIKE UPPER (CONCAT(CONCAT('%', #{key, jdbcType=VARCHAR}),'%'))
+        </if>
     </select>
 
-    <insert id="versionStandardStruct" parameterType="java.util.List">
 
-    </insert>
 </mapper>
