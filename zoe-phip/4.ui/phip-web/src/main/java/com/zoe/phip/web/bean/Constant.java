@@ -24,4 +24,5 @@ public final class Constant {
     /*标准管理*/
     public static final String NORM_SOURCE_SERVICE="StNormSourceInfoService";
     public static final String ST_ELEMENT_SERVICE="StElementInfoService";
+    public static final String STANDARD_VERSION_SERVICE="IStandardVersionService";
 }

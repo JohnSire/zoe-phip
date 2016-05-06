@@ -1,0 +1,25 @@
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content" id="main">
+    <div class="y-layout-sidebar y-layout-tree">
+        <ul id="tree"></ul>
+    </div>
+    <div id="columnGrid" class="y-layout-main">
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/StandardManage/StandardVersion/versionDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"版本管理-版本预览",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

@@ -6,14 +6,14 @@ define(function (require, exports, module) {
             init: function () {
                 var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
                 var baseAttr = new BaseAttr({
-                        winName: "win_source_detail_dialog",//弹窗对象变量名称
-                        winCallback: "win_source_detail_callback",//弹窗回调函数
-                        getUrl: 'source/getSourceInfo',//
-                        addUrl: 'source/addSourceInfo',//新增接口Url
-                        updateUrl: 'source/dupdateSourceInfo',//修改接口Url/修改的接口Url
+                        winName: "win_version_detail_dialog",//弹窗对象变量名称
+                        winCallback: "win_version_detail_callback",//弹窗回调函数
+                        getUrl: 'version/getVersionInfo',//
+                        addUrl: 'version/addVersionInfo',//新增接口Url
+                        updateUrl: 'version/updateVersionInfo',//修改接口Url/修改的接口Url
                         loadPageEvent: function () {
-                        }
 
+                        }
                     }
                 );
             },

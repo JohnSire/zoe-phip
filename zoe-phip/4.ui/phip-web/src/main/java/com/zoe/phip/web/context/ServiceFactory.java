@@ -75,4 +75,8 @@ public final class ServiceFactory {
         return BeanFactory.getBean(Constant.ST_ELEMENT_SERVICE);
     }
 
+    public static IStandardVersionService getStandardVersionService() {
+        return BeanFactory.getBean(Constant.STANDARD_VERSION_SERVICE);
+    }
+
 }

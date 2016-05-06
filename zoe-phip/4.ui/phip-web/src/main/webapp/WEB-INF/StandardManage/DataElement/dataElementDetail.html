@@ -7,39 +7,39 @@ var bodySection = {
             <li class="list">
                 <p class="column">
                     <label class="label"><span class="text-mark">*</span>名称：</label>
-                    <input type="text" class="text-middle" name="Name" value="" datatype="*1-124"
+                    <input type="text" class="text-middle" name="name" value="" datatype="*1-124"
                            errormsg="名称长度应为1-124位！" style="width:352px"/>
                 </p>
                 <p class="column">
                     <label class="label"><span class="text-mark">*</span>编码：</label>
-                    <input type="text" class="text-middle" name="Code" value="" datatype="*1-60" errormsg="编码长度应为1-60位！"
+                    <input type="text" class="text-middle" name="code" value="" datatype="*1-60" errormsg="编码长度应为1-60位！"
                            style="width:352px"/>
                 </p>
             </li>
             <li class="list">
                 <p class="column">
                     <label class="label">标准来源：</label>
-                    <select name="FkSourceId" class="select-middle" id="FkSourceId" style="width:358px"></select>
+                    <select name="fkSourceId" class="select-middle" id="fkSourceId" style="width:358px"></select>
                 </p>
                 <p class="column">
                     <label class="label">分类：</label>
-                    <select name="FkTypeId" class="select-middle" id="FkTypeId" style="width:358px"></select>
+                    <select name="fkTypeId" class="select-middle" id="fkTypeId" style="width:358px"></select>
                 </p>
             </li>
             <li class="list">
                 <p class="column">
                     <label class="label">数据类型：</label>
-                    <input type="text" class="text-middle" name="DataType" value="" style="width:352px"/>
+                    <input type="text" class="text-middle" name="dataType" value="" style="width:352px"/>
                 </p>
                 <p class="column">
                     <label class="label">表示格式：</label>
-                    <input type="text" class="text-middle" name="DataFormat" value="" style="width:352px"/>
+                    <input type="text" class="text-middle" name="dataFormat" value="" style="width:352px"/>
                 </p>
             </li>
             <li class="list">
                 <p class="column">
                     <label class="label">值域：</label>
-                    <input type="text" class="text-middle" name="FkDictId" id="dictId" readonly="readonly" value=""
+                    <input type="text" class="text-middle" name="dictCode" id="dictCode" readonly="readonly" value=""
                            style="display:none"/>
                     <input type="text" class="text-middle" id="dictName" readonly="readonly" value=""/>
                     <input type="button" id="chooseDict" class="btn-dialog-gray" value="选择值域"/>
@@ -48,7 +48,7 @@ var bodySection = {
             <li class="list">
                 <p class="column">
                     <label class="label label-textarea">定义：</label>
-                    <textarea rows="3" class="textarea" style="width:357px;" name="Define"
+                    <textarea rows="3" class="textarea" style="width:357px;" name="define"
                               datatype="*2-128" errormsg="定义长度应为2-128位！"></textarea>
                 </p>
             </li>

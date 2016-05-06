@@ -7,42 +7,42 @@ var bodySection = {
             <li class="list">
                 <p class="column-one">
                     <label class="label"><span class="text-mark">*</span>名称:</label>
-                    <input type="text" class="text-big" name="Name" value="" datatype="*1-60" errormsg="名称长度应为1-60位！"/>
+                    <input type="text" class="text-big" name="name" value="" datatype="*1-60" errormsg="名称长度应为1-60位！"/>
                 </p>
                 <p class="column-one">
                     <label class="label"><span class="text-mark">*</span>标识符:</label>
-                    <input type="text" class="text-big" name="Code" value="" datatype="*1-16" errormsg="标识符长度应为1-16位！"/>
+                    <input type="text" class="text-big" name="code" value="" datatype="*1-16" errormsg="标识符长度应为1-16位！"/>
                 </p>
             </li>
             <li class="list">
                 <p class="column-one">
                     <label class="label">标准类型:</label>
-                    <select name="StandardType" class="select-big">
+                    <select name="standardType" class="select-big">
                         <option value="-1">--请选择标准分类--</option>
                         <option value="1">数据元来源</option>
                         <option value="0">数据集来源</option>
                     </select>
                 </p>
-                <p class="column-one">
-                    <label class="label">标准来源:</label>
-                    <select name="SubType" class="select-big">
-                        <option value="0">政府标准</option>
-                        <option value="1">自定义标准</option>
-                    </select>
-                </p>
+                <!--    <p class="column-one">
+                        <label class="label">标准来源:</label>
+                        <select name="standardType" class="select-big">
+                            <option value="0">政府标准</option>
+                            <option value="1">自定义标准</option>
+                        </select>
+                    </p>-->
             </li>
             <li class="list" style="display:none;">
                 <p class="column-one">
                     <label class="label">启用时间:</label>
                         <span class="text-line-outer">
                             <input type="text" style="background: aliceblue;" edittype="date"
-                                   class="attr-content required attr-textbox " readonly="" id="txb_st" name="StartTime"
+                                   class="attr-content required attr-textbox " readonly="" id="txb_st" name="startTime"
                                    value="">
                         </span>
                     <label class="label" style="width:60px;">停用时间:</label>
                         <span class="text-line-outer">
                             <input type="text" style="background: aliceblue;" edittype="date"
-                                   class="attr-content required attr-textbox " readonly="" id="txb_et" name="EndTime"
+                                   class="attr-content required attr-textbox " readonly="" id="txb_et" name="endTime"
                                    value="">
                         </span>
                 </p>
@@ -50,7 +50,7 @@ var bodySection = {
             <li class="list">
                 <p class="column-one">
                     <label class="label label-textarea">描述:</label>
-                    <textarea rows="3" class="textarea" style="width:382px;" name="Descr"></textarea>
+                    <textarea rows="3" class="textarea" style="width:382px;" name="descr"></textarea>
                 </p>
             </li>
         </ul>

@@ -7,8 +7,8 @@ define(function (require, exports, module) {
             var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
             var baseGrid = new BaseGrid({
                 deleteUrl: {
-                    deleteInfo: "",
-                    deleteList: ""
+                    deleteInfo: "element/delElementInfo",
+                    deleteList: "element/delElementList"
                 },
                 tools: {
                     btnbox: {
@@ -22,14 +22,14 @@ define(function (require, exports, module) {
                     ]
                 },
                 gridParam: {
-                    url: "",
+                    url: "element/getElementList",
                     columns: [
-                        {display: '编码', name: 'Code', align: 'left'},
-                        {display: '名称', name: 'Name', align: 'left'},
-                        {display: '标准来源', name: 'SourceName', align: 'left'},
-                        {display: '分类', name: 'TypeName', align: 'left'},
-                        {display: '值域', name: 'DictName', align: 'left'},
-                        {display: '定义', name: 'Define'},
+                        {display: '编码', name: 'code', align: 'left'},
+                        {display: '名称', name: 'name', align: 'left'},
+                        {display: '标准来源', name: 'sourceName', align: 'left'},
+                        {display: '分类', name: 'typeName', align: 'left'},
+                        {display: '值域', name: 'dictName', align: 'left'},
+                        {display: '定义', name: 'define'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,

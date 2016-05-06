@@ -7,8 +7,8 @@ define(function (require, exports, module) {
             var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
             var baseGrid = new BaseGrid({
                 deleteUrl: {
-                    deleteInfo: "Source/SourceDel",
-                    deleteList: "Source/SourceDeleteList"
+                    deleteInfo: "source/delSourceInfo",
+                    deleteList: "source/delSourceList"
                 },
                 tools: {
                     btnbox: {
@@ -20,14 +20,14 @@ define(function (require, exports, module) {
                     ]
                 },
                 gridParam: {
-                    url: webRoot + "Source/GetSourceListJson",
+                    url: "source/getSourceList",
                     columns: [
-                        {display: '标准来源标识', name: 'Code', align: 'left'},
-                        {display: '标准来源名称', name: 'Name', align: 'left'},
+                        {display: '标准来源标识', name: 'code', align: 'left'},
+                        {display: '标准来源名称', name: 'name', align: 'left'},
                         {
-                            display: '来源类型', name: 'StandardType', align: 'left',
+                            display: '来源类型', name: 'standardType', align: 'left',
                             render: function (rowdata, rowindex, value) {
-                                switch (rowdata.StandardType) {
+                                switch (rowdata.standardType) {
                                     case -1:
                                         return "";
                                     case 1:
@@ -37,7 +37,7 @@ define(function (require, exports, module) {
                                 }
                             }
                         },
-                        {display: '描述', name: 'Descr', width: '20%', align: 'left'},
+                        {display: '描述', name: 'descr', width: '20%', align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,
@@ -50,9 +50,9 @@ define(function (require, exports, module) {
                     winCallback: "win_source_detail_callback",//弹窗回调函数
                     titleKey: "name",
                     //新增参数
-                    add: {title: "新增字典分类"},
+                    add: {title: "新增标准来源"},
                     //编辑参数
-                    edit: {title: "编辑字典分类"},
+                    edit: {title: "编辑标准来源"},
                     common: {
                         url: 'source/view/sourcedetail',
                         width: 560,
