@@ -12,15 +12,36 @@ define(function (require, exports, module) {
                 getUrl: 'dict/getDictItemInfoById',//
                 addUrl: 'dict/addDictItemInfo',//新增接口Url
                 updateUrl: 'dict/updateDictItemInfo',//修改接口Url
+                dialogParam: {
+                    otherUrlParam: ['fkCatalogName', 'fkCatalogId', 'fkCatalogType'],
+                },
                 loadPageEvent: function () {
                     internal.selectList.dialog('dict', {
                         target: $("#btnParentCatalog"),
+
+
                         name: 'fkCatalogId',
                         parentName: 'fkCatalogName',
                         valueField: 'id',
                         displayField: 'name',
                         selectParam: {
-                            multiselect: false
+                            multiselect: false,
+                            storage: function () {
+                                var data = [];
+                                var fkCatalogId = common.getParamFromUrl("fkCatalogId");
+                                var fkCatalogName = common.getParamFromUrl("fkCatalogName");
+                                var fkCatalogType = common.getParamFromUrl("fkCatalogType");
+                                //alert(fkCatalogType);
+
+                                if (fkCatalogId && fkCatalogId != "null" && fkCatalogType == 1) {
+                                    var info = {
+                                        fkCatalogId: fkCatalogId,
+                                        fkCatalogName: decodeURIComponent(fkCatalogName)
+                                    };
+                                    data.push(info);
+                                }
+                                return data;
+                            }(),
                         }
                     });
                 }

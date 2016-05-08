@@ -1,4 +1,4 @@
-﻿<%
+<%
 var scriptSection={
 %>
 <script type="text/javascript">
@@ -6,6 +6,6 @@ var scriptSection={
     top.location.href = webRoot + "/frame/login";
 </script>
 <%};%>
-include("/WEB-INF/shared/_default.html",{baseTitle:"skip",baseStyleSection:null,baseBodySection:bodySection,baseScriptSection:scriptSection}){}
+<%
+include("/WEB-INF/shared/_default.html",{baseTitle:"skip",baseStyleSection:null,baseBodySection:null,baseScriptSection:scriptSection}){}
 %>
-

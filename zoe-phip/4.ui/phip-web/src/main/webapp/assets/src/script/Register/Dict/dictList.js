@@ -8,6 +8,9 @@ define(function (require, exports, module) {
     var internal = {
         dictGrid: null,
         catalogId: null,
+        catalogCode: null,
+        catalogName: null,
+        catalogType: null,
         init: function () {
             internal.dictList();
             internal.dictTree();
@@ -32,29 +35,30 @@ define(function (require, exports, module) {
                     parentIDFieldName: 'pid',
                     textFieldName: 'name',
                     checkbox: false,
-                    nodeWidth: 330,
+                    nodeWidth: 200,
                     //选择
                     onSelect: function (data) {
                         internal.catalogId = data["data"]["id"];
+                        internal.catalogName = data["data"]["name"];
+                        internal.CatalogType = data["data"]["type"];
                         var itemGrid = common.getGrid("dictGrid");
                         if (itemGrid.get("dataAction") == "local") {
                             internal.dictGrid.setServer();
                         } else {
                             internal.dictGrid.reload();
                         }
-                    },
-                    //取消选择
-                    onCancelselect: function (data) {
-                        //var dictGrid = common.getGrid("dictGrid");
-                        //dictGrid.loadData({rows: [], total: 0});
                     }
                 },
                 validate: {
-                    //点击新增按钮验证
+                    //字典分能作为父节点
                     add: {
-                        isValidate: false,
-                        fn: function () {
-
+                        isValidate: true,
+                        fn: function (data) {
+                            if (data["type"] == 1) {
+                                common.jsmsgError("父节点不能是字典，请选择分类节点！");
+                                return false;
+                            }
+                            return true;
                         }
                     },
                     //点击编辑按钮验证
@@ -93,6 +97,12 @@ define(function (require, exports, module) {
                         title: "编辑信息"
                     },
                     common: {
+                        otherUrlParam: function () {
+                            return {
+                                catalogId: internal.catalogId,
+                                catalogName: internal.catalogName
+                            }
+                        },
                         url: 'dict/view/dictdetail',
                         width: 360,
                         height: 260
@@ -115,15 +125,7 @@ define(function (require, exports, module) {
                     },
                     searchbox: [
                         {label: '关键字', name: 'keyWord', type: 'text'}
-                    ],
-                    validate: {
-                        add: {
-                            isValidate: false,
-                            fn: function () {
-
-                            }
-                        }
-                    }
+                    ]
                 },
                 extendParam: function () {
                     return {catalogId: internal.catalogId};
@@ -150,6 +152,13 @@ define(function (require, exports, module) {
                     //编辑参数
                     edit: {title: "编辑字典项信息"},
                     common: {
+                        otherUrlParam: function () {
+                            return {
+                                fkCatalogId: internal.catalogId,
+                                fkCatalogName: internal.catalogName,
+                                fkCatalogType: internal.CatalogType,
+                            }
+                        },
                         url: 'dict/view/dictItemDetail',
                         width: 360,
                         height: 260

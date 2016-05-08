@@ -34,22 +34,44 @@ define(function (require, exports, module) {
                 var addParam = $.extend(true, {}, options["dialogParam"]["common"], options["dialogParam"]["add"]);
                 addParam["winName"] = options["dialogParam"]["winName"];
                 addParam["winCallback"] = options["dialogParam"]["winCallback"];
+
+                var treeObj = liger.get(options["treeId"]);
+                if (treeObj) {
+                    var data = treeObj.getSelected();
+                    var validate = options["validate"]["add"];
+                    if (validate["isValidate"]) {
+                        var isPassValidate = true;
+                        if (typeof (validate["fn"]) == "function" && data) {
+                            isPassValidate = validate["fn"](data["data"]);
+                        }
+                        if (!isPassValidate) {
+                            return;
+                        }
+                    }
+                }
+
+
                 addParam.buttons[0]["onclick"] = function (item, dialog) {
                     var top = common.getTopWindowDom();
                     var callback = function () {
-
                         internal.req.getList({url: options["url"]["getTreeList"]}, function (data) {
                             var treeId = options["treeId"];
                             var treeData = data.result.rows;
                             var treeObj = $("#" + treeId).ligerGetTreeManager();
                             treeObj.reloadNode(null, treeData);
                         });
-
-
                         //树重新加载（或者新增一个节点）
                     }
                     top[options["dialogParam"]["winCallback"]](callback);
                 }
+
+                var urlParam = "";
+                if (typeof(addParam["otherUrlParam"]) == "function") {
+                    $.each(addParam["otherUrlParam"](), function (key, value) {
+                        urlParam += key + "=" + value + "&&";
+                    });
+                }
+                addParam["url"] = addParam["url"] + "?" + urlParam;
                 top[options["dialogParam"]["winName"]] = common.dialog(addParam);
             },
             "edit": function (options) {
@@ -76,9 +98,8 @@ define(function (require, exports, module) {
                     }
                     id = data["data"]["id"];
                 }
-
-
                 editParam["url"] = editParam["url"] + "?state=edit&&id=" + id;
+
 
                 editParam.buttons[0]["onclick"] = function (item, dialog) {
                     var top = common.getTopWindowDom();
@@ -129,8 +150,6 @@ define(function (require, exports, module) {
                         var treeObj = $("#" + treeId).ligerGetTreeManager();
                         treeObj.reloadNode(null, treeData);
                     });
-
-                    //alert(JSON.stringify(data));
                 })
 
             }

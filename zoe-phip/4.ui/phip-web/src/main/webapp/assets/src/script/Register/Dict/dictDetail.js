@@ -12,6 +12,9 @@ define(function (require, exports, module) {
                 getUrl: 'dict/getDictCatalogInfoById',//
                 addUrl: 'dict/addDictCatalogInfo',//新增接口Url
                 updateUrl: 'dict/updateDictCatalogInfo',//修改接口Url
+                dialogParam: {
+                    otherUrlParam: ['catalogName', 'catalogId'],
+                },
                 loadPageEvent: function () {
                     internal.selectList.dialog('dictCatalog', {
                         target: $("#btnParentCatalog"),
@@ -21,6 +24,16 @@ define(function (require, exports, module) {
                         displayField: 'name',
                         fkNullContent: '根级节点',
                         selectParam: {
+                            storage: function () {
+                                var data = [];
+                                var pid = common.getParamFromUrl("catalogId");
+                                var pname = common.getParamFromUrl("catalogName");
+                                if (pid && pid != "null") {
+                                    var info = {pid: pid, parentName: decodeURIComponent(pname)};
+                                    data.push(info);
+                                }
+                                return data;
+                            }(),
                             isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
                             treeVaildMsg: '父级分类不能是其本身!',
                             multiselect: false

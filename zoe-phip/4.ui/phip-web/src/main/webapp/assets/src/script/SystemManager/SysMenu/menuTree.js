@@ -60,6 +60,10 @@
                 var ztreeNodes = treeObj.getNodes();
                 var nodes = treeObj.transformToArray(ztreeNodes);
                 nodes.splice(0, 1);
+                $.each(nodes, function (index, item) {
+                    item["sort"] = index + 1;
+                    nodes[index] = item;
+                });
                 internal.req.updateList({list: JSON.stringify(nodes)}, function (result) {
                     if (result.isSuccess) {
                         var top = common.getTopWindowDom();
