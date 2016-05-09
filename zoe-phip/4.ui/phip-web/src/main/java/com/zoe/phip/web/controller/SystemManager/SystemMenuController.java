@@ -2,9 +2,7 @@ package com.zoe.phip.web.controller.SystemManager;
 
 import com.zoe.phip.infrastructure.annotation.AuthAction;
 import com.zoe.phip.infrastructure.annotation.AuthController;
-import com.zoe.phip.infrastructure.entity.PageList;
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.infrastructure.security.MenuCode;
 import com.zoe.phip.infrastructure.security.Permission;
 import com.zoe.phip.infrastructure.util.StringUtil;

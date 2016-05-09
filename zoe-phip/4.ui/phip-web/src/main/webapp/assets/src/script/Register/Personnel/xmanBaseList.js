@@ -15,6 +15,7 @@ define(function (require, exports, module) {
                     btnbox: {
                         'custom': {
                             text: "合并", click: function () {
+                                internal.merge();
                             }
                         },
                         'add': true,
@@ -24,7 +25,6 @@ define(function (require, exports, module) {
                         {label: '关键字', name: 'keyWord', type: 'text'}
                     ]
                 },
-                // reqInfoKey:'patientId',
                 gridParam: {
                     url: 'personnel/getXmanList',
                     columns: [
@@ -61,6 +61,11 @@ define(function (require, exports, module) {
             })
         },
         merge: function () {
+            var gridObj = common.getGrid("grid");
+            var selectRows = gridObj.getSelectedRows();
+            if (selectRows.length) {
+
+            }
         }
 
     };

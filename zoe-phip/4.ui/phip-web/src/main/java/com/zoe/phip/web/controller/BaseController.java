@@ -45,7 +45,7 @@ public abstract class BaseController {
     }
 
     protected SortOrder getSortOrder() {
-        String sortOder = DataContext.getRequest().getParameter("sortname");
+        String sortOder = DataContext.getRequest().getParameter("sortorder");
         return SortOrder.forValue(sortOder);
     }
 

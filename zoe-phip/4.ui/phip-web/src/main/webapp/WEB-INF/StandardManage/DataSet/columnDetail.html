@@ -9,7 +9,7 @@ var bodySection = {
             <li class="list">
                 <p class="column-one">
                     <label class="label" for="pid">数据元：</label>
-                        <span class="text-line-outer" id="btnParentCatalog">
+                        <span class="text-line-outer" id="btnDataElement">
                             <input type="text" name="pid" class="text-line" datatype="*"/>
                             <span class="text-line-setting">
                                 <span class="icon-grid icon-grid-setting" title="选择"></span>
@@ -33,24 +33,10 @@ var bodySection = {
             </li>
 
             <li class="list">
-                <div class="column-two">
-                    <label class="label" for="sexCode">字段类型：</label>
-                    <div class="simulate-select" id="selSex">
-                        <span class="text">--请选择字段类型--</span>
-                        <i class="icon-grid icon-grid-fold-gray"></i>
-                        <ul class="simulate-select-lists" style="display:none;">
-                            <li class="simulate-select-list">--请选择字段类型--</li>
-                            <li value="VARCHAR2" class="simulate-select-list">VARCHAR2</li>
-                            <li value="NVARCHAR2" class="simulate-select-list">NVARCHAR2</li>
-                            <li value="NUMBER" class="simulate-select-list">NUMBER</li>
-                            <li value="CHAR" class="simulate-select-list">CHAR</li>
-                            <li value="DATE" class="simulate-select-list">DATE</li>
-                            <li value="BLOB" class="simulate-select-list">BLOB</li>
-                            <li value="CLOB" class="simulate-select-list">CLOB</li>
-                        </ul>
-                        <div class="clear"></div>
-                    </div>
-                    <select name="sexCode" style="display: none;">
+                <p class="column-two">
+                    <label class="label">字段类型:</label>
+                    <select name="standardType" class="select" style="width:190px;">
+                        <option value="-1">--请选择字段类型--</option>
                         <option value="VARCHAR2">VARCHAR2</option>
                         <option value="NVARCHAR2">NVARCHAR2</option>
                         <option value="NUMBER">NUMBER</option>
@@ -59,7 +45,8 @@ var bodySection = {
                         <option value="BLOB">BLOB</option>
                         <option value="CLOB">CLOB</option>
                     </select>
-                </div>
+                </p>
+
                 <p class="column-two">
                     <label class="label" for="codeSystem">字段长度：</label>
                     <input type="text" name="codeSystem" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
@@ -69,7 +56,7 @@ var bodySection = {
             <li class="list">
                 <p class="column-two">
                     <label class="label" for="userState">是否主键：</label>
-                    <a class="btn-switch-outer">
+                    <a class="btn-switch-outer" id="isPk">
                             <span class="btn-switch btn-switch-on">
                                 <b class="btn-switch-inner"></b>
                             </span>
@@ -77,7 +64,7 @@ var bodySection = {
                 </p>
                 <p class="column-two">
                     <label class="label" for="userState">是否为空：</label>
-                    <a class="btn-switch-outer">
+                    <a class="btn-switch-outer" id="isNull">
                             <span class="btn-switch btn-switch-on">
                                 <b class="btn-switch-inner"></b>
                             </span>
@@ -88,7 +75,7 @@ var bodySection = {
 
                 <p class="column-one">
                     <label class="label" for="pid">参照字典：</label>
-                        <span class="text-line-outer" id="btnParentCatalog">
+                        <span class="text-line-outer" id="btnDict">
                             <input type="text" name="pid" class="text-line" datatype="*"/>
                             <span class="text-line-setting">
                                 <span class="icon-grid icon-grid-setting" title="选择"></span>

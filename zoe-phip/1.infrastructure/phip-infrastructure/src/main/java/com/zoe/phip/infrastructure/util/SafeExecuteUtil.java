@@ -1,7 +1,6 @@
 package com.zoe.phip.infrastructure.util;
 
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
-import com.zoe.phip.infrastructure.annotation.ErrorMessages;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
@@ -98,6 +97,9 @@ public final class SafeExecuteUtil {
     public static String getBusinessExceptionMsg(BusinessException e, Class<?> invokeClass) {
         String msg = "";
         ErrorMessage[] errorMessages = invokeClass.getAnnotationsByType(ErrorMessage.class);
+        if(null==errorMessages || errorMessages.length==0) {
+            errorMessages= invokeClass.getSuperclass().getAnnotationsByType(ErrorMessage.class);
+        }
         if (errorMessages != null) {
             for (ErrorMessage er : errorMessages) {
                 if (er.code().equals(e.getCode())) {
