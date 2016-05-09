@@ -7,6 +7,8 @@ import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -87,6 +89,24 @@ public class ProcessXmlUtil {
         try {
             return DocumentHelper.parseText(xmlString);
         } catch (DocumentException ex) {
+            return null;
+        }
+    }
+
+    public static Document getAdapterDom(String path){
+        try{
+            //todo 先暂时用file的方式获取
+            SAXReader reader = new SAXReader();
+            Document parserDoc;
+            InputStream adapterStream=ProcessXmlUtil.class.getResourceAsStream(path);
+            if(adapterStream==null){
+                parserDoc = reader.read(new File("."+path));
+            }else {
+                parserDoc = reader.read(adapterStream);
+            }
+            return parserDoc;
+        }catch (DocumentException e){
+            logger.error("errors",e);
             return null;
         }
     }

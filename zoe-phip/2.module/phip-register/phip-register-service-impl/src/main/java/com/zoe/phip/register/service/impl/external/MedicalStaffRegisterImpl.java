@@ -72,7 +72,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             SAXReader reader = new SAXReader();
             String filePath = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
-            staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class, parserDoc);
+            staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class,  ProcessXmlUtil.getAdapterDom(filePath));
 
             //xml 验证错误
             if (strResult.contains("error:数据集内容验证错误")) {
@@ -110,11 +110,8 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
         MedicalStaffInfo staffInfo = null;
         String errorMsg = "";
         try {
-            SAXReader reader = new SAXReader();
             String filePath = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";
-            //MedicalStaffInfo
-            Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
-            staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class, parserDoc);
+            staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class,  ProcessXmlUtil.getAdapterDom(filePath));
             //数据是否存在判断
 //            if (!ifStaffIdExist(staffInfo.getStaffId())) {
 //                return RegisterUtil.responseFailed(staffInfo, "由于更新内容不存在，更新失败", RegisterType.DOCTOR_UPDATE_ERROR);

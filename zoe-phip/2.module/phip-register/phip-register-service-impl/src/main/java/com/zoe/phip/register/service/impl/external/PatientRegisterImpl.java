@@ -65,7 +65,7 @@ public class PatientRegisterImpl implements IPatientRegister {
         String errorMsg = "";
         XmanBaseInfo baseInfo = null;
         try {
-            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, getAdapterDom());
+            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, ProcessXmlUtil.getAdapterDom(adapterPath));
 
             //xml 验证错误
             if (strResult.contains("error:数据集内容验证错误")) {
@@ -108,7 +108,7 @@ public class PatientRegisterImpl implements IPatientRegister {
         String errorMsg = "";
         try {
 
-            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, getAdapterDom());
+            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, ProcessXmlUtil.getAdapterDom(adapterPath));
             //xml 验证错误
             if (strResult.contains("error:数据集内容验证错误")) {
                 return updateFailed(baseInfo, strResult);
@@ -240,21 +240,4 @@ public class PatientRegisterImpl implements IPatientRegister {
         return RegisterUtil.responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_UPDATE_ERROR);
     }
 
-    private Document getAdapterDom(){
-        try{
-            //todo 先暂时用file的方式获取
-            SAXReader reader = new SAXReader();
-            Document parserDoc;
-            InputStream adapterStream=this.getClass().getResourceAsStream(adapterPath);
-            if(adapterStream==null){
-                parserDoc = reader.read(new File("."+adapterPath));
-            }else {
-                parserDoc = reader.read(adapterStream);
-            }
-            return parserDoc;
-        }catch (DocumentException e){
-            logger.error("errors",e);
-            return null;
-        }
-    }
 }
