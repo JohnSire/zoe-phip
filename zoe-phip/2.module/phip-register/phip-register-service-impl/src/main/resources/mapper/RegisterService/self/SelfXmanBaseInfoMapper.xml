@@ -158,7 +158,7 @@
         WHERE P.ID=#{id}
     </select>
     <sql id="patientSelect">
-        SELECT P.*,S.NAME AS SEX_CODE_NAME,N.NAME AS NATIONALITY_NAME,O.NAME AS OCCUPATION_NAME,
+        SELECT P.*,S.NAME AS SEX_CODE_NAME,N.NAME AS NATIONALITY_NAME,OC.NAME AS OCCUPATION_NAME,
         M.NAME AS MARRIAGE_NAME,C.NAME AS CODE_SYS_NAME,X.XC_CARD_CODE,O.DEPT_NAME AS ORG_NAME,
         R.DEPT_NAME AS HEALTH_RECORD_ORG_NAME,X.XC_ORG_CODE,XC.DEPT_NAME AS XC_ORG_NAME
         FROM PHIP_XMAN_BASE_INFO P
@@ -176,7 +176,7 @@
         <include refid="oidSelect">
             <property name="oidValue" value="2.16.156.10011.2.3.3.7"/>
         </include>
-        ) O ON P.OCCUPATION_CODE=N.CODE --职业
+        ) OC ON P.OCCUPATION_CODE=OC.CODE --职业
         LEFT JOIN (
         <include refid="oidSelect">
             <property name="oidValue" value="2.16.156.10011.2.3.3.5"/>
