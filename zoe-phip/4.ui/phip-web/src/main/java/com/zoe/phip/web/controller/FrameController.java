@@ -73,7 +73,7 @@ public class FrameController extends BaseController {
     }
 
     // 注销用户登录
-    @RequestMapping("/loginOut")
+    @RequestMapping("/loginout")
     public String ToLoginOut(HttpServletRequest request, Model model) {
         return "/frame/loginOut";
     }

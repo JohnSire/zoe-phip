@@ -18288,9 +18288,9 @@
                     }
                 }
                 if (p.render) {
-                    treehtmlarr.push('<span>' + p.render(o, o[p.textFieldName]) + '</span>');
+                    treehtmlarr.push('<span title="' + o[p.textFieldName] + '">' + p.render(o, o[p.textFieldName]) + '</span>');
                 } else {
-                    treehtmlarr.push('<span>' + o[p.textFieldName] + '</span>');
+                    treehtmlarr.push('<span title="' + o[p.textFieldName] + '">' + o[p.textFieldName] + '</span>');
                 }
                 treehtmlarr.push('</div>');
                 if (g.hasChildren(o)) {

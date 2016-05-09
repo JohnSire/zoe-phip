@@ -64,6 +64,9 @@ define(function (require, exports, module) {
             var name = options.name;//字典名称
             var pName = options.parentName;//外键对象
             var displayField = options.displayField;//显示内容
+            var storage = options["selectParam"]["storage"]||[];
+
+
             //初始化绑定值
             $('input[name="' + name + '"]').on("setValue", function (event, argument) {
                 $(targetObj).find("input").val(argument[name]);
@@ -73,6 +76,11 @@ define(function (require, exports, module) {
                     $(targetObj).find(".text-line-content").text(options["fkNullContent"]);
                 }
             });
+
+            if (storage.length == 1) {
+                $('input[name="' + name + '"]').val(storage[0][name]);
+                $(targetObj).find(".text-line-content").text(storage[0][pName]);
+            }
 
             $(targetObj).on("click", function () {
                 var self = this;
