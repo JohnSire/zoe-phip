@@ -27,7 +27,7 @@ var creationTime = Model.creationTime;
     <acknowledgementDetail>
       <!--处理结果说明-->
       <text>
-      ${Model.acknowledgement.text}x
+      ${Model.acknowledgement.text}
       </text>
     </acknowledgementDetail>
   </acknowledgement>
