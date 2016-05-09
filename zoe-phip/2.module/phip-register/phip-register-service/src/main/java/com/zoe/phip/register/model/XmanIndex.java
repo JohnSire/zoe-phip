@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 
@@ -179,6 +180,18 @@ public class XmanIndex extends RegisterEntity {
     @Column(name = "END_TIME")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
+
+    /*
+    * 请求消息ID
+    * */
+    @Transient
+    private String msgId;
+
+    /*
+    * 档案ID
+    * */
+    @Transient
+    private String ehrId;
 
     public String getAreaCode() {
         return this.areaCode;
@@ -457,5 +470,21 @@ public class XmanIndex extends RegisterEntity {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getMsgId() {
+        return msgId;
+    }
+
+    public void setMsgId(String msgId) {
+        this.msgId = msgId;
+    }
+
+    public String getEhrId() {
+        return ehrId;
+    }
+
+    public void setEhrId(String ehrId) {
+        this.ehrId = ehrId;
     }
 }
