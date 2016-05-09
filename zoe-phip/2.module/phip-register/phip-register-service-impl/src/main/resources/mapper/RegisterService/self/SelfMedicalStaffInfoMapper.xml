@@ -134,7 +134,7 @@
     SELECT * FROM PHIP_MEDICAL_STAFF_INFO M
     LEFT JOIN (SELECT PDI.CODE, PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS JOIN PHIP_DICT_CATALOG PDC ON PNS.DICT_CODE = PDC.CODE JOIN PHIP_DICT_ITEM PDI ON PDC.ID = PDI.FK_CATALOG_ID WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.4') S ON M.GENDER_CODE = S.CODE
     -->
-    <select id="getAllProviderList" resultType="com.zoe.phip.register.model.MedicalStaffInfo">
+    <select id="getAllProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
         SELECT M.*,S.NAME AS GENDER_NAME FROM PHIP_MEDICAL_STAFF_INFO M
         LEFT JOIN (
         <include refid="oidSelect">
