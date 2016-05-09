@@ -5,6 +5,7 @@
             req.post({
                 async: false,
                 isTip: false,
+                data:{sortname:"sort",sortorder:"asc"},
                 success: function (data) {
                     if (typeof (callback) == "function") {
                         var result = common.pidToChildren(data.result.rows, "id", "fkParentMenuId", "children");
