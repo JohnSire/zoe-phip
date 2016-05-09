@@ -22,14 +22,14 @@ define(function (require, exports, module) {
                     ]
                 },
                 gridParam: {
-                    url: "element/getElementList",
+                    url: "personnel/getXmanList",//element/getElementList
                     columns: [
-                        {display: '编码', name: 'code', align: 'left'},
-                        {display: '名称', name: 'name', align: 'left'},
-                        {display: '标准来源', name: 'sourceName', align: 'left'},
-                        {display: '分类', name: 'typeName', align: 'left'},
-                        {display: '值域', name: 'dictName', align: 'left'},
-                        {display: '定义', name: 'define'},
+                        {display: '编码', name: 'cardCode', align: 'left'},//code
+                        {display: '名称', name: 'name', align: 'left'},//name
+                        {display: '标准来源', name: 'sexCodeName', align: 'left'},//sourceName
+                        {display: '分类', name: 'idNo', align: 'left'},//typeName
+                        {display: '值域', name: 'healthRecordNo', align: 'left'},//dictName
+                        {display: '定义', name: 'detelNofine'},//define
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,
