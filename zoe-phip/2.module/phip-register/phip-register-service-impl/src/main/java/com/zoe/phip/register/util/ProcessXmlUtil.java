@@ -19,6 +19,13 @@ public class ProcessXmlUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(ProcessXmlUtil.class);
 
+    private static String schemasPath;
+
+    public void setSchemasPath(String schemas) {
+        schemasPath = schemas;
+    }
+
+
     /**
      * 删除值为空的属性
      *
@@ -60,6 +67,9 @@ public class ProcessXmlUtil {
         String rootName = xd.getRootElement().getName();
         String xsdPath = "multicacheschemas/" + rootName + ".xsd";
         String xsdFilePath = ProcessXmlUtil.class.getClassLoader().getResource(xsdPath).getPath();
+        if(xsdFilePath.contains("jar")){
+            xsdFilePath=schemasPath + rootName + ".xsd";
+        }
         String result = "success:数据集内容验证正确";
         String strMessage = XmlUtil.validateXsd(xsdFilePath, strXml);
         if (!strMessage.equals("")) {

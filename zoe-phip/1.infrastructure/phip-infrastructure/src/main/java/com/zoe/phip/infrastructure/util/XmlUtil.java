@@ -84,6 +84,7 @@ public final class XmlUtil {
                 for (Node node : handler.getErrors().content()) {
                     error += node.asXML() + System.getProperty("line.separator");
                 }
+                logger.error("错误:"+error);
                 return error;
             } else {
                 logger.info("XML文件通过XSD文件校验成功!");
