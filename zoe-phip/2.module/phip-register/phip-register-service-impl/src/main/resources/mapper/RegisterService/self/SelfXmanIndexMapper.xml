@@ -104,4 +104,16 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="getXmanId" resultType="java.lang.String" parameterType="java.util.Map">
+        SELECT ID FROM PHIP_XMAN_BASE_INFO PXBI
+        <where>
+            <if test="idNo != null">
+                AND PXBI.ID_NO = #{idNo,jdbcType=VARCHAR}
+            </if>
+            <if test="patientId != null">
+                AND PXBI.PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -39,5 +39,8 @@ public final class RegisterType {
     public static final String AREA_QUERY = "template/area/output/区域信息查询服务响应信息.tbl";
     public static final String AREA_QUERY_CHILDREN = "template/area/output/所辖行政区域信息查询服务响应信息.tbl";
 
+    public static final String EHR_ADD_SUCCESS = "template/document/output/健康档案实时提交服务响应消息-正向.tbl";
+    public static final String EHR_ADD_ERROR = "template/document/output/健康档案实时提交服务响应消息-反向.tbl";
+
     public static final String MESSAGE = "template/响应消息结果.tbl";
 }

@@ -6,7 +6,7 @@
     <ParentDocumentRelationship descr="上级文档关联关系" path="//Document/@parentDocumentRelationship"/>
     <ParentDocumentId descr="上级文档ID" path="//Document/@parentDocumentId"/>
     <IndexId descr="事件ID" path=""/>
-    <XmanId descr="个人主索引" path="//SourcePatientID"/>
+    <XmanId descr="个人主索引" path=""/>
     <OrgCode descr="机构组织机构代码" path="//Organization/@id"/>
     <PatientId descr="患者标识" path="//SourcePatientID"/>
     <EventNo descr="事件号" path="//RegistryPackage/SubmissionSet/EpisodeID"/>
