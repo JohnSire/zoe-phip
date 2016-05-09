@@ -53,18 +53,31 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
 
 
     @Override
-    public PageList<MedicalStaffInfo> providerListQuery(String key, String deptCode, QueryPage page) throws Exception {
+    public PageList<MedicalStaffInfo> providerListQuery(String type, String key, String deptCode, QueryPage page) throws Exception {
         PageList<MedicalStaffInfo> pageList = new PageList<MedicalStaffInfo>();
         //分页
         SqlHelper.startPage(page);
         Map<String, Object> paras = new HashMap<String, Object>();
-        if (!StringUtil.isNullOrWhiteSpace(key)) {
-            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        List<MedicalStaffInfo> results = null;
+        if (type.equals("1")) {
+            if (!StringUtil.isNullOrWhiteSpace(key)) {
+                paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+            }
+            if (!StringUtil.isNullOrWhiteSpace(deptCode)) {
+                paras.put("deptCode", deptCode);
+            }
+            results = getAllProviderList(paras);
+        } else {
+            if (!StringUtil.isNullOrWhiteSpace(key)) {
+                paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+            }
+            if (!StringUtil.isNullOrWhiteSpace(deptCode)) {
+                paras.put("deptCode", deptCode);
+            }
+
+            results = getProviderList(paras);
         }
-        if (!StringUtil.isNullOrWhiteSpace(deptCode)) {
-            paras.put("deptCode", deptCode);
-        }
-        List<MedicalStaffInfo> results = getProviderList(paras);
+
         PageInfo<MedicalStaffInfo> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
@@ -116,6 +129,11 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     @Override
     public List<MedicalStaffInfo> getProviderList(Map<String, Object> map) {
         return getMapper().getProviderList(map);
+    }
+
+    @Override
+    public List<MedicalStaffInfo> getAllProviderList(Map<String, Object> map) {
+        return getMapper().getAllProviderList(map);
     }
 
     @Override
