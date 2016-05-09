@@ -16,7 +16,9 @@ define(function (require, exports, module) {
                 tools: {
                     btnbox: {
                         'add': true,
-                        'del': true
+                        'del': true,
+                        'import': true,
+                        'export': true
                     },
                     searchbox: [
                         {label: '关键字', name: 'keyWord', type: 'text'}
