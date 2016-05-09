@@ -123,10 +123,33 @@
             AND M.AFFILIATED_ORG_CODE IN (
             SELECT DEPT_CODE
             FROM PHIP_ORG_DEPT_INFO
-            START WITH DEPT_CODE=#{deptCode,jdbcType=VARCHAR}
+            <if test="deptCode !=null and deptCode !=''">
+                START WITH DEPT_CODE=#{deptCode,jdbcType=VARCHAR}
+            </if>
             CONNECT BY PRIOR DEPT_CODE = DEPT_PARENT_CODE)
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
+    </select>
+    <!--
+    SELECT * FROM PHIP_MEDICAL_STAFF_INFO M
+    LEFT JOIN (SELECT PDI.CODE, PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS JOIN PHIP_DICT_CATALOG PDC ON PNS.DICT_CODE = PDC.CODE JOIN PHIP_DICT_ITEM PDI ON PDC.ID = PDI.FK_CATALOG_ID WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.4') S ON M.GENDER_CODE = S.CODE
+    -->
+    <select id="getAllProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT M.*,S.NAME AS GENDER_NAME FROM PHIP_MEDICAL_STAFF_INFO M
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON M.GENDER_CODE=S.CODE --性别
+        <where>
+            <if test="_parameter.containsKey('key') and _parameter.containsKey('key')!=''">
+                (UPPER(M.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(M.ID_NO) LIKE
+                #{key,jdbcType=VARCHAR})
+            </if>
+
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+
     </select>
 
     <sql id="oidSelect">
