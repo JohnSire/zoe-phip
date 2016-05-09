@@ -16,7 +16,6 @@ define(function (require, exports, module) {
             internal.multiselect = options["multiselect"];//是否多选
             internal.displayField = options["displayField"];
             internal.valueField = options["valueField"];
-            //alert(internal.valueField);
             internal.storage = options["stroage"];
             internal.isTreeVaild = options["isTreeVaild"];
             internal.selfId = options["selfId"];
@@ -25,6 +24,13 @@ define(function (require, exports, module) {
             gridParam["onCheckAllRow"] = internal.onCheckAllRow;
             gridParam["isChecked"] = internal.isChecked;
             gridParam["onBeforeCheckRow"] = internal.onBeforeCheckRow;
+
+
+            var param = options["searchParam"]();
+
+            gridParam["parms"] = param;
+
+
             var gridObj = $("#grid").ligerGrid(gridParam);
             //如果是非多选的，则移除全选框
             if (!internal.multiselect) {
@@ -35,6 +41,8 @@ define(function (require, exports, module) {
             internal.itemsbox.addItemList(internal.storage, internal.displayField, internal.valueField, function (data) {
                 internal.unChecked(data);
             });
+
+
             internal.searchbox.search(options, function (data) {
                 var gridObj = common.getGrid("grid");
                 if (gridObj) {
@@ -43,7 +51,6 @@ define(function (require, exports, module) {
                     })
                     gridObj.reload();
                 }
-
             })
         },
         //是否选中
