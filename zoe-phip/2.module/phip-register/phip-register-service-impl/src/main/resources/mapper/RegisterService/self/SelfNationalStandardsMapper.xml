@@ -33,7 +33,7 @@
         SELECT * from PHIP_NATIONAL_STANDARDS PNS WHERE
         1=1
         <if test="_parameter.containsKey('key')">
-            AND CONCAT(upper(PNS.CODE_SYSTEM), upper(CONCAT(PNS.CODE, PNS.NAME))) like #{key,jdbcType=VARCHAR}
+            AND CONCAT(upper(CONCAT(PNS.CODE, PNS.NAME)),upper(PNS.CODE_SYSTEM)) like #{key,jdbcType=VARCHAR}
         </if>
     </select>
     <select id="getNationalStandard" parameterType="java.util.Map" resultType="java.lang.Integer">

@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
 
-import java.sql.Date;
+import java.util.Date;
 
 
 /**
@@ -60,12 +60,12 @@ public class StSetInfo extends MasterEntity {
      * 起用时间
      */
     @Column(name = "START_TIME")
-    private java.sql.Date startTime;
+    private Date startTime;
     /**
      * 停用时间
      */
     @Column(name = "END_TIME")
-    private java.sql.Date endTime;
+    private Date endTime;
 
 
     /**
