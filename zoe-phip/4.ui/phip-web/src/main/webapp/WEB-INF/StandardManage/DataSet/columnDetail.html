@@ -21,9 +21,9 @@ var bodySection = {
             </li>
             <li class="list">
                 <p class="column-two">
-                    <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
-                    <input type="text" name="code" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"
-                           nullmsg="请填写编码！"/>
+                    <label class="label" for="code"><span class="text-mark">*</span>名称：</label>
+                    <input type="text" name="code" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！"
+                           nullmsg="请填写名称！"/>
                 </p>
                 <p class="column-two">
                     <label class="label" for="codeSystem"><span class="text-mark">*</span>代码：</label>
@@ -33,24 +33,45 @@ var bodySection = {
             </li>
 
             <li class="list">
-                <p class="column-two">
-                    <label class="label">字段类型:</label>
-                    <select name="standardType" class="select" style="width:190px;">
-                        <option value="-1">--请选择字段类型--</option>
-                        <option value="VARCHAR2">VARCHAR2</option>
-                        <option value="NVARCHAR2">NVARCHAR2</option>
-                        <option value="NUMBER">NUMBER</option>
-                        <option value="CHAR">CHAR</option>
-                        <option value="DATE">DATE</option>
-                        <option value="BLOB">BLOB</option>
-                        <option value="CLOB">CLOB</option>
-                    </select>
-                </p>
+            <p class="column-two">
+                <label class="label">字段类型:</label>
+                <select name="standardType" class="select" style="width:190px;">
+                    <option value="-1">--请选择字段类型--</option>
+                    <option value="VARCHAR2">VARCHAR2</option>
+                    <option value="NVARCHAR2">NVARCHAR2</option>
+                    <option value="NUMBER">NUMBER</option>
+                    <option value="CHAR">CHAR</option>
+                    <option value="DATE">DATE</option>
+                    <option value="BLOB">BLOB</option>
+                    <option value="CLOB">CLOB</option>
+                </select>
+            </p>
 
-                <p class="column-two">
-                    <label class="label" for="codeSystem">字段长度：</label>
+            <p class="column-two">
+                <label class="label" for="codeSystem">字段长度：</label>
+                <input type="text" name="codeSystem" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
+                       nullmsg="请填写代码！"/>
+            </p>
+        </li>
+            <li class="list">
+
+                <p class="column-one">
+                    <label class="label" for="codeSystem">字段精度：</label>
                     <input type="text" name="codeSystem" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
                            nullmsg="请填写代码！"/>
+                </p>
+            </li>
+            <li class="list">
+
+                <p class="column-one">
+                    <label class="label" for="pid">参照字典：</label>
+                        <span class="text-line-outer" id="btnDict">
+                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
                 </p>
             </li>
             <li class="list">
@@ -71,19 +92,7 @@ var bodySection = {
                     </a>
                 </p>
             </li>
-            <li class="list">
 
-                <p class="column-one">
-                    <label class="label" for="pid">参照字典：</label>
-                        <span class="text-line-outer" id="btnDict">
-                            <input type="text" name="pid" class="text-line" datatype="*"/>
-                            <span class="text-line-setting">
-                                <span class="icon-grid icon-grid-setting" title="选择"></span>
-                                <span class="text-line-content"></span>
-                            </span>
-                        </span>
-                </p>
-            </li>
             <li class="list">
                 <p class="column-one">
                     <label class="label label-textarea">备注：</label>

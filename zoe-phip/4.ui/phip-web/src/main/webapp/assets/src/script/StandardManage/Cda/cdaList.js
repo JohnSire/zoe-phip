@@ -37,6 +37,13 @@ define(function (require, exports, module) {
 
                             return h;
                         }},
+                        {display: 'XSL配置',  width: 120,render:function(rowdata, rowindex, value){
+                            var h = "";
+                            h += "<a class='icon-grid icon-grid-setting' title='配置'"
+                            + " onclick='javascript:toDataSetList(\"" + rowdata.id + "\",\"" + rowdata.name + "\")'></a>";;
+
+                            return h;
+                        }},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,
