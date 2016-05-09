@@ -2,6 +2,7 @@ package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.exception.BusinessException;
+import com.zoe.phip.infrastructure.util.DateUtil;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.model.OrgDeptInfo;
@@ -128,20 +129,26 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
         }
         Document document;
         OrgDeptInfo deptInfo = null;
+        String strDeptId="";
+        String strDeptName="";
+        String strMsgId="";
+        String strIdRoot="";
+        String strCreateTime="";
+        String errorMsg = "";
+       String strDivisionRoot="";
         try {
             document = ProcessXmlUtil.load(message);
-            String strDeptId = document.selectSingleNode("//controlActProcess/queryByParameterPayload/organizationID/value/@extension").getText();
-            String strDeptName = document.selectSingleNode("//controlActProcess/queryByParameterPayload/organizationName/value").getText();
-            String strMsgId = document.selectSingleNode("//id/@extension").getText();
-            String strIdRoot = document.selectSingleNode("//id/@root").getText();
-            String strCreateTime = document.selectSingleNode("//creationTime/@value").getText();
-
+             strDeptId = document.selectSingleNode("//controlActProcess/queryByParameterPayload/organizationID/value/@extension").getText();
+            strDivisionRoot = document.selectSingleNode("//controlActProcess/queryByParameterPayload/organizationID/value/@root").getText();
+             strDeptName = document.selectSingleNode("//controlActProcess/queryByParameterPayload/organizationName/value").getText();
+             strMsgId = document.selectSingleNode("//id/@extension").getText();
+             strIdRoot = document.selectSingleNode("//id/@root").getText();
+             strCreateTime = document.selectSingleNode("//creationTime/@value").getText();
             Map<String, Object> map = new TreeMap<>();
             map.clear();
             map.put("deptCode", strDeptId);
             map.put("deptName", strDeptName);
             OrgDeptInfo result = organizationRegisterIn.organizationDetailQuery(map);
-
        /*     if (deptInfo == null || StringUtil.isNullOrWhiteSpace(deptInfo.getCode())) {
                 deptInfo = new OrgDeptInfo();
                 deptInfo.setCreationTime(DateUtil.stringToDateTime(strCreateTime));
@@ -156,13 +163,23 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
 
             return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_SUCCESS, result);
         } catch (BusinessException e) {
-            String msg = SafeExecuteUtil.getBusinessExceptionMsg(e, organizationRegisterIn.getClass());
-            acknowledgement.setText(msg);
-            return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, acknowledgement);
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, organizationRegisterIn.getClass());
+           // acknowledgement.setText(msg);
+           // return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, acknowledgement);
 
         } catch (Exception ex) {
-            return RegisterUtil.responseFailed(deptInfo, ex.getMessage(), RegisterType.ORG_QUERY_ERROR);
+           // return RegisterUtil.responseFailed(deptInfo, ex.getMessage(), RegisterType.ORG_QUERY_ERROR);
+            errorMsg = ex.getMessage();
+            logger.error("error:", ex);
         }
+        OrgDeptInfo orgDeptInfo= new OrgDeptInfo();
+        orgDeptInfo.setCreationTime(DateUtil.stringToDateTime(strCreateTime));
+        orgDeptInfo.setDivisionRoot(strDivisionRoot);
+        orgDeptInfo.setId(strIdRoot);
+        orgDeptInfo.setMsgId(strMsgId);
+        orgDeptInfo.setDeptCode(strDeptId);
+        orgDeptInfo.setDeptName(strDeptName);
+        return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, orgDeptInfo);
     }
 
 

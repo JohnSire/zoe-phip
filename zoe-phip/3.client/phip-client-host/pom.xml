@@ -30,7 +30,7 @@
     </dependencies>
     <!--
     部署修改点：
-    1.修改phip-web/../UrlExpand 中的staticResourcePath
+    1.修改phip-web/../web.config.properties中static-web.url
     2.修改phip-web/../_default.html中webRoot
     3.修改phip-web/../config.js 中staticDir
     -->

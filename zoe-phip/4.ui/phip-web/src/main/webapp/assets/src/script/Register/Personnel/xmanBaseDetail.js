@@ -38,6 +38,18 @@ define(function (require, exports, module) {
 
                     });
                     //医疗保险
+                    $("#selCodeSys").select({
+                        name: 'codeSysCode',
+                        display: 'codeSysName',
+                        ajaxParam: {
+                            url: 'organization/getMedicalOrgCategoryList',//url 请求的地址
+                            data: {codeSystem: oidCodeConfig.healthCareType},
+                        },
+                        value: 'code',//值
+                        text: 'name'//展示的内容
+
+                    });
+
                     //民族
                     internal.selectList.dialog('dictItem', {
                         target: $("#btnFkNationality"),
@@ -45,8 +57,9 @@ define(function (require, exports, module) {
                         parentName: 'nationalityName',//绑定name值
                         displayField: 'name',
                         valueField: 'code',
+                        param: {"codeSystem": oidCodeConfig.national},//ajax参数
                         selectParam: {
-                            multiselect: false
+                            multiselect: false,
                         }
                     });
                     //发卡机构
@@ -89,6 +102,7 @@ define(function (require, exports, module) {
                         parentName: 'occupationName',//绑定name值
                         displayField: 'name',
                         valueField: 'code',
+                        param: {"codeSystem": oidCodeConfig.occupation},//ajax参数
                         selectParam: {
                             multiselect: false
                         }

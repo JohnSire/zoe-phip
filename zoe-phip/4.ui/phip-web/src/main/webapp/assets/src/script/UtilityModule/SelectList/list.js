@@ -26,6 +26,10 @@ define(function (require, exports, module) {
                 var options = $.extend(true, {}, internal.defaultParam, internal["fn"][fnName], internal.options);
                 var selectParam = $.extend(true, {}, internal["fn"][fnName]["selectParam"], internal.options["selectParam"]);
                 internal.top["win_select_list_param"] = selectParam;
+
+
+                //alert(JSON.stringify(options));
+
                 internal.top[options["winName"]] = common.dialog({
                     title: options["title"],
                     url: options["url"],
@@ -59,12 +63,13 @@ define(function (require, exports, module) {
         dialog: function (fnName, options) {
             options = $.extend(true, {}, options);
             internal.options = $.extend(true, {}, options);
+
             var targetObj = options["target"];
             targetObj.data("options", options);
             var name = options.name;//字典名称
             var pName = options.parentName;//外键对象
             var displayField = options.displayField;//显示内容
-            var storage = options["selectParam"]["storage"]||[];
+            var storage = options["selectParam"]["storage"] || [];
 
 
             //初始化绑定值
@@ -76,12 +81,10 @@ define(function (require, exports, module) {
                     $(targetObj).find(".text-line-content").text(options["fkNullContent"]);
                 }
             });
-
             if (storage.length == 1) {
                 $('input[name="' + name + '"]').val(storage[0][name]);
                 $(targetObj).find(".text-line-content").text(storage[0][pName]);
             }
-
             $(targetObj).on("click", function () {
                 var self = this;
                 internal.getFn(fnName, function () {
@@ -102,6 +105,16 @@ define(function (require, exports, module) {
                         }
                         return data;
                     }();
+
+                    selectParam["searchParam"] = function () {
+                        var param = options["param"] || {};
+                        var keyWord = $("#txtKey").val();
+                        var value = $.trim(keyWord);
+                        param["keyWord"] = value;
+                        return param;
+
+                    };
+
                     internal.top["win_select_list_param"] = selectParam;
                     var buttonsExtend = options["buttonsExtend"] || [];
                     var buttons = [{
@@ -148,7 +161,6 @@ define(function (require, exports, module) {
                     $.each(buttons, function (index, item) {
                         buttonsExtend.push(item);
                     })
-
                     internal.top[options["winName"]] = common.dialog({
                         title: options["title"],
                         url: options["url"],

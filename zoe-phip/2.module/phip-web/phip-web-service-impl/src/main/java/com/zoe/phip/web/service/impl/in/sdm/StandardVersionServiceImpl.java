@@ -5,6 +5,7 @@
 
 package com.zoe.phip.web.service.impl.in.sdm;
 
+import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
@@ -12,6 +13,7 @@ import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
+import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.web.dao.sdm.IStandardVersionMapper;
 import com.zoe.phip.web.model.sdm.*;
 import com.zoe.phip.web.service.sdm.IStandardVersionService;
@@ -20,8 +22,10 @@ import org.springframework.stereotype.Repository;
 import com.alibaba.dubbo.config.annotation.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author
@@ -97,5 +101,18 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
         return dictServiceImpl.versionDictUpdate(fkVersionId, infoList);
     }
 
+
+    public PageList<StandardVersion> getDataPageList(String key, QueryPage page) {
+        PageList<StandardVersion> pageList = new PageList<>();
+        SqlHelper.startPage(page);
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (!StringUtil.isNullOrWhiteSpace(key))
+            map.put("key", key);
+        List<StandardVersion> results = getDataPageList(map);
+        PageInfo<StandardVersion> pageInfo = new PageInfo<>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
 
 }

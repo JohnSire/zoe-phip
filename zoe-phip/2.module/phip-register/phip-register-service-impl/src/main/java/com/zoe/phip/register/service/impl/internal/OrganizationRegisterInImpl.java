@@ -67,7 +67,6 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return orgDeptInfo;
     }
 
-
     public OrgDeptInfo updateOrganization(OrgDeptInfo orgDeptInfo) throws Exception {
         //数据是否存在判断
         Example example = new Example(OrgDeptInfo.class);

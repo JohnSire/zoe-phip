@@ -16,12 +16,12 @@ define(function (require, exports, module) {
                         {display: '编码', name: 'code', width: 120, align: 'left'},
                         {display: '名称', name: 'name', width: 280, align: 'left'}
                     ],
-                    parms: {'codeSystem': '2.16.156.10011.2.3.3.3'},
                     usePager: true,
                     height: 250
                 },
                 multiselect: false,//是否多选:true为多选，false为单选
                 winCallback: 'win_dict_item_select_list_callback'
+
             }
         }
     }

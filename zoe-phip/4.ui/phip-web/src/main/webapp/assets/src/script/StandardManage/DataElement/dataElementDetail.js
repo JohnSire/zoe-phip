@@ -3,6 +3,7 @@
  */
 define(function (require, exports, module) {
     var internal = {
+            selectList: require("{dir}/UtilityModule/SelectList/list"),
             init: function () {
                 var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
                 var baseAttr = new BaseAttr({
@@ -14,27 +15,15 @@ define(function (require, exports, module) {
                         loadPageEvent: function () {
                             //值域选择
                             $("#chooseDict").click(function () {
-                                top.list_dict_storage = JSON.parse(JSON.stringify(internal.list_dict_storage))
-
-                                seajs.use('{dir}/BaseList/tools.js', function (list) {
-                                    list.standardDict({
-                                        height: 500, width: 540, callback: function (data) {
-                                            internal.list_dict_storage = JSON.parse(JSON.stringify(data));
-                                            var list = internal.list_dict_storage;
-
-                                            if (list.length == 0) {
-                                                $("#dictId").val("");
-                                                $("#dictCode").val("");
-                                                $("#dictName").val("");
-                                            } else {
-                                                $.each(list, function (index, item) {
-
-                                                    $("#dictId").val(item.Id);
-                                                    $("#dictName").val(item.DictName);
-                                                })
-                                            }
-                                        }
-                                    })
+                                internal.selectList.dialog('dictItem', {
+                                    target: $("#chooseDict"),
+                                    name: 'nationalityCode',//绑定value值
+                                    parentName: 'nationalityName',//绑定name值
+                                    displayField: 'name',
+                                    valueField: 'code',
+                                    selectParam: {
+                                        multiselect: false
+                                    }
                                 });
 
                             });

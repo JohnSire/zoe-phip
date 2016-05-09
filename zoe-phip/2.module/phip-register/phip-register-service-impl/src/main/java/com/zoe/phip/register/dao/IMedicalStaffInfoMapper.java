@@ -56,14 +56,14 @@ public interface IMedicalStaffInfoMapper extends IServiceMapper<MedicalStaffInfo
 
     /**
      * 查询医疗卫生人员列表
-     *
+     * @param type
      * @param key
      * @param deptcode
      * @param page
      * @return
      * @throws Exception
      */
-    PageList<MedicalStaffInfo> providerListQuery(String key, String deptcode, QueryPage page) throws Exception;
+    PageList<MedicalStaffInfo> providerListQuery(String type, String key, String deptcode, QueryPage page) throws Exception;
 
 
     /**
@@ -77,4 +77,6 @@ public interface IMedicalStaffInfoMapper extends IServiceMapper<MedicalStaffInfo
 
 
     List<MedicalStaffInfo> getProviderList(Map<String, Object> map);
+
+    List<MedicalStaffInfo> getAllProviderList(Map<String, Object> map);
 }
