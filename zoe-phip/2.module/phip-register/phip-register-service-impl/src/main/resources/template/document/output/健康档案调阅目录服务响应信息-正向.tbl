@@ -1,14 +1,14 @@
 ﻿<%
-var createTime = Model.createTime;
-var inTime = Model.inTime;
-var outTime = Model.outTime;
+var createTime = Model.createAt;
+var inTime = Model.startTime;
+var outTime = Model.endTime;
 %>
 <GetDocumentStroedInfoResponse xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\GetDocumentStroedInfoResponse.xsd" status="AA">
-  <Id root="2.16.156.10011.0" extension="${Model.responseId}" />
+  <Id root="2.16.156.10011.0" extension="${Model.Acknowledge.msgId}" />
   <TargetId root="2.16.156.10011.0" extension="${Model.msgId}" />
   <DocumentSet>
-    <DocumentUniqueId>${Model.documentUniqueId}</DocumentUniqueId>
-    <RepositoryUniqueId>${Model.repositoryUniqueId}</RepositoryUniqueId>
+    <DocumentUniqueId>${Model.ehrId}</DocumentUniqueId>
+    <RepositoryUniqueId>HSDA00.01</RepositoryUniqueId>
     <DocumentTitle>${Model.title}</DocumentTitle>
     <CreateTime>${createTime,dateFormat="yyyyMMddHHmmss"}</CreateTime>
     <AuthorName>${Model.authorName}</AuthorName>
@@ -22,7 +22,7 @@ var outTime = Model.outTime;
     <AdmissionDoctor>${Model.admissionDoctor}</AdmissionDoctor>
     <AdmissionType>${Model.admissionType}</AdmissionType>
     <DiagnosisResult>${Model.diagnosisResult}</DiagnosisResult>
-    <DocUrl>${Model.doumentUrl}</DocUrl>
+    <DocUrl></DocUrl>
   </DocumentSet>
-  <Detail>检索成功</Detail>
+  <Detail>${Model.Acknowledge.text}</Detail>
 </GetDocumentStroedInfoResponse>
