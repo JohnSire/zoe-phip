@@ -27,8 +27,8 @@
                 <!--发布的时候用这个-->
                 <value>file:./jdbc.properties</value>
                 <value>file:./module.config.properties</value>
-               <!-- <value>classpath:jdbc.properties</value>
-                <value>classpath*:*.config.properties</value>-->
+                <value>classpath:jdbc.properties</value>
+                <value>classpath*:*.config.properties</value>
             </list>
         </property>
     </bean>

@@ -1,7 +1,7 @@
 <#assign className = table.className>
 <#assign baseDaoName="com.zoe.phip.module.service">
-        <?xml version="1.0" encoding="UTF-8" ?>
-        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="${basepackage}.(这里要自己改).I${className}Mapper">
 <resultMap id="BaseResultMap" type="${basepackage}.(这里要自己改).model.${className}" extends="com.zoe.phip.module.service.MasterEntityResultMap">
     <#list table.columns as field>

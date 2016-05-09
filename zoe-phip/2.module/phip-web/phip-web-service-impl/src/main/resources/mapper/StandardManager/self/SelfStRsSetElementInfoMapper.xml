@@ -4,7 +4,7 @@
     <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StRsSetElementInfo" extends="BaseResultMap">
         <result column="DICT_CODE" property="dictCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="DICT_NAME" property="dictName" javaType="java.lang.String"
+        <result column="DICT_NAME" property="dictName" javaType="java.lang.String"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StRsSetElementInfo">
         update PHIP_ST_RS_SET_ELEMENT_INFO
