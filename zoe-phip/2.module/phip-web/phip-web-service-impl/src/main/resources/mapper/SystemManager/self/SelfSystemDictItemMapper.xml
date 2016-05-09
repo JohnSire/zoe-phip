@@ -15,11 +15,25 @@
             AND UPPER (concat(SSDI.NAME,SSDI.code) ) LIKE UPPER (CONCAT(CONCAT('%', #{key, jdbcType=VARCHAR}),'%'))
         </if>
         <if test="_parameter.containsKey('categoryCode')">
-            AND UPPER (SSDC.NAME,SSDC.CODE) =UPPER (CONCAT(CONCAT('%', #{categoryCode, jdbcType=VARCHAR}),'%'))
+            AND UPPER (CONCAT (SSDC.NAME,SSDC.CODE)) = UPPER (CONCAT(CONCAT('%',
+            #{categoryCode, jdbcType=VARCHAR}),'%'))
         </if>
         <if test="_parameter.containsKey('code')">
             AND UPPER (concat(SSDI.code) ) LIKE UPPER (CONCAT(CONCAT('%', #{code, jdbcType=VARCHAR}),'%'))
         </if>
         ORDER BY SSDI.CODE
+    </select>
+
+    <select id="getSingle" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT ssdi.* FROM SYS_SYSTEM_DICT_ITEM SSDI
+        INNER JOIN SYS_SYSTEM_DICT_CATEGORY SSDC
+        ON SSDC.ID = SSDI.FK_SYSTEM_DICT_CATEGORY_ID
+        WHERE UPPER (SSDC.CODE)=UPPER (#{categoryCode,jdbcType=VARCHAR})
+        <if test="_parameter.containsKey('itemCode')">
+            AND UPPER (SSDI.CODE) = UPPER(#{itemCode, jdbcType=VARCHAR})
+        </if>
+        <if test="_parameter.containsKey('itemName')">
+            AND UPPER(SSDI.NAME) = UPPER(#{itemName, jdbcType=VARCHAR})
+        </if>
     </select>
 </mapper>

@@ -85,6 +85,10 @@
         </if>
     </select>
 
+    <select id="getOne" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT PSEI.* from PHIP_ST_ELEMENT_INFO PSEI
+        WHERE UPPER (PSEI.CODE) = UPPER (#{code, jdbcType=VARCHAR})
+    </select>
     <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
         SELECT COUNT (1) from PHIP_ST_ELEMENT_INFO PSEI
         WHERE UPPER (PSEI.CODE) = UPPER (#{code, jdbcType=VARCHAR})
@@ -92,4 +96,9 @@
             AND PSEI.id != #{id, jdbcType=VARCHAR}
         </if>
     </select>
+    <select id="getDictId" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT ID from PHIP_DICT_CATALOG PDC
+        WHERE UPPER (PDC.CODE) = UPPER (#{code, jdbcType=VARCHAR})
+    </select>
+
 </mapper>

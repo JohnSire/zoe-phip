@@ -105,5 +105,7 @@ public interface ISystemDictItemMapper extends IMyMapper<SystemDictItem> {
     List<SystemDictItem> getDictItemsByCategoryCode(String categoryCode) throws Exception;
 
     SystemDictItem getSysDataItemByCode(String code);
+
+    SystemDictItem getSingle(Map<String,Object> map);
 }
 

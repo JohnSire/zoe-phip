@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * @author
@@ -42,12 +42,12 @@ public class StNormSourceInfo extends MasterEntity {
      * 起用时间
      */
     @Column(name = "START_TIME")
-    private java.util.Date startTime;
+    private Date startTime;
     /**
      * 停用时间
      */
     @Column(name = "END_TIME")
-    private java.util.Date endTime;
+    private Date endTime;
 
     /**
      *
@@ -91,16 +91,16 @@ public class StNormSourceInfo extends MasterEntity {
         this.standardType = standardType;
     }
 
-    public java.util.Date getStartTime() {
+    public Date getStartTime() {
         return this.startTime;
     }
 
 
-    public void setStartTime(java.util.Date startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public java.util.Date getEndTime() {
+    public Date getEndTime() {
         return this.endTime;
     }
 

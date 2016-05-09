@@ -293,8 +293,34 @@ public class StRsSetElementInfo extends MasterEntity {
         return this.version;
     }
 
-
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    /**
+     * 字典代码
+     */
+    private String dictCode;
+
+    /**
+     * 字典名称
+     */
+    private String dictName;
+
+
+    public String getDictCode() {
+        return dictCode;
+    }
+
+    public void setDictCode(String dictCode) {
+        this.dictCode = dictCode;
+    }
+
+    public String getDictName() {
+        return dictName;
+    }
+
+    public void setDictName(String dictName) {
+        this.dictName = dictName;
     }
 }

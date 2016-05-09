@@ -23,5 +23,7 @@ public interface IStElementInfoMapper extends IMyMapper<StElementInfo> {
 
     int getSingle(Map<String, Object> Map);
 
+    StElementInfo getOne(String code);
 
+    String getDictId(String code);
 }

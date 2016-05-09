@@ -26,7 +26,7 @@ public interface IStSetInfoMapper extends IMyMapper<StSetInfo> {
      * @param map
      * @return
      */
-    PageList<StSetInfo> getDataPageList(Map<String, Object> map);
+    List<StSetInfo> getDataPageList(Map<String, Object> map);
 
     /**
      * 根据CDA查询数据集

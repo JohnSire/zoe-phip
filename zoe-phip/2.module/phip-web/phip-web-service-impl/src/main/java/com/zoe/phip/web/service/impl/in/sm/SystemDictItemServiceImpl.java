@@ -50,14 +50,12 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
     @ErrorMessage(code = "001", message = "该字典类({0})已经存在!")
     public int add(SystemDictItem entity) throws Exception {
         Example example = new Example(SystemDictItem.class);
-        example.createCriteria().andEqualTo("fkSystemDictCategoryId", entity.getFkSystemDictCategoryId())
-                .andEqualTo("code", entity.getCode());
+        example.createCriteria().andEqualTo("fkSystemDictCategoryId", entity.getFkSystemDictCategoryId()).andEqualTo("code", entity.getCode());
         //example.createCriteria().andEqualTo("code", entity.getCode());
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
             throw new BusinessException("001", entity.getCode());
-        } else
-            return getMapper().insertSelective(entity);
+        } else return getMapper().insertSelective(entity);
     }
 
     /**
@@ -77,8 +75,7 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
         int count = getMapper().selectCountByExample(example);
         if (count > 0) {
             throw new BusinessException("002", entity.getCode());
-        } else
-            return getMapper().updateByPrimaryKeySelective(entity);
+        } else return getMapper().updateByPrimaryKeySelective(entity);
 
     }
 
@@ -163,8 +160,7 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
         PageList<SystemDictItem> pageList = new PageList<>();
         SqlHelper.startPage(page);
         String categoryId = getCategoryId(categoryCode);
-        if (StringUtil.isNullOrWhiteSpace(categoryId))
-            throw new BusinessException("003", categoryCode);
+        if (StringUtil.isNullOrWhiteSpace(categoryId)) throw new BusinessException("003", categoryCode);
         Map<String, Object> map = MapUtil.createMap(m -> m.put("categoryCode", categoryCode));
         List<SystemDictItem> results = getMapper().getDataItemList(map);
         PageInfo<SystemDictItem> pageInfo = new PageInfo<>(results);
@@ -186,8 +182,7 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
     @Override
     @ErrorMessage(code = "004", message = "字典项代码不能为空")
     public SystemDictItem getDictItemByCategoryId(String categoryId, String code) throws Exception {
-        if (StringUtil.isNullOrWhiteSpace(code))
-            throw new BusinessException("004");
+        if (StringUtil.isNullOrWhiteSpace(code)) throw new BusinessException("004");
         return getMapper().getDataItemList(MapUtil.createMap(m -> {
             m.put("categoryId", categoryId);
             m.put("code", code);
@@ -208,10 +203,8 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
     @ErrorMessage(code = "006", message = "字典项代码不能为!")
     public SystemDictItem getDictItemByCategoryCode(String categoryCode, String code) throws Exception {
         String categoryId = getCategoryId(categoryCode);
-        if (StringUtil.isNullOrWhiteSpace(categoryId))
-            throw new BusinessException("005", categoryCode);
-        if (StringUtil.isNullOrWhiteSpace(code))
-            throw new BusinessException("006");
+        if (StringUtil.isNullOrWhiteSpace(categoryId)) throw new BusinessException("005", categoryCode);
+        if (StringUtil.isNullOrWhiteSpace(code)) throw new BusinessException("006");
         return getMapper().getDataItemList(MapUtil.createMap(m -> {
             m.put("categoryId", categoryId);
             m.put("code", code);
@@ -230,8 +223,7 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
     public List<SystemDictItem> getDictItemsByCategoryCode(String categoryCode) throws Exception {
 
         String categoryId = getCategoryId(categoryCode);
-        if (StringUtil.isNullOrWhiteSpace(categoryId))
-            throw new BusinessException("007", categoryCode);
+        if (StringUtil.isNullOrWhiteSpace(categoryId)) throw new BusinessException("007", categoryCode);
         Example example = new Example(SystemDictItem.class);
         example.createCriteria().andEqualTo("fkSystemDictCategoryId", categoryId);
         return getMapper().selectByExample(example);
@@ -239,8 +231,7 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
 
     private String getCategoryId(String categoryCode) throws Exception {
         SystemDictCategory sr = service.getDictCategory(categoryCode);
-        if (sr != null)
-            return sr.getId();
+        if (sr != null) return sr.getId();
         return null;
     }
 
@@ -254,5 +245,21 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
         Example example = new Example(SystemDictItem.class);
         example.createCriteria().andEqualTo("code", code);
         return getMapper().selectByExample(example).get(0);
+    }
+
+    @Override
+    public SystemDictItem getSingle(Map<String, Object> map) {
+        return getSingle(map);
+    }
+
+    public SystemDictItem getItemByCategoryCodeAndName(String categoryCode, String name) {
+        Map<String, Object> map = MapUtil.createMap(m -> {
+            m.put("categoryCode", categoryCode);
+            m.put("itemName", name);
+        });
+        SystemDictItem item = getSingle(map);
+        map.clear();
+        map = null;
+        return item;
     }
 }

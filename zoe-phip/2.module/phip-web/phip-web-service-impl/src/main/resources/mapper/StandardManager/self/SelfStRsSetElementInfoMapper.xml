@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.web.dao.sdm.IStRsSetElementInfoMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StRsSetElementInfo" extends="BaseResultMap">
-
+        <result column="DICT_CODE" property="dictCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DICT_NAME" property="dictName" javaType="java.lang.String"
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StRsSetElementInfo">
         update PHIP_ST_RS_SET_ELEMENT_INFO
@@ -79,4 +81,25 @@
             AND PSRSEI.id != #{id, jdbcType=VARCHAR}
         </if>
     </select>
+    <select id="getDataPageList" parameterType="java.util.Map" resultMap="MultiResultMap">
+        SELECT PSRSEI.*, PDC.CODE DICT_CODE, PDC.NAME DICT_NAME
+        FROM PHIP_ST_RS_SET_ELEMENT_INFO PSRSEI
+        LEFT JOIN PHIP_DICT_CATALOG PDC ON PSRSEI.FK_DICT_ID = PDC.ID
+        WHERE PSRSEI.FK_SET_ID = #{fkSetId,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('key')">
+            AND UPPER (CONCAT(PSRSEI.CODE,PSRSEI.NAME)) LIKE UPPER (#{key, jdbcType=VARCHAR})
+        </if>
+    </select>
+
+    <select id="getBySetCode" parameterType="java.util.Map" resultMap="MultiResultMap">
+        SELECT PSRSEI.*, PDC.CODE DICT_CODE, PDC.NAME DICT_NAME
+        FROM PHIP_ST_RS_SET_ELEMENT_INFO PSRSEI
+        INNER JOIN PHIP_ST_SET_INFO PSSI
+        ON PSRSEI.FK_SET_ID = PSSI.ID
+        LEFT JOIN PHIP_DICT_CATALOG PDC
+        ON PSRSEI.FK_DICT_ID = PDC.ID
+        WHERE UPPER(PSSI.CODE) = UPPER (#{setCode,jdbcType=VARCHAR})
+        AND UPPER (PSRSEI.ELEMENT_CODE) = UPPER (#{elementCode,jdbcType=VARCHAR})
+    </select>
+
 </mapper>
