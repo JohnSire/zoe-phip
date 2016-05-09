@@ -68,7 +68,29 @@ define(function (require, exports, module) {
             })
             var name=decodeURI(common.getParamFromUrl("cdaName"));
             var html="<p style='margin-top: 9px; '>"+"当前列表为CDA（"+name+"）下的数据集</p>"
-            $("#gridTools").append(html)
+            $("#gridTools").append(html);
+            $(".btn-add").parent().unbind();
+            internal.selectList.dialog('dataSet', {
+                target: $(".btn-add"),
+                name: 'pid',
+                parentName: 'parentName',
+                valueField: 'id',
+                displayField: 'name',
+                fkNullContent: '根级节点',
+                selectParam: {
+                    isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
+                    treeVaildMsg: '父级分类不能是其本身!',
+                    multiselect: true
+                },
+                buttonsExtend: [{
+                    text: '根级节点', onclick: function (item, dialog) {
+                        $('input[name="pid"]').val(0);
+                        $("#btnParentCatalog").find(".text-line-content").text("根级节点");
+                        dialog.close();
+                    }
+                }]
+            });
+
         }
 
     };
