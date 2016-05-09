@@ -10,8 +10,9 @@ define(function (require, exports, module) {
                         winCallback: "win_source_detail_callback",//弹窗回调函数
                         getUrl: 'source/getSourceInfo',//
                         addUrl: 'source/addSourceInfo',//新增接口Url
-                        updateUrl: 'source/dupdateSourceInfo',//修改接口Url/修改的接口Url
+                        updateUrl: 'source/updateSourceInfo',//修改接口Url/修改的接口Url
                         loadPageEvent: function () {
+
                         }
 
                     }
