@@ -42,12 +42,12 @@ public class StNormSourceInfo extends MasterEntity {
      * 起用时间
      */
     @Column(name = "START_TIME")
-    private java.sql.Date startTime;
+    private java.util.Date startTime;
     /**
      * 停用时间
      */
     @Column(name = "END_TIME")
-    private java.sql.Date endTime;
+    private java.util.Date endTime;
 
     /**
      *
@@ -91,16 +91,16 @@ public class StNormSourceInfo extends MasterEntity {
         this.standardType = standardType;
     }
 
-    public java.sql.Date getStartTime() {
+    public java.util.Date getStartTime() {
         return this.startTime;
     }
 
 
-    public void setStartTime(java.sql.Date startTime) {
+    public void setStartTime(java.util.Date startTime) {
         this.startTime = startTime;
     }
 
-    public java.sql.Date getEndTime() {
+    public java.util.Date getEndTime() {
         return this.endTime;
     }
 

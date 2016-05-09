@@ -8,6 +8,7 @@ package com.zoe.phip.web.model.sdm;
 import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -56,12 +57,12 @@ public class StElementInfo extends MasterEntity {
      * 起用时间
      */
     @Column(name = "START_TIME")
-    private java.sql.Date startTime;
+    private Date startTime;
     /**
      * 停用时间
      */
     @Column(name = "END_TIME")
-    private java.sql.Date endTime;
+    private Date endTime;
     /**
      * 允许值
      */
@@ -141,21 +142,21 @@ public class StElementInfo extends MasterEntity {
         this.dataFormat = dataFormat;
     }
 
-    public java.sql.Date getStartTime() {
+    public Date getStartTime() {
         return this.startTime;
     }
 
 
-    public void setStartTime(java.sql.Date startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public java.sql.Date getEndTime() {
+    public Date getEndTime() {
         return this.endTime;
     }
 
 
-    public void setEndTime(java.sql.Date endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
