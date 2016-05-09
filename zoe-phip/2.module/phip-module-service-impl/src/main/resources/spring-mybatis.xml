@@ -21,9 +21,11 @@
     <!-- 引入配置文件 -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <!--<property name="location" value="classpath:jdbc.properties"/>-->
+        <property name="ignoreResourceNotFound" value="true"/>
         <property name="locations">
             <list>
+                <!--发布的时候用这个-->
+                <value>file:./jdbc.properties</value>
                 <value>classpath:jdbc.properties</value>
                 <value>classpath*:*.config.properties</value>
             </list>
