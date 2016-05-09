@@ -1,9 +1,9 @@
 /**
- * Created by linqinghuang on 2016/5/3.
+ * Created by zhangxingcai on 2016/5/9 0009.
  */
 define(function (require, exports, module) {
     var internal = {
-        dict: {
+        domain: {
             winName: 'win_dict_select_list',
             title: '字典选择列表',
             selectParam: {
@@ -24,5 +24,5 @@ define(function (require, exports, module) {
             }
         }
     };
-    exports.dict = internal.dict;
+    exports.domain = internal.domain;
 })

@@ -77,6 +77,19 @@ define(function (require, exports, module) {
 
         }
     };
+
+    function showVersionPreview() {
+        var top = common.getTopWindowDom();
+        var link = "version/view/versionPreview";
+        top.frames["mainframe"].location.href = link;
+    }
+
+    function showEditVersionSetRs(id) {
+        var top = common.getTopWindowDom();
+        var link = "version/view/versionSetRs";
+        top.frames["mainframe"].location.href = link;
+    }
+
     exports.init = function () {
         internal.init();
     }

@@ -1,0 +1,56 @@
+<%
+var bodySection = {
+%>
+<ul class="y-layout-form clearfix">
+    <div class="column">
+        <label class="label" for="version">版本：</label>
+        <div class="simulate-select" id="version">
+            <span class="text" style="width:340px">----------------------------------------版本----------------------------------------</span>
+            <i class="icon-grid icon-grid-fold-gray" style="display:none "></i>
+            <ul class="simulate-select-lists" style="display:none;width: 358px">
+                <li class="simulate-select-list">
+                    ----------------------------------------版本----------------------------------------
+                </li>
+            </ul>
+            <div class="clear" style="width: 340px"></div>
+        </div>
+        <select name="version" style="display:none;">
+        </select>
+    </div>
+    <div class="column">
+        <label class="label" for="fkSourceId">标准来源：</label>
+        <div class="simulate-select" id="fkSourceId">
+            <span class="text" style="width:340px">----------------------------------------标准来源----------------------------------------</span>
+            <i class="icon-grid icon-grid-fold-gray" style="display:none "></i>
+            <ul class="simulate-select-lists" style="display:none;width: 358px">
+                <li class="simulate-select-list">
+                    --------------------------------------标准来源-------------------------------------
+                </li>
+            </ul>
+            <div class="clear" style="width: 340px"></div>
+        </div>
+        <select name="fkSourceId" style="display: none;">
+        </select>
+    </div>
+    <li class="list">
+        <label class="label" style="margin-right:-1px;">关键字：</label>
+        <input type="text" id="txtKey" class="text" style="width:312px"/>
+        <input type="button" id="btnSearch" class="btn btn-search" value="搜索"/>
+    </li>
+</ul>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/UtilityModule/SelectList/options/domain', function (a) {
+            a.init();
+        });
+    })
+</script>
+
+<%};%>
+<%
+include("/WEB-INF/shared/_baseSelectList.html",{title:"用户搜索",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

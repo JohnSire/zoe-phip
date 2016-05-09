@@ -32,6 +32,16 @@ public class StandardVersionController extends BaseController {
         return "StandardManage/StandardVersion/versionDetail";
     }
 
+    @RequestMapping("view/versionSetRs")
+    public String ToVersionSetRS() {
+        return "StandardManage/StandardVersion/versionSetRs";
+    }
+
+    @RequestMapping("view/versionPreview")
+    public String ToVersionPreview() {
+        return "StandardManage/StandardVersion/versionPreview";
+    }
+
     /**
      * 标准版本管理列表查询
      *
@@ -60,6 +70,7 @@ public class StandardVersionController extends BaseController {
 
     /**
      * 新增标准版本管理
+     *
      * @param standardVersion
      * @param request
      * @return
@@ -73,6 +84,7 @@ public class StandardVersionController extends BaseController {
 
     /**
      * 更新标准版本管理
+     *
      * @param standardVersion
      * @param request
      * @return
@@ -86,6 +98,7 @@ public class StandardVersionController extends BaseController {
 
     /**
      * 删除标准版本管理信息
+     *
      * @param id
      * @return
      */
@@ -98,6 +111,7 @@ public class StandardVersionController extends BaseController {
 
     /**
      * 批量删除标准管理信息
+     *
      * @param ids
      * @return
      */

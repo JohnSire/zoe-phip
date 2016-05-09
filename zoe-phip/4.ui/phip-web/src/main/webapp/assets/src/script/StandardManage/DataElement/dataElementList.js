@@ -47,8 +47,8 @@ define(function (require, exports, module) {
                     edit: {title: "编辑数据元"},
                     common: {
                         url: 'element/view/dataelementdetail',
-                        width: 550,
-                        height: 420
+                        width: 560,
+                        height: 450
                     }
                 }
             });
