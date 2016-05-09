@@ -14,6 +14,7 @@ define(function (require, exports, module) {
                 }
             });
         }
+
     };
 
     exports.searchbox = internal;
