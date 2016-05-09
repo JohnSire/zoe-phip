@@ -26,8 +26,9 @@
             <list>
                 <!--发布的时候用这个-->
                 <value>file:./jdbc.properties</value>
-                <value>classpath:jdbc.properties</value>
-                <value>classpath*:*.config.properties</value>
+                <value>file:./module.config.properties</value>
+               <!-- <value>classpath:jdbc.properties</value>
+                <value>classpath*:*.config.properties</value>-->
             </list>
         </property>
     </bean>
@@ -164,5 +165,8 @@
         <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
         <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
         <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+    <bean id="urlExpand" class="com.zoe.phip.register.util.ProcessXmlUtil">
+        <property name="schemasPath" value="${schemasPath}"/>
     </bean>
 </beans>

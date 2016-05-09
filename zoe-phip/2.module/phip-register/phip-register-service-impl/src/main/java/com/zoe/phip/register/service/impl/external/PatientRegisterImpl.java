@@ -1,8 +1,6 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.zoe.phip.infrastructure.annotation.ErrorMessage;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
@@ -11,19 +9,19 @@ import com.zoe.phip.register.model.XmanCard;
 import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IPatientRegister;
 import com.zoe.phip.register.service.impl.internal.PatientRegisterInImpl;
-import com.zoe.phip.register.service.internal.IPatientRegisterIn;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
 import org.dom4j.Document;
-import org.dom4j.Node;
+import org.dom4j.DocumentException;
 import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.text.MessageFormat;
+import java.io.File;
+import java.io.InputStream;
 
 /**
  * Created by zengjiyang on 2016/4/11.
@@ -67,10 +65,7 @@ public class PatientRegisterImpl implements IPatientRegister {
         String errorMsg = "";
         XmanBaseInfo baseInfo = null;
         try {
-            SAXReader reader = new SAXReader();
-            //XmanBaseInfo
-            Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapterPath));
-            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
+            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, getAdapterDom());
 
             //xml 验证错误
             if (strResult.contains("error:数据集内容验证错误")) {
@@ -112,10 +107,8 @@ public class PatientRegisterImpl implements IPatientRegister {
         XmanBaseInfo baseInfo = null;
         String errorMsg = "";
         try {
-            SAXReader reader = new SAXReader();
-            //XmanBaseInfo
-            Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapterPath));
-            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, parserDoc);
+
+            baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, getAdapterDom());
             //xml 验证错误
             if (strResult.contains("error:数据集内容验证错误")) {
                 return updateFailed(baseInfo, strResult);
@@ -247,4 +240,21 @@ public class PatientRegisterImpl implements IPatientRegister {
         return RegisterUtil.responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_UPDATE_ERROR);
     }
 
+    private Document getAdapterDom(){
+        try{
+            //todo 先暂时用file的方式获取
+            SAXReader reader = new SAXReader();
+            Document parserDoc;
+            InputStream adapterStream=this.getClass().getResourceAsStream(adapterPath);
+            if(adapterStream==null){
+                parserDoc = reader.read(new File("."+adapterPath));
+            }else {
+                parserDoc = reader.read(adapterStream);
+            }
+            return parserDoc;
+        }catch (DocumentException e){
+            logger.error("errors",e);
+            return null;
+        }
+    }
 }
