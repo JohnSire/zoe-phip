@@ -34,8 +34,12 @@ public class OrganizationController extends BaseController {
 
     @RequestMapping("/view/medicalDepartmentList")
     public String ToMedicalDepartmentList() {
-        // return "Register/Organization/medicalOrgDetail";
         return "Register/Organization/medicalDepartmentList";
+    }
+
+    @RequestMapping("/view/medicalDepartmentDetail")
+    public String ToMedicalDepartmentDetail() {
+        return "Register/Organization/medicalDepartmentDetail";
     }
 
     /**
@@ -132,9 +136,7 @@ public class OrganizationController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResult getMedicalDepartmentList(String type, String deptTypeCode, String keyWord, String deptParentCode) {
-
         return ServiceFactory.getOrganizationRegisterIn().DepartmentListQuery(ComSession.getUserInfo(), type, deptTypeCode, deptParentCode, keyWord, getQueryPage());
-
     }
 
 

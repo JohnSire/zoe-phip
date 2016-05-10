@@ -10,7 +10,7 @@ var bodySection={
 <div class="y-layout-sidebar">
     <div class="y-layout-header">
         <ul class="y-layout-form clearfix">
-            <p class="icon-wrapper" id="treeBtns">
+            <p class="icon-wrapper">
 
             </p>
         </ul>
@@ -23,7 +23,7 @@ var bodySection={
 <!--右边栏begin-->
 <div class="y-layout-main-two">
     <div class="y-layout-header">
-        <ul class="y-layout-form clearfix" id="medicalOrgTools">
+        <ul class="y-layout-form clearfix" id="medicalDepartmentTools">
             <ul op="btns" style="float:left;"></ul>
             <ul op="search" style="float:right;padding-right: 20px;"></ul>
         </ul>
@@ -31,7 +31,7 @@ var bodySection={
     <div class="y-layout-content">
         <!--主要内容-->
         <div>
-            <div id="medicalOrgGrid" style="border:0;"></div>
+            <div id="medicalDepartmentGrid" style="border:0;"></div>
         </div>
         <!--主要内容-->
     </div>
@@ -43,7 +43,7 @@ var scriptSection={
 %>
 <script type="text/javascript">
     $(function () {
-        seajs.use('{dir}/Register/Organization/medicalDepartmentList.js', function (a) {
+        seajs.use('{dir}/Register/Organization/medicalDepartmentList', function (a) {
             a.init();
         });
     })

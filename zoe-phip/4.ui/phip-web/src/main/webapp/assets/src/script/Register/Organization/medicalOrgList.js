@@ -79,16 +79,16 @@ define(function (require, exports, module) {
                         {display: '联系电话', name: 'employerTelNo', width: 200, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']},
                         {
-                            display: '编辑科室', isSort: false, width: 120, align: 'center', render: function () {
-                            return "<a onclick='javascript:winEditGridRow()'>编辑科室</a>"
+                            display: '编辑科室', isSort: false, width: 120, align: 'center',
+                            render: function (rowdata) {
+                                return "<a onclick='javascript:winEditDepartment(\"" + rowdata["deptCode"] + "\")'>编辑科室</a>"
+                            }
                         }
-                        }
-
                     ],
                     frozen: false,
                     usePage: true,
                     width: "100%",
-                    height: "99%"//$("body").innerHeight() - $("#dictItemTools").outerHeight() - 76//500
+                    height: "99%"
                 },
                 dialogParam: {
                     winName: "win_medical_org_detail_dialog",//弹窗对象变量名称
@@ -109,7 +109,16 @@ define(function (require, exports, module) {
                 }
             })
         }
+
     };
+    window.winEditDepartment = function (orgCode) {
+        common.dialog({
+            title: '科室信息维护',
+            url: 'organization/view/medicalDepartmentList?orgCode=' + orgCode,
+            width: 1000,
+            height: 600
+        })
+    }
     exports.init = function () {
         internal.init();
     }
