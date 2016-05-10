@@ -23,4 +23,14 @@
         </set>
         where id = #{id}
     </update>
+    <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT (1) FROM PHIP_STANDARD_VER_RS_FIELD PSVRF
+        WHERE PSVRF.FK_VERSION_ID = #{fkVersionId,jdbcType=VARCHAR}
+        AND PSVRF.FK_CDA_ID = #{fkCdaId,jdbcType=VARCHAR}
+        AND PSVRF.FK_SET_ID = #{fkSetId,jdbcType=VARCHAR}
+        AND PSVRF.FK_FIELD_ID =#{fkFieldId,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('id')">
+            AND PSVRF.id != #{id, jdbcType=VARCHAR}
+        </if>
+    </select>
 </mapper>
