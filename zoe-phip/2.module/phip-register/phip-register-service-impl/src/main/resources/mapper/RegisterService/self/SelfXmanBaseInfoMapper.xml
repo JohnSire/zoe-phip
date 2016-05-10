@@ -19,9 +19,6 @@
             <if test="orgCode != null">
                 ORG_CODE = #{orgCode,jdbcType=VARCHAR},
             </if>
-            <if test="orgName != null">
-                ORG_NAME = #{orgName,jdbcType=VARCHAR},
-            </if>
             <if test="idNo != null">
                 ID_NO = #{idNo,jdbcType=VARCHAR},
             </if>
@@ -94,9 +91,6 @@
             <if test="codeSysCode != null">
                 CODE_SYS_CODE = #{codeSysCode,jdbcType=VARCHAR},
             </if>
-            <if test="codeSysName != null">
-                CODE_SYS_NAME = #{codeSysName,jdbcType=VARCHAR},
-            </if>
             <if test="assignedPersonCode != null">
                 ASSIGNED_PERSON_CODE = #{assignedPersonCode,jdbcType=VARCHAR},
             </if>
@@ -106,7 +100,6 @@
             <if test="createTime != null">
                 CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
             </if>
-
             <if test="healthRecordOrgCode != null">
                 HEALTH_RECORD_ORG_CODE = #{healthRecordOrgCode,jdbcType=VARCHAR},
             </if>
