@@ -15,14 +15,14 @@ public class DocumentRegisterImplTest extends BaseTest {
     private DocumentRegisterImpl documentRegister;
 
     @Test
-    public void testAddPatientRegistry() throws Exception {
-        String patientInput = "<ProvideAndRegisterDocumentSetRequest xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+    public void testAddEhrRegistry() throws Exception {
+        String ehrInput = "<ProvideAndRegisterDocumentSetRequest xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
                 "                                      xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/ProvideAndRegisterDocumentSetRequest.xsd\">\n" +
                 "    <ID root=\"2.16.156.10011.0\" extension=\"C193FE3B-E71F-4D81-8B8B-9462F35E8D38\"/>\n" +
-                "    <SourcePatientID>201507287452</SourcePatientID>\n" +
+                "    <SourcePatientID>123456</SourcePatientID>\n" +
                 "    <SourcePatientName>李若鸣</SourcePatientName>\n" +
                 "    <HealthCardId>201507287452</HealthCardId>\n" +
-                "    <IdentityId>201507287452</IdentityId>\n" +
+                "    <IdentityId>120109197706015516</IdentityId>\n" +
                 "    <Organization id=\"022103A005\">\n" +
                 "        <Name>厦门大学附属第一医院</Name>\n" +
                 "        <TelephoneNumber areaCode=\"022\" number=\"23376522\"/>\n" +
@@ -63,21 +63,8 @@ public class DocumentRegisterImplTest extends BaseTest {
                 "</ProvideAndRegisterDocumentSetRequest>";
 
 
-        String result = documentRegister.provideAndRegisterDocumentSet(patientInput);
+        String result = documentRegister.provideAndRegisterDocumentSet(ehrInput);
         System.out.println(result);
-
-       /* SAXReader reader = new SAXReader();
-        String filePath = "/template/Patient/In/Adapter/PatientRegisterAdapter.xml";
-        Document document = null;
-        try {
-            document = reader.read(this.getClass().getResourceAsStream(filePath));
-        } catch (DocumentException e) {
-
-        }
-        patientInput= XmlUtil.removeNameSpace(patientInput);
-        Document doc= DocumentHelper.parseText(patientInput);
-        XmanBaseInfo info = XmlBeanUtil.toBean(doc, XmanBaseInfo.class,document);*/
-
     }
 
 }

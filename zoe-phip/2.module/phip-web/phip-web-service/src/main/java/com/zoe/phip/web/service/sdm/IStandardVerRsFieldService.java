@@ -7,6 +7,7 @@
 package com.zoe.phip.web.service.sdm;
 
 import com.zoe.phip.module.service.service.in.IBaseInService;
+import com.zoe.phip.web.model.sdm.StandardVerRsDict;
 import com.zoe.phip.web.model.sdm.StandardVerRsField;
 
 /**

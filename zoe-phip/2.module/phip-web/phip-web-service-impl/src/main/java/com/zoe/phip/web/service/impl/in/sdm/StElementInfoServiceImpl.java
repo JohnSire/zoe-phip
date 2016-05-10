@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SortOrder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
@@ -43,36 +44,15 @@ public class StElementInfoServiceImpl extends BaseInServiceImpl<StElementInfo, I
     @Autowired
     private SystemDictItemServiceImpl dictItemServiceImpl;
 
-    @Override
-    public int add(StElementInfo entity) throws Exception {
-        Map<String, Object> map = MapUtil.createMap(m -> {
-            m.put("code", entity.getCode());
-        });
-        if (getSingle(map) > 0) throw new BusinessException("001", entity.getCode());
-        map.clear();
-        map = null;
-        return super.add(entity);
-    }
-
-    @Override
-    public int update(StElementInfo entity) throws Exception {
-        Map<String, Object> map = MapUtil.createMap(m -> {
-            m.put("code", entity.getCode());
-            m.put("id", entity.getId());
-        });
-        if (getSingle(map) > 0) throw new BusinessException("001", entity.getCode());
-        map.clear();
-        map = null;
-        return super.update(entity);
-    }
-
-
     public PageList<StElementInfo> getDataPageList(String key, QueryPage queryPage) {
 
         PageList<StElementInfo> pageList = new PageList<>();
+        queryPage.setOrderBy("PSEI.CODE");
+        queryPage.setSortOrder(SortOrder.ASC);
         SqlHelper.startPage(queryPage);
+
         Map<String, Object> map = new TreeMap<>();
-        if (!StringUtil.isNullOrWhiteSpace(key)) map.put("key", key);
+        if (!StringUtil.isNullOrWhiteSpace(key)) map.put("key", SqlHelper.getLikeStr(key));
         List<StElementInfo> results = getMapper().getDataPageList(map);
         PageInfo<StElementInfo> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
@@ -112,11 +92,37 @@ public class StElementInfoServiceImpl extends BaseInServiceImpl<StElementInfo, I
         return addList(infoList);
     }
 
-    public List<StElementInfo> exportElement(String fkSourceId){
-        Map<String,Object> map =new TreeMap<>();
-        if(!StringUtil.isNullOrWhiteSpace(fkSourceId))
-            map.put("fkSourceId",fkSourceId);
+    public List<StElementInfo> exportElement(String fkSourceId) {
+        Map<String, Object> map = new TreeMap<>();
+        if (!StringUtil.isNullOrWhiteSpace(fkSourceId)) map.put("fkSourceId", fkSourceId);
         return getMapper().getDataPageList(map);
+    }
+
+    @Override
+    public int add(StElementInfo entity) throws Exception {
+        Map<String, Object> map = MapUtil.createMap(m -> {
+            m.put("code", entity.getCode());
+        });
+        if (getSingle(map) > 0) {
+            super.dispose(map);
+            throw new BusinessException("001", entity.getCode());
+        }
+        super.dispose(map);
+        return super.add(entity);
+    }
+
+    @Override
+    public int update(StElementInfo entity) throws Exception {
+        Map<String, Object> map = MapUtil.createMap(m -> {
+            m.put("code", entity.getCode());
+            m.put("id", entity.getId());
+        });
+        if (getSingle(map) > 0) {
+            super.dispose(map);
+            throw new BusinessException("001", entity.getCode());
+        }
+        super.dispose(map);
+        return super.update(entity);
     }
 
     @Override

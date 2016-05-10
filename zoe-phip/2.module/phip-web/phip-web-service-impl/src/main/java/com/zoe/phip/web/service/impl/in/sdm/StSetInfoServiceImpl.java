@@ -43,16 +43,23 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
     @Autowired
     private StRsSetElementInfoServiceImpl rsSetElementInfoService;
 
-    public PageList<StSetInfo> getDataPageList(String key, QueryPage queryPage){
+    @Autowired
+    private StElementInfoServiceImpl elementInfoService;
+
+
+    public PageList<StSetInfo> getDataPageList(String key, QueryPage queryPage) {
+        queryPage.setOrderBy("PSSI.CODE");
+        queryPage.setSortOrder(SortOrder.ASC);
         PageList<StSetInfo> pageList = new PageList<>();
-        Example example = new Example(StSetInfo.class);
         SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();
-        if (!StringUtil.isNullOrWhiteSpace(key)) map.put("key", key);
+        if (!StringUtil.isNullOrWhiteSpace(key))
+            map.put("key", SqlHelper.getLikeStr(key));
         List<StSetInfo> results = getMapper().getDataPageList(map);
         PageInfo<StSetInfo> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
+        super.dispose(map);
         return pageList;
     }
 
@@ -62,7 +69,9 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
             m.put("fkCdaId", fkCdaId);
             if (!StringUtil.isNullOrWhiteSpace(key)) m.put("key", key);
         });
-        return getMapper().getByCdaId(map);
+        List<StSetInfo> infoList = getMapper().getByCdaId(map);
+        super.dispose(map);
+        return infoList;
     }
 
     @Override
@@ -73,6 +82,78 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
     @Override
     public List<StSetInfo> getByCdaId(Map<String, Object> map) {
         return getMapper().getByCdaId(map);
+    }
+
+
+    public int rsSetElementAdd(StRsSetElementInfo info) throws Exception {
+        return rsSetElementInfoService.add(info);
+    }
+
+    public int rsSetElementUpdate(StRsSetElementInfo info) throws Exception {
+        return rsSetElementInfoService.update(info);
+    }
+
+    public int rsSetElementDel(String id) throws Exception {
+        return rsSetElementInfoService.deleteById(id);
+    }
+
+    public int importSetAndRsElement(List<StSetInfo> setInfoList, List<StRsSetElementInfo> elementInfoList) {
+        String ids = new String();
+        String eleIds = new String();
+        for (StSetInfo baseInfo : setInfoList) {
+            StSetInfo model = getBySetCode(baseInfo.getCode());
+            if (model != null)
+            {
+                ids += model.getId() + ",";
+                baseInfo.setId(model.getId());
+            }
+        }
+
+        return 0;
+    }
+
+    /**
+     * 数据集(字段关联)批量导入
+     *
+     * @param infoList
+     * @return
+     */
+
+    public int importRsSetElementInfo(List<StRsSetElementInfo> infoList) throws Exception {
+        // TODO: 2016/5/9
+        String ids = new String();
+        for (StRsSetElementInfo info : infoList) {
+            if (StringUtil.isNullOrWhiteSpace(info.getSetCode())) continue;
+            StSetInfo setInfo = getBySetCode(info.getSetCode());
+            if (setInfo == null) continue;
+            info.setFkSetId(setInfo.getId());
+            if (StringUtil.isNullOrWhiteSpace(info.getElementCode())) continue;
+            StRsSetElementInfo model = rsSetElementInfoService.getBySetCode(info.getSetCode(), info.getElementCode());
+            if (model != null) {
+                ids = ids + model.getId() + ",";
+                info.setId(model.getId());
+            }
+            //获取基础数据元的Id
+            if (!StringUtil.isNullOrWhiteSpace(info.getBaseElementCode())) {
+                StElementInfo e = elementInfoService.getOne(info.getBaseElementCode());
+                if (e != null) info.setFkBaseElementId(e.getId());
+            }
+
+            /**
+             * 字典
+             */
+
+            if (!StringUtil.isNullOrWhiteSpace(info.getDictCode())) {
+                String dictId = getDictId(info.getDictCode());
+                if (!StringUtil.isNullOrWhiteSpace(dictId)) info.setFkDictId(dictId);
+            }
+        }
+        if (!StringUtil.isNullOrWhiteSpace(ids)) {
+            ids = ids.substring(0, ids.length() - 1);
+            rsSetElementInfoService.deleteByIds(ids);
+        }
+
+        return rsSetElementInfoService.addList(infoList);
     }
 
     @Override
@@ -90,7 +171,11 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
         Map<String, Object> map = MapUtil.createMap(m -> {
             m.put("code", entity.getCode());
         });
-        if (getSingle(map) > 0) throw new BusinessException("001", entity.getCode());
+        if (getSingle(map) > 0) {
+            super.dispose(map);
+            throw new BusinessException("001", entity.getCode());
+        }
+        super.dispose(map);
         return super.add(entity);
     }
 
@@ -100,19 +185,21 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
             m.put("code", entity.getCode());
             m.put("id", entity.getId());
         });
-        if (getSingle(map) > 0) throw new BusinessException("002", entity.getCode());
+        if (getSingle(map) > 0) {
+            super.dispose(map);
+            throw new BusinessException("002", entity.getCode());
+        }
+        super.dispose(map);
         return super.update(entity);
     }
 
-    public int rsSetElementAdd(StRsSetElementInfo info) throws Exception {
-        return rsSetElementInfoService.add(info);
+    @Override
+    public StSetInfo getBySetCode(String code) {
+        return getMapper().getBySetCode(code);
     }
 
-    public int rsSetElementUpdate(StRsSetElementInfo info) throws Exception {
-        return rsSetElementInfoService.update(info);
-    }
-
-    public int rsSetElementDel(String id) throws Exception {
-        return rsSetElementInfoService.deleteById(id);
+    @Override
+    public String getDictId(String code) {
+        return getDictId(code);
     }
 }

@@ -1,7 +1,7 @@
 ﻿<RegistryResponse xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\RegistryResponse.xsd">
-  <Id root="2.16.156.10011.0" extension="${Model.Acknowledge.msgId}" />
+  <Id root="2.16.156.10011.0" extension="${Model.acknowledgement.msgId}" />
   <TargetId root="2.16.156.10011.0" extension="${Model.msgId}" />
   <Response id="Document.1" documentUniqueId="${Model.ehrId}" repositoryId="${Model.id}" status="AA" doumentUrl="">
-    <Detail>${Model.Acknowledge.text}</Detail>
+    <Detail>${Model.acknowledgement.text}</Detail>
   </Response>
 </RegistryResponse>

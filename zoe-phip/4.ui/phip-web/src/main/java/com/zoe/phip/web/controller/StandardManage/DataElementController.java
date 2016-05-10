@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by zhangxingcai on 2016/5/6 0006.
@@ -94,7 +95,7 @@ public class DataElementController extends BaseController {
     /**
      * 删除数据元信息
      *
-     * @param ids
+     * @param id
      * @return
      */
     @RequestMapping(value = "/delElementInfo")
@@ -115,6 +116,30 @@ public class DataElementController extends BaseController {
     @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult delElementList(String ids) {
         return ServiceFactory.getStElementService().deleteByIds(ComSession.getUserInfo(), ids);
+    }
+
+    /**
+     * 导出数据元
+     *
+     * @param fkSourceId
+     * @return
+     */
+    @RequestMapping(value = "/exportElement")
+    @ResponseBody
+    public ServiceResultT<List<StElementInfo>> exportElement(String fkSourceId) {
+        return ServiceFactory.getStElementService().exportElement(ComSession.getUserInfo(), fkSourceId);
+    }
+
+    /**
+     * 导入数据元
+     *
+     * @param stElementInfos
+     * @return
+     */
+    @RequestMapping(value = "/importElement")
+    @ResponseBody
+    public ServiceResult importElement(List<StElementInfo> stElementInfos) {
+        return ServiceFactory.getStElementService().importElement(ComSession.getUserInfo(), stElementInfos);
     }
     //endregion
 }

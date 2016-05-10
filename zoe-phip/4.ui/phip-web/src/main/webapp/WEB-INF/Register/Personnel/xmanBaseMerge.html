@@ -1,0 +1,14 @@
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Personnel/xmanBaseMergeList', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseGrid.html",{title:"请选择合并后保留记录",styleSection:null,bodySection:null,scriptSection:scriptSection}){}
+%>

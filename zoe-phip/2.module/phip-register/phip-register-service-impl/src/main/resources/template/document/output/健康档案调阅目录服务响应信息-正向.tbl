@@ -4,7 +4,7 @@ var inTime = Model.startTime;
 var outTime = Model.endTime;
 %>
 <GetDocumentStroedInfoResponse xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\GetDocumentStroedInfoResponse.xsd" status="AA">
-  <Id root="2.16.156.10011.0" extension="${Model.Acknowledge.msgId}" />
+  <Id root="2.16.156.10011.0" extension="${Model.acknowledgement.msgId}" />
   <TargetId root="2.16.156.10011.0" extension="${Model.msgId}" />
   <DocumentSet>
     <DocumentUniqueId>${Model.ehrId}</DocumentUniqueId>
@@ -24,5 +24,5 @@ var outTime = Model.endTime;
     <DiagnosisResult>${Model.diagnosisResult}</DiagnosisResult>
     <DocUrl></DocUrl>
   </DocumentSet>
-  <Detail>${Model.Acknowledge.text}</Detail>
+  <Detail>${Model.acknowledgement.text}</Detail>
 </GetDocumentStroedInfoResponse>

@@ -37,6 +37,11 @@ public class PersonnelController extends BaseController {
         return "/Register/Personnel/xmanBaseDetail";
     }
 
+    @RequestMapping("/view/xmanbasemerge")
+    public String ToXmanBaseMerge(HttpServletRequest request, Model model) {
+        return "/Register/Personnel/xmanBaseMerge";
+    }
+
     /**
      * 根据条件查询病人列表
      *

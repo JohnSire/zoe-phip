@@ -193,6 +193,7 @@ public class StElementInfo extends MasterEntity {
     @Transient
     private String sourceName;
 
+    @Transient
     private String DictCode;
 
     public String getSourceName() {
