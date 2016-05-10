@@ -176,12 +176,14 @@ public class OrganizationRegisterTest extends BaseTest {
         // implIn.organizationListQueryT("1","","");
         implIn.dictItemListQueryByCodeSystem("2.16.156.10011.2.3.4.1");
 
+
+
     }
 
     @Test
     public void organizationFind() {
-        OrgDeptInfo OrgDeptInfol= implIn.getOrgDeptByPrimaryKey("04982274C4A34AC693EDC491547D95E1");
-
+       // OrgDeptInfo OrgDeptInfol= implIn.getOrgDeptByPrimaryKey("04982274C4A34AC693EDC491547D95E1");
+        OrgDeptInfo OrgDeptInfol= implIn.getByDepartmentId("FF7E43C5F16344FD9CFC85D4498C0438");
     }
 
 

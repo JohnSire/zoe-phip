@@ -254,4 +254,14 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return getMapper().getOrgDeptByPrimaryKey(id);
     }
 
+    @Override
+    public OrgDeptInfo getDepartmentByPrimaryKey(String id) {
+       return getMapper().getDepartmentByPrimaryKey(id);
+    }
+
+
+    public OrgDeptInfo getByDepartmentId(String id){
+        return getDepartmentByPrimaryKey(id);
+    }
+
 }

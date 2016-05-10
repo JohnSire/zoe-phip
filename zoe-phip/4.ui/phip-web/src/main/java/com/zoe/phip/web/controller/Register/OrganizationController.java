@@ -91,7 +91,7 @@ public class OrganizationController extends BaseController {
     }
 
     /**
-     * 获取机构（科室）详情
+     * 获取机构详情
      *
      * @param id
      * @return
@@ -102,6 +102,21 @@ public class OrganizationController extends BaseController {
     public ServiceResult getMedicalOrgInfo(String id) {
         return ServiceFactory.getOrganizationRegisterIn().getById(ComSession.getUserInfo(), id);
     }
+
+    /**
+     * 获取科室详情
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/getMedicalOrgInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResult getMedicalDepartmentInfo(String id) {
+        return ServiceFactory.getOrganizationRegisterIn().getByDepartmentId(ComSession.getUserInfo(), id);
+    }
+
+
 
     /**
      * 根据机构编码获取机构列表

@@ -151,6 +151,26 @@
     </select>
 
 
+    <select id="getDepartmentByPrimaryKey" parameterType="java.lang.String" resultMap="MultiResultMap">
+        <include refid="departmentSelect"/>
+        WHERE PODI.ID=#{id}
+    </select>
+    <sql id="departmentSelect">
+        SELECT PODI.*,p.NAME AS dept_type_name,a.name as PROVINCE_CODE_NAME ,b.name as CITY_CODE_NAME,c.name as COUNTY_CODE_NAME,
+        d.name as STREET_CODE_NAME,e.name as NEIGHBORHOOD_CODE_NAME
+        FROM PHIP_ORG_DEPT_INFO PODI
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.2.62"/>
+        </include>
+        ) p ON PODI.dept_type_code=p.CODE --科室分类
+        left join phip_area_base_info a on PODI.PROVINCE_CODE=a.code
+        left join phip_area_base_info b on PODI.CITY_CODE=b.code
+        left join phip_area_base_info c on PODI.COUNTY_CODE=c.code
+        left join phip_area_base_info d on PODI.STREET_CODE=d.code
+        left join phip_area_base_info e on PODI.NEIGHBORHOOD_CODE=e.code
+    </sql>
+
 
     <select id="getOrgDeptByPrimaryKey" parameterType="java.lang.String" resultMap="MultiResultMap">
         <include refid="orgDeptSelect"/>

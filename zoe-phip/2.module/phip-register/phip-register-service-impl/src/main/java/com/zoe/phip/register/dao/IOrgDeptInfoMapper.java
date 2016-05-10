@@ -41,4 +41,6 @@ public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
     NationalStandards dictItemListQueryByDictCode(String dictCode);
 
     OrgDeptInfo getOrgDeptByPrimaryKey(String id);
+
+    OrgDeptInfo getDepartmentByPrimaryKey(String id);
 }
