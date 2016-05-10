@@ -32,12 +32,9 @@ public class DictRegisterImpl implements IDictRegister {
     @Override
     public String addDictCatalogRequest(String message) {
         Document document = ProcessXmlUtil.load(message);
-        SAXReader reader = new SAXReader();
-        Document parserDoc = null;
         DictCatalog catalog;
         try {
-            parserDoc = reader.read(this.getClass().getResourceAsStream(catalogAdapterPath));
-            catalog = XmlBeanUtil.toBean(document, DictCatalog.class, parserDoc);
+            catalog = XmlBeanUtil.toBean(document, DictCatalog.class,  ProcessXmlUtil.getAdapterDom(catalogAdapterPath));
             DictCatalog result = dictRegisterIn.addDictCatalogRequest(catalog);
         } catch (Exception e) {
             logger.error("error", e);

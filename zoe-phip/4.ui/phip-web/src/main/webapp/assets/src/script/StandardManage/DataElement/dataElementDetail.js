@@ -15,18 +15,17 @@ define(function (require, exports, module) {
                         updateUrl: 'element/updateElementList',//修改接口Url/修改的接口Url
                         loadPageEvent: function () {
                             //值域选择
-                            $("#chooseDict").click(function () {
-                                internal.selectList.dialog('domain', {
-                                    target: $("#chooseDict"),
-                                    name: 'dictCode',//绑定value值
-                                    parentName: 'dictName',//绑定name值
-                                    displayField: 'name',
-                                    valueField: 'code',
-                                    selectParam: {
-                                        multiselect: false
-                            }
-                                });
+                            internal.selectList.dialog('domain', {
+                                target: $("#btndictName"),
+                                name: 'dictCode',//绑定value值
+                                parentName: 'dictName',//绑定name值
+                                displayField: 'name',
+                                valueField: 'code',
+                                selectParam: {
+                                    multiselect: false
+                                }
                             });
+                            //标准来源
                             $("#fkSourceId").select({
                                 name: 'code',
                                 display: 'name',
@@ -36,7 +35,7 @@ define(function (require, exports, module) {
                                 value: 'code',//值
                                 text: 'name'//展示的内容
                             });
-                            //婚姻状况
+                            //分类
                             $("#fkTypeId").select({
                                 name: 'code',
                                 display: 'name',

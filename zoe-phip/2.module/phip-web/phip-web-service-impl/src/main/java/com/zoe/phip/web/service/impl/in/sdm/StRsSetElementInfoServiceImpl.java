@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SortOrder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
@@ -37,15 +38,7 @@ import java.util.TreeMap;
 @ErrorMessage(code = "002", message = "数据列({0})已经存在,更新失败!")
 public class StRsSetElementInfoServiceImpl extends BaseInServiceImpl<StRsSetElementInfo, IStRsSetElementInfoMapper> implements IStRsSetElementInfoMapper {
 
-    /**
-     * 数据集(字段关联)批量导入
-     * @param infoList
-     * @return
-     */
-    public int importRsSetElementInfo(List<StRsSetElementInfo> infoList) {
-        // TODO: 2016/5/9
-        return 0;
-    }
+
 
     public int deleteBySetId(String fkSetId) {
         Example example = new Example(StRsSetElementInfo.class);
@@ -60,12 +53,10 @@ public class StRsSetElementInfoServiceImpl extends BaseInServiceImpl<StRsSetElem
             map1.put("elementCode", entity.getElementCode());
         });
         if (getSingle(map) > 0) {
-            map.clear();
-            map = null;
+            super.dispose(map);
             throw new BusinessException("001", entity.getElementCode());
         }
-        map.clear();
-        map = null;
+        super.dispose(map);
         return super.add(entity);
     }
 
@@ -77,12 +68,10 @@ public class StRsSetElementInfoServiceImpl extends BaseInServiceImpl<StRsSetElem
             map1.put("id", entity.getId());
         });
         if (getSingle(map) > 0) {
-            map.clear();
-            map = null;
+            super.dispose(map);
             throw new BusinessException("002", entity.getElementCode());
         }
-        map.clear();
-        map = null;
+        super.dispose(map);
         return super.update(entity);
     }
 
@@ -103,13 +92,14 @@ public class StRsSetElementInfoServiceImpl extends BaseInServiceImpl<StRsSetElem
         map.put("setCode", setCode);
         map.put("elementCode", elementCode);
         StRsSetElementInfo info = getMapper().getBySetCode(map);
-        map.clear();
-        map = null;
+        super.dispose(map);
         return info;
     }
 
     public PageList<StRsSetElementInfo> getDataPageList(String fkSetId, String key, QueryPage queryPage) {
         PageList<StRsSetElementInfo> pageList = new PageList<>();
+        queryPage.setOrderBy("PSRSEI.ELEMENT_CODE");
+        queryPage.setSortOrder(SortOrder.ASC);
         SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();
         map.put("fkSetId", fkSetId);
@@ -118,6 +108,7 @@ public class StRsSetElementInfoServiceImpl extends BaseInServiceImpl<StRsSetElem
         PageInfo<StRsSetElementInfo> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
+        dispose(map);
         return pageList;
     }
 

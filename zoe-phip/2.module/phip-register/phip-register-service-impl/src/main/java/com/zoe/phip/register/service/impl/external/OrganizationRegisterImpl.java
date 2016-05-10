@@ -54,9 +54,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
         Document document = ProcessXmlUtil.load(message);
         OrgDeptInfo baseInfo = null;
         try {
-            SAXReader reader = new SAXReader();
-            Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapter));
-            baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, parserDoc);
+            baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, ProcessXmlUtil.getAdapterDom(adapter));
 
             //xml 验证错误  todo 打开验证功能
             if (strResult.contains("error:数据集内容验证错误")) {
@@ -92,9 +90,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
         Document document = ProcessXmlUtil.load(message);
         OrgDeptInfo baseInfo = null;
         try {
-            SAXReader reader = new SAXReader();
-            Document parserDoc = reader.read(this.getClass().getResourceAsStream(adapter));
-            baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, parserDoc);
+            baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, ProcessXmlUtil.getAdapterDom(adapter));
 
             //xml 验证错误  todo 打开验证功能
             if (strResult.contains("error:数据集内容验证错误")) {
