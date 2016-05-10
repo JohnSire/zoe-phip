@@ -106,4 +106,14 @@ public class DataSetController extends BaseController {
         return ServiceFactory.getStSetInfoService().deleteById(ComSession.getUserInfo(), id);
     }
     //endregion
+
+    //region 数据集字段 Json
+    @RequestMapping(value = "/getRsSetColumn")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResult getRsSetColumn(String id,String keyWord) {
+        return ServiceFactory.getStRsSetElementInfoService().getDataPageList(ComSession.getUserInfo(), id,keyWord, getQueryPage());
+    }
+
+    //endregion
 }

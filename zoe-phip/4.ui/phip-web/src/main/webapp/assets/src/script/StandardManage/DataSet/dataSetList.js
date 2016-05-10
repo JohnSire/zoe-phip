@@ -65,7 +65,7 @@ define(function (require, exports, module) {
     };
     function toColumnList(id,name){
         var top = common.getTopWindowDom();
-        var link=webRoot+"dataSet/view/columnList?dataSetName="+name;
+        var link=webRoot+"dataSet/view/columnList?id="+id+"&dataSetName="+name;
         top. frames["mainframe"].location.href = link;
 
     }

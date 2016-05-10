@@ -28,4 +28,5 @@ public final class Constant {
 
     public static final String STANDARD_DATASET_SERVICE="StSetInfoService";
     public static final String STANDARD_CDA_SERVICE="StCdaInfoService";
+    public static final String STANDARD_RsSetElement_SERVICE="StRsSetElementInfoService";
 }

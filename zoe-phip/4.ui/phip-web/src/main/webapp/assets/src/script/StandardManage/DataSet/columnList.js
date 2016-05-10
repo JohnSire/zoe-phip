@@ -9,8 +9,8 @@ define(function (require, exports, module) {
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
                 deleteUrl: {
-                    deleteInfo: "personnel/delXmanInfo",
-                    deleteList: "personnel/delXmanList"
+                    deleteInfo: "dataSet/delXmanInfo",
+                    deleteList: "dataSet/delXmanList"
                 },
                 tools: {
                     btnbox: {
@@ -31,15 +31,15 @@ define(function (require, exports, module) {
                 },
                 // reqInfoKey:'patientId',
                 gridParam: {
-                    url: 'personnel/getXmanList',
+                    url: 'dataSet/getRsSetColumn?id='+common.getParamFromUrl("id"),
                     columns: [
-                        {display: '名称', name: 'cardCode', width: 120, align: 'left'},
-                        {display: '字段编码', name: 'name', width: 120, align: 'left'},
-                        {display: '数据元', name: 'sexCodeName', width: 120, align: 'left'},
-                        {display: '参照字典', name: 'idNo', width: 120, align: 'left'},
-                        {display: '字段类型', name: 'idNo', width: 120, align: 'left'},
-                        {display: '为空', name: 'idNo', width: 120, align: 'left'},
-                        {display: '定义', name: 'idNo', width: 120, align: 'left'},
+                        {display: '名称', name: 'elementName', width: 120, align: 'left'},
+                        {display: '字段编码', name: 'elementCode', width: 120, align: 'left'},
+                        {display: '数据元', name: 'baseElementCode', width: 120, align: 'left'},
+                        {display: '参照字典', name: 'dictCode', width: 120, align: 'left'},
+                        {display: '字段类型', name: 'dataType', width: 120, align: 'left'},
+                        {display: '为空', name: 'isNullable', width: 120, align: 'left'},
+                        {display: '定义', name: 'define', width: 120, align: 'left'},
 
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
