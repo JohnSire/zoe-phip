@@ -100,15 +100,14 @@ var bodySection = {
                 </p>
                 <p class="column-three">
                     <label class="label" for="assignedDeptName"><span class="text-mark">*</span>申请人：</label>
-                    <!--<input type="text" name="assignedDeptName" class="text" datatype="*1-128" errormsg="所属科室长度应为1~128位！"-->
-                    <!--nullmsg="请填写所属科室！"/>-->
+
                     <span class="text-line-outer" id="btnParentCatalog">
-                            <input type="text" name="pid" class="text-line" datatype="*"/>
-                            <span class="text-line-setting">
-                                <span class="icon-grid icon-grid-setting" title="选择"></span>
-                                <span class="text-line-content"></span>
-                            </span>
+                        <input type="text" name="pid" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="选择"></span>
+                            <span class="text-line-content"></span>
                         </span>
+                    </span>
 
                 </p>
                 <p class="column-three">
@@ -116,24 +115,25 @@ var bodySection = {
                     <input type="text" name="roleName" class="text" datatype="*1-256" errormsg="角色名称长度应为1~256位！"
                            nullmsg="请填写角色名称！"/>
                 </p>
-                <!--<p class="column-three">-->
-                <!--<label class="label" for="roleState"><span class="text-mark">*</span>角色状态：</label>-->
-                <!--<input type="text" name="roleState" class="text" atatype="*1-256" errormsg="角色名称长度应为1~256位！"-->
-                <!--nullmsg="请填写角色状态！"/>-->
+
 
                 <div class="column-three">
                     <label class="label" for="roleState">角色状态：</label>
-                    <!--<input type="text" name="codeSysName" class="text"/>-->
-                    <div class="simulate-select" id="selCodeSysName">
-                        <span class="text">--请选择医保类型--</span>
+
+                    <div class="simulate-select" id="selRoleState">
+                        <span class="text">--请选择角色状态--</span>
                         <i class="icon-grid icon-grid-fold-gray"></i>
                         <ul class="simulate-select-lists" style="display:none;">
-                            <li class="simulate-select-list">--请选择医保类型--</li>
+                            <li class="simulate-select-list">--请选择角色状态--</li>
+                            <li class="simulate-select-list" value="active">激活</li>
+                            <li class="simulate-select-list" value="unactive">禁用</li>
                         </ul>
                         <div class="clear"></div>
                     </div>
                     <select name="roleState" style="display: none;">
+                        <option>--请选择角色状态--</option>
                         <option value="active">激活</option>
+                        <option value="unactive">禁用</option>
                     </select>
 
                 </div>

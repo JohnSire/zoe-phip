@@ -162,6 +162,7 @@
         var internal = {
             selectValue: null,//选中的值
             preText: null,//提示显示内容（--请选择--）
+            localData: false,
             defaultOptions: {
                 name: '',
                 display: '',
@@ -176,7 +177,6 @@
                 renderData: function (data) {
                     return data.result.rows;
                 },
-                data: [],
                 preText: '',//预加载显示内容
                 value: '',//值
                 text: '',//展示的内容
@@ -194,53 +194,68 @@
                     internal.preText = $(self).find("ul li:first-child").text();
                 }
                 $('select[name="' + name + '"]').on("setValue", function (event, argument) {
-                    $(self).find("span").text(argument[display]);
                     internal.selectValue = argument[name] || "";
+                    if (self["param"]["localData"]) {
+                        var jqSelect = $('select[name="' + name + '"]')
+                        $(self).find("span").text($(jqSelect).find("option:selected").text());
+                        if (!argument[name] && argument[name] != 0 && internal.preText) {
+                            $(self).find("span").text(internal.preText);
+                        }
+                    } else {
 
-                    if (!argument[display] && internal.preText) {
-                        $(self).find("span").text(internal.preText);
+                        $(self).find("span").text(argument[display]);
+                        if (!argument[display] && internal.preText) {
+                            $(self).find("span").text(internal.preText);
+                        }
                     }
-
                 });
                 $(self).on("click", function (e) {
                     e.stopPropagation();
                     var jqUl = $(self).find("ul");
                     var jqSelect = $('select[name="' + name + '"]')
 
-                    if (!(self.isLoadData)) {
-                        jqUl.empty();
-                        jqSelect.empty();
-                        if (internal.preText) {
-                            var jqLi = $("<li></li>");
-                            jqLi.addClass("simulate-select-list")
-                                .text(internal.preText);
-                            jqUl.append(jqLi);
-                            var jqOptions = $("<option></option>");
-                            jqOptions.text(internal.preText);
-                        }
-                        internal.req(self["param"], function (data) {
-                            data = self["param"]["renderData"](data);
-                            var value = self["param"]["value"];
-                            var text = self["param"]["text"];
-                            $.each(data, function (index, item) {
+                    if (self["param"]["localData"]) {
+                        $(jqUl).find("li").on("click", function () {
+                            internal.selectValue = $(this).attr("value") || "";
+                            $(self).find("span").text($(this).text());
+                            $(jqSelect).val(internal.selectValue);
+                        });
+                    } else {
+                        if (!(self.isLoadData)) {
+                            jqUl.empty();
+                            jqSelect.empty();
+                            if (internal.preText) {
                                 var jqLi = $("<li></li>");
-                                jqLi.attr({"value": item[value]})
-                                    .addClass("simulate-select-list")
-                                    .text(item[text]);
+                                jqLi.addClass("simulate-select-list")
+                                    .text(internal.preText);
                                 jqUl.append(jqLi);
                                 var jqOptions = $("<option></option>");
-                                jqOptions.attr({value: item[value]})
-                                    .text(item[text]);
-                                jqSelect.append(jqOptions);
-                            });
-                            $(jqSelect).val(internal.selectValue);
-                            self.isLoadData = true;
-                            $(jqUl).find("li").on("click", function () {
-                                internal.selectValue = $(this).attr("value") || "";
-                                $(self).find("span").text($(this).text());
+                                jqOptions.text(internal.preText);
+                            }
+                            internal.req(self["param"], function (data) {
+                                data = self["param"]["renderData"](data);
+                                var value = self["param"]["value"];
+                                var text = self["param"]["text"];
+                                $.each(data, function (index, item) {
+                                    var jqLi = $("<li></li>");
+                                    jqLi.attr({"value": item[value]})
+                                        .addClass("simulate-select-list")
+                                        .text(item[text]);
+                                    jqUl.append(jqLi);
+                                    var jqOptions = $("<option></option>");
+                                    jqOptions.attr({value: item[value]})
+                                        .text(item[text]);
+                                    jqSelect.append(jqOptions);
+                                });
                                 $(jqSelect).val(internal.selectValue);
+                                self.isLoadData = true;
+                                $(jqUl).find("li").on("click", function () {
+                                    internal.selectValue = $(this).attr("value") || "";
+                                    $(self).find("span").text($(this).text());
+                                    $(jqSelect).val(internal.selectValue);
+                                });
                             });
-                        });
+                        }
                     }
                     if (jqUl.is(":hidden")) {
                         jqUl.show();
