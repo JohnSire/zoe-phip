@@ -1,4 +1,3 @@
-
 <%
 var bodySection = {
 
@@ -7,22 +6,22 @@ var bodySection = {
     <div class="y-dialog-form form-little">
         <ul class="y-dialog-lists clearfix">
             <li class="list">
-                <p class="column-two">
+                <p class="column-one">
                     <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
                     <input type="text" name="code" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"
                            nullmsg="请填写编码！"/>
                 </p>
-                <p class="column-two">
-                    <label class="label" for="codeSystem"><span class="text-mark">*</span>代码：</label>
-                    <input type="text" name="codeSystem" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
+                <p class="column-one">
+                    <label class="label" for="name"><span class="text-mark">*</span>代码：</label>
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
                            nullmsg="请填写代码！"/>
                 </p>
             </li>
             <li class="list">
 
-                <p class="column-two">
-                    <label class="label" for="codeSystem"><span class="text-mark">*</span>样例XML：</label>
-                    <input type="text" name="codeSystem" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
+                <p class="column-one">
+                    <label class="label" for="sampleXml"><span class="text-mark">*</span>样例XML：</label>
+                    <input type="text" name="sampleXml" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
                            nullmsg="请填写代码！"/>
                 </p>
             </li>
@@ -31,7 +30,7 @@ var bodySection = {
             <li class="list">
                 <p class="column-one">
                     <label class="label label-textarea">备注：</label>
-                    <textarea rows="3" class="textarea" style="width:505px;height:60px;" name="descr"></textarea>
+                    <textarea rows="3" class="textarea" style="width:300px;height:60px;" name="descr"></textarea>
                 </p>
             </li>
         </ul>
@@ -43,8 +42,8 @@ var scriptSection={
 %>
 <script type="text/javascript">
     $(function () {
-        seajs.use('{dir}/StandardManage/DataSet/cdaDetail', function (a) {
-           a.init();
+        seajs.use('{dir}/StandardManage/Cda/cdaDetail', function (a) {
+            a.init();
         });
     })
 </script>
