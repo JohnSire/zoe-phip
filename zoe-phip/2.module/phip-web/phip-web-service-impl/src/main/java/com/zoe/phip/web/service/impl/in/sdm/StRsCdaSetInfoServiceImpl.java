@@ -49,10 +49,10 @@ public class StRsCdaSetInfoServiceImpl extends BaseInServiceImpl<StRsCdaSetInfo,
             map1.put("fkCdaId", entity.getFkCdaId());
         });
         if (getSingle(map) > 0) {
-            map.clear();
-            map = null;
+            dispose(map);
             throw new BusinessException("001");
         }
+        dispose(map);
         return super.add(entity);
     }
 
@@ -64,10 +64,10 @@ public class StRsCdaSetInfoServiceImpl extends BaseInServiceImpl<StRsCdaSetInfo,
             map1.put("id", entity.getId());
         });
         if (getSingle(map) > 0) {
-            map.clear();
-            map = null;
+            dispose(map);
             throw new BusinessException("001");
         }
+        dispose(map);
         return super.update(entity);
     }
 
