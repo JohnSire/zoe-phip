@@ -8,6 +8,7 @@ package com.zoe.phip.web.service.impl.in.sdm;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.web.dao.sdm.IStandardVerRsDictMapper;
 import com.zoe.phip.web.model.sdm.StandardVerRsDict;
+import com.zoe.phip.web.model.sdm.StandardVerRsField;
 import com.zoe.phip.web.service.sdm.IStandardVerRsDictService;
 import org.springframework.stereotype.Repository;
 import com.alibaba.dubbo.config.annotation.Service;
