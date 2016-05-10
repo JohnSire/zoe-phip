@@ -3,6 +3,7 @@ package com.zoe.phip.register.service.impl.external;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.UtilString;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.register.model.XmanEhr;
@@ -53,16 +54,10 @@ public class DocumentRegisterImpl implements IDocumentRegister {
         XmanEhr xmanEhr = null;
         XmanEhrContent xmanEhrContent = null;
         try {
-            SAXReader reader = new SAXReader();
             //XmanIndex/XmamEhr/XmanEhrContent
-            Document parserDoc = reader.read(this.getClass().getResourceAsStream(xmanIndexAdapter));
-            xmanIndex = XmlBeanUtil.toBean(document, XmanIndex.class, parserDoc);
-
-            Document xmanEhrParserDoc = reader.read(this.getClass().getResourceAsStream(xmanEhrAdapter));
-            xmanEhr = XmlBeanUtil.toBean(document, XmanEhr.class, xmanEhrParserDoc);
-
-            Document xmanEhrContentParserDoc = reader.read(this.getClass().getResourceAsStream(xmanEhrContentAdapter));
-            xmanEhrContent = XmlBeanUtil.toBean(document, XmanEhrContent.class, xmanEhrContentParserDoc);
+            xmanIndex = XmlBeanUtil.toBean(document, XmanIndex.class, ProcessXmlUtil.getAdapterDom(xmanIndexAdapter));
+            xmanEhr = XmlBeanUtil.toBean(document, XmanEhr.class, ProcessXmlUtil.getAdapterDom(xmanEhrAdapter));
+            xmanEhrContent = XmlBeanUtil.toBean(document, XmanEhrContent.class, ProcessXmlUtil.getAdapterDom(xmanEhrContentAdapter));
 
             //xml 验证错误
             if (strResult.contains("error:数据集内容验证错误")) {
@@ -72,6 +67,7 @@ public class DocumentRegisterImpl implements IDocumentRegister {
             XmanIndex result = documentRegisterIn.addDocumentRegistry(xmanIndex, xmanEhr, xmanEhrContent);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("注册成功");
+            acknowledgement.setMsgId(StringUtil.getUUID());
             xmanIndex.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.EHR_ADD_SUCCESS, result);
         } catch (BusinessException e) {
