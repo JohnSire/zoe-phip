@@ -26,7 +26,7 @@ import java.util.Map;
  * @date 2016-05-04
  */
 @Repository("standardVerRsFieldService")
-@Service(interfaceClass = IStandardVerRsFieldService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStandardVerRsFieldService.class,protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
 public class StandardVerRsFieldServiceImpl extends BaseInServiceImpl<StandardVerRsField, IStandardVerRsFieldMapper> implements IStandardVerRsFieldMapper {
 
 

@@ -25,7 +25,7 @@ import java.util.Map;
  * @date 2016-05-04
  */
 @Repository("standardVerRsDictService")
-@Service(interfaceClass = IStandardVerRsDictService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStandardVerRsDictService.class,protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
 public class StandardVerRsDictServiceImpl extends BaseInServiceImpl<StandardVerRsDict, IStandardVerRsDictMapper> implements IStandardVerRsDictMapper {
 
 

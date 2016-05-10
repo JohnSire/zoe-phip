@@ -32,7 +32,7 @@ import java.util.Map;
  * @date 2016-05-03
  */
 @Repository("standardVersionService")
-@Service(interfaceClass = IStandardVersionService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStandardVersionService.class,protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
 @ErrorMessage(code = "001", message = "标准版本标识({0})已经存在!")
 public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersion, IStandardVersionMapper> implements IStandardVersionMapper {
 

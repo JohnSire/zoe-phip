@@ -25,7 +25,7 @@ import java.util.Map;
  * @date 2016-05-04
  */
 @Repository("standardVerRsSetService")
-@Service(interfaceClass = IStandardVerRsSetService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStandardVerRsSetService.class, protocol = {"dubbo"},proxy = "sdpf", dynamic = true)
 public class StandardVerRsSetServiceImpl extends BaseInServiceImpl<StandardVerRsSet, IStandardVerRsSetMapper> implements IStandardVerRsSetMapper {
 
     public int versionStandardStruct(String fkVersionId, List<StandardVerRsSet> setList) throws Exception {

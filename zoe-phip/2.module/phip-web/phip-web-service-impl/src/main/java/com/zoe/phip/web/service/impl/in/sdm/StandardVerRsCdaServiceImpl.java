@@ -25,7 +25,7 @@ import java.util.Map;
  * @date 2016-05-05
  */
 @Repository("standardVerRsCdaService")
-@Service(interfaceClass = IStandardVerRsCdaService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStandardVerRsCdaService.class,protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
 @ErrorMessage(code = "001", message = "关系已经存在!")
 public class StandardVerRsCdaServiceImpl extends BaseInServiceImpl<StandardVerRsCda, IStandardVerRsCdaMapper> implements IStandardVerRsCdaMapper {
 

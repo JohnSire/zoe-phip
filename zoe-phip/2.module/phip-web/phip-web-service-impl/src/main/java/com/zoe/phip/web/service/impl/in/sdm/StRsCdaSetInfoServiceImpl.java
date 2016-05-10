@@ -26,7 +26,7 @@ import java.util.Map;
  * @date 2016-05-05
  */
 @Repository("stRsCdaSetInfoService")
-@Service(interfaceClass = IStRsCdaSetInfoService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStRsCdaSetInfoService.class,protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
 @ErrorMessage(code = "001", message = "关系已经存在!")
 public class StRsCdaSetInfoServiceImpl extends BaseInServiceImpl<StRsCdaSetInfo, IStRsCdaSetInfoMapper> implements IStRsCdaSetInfoMapper {
 

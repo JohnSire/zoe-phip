@@ -7,8 +7,7 @@
 package com.zoe.phip.web.service.sdm;
 
 
-import com.zoe.phip.infrastructure.entity.ServiceResult;
-import com.zoe.phip.infrastructure.entity.SystemData;
+import com.zoe.phip.infrastructure.entity.*;
 import com.zoe.phip.module.service.service.in.IBaseInService;
 import com.zoe.phip.web.model.sdm.StRsSetElementInfo;
 import com.zoe.phip.web.model.sm.SystemDictItem;
@@ -24,4 +23,7 @@ import java.util.List;
  */
 public interface IStRsSetElementInfoService extends IBaseInService<StRsSetElementInfo> {
     ServiceResult importRsSetElementInfo(SystemData systemData, List<StRsSetElementInfo> infoList);
+
+
+    ServiceResultT<PageList<StRsSetElementInfo>> getDataPageList(SystemData systemData, String fkSetId, String key, QueryPage queryPage);
 }

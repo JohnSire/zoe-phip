@@ -35,7 +35,7 @@ import java.util.TreeMap;
  * @date 2016-05-03
  */
 @Repository("stCdaInfoService")
-@Service(interfaceClass = IStCdaInfoService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStCdaInfoService.class,protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
 @ErrorMessage(code = "001", message = "CDA标识({0})已经存在!")
 public class StCdaInfoServiceImpl extends BaseInServiceImpl<StCdaInfo, IStCdaInfoMapper> implements IStCdaInfoMapper {
 
