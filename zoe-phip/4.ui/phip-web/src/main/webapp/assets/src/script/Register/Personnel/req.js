@@ -8,7 +8,7 @@ define(function (require, exports, module) {
             var req = new Request("personnel/mergeXmanInfo");
             req.post({
                 data: {newPatientId: newId, oldPatientId: oldId},
-                isTip: false,
+                isTip: true,
                 success: function (data) {
                     if (typeof(callback) == "function") {
                         callback(data);
