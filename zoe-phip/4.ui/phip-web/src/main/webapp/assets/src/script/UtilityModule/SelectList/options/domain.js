@@ -2,11 +2,10 @@
  * Created by zhangxingcai on 2016/5/9 0009.
  */
 define(function (require, exports, module) {
-    var list = require("{dir}/UtilityModule/SelectList/list");
     var internal = {
         domain: {
             winName: 'win_domain_select_list',
-            title: '字典选择列表',
+            title: '值域选择列表',
             selectParam: {
                 storage: [],
                 displayField: 'name',
