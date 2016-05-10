@@ -19,12 +19,12 @@ public class DocumentRegisterImplTest extends BaseTest {
         String ehrInput = "<ProvideAndRegisterDocumentSetRequest xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
                 "                                      xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/ProvideAndRegisterDocumentSetRequest.xsd\">\n" +
                 "    <ID root=\"2.16.156.10011.0\" extension=\"C193FE3B-E71F-4D81-8B8B-9462F35E8D38\"/>\n" +
-                "    <SourcePatientID>123456</SourcePatientID>\n" +
+                "    <SourcePatientID>46541321</SourcePatientID>\n" +
                 "    <SourcePatientName>李若鸣</SourcePatientName>\n" +
                 "    <HealthCardId>201507287452</HealthCardId>\n" +
-                "    <IdentityId>120109197706015516</IdentityId>\n" +
+                "    <IdentityId>4654654321</IdentityId>\n" +
                 "    <Organization id=\"022103A005\">\n" +
-                "        <Name>厦门大学附属第一医院</Name>\n" +
+                "        <Name>厦门中医院</Name>\n" +
                 "        <TelephoneNumber areaCode=\"022\" number=\"23376522\"/>\n" +
                 "        <EmailAddress address=\"XXX@yy.com.cn\"/>\n" +
                 "        <Address city=\"思明区\" country=\"中国\" postalCode=\"300002\" stateOrProvince=\"厦门市\"\n" +
@@ -35,20 +35,20 @@ public class DocumentRegisterImplTest extends BaseTest {
                 "            <SubmissionTime>2015-07-29T02:00:01Z</SubmissionTime>\n" +
                 "            <UniqueId>HSDC00.02</UniqueId>\n" +
                 "            <SourceId>3670984661</SourceId>\n" +
-                "            <Comments>胃炎,急性扁桃体炎</Comments>\n" +
-                "            <Title>门诊摘要</Title>\n" +
+                "            <Comments>胃炎</Comments>\n" +
+                "            <Title>门诊检查</Title>\n" +
                 "            <CreateTime>2015-07-29T03:27:29Z</CreateTime>\n" +
-                "            <ServerOrganization>厦门大学附属第一医院</ServerOrganization>\n" +
+                "            <ServerOrganization>厦门中医院</ServerOrganization>\n" +
                 "            <EpisodeID>201507287452</EpisodeID>\n" +
                 "            <InTime>2015-07-28T10:46:51Z</InTime>\n" +
                 "            <OutTime>2015-07-28T11:00:19Z</OutTime>\n" +
                 "            <AdmissionDepart>内科</AdmissionDepart>\n" +
                 "            <AdmissionDoctor>席刚</AdmissionDoctor>\n" +
                 "            <AdmissionType>门诊</AdmissionType>\n" +
-                "            <DiagnosisResult>胃炎,急性扁桃体炎</DiagnosisResult>\n" +
+                "            <DiagnosisResult>胃炎</DiagnosisResult>\n" +
                 "            <Author>\n" +
                 "                <AuthorName>席刚</AuthorName>\n" +
-                "                <AuthorInstitution>厦门大学附属第一医院</AuthorInstitution>\n" +
+                "                <AuthorInstitution>厦门中医院</AuthorInstitution>\n" +
                 "                <AuthorSpecialty>内科</AuthorSpecialty>\n" +
                 "                <AuthorRole>三级专家</AuthorRole>\n" +
                 "            </Author>\n" +
@@ -67,4 +67,18 @@ public class DocumentRegisterImplTest extends BaseTest {
         System.out.println(result);
     }
 
+    @Test
+    public void testAnticipationEhrRegistry() throws Exception{
+        String ehrInput = "<GetDocumentStroedInfoRequest xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"urn:hl7-org:v3\"\n" +
+                "                              xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/GetDocumentStroedInfoRequest.xsd\">\n" +
+                "    <Id root=\"2.16.156.10011.0\" extension=\"DDD34F6E-2E89-435A-9A62-F4CD3D4DE23B\"/>\n" +
+                "    <HealthCardId>201507287452</HealthCardId>\n" +
+                "    <IdentityId>4654654321</IdentityId>\n" +
+                "    <DocumentTitle>门诊检查</DocumentTitle>\n" +
+                "</GetDocumentStroedInfoRequest>";
+
+
+        String result = documentRegister.documentExistence(ehrInput);
+        System.out.println(result);
+    }
 }

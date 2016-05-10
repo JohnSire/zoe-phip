@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IXmanIndexMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.XmanIndex" extends="BaseResultMap">
-
+        <result column="EHR_ID" property="ehrId" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.XmanIndex">
         update PHIP_XMAN_INDEX
@@ -115,5 +115,31 @@
                 AND PXBI.PATIENT_ID = #{patientId,jdbcType=VARCHAR}
             </if>
         </where>
+    </select>
+
+    <select id="documentRegistryQuery" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT PXE.ID EHR_ID,
+        PXE.XMAN_ID,
+        PXE.PATIENT_ID,
+        PXE.SOURCE_ID,
+        PXI.TITLE,
+        PXI.HEALTH_CARD_ID,
+        PXI.ID_NO
+        FROM (SELECT *
+        FROM PHIP_XMAN_EHR
+        WHERE XMAN_ID IN (
+        SELECT DISTINCT XMAN_ID
+        FROM PHIP_XMAN_INDEX PXI
+        <where>
+            PXI.HEALTH_CARD_ID = #{healthCardId,jdbcType=VARCHAR}
+            AND PXI.ID_NO = #{identityId,jdbcType=VARCHAR}
+            <if test="documentTitle != null">
+                AND PXI.TITLE = #{documentTitle,jdbcType=VARCHAR}
+            </if>
+        </where>
+        )) PXE
+        LEFT JOIN PHIP_XMAN_INDEX PXI
+        ON PXE.INDEX_ID = PXI.ID
+        WHERE ROWNUM = 1
     </select>
 </mapper>

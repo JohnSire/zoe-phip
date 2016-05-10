@@ -29,6 +29,7 @@ import java.util.Map;
 @Service(interfaceClass = IDocumentRegisterIn.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
 @ErrorMessage(code = "001", message = "由于注册档案的患者基本信息不存在，注册失败")
 @ErrorMessage(code = "002", message = "由于注册档案内容已存在，注册失败")
+@ErrorMessage(code = "003", message = "由于调阅档案不存在，预判失败")
 public class DocumentRegisterInImpl extends BaseInServiceImpl<XmanEhr, IEhrDataInfoMapper> implements IEhrDataInfoMapper{
 
     @Autowired
@@ -82,6 +83,18 @@ public class DocumentRegisterInImpl extends BaseInServiceImpl<XmanEhr, IEhrDataI
         xmanEhrContentMapper.insertSelective(xmanEhrContent);
 
         xmanIndex.setEhrId(xmanEhr.getId());
+        return xmanIndex;
+    }
+
+    public XmanIndex documentRegistryQuery(String healthCardId, String identityId, String documentTitle) throws Exception {
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("healthCardId", healthCardId);
+        paras.put("identityId", identityId);
+        paras.put("documentTitle", documentTitle);
+        XmanIndex xmanIndex = xmanIndexMapper.documentRegistryQuery(paras);
+        if(xmanIndex == null){
+            throw new BusinessException("003");
+        }
         return xmanIndex;
     }
 }

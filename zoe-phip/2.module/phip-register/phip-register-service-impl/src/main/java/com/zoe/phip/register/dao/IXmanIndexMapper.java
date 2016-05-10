@@ -10,4 +10,6 @@ import java.util.Map;
  */
 public interface IXmanIndexMapper extends IServiceMapper<XmanIndex> {
     String getXmanId(Map<String, Object> args);
+
+    XmanIndex documentRegistryQuery(Map<String, Object> paras);
 }
