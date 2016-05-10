@@ -38,7 +38,7 @@ public class StandardVerRsFieldServiceImpl extends BaseInServiceImpl<StandardVer
     }
 
     public int deleteByVersionId(String fkVersionId) {
-        Example example = new Example(StandardVerRsDict.class);
+        Example example = new Example(StandardVerRsField.class);
         example.createCriteria().andEqualTo("fkVersionId", fkVersionId);
         return super.deleteByExample(example);
     }
