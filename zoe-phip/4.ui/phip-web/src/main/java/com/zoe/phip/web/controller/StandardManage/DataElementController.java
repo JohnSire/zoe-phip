@@ -94,7 +94,7 @@ public class DataElementController extends BaseController {
     /**
      * 删除数据元信息
      *
-     * @param ids
+     * @param id
      * @return
      */
     @RequestMapping(value = "/delElementInfo")
