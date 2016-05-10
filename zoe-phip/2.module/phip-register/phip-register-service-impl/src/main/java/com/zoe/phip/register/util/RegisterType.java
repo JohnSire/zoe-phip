@@ -42,5 +42,8 @@ public final class RegisterType {
     public static final String EHR_ADD_SUCCESS = "template/document/output/健康档案实时提交服务响应信息-正向.tbl";
     public static final String EHR_ADD_ERROR = "template/document/output/健康档案实时提交服务响应信息-反向.tbl";
 
+    public static final String EHR_ANTICIPATION_SUCCESS = "template/document/output/健康档案调阅预判服务响应信息-正向.tbl";
+    public static final String EHR_ANTICIPATION_ERROR = "template/document/output/健康档案调阅预判服务响应信息-反向.tbl";
+
     public static final String MESSAGE = "template/响应消息结果.tbl";
 }
