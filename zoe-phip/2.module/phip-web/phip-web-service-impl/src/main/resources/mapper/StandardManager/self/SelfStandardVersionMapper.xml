@@ -38,7 +38,7 @@
 </set>
         where id = #{id}
         </update>
-    <select id="getSingleVersion" parameterType="java.util.Map" resultType="java.lang.Integer">
+    <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
         SELECT COUNT (1) from PHIP_STANDARD_VERSION PSV
         WHERE UPPER (PSV.CODE) = UPPER (#{code, jdbcType=VARCHAR})
         <if test="_parameter.containsKey('id')">

@@ -59,12 +59,11 @@
     </select>
 
 
-
     <select id="getDictItemOrgList" resultMap="BaseResultMap" parameterType="java.util.Map">
         select * from PHIP_DICT_ITEM PDIT
         <where>
             <if test="pid !=null and pid !=''">
-                AND  PDIT.FK_CATALOG_ID in (select id from phip_dict_catalog where pid= #{pid,jdbcType=VARCHAR})
+                AND PDIT.FK_CATALOG_ID in (select id from phip_dict_catalog where pid= #{pid,jdbcType=VARCHAR})
             </if>
 
             <include refid="com.zoe.phip.module.service.selfWhere"/>
@@ -80,8 +79,8 @@
         )
     </select>
     <select id="getDictItemNewOrgTree" resultMap="BaseResultMap" parameterType="java.util.Map">
-        select pdi.* from Phip_National_Standards pns join phip_dict_catalog pdc  on pns.dict_code= pdc.code join
-        phip_dict_item pdi  on pdc.id =pdi.fk_catalog_id
+        select pdi.* from Phip_National_Standards pns join phip_dict_catalog pdc on pns.dict_code= pdc.code join
+        phip_dict_item pdi on pdc.id =pdi.fk_catalog_id
         <where>
             <if test="codeSystem !=null and codeSystem !=''">
                 AND pns.code_system = #{codeSystem,jdbcType=VARCHAR}
@@ -89,12 +88,13 @@
             <if test="dictCode !=null and dictCode !=''">
                 AND pns.dict_code = #{dictCode,jdbcType=VARCHAR}
             </if>
-            <if test="key !=null and key !=''">AND (  UPPER(pdi.CODE) LIKE
-                #{key,jdbcType=VARCHAR} OR UPPER(pdi.NAME) LIKE #{key,jdbcType=VARCHAR})</if>
+            <if test="key !=null and key !=''">AND ( UPPER(pdi.CODE) LIKE
+                #{key,jdbcType=VARCHAR} OR UPPER(pdi.NAME) LIKE #{key,jdbcType=VARCHAR})
+            </if>
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
     </select>
- <select id="getDictItemById" resultMap="MultiResultMap" parameterType="java.util.Map">
+    <select id="getDictItemById" resultMap="MultiResultMap" parameterType="java.util.Map">
         SELECT pdi.*,pdc.NAME CATALOG_NAME FROM (
         SELECT * FROM PHIP_DICT_ITEM pdi WHERE pdi.ID = #{id,jdbcType=VARCHAR}) pdi
         LEFT JOIN PHIP_DICT_CATALOG pdc

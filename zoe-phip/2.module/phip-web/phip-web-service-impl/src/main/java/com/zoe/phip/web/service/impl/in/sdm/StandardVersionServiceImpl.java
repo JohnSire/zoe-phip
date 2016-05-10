@@ -68,13 +68,13 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
             m.put("code", standardVersion.getCode());
             m.put("id", standardVersion.getId());
         });
-        if (getSingleVersion(map) > 0) throw new BusinessException("001", standardVersion.getCode());
+        if (getSingle(map) > 0) throw new BusinessException("001", standardVersion.getCode());
         return super.update(standardVersion);
     }
 
     @Override
-    public int getSingleVersion(Map<String, Object> map) {
-        return getMapper().getSingleVersion(map);
+    public int getSingle(Map<String, Object> map) {
+        return getMapper().getSingle(map);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
     }
 
 
-    @Override
+
     public int versionStandardStruct(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList) throws Exception {
         Example cda = new Example(StandardVerRsCda.class);
         cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
@@ -95,13 +95,14 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
         return p;
     }
 
-    @Override
+
     public int versionDictUpdate(String fkVersionId, List<StandardVerRsDict> infoList) throws Exception {
         return dictServiceImpl.versionDictUpdate(fkVersionId, infoList);
     }
 
 
     public PageList<StandardVersion> getDataPageList(String key, QueryPage page) {
+
         PageList<StandardVersion> pageList = new PageList<>();
         SqlHelper.startPage(page);
         Map<String, Object> map = new HashMap<String, Object>();

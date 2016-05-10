@@ -19,13 +19,10 @@ import java.util.Map;
  */
 public interface IStandardVersionMapper extends IMyMapper<StandardVersion> {
 
-    int getSingleVersion(Map<String, Object> map);
+    int getSingle(Map<String, Object> map);
 
     List<StandardVersion> getDataPageList(Map<String, Object> map);
 
 
-    int versionStandardStruct(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList) throws Exception;
-
-    int versionDictUpdate(String fkVersionId, List<StandardVerRsDict> infoList) throws Exception;
 
 }
