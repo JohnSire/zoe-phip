@@ -125,6 +125,11 @@ public class DocumentRegisterImpl implements IDocumentRegister {
         return RegisterUtil.registerMessage(RegisterType.EHR_ANTICIPATION_ERROR, acknowledgement);
     }
 
+    /**
+     * 档案检索服务
+     * @param message
+     * @return
+     */
     @Override
     public String getDocumentSetRetrieveInfo(String message) {
         String strResult = ProcessXmlUtil.verifyMessage(message);
@@ -141,12 +146,28 @@ public class DocumentRegisterImpl implements IDocumentRegister {
         String strHealthCardId = document.selectSingleNode("//GetDocumentStroedInfoRequest/HealthCardId").getText();;//居民健康卡号
         String strIdentityId = document.selectSingleNode("//GetDocumentStroedInfoRequest/Id/@extension").getText();; //居民身份证号
         String strDocumentTitle = document.selectSingleNode("//GetDocumentStroedInfoRequest/Id/@extension").getText();; //标题
+        //从数据库获取值
+        XmanIndex xmanIndex=new XmanIndex();
+        if (strResult != "success:数据集内容验证正确" || xmanIndex.getMsgId() == "")
+        {
+            xmanIndex.setMsgId(strMsgId);
+            xmanIndex.getHealthCardId();
+            xmanIndex.getTitle();
+            xmanIndex.getIdNo();
+        }
+
+
 
 
 
         return null;
     }
 
+    /**
+     * 档案调阅服务
+     * @param message
+     * @return
+     */
     @Override
     public String retrieveDocumentSet(String message) {
         return null;
