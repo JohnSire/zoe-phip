@@ -36,6 +36,13 @@ public class DataSetController extends BaseController {
         return "/StandardManage/DataSet/dataSetDetail";
     }
 
+    @RequestMapping("/view/childSet")
+    @AuthAction(permission = {Permission.View}, name = "查看")
+    public String ToChildSet(HttpServletRequest request, Model model) {
+        return "/StandardManage/DataSet/childSet";
+    }
+
+
     @RequestMapping("/view/columnList")
     @AuthAction(permission = {Permission.View}, name = "查看")
     public String ToColumnList(HttpServletRequest request, Model model) {
@@ -88,6 +95,12 @@ public class DataSetController extends BaseController {
         return ServiceFactory.getStSetInfoService().update(ComSession.getUserInfo(), StSetInfo);
     }
 
+    @RequestMapping(value = "/getByChildSet")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResult getByChildSet(String pid) {
+        return ServiceFactory.getStSetInfoService().getByPid(ComSession.getUserInfo(), pid);
+    }
     /**
      *
      * @param ids
