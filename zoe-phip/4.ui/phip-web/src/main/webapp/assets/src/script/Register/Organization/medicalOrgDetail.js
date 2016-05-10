@@ -11,8 +11,8 @@ define(function (require, exports, module) {
                 winName: "win_medical_org_detail_dialog",//弹窗对象变量名称
                 winCallback: "win_medical_org_detail_callback",//弹窗回调函数
                 getUrl: 'organization/getMedicalOrgInfo',//
-                addUrl: '',//新增接口Url
-                updateUrl: '',//修改接口Url
+                addUrl: 'organization/addMedicalOrgInfo',//新增接口Url
+                updateUrl: 'organization/updateMedicalOrgInfo',//修改接口Url
                 loadPageEvent: function () {
                     internal.selectList.dialog('dictItem', {
                         target: $("#btnDeptType"),
@@ -25,6 +25,16 @@ define(function (require, exports, module) {
                             multiselect: false
                         }
                     });
+
+                    $("#selRoleState").select({
+                        localData: true,
+                        name: 'roleState'
+                        //display: 'roleName',
+                    })
+                },
+                beforeSaveEvent: function (data) {
+                    data = $.extend(true, {}, data, {divisionRoot: oidCodeConfig.orgType})
+                    return data;
                 }
             })
         }

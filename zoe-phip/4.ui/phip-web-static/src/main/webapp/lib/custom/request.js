@@ -64,7 +64,7 @@
                                 msgContext += item["content"]
                             });
                         }
-                        common.jsmsg(msgContext, msgCss, function () {
+                        common.getTopWindowDom().common.jsmsg(msgContext, msgCss, function () {
                             successObj.success(data);
                         })
                     };

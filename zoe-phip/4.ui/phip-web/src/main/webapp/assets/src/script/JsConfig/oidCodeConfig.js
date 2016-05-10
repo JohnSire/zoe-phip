@@ -10,7 +10,10 @@ define(function (require, exports, module) {
         orgClassification: '2.16.156.10011.2.3.4.1',//卫生机构分类代码表
         department: '2.16.156.10011.2.3.2.62',//医疗卫生机构业务科室分类与代码表
         occupation: '2.16.156.10011.2.3.3.7',//职业分类与代码
-        healthCareType: '2.16.156.10011.2.3.1.248'// 医保类型
+        healthCareType: '2.16.156.10011.2.3.1.248',// 医保类型
+        departType: '2.16.156.10011.1.26',//科室机构标识：科室
+        orgType: '2.16.156.10011.1.5'//科室机构标识：机构
+
     }
     exports.oidCodeConfig = internal;
 });
