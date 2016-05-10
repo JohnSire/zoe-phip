@@ -9,9 +9,9 @@ define(function (require, exports, module) {
             var baseAttr = new BaseAttr({
                 winName: "win_set_detail_dialog",//弹窗对象变量名称
                 winCallback: "win_set_detail_callback",//弹窗回调函数
-                getUrl: 'dataset/getSetInfo',//
-                addUrl: 'dataset/addSetInfo',//新增接口Url
-                updateUrl: 'dataset/updateSetInfo',//修改接口Url
+                getUrl: 'dataSet/getSetInfo',//
+                addUrl: 'dataSet/addSetInfo',//新增接口Url
+                updateUrl: 'dataSet/updateSetInfo',//修改接口Url
                 loadPageEvent: function () {
                     internal.selectList.dialog('dataSetColumn', {
                         target: $("#btnBusinessColumn"),

@@ -93,12 +93,17 @@ public class DataSetController extends BaseController {
      * @param ids
      * @return
      */
+    @RequestMapping(value = "/deleteSetList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult deleteSetList(String ids) {
+        return ServiceFactory.getStSetInfoService().deleteByIds(ComSession.getUserInfo(), ids);
+    }
     @RequestMapping(value = "/deleteSetInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "删除")
-    public ServiceResult deleteSetInfo(String ids) {
-        return ServiceFactory.getStSetInfoService().deleteByIds(ComSession.getUserInfo(), ids);
+    public ServiceResult deleteSetInfo(String id) {
+        return ServiceFactory.getStSetInfoService().deleteById(ComSession.getUserInfo(), id);
     }
-
     //endregion
 }
