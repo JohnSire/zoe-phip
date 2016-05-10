@@ -1,0 +1,54 @@
+
+<%
+var bodySection={
+%>
+<div class="section-display">
+    <ul class="y-layout-form clearfix">
+        <li class="list">
+            <a class="btn-little btn-little-blue">
+                <span class="text-outer">导入Xsl<span class="text-inner">导入Xsl</span></span>
+            </a>
+        </li>
+        <li class="list" id="xslToPreview">
+            <a class="btn-little btn-little-blue">
+                <span class="text-outer">预览<span class="text-inner">预览</span></span>
+            </a>
+        </li>
+        <li class="list" id="xslToStruct">
+            <a class="btn-little btn-little-blue">
+                <span class="text-outer">结构化视图<span class="text-inner">结构化视图</span></span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="y-dialog-tabs">
+    <ul class="lists" id="xsltab">
+        <li class="list active"><a class="link">显示Xsl</a></li>
+        <li class="list"><a class="link">摘要Xsl</a></li>
+        <li class="list"><a class="link">解析Xsl</a></li>
+    </ul>
+    <li>
+
+        <div style="width:500px;height:300px"><div id="editor_id"></div></div>
+    </li>
+</div>
+
+<%};%>
+
+
+<%
+var scriptSection={
+%>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/kindeditor/V4.1.7/kindeditor-all.js")}'></script>
+<script type="text/javascript">
+
+    $(function () {
+        seajs.use('{dir}/StandardManage/Cda/editXsl', function (a) {
+           a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"xsl编辑",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

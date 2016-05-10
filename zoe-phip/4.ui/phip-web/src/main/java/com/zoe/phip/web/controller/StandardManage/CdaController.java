@@ -33,10 +33,24 @@ public class CdaController extends BaseController {
 
         return "/StandardManage/cda/cdaDetail";
     }
-    @RequestMapping("/view/showXSLToStruct")
+       @RequestMapping("/view/showXSLToStruct")
     public String ToShowXSLToStruct(HttpServletRequest request, Model model) {
 
         return "/StandardManage/cda/ShowXSLToStruct";
     }
+
+    @RequestMapping("/view/editXsl")
+    public String ToEditXsl(HttpServletRequest request, Model model) {
+
+        return "/StandardManage/cda/editXsl";
+    }
+
+    @RequestMapping("/view/previewXsl")
+    public String ToPreviewXsl(HttpServletRequest request, Model model) {
+
+        return "/StandardManage/cda/previewXsl";
+    }
+
+
 
 }

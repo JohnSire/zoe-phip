@@ -6,6 +6,7 @@ define(function (require, exports, module) {
     var internal = {
         init: function () {
             window.toDataSetList=toDataSetList;
+            window.xsl=xsl.show;
             var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
@@ -40,7 +41,7 @@ define(function (require, exports, module) {
                         {display: 'XSL配置',  width: 120,render:function(rowdata, rowindex, value){
                             var h = "";
                             h += "<a class='icon-grid icon-grid-setting' title='配置'"
-                            + " onclick='javascript:toDataSetList(\"" + rowdata.id + "\",\"" + rowdata.name + "\")'></a>";;
+                            + " onclick='javascript:xsl(\"" + rowdata.id + "\",\"" + rowdata.name + "\")'></a>";;
 
                             return h;
                         }},
@@ -69,6 +70,36 @@ define(function (require, exports, module) {
 
 
     };
+    var xsl={
+        show:function(){
+          var dialogParam=
+          {
+              title: "xsl编辑",
+                url: 'cda/view/editXsl',
+                    width: 680,
+                    height: 480,
+              buttons: [
+                  {
+                      //verifySubmit自己的验证提交状态
+                      text: "确定",
+                      verifySubmit: true,
+                      submitText: '提交中...',
+                      onclick: function (item, dialog, submited) {
+                      }
+                  },
+                  {
+                      text: "取消",
+                      onclick: function (item, dialog) {
+                          dialog.close();
+                      }
+                  }
+              ]
+            }
+            var top = common.getTopWindowDom();
+            top["show"] = common.dialog(dialogParam);
+        }
+
+    }
 function toDataSetList(id,name){
     var top = common.getTopWindowDom();
     var link=webRoot+"cda/view/dataSetList?cdaName="+name;
@@ -77,4 +108,5 @@ function toDataSetList(id,name){
     exports.init = function () {
         internal.init();
     }
+
 });

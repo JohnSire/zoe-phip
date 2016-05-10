@@ -26,65 +26,7 @@ var bodySection = {
                            nullmsg="请填写代码！"/>
                 </p>
             </li>
-            <!--<li class="list">-->
-                <!--<p class="column-two">-->
-                    <!--<label class="label" for="pid">直报表单：</label>-->
-                        <!--<span class="text-line-outer" id="btnParentCatalog">-->
-                            <!--<input type="text" name="pid" class="text-line" datatype="*"/>-->
-                            <!--<span class="text-line-setting">-->
-                                <!--<span class="icon-grid icon-grid-setting" title="选择"></span>-->
-                                <!--<span class="text-line-content"></span>-->
-                            <!--</span>-->
-                        <!--</span>-->
-                <!--</p>-->
-                <!--<p class="column-two">-->
-                    <!--<label class="label" for="pid">问卷调查：</label>-->
-                        <!--<span class="text-line-outer" id="btnParentCatalog">-->
-                            <!--<input type="text" name="pid" class="text-line" datatype="*"/>-->
-                            <!--<span class="text-line-setting">-->
-                                <!--<span class="icon-grid icon-grid-setting" title="选择"></span>-->
-                                <!--<span class="text-line-content"></span>-->
-                            <!--</span>-->
-                        <!--</span>-->
-                <!--</p>-->
-            <!--</li>-->
-            <!--<li class="list">-->
-                <!--<p class="column-two">-->
-                    <!--<label class="label" for="pid">数据来源：</label>-->
-                        <!--<span class="text-line-outer" id="btnParentCatalog">-->
-                            <!--<input type="text" name="pid" class="text-line" datatype="*"/>-->
-                            <!--<span class="text-line-setting">-->
-                                <!--<span class="icon-grid icon-grid-setting" title="选择"></span>-->
-                                <!--<span class="text-line-content"></span>-->
-                            <!--</span>-->
-                        <!--</span>-->
-                <!--</p>-->
-                <!--<p class="column-two">-->
-                    <!--<label class="label" for="pid">档案类别：</label>-->
-                        <!--<span class="text-line-outer" id="btnParentCatalog">-->
-                            <!--<input type="text" name="pid" class="text-line" datatype="*"/>-->
-                            <!--<span class="text-line-setting">-->
-                                <!--<span class="icon-grid icon-grid-setting" title="选择"></span>-->
-                                <!--<span class="text-line-content"></span>-->
-                            <!--</span>-->
-                        <!--</span>-->
-                <!--</p>-->
-            <!--</li>-->
 
-            <!--<li class="list">-->
-                <!--<p class="column-two">-->
-                    <!--<label class="label" for="birthDate">启用时间：</label>-->
-                    <!--<span class="text-line-outer">-->
-                    <!--<input edittype="date" type="text" name="birthDate" class="text"/>-->
-                    <!--</span>-->
-                <!--</p>-->
-                <!--<p class="column-two">-->
-                    <!--<label class="label" for="birthDate">停用时间：</label>-->
-                    <!--<span class="text-line-outer">-->
-                    <!--<input edittype="date" type="text" name="birthDate" class="text"/>-->
-                    <!--</span>-->
-                <!--</p>-->
-            <!--</li>-->
 
             <li class="list">
                 <p class="column-one">
@@ -101,8 +43,8 @@ var scriptSection={
 %>
 <script type="text/javascript">
     $(function () {
-        seajs.use('{dir}/StandardManage/DataSet/dataSetDetail', function (a) {
-            a.init();
+        seajs.use('{dir}/StandardManage/DataSet/cdaDetail', function (a) {
+           a.init();
         });
     })
 </script>
