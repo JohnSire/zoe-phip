@@ -5,26 +5,18 @@
                extends="com.zoe.phip.module.service.MasterEntityResultMap">
         <result column="FK_VERSION_ID" property="fkVersionId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="FK_CDA_ID" property="fkCdaId" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="FK_SET_ID" property="fkSetId" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
-        <result column="FK_FIELD_ID" property="fkFieldId" javaType="java.lang.String"
+        <result column="FK_DICT_ID" property="fkDictId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="com.zoe.phip.web.model.sdm.StandardVerRsDict">
         INSERT INTO PHIP_STANDARD_VER_RS_DICT (
         FK_VERSION_ID,
-        FK_CDA_ID,
-        FK_SET_ID,
-        FK_FIELD_ID,
+        FK_DICT_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
             #{item.fkVersionId,jdbcType=VARCHAR},
-            #{item.fkCdaId,jdbcType=VARCHAR},
-            #{item.fkSetId,jdbcType=VARCHAR},
-            #{item.fkFieldId,jdbcType=VARCHAR},
+            #{item.fkDictId,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -32,15 +24,11 @@
     <insert id="defaultAdd" parameterType="java.util.List">
         INSERT INTO PHIP_STANDARD_VER_RS_DICT (
         FK_VERSION_ID,
-        FK_CDA_ID,
-        FK_SET_ID,
-        FK_FIELD_ID,
+        FK_DICT_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES(
         #{fkVersionId,jdbcType=VARCHAR},
-        #{fkCdaId,jdbcType=VARCHAR},
-        #{fkSetId,jdbcType=VARCHAR},
-        #{fkFieldId,jdbcType=VARCHAR},
+        #{fkDictId,jdbcType=VARCHAR},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
@@ -63,14 +51,8 @@
                 <if test="item.fkVersionId != null">
                     FK_VERSION_ID = #{item.fkVersionId,jdbcType=VARCHAR},
                 </if>
-                <if test="item.fkCdaId != null">
-                    FK_CDA_ID = #{item.fkCdaId,jdbcType=VARCHAR},
-                </if>
-                <if test="item.fkSetId != null">
-                    FK_SET_ID = #{item.fkSetId,jdbcType=VARCHAR},
-                </if>
-                <if test="item.fkFieldId != null">
-                    FK_FIELD_ID = #{item.fkFieldId,jdbcType=VARCHAR},
+                <if test="item.fkDictId != null">
+                    FK_DICT_ID = #{item.fkDictId,jdbcType=VARCHAR},
                 </if>
                 MODIFY_AT=sysdate
             </set>

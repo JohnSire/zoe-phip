@@ -24,10 +24,20 @@ public class StandardVerRsField extends MasterEntity {
     @Column(name = "FK_VERSION_ID")
     private String fkVersionId;
     /**
-     * 字典主键
+     * CDA主键
      */
-    @Column(name = "FK_DICT_ID")
-    private String fkDictId;
+    @Column(name = "FK_CDA_ID")
+    private String fkCdaId;
+    /**
+     * 数据集主键
+     */
+    @Column(name = "FK_SET_ID")
+    private String fkSetId;
+    /**
+     * 数据集字段主键
+     */
+    @Column(name = "FK_FIELD_ID")
+    private String fkFieldId;
 
     public String getFkVersionId() {
         return this.fkVersionId;
@@ -38,12 +48,30 @@ public class StandardVerRsField extends MasterEntity {
         this.fkVersionId = fkVersionId;
     }
 
-    public String getFkDictId() {
-        return this.fkDictId;
+    public String getFkCdaId() {
+        return this.fkCdaId;
     }
 
 
-    public void setFkDictId(String fkDictId) {
-        this.fkDictId = fkDictId;
+    public void setFkCdaId(String fkCdaId) {
+        this.fkCdaId = fkCdaId;
+    }
+
+    public String getFkSetId() {
+        return this.fkSetId;
+    }
+
+
+    public void setFkSetId(String fkSetId) {
+        this.fkSetId = fkSetId;
+    }
+
+    public String getFkFieldId() {
+        return this.fkFieldId;
+    }
+
+
+    public void setFkFieldId(String fkFieldId) {
+        this.fkFieldId = fkFieldId;
     }
 }
