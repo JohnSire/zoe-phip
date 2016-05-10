@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DocumentType>
+  <docType code="HSDA00.01">个人基本健康信息登记</docType>
+  <docType code="HSDB01.01">出生医学证明</docType>
+  <docType code="HSDB01.02">新生儿家庭访视</docType>
+  <docType code="HSDB01.03">儿童健康体检</docType>
+  <docType code="HSDB02.01">首次产前随访服务</docType>
+  <docType code="HSDB02.02">产前随访服务</docType>
+  <docType code="HSDB02.03">产后访视</docType>
+  <docType code="HSDB02.04">产后42天健康检查</docType>
+  <docType code="HSDB03.01">预防接种报告</docType>
+  <docType code="HSDB03.02">传染病报告</docType>
+  <docType code="HSDB03.03">死亡医学证明</docType>
+  <docType code="HSDB04.01">高血压患者随访服务</docType>
+  <docType code="HSDB04.02">2型糖尿病患者随访服务</docType>
+  <docType code="HSDB04.03">重性精神病患者个人信息登记</docType>
+  <docType code="HSDB04.04">重性精神病患者随访服务</docType>
+  <docType code="HSDC00.01">成人健康体检</docType>
+  <docType code="HSDC00.02">门诊摘要</docType>
+  <docType code="HSDC00.03">住院摘要</docType>
+  <docType code="HSDC00.04">会诊记录</docType>
+  <docType code="HSDC00.05">转诊（院）记录</docType>
+</DocumentType>
