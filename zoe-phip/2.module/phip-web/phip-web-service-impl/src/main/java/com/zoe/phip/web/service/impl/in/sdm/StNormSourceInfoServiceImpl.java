@@ -33,7 +33,6 @@ public class StNormSourceInfoServiceImpl extends BaseInServiceImpl<StNormSourceI
 
     public PageList<StNormSourceInfo> getDataPageList(String key, QueryPage queryPage) {
         PageList<StNormSourceInfo> pageList = new PageList<>();
-        Example example = new Example(StNormSourceInfo.class);
         SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();
         if (!StringUtil.isNullOrWhiteSpace(key))

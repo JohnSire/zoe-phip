@@ -41,5 +41,8 @@ public interface IStSetInfoService extends IBaseInService<StSetInfo> {
 
     ServiceResult rsSetElementDel(SystemData systemData, String id);
 
+    ServiceResult importSetAndRsElement(SystemData systemData,List<StSetInfo> setInfoList, List<StRsSetElementInfo> elementInfoList);
+
+    ServiceResult importRsSetElementInfo(SystemData systemData, List<StRsSetElementInfo> infoList);
 
 }

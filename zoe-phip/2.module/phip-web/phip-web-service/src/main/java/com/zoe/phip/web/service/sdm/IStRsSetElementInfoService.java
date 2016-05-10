@@ -22,7 +22,6 @@ import java.util.List;
  * @date 2016-05-03
  */
 public interface IStRsSetElementInfoService extends IBaseInService<StRsSetElementInfo> {
-    ServiceResult importRsSetElementInfo(SystemData systemData, List<StRsSetElementInfo> infoList);
 
 
     ServiceResultT<PageList<StRsSetElementInfo>> getDataPageList(SystemData systemData, String fkSetId, String key, QueryPage queryPage);
