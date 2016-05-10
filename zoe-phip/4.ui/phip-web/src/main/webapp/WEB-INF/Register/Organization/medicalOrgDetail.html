@@ -26,21 +26,20 @@ var bodySection = {
             </li>
             <li class="list">
                 <p class="column-three">
-                    <label class="label" for="deptTypeName"><span class="text-mark">*</span>类别：</label>
-                    <input type="text" name="deptTypeName" class="text" datatype="*1-128"
-                           errormsg="类别长度应为1~128位！"
-                           nullmsg="请填写类别！"/>
+                    <label class="label" for="deptTypeCode"><span class="text-mark">*</span>类别：</label>
+
+                    <span class="text-line-outer" id="btnDeptType">
+                        <input type="text" name="deptTypeCode" class="text-line" datatype="*"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="选择"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
+
                 </p>
                 <p>
             </li>
-            <li>
-                <p class="column-one">
-                    <label class="label" for="employerAddr"><span class="text-mark">*</span>地址：</label>
-                    <input type="text" name="employerAddr" style="width: 800px;" class="text" datatype="*1-256"
-                           errormsg="地址长度应为1~256位！"
-                           nullmsg="请填写地址！"/>
-                </p>
-            </li>
+
         </ul>
     </div>
     <div class="y-dialog-title">
