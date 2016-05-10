@@ -78,5 +78,10 @@ public final class ServiceFactory {
     public static IStandardVersionService getStandardVersionService() {
         return BeanFactory.getBean(Constant.STANDARD_VERSION_SERVICE);
     }
-
+    public static IStSetInfoService getStSetInfoService() {
+        return BeanFactory.getBean(Constant.STANDARD_DATASET_SERVICE);
+    }
+    public static IStCdaInfoService getStCdaInfoService() {
+        return BeanFactory.getBean(Constant.STANDARD_CDA_SERVICE);
+    }
 }

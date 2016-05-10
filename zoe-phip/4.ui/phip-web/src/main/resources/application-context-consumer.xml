@@ -48,4 +48,8 @@
                      url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStElementInfoService"/>
     <dubbo:reference id="StandardVersionService" interface="com.zoe.phip.web.service.sdm.IStandardVersionService"
                      url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStandardVersionService"/>
+    <dubbo:reference id="StandardVersionService" interface="com.zoe.phip.web.service.sdm.IStandardVersionService"
+                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStandardVersionService"/>
+    <dubbo:reference id="StandardVersionService" interface="com.zoe.phip.web.service.sdm.IStandardVersionService"
+                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStandardVersionService"/>
 </beans>

@@ -25,4 +25,7 @@ public final class Constant {
     public static final String NORM_SOURCE_SERVICE="StNormSourceInfoService";
     public static final String ST_ELEMENT_SERVICE="StElementInfoService";
     public static final String STANDARD_VERSION_SERVICE="StandardVersionService";
+
+    public static final String STANDARD_DATASET_SERVICE="StSetInfoService";
+    public static final String STANDARD_CDA_SERVICE="StCdaInfoService";
 }

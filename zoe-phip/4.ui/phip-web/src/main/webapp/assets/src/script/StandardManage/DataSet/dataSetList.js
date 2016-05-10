@@ -10,8 +10,8 @@ define(function (require, exports, module) {
             var baseGrid = new BaseGrid({
                 gridId: 'grid',
                 deleteUrl: {
-                    deleteInfo: "personnel/delXmanInfo",
-                    deleteList: "personnel/delXmanList"
+                    deleteInfo: "dataSet/deleteSetInfo",
+                    deleteList: "dataSet/deleteSetInfo"
                 },
                 tools: {
                     btnbox: {
@@ -26,7 +26,7 @@ define(function (require, exports, module) {
                 },
                 // reqInfoKey:'patientId',
                 gridParam: {
-                    url: 'personnel/getXmanList',
+                    url: 'dataSet/getSetList',
                     columns: [
                         {display: '编码', name: 'cardCode', width: 120, align: 'left'},
                         {display: '名称', name: 'name', width: 120, align: 'left'},
