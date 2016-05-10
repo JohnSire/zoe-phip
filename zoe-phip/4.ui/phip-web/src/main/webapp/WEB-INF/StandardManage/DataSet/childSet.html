@@ -1,0 +1,14 @@
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/StandardManage/DataSet/childSet', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseGrid.html",{title:"子级数据集管理",styleSection:null,bodySection:null,scriptSection:scriptSection}){}
+%>
