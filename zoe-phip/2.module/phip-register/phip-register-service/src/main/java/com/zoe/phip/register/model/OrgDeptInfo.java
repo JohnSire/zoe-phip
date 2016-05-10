@@ -210,6 +210,8 @@ public class OrgDeptInfo extends RegisterEntity {
     @Column(name = "PROVINCE_CODE")
     private String provinceCode;
 
+    @Transient
+    private String provinceCodeName;
 
     /**
      * 市级编码
@@ -217,12 +219,17 @@ public class OrgDeptInfo extends RegisterEntity {
     @Column(name = "CITY_CODE")
     private String cityCode;
 
+    @Transient
+    private String cityCodeName;
+
     /**
      * 区县级编码
      */
     @Column(name = "COUNTY_CODE")
     private String countyCode;
 
+    @Transient
+    private String countyCodeName;
 
     /**
      * 街道编码
@@ -230,6 +237,8 @@ public class OrgDeptInfo extends RegisterEntity {
     @Column(name = "STREET_CODE")
     private String streetCode;
 
+    @Transient
+    private String streetCodeName;
 
     /**
      * 居委会编码
@@ -237,6 +246,48 @@ public class OrgDeptInfo extends RegisterEntity {
     @Column(name = "NEIGHBORHOOD_CODE")
     private String neighborhoodCode;
 
+    @Transient
+    private String neighborhoodCodeName;
+
+    public String getNeighborhoodCodeName() {
+        return neighborhoodCodeName;
+    }
+
+    public void setNeighborhoodCodeName(String neighborhoodCodeName) {
+        this.neighborhoodCodeName = neighborhoodCodeName;
+    }
+
+    public String getProvinceCodeName() {
+        return provinceCodeName;
+    }
+
+    public void setProvinceCodeName(String provinceCodeName) {
+        this.provinceCodeName = provinceCodeName;
+    }
+
+    public String getCityCodeName() {
+        return cityCodeName;
+    }
+
+    public void setCityCodeName(String cityCodeName) {
+        this.cityCodeName = cityCodeName;
+    }
+
+    public String getCountyCodeName() {
+        return countyCodeName;
+    }
+
+    public void setCountyCodeName(String countyCodeName) {
+        this.countyCodeName = countyCodeName;
+    }
+
+    public String getStreetCodeName() {
+        return streetCodeName;
+    }
+
+    public void setStreetCodeName(String streetCodeName) {
+        this.streetCodeName = streetCodeName;
+    }
 
     public String getNeighborhoodCode() {
         return neighborhoodCode;

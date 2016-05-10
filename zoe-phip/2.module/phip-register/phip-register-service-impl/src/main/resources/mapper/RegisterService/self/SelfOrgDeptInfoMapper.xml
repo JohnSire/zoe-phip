@@ -2,7 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.register.dao.IOrgDeptInfoMapper">
 <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.OrgDeptInfo" extends="BaseResultMap">
-
+    <result column="dept_type_name" property="deptTypeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result column="PROVINCE_CODE_NAME" property="provinceCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result column="CITY_CODE_NAME" property="cityCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result column="COUNTY_CODE_NAME" property="countyCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result column="STREET_CODE_NAME" property="streetCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    <result column="NEIGHBORHOOD_CODE_NAME" property="neighborhoodCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
 </resultMap>
 <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.OrgDeptInfo">
     update PHIP_ORG_DEPT_INFO
@@ -147,4 +152,29 @@
 
 
 
+    <select id="getOrgDeptByPrimaryKey" parameterType="java.lang.String" resultMap="MultiResultMap">
+        <include refid="orgDeptSelect"/>
+        WHERE PODI.ID=#{id}
+    </select>
+    <sql id="orgDeptSelect">
+        SELECT PODI.*,p.NAME AS dept_type_name,a.name as PROVINCE_CODE_NAME ,b.name as CITY_CODE_NAME,c.name as COUNTY_CODE_NAME,
+        d.name as STREET_CODE_NAME,e.name as NEIGHBORHOOD_CODE_NAME
+        FROM PHIP_ORG_DEPT_INFO PODI
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.4.1"/>
+        </include>
+        ) p ON PODI.dept_type_code=p.CODE --机构分类
+        left join phip_area_base_info a on PODI.PROVINCE_CODE=a.code
+        left join phip_area_base_info b on PODI.CITY_CODE=b.code
+        left join phip_area_base_info c on PODI.COUNTY_CODE=c.code
+        left join phip_area_base_info d on PODI.STREET_CODE=d.code
+        left join phip_area_base_info e on PODI.NEIGHBORHOOD_CODE=e.code
+    </sql>
+    <sql id="oidSelect">
+        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
+        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
+        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
+        WHERE PNS.CODE_SYSTEM = '${oidValue}'
+    </sql>
 </mapper>
