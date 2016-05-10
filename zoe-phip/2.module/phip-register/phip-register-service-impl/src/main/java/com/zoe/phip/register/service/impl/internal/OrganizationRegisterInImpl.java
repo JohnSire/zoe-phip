@@ -15,10 +15,7 @@ import com.zoe.phip.register.dao.IDictCatalogMapper;
 import com.zoe.phip.register.dao.IDictItemMapper;
 import com.zoe.phip.register.dao.INationalStandardsMapper;
 import com.zoe.phip.register.dao.IOrgDeptInfoMapper;
-import com.zoe.phip.register.model.DictCatalog;
-import com.zoe.phip.register.model.DictItem;
-import com.zoe.phip.register.model.NationalStandards;
-import com.zoe.phip.register.model.OrgDeptInfo;
+import com.zoe.phip.register.model.*;
 import com.zoe.phip.register.service.internal.IOrganizationRegisterIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -247,5 +244,14 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
         return pageList;
     }
 
+
+    @Override
+    public OrgDeptInfo getById(String id) throws Exception {
+        return getOrgDeptByPrimaryKey(id);
+    }
+    @Override
+    public OrgDeptInfo getOrgDeptByPrimaryKey(String id) {
+        return getMapper().getOrgDeptByPrimaryKey(id);
+    }
 
 }

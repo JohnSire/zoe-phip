@@ -39,4 +39,6 @@ public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
     PageList<OrgDeptInfo> DepartmentListQuery(String type, String deptTypeCode, String deptParentCode, String key, QueryPage page);
 
     NationalStandards dictItemListQueryByDictCode(String dictCode);
+
+    OrgDeptInfo getOrgDeptByPrimaryKey(String id);
 }
