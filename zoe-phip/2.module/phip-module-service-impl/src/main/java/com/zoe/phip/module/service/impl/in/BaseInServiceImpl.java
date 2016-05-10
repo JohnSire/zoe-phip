@@ -20,6 +20,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by qiuyungen on 2016/3/26.
@@ -220,7 +221,10 @@ public abstract class BaseInServiceImpl<T extends MasterEntity, TMapper extends 
     public Object $invoke(String s, String[] strings, Object[] objects) throws GenericException {
         return null;
     }
-
+    public void  dispose(Map<String,Object> map){
+        map.clear();
+        map = null;
+    }
 
     //endregion
 }
