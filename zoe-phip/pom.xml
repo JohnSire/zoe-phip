@@ -26,7 +26,7 @@
 
     <properties>
         <!--dubbo相关 版本号 2.5.3   2.8.4-->
-        <dubbo.version>4.2.4.RC1</dubbo.version>
+        <dubbo.version>4.2.4.RC2</dubbo.version>
         <cxf.version>3.1.5</cxf.version>
         <tomcat.embed.version>8.0.11</tomcat.embed.version>
         <resteasy.version>3.0.7.Final</resteasy.version>
