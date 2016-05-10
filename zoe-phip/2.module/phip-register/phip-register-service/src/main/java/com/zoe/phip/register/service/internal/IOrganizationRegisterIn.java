@@ -82,6 +82,13 @@ public interface IOrganizationRegisterIn extends IBaseInService<OrgDeptInfo> {
 
     ServiceResultT<PageList<OrgDeptInfo>> orgListQuery(SystemData systemData);
 
+    /**
+     * 获取科室详情
+     * @param systemData
+     * @param id
+     * @return
+     */
+    ServiceResult getByDepartmentId(SystemData systemData,String id);
 
     /**
      * 公共获取字典分类树
