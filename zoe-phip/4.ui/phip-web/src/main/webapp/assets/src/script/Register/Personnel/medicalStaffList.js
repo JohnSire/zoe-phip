@@ -17,20 +17,20 @@ define(function (require, exports, module) {
                 url: {
                     getTreeList: 'personnel/getMedDeptList',
                 },
-                //renderData: function (data) {
-                //
-                //    var treeData = [];
-                //    var parentNode = {
-                //        id: "ffff",
-                //        deptName: "医疗机构",
-                //        deptCode: "0",
-                //        type: 0,
-                //        children: []
-                //    };
-                //    parentNode["children"] = data.result.rows;
-                //    treeData.push(parentNode);
-                //    return treeData;
-                //},
+                renderData: function (data) {
+
+                    var treeData = [];
+                    var parentNode = {
+                        id: "ffff",
+                        deptName: "医疗机构",
+                        deptCode: "0",
+                        type: 0,
+                        children: []
+                    };
+                    parentNode["children"] = data.result.rows;
+                    treeData.push(parentNode);
+                    return treeData;
+                },
                 treeParam: {
                     idFieldName: 'deptCode',
                     parentIDFieldName: 'deptParentCode',
