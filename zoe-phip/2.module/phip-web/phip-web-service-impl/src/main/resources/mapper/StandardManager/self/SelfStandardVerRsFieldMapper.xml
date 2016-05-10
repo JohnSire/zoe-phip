@@ -10,8 +10,14 @@
             <if test="fkVersionId != null">
                 FK_VERSION_ID = #{fkVersionId,jdbcType=VARCHAR},
             </if>
-            <if test="fkDictId != null">
-                FK_DICT_ID = #{fkDictId,jdbcType=VARCHAR},
+            <if test="fkCdaId != null">
+                FK_CDA_ID = #{fkCdaId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkSetId != null">
+                FK_SET_ID = #{fkSetId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkFieldId != null">
+                FK_FIELD_ID = #{fkFieldId,jdbcType=VARCHAR},
             </if>
             MODIFY_AT=sysdate
         </set>

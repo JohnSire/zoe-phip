@@ -6,7 +6,6 @@
 
 package com.zoe.phip.web.dao.sdm;
 
-import com.zoe.phip.infrastructure.entity.QueryPage;
 import com.zoe.phip.module.service.mapper.IMyMapper;
 import com.zoe.phip.web.model.sdm.*;
 
