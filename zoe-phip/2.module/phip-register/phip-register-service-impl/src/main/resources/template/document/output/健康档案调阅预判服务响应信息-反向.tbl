@@ -1,5 +1,5 @@
 ﻿<GetDocumentStroedInfoResponse xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\GetDocumentStroedInfoResponse.xsd" status="AE">
-  <Id root="2.16.156.10011.0" extension="${Model.Acknowledge.msgId}" />
+  <Id root="2.16.156.10011.0" extension="${Model.acknowledgement.msgId}" />
   <TargetId root="2.16.156.10011.0" extension="${Model.msgId}" />
-  <Detail>${Model.Acknowledge.text}</Detail>
+  <Detail>${Model.acknowledgement.text}</Detail>
 </GetDocumentStroedInfoResponse>

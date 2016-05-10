@@ -15,6 +15,7 @@ import com.zoe.phip.register.model.XmanIndex;
 import com.zoe.phip.register.service.internal.IDocumentRegisterIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ import java.util.Map;
 @Repository("DocumentRegisterIn")
 @Service(interfaceClass = IDocumentRegisterIn.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
 @ErrorMessage(code = "001", message = "由于注册档案的患者基本信息不存在，注册失败")
+@ErrorMessage(code = "002", message = "由于注册档案内容已存在，注册失败")
 public class DocumentRegisterInImpl extends BaseInServiceImpl<XmanEhr, IEhrDataInfoMapper> implements IEhrDataInfoMapper{
 
     @Autowired
@@ -39,11 +41,6 @@ public class DocumentRegisterInImpl extends BaseInServiceImpl<XmanEhr, IEhrDataI
         return getMapper().defaultUpdate(ehrDataInfo);
     }
 
-
-    public String getXmanId(Map<String, Object> args) {
-        return xmanIndexMapper.getXmanId(args);
-    }
-
     public XmanIndex addDocumentRegistry(XmanIndex xmanIndex, XmanEhr xmanEhr, XmanEhrContent xmanEhrContent) throws Exception {
         //根据身份证号和患者ID获取xmanId
         Map<String, Object> paras = new HashMap<String, Object>();
@@ -53,20 +50,31 @@ public class DocumentRegisterInImpl extends BaseInServiceImpl<XmanEhr, IEhrDataI
         if(UtilString.isEmptyOrNullWildcard(xmanId)){
             throw new BusinessException("001");
         }
-        String indexId = StringUtil.getUUID();
-        xmanIndex.setId(indexId);
+        //档案Id不为空时判断档案是否已存在
+        if(!UtilString.isEmptyOrNullWildcard(xmanEhr.getId())) {
+            Example example = new Example(XmanEhr.class);
+            example.createCriteria().andEqualTo("id", xmanEhr.getId());
+            int count = getMapper().selectCountByExample(example);
+            if (count > 0) {
+                throw new BusinessException("002");
+            }
+        }
+        xmanIndex.setId(StringUtil.getUUID());
         xmanIndex.setXmanId(xmanId);
+        xmanIndex.setCreateAt(new Date());
+        xmanIndex.setModifyAt(new Date());
         xmanIndexMapper.insertSelective(xmanIndex);
 
-        String ehrId = StringUtil.getUUID();
-        xmanEhr.setId(ehrId);
+        if(UtilString.isEmptyOrNullWildcard(xmanEhr.getId())) {
+            xmanEhr.setId(StringUtil.getUUID());
+        }
         xmanEhr.setIndexId(xmanIndex.getId());
         xmanEhr.setXmanId(xmanId);
         xmanEhr.setCreateAt(new Date());
         xmanEhr.setModifyAt(new Date());
         super.add(xmanEhr);
 
-        xmanEhrContent.setId(ehrId);
+        xmanEhrContent.setId(xmanEhr.getId());
         xmanEhrContent.setIndexId(xmanIndex.getId());
         xmanEhrContent.setXmanId(xmanId);
         xmanEhrContent.setCreateAt(new Date());

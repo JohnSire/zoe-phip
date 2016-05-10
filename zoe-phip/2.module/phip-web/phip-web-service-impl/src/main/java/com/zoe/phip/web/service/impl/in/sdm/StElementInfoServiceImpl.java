@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SortOrder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
@@ -70,9 +71,13 @@ public class StElementInfoServiceImpl extends BaseInServiceImpl<StElementInfo, I
     public PageList<StElementInfo> getDataPageList(String key, QueryPage queryPage) {
 
         PageList<StElementInfo> pageList = new PageList<>();
+        queryPage.setOrderBy("PSEI.CODE");
+        queryPage.setSortOrder(SortOrder.ASC);
         SqlHelper.startPage(queryPage);
+
         Map<String, Object> map = new TreeMap<>();
         if (!StringUtil.isNullOrWhiteSpace(key)) map.put("key", key);
+
         List<StElementInfo> results = getMapper().getDataPageList(map);
         PageInfo<StElementInfo> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
