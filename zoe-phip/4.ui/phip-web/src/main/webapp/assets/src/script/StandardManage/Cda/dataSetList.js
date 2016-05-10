@@ -19,14 +19,12 @@ define(function (require, exports, module) {
                             text: "返回 CDA列表", click: function () {
 
                                 var top = common.getTopWindowDom();
-                                var link=webRoot+"cda/view/cdaList";
-                                top. frames["mainframe"].location.href = link;
+                                var link = webRoot + "cda/view/cdaList";
+                                top.frames["mainframe"].location.href = link;
                             }
 
 
-
                         },
-
 
 
                         'add': true,
@@ -40,12 +38,12 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: 'personnel/getXmanList',
                     columns: [
-                        {display: '数据集标识', name: 'cardCode', width: 120, align: 'left'},
+                        {display: '数据集标识', name: 'code', width: 120, align: 'left'},
                         {display: '数据集名称', name: 'name', width: 120, align: 'left'},
-                        {display: '描述', name: 'sexCodeName', width: 120, align: 'left'},
+                        {display: '描述', name: 'descr', width: 120, align: 'left'},
 
 
-                        {display: '操作', isSort: false, width: 120, icons: [ 'del']}
+                        {display: '操作', isSort: false, width: 120, icons: ['del']}
                     ],
                     usePage: true,
                     width: $("body").innerWidth() - 2,
@@ -66,8 +64,8 @@ define(function (require, exports, module) {
                     }
                 }
             })
-            var name=decodeURI(common.getParamFromUrl("cdaName"));
-            var html="<p style='margin-top: 9px; '>"+"当前列表为CDA（"+name+"）下的数据集</p>"
+            var name = decodeURI(common.getParamFromUrl("cdaName"));
+            var html = "<p style='margin-top: 9px; '>" + "当前列表为CDA（" + name + "）下的数据集</p>"
             $("#gridTools").append(html);
             $(".btn-add").parent().unbind();
             internal.selectList.dialog('dataSet', {
