@@ -44,8 +44,9 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
     private StRsSetElementInfoServiceImpl rsSetElementInfoService;
 
     public PageList<StSetInfo> getDataPageList(String key, QueryPage queryPage){
+        queryPage.setOrderBy("PSSI.CODE");
+        queryPage.setSortOrder(SortOrder.ASC);
         PageList<StSetInfo> pageList = new PageList<>();
-        Example example = new Example(StSetInfo.class);
         SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();
         if (!StringUtil.isNullOrWhiteSpace(key)) map.put("key", key);
@@ -53,6 +54,7 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
         PageInfo<StSetInfo> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
+        super.dispose(map);
         return pageList;
     }
 
@@ -62,7 +64,9 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
             m.put("fkCdaId", fkCdaId);
             if (!StringUtil.isNullOrWhiteSpace(key)) m.put("key", key);
         });
-        return getMapper().getByCdaId(map);
+        List<StSetInfo> infoList  =getMapper().getByCdaId(map);
+        super.dispose(map);
+        return infoList;
     }
 
     @Override
@@ -114,5 +118,17 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
 
     public int rsSetElementDel(String id) throws Exception {
         return rsSetElementInfoService.deleteById(id);
+    }
+
+    /**
+     * 数据集(字段关联)批量导入
+     *
+     * @param infoList
+     * @return
+     */
+    public int importRsSetElementInfo(List<StRsSetElementInfo> infoList) {
+        // TODO: 2016/5/9
+
+        return 0;
     }
 }

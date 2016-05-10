@@ -307,6 +307,20 @@ public class StRsSetElementInfo extends MasterEntity {
      */
     private String dictName;
 
+    /**
+     * 数据集代码
+     */
+    private String setCode;
+
+    /**
+     * 基础数据元代码
+     */
+    private String baseElementCode;
+
+    /**
+     * 基础数据元名称
+     */
+    private String baseElementName;
 
     public String getDictCode() {
         return dictCode;
@@ -322,5 +336,29 @@ public class StRsSetElementInfo extends MasterEntity {
 
     public void setDictName(String dictName) {
         this.dictName = dictName;
+    }
+
+    public String getSetCode() {
+        return setCode;
+    }
+
+    public void setSetCode(String setCode) {
+        this.setCode = setCode;
+    }
+
+    public String getBaseElementCode() {
+        return baseElementCode;
+    }
+
+    public void setBaseElementCode(String baseElementCode) {
+        this.baseElementCode = baseElementCode;
+    }
+
+    public String getBaseElementName() {
+        return baseElementName;
+    }
+
+    public void setBaseElementName(String baseElementName) {
+        this.baseElementName = baseElementName;
     }
 }
