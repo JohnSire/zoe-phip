@@ -3,6 +3,8 @@
  */
 define(function (require, exports, module) {
     var internal = {
+        req: require("./req").req,
+        top: common.getTopWindowDom(),
         init: function () {
             var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
             var baseGrid = new BaseGrid({
@@ -63,9 +65,45 @@ define(function (require, exports, module) {
         merge: function () {
             var gridObj = common.getGrid("grid");
             var selectRows = gridObj.getSelectedRows();
-            if (selectRows.length) {
+            if (selectRows.length == 2) {
+                internal.top.win_xmanbase_merge_selectrows = selectRows;
+                common.dialog({
+                    title: '选择合并后保留记录',
+                    url: 'personnel/view/xmanbasemerge',
+                    width: 500,
+                    height: 260,
+                    buttons: [
+                        {
+                            text: '合并',
+                            onclick: function (item, dialog) {
+                                var idArray = internal.top.win_xmanbase_merge_callback();
+                                if (idArray) {
+                                    var newId = idArray[0], oldId = idArray[1];
+                                    internal.req.xmanBaseMerge(newId, oldId, function (data) {
+                                        if (data.isSuccess) {
+                                            var gridObj = common.getGrid("grid");
+                                            gridObj.reload();
+                                            dialog.close();
+                                        }
 
+                                    })
+                                }
+
+                            }
+                        },
+                        {
+                            text: '取消',
+                            onclick: function (item, dialog) {
+                                dialog.close();
+                            }
+                        }]
+                })
+            } else if (selectRows.length < 2) {
+                common.jsmsgError("请选择两条记录进行合并!");
+            } else {
+                common.jsmsgError("只能选择两条记录进行合并!");
             }
+
         }
 
     };
