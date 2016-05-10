@@ -28,7 +28,7 @@ import java.util.TreeMap;
  * @date 2016-05-03
  */
 @Repository("stNormSourceInfoService")
-@Service(interfaceClass = IStNormSourceInfoService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStNormSourceInfoService.class,protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
 public class StNormSourceInfoServiceImpl extends BaseInServiceImpl<StNormSourceInfo, IStNormSourceInfoMapper> implements IStNormSourceInfoMapper {
 
     public PageList<StNormSourceInfo> getDataPageList(String key, QueryPage queryPage) {

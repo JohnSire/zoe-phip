@@ -33,7 +33,7 @@ import java.util.TreeMap;
  * @date 2016-05-03
  */
 @Repository("stRsSetElementInfoService")
-@Service(interfaceClass = IStRsSetElementInfoService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStRsSetElementInfoService.class, protocol = {"dubbo"},proxy = "sdpf", dynamic = true)
 @ErrorMessage(code = "001", message = "数据列({0})已经存在,新增失败!")
 @ErrorMessage(code = "002", message = "数据列({0})已经存在,更新失败!")
 public class StRsSetElementInfoServiceImpl extends BaseInServiceImpl<StRsSetElementInfo, IStRsSetElementInfoMapper> implements IStRsSetElementInfoMapper {

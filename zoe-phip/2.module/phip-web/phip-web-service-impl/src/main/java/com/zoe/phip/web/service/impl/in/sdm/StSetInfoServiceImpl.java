@@ -34,7 +34,7 @@ import java.util.TreeMap;
  * @date 2016-05-03
  */
 @Repository("stSetInfoService")
-@Service(interfaceClass = IStSetInfoService.class, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStSetInfoService.class, protocol = {"dubbo"},proxy = "sdpf", dynamic = true)
 @ErrorMessage(code = "001", message = "数据集标识({0})已经存在,新增失败!")
 @ErrorMessage(code = "002", message = "数据集标识({0})已经存在,更新失败!")
 public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInfoMapper> implements IStSetInfoMapper {
@@ -53,8 +53,7 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
         PageList<StSetInfo> pageList = new PageList<>();
         SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();
-        if (!StringUtil.isNullOrWhiteSpace(key))
-            map.put("key", SqlHelper.getLikeStr(key));
+        if (!StringUtil.isNullOrWhiteSpace(key)) map.put("key", SqlHelper.getLikeStr(key));
         List<StSetInfo> results = getMapper().getDataPageList(map);
         PageInfo<StSetInfo> pageInfo = new PageInfo<>(results);
         pageList.setTotal((int) pageInfo.getTotal());
@@ -97,19 +96,23 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
         return rsSetElementInfoService.deleteById(id);
     }
 
-    public int importSetAndRsElement(List<StSetInfo> setInfoList, List<StRsSetElementInfo> elementInfoList) {
+    public int importSetAndRsElement(List<StSetInfo> setInfoList, List<StRsSetElementInfo> elementInfoList) throws Exception {
         String ids = new String();
         String eleIds = new String();
         for (StSetInfo baseInfo : setInfoList) {
             StSetInfo model = getBySetCode(baseInfo.getCode());
-            if (model != null)
-            {
+            if (model != null) {
                 ids += model.getId() + ",";
                 baseInfo.setId(model.getId());
             }
         }
-
-        return 0;
+        if (StringUtil.isNullOrWhiteSpace(ids)) {
+            ids = ids.substring(0, ids.length() - 1);
+            deleteByIds(ids);
+        }
+        int result = addList(setInfoList);
+        importRsSetElementInfo(elementInfoList);
+        return result;
     }
 
     /**

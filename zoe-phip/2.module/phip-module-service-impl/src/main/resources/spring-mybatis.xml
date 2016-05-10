@@ -133,6 +133,9 @@
             <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="edit*" propagation="REQUIRED"/>
             <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="import*" propagation="REQUIRED"/>
+            <tx:method name="export*" propagation="REQUIRED"/>
+
             <!--<tx:method name="*"/>-->
         </tx:attributes>
     </tx:advice>
