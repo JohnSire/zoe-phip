@@ -145,13 +145,13 @@
         SELECT * FROM PHIP_XMAN_INDEX PXI
         <where>
             <if test="healthCardId != null">
-                AND T.HEALTH_CARD_ID = #{healthCardId,jdbcType=VARCHAR}
+                AND PXI.HEALTH_CARD_ID = #{healthCardId,jdbcType=VARCHAR}
             </if>
             <if test="idNo != null">
-                AND T.ID_NO = #{idNo,jdbcType=VARCHAR}
+                AND PXI.ID_NO = #{idNo,jdbcType=VARCHAR}
             </if>
             <if test="title != null">
-                AND T.TITLE = #{title,jdbcType=VARCHAR}
+                AND PXI.TITLE = #{title,jdbcType=VARCHAR}
             </if>
         </where>
         ) PXI
