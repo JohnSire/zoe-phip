@@ -17,75 +17,80 @@
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.XmanBaseInfo">
         update PHIP_XMAN_BASE_INFO
         <set>
+            <if test="orgCode != null">
                 ORG_CODE = #{orgCode,jdbcType=VARCHAR},
-
-                ID_NO = #{idNo,jdbcType=VARCHAR},
-
+            </if>
+            <if test="idNo != null">
+            ID_NO = #{idNo,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
                 NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            SEX_CODE = #{sexCode,jdbcType=VARCHAR},
 
-                SEX_CODE = #{sexCode,jdbcType=VARCHAR},
+            BIRTH_DATE = #{birthDate,jdbcType=TIMESTAMP},
 
-                BIRTH_DATE = #{birthDate,jdbcType=TIMESTAMP},
+            ID_TYPE_CODE = #{idTypeCode,jdbcType=DECIMAL},
 
-                ID_TYPE_CODE = #{idTypeCode,jdbcType=DECIMAL},
+            EMPLOYER_NAME = #{employerName,jdbcType=VARCHAR},
 
-                EMPLOYER_NAME = #{employerName,jdbcType=VARCHAR},
+            TEL_NO = #{telNo,jdbcType=VARCHAR},
 
-                TEL_NO = #{telNo,jdbcType=VARCHAR},
+            REL_NAME = #{relName,jdbcType=VARCHAR},
 
-                REL_NAME = #{relName,jdbcType=VARCHAR},
+            REL_TEL_NO = #{relTelNo,jdbcType=VARCHAR},
 
-                REL_TEL_NO = #{relTelNo,jdbcType=VARCHAR},
+            ADDRESS = #{address,jdbcType=VARCHAR},
 
-                ADDRESS = #{address,jdbcType=VARCHAR},
+            STATE_CODE = #{stateCode,jdbcType=VARCHAR},
 
-                STATE_CODE = #{stateCode,jdbcType=VARCHAR},
+            CITY_CODE = #{cityCode,jdbcType=VARCHAR},
 
-                CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+            AREA_CODE = #{areaCode,jdbcType=VARCHAR},
 
-                AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+            STREET_CODE = #{streetCode,jdbcType=VARCHAR},
 
-                STREET_CODE = #{streetCode,jdbcType=VARCHAR},
+            COMMITTEE_CODE = #{committeeCode,jdbcType=VARCHAR},
 
-                COMMITTEE_CODE = #{committeeCode,jdbcType=VARCHAR},
+            HOUSE_NUMBER = #{houseNumber,jdbcType=VARCHAR},
 
-                HOUSE_NUMBER = #{houseNumber,jdbcType=VARCHAR},
+            POSTAL_CODE = #{postalCode,jdbcType=VARCHAR},
 
-                POSTAL_CODE = #{postalCode,jdbcType=VARCHAR},
+            NATIONALITY_CODE = #{nationalityCode,jdbcType=VARCHAR},
 
-                NATIONALITY_CODE = #{nationalityCode,jdbcType=VARCHAR},
+            ABO_CODE = #{aboCode,jdbcType=DECIMAL},
 
-                ABO_CODE = #{aboCode,jdbcType=DECIMAL},
+            RH_CODE = #{rhCode,jdbcType=DECIMAL},
 
-                RH_CODE = #{rhCode,jdbcType=DECIMAL},
+            EDUCATION_CODE = #{educationCode,jdbcType=DECIMAL},
 
-                EDUCATION_CODE = #{educationCode,jdbcType=DECIMAL},
+            OCCUPATION_CODE = #{occupationCode,jdbcType=VARCHAR},
 
-                OCCUPATION_CODE = #{occupationCode,jdbcType=VARCHAR},
+            MARRIAGE_CODE = #{marriageCode,jdbcType=VARCHAR},
 
-                MARRIAGE_CODE = #{marriageCode,jdbcType=VARCHAR},
+            CODE_SYS_CODE = #{codeSysCode,jdbcType=VARCHAR},
 
-                CODE_SYS_CODE = #{codeSysCode,jdbcType=VARCHAR},
+            ASSIGNED_PERSON_CODE = #{assignedPersonCode,jdbcType=VARCHAR},
 
-                ASSIGNED_PERSON_CODE = #{assignedPersonCode,jdbcType=VARCHAR},
+            ASSIGNED_PERSON_NAME = #{assignedPersonName,jdbcType=VARCHAR},
 
-                ASSIGNED_PERSON_NAME = #{assignedPersonName,jdbcType=VARCHAR},
-
-                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-
+            CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            <if test="healthRecordOrgCode != null">
                 HEALTH_RECORD_ORG_CODE = #{healthRecordOrgCode,jdbcType=VARCHAR},
-
+            </if>
+            <if test="patientId != null">
                 PATIENT_ID = #{patientId,jdbcType=VARCHAR},
-
+            </if>
+            <if test="msgId != null">
                 MSG_ID = #{msgId,jdbcType=VARCHAR},
+            </if>
+            STATE = #{state,jdbcType=DECIMAL},
 
-                STATE = #{state,jdbcType=DECIMAL},
+            STATUS_CODE = #{statusCode,jdbcType=VARCHAR},
 
-                STATUS_CODE = #{statusCode,jdbcType=VARCHAR},
+            EFFECTIVE_TIME = #{effectiveTime,jdbcType=TIMESTAMP},
 
-                EFFECTIVE_TIME = #{effectiveTime,jdbcType=TIMESTAMP},
-
-                EMPLOYER_TEL_NO = #{employerTelNo,jdbcType=VARCHAR},
+            EMPLOYER_TEL_NO = #{employerTelNo,jdbcType=VARCHAR},
 
             MODIFY_AT=sysdate
         </set>
