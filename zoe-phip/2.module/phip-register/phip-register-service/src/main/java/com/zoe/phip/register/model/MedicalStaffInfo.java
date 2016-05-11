@@ -41,6 +41,22 @@ public class MedicalStaffInfo extends RegisterEntity {
     @Transient
 //    @Column(name = "GENDER_NAME")
     private String genderName;
+
+
+
+    /**
+     * 隶属机构
+     */
+    @Transient
+    private String orgName;
+
+    public String getOrgName() {
+        return orgName;
+    }
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
+    }
+
     /**
      * 出生日期
      */

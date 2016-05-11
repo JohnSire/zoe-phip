@@ -80,7 +80,7 @@
         FROM PHIP_ST_CDA_INFO PSCI
         LEFT JOIN SYS_SYSTEM_DICT_ITEM SSDI
         ON PSCI.ID = SSDI.ID
-        LEFT  join PHIP_ST_NORM_SOURCE_INFO PSNSI
+        LEFT join PHIP_ST_NORM_SOURCE_INFO PSNSI
         on PSCI.FK_NORM_SOURCE_ID = PSNSI.ID
         WHERE 1 = 1
         <if test="_parameter.containsKey('key')">
@@ -98,5 +98,6 @@
             and PSCI.id != #{id, jdbcType=VARCHAR}
         </if>
     </select>
+
 
 </mapper>

@@ -10,6 +10,7 @@ import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.web.dao.sdm.IStandardVerRsCdaMapper;
+import com.zoe.phip.web.model.sdm.StCdaInfo;
 import com.zoe.phip.web.model.sdm.StandardVerRsCda;
 import com.zoe.phip.web.service.sdm.IStandardVerRsCdaService;
 import org.springframework.stereotype.Repository;
@@ -34,6 +35,21 @@ public class StandardVerRsCdaServiceImpl extends BaseInServiceImpl<StandardVerRs
         cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
         int i = super.addList(fieldList);
         return i;
+    }
+
+//    public List<StandardVerRsCda> getVerRsCdaInfo(String fkVersionId) throws Exception {
+//        Example cda = new Example(StandardVerRsCda.class);
+//        Example.Criteria criteria = cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
+//        cda.or(criteria);
+//        return getMapper().selectByExample(cda);
+//    }
+
+
+    public List<StCdaInfo> getVerRsCdaInfo(String fkVersionId) throws Exception {
+        Map<String, Object> map = MapUtil.createMap(map1 -> {
+            map1.put("fkVersionId", fkVersionId);
+        });
+        return getCdaByFkVersionId(map);
     }
 
     public int deleteByVersionId(String fkVersionId) {
@@ -74,5 +90,10 @@ public class StandardVerRsCdaServiceImpl extends BaseInServiceImpl<StandardVerRs
     @Override
     public int getSingle(Map<String, Object> map) {
         return getMapper().getSingle(map);
+    }
+
+    @Override
+    public List<StCdaInfo> getCdaByFkVersionId(Map<String, Object> map) {
+        return getMapper().getCdaByFkVersionId(map);
     }
 }
