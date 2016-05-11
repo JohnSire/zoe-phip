@@ -29,7 +29,7 @@ define(function (require, exports, module) {
                                 var fkCatalogId = common.getParamFromUrl("fkCatalogId");
                                 var fkCatalogName = common.getParamFromUrl("fkCatalogName");
                                 var fkCatalogType = common.getParamFromUrl("fkCatalogType");
-                                if (fkCatalogId && fkCatalogId != "null" && fkCatalogType == 1) {
+                                if (fkCatalogType == 1) {
                                     var info = {
                                         fkCatalogId: fkCatalogId,
                                         fkCatalogName: decodeURIComponent(fkCatalogName)

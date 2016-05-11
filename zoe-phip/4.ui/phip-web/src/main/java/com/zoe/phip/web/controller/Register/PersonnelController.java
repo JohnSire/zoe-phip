@@ -202,7 +202,7 @@ public class PersonnelController extends BaseController {
      * @param medicalStaffInfo
      * @return
      */
-    @RequestMapping(value = "/addMedStaffInfo")
+    @RequestMapping(value = "/addMedStaffInfo", method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Add}, name = "新增")
     public ServiceResultT<MedicalStaffInfo> addMedStfInfo(MedicalStaffInfo medicalStaffInfo) {

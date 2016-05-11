@@ -30,6 +30,7 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: 'personnel/getXmanList',
                     columns: [
+                        {display: '个人编码', name: 'patientId', width: 120, align: 'left'},
                         {display: '卡号', name: 'cardCode', width: 120, align: 'left'},
                         {display: '姓名', name: 'name', width: 120, align: 'left'},
                         {display: '性别', name: 'sexCodeName', width: 120, align: 'left'},
@@ -88,7 +89,6 @@ define(function (require, exports, module) {
 
                                     })
                                 }
-
                             }
                         },
                         {

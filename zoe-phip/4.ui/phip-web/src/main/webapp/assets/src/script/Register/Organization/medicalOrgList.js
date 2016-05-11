@@ -7,6 +7,8 @@ define(function (require, exports, module) {
     var internal = {
         odiCodeConfig: require("{dir}/JsConfig/oidCodeConfig").oidCodeConfig,
         medicalOrgGrid: null,
+        deptTypeName: '',
+        deptTypeCode: '',
         init: function () {
             internal.medicalOrgList();
             internal.medicalOrgCategoryTree();
@@ -38,6 +40,7 @@ define(function (require, exports, module) {
                     checkbox: false,
                     onSelect: function (data) {
                         internal.deptTypeCode = data["data"]["code"];
+                        internal.deptTypeName = data["data"]["name"];
                         internal.type = data["data"]["type"] == 0 ? 0 : 1;
                         var medicalOrgGrid = common.getGrid("medicalOrgGrid");
                         if (medicalOrgGrid.get("dataAction") == "local") {
@@ -100,7 +103,11 @@ define(function (require, exports, module) {
                     edit: {title: "编辑医疗机构信息"},
                     common: {
                         otherUrlParam: function () {
-                            return {fkSystemDictCategoryId: internal.fkSystemDictCategoryId}
+                            return {
+                                deptTypeCode: internal.deptTypeCode,
+                                deptTypeName: internal.deptTypeName,
+                                deptTypeParent: internal.type
+                            }
                         },
                         url: 'organization/view/medicalOrgDetail',
                         width: 1000,
