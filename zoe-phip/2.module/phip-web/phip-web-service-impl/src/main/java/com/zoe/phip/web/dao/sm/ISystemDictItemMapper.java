@@ -106,6 +106,7 @@ public interface ISystemDictItemMapper extends IMyMapper<SystemDictItem> {
 
     SystemDictItem getSysDataItemByCode(String code);
 
+
     SystemDictItem getSingle(Map<String,Object> map);
 }
 

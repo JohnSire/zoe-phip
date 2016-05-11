@@ -1,5 +1,7 @@
 package com.zoe.phip.web.service.impl.in.sm;
 
+import com.zoe.phip.infrastructure.util.MapUtil;
+import com.zoe.phip.web.model.sm.SystemDictItem;
 import com.zoe.phip.web.model.sm.SystemUser;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +19,16 @@ public class SystemUserServiceImplTest {
     @Autowired
     private SystemUserServiceImpl systemUserService;
 
+    @Autowired
+    private SystemDictItemServiceImpl systemDictItemServiceImpl;
+
 
     /*    @org.junit.Test
         public void testUpdatePassword() throws Exception {
             systemUserService.updateState("123",1);
 
         }*/
-    @org.junit.Test
+ //   @org.junit.Test
     public void testAdd() throws Exception {
         SystemUser s = new SystemUser();
         // s.setName("1");
@@ -79,6 +84,13 @@ public class SystemUserServiceImplTest {
 
         systemUserService.add(s);
 
+    }
+
+    @org.junit.Test
+    public void get(){
+        SystemDictItem systemDictItem =systemDictItemServiceImpl.getSingle(MapUtil.createMap(m -> {
+            m.put("categoryId", 1);
+        }));
     }
 
 }

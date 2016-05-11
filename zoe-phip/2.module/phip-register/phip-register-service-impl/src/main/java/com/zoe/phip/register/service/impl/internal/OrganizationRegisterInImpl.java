@@ -86,7 +86,7 @@ public class OrganizationRegisterInImpl extends BaseInServiceImpl<OrgDeptInfo, I
             throw new BusinessException("002");
         }
         //保存到数据库
-        super.update(orgDeptInfo);
+        getMapper().defaultUpdate(orgDeptInfo);
         return orgDeptInfo;
     }
 

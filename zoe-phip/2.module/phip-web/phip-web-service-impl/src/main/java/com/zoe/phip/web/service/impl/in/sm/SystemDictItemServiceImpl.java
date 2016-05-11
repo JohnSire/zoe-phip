@@ -249,8 +249,10 @@ public class SystemDictItemServiceImpl extends BaseInServiceImpl<SystemDictItem,
 
     @Override
     public SystemDictItem getSingle(Map<String, Object> map) {
-        return getSingle(map);
+        return getMapper().getSingle(map);
     }
+
+
 
     public SystemDictItem getItemByCategoryCodeAndName(String categoryCode, String name) {
         Map<String, Object> map = MapUtil.createMap(m -> {

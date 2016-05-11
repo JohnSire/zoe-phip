@@ -34,9 +34,7 @@
         <if test="roleName != null">
             ROLE_NAME = #{roleName,jdbcType=VARCHAR},
         </if>
-        <if test="roleState != null">
             ROLE_STATE = #{roleState,jdbcType=VARCHAR},
-        </if>
         <if test="effectiveTimeLow != null">
             EFFECTIVE_TIME_LOW = #{effectiveTimeLow,jdbcType=DATE},
         </if>
@@ -117,8 +115,22 @@
         </if>
         MODIFY_AT=sysdate
 </set>
-        where DEPT_CODE = #{deptCode}
-        </update>
+
+    <choose>
+    <when test="id != null">
+        ID = #{id,jdbcType=VARCHAR}
+    </when>
+    <otherwise>
+        DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
+    </otherwise>
+    </choose>
+
+</update>
+
+
+
+
+
 
     <select id="getOrgDeptInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
         SELECT  * FROM PHIP_ORG_DEPT_INFO PODI
