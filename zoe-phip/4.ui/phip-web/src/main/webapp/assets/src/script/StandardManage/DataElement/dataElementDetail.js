@@ -40,7 +40,8 @@ define(function (require, exports, module) {
                             name: 'code',
                             display: 'name',
                             ajaxParam: {
-                                url: 'dict/dictCatalogListQueryPage',//url 请求的地址
+                                url: 'dict/getItemList ',//url 请求的地址
+                                parameterNames: 'catalogCode'
                             },
                             value: 'code',//值
                             text: 'name'//展示的内容

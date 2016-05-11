@@ -6,25 +6,19 @@ define(function (require, exports, module) {
     var BaseTree = require("{staticDir}/BaseTree/baseTree");
 
     var internal = {
-        dictGrid: null,
-        catalogId: null,
-        catalogCode: null,
-        catalogName: null,
-        catalogType: null,
         init: function () {
-            internal.versionPreviewList();
-            internal.versionPreviewTree();
+            internal.dictList();
+            internal.dictTree();
         },
-        versionPreviewTree: function () {
+        dictTree: function () {
             var treeObj = new BaseTree({
                 treeId: 'tree',
-                btnBox: 'treeBtns',
                 reqInfoKey: 'id',//根据哪个值进去获取对象
-                renderData: function (data) {
-                    return data.result.rows;
-                },
                 url: {
                     getTreeList: 'dict/dictCatalogTreeQuery'
+                },
+                renderData: function (data) {
+                    return data.result.rows;
                 },
                 treeParam: {
                     idFieldName: 'id',
@@ -47,9 +41,9 @@ define(function (require, exports, module) {
                 },
             })
         },
-        versionPreviewList: function () {
+        dictList: function () {
             internal.dictGrid = new BaseGrid({
-                gridId: 'columnGrid',
+                gridId: 'dictGrid',
                 toolsBoxId: 'dictTools',
                 extendParam: function () {
                     return {catalogId: internal.catalogId};
@@ -58,9 +52,8 @@ define(function (require, exports, module) {
                     dataAction: "local",
                     url: 'dict/getDictItemListByCatalogId',
                     columns: [
-                        {display: '编码', name: 'code', width: 220, align: 'left'},
-                        {display: '名称', name: 'name', width: 380, align: 'left'},
-                        {display: '操作', isSort: false, width: 100, icons: ['edit', 'del']}
+                        {display: '编码', name: 'code', width: 170, align: 'left'},
+                        {display: '名称', name: 'name', width: 170, align: 'left'}
                     ],
                     frozen: false,
                     usePage: true,
