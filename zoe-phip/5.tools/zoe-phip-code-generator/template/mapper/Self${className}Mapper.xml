@@ -12,13 +12,23 @@
         <#if field.entityName?uncap_first!="id"&&field.entityName?uncap_first!="modifyAt"
         &&field.entityName?uncap_first!="createBy"&&field.entityName?uncap_first!="createAt"&&
         field.entityName?uncap_first!="modifyBy">
-        <if test="${field.entityName?uncap_first} != null">
             ${field.sqlName} = ${r'#'}{${field.entityName?uncap_first},jdbcType=${field.jdbcType?upper_case}},
-        </if>
     </#if>
 </#list>
         MODIFY_AT=sysdate
 </set>
-        where id = ${r'#'}{id}
+        WHERE
+        <choose>
+        <when test="id != null">
+            ID = ${r'#'}{id,jdbcType=VARCHAR}
+        </when>
+        <otherwise>
+            /*
+            另一个更新条件根据需要自己改
+            HEALTH_RECORD_NO = ${r'#'}{healthRecordNo,jdbcType=VARCHAR}
+            */
+            ID = ${r'#'}{id,jdbcType=VARCHAR}
+        </otherwise>
+        </choose>
         </update>
 </mapper>
