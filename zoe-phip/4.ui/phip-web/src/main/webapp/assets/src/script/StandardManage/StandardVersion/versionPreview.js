@@ -52,8 +52,8 @@ define(function (require, exports, module) {
                     dataAction: "local",
                     url: 'dict/getDictItemListByCatalogId',
                     columns: [
-                        {display: '编码', name: 'code', width: 170, align: 'left'},
-                        {display: '名称', name: 'name', width: 170, align: 'left'}
+                        {display: '编码', name: 'code', width: 165, align: 'left'},
+                        {display: '名称', name: 'name', width: 160, align: 'left'}
                     ],
                     frozen: false,
                     usePage: true,

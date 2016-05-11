@@ -1,11 +1,63 @@
 <%
 var bodySection = {
 %>
-<div class="y-dialog-tabs">
-    <ul class="lists" id="xsltab">
-        <li class="list active"><a class="link">平台标准版本-数据集</a></li>
-        <li class="list"><a class="link">平台标准版本-字典</a></li>
+<div class="y-dialog-menu">
+    <ul class="lists">
+        <li class="list active" style="width: 150px"><a class="link">平台标准版本--数据集</a></li>
+        <li class="list" style="width: 150px"><a class="link">平台标准版本--字典</a></li>
     </ul>
+    <div class="y-dialog-menu-wrapper">
+        <!--平台标准版本--数据集-->
+        <div class="y-layout-sidebar">
+            <div class="y-layout-tree" style="border:0;float: none">
+                <ul id="dataSet"></ul>
+            </div>
+        </div>
+        <!--左边栏end-->
+        <!--右边栏begin-->
+        <div class="y-layout-main-two">
+            <div class="y-layout-header">
+                <ul class="y-layout-form clearfix" id="dataSetTools">
+                    <ul op="btns" style="float:left;"></ul>
+                    <ul op="search" style="float:right;padding-right: 20px;"></ul>
+                </ul>
+            </div>
+            <div class="y-layout-content">
+                <!--主要内容-->
+                <div>
+                    <div id="dataSetGrid" style="border:0;float: none"></div>
+                </div>
+                <!--主要内容-->
+            </div>
+        </div>
+    </div>
+    <div class="y-dialog-menu-wrapper">
+        <!--平台标准版本--字典-->
+        <div class="y-layout-sidebar">
+            <div class="y-layout-tree" style="border:0;float: none">
+                <ul id="tree"></ul>
+            </div>
+        </div>
+        <!--左边栏end-->
+        <!--右边栏begin-->
+        <div class="y-layout-main-two">
+            <div class="y-layout-header">
+                <ul class="y-layout-form clearfix" id="dictTools">
+
+                    <ul op="btns" style="float:left;"></ul>
+                    <ul op="search" style="float:right;padding-right: 20px;"></ul>
+                </ul>
+            </div>
+            <div class="y-layout-content">
+                <!--主要内容-->
+                <div>
+                    <div id="dictGrid" style="border:0;float: none"></div>
+                </div>
+                <!--主要内容-->
+            </div>
+        </div>
+        <!--存储脚本集合-->
+    </div>
 </div>
 <%};%>
 <%

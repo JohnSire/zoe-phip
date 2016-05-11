@@ -29,7 +29,6 @@ define(function (require, exports, module) {
                     $("#selRoleState").select({
                         localData: true,
                         name: 'roleState'
-                        //display: 'roleName',
                     })
                 },
                 beforeSaveEvent: function (data) {
