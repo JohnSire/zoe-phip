@@ -43,14 +43,14 @@ public class PatientRegisterImplTest extends BaseTest {
                 "        <subject1 typeCode=\"SBJ\">\n" +
                 "          <patient classCode=\"PAT\">\n" +
                 "            <!--本地系统的患者ID -->\n" +
-                "            <id root=\"2.16.156.10011.0.2.2\" extension=\"患者ID\"/>\n" +
+                "            <id root=\"2.16.156.10011.0.2.2\" extension=\"46513245\"/>\n" +
                 "            <statusCode code=\"active\"/>\n" +
                 "            <effectiveTime value=\"20111212141414\"/>\n" +
                 "            <patientPerson>\n" +
                 "              <!--身份证号-->\n" +
                 "              <id root=\"2.16.156.10011.1.3\" extension=\"120109197706015516\"/>\n" +
                 "              <!--姓名-->\n" +
-                "              <name use=\"L\">刘永好</name>\n" +
+                "              <name use=\"L\">张三峰</name>\n" +
                 "              <!--联系电话-->\n" +
                 "              <telecom value=\"028-2222444\" use=\"H\"/>\n" +
                 "              <!--性别-->\n" +
@@ -66,7 +66,7 @@ public class PatientRegisterImplTest extends BaseTest {
                 "                  村3 号\n" +
                 "                </streetAddressLine>\n" +
                 "                <!--地址-省（自治区、直辖市） -->\n" +
-                "                <state language=\"CH\">广东省</state>\n" +
+                "                <state language=\"CH\">福建省</state>\n" +
                 "                <!--地址-市（地区） -->\n" +
                 "                <city>广州市</city>\n" +
                 "                <!--地址-县（区） -->\n" +
@@ -106,12 +106,12 @@ public class PatientRegisterImplTest extends BaseTest {
                 "                <scopingOrganization classCode=\"ORG\"\n" +
                 "                determinerCode=\"INSTANCE\">\n" +
                 "                  <!--健康卡发放机构代码-->\n" +
-                "                  <id root=\"2.16.156.10011.1.5\" extension=\"健康卡发放机构代码\"/>\n" +
+                "                  <id root=\"2.16.156.10011.1.5\" extension=\"TEST20150612\"/>\n" +
                 "                </scopingOrganization>\n" +
                 "              </asOtherIDs>\n" +
                 "              <asOtherIDs classCode=\"PAT\">\n" +
                 "                <!--城乡居民健康档案编号-->\n" +
-                "                <id root=\"2.16.156.10011.1.2\" extension=\"城乡居民健康档案编号\"/>\n" +
+                "                <id root=\"2.16.156.10011.1.2\" extension=\"CX502565478\"/>\n" +
                 "                <scopingOrganization classCode=\"ORG\"\n" +
                 "                determinerCode=\"INSTANCE\">\n" +
                 "                  <!--建档医疗机构组织机构代码-->\n" +

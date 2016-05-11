@@ -21,7 +21,8 @@ import java.util.Map;
  * @version 1.0
  * @date 2016-04-12
  */
-public interface IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
+public interface
+IOrgDeptInfoMapper extends IServiceMapper<OrgDeptInfo> {
     OrgDeptInfo getOrgDeptInfo(Map<String, Object> map);
 
     PageList<OrgDeptInfo> organizationListQuery(String type, String deptTypeCode, String key, QueryPage page);

@@ -4,10 +4,12 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
+import com.zoe.phip.register.model.AreaBaseInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.XmanCard;
 import com.zoe.phip.register.model.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IPatientRegister;
+import com.zoe.phip.register.service.impl.internal.AreaRegisterInImpl;
 import com.zoe.phip.register.service.impl.internal.PatientRegisterInImpl;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
@@ -37,6 +39,8 @@ public class PatientRegisterImpl implements IPatientRegister {
     @Autowired
     private PatientRegisterInImpl patientRegisterIn;
 
+    @Autowired
+    private AreaRegisterInImpl areaRegisterIn;
 
     /**
      * 新增个人信息注册
@@ -76,7 +80,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             xmanCard.setXcOrgCode(baseInfo.getXcOrgCode());
             xmanCard.setHealthRecordNo(baseInfo.getHealthRecordNo());
             //将地址转换为对应code
-
+            baseInfoSetCode(baseInfo);
 
             XmanBaseInfo result = patientRegisterIn.addPatientRegistry(baseInfo, xmanCard);
 
@@ -116,6 +120,8 @@ public class PatientRegisterImpl implements IPatientRegister {
             if (strResult.contains("error:数据集内容验证错误")) {
                 return updateFailed(baseInfo, strResult);
             }
+            //将地址转换为对应code
+            baseInfoSetCode(baseInfo);
 
             XmanCard xmanCard = new XmanCard();
             xmanCard.setXcCardCode(baseInfo.getCardCode());
@@ -241,6 +247,22 @@ public class PatientRegisterImpl implements IPatientRegister {
      */
     private String updateFailed(XmanBaseInfo baseInfo, String errorMsg) {
         return RegisterUtil.responseFailed(baseInfo, errorMsg, RegisterType.PATIENT_UPDATE_ERROR);
+    }
+
+    private void baseInfoSetCode(XmanBaseInfo baseInfo){
+        baseInfo.setCityCode(getAreaByName(baseInfo.getCityCode()));
+        baseInfo.setStateCode(getAreaByName(baseInfo.getStateCode()));
+        baseInfo.setAreaCode(getAreaByName(baseInfo.getAreaCode()));
+        baseInfo.setCommitteeCode(getAreaByName(baseInfo.getCommitteeCode()));
+        baseInfo.setStreetCode(getAreaByName(baseInfo.getStreetCode()));
+    }
+
+    private String getAreaByName(String name){
+        AreaBaseInfo areaBaseInfo= areaRegisterIn.getAreaByName(name);
+        if(areaBaseInfo!=null)
+            return areaBaseInfo.getCode();
+        else
+            return null;
     }
 
 }
