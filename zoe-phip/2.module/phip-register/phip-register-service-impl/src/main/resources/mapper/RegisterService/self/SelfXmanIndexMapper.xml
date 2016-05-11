@@ -117,7 +117,7 @@
         </where>
     </select>
 
-    <select id="getOneByCondition" resultType="java.lang.String" parameterType="java.util.Map">
+    <select id="getOneByCondition" resultType="MultiResultMap" parameterType="java.util.Map">
         SELECT * FROM PHIP_XMAN_INDEX T
         <where>
             <if test="healthCardId != null">
