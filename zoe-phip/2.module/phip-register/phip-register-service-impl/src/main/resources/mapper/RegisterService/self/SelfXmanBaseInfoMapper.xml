@@ -11,8 +11,12 @@
         <result column="CODE_SYS_NAME" property="codeSysName" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="XC_ORG_CODE" property="xcOrgCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="XC_ORG_NAME" property="xcOrgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="HEALTH_RECORD_ORG_NAME" property="healthRecordOrgName" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
+        <result column="HEALTH_RECORD_ORG_NAME" property="healthRecordOrgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="STATE_NAME" property="stateName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CITY_NAME" property="cityName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="AREA_NAME" property="areaName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="STREET_NAME" property="streetName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="COMMITTEE_NAME" property="committeeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.XmanBaseInfo">
         update PHIP_XMAN_BASE_INFO
@@ -132,7 +136,9 @@
     <sql id="patientSelect">
         SELECT P.*,S.NAME AS SEX_CODE_NAME,N.NAME AS NATIONALITY_NAME,OC.NAME AS OCCUPATION_NAME,
         M.NAME AS MARRIAGE_NAME,C.NAME AS CODE_SYS_NAME,X.XC_CARD_CODE,O.DEPT_NAME AS ORG_NAME,
-        R.DEPT_NAME AS HEALTH_RECORD_ORG_NAME,X.XC_ORG_CODE,XC.DEPT_NAME AS XC_ORG_NAME
+        R.DEPT_NAME AS HEALTH_RECORD_ORG_NAME,X.XC_ORG_CODE,XC.DEPT_NAME AS XC_ORG_NAME,
+        ST.NAME AS STATE_NAME,CI.NAME AS CITY_NAME,AR.NAME AS AREA_NAME,SR.NAME AS STREET_NAME,
+        CO.NAME AS COMMITTEE_NAME
         FROM PHIP_XMAN_BASE_INFO P
         LEFT JOIN (
         <include refid="oidSelect">
@@ -169,6 +175,21 @@
         LEFT JOIN (
         <include refid="deptSelect"/>
         ) XC ON X.XC_ORG_CODE=XC.DEPT_CODE
+        LEFT JOIN (
+         <include refid="areaSelect"/>
+        ) ST ON P.STATE_CODE=ST.CODE
+        LEFT JOIN (
+        <include refid="areaSelect"/>
+        ) CI ON P.CITY_CODE=CI.CODE
+        LEFT JOIN(
+         <include refid="areaSelect"/>
+        ) AR ON P.AREA_CODE=AR.CODE
+        LEFT JOIN (
+        <include refid="areaSelect"/>
+        ) SR ON P.STREET_CODE=SR.CODE
+        LEFT JOIN(
+        <include refid="areaSelect"/>
+        ) CO ON P.COMMITTEE_CODE=CO.CODE
     </sql>
     <sql id="oidSelect">
         SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
@@ -179,5 +200,8 @@
     <sql id="deptSelect">
          SELECT DEPT_CODE,DEPT_NAME FROM PHIP_ORG_DEPT_INFO
          WHERE DIVISION_ROOT = '2.16.156.10011.1.5'
+    </sql>
+    <sql id="areaSelect">
+        SELECT CODE, NAME FROM PHIP_AREA_BASE_INFO T
     </sql>
 </mapper>

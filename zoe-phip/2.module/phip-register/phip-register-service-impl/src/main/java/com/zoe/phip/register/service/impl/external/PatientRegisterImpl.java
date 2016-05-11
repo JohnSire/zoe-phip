@@ -75,6 +75,9 @@ public class PatientRegisterImpl implements IPatientRegister {
             xmanCard.setXcCardCode(baseInfo.getCardCode());
             xmanCard.setXcOrgCode(baseInfo.getXcOrgCode());
             xmanCard.setHealthRecordNo(baseInfo.getHealthRecordNo());
+            //将地址转换为对应code
+
+
             XmanBaseInfo result = patientRegisterIn.addPatientRegistry(baseInfo, xmanCard);
 
             acknowledgement.setTypeCode("AA");
