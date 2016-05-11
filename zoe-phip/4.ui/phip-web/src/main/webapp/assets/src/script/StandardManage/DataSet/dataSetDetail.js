@@ -5,6 +5,11 @@ define(function (require, exports, module) {
     var internal = {
         selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
+            var id=common.getParamFromUrl("id");
+            if(id){
+                $("#column").show();
+            }
+
             var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
             var baseAttr = new BaseAttr({
                 winName: "win_set_detail_dialog",//弹窗对象变量名称
@@ -15,44 +20,38 @@ define(function (require, exports, module) {
                 loadPageEvent: function () {
                     internal.selectList.dialog('dataSetColumn', {
                         target: $("#btnBusinessColumn"),
-                        name: 'pid',
+                        name: 'bussTimeFieldId',
                         parentName: 'parentName',
                         valueField: 'id',
                         displayField: 'name',
-                        fkNullContent: '根级节点',
+                        fkNullContent: '--请选择业务时间列--',
                         selectParam: {
                             isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
                             treeVaildMsg: '父级分类不能是其本身!',
                             multiselect: false
                         },
-                        buttonsExtend: [{
-                            text: '根级节点', onclick: function (item, dialog) {
-                                $('input[name="pid"]').val(0);
-                                $("#btnParentCatalog").find(".text-line-content").text("根级节点");
-                                dialog.close();
-                            }
-                        }]
+                        param: {"id": id}
                     });
-                    internal.selectList.dialog('dataSetColumn', {
-                        target: $("#btnDataUpdateColumn"),
-                        name: 'pid',
-                        parentName: 'parentName',
-                        valueField: 'id',
-                        displayField: 'name',
-                        fkNullContent: '根级节点',
-                        selectParam: {
-                            isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
-                            treeVaildMsg: '父级分类不能是其本身!',
-                            multiselect: false
-                        },
-                        buttonsExtend: [{
-                            text: '根级节点', onclick: function (item, dialog) {
-                                $('input[name="pid"]').val(0);
-                                $("#btnParentCatalog").find(".text-line-content").text("根级节点");
-                                dialog.close();
-                            }
-                        }]
-                    });
+                    //internal.selectList.dialog('dataSetColumn', {
+                    //    target: $("#btnDataUpdateColumn"),
+                    //    name: 'pid',
+                    //    parentName: 'parentName',
+                    //    valueField: 'id',
+                    //    displayField: 'name',
+                    //    fkNullContent: '根级节点',
+                    //    selectParam: {
+                    //        isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
+                    //        treeVaildMsg: '父级分类不能是其本身!',
+                    //        multiselect: false
+                    //    },
+                    //    buttonsExtend: [{
+                    //        text: '根级节点', onclick: function (item, dialog) {
+                    //            $('input[name="pid"]').val(0);
+                    //            $("#btnParentCatalog").find(".text-line-content").text("根级节点");
+                    //            dialog.close();
+                    //        }
+                    //    }]
+                    //});
 
                     internal.selectList.dialog('dataSet', {
                         target: $("#btnDataSet"),
@@ -60,19 +59,12 @@ define(function (require, exports, module) {
                         parentName: 'parentName',
                         valueField: 'id',
                         displayField: 'name',
-                        fkNullContent: '根级节点',
+                        fkNullContent: '--请选择父级数据集--',
                         selectParam: {
                             isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
                             treeVaildMsg: '父级分类不能是其本身!',
                             multiselect: false
-                        },
-                        buttonsExtend: [{
-                            text: '根级节点', onclick: function (item, dialog) {
-                                $('input[name="pid"]').val(0);
-                                $("#btnParentCatalog").find(".text-line-content").text("根级节点");
-                                dialog.close();
-                            }
-                        }]
+                        }
                     });
 
                 }

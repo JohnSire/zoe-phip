@@ -74,13 +74,13 @@ define(function (require, exports, module) {
     };
     function toColumnList(id,name){
         var top = common.getTopWindowDom();
-        var link=webRoot+"dataSet/view/columnList?id="+id+"&dataSetName="+name;
+        var link=webRoot+"dataSet/view/columnList?fkSetId="+id+"&dataSetName="+name;
         top. frames["mainframe"].location.href = link;
 
     }
     function toChildSet(id,name){
         var top = common.getTopWindowDom();
-        var link=webRoot+"dataSet/view/childSet?id="+id+"&dataSetName="+name;
+        var link=webRoot+"dataSet/view/childSet?fkSetId="+id+"&dataSetName="+name;
         top. frames["mainframe"].location.href = link;
 
     }

@@ -8,27 +8,28 @@ var bodySection = {
         <ul class="y-dialog-lists clearfix">
             <li class="list">
                 <p class="column-two">
+                    <label class="label" for="name"><span class="text-mark">*</span>名称：</label>
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！"
+                           nullmsg="请填写名称！"/>
+                </p>
+                <p class="column-two">
                     <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
                     <input type="text" name="code" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"
                            nullmsg="请填写编码！"/>
                 </p>
-                <p class="column-two">
-                    <label class="label" for="name"><span class="text-mark">*</span>代码：</label>
-                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
-                           nullmsg="请填写代码！"/>
-                </p>
+
             </li>
-            <!--<li class="list" style="display: none;" id="column">-->
-                <!--<p class="column-two">-->
-                    <!--<label class="label" for="pid">业务时间列：</label>-->
-                        <!--<span class="text-line-outer" id="btnBusinessColumn">-->
-                            <!--<input type="text" name="pid" class="text-line" datatype="*"/>-->
-                            <!--<span class="text-line-setting">-->
-                                <!--<span class="icon-grid icon-grid-setting" title="选择"></span>-->
-                                <!--<span class="text-line-content"></span>-->
-                            <!--</span>-->
-                        <!--</span>-->
-                <!--</p>-->
+            <li class="list" style="display: none;" id="column">
+                <p class="column-two">
+                    <label class="label" for="bussTimeFieldId">业务时间列：</label>
+                        <span class="text-line-outer" id="btnBusinessColumn">
+                            <input type="text" name="bussTimeFieldId" class="text-line"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
+                </p>
                 <!--<p class="column-two">-->
                     <!--<label class="label" for="pid">数据更新时间列：</label>-->
                         <!--<span class="text-line-outer" id="btnDataUpdateColumn">-->
@@ -39,13 +40,13 @@ var bodySection = {
                             <!--</span>-->
                         <!--</span>-->
                 <!--</p>-->
-            <!--</li>-->
+            </li>
 
             <li class="list">
                 <p class="column-one">
                     <label class="label" for="pid">父级数据集：</label>
                         <span class="text-line-outer" id="btnDataSet">
-                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <input type="text" name="pid" class="text-line" />
                             <span class="text-line-setting">
                                 <span class="icon-grid icon-grid-setting" title="选择"></span>
                                 <span class="text-line-content"></span>
