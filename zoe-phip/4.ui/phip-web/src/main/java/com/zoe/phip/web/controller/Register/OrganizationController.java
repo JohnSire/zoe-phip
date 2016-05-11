@@ -113,7 +113,7 @@ public class OrganizationController extends BaseController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/getMedicalOrgInfo")
+    @RequestMapping(value = "/getMedicalDepartmentInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResult getMedicalDepartmentInfo(String id) {
