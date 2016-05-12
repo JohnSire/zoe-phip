@@ -50,11 +50,11 @@ public class StRsSetElementInfoServiceImpl extends BaseInServiceImpl<StRsSetElem
     public int add(StRsSetElementInfo entity) throws Exception {
         Map<String, Object> map = MapUtil.createMap(map1 -> {
             map1.put("fkSetId", entity.getFkSetId());
-            map1.put("elementCode", entity.getElementCode());
+            map1.put("fieldCode", entity.getFieldCode());
         });
         if (getSingle(map) > 0) {
             super.dispose(map);
-            throw new BusinessException("001", entity.getElementCode());
+            throw new BusinessException("001", entity.getFieldCode());
         }
         super.dispose(map);
         return super.add(entity);
@@ -64,12 +64,12 @@ public class StRsSetElementInfoServiceImpl extends BaseInServiceImpl<StRsSetElem
     public int update(StRsSetElementInfo entity) throws Exception {
         Map<String, Object> map = MapUtil.createMap(map1 -> {
             map1.put("fkSetId", entity.getFkSetId());
-            map1.put("elementCode", entity.getElementCode());
+            map1.put("fieldCode", entity.getFieldCode());
             map1.put("id", entity.getId());
         });
         if (getSingle(map) > 0) {
             super.dispose(map);
-            throw new BusinessException("002", entity.getElementCode());
+            throw new BusinessException("002", entity.getFieldCode());
         }
         super.dispose(map);
         return super.update(entity);
@@ -84,13 +84,13 @@ public class StRsSetElementInfoServiceImpl extends BaseInServiceImpl<StRsSetElem
      * 根据数据集代码和数据列字段查询关系表数据
      *
      * @param setCode
-     * @param elementCode
+     * @param fieldCode
      * @return
      */
-    public StRsSetElementInfo getBySetCode(String setCode, String elementCode) {
+    public StRsSetElementInfo getBySetCode(String setCode, String fieldCode) {
         Map<String, Object> map = new TreeMap<>();
         map.put("setCode", setCode);
-        map.put("elementCode", elementCode);
+        map.put("fieldCode", fieldCode);
         StRsSetElementInfo info = getMapper().getBySetCode(map);
         super.dispose(map);
         return info;
@@ -98,7 +98,7 @@ public class StRsSetElementInfoServiceImpl extends BaseInServiceImpl<StRsSetElem
 
     public PageList<StRsSetElementInfo> getDataPageList(String fkSetId, String key, QueryPage queryPage) {
         PageList<StRsSetElementInfo> pageList = new PageList<>();
-        queryPage.setOrderBy("PSRSEI.ELEMENT_CODE");
+        queryPage.setOrderBy("PSRSEI.FIELD_CODE");
         queryPage.setSortOrder(SortOrder.ASC);
         SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();

@@ -5,9 +5,9 @@
                extends="com.zoe.phip.module.service.MasterEntityResultMap">
         <result column="FK_SET_ID" property="fkSetId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="ELEMENT_CODE" property="elementCode" javaType="java.lang.String"
+        <result column="FIELD_CODE" property="fieldCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="ELEMENT_NAME" property="elementName" javaType="java.lang.String"
+        <result column="FIELD_NAME" property="fieldName" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="IS_PRIMARY_KEY" property="isPrimaryKey" javaType="java.math.BigDecimal"
                 jdbcType="DECIMAL"/>
@@ -15,7 +15,7 @@
                 jdbcType="DECIMAL"/>
         <result column="IS_NULLABLE" property="isNullable" javaType="java.math.BigDecimal"
                 jdbcType="DECIMAL"/>
-        <result column="FK_BASE_ELEMENT_ID" property="fkBaseElementId" javaType="java.lang.String"
+        <result column="FK_ELEMENT_ID" property="fkElementId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="FK_DICT_ID" property="fkDictId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
@@ -47,12 +47,12 @@
     <insert id="addList" parameterType="com.zoe.phip.web.model.sdm.StRsSetElementInfo">
         INSERT INTO PHIP_ST_RS_SET_ELEMENT_INFO (
         FK_SET_ID,
-        ELEMENT_CODE,
-        ELEMENT_NAME,
+        FIELD_CODE,
+        FIELD_NAME,
         IS_PRIMARY_KEY,
         IS_INDEX_KEY,
         IS_NULLABLE,
-        FK_BASE_ELEMENT_ID,
+        FK_ELEMENT_ID,
         FK_DICT_ID,
         DATA_TYPE,
         DATA_LENGTH,
@@ -70,12 +70,12 @@
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
             #{item.fkSetId,jdbcType=VARCHAR},
-            #{item.elementCode,jdbcType=VARCHAR},
-            #{item.elementName,jdbcType=VARCHAR},
+            #{item.fieldCode,jdbcType=VARCHAR},
+            #{item.fieldName,jdbcType=VARCHAR},
             #{item.isPrimaryKey,jdbcType=DECIMAL},
             #{item.isIndexKey,jdbcType=DECIMAL},
             #{item.isNullable,jdbcType=DECIMAL},
-            #{item.fkBaseElementId,jdbcType=VARCHAR},
+            #{item.fkElementId,jdbcType=VARCHAR},
             #{item.fkDictId,jdbcType=VARCHAR},
             #{item.dataType,jdbcType=VARCHAR},
             #{item.dataLength,jdbcType=VARCHAR},
@@ -96,12 +96,12 @@
     <insert id="defaultAdd" parameterType="java.util.List">
         INSERT INTO PHIP_ST_RS_SET_ELEMENT_INFO (
         FK_SET_ID,
-        ELEMENT_CODE,
-        ELEMENT_NAME,
+        FIELD_CODE,
+        FIELD_NAME,
         IS_PRIMARY_KEY,
         IS_INDEX_KEY,
         IS_NULLABLE,
-        FK_BASE_ELEMENT_ID,
+        FK_ELEMENT_ID,
         FK_DICT_ID,
         DATA_TYPE,
         DATA_LENGTH,
@@ -118,12 +118,12 @@
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES(
         #{fkSetId,jdbcType=VARCHAR},
-        #{elementCode,jdbcType=VARCHAR},
-        #{elementName,jdbcType=VARCHAR},
+        #{fieldCode,jdbcType=VARCHAR},
+        #{fieldName,jdbcType=VARCHAR},
         #{isPrimaryKey,jdbcType=DECIMAL},
         #{isIndexKey,jdbcType=DECIMAL},
         #{isNullable,jdbcType=DECIMAL},
-        #{fkBaseElementId,jdbcType=VARCHAR},
+        #{fkElementId,jdbcType=VARCHAR},
         #{fkDictId,jdbcType=VARCHAR},
         #{dataType,jdbcType=VARCHAR},
         #{dataLength,jdbcType=VARCHAR},
@@ -159,11 +159,11 @@
                 <if test="item.fkSetId != null">
                     FK_SET_ID = #{item.fkSetId,jdbcType=VARCHAR},
                 </if>
-                <if test="item.elementCode != null">
-                    ELEMENT_CODE = #{item.elementCode,jdbcType=VARCHAR},
+                <if test="item.fieldCode != null">
+                    FIELD_CODE = #{item.fieldCode,jdbcType=VARCHAR},
                 </if>
-                <if test="item.elementName != null">
-                    ELEMENT_NAME = #{item.elementName,jdbcType=VARCHAR},
+                <if test="item.fieldName != null">
+                    FIELD_NAME = #{item.fieldName,jdbcType=VARCHAR},
                 </if>
                 <if test="item.isPrimaryKey != null">
                     IS_PRIMARY_KEY = #{item.isPrimaryKey,jdbcType=DECIMAL},
@@ -174,8 +174,8 @@
                 <if test="item.isNullable != null">
                     IS_NULLABLE = #{item.isNullable,jdbcType=DECIMAL},
                 </if>
-                <if test="item.fkBaseElementId != null">
-                    FK_BASE_ELEMENT_ID = #{item.fkBaseElementId,jdbcType=VARCHAR},
+                <if test="item.fkElementId != null">
+                    FK_ELEMENT_ID = #{item.fkElementId,jdbcType=VARCHAR},
                 </if>
                 <if test="item.fkDictId != null">
                     FK_DICT_ID = #{item.fkDictId,jdbcType=VARCHAR},

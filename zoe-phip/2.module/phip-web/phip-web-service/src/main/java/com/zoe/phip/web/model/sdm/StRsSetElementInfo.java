@@ -23,15 +23,15 @@ public class StRsSetElementInfo extends MasterEntity {
     @Column(name = "FK_SET_ID")
     private String fkSetId;
     /**
-     * 数据元编码
+     * 数据集字段编码
      */
-    @Column(name = "ELEMENT_CODE")
-    private String elementCode;
+    @Column(name = "FIELD_CODE")
+    private String fieldCode;
     /**
-     * 数据元名称
+     * 数据集字段名称
      */
-    @Column(name = "ELEMENT_NAME")
-    private String elementName;
+    @Column(name = "FIELD_NAME")
+    private String fieldName;
     /**
      * 是否主键
      */
@@ -50,8 +50,8 @@ public class StRsSetElementInfo extends MasterEntity {
     /**
      * 数据元ID
      */
-    @Column(name = "FK_BASE_ELEMENT_ID")
-    private String fkBaseElementId;
+    @Column(name = "FK_ELEMENT_ID")
+    private String fkElementId;
     /**
      * 字典ID
      */
@@ -127,22 +127,22 @@ public class StRsSetElementInfo extends MasterEntity {
         this.fkSetId = fkSetId;
     }
 
-    public String getElementCode() {
-        return this.elementCode;
+    public String getFieldCode() {
+        return this.fieldCode;
     }
 
 
-    public void setElementCode(String elementCode) {
-        this.elementCode = elementCode;
+    public void setFieldCode(String fieldCode) {
+        this.fieldCode = fieldCode;
     }
 
-    public String getElementName() {
-        return this.elementName;
+    public String getFieldName() {
+        return this.fieldName;
     }
 
 
-    public void setElementName(String elementName) {
-        this.elementName = elementName;
+    public void setFieldName(String fieldName) {
+        this.fieldName = fieldName;
     }
 
     public java.math.BigDecimal getIsPrimaryKey() {
@@ -172,13 +172,13 @@ public class StRsSetElementInfo extends MasterEntity {
         this.isNullable = isNullable;
     }
 
-    public String getFkBaseElementId() {
-        return this.fkBaseElementId;
+    public String getFkElementId() {
+        return this.fkElementId;
     }
 
 
-    public void setFkBaseElementId(String fkBaseElementId) {
-        this.fkBaseElementId = fkBaseElementId;
+    public void setFkElementId(String fkElementId) {
+        this.fkElementId = fkElementId;
     }
 
     public String getFkDictId() {

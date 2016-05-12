@@ -72,6 +72,7 @@ public class MedicalStaffInfo extends RegisterEntity {
      * 身份证号
      */
     @Column(name = "ID_NO")
+    //
     private String idNo;
     /**
      * 专业技术职务代码
@@ -94,6 +95,7 @@ public class MedicalStaffInfo extends RegisterEntity {
     /**
      * 工作联系电话
      */
+    //
     @Column(name = "EMPLOYER_TEL_NO")
     private String employerTelNo;
     /**
