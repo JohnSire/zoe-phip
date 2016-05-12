@@ -27,5 +27,12 @@ public class MedicalStaffRegisterInImplTest extends BaseTest {
         MedicalStaffInfo staffInfo = medicalStaffRegisterIn.providerDetailsQuery("14BFF2E85C1545DA93768841B0BBD949");
     }
 
+    @Test
+    public void testUpdate() throws Exception {
+        MedicalStaffInfo staffInfo = medicalStaffRegisterIn.providerDetailsQuery("14BFF2E85C1545DA93768841B0BBD949");
+        staffInfo.setName("张三");
+        MedicalStaffInfo info = medicalStaffRegisterIn.updateProvider(staffInfo);
+    }
+
 
 }

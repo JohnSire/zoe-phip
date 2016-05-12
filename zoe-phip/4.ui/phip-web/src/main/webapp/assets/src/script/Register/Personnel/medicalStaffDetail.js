@@ -30,8 +30,10 @@ define(function (require, exports, module) {
                         parentName: 'affiliatedOrgName',//绑定name值
                         displayField: 'name',
                         valueField: 'code',
+                        isAllowEmptySelect: true,
                         selectParam: {
                             multiselect: false,
+                            param: {type: 0},
                             storage: function () {
                                 var data = [];
                                 var affiliatedOrgCode = common.getParamFromUrl("deptCode");
@@ -46,7 +48,40 @@ define(function (require, exports, module) {
                                 return data;
                             }()
                         }
+                    })
+
+                    internal.selectList.dialog('medicalDept', {
+                        target: $('#btnFkAssignedDept'),
+                        name: 'assignedDeptCode',
+                        parentName: 'assignedDeptName',
+                        displayField: 'name',
+                        valueField: 'code',
+                        selectParam: {
+                            multiselect: false,
+                            param: function () {
+                                var param = {
+                                    type: 0,
+                                    deptParentCode: $("[name='affiliatedOrgCode']").val()
+                                }
+                                return param;
+                            }
+                        }
                     });
+
+                    internal.selectList.dialog('dictItem', {
+                        target: $('#btnFkTechnical'),
+                        name: 'technicalCode',
+                        parentName: 'technicalName',
+                        displayField: 'name',
+                        valueField: 'code',
+                        isAllowEmptySelect: true,
+                        selectParam: {
+                            multiselect: false,
+                            param: {codeSystem: oidCodeConfig.duty}
+                        }
+                    });
+
+
                 }
             })
         }

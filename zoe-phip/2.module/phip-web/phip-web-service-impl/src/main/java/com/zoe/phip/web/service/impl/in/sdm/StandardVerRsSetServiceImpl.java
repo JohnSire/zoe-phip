@@ -10,6 +10,7 @@ import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 ;
 import com.zoe.phip.web.dao.sdm.IStandardVerRsSetMapper;
+import com.zoe.phip.web.model.sdm.StSetInfo;
 import com.zoe.phip.web.model.sdm.StandardVerRsSet;
 import com.zoe.phip.web.service.sdm.IStandardVerRsSetService;
 import org.springframework.stereotype.Repository;
@@ -33,6 +34,14 @@ public class StandardVerRsSetServiceImpl extends BaseInServiceImpl<StandardVerRs
         example.createCriteria().andEqualTo("fkVersionId", fkVersionId);
         int i = super.addList(setList);
         return i;
+    }
+
+    public List<StSetInfo> getVerRsSetInfo(String fkVersionId,String fkCdaId) throws Exception {
+        Map<String, Object> map = MapUtil.createMap(map1 -> {
+            map1.put("fkVersionId", fkVersionId);
+            map1.put("fkCdaId", fkCdaId);
+        });
+        return getSetByFkVersionId(map);
     }
 
     public int deleteByVersionId(String fkVersionId) {
@@ -76,4 +85,10 @@ public class StandardVerRsSetServiceImpl extends BaseInServiceImpl<StandardVerRs
     public int getSingle(Map<String, Object> map) {
         return getMapper().getSingle(map);
     }
+
+    @Override
+    public List<StSetInfo> getSetByFkVersionId(Map<String, Object> map) {
+        return getMapper().getSetByFkVersionId(map);
+    }
+
 }
