@@ -10,6 +10,8 @@ define(function (require, exports, module) {
             internal.tab();
             internal.dictList();
             internal.dictTree();
+            internal.dataList();
+            internal.dataTree();
         },
         tab: function () {
             $('.y-dialog-menu .lists .list').click(function () {
@@ -19,7 +21,7 @@ define(function (require, exports, module) {
         },
         dictTree: function () {
             var treeObj = new BaseTree({
-                treeId: 'dataSet',
+                treeId: 'dictTree',
                 reqInfoKey: 'id',//根据哪个值进去获取对象
                 url: {
                     getTreeList: 'dict/dictCatalogTreeQuery'
@@ -50,7 +52,7 @@ define(function (require, exports, module) {
         },
         dictList: function () {
             internal.dictGrid = new BaseGrid({
-                gridId: 'dataSetGrid',
+                gridId: 'dictGrid',
                 toolsBoxId: 'dictTools',
                 extendParam: function () {
                     return {catalogId: internal.catalogId};
@@ -60,7 +62,59 @@ define(function (require, exports, module) {
                     url: 'dict/getDictItemListByCatalogId',
                     columns: [
                         {display: '编码', name: 'code', width: 165, align: 'left'},
-                        {display: '名称', name: 'name', width: 160, align: 'left'}
+                        {display: '名称', name: 'name', width: 165, align: 'left'}
+                    ],
+                    frozen: false,
+                    usePage: true,
+                    width: "100%",
+                    height: "99%"
+                },
+            })
+        },
+        dataTree: function () {
+            var treeObj = new BaseTree({
+                treeId: 'dataTree',
+                reqInfoKey: 'id',//根据哪个值进去获取对象
+                url: {
+                    getTreeList: 'dict/dictCatalogTreeQuery'
+                },
+                renderData: function (data) {
+                    return data.result.rows;
+                },
+                treeParam: {
+                    idFieldName: 'id',
+                    parentIDFieldName: 'pid',
+                    textFieldName: 'name',
+                    checkbox: false,
+                    nodeWidth: 200,
+                    //选择
+                    onSelect: function (data) {
+                        internal.catalogId = data["data"]["id"];
+                        internal.catalogName = data["data"]["name"];
+                        internal.CatalogType = data["data"]["type"];
+                        var itemGrid = common.getGrid("dataGrid");
+                        if (itemGrid.get("dataAction") == "local") {
+                            internal.dataGrid.setServer();
+                        } else {
+                            internal.dataGrid.reload();
+                        }
+                    }
+                },
+            })
+        },
+        dataList: function () {
+            internal.dataGrid = new BaseGrid({
+                gridId: 'dataGrid',
+                toolsBoxId: 'dataTools',
+                extendParam: function () {
+                    return {catalogId: internal.catalogId};
+                },
+                gridParam: {
+                    dataAction: "local",
+                    url: 'dict/getDictItemListByCatalogId',
+                    columns: [
+                        {display: '编码', name: 'code', width: 165, align: 'left'},
+                        {display: '名称', name: 'name', width: 162, align: 'left'}
                     ],
                     frozen: false,
                     usePage: true,

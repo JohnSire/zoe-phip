@@ -114,8 +114,8 @@ define(function (require, exports, module) {
             {
                 title: "平台标准版本",
                 url: 'version/view/versionSetRs',
-                width: 680,
-                height: 480,
+                width: 720,
+                height:450,
                 buttons: [
                     {
                         //verifySubmit自己的验证提交状态
