@@ -26,9 +26,9 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: 'dict/getCategoryList',
                     columns: [
-                        {display: '字典编码', name: 'code', isSort: false, width: 160, align: 'left'},
-                        {display: '字典名称', name: 'name', isSort: false, width: 200, align: 'left'},
-                        {display: '描述', name: 'descr', isSort: false, width: 220, align: 'left'}
+                        {display: '字典编码', name: 'code', isSort: false, width: 210, align: 'left'},
+                        {display: '字典名称', name: 'name', isSort: false, width: 160, align: 'left'},
+                        {display: '描述', name: 'descr', isSort: false, width: 185, align: 'left'}
                     ],
                     isSelected: function (rowdata) {
                         if (rowdata["__id"] == 'r1001') {
@@ -76,8 +76,8 @@ define(function (require, exports, module) {
                     url: 'dict/getItemPageList',
                     columns: [
                         {display: '项编码', name: 'code', width: 150, align: 'left'},
-                        {display: '项名称', name: 'name', width: 400, align: 'left'},
-                        {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
+                        {display: '项名称', name: 'name', width: 320, align: 'left'},
+                        {display: '操作', isSort: false, width: 130, icons: ['edit', 'del']}
                     ],
                     frozen: false,
                     usePage: true,

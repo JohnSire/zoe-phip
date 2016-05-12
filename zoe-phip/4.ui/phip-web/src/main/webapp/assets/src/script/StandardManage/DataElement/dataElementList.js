@@ -25,13 +25,14 @@ define(function (require, exports, module) {
                     url: "element/getElementList",
                     columns: [
                         {display: '编码', name: 'code', align: 'left', width: 120},
-                        {display: '名称', name: 'name', align: 'left', width: 130},
+                        {display: '名称', name: 'name', align: 'left', width: 120},
                         {display: '标准来源', name: 'fkSourceId', align: 'left', width: 240},
-                        {display: '分类', name: 'fkTypeId', align: 'left', width: 130},
-                        {display: '值域', name: 'fkDictId', align: 'left', width: 130},
-                        {display: '定义', name: 'define'},
+                        {display: '分类', name: 'fkTypeId', align: 'left', width: 125},
+                        {display: '值域', name: 'fkDictId', align: 'left', width: 125},
+                        {display: '定义', name: 'define', align: 'left', width: 340},
                         {display: '操作', isSort: false, width: 100, icons: ['edit', 'del']}
                     ],
+                    frozen: false,
                     usePage: true,
                     width: $("body").innerWidth() - 2,
                     height: $("body").innerHeight() - $("#gridTools").outerHeight() - 38//500

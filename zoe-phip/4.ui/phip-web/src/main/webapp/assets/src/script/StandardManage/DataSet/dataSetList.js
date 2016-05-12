@@ -30,10 +30,10 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: 'dataSet/getSetList',
                     columns: [
-                        {display: '编码', name: 'code', width: 180, align: 'left'},
-                        {display: '名称', name: 'name', width: 180, align: 'left'},
+                        {display: '编码', name: 'code', width: 250, align: 'left'},
+                        {display: '名称', name: 'name', width: 250, align: 'left'},
                         //{display: '标准来源名称', name: 'sexCodeName', width: 120, align: 'left'},
-                        {display: '描述', name: 'descr', width: 120, align: 'left'},
+                        {display: '描述', name: 'descr', width: 250, align: 'left'},
                         {display: '关联字段',  width: 120,render:function(rowdata, rowindex, value){
                             var h = "";
                             h += "<a class='icon-grid icon-grid-setting' title='配置'"

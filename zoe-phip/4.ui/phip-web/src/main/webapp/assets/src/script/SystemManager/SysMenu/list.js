@@ -35,7 +35,7 @@
                             type: 'date',
                             format: 'yyyy-MM-dd'
                         },
-                        {display: '创建人', name: 'createBy', width: 120, align: 'left'},
+                        {display: '创建人', name: 'createBy', width: 260, align: 'left'},
                         {
                             display: '状态',
                             name: 'state',
@@ -54,6 +54,7 @@
                         },
                         {display: '操作', isSort: false, width: 120, icons: ['edit']}
                     ],
+                    frozen: false,
                     usePager: false,
                     tree: {
                         columnId: 'id',

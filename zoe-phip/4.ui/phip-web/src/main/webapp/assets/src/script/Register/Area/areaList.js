@@ -75,7 +75,7 @@ define(function (require, exports, module) {
                         },
                         url: 'area/view/areadetail',
                         width: 680,
-                        height: 450
+                        height: 320
                     }
                 }
             })

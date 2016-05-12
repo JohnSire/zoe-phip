@@ -77,12 +77,12 @@ define(function (require, exports, module) {
                     dataAction: "local",
                     url: 'organization/getMedicalOrgList',
                     columns: [
-                        {display: '机构代码', name: 'deptCode', width: 300, align: 'left'},
-                        {display: '机构名称', name: 'deptName', width: 300, align: 'left'},
-                        {display: '联系电话', name: 'employerTelNo', width: 200, align: 'left'},
-                        {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']},
+                        {display: '机构代码', name: 'deptCode', width: 170, align: 'left'},
+                        {display: '机构名称', name: 'deptName', width: 250, align: 'left'},
+                        {display: '联系电话', name: 'employerTelNo', width: 170, align: 'left'},
+                        {display: '操作', isSort: false, width: 150, icons: ['edit', 'del']},
                         {
-                            display: '编辑科室', isSort: false, width: 120, align: 'center',
+                            display: '编辑科室', isSort: false, width: 150, align: 'center',
                             render: function (rowdata) {
                                 return "<a onclick='javascript:winEditDepartment(\"" + rowdata["deptCode"] + "\")'>编辑科室</a>"
                             }

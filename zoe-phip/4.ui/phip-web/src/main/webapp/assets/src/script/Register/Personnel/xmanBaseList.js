@@ -30,12 +30,12 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: 'personnel/getXmanList',
                     columns: [
-                        {display: '个人编码', name: 'patientId', width: 120, align: 'left'},
-                        {display: '卡号', name: 'cardCode', width: 120, align: 'left'},
+                        {display: '个人编码', name: 'patientId', width: 150, align: 'left'},
+                        {display: '卡号', name: 'cardCode', width: 150, align: 'left'},
                         {display: '姓名', name: 'name', width: 120, align: 'left'},
-                        {display: '性别', name: 'sexCodeName', width: 120, align: 'left'},
-                        {display: '身份证号', name: 'idNo', width: 120, align: 'left'},
-                        {display: '健康档案编号', name: 'healthRecordNo', width: 120, align: 'left'},
+                        {display: '性别', name: 'sexCodeName', width: 100, align: 'left'},
+                        {display: '身份证号', name: 'idNo', width: 150, align: 'left'},
+                        {display: '健康档案编号', name: 'healthRecordNo', width: 150, align: 'left'},
                         {
                             display: '出生日期', name: 'birthDate', width: 120, align: 'left', type: 'date',
                             format: 'yyyy-MM-dd'
