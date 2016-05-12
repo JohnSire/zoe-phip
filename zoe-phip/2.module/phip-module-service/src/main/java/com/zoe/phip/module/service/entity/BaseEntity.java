@@ -1,12 +1,14 @@
 package com.zoe.phip.module.service.entity;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotBlank;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotNull;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -37,6 +39,14 @@ public class BaseEntity implements Serializable, First {
     @ValidateNotNull(message = "创建时间不能为空")
     private Date createAt;
 
+    /**
+     * 验证消息
+     */
+    @JSONField(serialize = false)
+    @Transient
+    private String  validateMessage;
+
+
 
     /**
      * 获取实体主键id
@@ -47,6 +57,8 @@ public class BaseEntity implements Serializable, First {
 
         return id;
     }
+
+
 
     /**
      * 设置实体主键id
@@ -84,5 +96,11 @@ public class BaseEntity implements Serializable, First {
         this.createBy = createBy;
     }
 
+    public String getValidateMessage() {
+        return validateMessage;
+    }
 
+    public void setValidateMessage(String validateMessage) {
+        this.validateMessage = validateMessage;
+    }
 }

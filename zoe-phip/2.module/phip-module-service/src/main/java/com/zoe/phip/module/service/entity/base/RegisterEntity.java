@@ -1,4 +1,4 @@
-package com.zoe.phip.register.model.base;
+package com.zoe.phip.module.service.entity.base;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.module.service.entity.MasterEntity;
@@ -19,6 +19,9 @@ public class RegisterEntity extends MasterEntity {
     @Transient
     private ReceiverSender receiverSender;
 
+
+
+
     public Acknowledgement getAcknowledgement() {
         return acknowledgement;
     }
@@ -34,4 +37,6 @@ public class RegisterEntity extends MasterEntity {
     public void setReceiverSender(ReceiverSender receiverSender) {
         this.receiverSender = receiverSender;
     }
+
+
 }

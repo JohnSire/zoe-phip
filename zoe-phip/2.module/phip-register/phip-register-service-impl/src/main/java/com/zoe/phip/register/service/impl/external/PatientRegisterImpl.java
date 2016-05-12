@@ -3,11 +3,11 @@ package com.zoe.phip.register.service.impl.external;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
-import com.zoe.phip.infrastructure.util.XmlBeanUtil;
+import com.zoe.phip.module.service.util.XmlBeanUtil;
 import com.zoe.phip.register.model.AreaBaseInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.XmanCard;
-import com.zoe.phip.register.model.base.Acknowledgement;
+import com.zoe.phip.module.service.entity.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IPatientRegister;
 import com.zoe.phip.register.service.impl.internal.AreaRegisterInImpl;
 import com.zoe.phip.register.service.impl.internal.PatientRegisterInImpl;
@@ -15,15 +15,10 @@ import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.io.File;
-import java.io.InputStream;
 
 /**
  * Created by zengjiyang on 2016/4/11.

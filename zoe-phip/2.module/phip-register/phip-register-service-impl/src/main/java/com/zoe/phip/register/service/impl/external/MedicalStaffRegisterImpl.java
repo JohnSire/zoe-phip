@@ -1,19 +1,15 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
-import com.zoe.phip.infrastructure.parser.Parser;
 import com.zoe.phip.infrastructure.util.DateUtil;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
-import com.zoe.phip.infrastructure.util.XmlBeanUtil;
-import com.zoe.phip.register.dao.IMedicalStaffInfoMapper;
+import com.zoe.phip.module.service.util.XmlBeanUtil;
 import com.zoe.phip.register.model.MedicalStaffInfo;
-import com.zoe.phip.register.model.base.Acknowledgement;
+import com.zoe.phip.module.service.entity.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IMedicalStaffRegister;
 import com.zoe.phip.register.service.impl.internal.MedicalStaffRegisterInImpl;
-import com.zoe.phip.register.service.internal.IMedicalStaffRegisterIn;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
@@ -23,9 +19,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import tk.mybatis.mapper.entity.Example;
 
-import java.util.*;
+import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by zengjiyang on 2016/4/11.

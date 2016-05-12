@@ -1,15 +1,12 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.zoe.phip.infrastructure.entity.ServiceResultT;
-import com.zoe.phip.infrastructure.util.XmlBeanUtil;
+import com.zoe.phip.module.service.util.XmlBeanUtil;
 import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.service.external.IDictRegister;
 import com.zoe.phip.register.service.impl.internal.DictRegisterInImpl;
-import com.zoe.phip.register.service.internal.IDictRegisterIn;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import org.dom4j.Document;
-import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

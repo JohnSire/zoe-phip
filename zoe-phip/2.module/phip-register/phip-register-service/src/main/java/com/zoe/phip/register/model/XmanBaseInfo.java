@@ -6,7 +6,7 @@
 package com.zoe.phip.register.model;
 
 import com.zoe.phip.infrastructure.annotation.XPath;
-import com.zoe.phip.register.model.base.RegisterEntity;
+import com.zoe.phip.module.service.entity.base.RegisterEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

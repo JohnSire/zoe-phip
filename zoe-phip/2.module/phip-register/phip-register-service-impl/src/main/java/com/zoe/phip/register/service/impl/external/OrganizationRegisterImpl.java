@@ -4,16 +4,15 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.DateUtil;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
-import com.zoe.phip.infrastructure.util.XmlBeanUtil;
+import com.zoe.phip.module.service.util.XmlBeanUtil;
 import com.zoe.phip.register.model.OrgDeptInfo;
-import com.zoe.phip.register.model.base.Acknowledgement;
+import com.zoe.phip.module.service.entity.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IOrganizationRegister;
 import com.zoe.phip.register.service.impl.internal.OrganizationRegisterInImpl;
 import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
 import org.dom4j.Document;
-import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +54,9 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
         OrgDeptInfo baseInfo = null;
         try {
             baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, ProcessXmlUtil.getAdapterDom(adapter));
-
+            if(null!=baseInfo && null !=baseInfo.getValidateMessage()){
+                throw  new Exception(baseInfo.getValidateMessage());
+            }
             //xml 验证错误  todo 打开验证功能
             if (strResult.contains("error:数据集内容验证错误")) {
                 return registerFailed(baseInfo, strResult);
@@ -91,6 +92,9 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
         OrgDeptInfo baseInfo = null;
         try {
             baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, ProcessXmlUtil.getAdapterDom(adapter));
+            if(null!=baseInfo && null !=baseInfo.getValidateMessage()){
+                throw  new Exception(baseInfo.getValidateMessage());
+            }
 
             //xml 验证错误  todo 打开验证功能
             if (strResult.contains("error:数据集内容验证错误")) {
@@ -145,6 +149,9 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             map.put("deptCode", strDeptId);
             map.put("deptName", strDeptName);
             OrgDeptInfo result = organizationRegisterIn.organizationDetailQuery(map);
+            if(null!=result && null !=result.getValidateMessage()){
+                throw  new Exception(result.getValidateMessage());
+            }
        /*     if (deptInfo == null || StringUtil.isNullOrWhiteSpace(deptInfo.getCode())) {
                 deptInfo = new OrgDeptInfo();
                 deptInfo.setCreationTime(DateUtil.stringToDateTime(strCreateTime));
