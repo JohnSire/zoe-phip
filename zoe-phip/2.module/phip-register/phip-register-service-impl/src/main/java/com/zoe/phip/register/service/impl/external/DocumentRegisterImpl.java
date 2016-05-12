@@ -134,6 +134,7 @@ public class DocumentRegisterImpl implements IDocumentRegister {
     public String getDocumentSetRetrieveInfo(String message) {
         String strResult = ProcessXmlUtil.verifyMessage(message);
         Acknowledgement acknowledgement = new Acknowledgement();
+        acknowledgement.setMsgId(StringUtil.getUUID());
         String errorMsg = "";
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
@@ -141,40 +142,38 @@ public class DocumentRegisterImpl implements IDocumentRegister {
             acknowledgement.setText(strResult);
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
+
         Document document = ProcessXmlUtil.load(message);
         String msgId = document.selectSingleNode("//GetDocumentStroedInfoRequest/Id/@extension").getText();//请求消息ID
         String healthCardId = document.selectSingleNode("//GetDocumentStroedInfoRequest/HealthCardId").getText();;//居民健康卡号
-        String identityId = document.selectSingleNode("//GetDocumentStroedInfoRequest/Id/@extension").getText();; //居民身份证号
-        String documentTitle = document.selectSingleNode("//GetDocumentStroedInfoRequest/Id/@extension").getText();; //标题
+        String identityId = document.selectSingleNode("//GetDocumentStroedInfoRequest/IdentityId").getText();; //居民身份证号
+        String documentTitle = document.selectSingleNode("//GetDocumentStroedInfoRequest/DocumentTitle").getText();; //标题
+        XmanIndex xmanIndex=null;
+        if (strResult != "success:数据集内容验证正确")
+        {
+            errorMsg="fail:由于查询内容不存在";
+            return queryFailed(xmanIndex,acknowledgement,msgId,errorMsg);
+        }
         try {
             //从数据库获取值
-            XmanIndex xmanIndex=documentRegisterIn.getOneByCondition(healthCardId,identityId,documentTitle);
+            xmanIndex=documentRegisterIn.documentRegistryQuery(healthCardId,identityId,documentTitle);
             //响应失败
-            if (strResult != "success:数据集内容验证正确" ||xmanIndex==null||
-                    xmanIndex.getMsgId() == "")
-            {
-                if(xmanIndex==null){
-                    xmanIndex=new XmanIndex();
-                }
-                acknowledgement.setText("fail:由于查询内容不存在");
-                acknowledgement.setMsgId(StringUtil.getUUID());
-                xmanIndex.setMsgId(msgId);
-                xmanIndex.setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.EHR_SEARCH_SUCCESS, xmanIndex);
-            }
+
             //请求成功
             if(StringUtil.isNullOrWhiteSpace(xmanIndex.getMsgId())){
                 xmanIndex.setMsgId(msgId);
-                xmanIndex.getEhrId();
             }
+            acknowledgement.setText("检索成功");
+            xmanIndex.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.EHR_SEARCH_SUCCESS, xmanIndex);
 
-
-
-        }catch (Exception e){
-
+        }catch (BusinessException e) {
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, documentRegisterIn.getClass());
+        } catch (Exception ex) {
+            logger.error("error:", ex);
+            errorMsg = ex.getMessage();
         }
-
-        return null;
+        return queryFailed(xmanIndex,acknowledgement,msgId,errorMsg);
     }
 
     /**
@@ -186,6 +185,18 @@ public class DocumentRegisterImpl implements IDocumentRegister {
     public String retrieveDocumentSet(String message) {
         return null;
     }
+
+
+    private String queryFailed(XmanIndex xmanIndex,Acknowledgement acknowledgement,String msgId,String errorMsg){
+        if(xmanIndex==null){
+            xmanIndex=new XmanIndex();
+        }
+        xmanIndex.setMsgId(msgId);
+        acknowledgement.setText(errorMsg);
+        xmanIndex.setAcknowledgement(acknowledgement);
+        return RegisterUtil.registerMessage(RegisterType.EHR_SEARCH_ERROR, xmanIndex);
+    }
+
 
     /**
      * 注册失败返回值

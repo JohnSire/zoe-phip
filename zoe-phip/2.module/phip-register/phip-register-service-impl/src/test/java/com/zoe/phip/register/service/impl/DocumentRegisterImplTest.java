@@ -81,4 +81,27 @@ public class DocumentRegisterImplTest extends BaseTest {
         String result = documentRegister.documentExistence(ehrInput);
         System.out.println(result);
     }
+
+
+    @Test
+    public void testGetDocumentSetRetrieveInfo() throws Exception {
+
+        String ehrInput = "<GetDocumentStroedInfoRequest xmlns=\"urn:hl7-org:v3\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                "                              xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/GetDocumentStroedInfoRequest.xsd\">\n" +
+                "    <Id root=\"2.16.156.10011.0\" extension=\"DDD34F6E-2E89-435A-9A62-F4CD3D4DE23B\"/>\n" +
+                "    <HealthCardId>201507287452</HealthCardId>\n" +
+                "    <IdentityId>4654654321</IdentityId>\n" +
+                "    <DocumentTitle>门诊检查</DocumentTitle>\n" +
+                "</GetDocumentStroedInfoRequest>";
+
+
+        String result = documentRegister.getDocumentSetRetrieveInfo(ehrInput);
+        System.out.println(result);
+
+    }
+
+    @Test
+    public void testRetrieveDocumentSet() throws Exception {
+
+    }
 }
