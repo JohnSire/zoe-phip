@@ -1,5 +1,10 @@
-package com.zoe.phip.infrastructure.util;
+package com.zoe.phip.module.service.util;
 
+import com.zoe.phip.infrastructure.myvalidator.validator.ValidationAppendUtils;
+import com.zoe.phip.infrastructure.myvalidator.validator.ValidationResult;
+import com.zoe.phip.infrastructure.util.DateUtil;
+import com.zoe.phip.infrastructure.util.StringUtil;
+import com.zoe.phip.module.service.entity.BaseEntity;
 import org.dom4j.*;
 
 import java.lang.reflect.Field;
@@ -22,7 +27,7 @@ public final class XmlBeanUtil {
      * @return
      * @throws Exception
      */
-    public static <T> T toBean(Document document, Class<T> clazz, Document parserDoc) throws Exception {
+    public static <T extends BaseEntity> T toBean(Document document, Class<T> clazz, Document parserDoc) throws Exception {
         if (document == null || parserDoc == null) {
             throw new Exception("document or parserDoc could not be null!");
         }
@@ -89,6 +94,12 @@ public final class XmlBeanUtil {
                     ParameterizedType pt = (ParameterizedType) fc;
                     Class parameterClazz = (Class) pt.getActualTypeArguments()[0]; //
                 }
+            }
+        }
+        if(null!=instance){
+            ValidationResult result = ValidationAppendUtils.validateEntity(instance);
+            if(null !=result && null!=result.getErrorMessage() && !result.getErrorMessage().equals("")){
+                instance.setValidateMessage(result.getErrorMessage());
             }
         }
         return instance;

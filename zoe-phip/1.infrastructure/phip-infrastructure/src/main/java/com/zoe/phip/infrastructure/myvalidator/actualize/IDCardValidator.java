@@ -2,7 +2,7 @@
 package com.zoe.phip.infrastructure.myvalidator.actualize;
 
 
-import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateMobile;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateIDCard;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -13,15 +13,16 @@ import java.util.regex.Pattern;
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
 
 
-public class MobileValidator implements ConstraintValidator<ValidateMobile, CharSequence> {
+public class IDCardValidator implements ConstraintValidator<ValidateIDCard, CharSequence> {
 
-    private static String pattern = "^((13[0-9])|(15[0-9])|(14[0-9])|(18[0-9]))\\\\d{8}$";
+    private static String pattern = "^(\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$";  //15或者18
+
 
     private Pattern toPattern = Pattern.compile(
             pattern, CASE_INSENSITIVE
     );
 
-    public void initialize(ValidateMobile annotation) {
+    public void initialize(ValidateIDCard annotation) {
     }
 
     public boolean isValid(CharSequence value, ConstraintValidatorContext context) {
@@ -41,4 +42,5 @@ public class MobileValidator implements ConstraintValidator<ValidateMobile, Char
         Matcher matcher = pattern.matcher(part);
         return matcher.matches();
     }
+
 }

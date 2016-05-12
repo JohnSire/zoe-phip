@@ -2,7 +2,6 @@ package com.zoe.phip.register.service.impl;
 
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.infrastructure.util.XmlBeanUtil;
 import com.zoe.phip.infrastructure.util.XmlUtil;
 import com.zoe.phip.register.BaseTest;
 import com.zoe.phip.register.model.MedicalStaffInfo;
@@ -126,7 +125,7 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
 
         xml = XmlUtil.removeNameSpace(xml);
         Document document = DocumentHelper.parseText(xml);
-        MedicalStaffInfo info = XmlBeanUtil.toBean(document, MedicalStaffInfo.class, null);
+    //    MedicalStaffInfo info = XmlBeanUtil.toBean(document, MedicalStaffInfo.class, null);
         System.out.println();
     }
 

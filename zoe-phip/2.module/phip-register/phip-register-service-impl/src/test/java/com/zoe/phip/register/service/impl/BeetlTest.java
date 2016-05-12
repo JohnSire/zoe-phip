@@ -3,7 +3,7 @@ package com.zoe.phip.register.service.impl;
 
 import com.zoe.phip.infrastructure.parser.Parser;
 import com.zoe.phip.infrastructure.util.MapUtil;
-import com.zoe.phip.register.model.base.Acknowledgement;
+import com.zoe.phip.module.service.entity.base.Acknowledgement;
 import org.junit.Test;
 
 import com.zoe.phip.register.BaseTest;

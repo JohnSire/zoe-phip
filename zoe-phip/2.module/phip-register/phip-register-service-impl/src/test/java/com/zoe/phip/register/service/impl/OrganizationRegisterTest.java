@@ -144,12 +144,12 @@ public class OrganizationRegisterTest extends BaseTest {
                 "      <statusCode code=\"new\"/>\n" +
                 "      <!--医疗卫生机构（科室）ID-->\n" +
                 "      <organizationID>\n" +
-                "        <value root=\"2.16.156.10011.1.26\" extension=\"111234567890\"/>\n" +
+                "        <value root=\"2.16.156.10011.1.26\" extension=\"11123456789011\"/>\n" +
                 "        <semanticsText>AssignedEntity.id</semanticsText>\n" +
                 "      </organizationID>\n" +
                 "      <!--医疗卫生机构（科室）实体名称-->\n" +
                 "      <organizationName>\n" +
-                "        <value>呼吸内科edsjfksdj</value>\n" +
+                "        <value>ceshi呼吸内科edsjfksdj</value>\n" +
                 "        <semanticsText>PrincipalOrganization.name</semanticsText>\n" +
                 "      </organizationName>\n" +
                 "      <!--医疗卫生机构（科室）状态AssignedEntity.statusCode-->\n" +

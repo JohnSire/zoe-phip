@@ -25,7 +25,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * @author by hyf
  * @version 1.0
- * @date 2016/4/14
+ * @date 2016/5/12
  * bean验证：被注释的元素必须是电子邮箱地址
  */
 public @interface ValidateEmail {
@@ -40,7 +40,6 @@ public @interface ValidateEmail {
 
 
     @OverridesAttribute(constraint = ValidatePattern.class, name = "flags") ValidatePattern.Flag[] flags() default {};
-
 
     @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
     @Retention(RUNTIME)

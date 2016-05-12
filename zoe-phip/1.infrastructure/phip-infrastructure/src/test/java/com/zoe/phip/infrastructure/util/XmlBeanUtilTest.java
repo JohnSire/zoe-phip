@@ -3,14 +3,9 @@ package com.zoe.phip.infrastructure.util;
 import com.zoe.phip.infrastructure.annotation.XPath;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.Node;
 import org.junit.Test;
 
 import java.util.Date;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by zhangwenbin on 2016/4/12.
@@ -166,7 +161,7 @@ public class XmlBeanUtilTest {
         try {
             Document document = DocumentHelper.parseText(xmlString);
 
-            BaseInfo baseInfo = XmlBeanUtil.toBean(document, BaseInfo.class, null);
+          //  BaseInfo baseInfo = XmlBeanUtil.toBean(document, BaseInfo.class, null);
             System.out.println();
 
 

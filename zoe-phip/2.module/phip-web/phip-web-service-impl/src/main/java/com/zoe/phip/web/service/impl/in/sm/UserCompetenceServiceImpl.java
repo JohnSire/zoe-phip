@@ -162,7 +162,7 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
 
         SystemUser systemUser;
         systemUser = new SystemUser();
-        systemUser.setName("2");
+        systemUser.setName("");
         ValidatorFactory vf = BeanFactory.getBean("validator");
         Validator validator = vf.getValidator();
         Set<ConstraintViolation<SystemUser>> set = validator.validate(systemUser);

@@ -3,10 +3,9 @@ package com.zoe.phip.register.util;
 import com.zoe.phip.infrastructure.bean.BeanFactory;
 import com.zoe.phip.infrastructure.parser.Parser;
 import com.zoe.phip.infrastructure.util.MapUtil;
-import com.zoe.phip.register.model.base.Acknowledgement;
-import com.zoe.phip.register.model.base.RegisterEntity;
+import com.zoe.phip.module.service.entity.base.Acknowledgement;
+import com.zoe.phip.module.service.entity.base.RegisterEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 
