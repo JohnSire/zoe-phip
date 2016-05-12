@@ -14,7 +14,7 @@ define(function (require, exports, module) {
                 displayField: 'deptName',
                 valueField: 'deptCode',
                 gridParam: {
-                    url: webRoot + 'organization/getMedicalOrgList?type=0',
+                    url: webRoot + 'organization/getMedicalOrgList',
                     columns: [
                         {display: '机构代码', name: 'deptCode', width: 150, align: 'left'},
                         {display: '机构名称', name: 'deptName', width: 280, align: 'left'}

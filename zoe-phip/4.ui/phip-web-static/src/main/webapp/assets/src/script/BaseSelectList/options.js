@@ -13,11 +13,11 @@ define(function (require, exports, module) {
             checkbox: true//选择框
         },
         searchParam: function () {//列表查询条件相关参数
-            var keyWord=$("#txtKey").val();
-            var value=$.trim(keyWord);
-            return {"keyWord":value };
+            var keyWord = $("#txtKey").val();
+            var value = $.trim(keyWord);
+            return {"keyWord": value};
         },
-        winCallback:''
+        winCallback: ''
     }
     exports.defaultOptions = options;
 })

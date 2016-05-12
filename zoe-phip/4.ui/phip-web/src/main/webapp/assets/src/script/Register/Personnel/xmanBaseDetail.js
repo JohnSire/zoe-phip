@@ -57,8 +57,8 @@ define(function (require, exports, module) {
                         parentName: 'nationalityName',//绑定name值
                         displayField: 'name',
                         valueField: 'code',
-                        param: {"codeSystem": oidCodeConfig.national},//ajax参数
                         selectParam: {
+                            param: {"codeSystem": oidCodeConfig.national},//ajax参数
                             multiselect: false,
                         }
                     });
@@ -102,8 +102,8 @@ define(function (require, exports, module) {
                         parentName: 'occupationName',//绑定name值
                         displayField: 'name',
                         valueField: 'code',
-                        param: {"codeSystem": oidCodeConfig.occupation},//ajax参数
                         selectParam: {
+                            param: {"codeSystem": oidCodeConfig.occupation},//ajax参数
                             multiselect: false
                         }
                     });
