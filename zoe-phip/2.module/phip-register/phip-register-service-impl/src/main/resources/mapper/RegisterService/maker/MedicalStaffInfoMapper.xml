@@ -27,8 +27,8 @@
                 jdbcType="TIMESTAMP"/>
         <result column="AFFILIATED_ORG_CODE" property="affiliatedOrgCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="AFFILIATED_ORG_NAME" property="affiliatedOrgName" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
+        <!--<result column="AFFILIATED_ORG_NAME" property="affiliatedOrgName" javaType="java.lang.String"-->
+                <!--jdbcType="VARCHAR"/>-->
         <result column="MSG_ID" property="msgId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="ASSIGNED_CODE" property="assignedCode" javaType="java.lang.String"
@@ -37,8 +37,8 @@
                 jdbcType="VARCHAR"/>
         <result column="ASSIGNED_DEPT_CODE" property="assignedDeptCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="ASSIGNED_DEPT_NAME" property="assignedDeptName" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
+        <!--<result column="ASSIGNED_DEPT_NAME" property="assignedDeptName" javaType="java.lang.String"-->
+                <!--jdbcType="VARCHAR"/>-->
         <result column="ASSIGNED_CONTACT_PERSON" property="assignedContactPerson" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="STATUS_CODE" property="statusCode" javaType="java.lang.String"
@@ -60,12 +60,12 @@
         EFFECTIVE_TIME_LOW,
         EFFECTIVE_TIME_HIGH,
         AFFILIATED_ORG_CODE,
-        AFFILIATED_ORG_NAME,
+--         AFFILIATED_ORG_NAME,
         MSG_ID,
         ASSIGNED_CODE,
         ASSIGNED_NAME,
         ASSIGNED_DEPT_CODE,
-        ASSIGNED_DEPT_NAME,
+--         ASSIGNED_DEPT_NAME,
         ASSIGNED_CONTACT_PERSON,
         STATUS_CODE,
         CREATION_TIME,
@@ -84,12 +84,12 @@
             #{item.effectiveTimeLow,jdbcType=TIMESTAMP},
             #{item.effectiveTimeHigh,jdbcType=TIMESTAMP},
             #{item.affiliatedOrgCode,jdbcType=VARCHAR},
-            #{item.affiliatedOrgName,jdbcType=VARCHAR},
+--             #{item.affiliatedOrgName,jdbcType=VARCHAR},
             #{item.msgId,jdbcType=VARCHAR},
             #{item.assignedCode,jdbcType=VARCHAR},
             #{item.assignedName,jdbcType=VARCHAR},
             #{item.assignedDeptCode,jdbcType=VARCHAR},
-            #{item.assignedDeptName,jdbcType=VARCHAR},
+--             #{item.assignedDeptName,jdbcType=VARCHAR},
             #{item.assignedContactPerson,jdbcType=VARCHAR},
             #{item.statusCode,jdbcType=VARCHAR},
             #{item.creationTime,jdbcType=TIMESTAMP},
@@ -111,12 +111,12 @@
         EFFECTIVE_TIME_LOW,
         EFFECTIVE_TIME_HIGH,
         AFFILIATED_ORG_CODE,
-        AFFILIATED_ORG_NAME,
+--         AFFILIATED_ORG_NAME,
         MSG_ID,
         ASSIGNED_CODE,
         ASSIGNED_NAME,
         ASSIGNED_DEPT_CODE,
-        ASSIGNED_DEPT_NAME,
+--         ASSIGNED_DEPT_NAME,
         ASSIGNED_CONTACT_PERSON,
         STATUS_CODE,
         CREATION_TIME,
@@ -134,12 +134,12 @@
         #{effectiveTimeLow,jdbcType=TIMESTAMP},
         #{effectiveTimeHigh,jdbcType=TIMESTAMP},
         #{affiliatedOrgCode,jdbcType=VARCHAR},
-        #{affiliatedOrgName,jdbcType=VARCHAR},
+--         #{affiliatedOrgName,jdbcType=VARCHAR},
         #{msgId,jdbcType=VARCHAR},
         #{assignedCode,jdbcType=VARCHAR},
         #{assignedName,jdbcType=VARCHAR},
         #{assignedDeptCode,jdbcType=VARCHAR},
-        #{assignedDeptName,jdbcType=VARCHAR},
+--         #{assignedDeptName,jdbcType=VARCHAR},
         #{assignedContactPerson,jdbcType=VARCHAR},
         #{statusCode,jdbcType=VARCHAR},
         #{creationTime,jdbcType=TIMESTAMP},
@@ -199,9 +199,9 @@
                 <if test="item.affiliatedOrgCode != null">
                     AFFILIATED_ORG_CODE = #{item.affiliatedOrgCode,jdbcType=VARCHAR},
                 </if>
-                <if test="item.affiliatedOrgName != null">
-                    AFFILIATED_ORG_NAME = #{item.affiliatedOrgName,jdbcType=VARCHAR},
-                </if>
+                <!--<if test="item.affiliatedOrgName != null">-->
+                    <!--AFFILIATED_ORG_NAME = #{item.affiliatedOrgName,jdbcType=VARCHAR},-->
+                <!--</if>-->
                 <if test="item.msgId != null">
                     MSG_ID = #{item.msgId,jdbcType=VARCHAR},
                 </if>
@@ -214,9 +214,9 @@
                 <if test="item.assignedDeptCode != null">
                     ASSIGNED_DEPT_CODE = #{item.assignedDeptCode,jdbcType=VARCHAR},
                 </if>
-                <if test="item.assignedDeptName != null">
-                    ASSIGNED_DEPT_NAME = #{item.assignedDeptName,jdbcType=VARCHAR},
-                </if>
+                <!--<if test="item.assignedDeptName != null">-->
+                    <!--ASSIGNED_DEPT_NAME = #{item.assignedDeptName,jdbcType=VARCHAR},-->
+                <!--</if>-->
                 <if test="item.assignedContactPerson != null">
                     ASSIGNED_CONTACT_PERSON = #{item.assignedContactPerson,jdbcType=VARCHAR},
                 </if>

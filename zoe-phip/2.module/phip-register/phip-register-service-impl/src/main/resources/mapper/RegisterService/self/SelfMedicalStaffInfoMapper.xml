@@ -3,8 +3,10 @@
 <mapper namespace="com.zoe.phip.register.dao.IMedicalStaffInfoMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.MedicalStaffInfo" extends="BaseResultMap">
         <result column="GENDER_NAME" property="genderName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="ORG_NAME" property="orgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="DEPT_NAME" property="deptName" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="TECHNICAL_NAME" property="technicalName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="ASSIGNED_DEPT_NAME" property="assignedDeptName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="AFFILIATED_ORG_NAME" property="affiliatedOrgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
         update PHIP_MEDICAL_STAFF_INFO
@@ -34,7 +36,7 @@
 
             AFFILIATED_ORG_CODE = #{affiliatedOrgCode,jdbcType=VARCHAR},
 
-            AFFILIATED_ORG_NAME = #{affiliatedOrgName,jdbcType=VARCHAR},
+--             AFFILIATED_ORG_NAME = #{affiliatedOrgName,jdbcType=VARCHAR},
 
             MSG_ID = #{msgId,jdbcType=VARCHAR},
 
@@ -44,7 +46,7 @@
 
             ASSIGNED_DEPT_CODE = #{assignedDeptCode,jdbcType=VARCHAR},
 
-            ASSIGNED_DEPT_NAME = #{assignedDeptName,jdbcType=VARCHAR},
+--             ASSIGNED_DEPT_NAME = #{assignedDeptName,jdbcType=VARCHAR},
 
             ASSIGNED_CONTACT_PERSON = #{assignedContactPerson,jdbcType=VARCHAR},
 
@@ -97,7 +99,10 @@
     </select>
 
     <select id="getProvider" parameterType="java.lang.String" resultMap="MultiResultMap">
-        SELECT PMSI.*,S.NAME AS GENDER_NAME,D.DEPT_NAME AS ORG_NAME,T.NAME AS TECHNICAL_NAME
+        SELECT PMSI.*,S.NAME AS GENDER_NAME,
+        O.DEPT_NAME AS ASSIGNED_DEPT_NAME,
+        T.NAME AS TECHNICAL_NAME,
+        D.DEPT_NAME AS AFFILIATED_ORG_NAME
         FROM PHIP_MEDICAL_STAFF_INFO PMSI
         LEFT JOIN (
         <include refid="oidSelect">
@@ -110,16 +115,26 @@
         </include>
         ) T ON PMSI.TECHNICAL_CODE=T.CODE --职务
         LEFT JOIN(
-        SELECT PODI.* FROM PHIP_ORG_DEPT_INFO PODI
+        <include refid="orgSelect"/>
         ) D
-        ON PMSI.AFFILIATED_ORG_CODE =D.DEPT_CODE
-        AND PMSI.ASSIGNED_DEPT_CODE =D.DEPT_CODE
+        ON PMSI.AFFILIATED_ORG_CODE =D.DEPT_CODE --机构
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) O
+        ON PMSI.ASSIGNED_DEPT_CODE = O.DEPT_CODE --申请者科室
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) C
+        ON PMSI.ASSIGNED_DEPT_CODE =C.DEPT_CODE --科室
         WHERE PMSI.ID=#{id} OR PMSI.EXTENSION_ID=#{id}
         AND ROWNUM=1
     </select>
 
     <select id="getProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
-        SELECT M.*,S.NAME AS GENDER_NAME,D.DEPT_NAME AS ORG_NAME,T.NAME AS TECHNICAL_NAME
+        SELECT M.*,S.NAME AS GENDER_NAME,
+        O.DEPT_NAME AS ASSIGNED_DEPT_NAME,
+        T.NAME AS TECHNICAL_NAME,
+        D.DEPT_NAME AS AFFILIATED_ORG_NAME
         FROM PHIP_MEDICAL_STAFF_INFO M
         LEFT JOIN (
         <include refid="oidSelect">
@@ -131,6 +146,18 @@
             <property name="oidValue" value="2.16.156.10011.2.3.3.10"/>
         </include>
         ) T ON M.TECHNICAL_CODE=T.CODE --职务
+        LEFT JOIN(
+        <include refid="orgSelect"/>
+        ) D
+        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE --机构
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) O
+        ON M.ASSIGNED_DEPT_CODE = O.DEPT_CODE --申请者科室
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) C
+        ON M.ASSIGNED_DEPT_CODE =C.DEPT_CODE --科室
         LEFT JOIN(
         SELECT PODI.* FROM PHIP_ORG_DEPT_INFO PODI
         ) D
@@ -153,7 +180,10 @@
     </select>
 
     <select id="getAllProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
-        SELECT M.*,S.NAME AS GENDER_NAME,D.DEPT_NAME AS ORG_NAME,T.NAME AS TECHNICAL_NAME
+        SELECT M.*,S.NAME AS GENDER_NAME,
+        O.DEPT_NAME AS ASSIGNED_DEPT_NAME,
+        T.NAME AS TECHNICAL_NAME,
+        D.DEPT_NAME AS AFFILIATED_ORG_NAME
         FROM PHIP_MEDICAL_STAFF_INFO M
         LEFT JOIN (
         <include refid="oidSelect">
@@ -165,6 +195,18 @@
             <property name="oidValue" value="2.16.156.10011.2.3.3.10"/>
         </include>
         ) T ON M.TECHNICAL_CODE=T.CODE --职务
+        LEFT JOIN(
+        <include refid="orgSelect"/>
+        ) D
+        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE --机构
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) O
+        ON M.ASSIGNED_DEPT_CODE = O.DEPT_CODE --申请者科室
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) C
+        ON M.ASSIGNED_DEPT_CODE =C.DEPT_CODE --科室
         LEFT JOIN(
         SELECT PODI.* FROM PHIP_ORG_DEPT_INFO PODI
         ) D
@@ -181,7 +223,10 @@
 
     </select>
     <select id="getOrgProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
-        SELECT M.*,S.NAME AS GENDER_NAME,D.DEPT_NAME AS ORG_NAME,T.NAME AS TECHNICAL_NAME
+        SELECT M.*,S.NAME AS GENDER_NAME,
+        O.DEPT_NAME AS ASSIGNED_DEPT_NAME,
+        T.NAME AS TECHNICAL_NAME,
+        D.DEPT_NAME AS AFFILIATED_ORG_NAME
         FROM PHIP_MEDICAL_STAFF_INFO M
         LEFT JOIN (
         <include refid="oidSelect">
@@ -194,10 +239,22 @@
         </include>
         ) T ON M.TECHNICAL_CODE=T.CODE --职务
         LEFT JOIN(
+        <include refid="orgSelect"/>
+        ) D
+        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE --机构
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) O
+        ON M.ASSIGNED_DEPT_CODE = O.DEPT_CODE --申请者科室
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) C
+        ON M.ASSIGNED_DEPT_CODE =C.DEPT_CODE --科室
+        LEFT JOIN(
         SELECT PODI.* FROM PHIP_ORG_DEPT_INFO PODI
         ) D
-        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE
-        AND M.ASSIGNED_DEPT_CODE =D.DEPT_CODE
+        ON M.AFFILIATED_ORG_CODE =T.DEPT_CODE
+        AND M.ASSIGNED_DEPT_CODE =T.DEPT_CODE
         WHERE AFFILIATED_ORG_CODE IN(
         SELECT O.DEPT_CODE FROM PHIP_ORG_DEPT_INFO O
         WHERE DEPT_TYPE_CODE=#{orgTypeCode,jdbcType=VARCHAR})
@@ -208,5 +265,13 @@
         JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
         JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
         WHERE PNS.CODE_SYSTEM = '${oidValue}'
+    </sql>
+    <sql id="orgSelect">
+        SELECT DEPT_CODE,DEPT_NAME FROM PHIP_ORG_DEPT_INFO
+        WHERE DIVISION_ROOT = '2.16.156.10011.1.5'
+    </sql>
+    <sql id="deptSelect">
+        SELECT DEPT_CODE,DEPT_NAME FROM PHIP_ORG_DEPT_INFO
+        WHERE DIVISION_ROOT = '2.16.156.10011.1.26'
     </sql>
 </mapper>

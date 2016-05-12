@@ -4,6 +4,11 @@
 define(function (require, exports, module) {
     var internal = {
         selectList: require("{dir}/UtilityModule/SelectList/list"),
+        selProvince: null,//省下拉
+        selCity: null,//市下拉
+        selCounty: null,//区县下拉
+        selStreet: null,//乡镇
+        selNeighborhood: null,//街道
         init: function () {
             var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
             var oidCodeConfig = require("{dir}/JsConfig/oidCodeConfig").oidCodeConfig;
@@ -54,7 +59,7 @@ define(function (require, exports, module) {
                         success: function (data) {
                             var provincePid = data.result && data.result.id ? data.result.id : "";
                             /*选择省份*/
-                            $("#selProvince").select({
+                            internal.selProvince = $("#selProvince").select({
                                 name: 'provinceCode',
                                 display: 'provinceCodeName',
                                 ajaxParam: {
@@ -62,11 +67,20 @@ define(function (require, exports, module) {
                                     data: {pid: provincePid},
                                 },
                                 value: 'code',//值
-                                text: 'name'//展示的内容
-
+                                text: 'name',//展示的内容
+                                onAfterSelected: function (item, newValue, oldValue) {
+                                    //if (newValue != oldValue) {
+                                    //    internal.selCity.reset({
+                                    //        ajaxParam: {
+                                    //            data: {pid: item ? item["id"] : ""},
+                                    //        }
+                                    //    });
+                                    //
+                                    //}
+                                }
                             })
-                            /*选择*/
-                            $("#selCity").select({
+                            /*选择市*/
+                            internal.selCity = $("#selCity").select({
                                 name: 'cityCode',
                                 display: 'cityCodeName',
                                 ajaxParam: {
@@ -74,10 +88,17 @@ define(function (require, exports, module) {
                                     data: {pid: 'F2565E55804540AD8E23C059E0E3D593'},
                                 },
                                 value: 'code',//值
-                                text: 'name'//展示的内容
+                                text: 'name',//展示的内容
+                                onAfterSelected: function (item, newValue, oldValue) {
+                                    //if (newValue != oldValue) {
+                                    //    internal.selCounty.reset();
+                                    //    //internal.selStreet.reset();
+                                    //    //internal.selNeighborhood.reset();
+                                    //}
+                                }
                             })
                             /*选择区县*/
-                            $("#selCounty").select({
+                            internal.selCounty = $("#selCounty").select({
                                 name: 'countyCode',
                                 display: 'countyCodeName',
                                 ajaxParam: {
@@ -85,21 +106,35 @@ define(function (require, exports, module) {
                                     data: {pid: '9BC2CEB4B2EE47488703F5A45EB998E0'},
                                 },
                                 value: 'code',//�
-                                text: 'name'//展示的内�
+                                text: 'name',//展示的内�
+                                onAfterSelected: function (item, newValue, oldValue) {
+                                    //if (newValue != oldValue) {
+                                    //    internal.selStreet.reset({
+                                    //        ajaxParam: {
+                                    //            data: {pid: item ? item["id"] : ""},
+                                    //        }
+                                    //    });
+                                    //}
+                                }
                             })
                             /*选择乡镇*/
-                            $("#selStreet").select({
+                            internal.selStreet = $("#selStreet").select({
                                 name: 'streetCode',
                                 display: 'streetCodeName',
                                 ajaxParam: {
                                     url: 'area/getAreaListByPid',//url 请求的地址
-                                    data: {pid: '95beeb26-1825-4f37-87b0-70fcc160f248'},
+                                    //data: {pid: '95beeb26-1825-4f37-87b0-70fcc160f248'},
                                 },
                                 value: 'code',//值
-                                text: 'name'//展示的内容
+                                text: 'name',//展示的内容
+                                onAfterSelected: function (item, newValue, oldValue) {
+                                    //if (newValue != oldValue) {
+                                    //    internal.selNeighborhood.reset();
+                                    //}
+                                }
                             })
                             /*选择街道*/
-                            $("#selNeighborhood").select({
+                            internal.selNeighborhood = $("#selNeighborhood").select({
                                 name: 'neighborhoodCode',
                                 display: 'neighborhoodCodeName',
                                 ajaxParam: {
@@ -108,6 +143,7 @@ define(function (require, exports, module) {
                                 },
                                 value: 'code',//值
                                 text: 'name'//展示的内容
+
                             })
                         }
                     });

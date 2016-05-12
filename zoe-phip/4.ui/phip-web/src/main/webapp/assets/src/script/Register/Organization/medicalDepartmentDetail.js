@@ -48,7 +48,27 @@ define(function (require, exports, module) {
                     $("#selRoleState").select({
                         localData: true,
                         name: 'roleState'
-                    })
+                    });
+
+                    internal.selectList.dialog('medicalDept', {
+                        target: $('#btnFkAssignedDept'),
+                        name: 'assignedDeptCode',
+                        parentName: 'assignedDeptName',
+                        displayField: 'name',
+                        valueField: 'code',
+                        selectParam: {
+                            multiselect: false,
+                            param: function () {
+                                var orgCode = common.getParamFromUrl("orgCode");
+                                var param = {
+                                    type: 0,
+                                    deptParentCode: orgCode || ""
+                                }
+                                return param;
+                            }
+                        }
+                    });
+
                 },
                 beforeSaveEvent: function (data) {
                     var orgCode = common.getParamFromUrl("orgCode");

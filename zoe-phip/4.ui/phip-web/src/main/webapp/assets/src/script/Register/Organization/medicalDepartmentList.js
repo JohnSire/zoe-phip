@@ -94,11 +94,11 @@ define(function (require, exports, module) {
                             titleKey: "deptName",
                             //新增参数
                             add: {
-                                title: "新增医疗机构信息"
+                                title: "新增机构科室信息"
                             },
                             //编辑参数
                             edit: {
-                                title: "编辑医疗机构信息"
+                                title: "编辑机构科室信息"
                             },
                             common: {
                                 otherUrlParam: function () {

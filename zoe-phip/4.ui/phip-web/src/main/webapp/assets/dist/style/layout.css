@@ -2715,6 +2715,10 @@ a.btn-dialog-gray {
     vertical-align: middle;
 }
 
+.simulate-select span {
+    cursor: default;
+}
+
 .simulate-select .text {
     width: 168px;
     padding-right: 16px;
