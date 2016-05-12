@@ -11,12 +11,12 @@ define(function (require, exports, module) {
                 winName: "win_medicalStaff_detail_dialog",//弹窗对象变量名称
                 winCallback: "win_medicalStaff_detail_callback",//弹窗回调函数
                 getUrl: 'personnel/getMedStfInfo',//
-                addUrl: 'personnel/addMedStfInfo',//新增接口Url
+                addUrl: 'personnel/addMedStaffInfo',//新增接口Url
                 updateUrl: 'personnel/updateMedStfInfo',//修改接口Url
                 loadPageEvent: function () {
                     $("#selSex").select({
-                        name: 'sexCode',
-                        display: 'sexCodeName',
+                        name: 'genderCode',
+                        display: 'genderName',
                         ajaxParam: {
                             url: 'organization/getMedicalOrgCategoryList',//url 请求的地址
                             data: {codeSystem: oidCodeConfig.sex},
@@ -31,19 +31,40 @@ define(function (require, exports, module) {
                         displayField: 'name',
                         valueField: 'code',
                         selectParam: {
-                            multiselect: false
+                            multiselect: false,
+                            storage: function () {
+                                //var deptTypeParent = common.getParamFromUrl("deptTypeParent");
+                                //if (deptTypeParent == 1) {
+                                var data = [];
+                                var affiliatedOrgCode = common.getParamFromUrl("deptCode");
+                                var affiliatedOrgName = common.getParamFromUrl("deptName");
+                                if (affiliatedOrgCode && affiliatedOrgCode != "null") {
+                                    var info = {
+                                        affiliatedOrgCode: affiliatedOrgCode,
+                                        affiliatedOrgName: decodeURIComponent(affiliatedOrgName)
+                                    };
+                                    data.push(info);
+                                }
+                                return data;
+                                //}
+                                //return [];
+                            }()
                         }
                     });
-                    internal.selectList.dialog('dept', {
-                        target: $("#btnFkAssignedDept"),
-                        name: 'code',//绑定value值
-                        parentName: 'name',//绑定name值
-                        displayField: 'name',
-                        valueField: 'code',
-                        selectParam: {
-                            multiselect: false
-                        }
-                    });
+
+
+
+
+                    //internal.selectList.dialog('dept', {
+                    //    target: $("#btnFkAssignedDept"),
+                    //    name: 'code',//绑定value值
+                    //    parentName: 'name',//绑定name值
+                    //    displayField: 'name',
+                    //    valueField: 'code',
+                    //    selectParam: {
+                    //        multiselect: false
+                    //    }
+                    //});
                 }
             })
         }
