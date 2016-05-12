@@ -102,7 +102,17 @@ public class DocumentRegisterImplTest extends BaseTest {
 
     @Test
     public void testRetrieveDocumentSet() throws Exception {
+        String ehrInput = "<RetrieveDocumentSetRequest xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"urn:hl7-org:v3\" xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/RetrieveDocumentSetRequest.xsd\">\n" +
+                "  <ID root=\"2.16.156.10011.0\" extension=\"C193FE3B-E71F-4D81-8B8B-9462F35E8D38\"/>\n" +
+                "  <DocumentRequest>\n" +
+                "    <RepositoryUniqueId>5d8a0768141a4438a5fba61e41191e28</RepositoryUniqueId>\n" +
+                "    <DocumentUniqueId>1ebfb5af898b4f939cca7810eba9e776</DocumentUniqueId>\n" +
+                "  </DocumentRequest>\n" +
+                "</RetrieveDocumentSetRequest>";
 
+
+        String result = documentRegister.retrieveDocumentSet(ehrInput);
+        System.out.println(result);
     }
 
     @Test

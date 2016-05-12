@@ -200,7 +200,14 @@ public class XmanIndex extends RegisterEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
+    /**
+     * 病人ID
+     */
     private String patientId;
+
+
+    @Transient
+    private String context;
 
 
 
@@ -514,4 +521,13 @@ public class XmanIndex extends RegisterEntity {
     public void setPatientId(String patientId) {
         this.patientId = patientId;
     }
+
+    public String getContext() {
+        return context;
+    }
+
+    public void setContext(String context) {
+        this.context = context;
+    }
+
 }

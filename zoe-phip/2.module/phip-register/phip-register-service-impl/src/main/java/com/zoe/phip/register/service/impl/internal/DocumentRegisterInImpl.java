@@ -100,4 +100,15 @@ public class DocumentRegisterInImpl extends BaseInServiceImpl<XmanEhr, IEhrDataI
         }
         return xmanIndex;
     }
+
+    public XmanIndex getDocumentInfo(String repositoryUniqueId,String documentUniqueId) throws Exception{
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("repositoryUniqueId", repositoryUniqueId);
+        paras.put("documentUniqueId", documentUniqueId);
+        XmanIndex xmanIndex = xmanIndexMapper.getDocumentInfo(paras);
+        if(xmanIndex == null){
+            throw new BusinessException("003");
+        }
+        return xmanIndex;
+    }
 }
