@@ -46,4 +46,10 @@ public interface IAreaBaseInfoMapper extends IServiceMapper<AreaBaseInfo> {
      */
     List<AreaBaseInfo> getDataList(Map<String, Object> map);
 
+    /**
+     * 根据名称获取 AreaBaseInfo
+     * @return
+     */
+    AreaBaseInfo getAreaInfoByName(String name);
+
 }

@@ -668,6 +668,77 @@ public class XmanBaseInfo extends RegisterEntity {
         this.employerTelNo = employerTelNo;
     }
 
+    /**
+     * 省
+     */
+    @Transient
+    private String stateName;
+
+    /**
+     * 城市
+     */
+    @Transient
+    private String cityName;
+
+    /**
+     * 县
+     */
+    @Transient
+    private String areaName;
+
+    /**
+     * 地址-乡（镇、街道办事处）
+     */
+    @Transient
+    private String streetName;
+
+    /**
+     * 地址-村（街、路、弄等）
+     */
+    @Transient
+    private String committeeName;
+
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public String getCommitteeName() {
+        return committeeName;
+    }
+
+    public void setCommitteeName(String committeeName) {
+        this.committeeName = committeeName;
+    }
+
     //region 健康卡
     @Transient
     private XmanCard xmanCard;

@@ -117,7 +117,7 @@
         </where>
     </select>
 
-    <select id="getOneByCondition" resultType="java.lang.String" parameterType="java.util.Map">
+    <select id="getOneByCondition" resultType="MultiResultMap" parameterType="java.util.Map">
         SELECT * FROM PHIP_XMAN_INDEX T
         <where>
             <if test="healthCardId != null">
@@ -129,7 +129,7 @@
             <if test="title != null">
                 AND T.TITLE = #{title,jdbcType=VARCHAR}
             </if>
-                AND ROWNUM=1
+            AND ROWNUM=1
         </where>
     </select>
 
@@ -141,21 +141,22 @@
         PXI.TITLE,
         PXI.HEALTH_CARD_ID,
         PXI.ID_NO
-        FROM (SELECT *
-        FROM PHIP_XMAN_EHR
-        WHERE XMAN_ID IN (
-        SELECT DISTINCT XMAN_ID
-        FROM PHIP_XMAN_INDEX PXI
+        FROM(
+        SELECT * FROM PHIP_XMAN_INDEX PXI
         <where>
-            PXI.HEALTH_CARD_ID = #{healthCardId,jdbcType=VARCHAR}
-            AND PXI.ID_NO = #{identityId,jdbcType=VARCHAR}
-            <if test="documentTitle != null">
-                AND PXI.TITLE = #{documentTitle,jdbcType=VARCHAR}
+            <if test="healthCardId != null">
+                AND PXI.HEALTH_CARD_ID = #{healthCardId,jdbcType=VARCHAR}
+            </if>
+            <if test="idNo != null">
+                AND PXI.ID_NO = #{idNo,jdbcType=VARCHAR}
+            </if>
+            <if test="title != null">
+                AND PXI.TITLE = #{title,jdbcType=VARCHAR}
             </if>
         </where>
-        )) PXE
-        LEFT JOIN PHIP_XMAN_INDEX PXI
-        ON PXE.INDEX_ID = PXI.ID
+        ) PXI
+        LEFT JOIN PHIP_XMAN_EHR PXE
+        ON PXI.ID = PXE.INDEX_ID
         WHERE ROWNUM = 1
     </select>
 </mapper>
