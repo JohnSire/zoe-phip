@@ -24,8 +24,6 @@
             </if>
             TECHNICAL_CODE = #{technicalCode,jdbcType=VARCHAR},
 
-            TECHNICAL_NAME = #{technicalName,jdbcType=VARCHAR},
-
             EMPLOYER_ADDR = #{employerAddr,jdbcType=VARCHAR},
 
             EMPLOYER_TEL_NO = #{employerTelNo,jdbcType=VARCHAR},

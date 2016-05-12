@@ -17,8 +17,6 @@
                 jdbcType="VARCHAR"/>
         <result column="TECHNICAL_CODE" property="technicalCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="TECHNICAL_NAME" property="technicalName" javaType="java.lang.String"
-                jdbcType="VARCHAR"/>
         <result column="EMPLOYER_ADDR" property="employerAddr" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="EMPLOYER_TEL_NO" property="employerTelNo" javaType="java.lang.String"
@@ -57,7 +55,6 @@
         BIRTHPLACE_ADDR,
         ID_NO,
         TECHNICAL_CODE,
-        TECHNICAL_NAME,
         EMPLOYER_ADDR,
         EMPLOYER_TEL_NO,
         EFFECTIVE_TIME_LOW,
@@ -82,7 +79,6 @@
             #{item.birthplaceAddr,jdbcType=VARCHAR},
             #{item.idNo,jdbcType=VARCHAR},
             #{item.technicalCode,jdbcType=VARCHAR},
-            #{item.technicalName,jdbcType=VARCHAR},
             #{item.employerAddr,jdbcType=VARCHAR},
             #{item.employerTelNo,jdbcType=VARCHAR},
             #{item.effectiveTimeLow,jdbcType=TIMESTAMP},
@@ -110,7 +106,6 @@
         BIRTHPLACE_ADDR,
         ID_NO,
         TECHNICAL_CODE,
-        TECHNICAL_NAME,
         EMPLOYER_ADDR,
         EMPLOYER_TEL_NO,
         EFFECTIVE_TIME_LOW,
@@ -134,7 +129,6 @@
         #{birthplaceAddr,jdbcType=VARCHAR},
         #{idNo,jdbcType=VARCHAR},
         #{technicalCode,jdbcType=VARCHAR},
-        #{technicalName,jdbcType=VARCHAR},
         #{employerAddr,jdbcType=VARCHAR},
         #{employerTelNo,jdbcType=VARCHAR},
         #{effectiveTimeLow,jdbcType=TIMESTAMP},
@@ -189,9 +183,7 @@
                 <if test="item.technicalCode != null">
                     TECHNICAL_CODE = #{item.technicalCode,jdbcType=VARCHAR},
                 </if>
-                <if test="item.technicalName != null">
-                    TECHNICAL_NAME = #{item.technicalName,jdbcType=VARCHAR},
-                </if>
+
                 <if test="item.employerAddr != null">
                     EMPLOYER_ADDR = #{item.employerAddr,jdbcType=VARCHAR},
                 </if>

@@ -37,8 +37,11 @@ public class StandardVerRsSetServiceImpl extends BaseInServiceImpl<StandardVerRs
     }
 
     public List<StSetInfo> getVerRsSetInfo(String fkVersionId,String fkCdaId) throws Exception {
-
-        return null;
+        Map<String, Object> map = MapUtil.createMap(map1 -> {
+            map1.put("fkVersionId", fkVersionId);
+            map1.put("fkCdaId", fkCdaId);
+        });
+        return getSetByFkVersionId(map);
     }
 
     public int deleteByVersionId(String fkVersionId) {
