@@ -82,7 +82,8 @@ public class MedicalStaffInfo extends RegisterEntity {
     /**
      * 专业技术职务名称
      */
-    @Column(name = "TECHNICAL_NAME")
+    @Transient
+//    @Column(name = "TECHNICAL_NAME")
     private String technicalName;
 
     /**

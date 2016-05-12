@@ -45,7 +45,7 @@
             AND PSV.id != #{id, jdbcType=VARCHAR}
         </if>
     </select>
-    <select id="getDataPageList" resultType="com.zoe.phip.web.model.sdm.StandardVersion">
+    <select id="getDataPageList" parameterType="java.util.Map" resultMap="BaseResultMap">
         SELECT *
         FROM PHIP_STANDARD_VERSION PSV
         WHERE 1=1
