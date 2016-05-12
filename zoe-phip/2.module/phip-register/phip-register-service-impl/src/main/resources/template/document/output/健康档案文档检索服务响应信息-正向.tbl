@@ -9,7 +9,7 @@ var outTime = Model.endTime;
   <TargetId root="2.16.156.10011.0" extension="${Model.msgId}" />
   <DocumentSet>
     <DocumentUniqueId>${Model.ehrId}</DocumentUniqueId>
-    <RepositoryUniqueId>HSDA00.01</RepositoryUniqueId>
+    <RepositoryUniqueId>${Model.id}</RepositoryUniqueId>
     <DocumentTitle>${Model.title}</DocumentTitle>
     <CreateTime>${createTime,dateFormat="yyyyMMddHHmmss"}</CreateTime>
     <AuthorName>${Model.authorName}</AuthorName>
