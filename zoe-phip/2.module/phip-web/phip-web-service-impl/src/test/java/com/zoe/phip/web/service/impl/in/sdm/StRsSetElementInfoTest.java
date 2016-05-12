@@ -1,5 +1,8 @@
 package com.zoe.phip.web.service.impl.in.sdm;
 
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.web.model.sdm.StRsSetElementInfo;
 import com.zoe.phip.web.service.impl.in.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,7 @@ public class StRsSetElementInfoTest extends BaseTest {
     private StRsSetElementInfoServiceImpl impl;
 
     @Test
-    public void testSet() throws Exception{
-        impl.getBySetCode("", "");
+    public void testSet() throws Exception {
+        PageList<StRsSetElementInfo> dataPageList = impl.getDataPageList("522dc8b3-213b-475c-980f-89cef50ae92f", "", new QueryPage());
     }
 }
