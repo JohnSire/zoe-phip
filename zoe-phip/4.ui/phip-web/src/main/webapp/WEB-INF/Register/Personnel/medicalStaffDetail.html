@@ -37,8 +37,15 @@ var bodySection = {
                     <input type="text" name="employerTelNo" class="text"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="technicalName">职务：</label>
-                    <input type="text" name="technicalName" class="text"/>
+                    <label class="label" for="technicalCode">职务：</label>
+                    <!--<input type="text" name="technicalName" class="text"/>-->
+                     <span class="text-line-outer" id="btnFkTechnical">
+                        <input type="text" name="technicalCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="职务"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
                 </p>
                 <p class="column-three">
                     <label class="label" for="extensionId"><span class="text-mark">*</span>医护人员编码：</label>
@@ -108,7 +115,7 @@ var bodySection = {
                 <p class="column-three">
                     <label class="label" for="assignedDeptName">申请人所属科室：</label>
                     <span class="text-line-outer" id="btnFkAssignedDept">
-                        <input type="text" name="assignedDeptName" class="text-line"/>
+                        <input type="text" name="assignedDeptCode" class="text-line"/>
                         <span class="text-line-setting">
                             <span class="icon-grid icon-grid-setting" title="配置"></span>
                             <span class="text-line-content"></span>

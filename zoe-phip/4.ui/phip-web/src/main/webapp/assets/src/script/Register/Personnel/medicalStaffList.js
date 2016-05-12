@@ -107,8 +107,8 @@ define(function (require, exports, module) {
                         {display: '身份证号', name: 'idNo', width: 100, align: 'left'},
                         {display: '姓名', name: 'name', width: 80, align: 'left'},
                         {display: '职务', name: 'technicalName', width: 100, align: 'left'},
-                        {display: '机构名称', name: 'name', width: 100, align: 'left'},
-                        {display: '科室名称', name: 'affiliatedOrgName', width: 100, align: 'left'},
+                        {display: '机构名称', name: 'orgName', width: 100, align: 'left'},
+                        {display: '科室名称', name: 'assignedDeptName', width: 100, align: 'left'},
                         {display: '性别', name: 'genderName', width: 80, align: 'left'},
                         {
                             display: '出生日期', name: 'birthTime', width: 120, align: 'left', type: 'date',

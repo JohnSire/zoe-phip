@@ -60,7 +60,13 @@ define(function (require, exports, module) {
                             return true;
                     }
                     var check = dataTypeVerify[type.toUpperCase()](length);
-
+                    if (check) {
+                        $("#vaildDataLength").show().removeClass("Validform_wrong");
+                        $("#dataLength").removeClass("Validform_error");
+                    } else {
+                        $("#vaildDataLength").show().addClass("Validform_wrong");
+                        $("#dataLength").addClass("Validform_error");
+                    }
                     return check;
                 }
             })
@@ -83,14 +89,17 @@ define(function (require, exports, module) {
                 var length = $("#dataLength").val()
                 var check = dataTypeVerify[type.toUpperCase()](length);
                 if (!check) {
+                    $("#vaildDataLength").show().addClass("Validform_wrong");
                     $(this).addClass("Validform_error");
                 } else {
+                    $("#vaildDataLength").show().removeClass("Validform_wrong");
                     $(this).removeClass("Validform_error");
                 }
             })
         },
         event: function () {
             $("#dataType").change(function () {
+                $("#vaildDataLength").hide().removeClass("Validform_wrong");
                 $("#show_dataLength").hide();
                 $("#show_dataAccuracy").hide();
                 $("#dataLength").val("");

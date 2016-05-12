@@ -51,7 +51,8 @@ var bodySection = {
             <p class="column-two" id="show_dataLength" style="display: none;">
                 <label class="label" for="codeSystem">字段长度：</label>
                 <input type="text" name="dataLength" class="text" id="dataLength"    errormsg="字段长度应为1~128位！"
-                       nullmsg="请填写字段长度！"/>
+                       nullmsg="请填写字段长度！"  onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
+                <span class="Validform_checktip Validform_right" id="vaildDataLength" style="display: none;"></span>
             </p>
         </li>
             <li class="list"  id="show_dataAccuracy" style="display: none;">
@@ -59,7 +60,7 @@ var bodySection = {
                 <p class="column-one">
                     <label class="label" for="codeSystem">字段精度：</label>
                     <input type="text" name="dataAccuracy" id="dataAccuracy" class="text" errormsg="字段精度应为1~128位！"  datatype="*"
-                           nullmsg="请填写字段精度！"/>
+                           nullmsg="请填写字段精度！"  onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
                 </p>
             </li>
             <li class="list">
