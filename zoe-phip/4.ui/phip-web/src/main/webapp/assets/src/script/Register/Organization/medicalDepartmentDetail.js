@@ -20,9 +20,10 @@ define(function (require, exports, module) {
                         parentName: 'deptTypeName',//绑定name值
                         displayField: 'name',
                         valueField: 'code',
-                        param: {"codeSystem": oidCodeConfig.department},//ajax参数
+
                         selectParam: {
                             multiselect: false,
+                            param: {"codeSystem": oidCodeConfig.department},//ajax参数
                             storage: function () {
                                 var deptTypeParent = common.getParamFromUrl("deptTypeParent");
                                 if (deptTypeParent == 1) {

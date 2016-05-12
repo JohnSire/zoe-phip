@@ -25,7 +25,15 @@ define(function (require, exports, module) {
             gridParam["isChecked"] = internal.isChecked;
             gridParam["onBeforeCheckRow"] = internal.onBeforeCheckRow;
             var param = options["searchParam"]();
-            param = $.extend(true, {}, param, options["param"]);
+
+            if (typeof(options["param"]) == "function") {
+                var parm = options["param"]();
+                param = $.extend(true, {}, param, parm);
+            } else {
+                param = $.extend(true, {}, param, options["param"]);
+            }
+
+
             gridParam["parms"] = param;
             var gridObj = $("#grid").ligerGrid(gridParam);
             //如果是非多选的，则移除全选框
@@ -37,14 +45,12 @@ define(function (require, exports, module) {
             internal.itemsbox.addItemList(internal.storage, internal.displayField, internal.valueField, function (data) {
                 internal.unChecked(data);
             });
-
-
             internal.searchbox.search(options, function (data) {
                 var gridObj = common.getGrid("grid");
                 if (gridObj) {
                     $.each(data, function (index, item) {
                         gridObj.setParm(index, item);
-                    })
+                    });
                     gridObj.reload();
                 }
             })

@@ -168,16 +168,23 @@ var bodySection = {
             </li>
 
             <p class="column-three">
-                <label class="label" for="assignedDeptName">申请人：</label>
+                <label class="label" for="assignedDeptName">申请人名称：</label>
+                <input type="text" name="assignedDeptName" class="text"/>
 
-                    <span class="text-line-outer" id="btnParentCatalog">
-                        <input type="text" name="pid" class="text-line"/>
-                        <span class="text-line-setting">
-                            <span class="icon-grid icon-grid-setting" title="选择"></span>
-                            <span class="text-line-content"></span>
+            </p>
+            <p class="column-three">
+                <label class="label" for="assignedDeptName">申请人标识：</label>
+                <input type="text" name="assignedDeptName" class="text"/>
+            </p>
+            <p class="column-three">
+                <label class="label" for="assignedDeptName">申请人所属科室：</label>
+                <span class="text-line-outer" id="btnParentCatalog">
+                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
                         </span>
-                    </span>
-
             </p>
             <p class="column-three">
                 <label class="label" for="roleName">角色名称：</label>

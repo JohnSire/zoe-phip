@@ -12,7 +12,9 @@ define(function (require, exports, module) {
         occupation: '2.16.156.10011.2.3.3.7',//职业分类与代码
         healthCareType: '2.16.156.10011.2.3.1.248',// 医保类型
         departType: '2.16.156.10011.1.26',//科室机构标识：科室
-        orgType: '2.16.156.10011.1.5'//科室机构标识：机构
+        orgType: '2.16.156.10011.1.5',//科室机构标识：机构
+        duty: '2.16.156.10011.2.3.3.10'//专业技术职务代码：职务
+
 
     }
     exports.oidCodeConfig = internal;

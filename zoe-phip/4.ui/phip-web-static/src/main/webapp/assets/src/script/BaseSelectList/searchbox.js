@@ -8,7 +8,12 @@ define(function (require, exports, module) {
                 var searchParam = {};
                 if (typeof(options["searchParam"]) == "function") {
                     searchParam = options["searchParam"]();
-                    searchParam = $.extend(true, {}, searchParam, options["param"]);
+                    if (typeof(options["param"]) == "function") {
+                        var parm = options["param"]();
+                        searchParam = $.extend(true, {}, searchParam, parm);
+                    } else {
+                        searchParam = $.extend(true, {}, searchParam, options["param"]);
+                    }
                 }
                 if (typeof(callback) == "function") {
                     callback(searchParam);
