@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -203,115 +203,79 @@ public class CdaController extends BaseController {
     @ResponseBody
     public void uploadXml(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        final long MAX_SIZE = 3 * 1024 * 1024;// 设置上传文件最大为 3M
-        // 允许上传的文件格式的列表
-        final String[] allowedExt = new String[]{"jpg", "jpeg", "gif", "png"};
-
-        response.setContentType("text/html");
-        // 设置字符编码为UTF-8, 这样支持汉字显示
-        // response.setCharacterEncoding("GBK");
-
-        // 实例化一个硬盘文件工厂,用来配置上传组件ServletFileUpload
-        DiskFileItemFactory dfif = new DiskFileItemFactory();
-        dfif.setSizeThreshold(4096);// 设置上传文件时用于临时存放文件的内存大小,这里是4K.多于的部分将临时存在硬盘
-        dfif.setRepository(new File(request.getRealPath("/")+ "/file/cda_xsl"));// 设置存放临时文件的目录,web根目录下的ImagesUploadTemp目录
-
-        // 用以上工厂实例化上传组件
-        ServletFileUpload sfu = new ServletFileUpload(dfif);
-        // 设置最大上传尺寸
-        sfu.setSizeMax(MAX_SIZE);
-
-        PrintWriter out = response.getWriter();
-        // 从request得到 所有 上传域的列表
-        List fileList = null;
-        sfu.setHeaderEncoding("UTF-8");
-        try {
-            fileList = sfu.parseRequest(request);
-        } catch (FileUploadException e) {// 处理文件尺寸过大异常
-            if (e instanceof FileUploadBase.SizeLimitExceededException) {
-                out.print("<script>alert('文件尺寸超过规定大小:" + MAX_SIZE
-                        + "字节');history.back();</script>");
+        //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
+        String savePath = request.getServletContext().getRealPath("/WEB-INF/upload");
+        File file = new File(savePath);
+        //判断上传文件的保存目录是否存在
+        if (!file.exists() && !file.isDirectory()) {
+            System.out.println(savePath+"目录不存在，需要创建");
+            //创建目录
+            file.mkdir();
+        }
+        //消息提示
+        String message = "";
+        try{
+            //使用Apache文件上传组件处理文件上传步骤：
+            //1、创建一个DiskFileItemFactory工厂
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            //2、创建一个文件上传解析器
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            //解决上传文件名的中文乱码
+            upload.setHeaderEncoding("UTF-8");
+            //3、判断提交上来的数据是否是上传表单的数据
+            if(!ServletFileUpload.isMultipartContent(request)){
+                //按照传统方式获取数据
                 return;
             }
-            e.printStackTrace();
-        }
-        // 没有文件上传
-        if (fileList == null || fileList.size() == 0) {
-            out.print("<script>alert('请选择上传文件!');history.back();</script>");
-            return;
-        }
-        HashMap<String, String> paramMap = new HashMap<String, String>();
-        // 得到所有上传的文件
-        Iterator fileItr = fileList.iterator();
-        // 循环处理所有文件
-        FileItem fileUp = null;
-        String path = null;
-        while (fileItr.hasNext()) {
-            FileItem fileItem = null;
-            long size = 0;
-            // 得到当前文件
-            fileItem = (FileItem) fileItr.next();
-            // 忽略简单form字段而不是上传域的文件域(<input type="text" />等)
-            if (fileItem == null || fileItem.isFormField()) {
-                String formname = fileItem.getFieldName();//获取form中的名字
-                String formcontent = fileItem.getString();
-                formname = new String(formname.getBytes(), "GBK");
-                formcontent = new String(formcontent.getBytes(), "GBK");
-                paramMap.put(formname, formcontent);
-            } else {
-                //得到放文件的item
-                fileUp = fileItem;
-                // 得到文件的完整路径
-                path = fileItem.getName();
-                // 得到文件的大小
-                size = fileItem.getSize();
-                if ("".equals(path) || size == 0) {
-                    out.print("<script>alert('请选择上传文件!');history.back();</script>");
-                    return;
+            //4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
+            List<FileItem> list = upload.parseRequest(request);
+            for(FileItem item : list){
+                //如果fileitem中封装的是普通输入项的数据
+                if(item.isFormField()){
+                    String name = item.getFieldName();
+                    //解决普通输入项的数据的中文乱码问题
+                    String value = item.getString("UTF-8");
+                    //value = new String(value.getBytes("iso8859-1"),"UTF-8");
+                    System.out.println(name + "=" + value);
+                }else{//如果fileitem中封装的是上传文件
+                    //得到上传的文件名称，
+                    String filename = item.getName();
+                    System.out.println(filename);
+                    if(filename==null || filename.trim().equals("")){
+                        continue;
+                    }
+                    //注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，如：  c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt
+                    //处理获取到的上传文件的文件名的路径部分，只保留文件名部分
+                    filename = filename.substring(filename.lastIndexOf("\\")+1);
+                    //获取item中的上传文件的输入流
+                    InputStream in = item.getInputStream();
+                    //创建一个文件输出流
+                    FileOutputStream out = new FileOutputStream(savePath + "\\" + filename);
+                    //创建一个缓冲区
+                    byte buffer[] = new byte[1024];
+                    //判断输入流中的数据是否已经读完的标识
+                    int len = 0;
+                    //循环将输入流读入到缓冲区当中，(len=in.read(buffer))>0就表示in里面还有数据
+                    while((len=in.read(buffer))>0){
+                        //使用FileOutputStream输出流将缓冲区的数据写入到指定的目录(savePath + "\\" + filename)当中
+                        out.write(buffer, 0, len);
+                    }
+                    //关闭输入流
+                    in.close();
+                    //关闭输出流
+                    out.close();
+                    //删除处理文件上传时生成的临时文件
+                    item.delete();
+                    message = "文件上传成功！";
                 }
-
             }
-
-        }
-        // 得到去除路径的文件名
-        String t_name = path.substring(path.lastIndexOf("\\") + 1);
-        // 得到文件的扩展名(无扩展名时将得到全名)
-        String t_ext = t_name.substring(t_name.lastIndexOf(".") + 1);
-        // 拒绝接受规定文件格式之外的文件类型
-        int allowFlag = 0;
-        int allowedExtCount = allowedExt.length;
-        for (; allowFlag < allowedExtCount; allowFlag++) {
-            if (allowedExt[allowFlag].equals(t_ext))
-                break;
-        }
-        if (allowFlag == allowedExtCount) {
-            StringBuffer sb = new StringBuffer();
-            for (allowFlag = 0; allowFlag < allowedExtCount; allowFlag++)
-                sb.append("*." + allowedExt[allowFlag]);
-            out.println("<script>alert('请上传以下类型的文件" + sb.toString()
-                    + "');history.back();</script>");
-            return;
-        }
-        long now = System.currentTimeMillis();
-        // 根据系统时间生成上传后保存的文件名
-        String prefix = String.valueOf(now);
-        // 保存的最终文件完整路径,保存在web根目录下的ImagesUploaded目录下
-        String u_name = request.getRealPath("/") + "ImagesUploaded/"
-                + prefix + "." + t_ext;
-        // 相对项目路径
-        String file_url = request.getContextPath() + "/"
-                + "ImagesUploaded/" + prefix + "." + t_ext;
-        try {
-            // 保存文件
-            fileUp.write(new File(u_name));
-            out.println("<script  type='text/javascript'>parent.KE.plugin[\"image\"].insert('" + paramMap.get("id")
-                    + "', '" + file_url + "','" + paramMap.get("imgWidth") + "','"
-                    + paramMap.get("imgHeight") + "','" + paramMap.get("imgBorder") + "','" + paramMap.get("imgTitle")
-                    + "')</script>");
-
-        } catch (Exception e) {
+        }catch (Exception e) {
+            message= "文件上传失败！";
             e.printStackTrace();
+
         }
+        request.setAttribute("message",message);
+        request.getRequestDispatcher("/message.jsp").forward(request, response);
     }
     //endregion
 }
