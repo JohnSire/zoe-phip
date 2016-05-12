@@ -97,17 +97,4 @@ public class DocumentRegisterInImpl extends BaseInServiceImpl<XmanEhr, IEhrDataI
         }
         return xmanIndex;
     }
-
-
-    public XmanIndex getOneByCondition(String healthCardId, String identityId, String documentTitle) throws Exception {
-        Map<String, Object> paras = new HashMap<String, Object>();
-        paras.put("healthCardId", healthCardId);
-        paras.put("identityId", identityId);
-        paras.put("documentTitle", documentTitle);
-        XmanIndex xmanIndex = xmanIndexMapper.getOneByCondition(paras);
-        if(xmanIndex == null){
-            throw new BusinessException("003");
-        }
-        return xmanIndex;
-    }
 }

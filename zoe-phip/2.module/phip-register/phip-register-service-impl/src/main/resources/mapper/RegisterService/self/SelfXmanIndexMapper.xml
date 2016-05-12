@@ -3,7 +3,6 @@
 <mapper namespace="com.zoe.phip.register.dao.IXmanIndexMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.XmanIndex" extends="BaseResultMap">
         <result column="EHR_ID" property="ehrId" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="DOCUMENT_ID" property="documentId" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.XmanIndex">
         update PHIP_XMAN_INDEX
@@ -124,41 +123,21 @@
         </where>
     </select>
 
-    <select id="getOneByCondition" resultMap="MultiResultMap" parameterType="java.util.Map">
-        SELECT * FROM PHIP_XMAN_INDEX T
-        <where>
-            <if test="healthCardId != null">
-                AND T.HEALTH_CARD_ID = #{healthCardId,jdbcType=VARCHAR}
-            </if>
-            <if test="idNo != null">
-                AND T.ID_NO = #{idNo,jdbcType=VARCHAR}
-            </if>
-            <if test="title != null">
-                AND T.TITLE = #{title,jdbcType=VARCHAR}
-            </if>
-            AND ROWNUM=1
-        </where>
-    </select>
-
     <select id="documentRegistryQuery" resultMap="MultiResultMap" parameterType="java.util.Map">
         SELECT PXE.ID EHR_ID,
-        PXE.XMAN_ID,
-        PXE.PATIENT_ID,
         PXE.SOURCE_ID,
-        PXI.TITLE,
-        PXI.HEALTH_CARD_ID,
-        PXI.ID_NO
+        PXI.*
         FROM(
         SELECT * FROM PHIP_XMAN_INDEX PXI
         <where>
             <if test="healthCardId != null">
                 AND PXI.HEALTH_CARD_ID = #{healthCardId,jdbcType=VARCHAR}
             </if>
-            <if test="idNo != null">
-                AND PXI.ID_NO = #{idNo,jdbcType=VARCHAR}
+            <if test="identityId != null">
+                AND PXI.ID_NO = #{identityId,jdbcType=VARCHAR}
             </if>
-            <if test="title != null">
-                AND PXI.TITLE = #{title,jdbcType=VARCHAR}
+            <if test="documentTitle != null">
+                AND PXI.TITLE = #{documentTitle,jdbcType=VARCHAR}
             </if>
         </where>
         ) PXI
