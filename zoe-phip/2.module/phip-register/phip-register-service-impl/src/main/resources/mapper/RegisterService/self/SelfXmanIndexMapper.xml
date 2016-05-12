@@ -3,6 +3,7 @@
 <mapper namespace="com.zoe.phip.register.dao.IXmanIndexMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.XmanIndex" extends="BaseResultMap">
         <result column="EHR_ID" property="ehrId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="DOCUMENT_ID" property="documentId" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.XmanIndex">
         update PHIP_XMAN_INDEX
@@ -99,6 +100,12 @@
             </if>
             <if test="endTime != null">
                 END_TIME = #{endTime,jdbcType=DATE},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=DATE},
+            </if>
+            <if test="patientId != null">
+                PATIENT_ID = #{patientId,jdbcType=VARCHAR},
             </if>
             MODIFY_AT=sysdate
         </set>
