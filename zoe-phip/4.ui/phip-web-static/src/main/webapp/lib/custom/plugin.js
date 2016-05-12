@@ -182,12 +182,17 @@
                 rows: 6,//显示几行，如果超过的则出现滚动条，如果少于不影响
 
                 //选择后事件
-                afterSelected: function (data, oldValue) {
+                onAfterSelected: function (data, newValue, oldValue) {
 
                 }
             },
             //方法
-            method: {},
+            method: {
+                reset: function (self, param) {
+                    self["param"] = $.extend(true, {}, self["param"], param || {});
+                    internal.reset(self);
+                }
+            },
             //插件使用
             init: function (self) {
                 internal.render(self);
@@ -219,14 +224,13 @@
                     e.stopPropagation();
                     var jqUl = $(self).find("ul");
                     var jqSelect = $('select[name="' + name + '"]')
-
                     if (self["param"]["localData"]) {
                         $(jqUl).find("li").on("click", function () {
                             internal.selectValue = $(this).attr("value") || "";
                             $(self).find("span").text($(this).text());
                             $(jqSelect).val(internal.selectValue);
-                            if (typeof(self["param"]["afterSelected"]) == "function") {
-                                self["param"]["afterSelected"]();
+                            if (typeof(self["param"]["onAfterSelected"]) == "function") {
+                                self["param"]["onAfterSelected"]();
                             }
                         });
                     } else {
@@ -259,13 +263,15 @@
                                 $(jqSelect).val(internal.selectValue);
                                 self.isLoadData = true;
                                 $(jqUl).find("li").on("click", function () {
+                                    var oldValue = $(jqSelect).val();
                                     var jqLi = $(this);
                                     internal.selectValue = $(this).attr("value") || "";
+                                    var newValue = $(this).attr("value") || "";
                                     $(self).find("span").text($(this).text());
                                     $(jqSelect).val(internal.selectValue);
-                                    if (typeof(self["param"]["afterSelected"]) == "function") {
+                                    if (typeof(self["param"]["onAfterSelected"]) == "function") {
                                         var itemInfo = jqLi.data("itemInfo");
-                                        self["param"]["afterSelected"](itemInfo);
+                                        self["param"]["onAfterSelected"](itemInfo, newValue, oldValue);
                                     }
                                 });
                             });
@@ -283,9 +289,78 @@
                 $(self).hover(null, function () {
                     $(self).find("ul").hide();
                 })
-
-
             },
+            reset: function (self) {
+                var name = self["param"]["name"];
+                var display = self["param"]["display"];
+                internal.preText = null;
+                if (!internal.preText) {
+                    internal.preText = $(self).find("ul li:first-child").text();
+                }
+                $(self).find("span").text(internal.preText);
+                $(self).on("click", function (e) {
+                    var jqUl = $(self).find("ul");
+                    var jqSelect = $('select[name="' + name + '"]');
+                    $(jqUl).empty();
+                    $(jqSelect).empty();
+                    internal.req(self["param"], function (data) {
+                        $(jqUl).empty();
+                        $(jqSelect).empty();
+                        if (internal.preText) {
+                            var jqLi = $("<li></li>");
+                            jqLi.addClass("simulate-select-list")
+                                .text(internal.preText);
+                            jqUl.append(jqLi);
+                            var jqOptions = $("<option></option>");
+                            jqOptions.text(internal.preText);
+                        }
+
+                        data = self["param"]["renderData"](data);
+                        var value = self["param"]["value"];
+                        var text = self["param"]["text"];
+
+                        $.each(data, function (index, item) {
+                            var jqLi = $("<li></li>").data("itemInfo", item);
+                            jqLi.attr({"value": item[value]})
+                                .addClass("simulate-select-list")
+                                .text(item[text]);
+                            jqUl.append(jqLi);
+                            var jqOptions = $("<option></option>");
+                            jqOptions.attr({value: item[value]})
+                                .text(item[text]);
+                            jqSelect.append(jqOptions);
+                        });
+                        self.isLoadData = true;
+                        $(jqUl).find("li").on("click", function () {
+                            var oldValue = $(jqSelect).val();
+                            var jqLi = $(this);
+                            internal.selectValue = $(this).attr("value") || "";
+                            $(self).find("span").text($(this).text());
+                            $(jqSelect).val(newValue);
+                            if (typeof(self["param"]["onAfterSelected"]) == "function") {
+                                var itemInfo = jqLi.data("itemInfo");
+                                self["param"]["onAfterSelected"](itemInfo, newValue, oldValue);
+                            }
+                        });
+                        jqUl.show();
+                    });
+
+                    //if (jqUl.is(":hidden")) {
+                    //    jqUl.show();
+                    //} else {
+                    //    jqUl.hide();
+                    //}
+                });
+
+
+                $(document).on("click", function () {
+                    $(self).find("ul").hide();
+                });
+                $(self).hover(null, function () {
+                    $(self).find("ul").hide();
+                })
+            },
+
             //ajax请求
             //need reuqest.js
             req: function (options, callback) {
@@ -315,7 +390,11 @@
             var self = this;
             self.param = $.extend(true, {}, internal.defaultOptions, options);
             internal.init(self);
+            target.reset = function (param) {
+                internal.method.reset(self, param);
+            }
         });
+        return target;
     }
     //switch开关按钮
     $.fn.btnSwitch = function (options) {
