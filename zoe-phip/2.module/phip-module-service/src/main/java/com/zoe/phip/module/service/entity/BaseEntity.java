@@ -23,20 +23,17 @@ public class BaseEntity implements Serializable, First {
     @Id
     @Column(name = "ID")
     @GeneratedValue(generator = "UUID")
-    @ValidateNotNull(message = "id不能为空", groups = {First.class})
 //    @JSONField(name = "Id")
     private String id;
     /**
      * 创建人
      */
 //    @JSONField(name = "CreateBy")
-    @ValidateNotBlank(message = "修改人不能为空")
     private String createBy;
     /**
      * 实体（数据记录）创建时间
      */
 //    @JSONField(name = "CreateAt")
-    @ValidateNotNull(message = "创建时间不能为空")
     private Date createAt;
 
     /**

@@ -46,9 +46,6 @@ public class OrgDeptInfo extends RegisterEntity {
      * 医疗卫生机构（科室）实体名称
      */
     @Column(name = "DEPT_NAME")
-    @ValidateEmail
-    @ValidateIDCard
-    @ValidateNumberPlusMinus
     private String deptName;
     /**
      * 医疗卫生机构（科室）类别代码
