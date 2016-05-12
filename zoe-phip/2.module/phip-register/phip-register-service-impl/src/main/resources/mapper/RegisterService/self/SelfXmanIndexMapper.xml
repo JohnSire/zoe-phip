@@ -101,6 +101,9 @@
             <if test="endTime != null">
                 END_TIME = #{endTime,jdbcType=DATE},
             </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=DATE},
+            </if>
             MODIFY_AT=sysdate
         </set>
         where id = #{id}

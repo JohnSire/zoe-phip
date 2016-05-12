@@ -32,4 +32,5 @@
     <AuthorRole descr="数据记录者级别" path="//RegistryPackage/SubmissionSet/Author/AuthorRole"/>
     <StartTime descr="活动服务开始时间" path="//RegistryPackage/SubmissionSet/InTime"/>
     <EndTime descr="活动服务结束时间" path="//RegistryPackage/SubmissionSet/OutTime"/>
+    <CreateTime descr="创建时间" path="//RegistryPackage/SubmissionSet/CreateTime"/>
 </root>

@@ -193,6 +193,13 @@ public class XmanIndex extends RegisterEntity {
     @Transient
     private String ehrId;
 
+    /**
+     * 创建时间
+     */
+    @Column(name = "CREATE_TIME")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date createTime;
+
     public String getAreaCode() {
         return this.areaCode;
     }
@@ -486,5 +493,13 @@ public class XmanIndex extends RegisterEntity {
 
     public void setEhrId(String ehrId) {
         this.ehrId = ehrId;
+    }
+
+    public Date getCreateTime(){
+        return this.createTime;
+    }
+
+    public void setCreateTime(Date createTime){
+        this.createTime=createTime;
     }
 }
