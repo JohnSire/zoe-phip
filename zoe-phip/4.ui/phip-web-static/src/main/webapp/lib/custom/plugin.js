@@ -162,7 +162,7 @@
         var internal = {
             selectValue: null,//选中的值
             preText: null,//提示显示内容（--请选择--）
-            localData: false,
+            localData: false,//是否本地数据
             defaultOptions: {
                 name: '',
                 display: '',
@@ -177,11 +177,17 @@
                 renderData: function (data) {
                     return data.result.rows;
                 },
-                preText: '',//预加载显示内容
                 value: '',//值
                 text: '',//展示的内容
-                rows: 6//显示几行，如果超过的则出现滚动条，如果少于不影响
+                rows: 6,//显示几行，如果超过的则出现滚动条，如果少于不影响
+
+                //选择后事件
+                afterSelected: function (data, oldValue) {
+
+                }
             },
+            //方法
+            method: {},
             //插件使用
             init: function (self) {
                 internal.render(self);
@@ -219,6 +225,9 @@
                             internal.selectValue = $(this).attr("value") || "";
                             $(self).find("span").text($(this).text());
                             $(jqSelect).val(internal.selectValue);
+                            if (typeof(self["param"]["afterSelected"]) == "function") {
+                                self["param"]["afterSelected"]();
+                            }
                         });
                     } else {
                         if (!(self.isLoadData)) {
@@ -237,7 +246,7 @@
                                 var value = self["param"]["value"];
                                 var text = self["param"]["text"];
                                 $.each(data, function (index, item) {
-                                    var jqLi = $("<li></li>");
+                                    var jqLi = $("<li></li>").data("itemInfo", item);
                                     jqLi.attr({"value": item[value]})
                                         .addClass("simulate-select-list")
                                         .text(item[text]);
@@ -250,9 +259,14 @@
                                 $(jqSelect).val(internal.selectValue);
                                 self.isLoadData = true;
                                 $(jqUl).find("li").on("click", function () {
+                                    var jqLi = $(this);
                                     internal.selectValue = $(this).attr("value") || "";
                                     $(self).find("span").text($(this).text());
                                     $(jqSelect).val(internal.selectValue);
+                                    if (typeof(self["param"]["afterSelected"]) == "function") {
+                                        var itemInfo = jqLi.data("itemInfo");
+                                        self["param"]["afterSelected"](itemInfo);
+                                    }
                                 });
                             });
                         }
@@ -265,7 +279,12 @@
                 });
                 $(document).on("click", function () {
                     $(self).find("ul").hide();
+                });
+                $(self).hover(null, function () {
+                    $(self).find("ul").hide();
                 })
+
+
             },
             //ajax请求
             //need reuqest.js
