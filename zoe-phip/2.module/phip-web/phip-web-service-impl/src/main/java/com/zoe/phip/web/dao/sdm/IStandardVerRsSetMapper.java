@@ -7,8 +7,10 @@
 package com.zoe.phip.web.dao.sdm;
 
 import com.zoe.phip.module.service.mapper.IMyMapper;
+import com.zoe.phip.web.model.sdm.StSetInfo;
 import com.zoe.phip.web.model.sdm.StandardVerRsSet;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,4 +20,6 @@ import java.util.Map;
  */
 public interface IStandardVerRsSetMapper extends IMyMapper<StandardVerRsSet> {
     int getSingle(Map<String, Object> map);
+
+    List<StSetInfo> getSetByFkVersionId(Map<String, Object> map);
 }
