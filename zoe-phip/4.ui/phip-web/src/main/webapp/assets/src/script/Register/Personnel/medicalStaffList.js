@@ -37,7 +37,7 @@ define(function (require, exports, module) {
                             isExpand: false,
                             deptName: item["name"],
                             deptCode: item["code"],
-                            type: 1
+                            type: 2
                         });
                         itemList.push(info);
                     });
@@ -53,7 +53,7 @@ define(function (require, exports, module) {
                     onSelect: function (data) {
                         internal.deptCode = data["data"]["deptCode"];
                         internal.deptName = data["data"]["deptName"];
-                        internal.type = data["data"]["type"] == 1 ? 1 : 2;
+                        internal.type = data["data"]["type"] == 1 || data["data"]["type"] == 2 ? data["data"]["type"] : 3;
                         var medicalStaffGrid = common.getGrid("medicalStaffGrid");
                         if (medicalStaffGrid.get("dataAction") == "local") {
                             internal.medicalStaffGrid.setServer();
@@ -97,7 +97,7 @@ define(function (require, exports, module) {
                     ]
                 },
                 extendParam: function () {
-                    return {deptCode: internal.deptCode, type: internal.type};
+                    return {deptCode: internal.deptCode, orgTypeCode: internal.deptCode, type: internal.type};
                 },
                 gridParam: {
                     dataAction: "local",
