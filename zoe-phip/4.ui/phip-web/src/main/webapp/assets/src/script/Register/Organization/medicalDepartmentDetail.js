@@ -4,6 +4,7 @@
 define(function (require, exports, module) {
     var internal = {
         selectList: require("{dir}/UtilityModule/SelectList/list"),
+        areaRelevance: require("{dir}/UtilityModule/AreaRelevance/area"),
         init: function () {
             var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
             var oidCodeConfig = require("{dir}/JsConfig/oidCodeConfig").oidCodeConfig;
@@ -50,24 +51,8 @@ define(function (require, exports, module) {
                         name: 'roleState'
                     });
 
-                    internal.selectList.dialog('medicalDept', {
-                        target: $('#btnFkAssignedDept'),
-                        name: 'assignedDeptCode',
-                        parentName: 'assignedDeptName',
-                        displayField: 'name',
-                        valueField: 'code',
-                        selectParam: {
-                            multiselect: false,
-                            param: function () {
-                                var orgCode = common.getParamFromUrl("orgCode");
-                                var param = {
-                                    type: 0,
-                                    deptParentCode: orgCode || ""
-                                }
-                                return param;
-                            }
-                        }
-                    });
+                    //地理区划提取公用部分，后端实体属性字段在各模块直接命名差异，前端需要做特殊配置，1代表配置第一种名称
+                    internal.areaRelevance.init("1");
 
                 },
                 beforeSaveEvent: function (data) {
