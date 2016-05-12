@@ -27,7 +27,14 @@
                         {display: '编码', name: 'code', width: 100, align: 'left'},
                         {display: '地址', name: 'address', width: 320, align: 'left'},
                         {display: '排序', name: 'sort', width: 80, align: 'left'},
-                        {display: '创建时间', name: 'createAt', width: 120, align: 'left', type: 'date'},
+                        {
+                            display: '创建时间',
+                            name: 'createAt',
+                            width: 120,
+                            align: 'left',
+                            type: 'date',
+                            format: 'yyyy-MM-dd'
+                        },
                         {display: '创建人', name: 'createBy', width: 120, align: 'left'},
                         {
                             display: '状态',

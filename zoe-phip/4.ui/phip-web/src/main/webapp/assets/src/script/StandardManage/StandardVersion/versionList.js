@@ -17,10 +17,10 @@ define(function (require, exports, module) {
                 },
                 tools: {
                     btnbox: {
-                        'custom': {
-                            text: "本级平台标准预览", click: function () {
-                            }
-                        },
+                        /*     'custom': {
+                         text: "本级平台标准预览", click: function () {
+                         }
+                         },*/
                         'add': true,
                         'del': true
 
@@ -36,7 +36,10 @@ define(function (require, exports, module) {
                         {display: '名称', name: 'name', align: 'left'},
                         {display: '编码', name: 'code', align: 'left', width: "20%"},
 
-                        {display: '生成时间', name: 'ceateAt', align: 'center', type: "date", width: "10%",},
+                        {
+                            display: '生成时间', name: 'createAt', width: 120, align: 'left', type: 'date',
+                            format: 'yyyy-MM-dd'
+                        },
                         {
                             display: '版本预览', width: 120, render: function (rowdata, rowindex, value) {
                             var h = "";
@@ -75,8 +78,8 @@ define(function (require, exports, module) {
                     edit: {title: "编辑标准版本"},
                     common: {
                         url: 'version/view/versiondetail',
-                        width: 450,
-                        height: 350
+                        width: 680,
+                        height: 300
                     }
                 }
             });

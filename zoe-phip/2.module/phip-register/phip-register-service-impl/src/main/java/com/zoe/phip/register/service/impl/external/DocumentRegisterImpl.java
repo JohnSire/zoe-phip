@@ -160,9 +160,13 @@ public class DocumentRegisterImpl implements IDocumentRegister {
                 acknowledgement.setMsgId(StringUtil.getUUID());
                 xmanIndex.setMsgId(msgId);
                 xmanIndex.setAcknowledgement(acknowledgement);
-                return RegisterUtil.registerMessage(RegisterType.DOCTOR_QUERY_ERROR, xmanIndex);
+                return RegisterUtil.registerMessage(RegisterType.EHR_SEARCH_SUCCESS, xmanIndex);
             }
             //请求成功
+            if(StringUtil.isNullOrWhiteSpace(xmanIndex.getMsgId())){
+                xmanIndex.setMsgId(msgId);
+                xmanIndex.getEhrId();
+            }
 
 
 
