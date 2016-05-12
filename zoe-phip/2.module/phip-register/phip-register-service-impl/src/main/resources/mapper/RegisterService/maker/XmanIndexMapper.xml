@@ -67,6 +67,8 @@
                 jdbcType="DATE"/>
         <result column="CREATE_TIME" property="createTime" javaType="java.sql.Date"
                 jdbcType="DATE"/>
+        <result column="PATIENT_ID" property="patientId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO PHIP_XMAN_INDEX (
@@ -102,6 +104,7 @@
         START_TIME,
         END_TIME,
         CREATE_TIME,
+        PATIENT_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
@@ -137,6 +140,7 @@
             #{item.startTime,jdbcType=DATE},
             #{item.endTime,jdbcType=DATE},
             #{item.createTime,jdbcType=DATE},
+            #{item.patientId,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -175,6 +179,7 @@
         START_TIME,
         END_TIME,
         CREATE_TIME,
+        PATIENT_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES(
         #{areaCode,jdbcType=VARCHAR},
@@ -209,6 +214,7 @@
         #{startTime,jdbcType=DATE},
         #{endTime,jdbcType=DATE},
         #{createTime,jdbcType=DATE},
+        #{patientId,jdbcType=VARCHAR},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
@@ -323,6 +329,9 @@
                 </if>
                 <if test="item.createTime != null">
                     CREATE_TIME = #{item.createTime,jdbcType=DATE},
+                </if>
+                <if test="item.patientId != null">
+                    PATIENT_ID = #{item.patientId,jdbcType=VARCHAR},
                 </if>
                 MODIFY_AT=sysdate
             </set>

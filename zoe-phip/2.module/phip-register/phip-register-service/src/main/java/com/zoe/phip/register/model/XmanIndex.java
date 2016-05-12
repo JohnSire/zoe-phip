@@ -200,6 +200,10 @@ public class XmanIndex extends RegisterEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
+    private String patientId;
+
+
+
     public String getAreaCode() {
         return this.areaCode;
     }
@@ -501,5 +505,13 @@ public class XmanIndex extends RegisterEntity {
 
     public void setCreateTime(Date createTime){
         this.createTime=createTime;
+    }
+
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 }

@@ -16,7 +16,7 @@ var outTime = Model.endTime;
     <PatientID>${Model.patientId}</PatientID>
     <PatientName>${Model.patientName}</PatientName>
     <ServerOrganization>${Model.serverOrgName}</ServerOrganization>
-    <EpisodeID>${Model.episodeId}</EpisodeID>
+    <EpisodeID>${Model.eventNo}</EpisodeID>
     <InTime>${inTime,dateFormat="yyyyMMddHHmmss"}</InTime>
     <OutTime>${outTime,dateFormat="yyyyMMddHHmmss"}</OutTime>
     <AdmissionDepart>${Model.admissionDepart}</AdmissionDepart>

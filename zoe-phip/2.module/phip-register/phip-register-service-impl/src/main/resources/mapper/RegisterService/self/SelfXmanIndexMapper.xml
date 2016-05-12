@@ -104,6 +104,9 @@
             <if test="createTime != null">
                 CREATE_TIME = #{createTime,jdbcType=DATE},
             </if>
+            <if test="patientId != null">
+                PATIENT_ID = #{patientId,jdbcType=VARCHAR},
+            </if>
             MODIFY_AT=sysdate
         </set>
         where id = #{id}

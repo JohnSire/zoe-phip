@@ -7,6 +7,7 @@
     <OrgName descr="机构名称" path="//Organization/Name"/>
     <EventNo descr="活动服务编号(如住院号、就诊号、会诊号等)" path="//RegistryPackage/SubmissionSet/EpisodeID"/>
     <EventType descr="事件类型" path=""/>
+    <PatientId descr="患者ID" path="//SourcePatientID"/>
     <PatientName descr="患者姓名" path="//SourcePatientName"/>
     <HealthCardId descr="健康卡号" path="//HealthCardId"/>
     <IdNo descr="居民身份证号" path="//IdentityId"/>
