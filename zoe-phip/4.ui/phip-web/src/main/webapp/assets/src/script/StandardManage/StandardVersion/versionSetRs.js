@@ -6,26 +6,23 @@ define(function (require, exports, module) {
     var BaseTree = require("{staticDir}/BaseTree/baseTree");
 
     var internal = {
-        dictGrid: null,
-        catalogId: null,
-        catalogCode: null,
-        catalogName: null,
-        catalogType: null,
         init: function () {
+            internal.tab();
             internal.dictList();
             internal.dictTree();
         },
+        tab: function () {
+            $('.y-dialog-menu .lists .list').click(function () {
+                $(this).addClass('active').siblings().removeClass('active');
+                $('.y-dialog-menu-wrapper>div:eq(' + $(this).index() + ')').show().siblings().hide();
+            })
+        },
         dictTree: function () {
             var treeObj = new BaseTree({
-                treeId: 'tree',
-                btnBox: 'treeBtns',
+                treeId: 'dataSet',
                 reqInfoKey: 'id',//根据哪个值进去获取对象
-                tools: {
-                    btns: {'add': true, 'edit': true, 'del': true}
-                },
                 url: {
-                    getTreeList: 'dict/dictCatalogTreeQuery',
-                    delTreeInfo: 'dict/delDictCatalogInfo',
+                    getTreeList: 'dict/dictCatalogTreeQuery'
                 },
                 renderData: function (data) {
                     return data.result.rows;
@@ -49,84 +46,12 @@ define(function (require, exports, module) {
                         }
                     }
                 },
-                validate: {
-                    //字典分能作为父节点
-                    add: {
-                        isValidate: true,
-                        fn: function (data) {
-                            if (data["type"] == 1) {
-                                common.jsmsgError("父节点不能是字典，请选择分类节点！");
-                                return false;
-                            }
-                            return true;
-                        }
-                    },
-                    //点击编辑按钮验证
-                    edit: {
-                        isValidate: true,
-                        fn: function (data) {
-                            if (data["type"] == 0) {
-                                common.jsmsgError("分类不能做编辑,选择字典进行编辑！");
-                                return false;
-                            }
-                            return true;
-                        }
-                    },
-                    //点击删除按钮验证
-                    del: {
-                        isValidate: true,
-                        fn: function (data) {
-                            if (data["type"] == 0) {
-                                common.jsmsgError("分类不能做删除,选择字典进行删除！");
-                                return false;
-                            }
-                            return true;
-                        }
-                    }
-                },
-                dialogParam: {
-                    winName: "win_dict_detail_dialog",
-                    winCallback: "win_dict_detail_callback",
-                    titleKey: null,//弹窗标题索引 �编辑用户--张三"其中张三是通过�userName'获取
-                    //新增参数
-                    add: {
-                        title: "新增信息"
-                    },
-                    //编辑参数
-                    edit: {
-                        title: "编辑信息"
-                    },
-                    common: {
-                        otherUrlParam: function () {
-                            return {
-                                catalogId: internal.catalogId,
-                                catalogName: internal.catalogName
-                            }
-                        },
-                        url: 'dict/view/dictdetail',
-                        width: 360,
-                        height: 260
-                    }
-                }
             })
         },
         dictList: function () {
             internal.dictGrid = new BaseGrid({
-                gridId: 'dictGrid',
+                gridId: 'dataSetGrid',
                 toolsBoxId: 'dictTools',
-                deleteUrl: {
-                    deleteInfo: "dict/delDictItemInfo",
-                    deleteList: "dict/delDictItemList"
-                },
-                tools: {
-                    btnbox: {
-                        'add': true,
-                        'del': true
-                    },
-                    searchbox: [
-                        {label: '关键字', name: 'keyWord', type: 'text'}
-                    ]
-                },
                 extendParam: function () {
                     return {catalogId: internal.catalogId};
                 },
@@ -134,36 +59,14 @@ define(function (require, exports, module) {
                     dataAction: "local",
                     url: 'dict/getDictItemListByCatalogId',
                     columns: [
-                        {display: '编码', name: 'code', width: 220, align: 'left'},
-                        {display: '名称', name: 'name', width: 380, align: 'left'},
-                        {display: '操作', isSort: false, width: 100, icons: ['edit', 'del']}
+                        {display: '编码', name: 'code', width: 165, align: 'left'},
+                        {display: '名称', name: 'name', width: 160, align: 'left'}
                     ],
                     frozen: false,
                     usePage: true,
                     width: "100%",
                     height: "99%"
                 },
-                dialogParam: {
-                    winName: "win_dict_item_detail_dialog",//弹窗对象变量名称
-                    winCallback: "win_dict_item_detail_callback",//弹窗回调函数
-                    titleKey: "name",
-                    //新增参数
-                    add: {title: "新增字典项信息"},
-                    //编辑参数
-                    edit: {title: "编辑字典项信息"},
-                    common: {
-                        otherUrlParam: function () {
-                            return {
-                                fkCatalogId: internal.catalogId,
-                                fkCatalogName: internal.catalogName,
-                                fkCatalogType: internal.CatalogType,
-                            }
-                        },
-                        url: 'dict/view/dictItemDetail',
-                        width: 360,
-                        height: 260
-                    }
-                }
             })
         }
     };

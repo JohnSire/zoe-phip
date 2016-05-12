@@ -16,8 +16,8 @@ define(function (require, exports, module) {
                 loadPageEvent: function () {
                     internal.selectList.dialog('dictItem', {
                         target: $("#btnDeptType"),
-                        name: 'deptTypeCode',//绑定value值
-                        parentName: 'deptTypeName',//绑定name值
+                        name: 'deptTypeCode',//绑定value�
+                        parentName: 'deptTypeName',//绑定name�
                         displayField: 'name',
                         valueField: 'code',
                         param: {"codeSystem": oidCodeConfig.orgClassification},//ajax参数
@@ -61,11 +61,11 @@ define(function (require, exports, module) {
                                     url: 'area/getAreaListByPid',//url 请求的地址
                                     data: {pid: provincePid},
                                 },
-                                value: 'code',//值
-                                text: 'name'//展示的内容
+                                value: 'code',//�
+                                text: 'name'//展示的内�
 
                             })
-                            /*选择市*/
+                            /*选择�/
                             $("#selCity").select({
                                 name: 'cityCode',
                                 display: 'cityCodeName',
@@ -73,8 +73,8 @@ define(function (require, exports, module) {
                                     url: 'area/getAreaListByPid',//url 请求的地址
                                     data: {pid: 'F2565E55804540AD8E23C059E0E3D593'},
                                 },
-                                value: 'code',//值
-                                text: 'name'//展示的内容
+                                value: 'code',//�
+                                text: 'name'//展示的内�
                             })
                             /*选择区县*/
                             $("#selCounty").select({
@@ -84,8 +84,8 @@ define(function (require, exports, module) {
                                     url: 'area/getAreaListByPid',//url 请求的地址
                                     data: {pid: '9BC2CEB4B2EE47488703F5A45EB998E0'},
                                 },
-                                value: 'code',//值
-                                text: 'name'//展示的内容
+                                value: 'code',//�
+                                text: 'name'//展示的内�
                             })
                             /*选择乡镇*/
                             $("#selStreet").select({
@@ -95,8 +95,8 @@ define(function (require, exports, module) {
                                     url: 'area/getAreaListByPid',//url 请求的地址
                                     data: {pid: '95beeb26-1825-4f37-87b0-70fcc160f248'},
                                 },
-                                value: 'code',//值
-                                text: 'name'//展示的内容
+                                value: 'code',//�
+                                text: 'name'//展示的内�
                             })
                             /*选择街道*/
                             $("#selNeighborhood").select({
@@ -106,8 +106,8 @@ define(function (require, exports, module) {
                                     url: 'area/getAreaListByPid',//url 请求的地址
                                     data: {pid: 'e6bda006-95a6-44ae-8570-143856d310d3'},
                                 },
-                                value: 'code',//值
-                                text: 'name'//展示的内容
+                                value: 'code',//�
+                                text: 'name'//展示的内�
                             })
                         }
                     });
