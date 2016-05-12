@@ -167,25 +167,25 @@ var bodySection = {
                 </div>
             </li>
 
-            <!--<p class="column-three">-->
-                <!--<label class="label" for="assignedDeptName">申请人名称：</label>-->
-                <!--<input type="text" name="assignedDeptName" class="text"/>-->
+            <p class="column-three">
+                <label class="label" for="assignedName">申请人名称：</label>
+                <input type="text" name="assignedName" class="text"/>
 
-            <!--</p>-->
-            <!--<p class="column-three">-->
-                <!--<label class="label" for="assignedDeptName">申请人标识：</label>-->
-                <!--<input type="text" name="assignedDeptName" class="text"/>-->
-            <!--</p>-->
-            <!--<p class="column-three">-->
-                <!--<label class="label" for="assignedDeptName">申请人所属科室：</label>-->
-                <!--<span class="text-line-outer" id="btnParentCatalog">-->
-                            <!--<input type="text" name="pid" class="text-line"/>-->
-                            <!--<span class="text-line-setting">-->
-                                <!--<span class="icon-grid icon-grid-setting" title="选择"></span>-->
-                                <!--<span class="text-line-content"></span>-->
-                            <!--</span>-->
-                        <!--</span>-->
-            <!--</p>-->
+            </p>
+            <p class="column-three">
+                <label class="label" for="assignedCode">申请人标识：</label>
+                <input type="text" name="assignedCode" class="text"/>
+            </p>
+            <p class="column-three">
+                <label class="label" for="assignedDeptName">申请人所属科室：</label>
+                <span class="text-line-outer" id="btnParentCatalog">
+                            <input type="text" name="pid" class="text-line"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
+            </p>
             <p class="column-three">
                 <label class="label" for="roleName">角色名称：</label>
                 <input type="text" name="roleName" class="text"/>
@@ -222,19 +222,15 @@ var bodySection = {
                     <input type="text" name="assignedContactPerson" class="text"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="effectiveTimeLow"><span class="text-mark">*</span>有效期开始：</label>
+                    <label class="label" for="effectiveTimeLow">有效期开始：</label>
                     <span class="text-line-outer">
-                    <input edittype="date" type="text" name="effectiveTimeLow" class="text" datatype="*1-36"
-                           errormsg="有效期开始长度应为1~36位！"
-                           nullmsg="请填写有效期开始！"/>
+                    <input edittype="date" type="text" name="effectiveTimeLow" class="text"/>
                     </span>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="effectiveTimeHigh"><span class="text-mark">*</span>有效期结束：</label>
+                    <label class="label" for="effectiveTimeHigh">有效期结束：</label>
                     <span class="text-line-outer">
-                    <input edittype="date" type="text" name="effectiveTimeHigh" class="text" datatype="*1-36"
-                           errormsg="有效期结束长度应为1~36位！"
-                           nullmsg="请填写有效期结束！"/>
+                    <input edittype="date" type="text" name="effectiveTimeHigh" class="text"/>
                     </span>
                 </p>
 
