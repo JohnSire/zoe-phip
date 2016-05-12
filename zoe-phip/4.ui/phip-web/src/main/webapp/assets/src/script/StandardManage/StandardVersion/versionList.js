@@ -36,7 +36,10 @@ define(function (require, exports, module) {
                         {display: '名称', name: 'name', align: 'left'},
                         {display: '编码', name: 'code', align: 'left', width: "20%"},
 
-                        {display: '生成时间', name: 'ceateAt', align: 'center', type: "date", width: "10%",},
+                        {
+                            display: '生成时间', name: 'createAt', width: 120, align: 'left', type: 'date',
+                            format: 'yyyy-MM-dd'
+                        },
                         {
                             display: '版本预览', width: 120, render: function (rowdata, rowindex, value) {
                             var h = "";

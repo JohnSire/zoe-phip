@@ -38,7 +38,7 @@ define(function (require, exports, module) {
                         {display: '健康档案编号', name: 'healthRecordNo', width: 120, align: 'left'},
                         {
                             display: '出生日期', name: 'birthDate', width: 120, align: 'left', type: 'date',
-                            format: 'yyyy-mm-dd'
+                            format: 'yyyy-MM-dd'
                         },
                         {display: '联系电话', name: 'telNo', width: 120, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
