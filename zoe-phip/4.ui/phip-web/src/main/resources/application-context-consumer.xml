@@ -54,4 +54,7 @@
                      url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStCdaInfoService"/>
     <dubbo:reference id="StRsSetElementInfoService" interface="com.zoe.phip.web.service.sdm.IStRsSetElementInfoService"
                      url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStRsSetElementInfoService"/>
+    <dubbo:reference id="StRsCdaSetInfoService" interface="com.zoe.phip.web.service.sdm.IStRsCdaSetInfoService"
+                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStRsCdaSetInfoService"/>
+
 </beans>

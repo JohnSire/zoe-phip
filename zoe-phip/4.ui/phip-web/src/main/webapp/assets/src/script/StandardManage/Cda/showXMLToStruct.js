@@ -1,5 +1,5 @@
 /**
- * Created by chenzhisen on 2016/5/9.
+ * Created by chenzhisen on 2016/5/12.
  */
 
 define(function (require, exports, module) {
@@ -8,7 +8,7 @@ define(function (require, exports, module) {
 
         init: function (cdaID, sourceID, type) {
             Ext.onReady(function(){
-              //  Ext.BLANK_IMAGE_URL = '<%=rootpath%>/ext/resources/images/default/s.gif';
+                //  Ext.BLANK_IMAGE_URL = '<%=rootpath%>/ext/resources/images/default/s.gif';
                 var tree = new Ext.tree.TreePanel({
                     region: 'center',
                     //True表示为面板是可收缩的，并自动渲染一个展开/收缩的轮换按钮在头部工具条
