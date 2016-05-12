@@ -24,7 +24,7 @@ define(function (require, exports, module) {
                         value: 'code',//值
                         text: 'name'//展示的内容
                     });
-                    internal.selectList.dialog('organization', {
+                    internal.selectList.dialog('medicalOrg', {
                         target: $("#btnFkOrganization"),
                         name: 'affiliatedOrgCode',//绑定value值
                         parentName: 'affiliatedOrgName',//绑定name值
@@ -33,8 +33,6 @@ define(function (require, exports, module) {
                         selectParam: {
                             multiselect: false,
                             storage: function () {
-                                //var deptTypeParent = common.getParamFromUrl("deptTypeParent");
-                                //if (deptTypeParent == 1) {
                                 var data = [];
                                 var affiliatedOrgCode = common.getParamFromUrl("deptCode");
                                 var affiliatedOrgName = common.getParamFromUrl("deptName");
@@ -46,25 +44,9 @@ define(function (require, exports, module) {
                                     data.push(info);
                                 }
                                 return data;
-                                //}
-                                //return [];
                             }()
                         }
                     });
-
-
-
-
-                    //internal.selectList.dialog('dept', {
-                    //    target: $("#btnFkAssignedDept"),
-                    //    name: 'code',//绑定value值
-                    //    parentName: 'name',//绑定name值
-                    //    displayField: 'name',
-                    //    valueField: 'code',
-                    //    selectParam: {
-                    //        multiselect: false
-                    //    }
-                    //});
                 }
             })
         }

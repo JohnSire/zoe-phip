@@ -26,10 +26,6 @@ define(function (require, exports, module) {
                 var options = $.extend(true, {}, internal.defaultParam, internal["fn"][fnName], internal.options);
                 var selectParam = $.extend(true, {}, internal["fn"][fnName]["selectParam"], internal.options["selectParam"]);
                 internal.top["win_select_list_param"] = selectParam;
-
-
-                //alert(JSON.stringify(options));
-
                 internal.top[options["winName"]] = common.dialog({
                     title: options["title"],
                     url: options["url"],
@@ -70,8 +66,6 @@ define(function (require, exports, module) {
             var pName = options.parentName;//外键对象
             var displayField = options.displayField;//显示内容
             var storage = options["selectParam"]["storage"] || [];
-
-
             //初始化绑定值
             $('input[name="' + name + '"]').on("setValue", function (event, argument) {
                 $(targetObj).find("input").val(argument[name]);
@@ -105,15 +99,6 @@ define(function (require, exports, module) {
                         }
                         return data;
                     }();
-
-                    selectParam["searchParam"] = function () {
-                        var param = options["param"] || {};
-                        var keyWord = $("#txtKey").val();
-                        var value = $.trim(keyWord);
-                        param["keyWord"] = value;
-                        return param;
-
-                    };
 
                     internal.top["win_select_list_param"] = selectParam;
                     var buttonsExtend = options["buttonsExtend"] || [];
@@ -175,6 +160,7 @@ define(function (require, exports, module) {
         //初始化
         init: function () {
             var selectParam = $.extend(true, {}, internal.top["win_select_list_param"]);
+            //alert(JSON.stringify(selectParam));
             //通用的对外方法
             var selectList = new BaseSelectList(selectParam);
             internal.top[selectParam["winCallback"]] = function () {
