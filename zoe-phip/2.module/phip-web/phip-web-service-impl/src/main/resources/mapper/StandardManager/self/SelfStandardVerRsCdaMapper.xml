@@ -25,7 +25,7 @@
             AND PSVRC.id != #{id, jdbcType=VARCHAR}
         </if>
     </select>
-    <select id="getCdaByFkVersionId" parameterType="java.util.Map" resultType="java.util.List">
+    <select id="getCdaByFkVersionId" parameterType="java.util.Map" resultType="com.zoe.phip.web.model.sdm.StCdaInfo">
         select i.*
         from Phip_St_Cda_Info i,Phip_Standard_Ver_Rs_Cda c
         where i.id=c.fk_cda_id
