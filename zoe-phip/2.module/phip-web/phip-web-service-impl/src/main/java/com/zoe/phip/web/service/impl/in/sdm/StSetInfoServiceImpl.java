@@ -5,15 +5,17 @@
 
 package com.zoe.phip.web.service.impl.in.sdm;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
-import com.zoe.phip.infrastructure.entity.*;
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SortOrder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
-import com.zoe.phip.web.dao.sdm.IStRsSetElementInfoMapper;
 import com.zoe.phip.web.dao.sdm.IStSetInfoMapper;
 import com.zoe.phip.web.model.sdm.StElementInfo;
 import com.zoe.phip.web.model.sdm.StRsSetElementInfo;
@@ -21,8 +23,6 @@ import com.zoe.phip.web.model.sdm.StSetInfo;
 import com.zoe.phip.web.service.sdm.IStSetInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.alibaba.dubbo.config.annotation.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.Map;
@@ -203,6 +203,6 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
 
     @Override
     public String getDictId(String code) {
-        return getDictId(code);
+        return getMapper().getDictId(code);
     }
 }

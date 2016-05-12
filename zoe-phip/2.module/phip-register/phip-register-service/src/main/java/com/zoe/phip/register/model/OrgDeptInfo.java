@@ -5,9 +5,10 @@
 
 package com.zoe.phip.register.model;
 
-import com.zoe.phip.infrastructure.util.XmlBeanUtil;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateEmail;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNumberPlusMinus;
 import com.zoe.phip.infrastructure.util.XmlUtil;
-import com.zoe.phip.register.model.base.RegisterEntity;
+import com.zoe.phip.module.service.entity.base.RegisterEntity;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -91,6 +92,7 @@ public class OrgDeptInfo extends RegisterEntity {
      * 工作联系电话
      */
     @Column(name = "EMPLOYER_TEL_NO")
+    @ValidateNumberPlusMinus(message = "工作联系电话不合法！")
     private String employerTelNo;
 
     /**
@@ -185,7 +187,9 @@ public class OrgDeptInfo extends RegisterEntity {
     /**
      * 邮件
      */
+
     @Column(name = "EMAIL")
+    @ValidateEmail
     private String email;
     /**
      * 邮政编码
@@ -671,7 +675,7 @@ public class OrgDeptInfo extends RegisterEntity {
 
         try {
             Document document = DocumentHelper.parseText(xmlString);
-            baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, null);
+       //     baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, null);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

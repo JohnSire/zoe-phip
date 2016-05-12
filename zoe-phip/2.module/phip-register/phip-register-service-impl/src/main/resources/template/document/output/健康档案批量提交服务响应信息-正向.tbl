@@ -5,7 +5,4 @@
   <Response id="Document.1" documentUniqueId="${Model.ehrId}" repositoryId="${Model.id}" status="AA" doumentUrl="">
     <Detail>${Model.acknowledgement.text}</Detail>
   </Response>
-  <Response id="Document.2" documentUniqueId="${Model.ehrId}" repositoryId="${Model.id}" status="AA" doumentUrl="">
-    <Detail>${Model.acknowledgement.text}</Detail>
-  </Response>
 </RegistryResponse>

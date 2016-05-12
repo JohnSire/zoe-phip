@@ -3,6 +3,7 @@
 <mapper namespace="com.zoe.phip.register.dao.IXmanIndexMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.XmanIndex" extends="BaseResultMap">
         <result column="EHR_ID" property="ehrId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CONTENT" property="context" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.XmanIndex">
         update PHIP_XMAN_INDEX
@@ -120,6 +121,22 @@
             <if test="patientId != null">
                 AND PXBI.PATIENT_ID = #{patientId,jdbcType=VARCHAR}
             </if>
+        </where>
+    </select>
+
+    <select id="getDocumentInfo" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT T.ID,X.CONTENT, X.ID AS EHR_ID
+        FROM PHIP_XMAN_INDEX T
+        LEFT JOIN PHIP_XMAN_EHR_CONTENT X
+        ON T.ID = X.INDEX_ID
+        <where>
+            <if test="repositoryUniqueId != null">
+                AND T.ID = #{repositoryUniqueId,jdbcType=VARCHAR}
+            </if>
+            <if test="documentUniqueId != null">
+                AND X.ID = #{documentUniqueId,jdbcType=VARCHAR}
+            </if>
+            AND ROWNUM = 1
         </where>
     </select>
 

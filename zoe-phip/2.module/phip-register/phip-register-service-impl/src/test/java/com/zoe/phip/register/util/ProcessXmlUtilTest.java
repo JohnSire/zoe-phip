@@ -1,15 +1,8 @@
 package com.zoe.phip.register.util;
 
-import com.zoe.phip.infrastructure.util.XmlBeanUtil;
-import com.zoe.phip.infrastructure.util.XmlUtil;
 import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
 import org.dom4j.io.SAXReader;
 import org.junit.Test;
-
-import java.io.File;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by zengjiyang on 2016/4/13.
