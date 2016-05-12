@@ -16,7 +16,7 @@ public class StandardVerRsCdaImplTest extends BaseTest {
     private StandardVerRsCdaServiceImpl impl;
 
     @Test
-    public void testGetVersionByFk() throws Exception {
+    public void testGetCdaByFk() throws Exception {
         List<StCdaInfo> verRsCdaInfo = impl.getVerRsCdaInfo("1111");
     }
 }
