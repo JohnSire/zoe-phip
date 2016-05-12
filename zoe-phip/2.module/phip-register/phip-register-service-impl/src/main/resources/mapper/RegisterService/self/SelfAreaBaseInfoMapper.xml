@@ -63,4 +63,9 @@ AND ROWNUM=1
             AND UPPER(CONCAT(PABI.CODE,PABI.NAME )) LIKE UPPER (CONCAT(CONCAT('%',#{key,jdbcType=VARCHAR}),'%'))
         </if>
     </select>
+
+    <select id="getAreaInfoByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT CODE,NAME FROM PHIP_AREA_BASE_INFO WHERE NAME=#{NAME} AND ROWNUM=1
+    </select>
+
 </mapper>

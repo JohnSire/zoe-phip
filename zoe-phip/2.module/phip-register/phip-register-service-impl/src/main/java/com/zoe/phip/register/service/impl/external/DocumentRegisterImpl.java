@@ -142,23 +142,37 @@ public class DocumentRegisterImpl implements IDocumentRegister {
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
         Document document = ProcessXmlUtil.load(message);
-        String strMsgId = document.selectSingleNode("//GetDocumentStroedInfoRequest/Id/@extension").getText();//请求消息ID
-        String strHealthCardId = document.selectSingleNode("//GetDocumentStroedInfoRequest/HealthCardId").getText();;//居民健康卡号
-        String strIdentityId = document.selectSingleNode("//GetDocumentStroedInfoRequest/Id/@extension").getText();; //居民身份证号
-        String strDocumentTitle = document.selectSingleNode("//GetDocumentStroedInfoRequest/Id/@extension").getText();; //标题
-        //从数据库获取值
-        XmanIndex xmanIndex=new XmanIndex();
-        if (strResult != "success:数据集内容验证正确" || xmanIndex.getMsgId() == "")
-        {
-            xmanIndex.setMsgId(strMsgId);
-            xmanIndex.getHealthCardId();
-            xmanIndex.getTitle();
-            xmanIndex.getIdNo();
+        String msgId = document.selectSingleNode("//GetDocumentStroedInfoRequest/Id/@extension").getText();//请求消息ID
+        String healthCardId = document.selectSingleNode("//GetDocumentStroedInfoRequest/HealthCardId").getText();;//居民健康卡号
+        String identityId = document.selectSingleNode("//GetDocumentStroedInfoRequest/Id/@extension").getText();; //居民身份证号
+        String documentTitle = document.selectSingleNode("//GetDocumentStroedInfoRequest/Id/@extension").getText();; //标题
+        try {
+            //从数据库获取值
+            XmanIndex xmanIndex=documentRegisterIn.getOneByCondition(healthCardId,identityId,documentTitle);
+            //响应失败
+            if (strResult != "success:数据集内容验证正确" ||xmanIndex==null||
+                    xmanIndex.getMsgId() == "")
+            {
+                if(xmanIndex==null){
+                    xmanIndex=new XmanIndex();
+                }
+                acknowledgement.setText("fail:由于查询内容不存在");
+                acknowledgement.setMsgId(StringUtil.getUUID());
+                xmanIndex.setMsgId(msgId);
+                xmanIndex.setAcknowledgement(acknowledgement);
+                return RegisterUtil.registerMessage(RegisterType.EHR_SEARCH_SUCCESS, xmanIndex);
+            }
+            //请求成功
+            if(StringUtil.isNullOrWhiteSpace(xmanIndex.getMsgId())){
+                xmanIndex.setMsgId(msgId);
+                xmanIndex.getEhrId();
+            }
+
+
+
+        }catch (Exception e){
+
         }
-
-
-
-
 
         return null;
     }

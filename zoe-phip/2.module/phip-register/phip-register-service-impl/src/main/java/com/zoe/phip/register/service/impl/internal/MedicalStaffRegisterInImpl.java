@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SortOrder;
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
@@ -53,9 +54,11 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
 
 
     @Override
-    public PageList<MedicalStaffInfo> providerListQuery(String type, String key, String deptCode, QueryPage page) throws Exception {
+    public PageList<MedicalStaffInfo> providerListQuery(String type, String key, String orgTypeCode, String deptCode, QueryPage page) throws Exception {
         PageList<MedicalStaffInfo> pageList = new PageList<MedicalStaffInfo>();
         //分页
+        page.setOrderBy(" M.CREATE_AT  ");
+        page.setSortOrder(SortOrder.DESC);
         SqlHelper.startPage(page);
         Map<String, Object> paras = new HashMap<String, Object>();
         List<MedicalStaffInfo> results = null;
@@ -67,6 +70,11 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
                 paras.put("deptCode", deptCode);
             }
             results = getAllProviderList(paras);
+        } else if (type.equals("2")) {
+            if (!StringUtil.isNullOrWhiteSpace(orgTypeCode)) {
+                paras.put("orgTypeCode", orgTypeCode);
+            }
+            results = getOrgProviderList(paras);
         } else {
             if (!StringUtil.isNullOrWhiteSpace(key)) {
                 paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
@@ -74,7 +82,6 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
             if (!StringUtil.isNullOrWhiteSpace(deptCode)) {
                 paras.put("deptCode", deptCode);
             }
-
             results = getProviderList(paras);
         }
 
@@ -114,7 +121,7 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
 //        medicalStaffInfo.setId(StringUtil.getUUID());
             getMapper().defaultUpdate(medicalStaffInfo);
         } else {
-            super.update(medicalStaffInfo);
+            getMapper().defaultUpdate(medicalStaffInfo);
         }
 
         return medicalStaffInfo;
@@ -134,6 +141,11 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
     @Override
     public List<MedicalStaffInfo> getAllProviderList(Map<String, Object> map) {
         return getMapper().getAllProviderList(map);
+    }
+
+    @Override
+    public List<MedicalStaffInfo> getOrgProviderList(Map<String, Object> map) {
+        return getMapper().getOrgProviderList(map);
     }
 
     @Override

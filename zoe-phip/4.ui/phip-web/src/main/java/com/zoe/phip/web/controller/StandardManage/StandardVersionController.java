@@ -61,7 +61,7 @@ public class StandardVersionController extends BaseController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/getVersioninfo")
+    @RequestMapping(value = "/getVersionInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResult getVersionInfo(String id) {

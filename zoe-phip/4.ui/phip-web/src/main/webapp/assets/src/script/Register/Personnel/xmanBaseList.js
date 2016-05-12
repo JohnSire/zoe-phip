@@ -30,6 +30,7 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: 'personnel/getXmanList',
                     columns: [
+                        {display: '个人编码', name: 'patientId', width: 120, align: 'left'},
                         {display: '卡号', name: 'cardCode', width: 120, align: 'left'},
                         {display: '姓名', name: 'name', width: 120, align: 'left'},
                         {display: '性别', name: 'sexCodeName', width: 120, align: 'left'},
@@ -37,7 +38,7 @@ define(function (require, exports, module) {
                         {display: '健康档案编号', name: 'healthRecordNo', width: 120, align: 'left'},
                         {
                             display: '出生日期', name: 'birthDate', width: 120, align: 'left', type: 'date',
-                            format: 'yyyy-mm-dd'
+                            format: 'yyyy-MM-dd'
                         },
                         {display: '联系电话', name: 'telNo', width: 120, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
@@ -88,7 +89,6 @@ define(function (require, exports, module) {
 
                                     })
                                 }
-
                             }
                         },
                         {

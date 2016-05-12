@@ -8,25 +8,20 @@ define(function (require, exports, module) {
             title: '数据集字段选择列表',
             selectParam: {
                 storage: [],
-                displayField: 'name',
+                displayField: 'elementName',
                 valueField: 'id',
                 gridParam: {
-                    url: webRoot + '/dict/dictCatalogListQueryPage',
+                    url: webRoot + '/dataSet/getRsSetColumn',
                     columns: [
-                        {display: '名称', name: 'name', width: 120, align: 'left'},
-                        {display: '编码', name: 'code', width: 280, align: 'left'}
+                        {display: '名称', name: 'elementName', width: 120, align: 'left'},
+                        {display: '编码', name: 'elementCode', width: 280, align: 'left'}
                     ],
-                    usePager: false,
-                    tree: {
-                        columnId: 'id',
-                        columnName: 'name',
-                        idField: 'id',
-                        parentIDField: 'pid'
-                    },
+                    usePage: true,
+
                     height: 250
                 },
                 multiselect: false,//是否多选:true为多选，false为单选
-                winCallback: 'win_dict_catalog_select_list_callback'
+                winCallback: 'win_setColumn_select_list_callback'
             }
         }
     }

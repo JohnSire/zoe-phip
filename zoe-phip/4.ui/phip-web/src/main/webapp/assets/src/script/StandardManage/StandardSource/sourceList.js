@@ -22,10 +22,10 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: "source/getSourceList",
                     columns: [
-                        {display: '标准来源标识', name: 'code', align: 'left'},
-                        {display: '标准来源名称', name: 'name', align: 'left'},
+                        {display: '标准来源标识', name: 'code', align: 'left', width: 150},
+                        {display: '标准来源名称', name: 'name', align: 'left', width: 380},
                         {
-                            display: '来源类型', name: 'standardType', align: 'left',
+                            display: '来源类型', name: 'standardType', width: 150, align: 'left',
                             render: function (rowdata, rowindex, value) {
                                 switch (rowdata.standardType) {
                                     case -1:
@@ -37,7 +37,7 @@ define(function (require, exports, module) {
                                 }
                             }
                         },
-                        {display: '描述', name: 'descr', width: '20%', align: 'left'},
+                        {display: '描述', name: 'descr', width: 380, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,

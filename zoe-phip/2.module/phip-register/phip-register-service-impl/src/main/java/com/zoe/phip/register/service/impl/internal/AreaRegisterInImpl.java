@@ -108,6 +108,11 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
         return count > 0;
     }
 
+    public AreaBaseInfo getAreaByName(String name){
+        return getAreaInfoByName(name);
+    }
+
+
     @Override
     public AreaBaseInfo getAreaBaseInfo(Map<String, Object> map) {
         return getMapper().getAreaBaseInfo(map);
@@ -121,6 +126,11 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
     @Override
     public List<AreaBaseInfo> getDataList(Map<String, Object> map) {
         return getMapper().getDataList(map);
+    }
+
+    @Override
+    public AreaBaseInfo getAreaInfoByName(String name) {
+        return getMapper().getAreaInfoByName(name);
     }
 
     @Override

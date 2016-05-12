@@ -169,7 +169,7 @@
         <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
         <property name="validationMessageSource" ref="messageSource"/>
     </bean>
- <!--   <bean id="urlExpand" class="com.zoe.phip.register.util.ProcessXmlUtil">
+<!--    <bean id="urlExpand" class="com.zoe.phip.register.util.ProcessXmlUtil">
         <property name="schemasPath" value="${schemasPath}"/>
     </bean>-->
 </beans>

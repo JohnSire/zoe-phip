@@ -12,7 +12,10 @@ define(function (require, exports, module) {
                         addUrl: 'source/addSourceInfo',//新增接口Url
                         updateUrl: 'source/updateSourceInfo',//修改接口Url/修改的接口Url
                         loadPageEvent: function () {
-
+                            $("#selstandardType").select({
+                                localData: true,
+                                name: 'standardType'
+                            })
                         }
 
                     }

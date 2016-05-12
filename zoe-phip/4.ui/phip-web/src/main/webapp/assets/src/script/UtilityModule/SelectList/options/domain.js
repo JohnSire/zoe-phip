@@ -11,7 +11,7 @@ define(function (require, exports, module) {
                 displayField: 'name',
                 valueField: 'id',
                 gridParam: {
-                    url: webRoot + 'dict/dictCatalogTreeQuery',
+                    url: webRoot + 'dict/getDictList',
                     columns: [
                         {display: '编码', name: 'code', width: 180, align: 'left'},
                         {display: '名称', name: 'name', width: 220, align: 'left'}

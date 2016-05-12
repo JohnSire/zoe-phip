@@ -16,21 +16,103 @@ define(function (require, exports, module) {
                 loadPageEvent: function () {
                     internal.selectList.dialog('dictItem', {
                         target: $("#btnDeptType"),
-                        name: 'deptTypeCode',//绑定value值
-                        parentName: 'deptTypeName',//绑定name值
+                        name: 'deptTypeCode',//绑定value的值
+                        parentName: 'deptTypeName',//绑定name的值
                         displayField: 'name',
                         valueField: 'code',
                         param: {"codeSystem": oidCodeConfig.orgClassification},//ajax参数
                         selectParam: {
-                            multiselect: false
+                            multiselect: false,
+                            storage: function () {
+                                var deptTypeParent = common.getParamFromUrl("deptTypeParent");
+                                if (deptTypeParent == 1) {
+                                    var data = [];
+                                    var deptTypeCode = common.getParamFromUrl("deptTypeCode");
+                                    var deptTypeName = common.getParamFromUrl("deptTypeName");
+                                    if (deptTypeCode && deptTypeCode != "null") {
+                                        var info = {
+                                            deptTypeCode: deptTypeCode,
+                                            deptTypeName: decodeURIComponent(deptTypeName)
+                                        };
+                                        data.push(info);
+                                    }
+                                    return data;
+                                }
+                                return [];
+                            }()
                         }
-                    });
 
+                    });
                     $("#selRoleState").select({
                         localData: true,
                         name: 'roleState'
-                        //display: 'roleName',
-                    })
+                    });
+                    var req = new Request("area/getAreaTopNode")
+                    req.get({
+                        isTip: false,
+                        async: true,
+                        success: function (data) {
+                            var provincePid = data.result && data.result.id ? data.result.id : "";
+                            /*选择省份*/
+                            $("#selProvince").select({
+                                name: 'provinceCode',
+                                display: 'provinceCodeName',
+                                ajaxParam: {
+                                    url: 'area/getAreaListByPid',//url 请求的地址
+                                    data: {pid: provincePid},
+                                },
+                                value: 'code',//值
+                                text: 'name'//展示的内容
+
+                            })
+                            /*选择*/
+                            $("#selCity").select({
+                                name: 'cityCode',
+                                display: 'cityCodeName',
+                                ajaxParam: {
+                                    url: 'area/getAreaListByPid',//url 请求的地址
+                                    data: {pid: 'F2565E55804540AD8E23C059E0E3D593'},
+                                },
+                                value: 'code',//值
+                                text: 'name'//展示的内容
+                            })
+                            /*选择区县*/
+                            $("#selCounty").select({
+                                name: 'countyCode',
+                                display: 'countyCodeName',
+                                ajaxParam: {
+                                    url: 'area/getAreaListByPid',//url 请求的地址
+                                    data: {pid: '9BC2CEB4B2EE47488703F5A45EB998E0'},
+                                },
+                                value: 'code',//�
+                                text: 'name'//展示的内�
+                            })
+                            /*选择乡镇*/
+                            $("#selStreet").select({
+                                name: 'streetCode',
+                                display: 'streetCodeName',
+                                ajaxParam: {
+                                    url: 'area/getAreaListByPid',//url 请求的地址
+                                    data: {pid: '95beeb26-1825-4f37-87b0-70fcc160f248'},
+                                },
+                                value: 'code',//值
+                                text: 'name'//展示的内容
+                            })
+                            /*选择街道*/
+                            $("#selNeighborhood").select({
+                                name: 'neighborhoodCode',
+                                display: 'neighborhoodCodeName',
+                                ajaxParam: {
+                                    url: 'area/getAreaListByPid',//url 请求的地址
+                                    data: {pid: 'e6bda006-95a6-44ae-8570-143856d310d3'},
+                                },
+                                value: 'code',//值
+                                text: 'name'//展示的内容
+                            })
+                        }
+                    });
+
+
                 },
                 beforeSaveEvent: function (data) {
                     data = $.extend(true, {}, data, {divisionRoot: oidCodeConfig.orgType})

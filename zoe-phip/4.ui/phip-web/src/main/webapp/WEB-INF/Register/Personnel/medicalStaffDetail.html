@@ -14,7 +14,7 @@ var bodySection = {
                            nullmsg="请填写姓名！"/>
                 </p>
                 <div class="column-three">
-                    <label class="label" for="sexCode">性别：</label>
+                    <label class="label" for="genderCode">性别：</label>
                     <div class="simulate-select" id="selSex">
                         <span class="text">--请选择性别--</span>
                         <i class="icon-grid icon-grid-fold-gray"></i>
@@ -23,13 +23,12 @@ var bodySection = {
                         </ul>
                         <div class="clear"></div>
                     </div>
-                    <select name="sexCode" style="display: none;">
+                    <select name="genderCode" style="display: none;">
                     </select>
                 </div>
                 <p class="column-three">
-                    <label class="label" for="idNo"><span class="text-mark">*</span>身份证件号：</label>
-                    <input type="text" name="idNo" class="text" datatype="*1-256" errormsg="身份证件号长度应为1~256位！"
-                           nullmsg="请填写身份证件号！"/>
+                    <label class="label" for="idNo">身份证件号：</label>
+                    <input type="text" name="idNo" class="text"/>
                 </p>
             </li>
             <li class="list">
@@ -42,9 +41,9 @@ var bodySection = {
                     <input type="text" name="technicalName" class="text"/>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="extensionId">医护人员编码：</label>
+                    <label class="label" for="extensionId"><span class="text-mark">*</span>医护人员编码：</label>
                     <span class="text-line-outer">
-                    <input type="text" name="extensionId" class="text"/>
+                    <input type="text" name="extensionId" class="text" datatype="*1-128" errormsg="医护人员编码长度不超过128个字符！"/>
                     </span>
                 </p>
             </li>
@@ -56,9 +55,9 @@ var bodySection = {
                     </span>
                 </p>
                 <p class="column-three">
-                    <label class="label" for="affiliatedOrgName">隶属：</label>
+                    <label class="label" for="affiliatedOrgCode">隶属机构：</label>
                     <span class="text-line-outer" id="btnFkOrganization">
-                        <input type="text" name="affiliatedOrgName" class="text-line"/>
+                        <input type="text" name="affiliatedOrgCode" class="text-line"/>
                         <span class="text-line-setting">
                             <span class="icon-grid icon-grid-setting" title="配置"></span>
                             <span class="text-line-content"></span>

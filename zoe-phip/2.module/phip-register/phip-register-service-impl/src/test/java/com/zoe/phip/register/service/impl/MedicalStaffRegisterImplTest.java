@@ -295,7 +295,7 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
     public void testProviderListQuery() throws Exception {
         QueryPage page = new QueryPage();
         page.setPageSize(30);
-        PageList<MedicalStaffInfo> list = staffRegisterIn.providerListQuery("","", "12010", page);
+        PageList<MedicalStaffInfo> list = staffRegisterIn.providerListQuery("","","", "12010", page);
     }
 
     @Test

@@ -6,7 +6,7 @@ define(function (require, exports, module) {
         selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
             var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
-            var oidCodeConfig = require("{dir}/JsConfig/oidCodeConfig").oidCodeConfig;
+            var sysDictConfig = require("{dir}/JsConfig/sysDictConfig").sysDictConfig;
             var baseAttr = new BaseAttr({
                     winName: "win_dataElement_detail_dialog",//弹窗对象变量名称
                     winCallback: "win_dataElement_detail_callback",//弹窗回调函数
@@ -40,7 +40,8 @@ define(function (require, exports, module) {
                             name: 'code',
                             display: 'name',
                             ajaxParam: {
-                                url: 'dict/dictCatalogListQueryPage',//url 请求的地址
+                                url: 'dict/getItemList ',//url 请求的地址
+                                data: {catalogCode: sysDictConfig.elementType}
                             },
                             value: 'code',//值
                             text: 'name'//展示的内容

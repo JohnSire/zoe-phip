@@ -41,6 +41,7 @@ define(function (require, exports, module) {
                         checkbox: false,
                         onSelect: function (data) {
                             internal.deptTypeCode = data["data"]["code"];
+                            internal.deptTypeName = data["data"]["name"];
                             internal.type = data["data"]["type"] == 0 ? 0 : 1;
                             var medicalDepartmentGrid = common.getGrid("medicalDepartmentGrid");
                             if (medicalDepartmentGrid.get("dataAction") == "local") {
@@ -101,7 +102,13 @@ define(function (require, exports, module) {
                             },
                             common: {
                                 otherUrlParam: function () {
-                                    return {fkSystemDictCategoryId: internal.fkSystemDictCategoryId}
+                                    var orgCode = common.getParamFromUrl("orgCode");
+                                    return {
+                                        deptTypeCode: internal.deptTypeCode,
+                                        deptTypeName: internal.deptTypeName,
+                                        deptTypeParent: internal.type,
+                                        orgCode: orgCode
+                                    }
                                 },
                                 url: 'organization/view/medicalDepartmentDetail',
                                 width: 1000,

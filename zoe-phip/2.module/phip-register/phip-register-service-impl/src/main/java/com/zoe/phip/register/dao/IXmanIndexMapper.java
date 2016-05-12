@@ -12,4 +12,11 @@ public interface IXmanIndexMapper extends IServiceMapper<XmanIndex> {
     String getXmanId(Map<String, Object> args);
 
     XmanIndex documentRegistryQuery(Map<String, Object> paras);
+
+    /**
+     * 根据条件获取一条记录
+     * @param paras
+     * @return
+     */
+    XmanIndex getOneByCondition(Map<String, Object> paras);
 }
