@@ -17,10 +17,10 @@ define(function (require, exports, module) {
                 },
                 tools: {
                     btnbox: {
-                        'custom': {
-                            text: "本级平台标准预览", click: function () {
-                            }
-                        },
+                        /*     'custom': {
+                         text: "本级平台标准预览", click: function () {
+                         }
+                         },*/
                         'add': true,
                         'del': true
 
@@ -78,8 +78,8 @@ define(function (require, exports, module) {
                     edit: {title: "编辑标准版本"},
                     common: {
                         url: 'version/view/versiondetail',
-                        width: 450,
-                        height: 350
+                        width: 680,
+                        height: 300
                     }
                 }
             });
