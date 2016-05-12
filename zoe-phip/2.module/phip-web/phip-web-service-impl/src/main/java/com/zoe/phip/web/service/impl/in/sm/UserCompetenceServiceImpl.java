@@ -157,7 +157,7 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext(new String[]{"application-context-provider.xml", "spring-mybatis.xml"});
+                new ClassPathXmlApplicationContext(new String[]{"web-context-provider.xml", "spring-mybatis.xml"});
         context.start();
 
         SystemUser systemUser;
@@ -168,7 +168,7 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
         Set<ConstraintViolation<SystemUser>> set = validator.validate(systemUser);
         for (ConstraintViolation<SystemUser> constraintViolation : set) {
             System.out.println(constraintViolation.getMessage());
-            //字段名:如name.
+           //字段名:如name.
             String columnName = constraintViolation.getPropertyPath().toString();
             //class:如：systemuser
             constraintViolation.getRootBeanClass();
@@ -202,4 +202,5 @@ public class UserCompetenceServiceImpl extends BaseInServiceImpl<UserCompetence,
             System.out.println(columnNotesName + constraintViolation.getMessage());
         }
     }
+
 }

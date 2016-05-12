@@ -115,7 +115,7 @@
         </if>
         MODIFY_AT=sysdate
 </set>
-
+   where
     <choose>
     <when test="id != null">
         ID = #{id,jdbcType=VARCHAR}
