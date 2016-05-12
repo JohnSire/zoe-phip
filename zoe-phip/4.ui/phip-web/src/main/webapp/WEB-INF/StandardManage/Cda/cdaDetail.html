@@ -1,4 +1,20 @@
 <%
+var styleSection = {
+%>
+<style>
+    .uploadlay {
+        position: absolute;
+        border: 1px green solid;
+        width: 238px;
+        height: 22px;
+        opacity: 0;
+        filter: alpha(opacity:0);
+        z-index: 999;
+    }
+
+</style>
+<%};%>
+<%
 var bodySection = {
 
 %>
@@ -20,12 +36,17 @@ var bodySection = {
             <li class="list">
 
                 <p class="column-one">
-                    <label class="label" for="sampleXml"><span class="text-mark">*</span>样例XML：</label>
-                    <input type="text" name="sampleXml" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
-                           nullmsg="请填写代码！"/>
+                    <label class="label" for="archivesType">档案类别：</label>
+                        <span class="text-line-outer" id="archivesType">
+                            <input type="text" name="archivesType" class="text-line"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
                 </p>
-            </li>
 
+            </li>
 
             <li class="list">
                 <p class="column-one">
@@ -49,5 +70,5 @@ var scriptSection={
 </script>
 <%};%>
 <%
-include("/WEB-INF/shared/_baseAttr.html",{title:"数据集详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_baseAttr.html",{title:"数据集详细信息",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
 %>

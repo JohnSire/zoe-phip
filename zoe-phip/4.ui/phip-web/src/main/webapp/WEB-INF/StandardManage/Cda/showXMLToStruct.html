@@ -1,0 +1,36 @@
+<%
+var baseTitle={
+%>
+结构化
+<%};%>
+<%
+var baseBodySection={
+%>
+<div id="div_cda_struct" style="width:600px;height: 450px;;"></div>
+<%};%>
+
+<%
+var baseStyleSection = {
+%>
+<link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ext-3.0.0/ext-3.0.0/resources/css/ext-all.css")}'
+      rel="stylesheet"/>
+
+<%};%>
+<%
+var baseScriptSection={
+%>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ext-3.0.0/ext-3.0.0/adapter/ext/ext-base-debug.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ext-3.0.0/ext-3.0.0/ext-all-debug.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/ext-3.0.0/ext-3.0.0/examples/ux/XmlTreeLoader.js")}'></script>
+
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/StandardManage/Cda/showXMLToStruct', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/Shared/_default.html",{baseTitle:baseTitle,baseStyleSection:baseStyleSection,baseBodySection:baseBodySection,baseScriptSection:baseScriptSection}){}
+%>

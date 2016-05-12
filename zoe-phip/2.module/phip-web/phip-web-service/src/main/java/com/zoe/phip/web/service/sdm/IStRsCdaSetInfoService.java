@@ -22,4 +22,5 @@ import java.util.List;
  */
 public interface IStRsCdaSetInfoService extends IBaseInService<StRsCdaSetInfo> {
     ServiceResult updateByCdaId(SystemData systemData, String fkCdaId, List<StRsCdaSetInfo> infoList);
+    //TODO 通过CDA获取数据集
 }

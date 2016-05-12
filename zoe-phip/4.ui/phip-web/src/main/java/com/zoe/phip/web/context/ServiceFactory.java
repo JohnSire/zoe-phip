@@ -88,4 +88,7 @@ public final class ServiceFactory {
     public static IStRsSetElementInfoService getStRsSetElementInfoService() {
         return BeanFactory.getBean(Constant.STANDARD_RsSetElement_SERVICE);
     }
+    public static IStRsCdaSetInfoService getStRsCdaSetInfoService() {
+        return BeanFactory.getBean(Constant.STANDARD_RsCdaSetInfo_SERVICE);
+    }
 }
