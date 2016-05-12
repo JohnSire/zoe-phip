@@ -58,9 +58,15 @@ define(function (require, exports, module) {
                 })
 
                 var preOPData = {};
+                var customCheck = true;
                 if (typeof (param["beforeSaveEvent"]) == "function") {
                     preOPData = param["beforeSaveEvent"](data);
+
                 }
+                if (preOPData == false) {
+                    customCheck = false;
+                }
+
                 data = $.extend(true, {}, data, preOPData || {});
                 var url = "";
 
@@ -72,7 +78,7 @@ define(function (require, exports, module) {
                     url = param["addUrl"];
                 }
                 var ajaxParam = {data: data, url: url}
-                if (internal.vaildformObj.check()) {
+                if (internal.vaildformObj.check() && customCheck) {
                     if (typeof (param["customEvent"]) == "function") {
                         param["customEvent"](data);
                         if (typeof (param["afterSaveEvent"]) == "function") {

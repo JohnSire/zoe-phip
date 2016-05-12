@@ -33,7 +33,7 @@ define(function (require, exports, module) {
                 },
                 // reqInfoKey:'patientId',
                 gridParam: {
-                    url: 'dataSet/getByChildSet?id='+common.getParamFromUrl("id"),
+                    url: 'dataSet/getByChildSet?pid='+common.getParamFromUrl("fkSetId"),
                     columns: [
                         {display: '编码', name: 'code', width: 180, align: 'left'},
                         {display: '名称', name: 'name', width: 180, align: 'left'},
@@ -76,14 +76,7 @@ define(function (require, exports, module) {
                     isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
                     treeVaildMsg: '父级分类不能是其本身!',
                     multiselect: true
-                },
-                buttonsExtend: [{
-                    text: '根级节点', onclick: function (item, dialog) {
-                        $('input[name="pid"]').val(0);
-                        $("#btnParentCatalog").find(".text-line-content").text("根级节点");
-                        dialog.close();
-                    }
-                }]
+                }
             });
         }
 

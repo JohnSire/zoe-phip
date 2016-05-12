@@ -6,11 +6,12 @@ var bodySection = {
 <div class="y-dialog-content">
     <div class="y-dialog-form form-little">
         <ul class="y-dialog-lists clearfix">
+            <input type="text" name="fkSetId"  id ="fkSetId" class="text"    style="display: none;"     />
             <li class="list">
                 <p class="column-one">
-                    <label class="label" for="pid">数据元：</label>
+                    <label class="label" for="fkBaseElementId">数据元：</label>
                         <span class="text-line-outer" id="btnDataElement">
-                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <input type="text" name="fkBaseElementId" class="text-line" s/>
                             <span class="text-line-setting">
                                 <span class="icon-grid icon-grid-setting" title="选择"></span>
                                 <span class="text-line-content"></span>
@@ -21,13 +22,13 @@ var bodySection = {
             </li>
             <li class="list">
                 <p class="column-two">
-                    <label class="label" for="code"><span class="text-mark">*</span>名称：</label>
-                    <input type="text" name="code" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！"
+                    <label class="label" for="elementName"><span class="text-mark">*</span>名称：</label>
+                    <input type="text" name="elementName" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！"
                            nullmsg="请填写名称！"/>
                 </p>
                 <p class="column-two">
-                    <label class="label" for="codeSystem"><span class="text-mark">*</span>代码：</label>
-                    <input type="text" name="codeSystem" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
+                    <label class="label" for="elementCode"><span class="text-mark">*</span>代码：</label>
+                    <input type="text" name="elementCode" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
                            nullmsg="请填写代码！"/>
                 </p>
             </li>
@@ -35,8 +36,8 @@ var bodySection = {
             <li class="list">
             <p class="column-two">
                 <label class="label">字段类型:</label>
-                <select name="standardType" class="select" style="width:190px;">
-                    <option value="-1">--请选择字段类型--</option>
+                <select name="dataType" class="select" id="dataType" style="width:190px;" datatype="*">
+                    <option value="">--请选择字段类型--</option>
                     <option value="VARCHAR2">VARCHAR2</option>
                     <option value="NVARCHAR2">NVARCHAR2</option>
                     <option value="NUMBER">NUMBER</option>
@@ -47,56 +48,66 @@ var bodySection = {
                 </select>
             </p>
 
-            <p class="column-two">
+            <p class="column-two" id="show_dataLength" style="display: none;">
                 <label class="label" for="codeSystem">字段长度：</label>
-                <input type="text" name="codeSystem" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
-                       nullmsg="请填写代码！"/>
+                <input type="text" name="dataLength" class="text" id="dataLength"    errormsg="字段长度应为1~128位！"
+                       nullmsg="请填写字段长度！"/>
             </p>
         </li>
-            <li class="list">
+            <li class="list"  id="show_dataAccuracy" style="display: none;">
 
                 <p class="column-one">
                     <label class="label" for="codeSystem">字段精度：</label>
-                    <input type="text" name="codeSystem" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
-                           nullmsg="请填写代码！"/>
+                    <input type="text" name="dataAccuracy" id="dataAccuracy" class="text" errormsg="字段精度应为1~128位！"  datatype="*"
+                           nullmsg="请填写字段精度！"/>
                 </p>
             </li>
             <li class="list">
 
                 <p class="column-one">
-                    <label class="label" for="pid">参照字典：</label>
+                    <label class="label" for="fkDictId">参照字典：</label>
                         <span class="text-line-outer" id="btnDict">
-                            <input type="text" name="pid" class="text-line" datatype="*"/>
+                            <input type="text" name="fkDictId" class="text-line"/>
                             <span class="text-line-setting">
                                 <span class="icon-grid icon-grid-setting" title="选择"></span>
                                 <span class="text-line-content"></span>
                             </span>
                         </span>
                 </p>
+
             </li>
             <li class="list">
                 <p class="column-two">
-                    <label class="label" for="userState">是否主键：</label>
-                    <a class="btn-switch-outer" id="isPk">
+                    <label class="label" for="isPrimaryKey">是否主键：</label>
+                    <a class="btn-switch-outer" id="isPrimaryKey">
                             <span class="btn-switch btn-switch-on">
                                 <b class="btn-switch-inner"></b>
                             </span>
                     </a>
                 </p>
                 <p class="column-two">
-                    <label class="label" for="userState">是否为空：</label>
-                    <a class="btn-switch-outer" id="isNull">
+                    <label class="label" for="isNullable">是否可空：</label>
+                    <a class="btn-switch-outer" id="isNullable">
                             <span class="btn-switch btn-switch-on">
                                 <b class="btn-switch-inner"></b>
                             </span>
                     </a>
                 </p>
             </li>
-
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="isIndexKey">是否索引：</label>
+                    <a class="btn-switch-outer" id="isIndexKey">
+                            <span class="btn-switch btn-switch-on">
+                                <b class="btn-switch-inner"></b>
+                            </span>
+                    </a>
+                </p>
+            </li>
             <li class="list">
                 <p class="column-one">
                     <label class="label label-textarea">备注：</label>
-                    <textarea rows="3" class="textarea" style="width:505px;height:60px;" name="descr"></textarea>
+                    <textarea rows="3" class="textarea" style="width:505px;height:60px;" name="define"></textarea>
                 </p>
             </li>
         </ul>
