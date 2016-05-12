@@ -1,4 +1,7 @@
 /**
+ * Created by linqinghuang on 2016/5/12.
+ */
+/**
  * Created by linqinghuang on 2016/5/6.
  */
 /**
@@ -7,14 +10,14 @@
 define(function (require, exports, module) {
     var internal = {
         medicalOrg: {
-            winName: 'win_medical_org_select_list',
-            title: '机构选择列表',
+            winName: 'win_medical_staff_select_list',
+            title: '医护人员选择列表',
             selectParam: {
                 storage: [],
-                displayField: 'deptName',
+                displayField: 'name',
                 valueField: 'deptCode',
                 gridParam: {
-                    url: webRoot + 'organization/getMedicalOrgList',
+                    url: webRoot + 'organization/getMedicalOrgList?type=0',
                     columns: [
                         {display: '机构代码', name: 'deptCode', width: 150, align: 'left'},
                         {display: '机构名称', name: 'deptName', width: 280, align: 'left'}

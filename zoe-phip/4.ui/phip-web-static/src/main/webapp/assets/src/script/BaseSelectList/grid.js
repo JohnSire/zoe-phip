@@ -24,13 +24,9 @@ define(function (require, exports, module) {
             gridParam["onCheckAllRow"] = internal.onCheckAllRow;
             gridParam["isChecked"] = internal.isChecked;
             gridParam["onBeforeCheckRow"] = internal.onBeforeCheckRow;
-
-
             var param = options["searchParam"]();
-
+            param = $.extend(true, {}, param, options["param"]);
             gridParam["parms"] = param;
-
-
             var gridObj = $("#grid").ligerGrid(gridParam);
             //如果是非多选的，则移除全选框
             if (!internal.multiselect) {

@@ -29,7 +29,7 @@
                             width: 120,
                             align: 'left',
                             type: 'date',
-                            format: 'yyyy-mm-dd'
+                            format: 'yyyy-MM-dd'
                         },
                         {
                             display: '状态',

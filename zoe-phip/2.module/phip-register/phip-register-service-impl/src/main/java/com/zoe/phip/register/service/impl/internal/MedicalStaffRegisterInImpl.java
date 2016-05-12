@@ -79,6 +79,9 @@ public class MedicalStaffRegisterInImpl extends BaseInServiceImpl<MedicalStaffIn
             if (!StringUtil.isNullOrWhiteSpace(key)) {
                 paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
             }
+            if (!StringUtil.isNullOrWhiteSpace(deptCode)) {
+                paras.put("deptCode", deptCode);
+            }
             results = getProviderList(paras);
         }
 

@@ -8,6 +8,7 @@ define(function (require, exports, module) {
                 var searchParam = {};
                 if (typeof(options["searchParam"]) == "function") {
                     searchParam = options["searchParam"]();
+                    searchParam = $.extend(true, {}, searchParam, options["param"]);
                 }
                 if (typeof(callback) == "function") {
                     callback(searchParam);
