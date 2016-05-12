@@ -3,82 +3,67 @@
 <mapper namespace="com.zoe.phip.register.dao.IMedicalStaffInfoMapper">
     <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.MedicalStaffInfo" extends="BaseResultMap">
         <result column="GENDER_NAME" property="genderName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="ORG_NAME" property="orgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
         update PHIP_MEDICAL_STAFF_INFO
         <set>
-            <if test="extensionId != null">
-                EXTENSION_ID = #{extensionId,jdbcType=VARCHAR},
-            </if>
-            <if test="name != null">
-                NAME = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="genderCode != null">
-                GENDER_CODE = #{genderCode,jdbcType=VARCHAR},
-            </if>
-            <if test="birthTime != null">
-                BIRTH_TIME = #{birthTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="birthplaceAddr != null">
-                BIRTHPLACE_ADDR = #{birthplaceAddr,jdbcType=VARCHAR},
-            </if>
+
+            EXTENSION_ID = #{extensionId,jdbcType=VARCHAR},
+
+            NAME = #{name,jdbcType=VARCHAR},
+
+            GENDER_CODE = #{genderCode,jdbcType=VARCHAR},
+
+            BIRTH_TIME = #{birthTime,jdbcType=TIMESTAMP},
+
+            BIRTHPLACE_ADDR = #{birthplaceAddr,jdbcType=VARCHAR},
             <if test="idNo != null">
                 ID_NO = #{idNo,jdbcType=VARCHAR},
             </if>
-            <if test="technicalCode != null">
-                TECHNICAL_CODE = #{technicalCode,jdbcType=VARCHAR},
-            </if>
-            <if test="technicalName != null">
-                TECHNICAL_NAME = #{technicalName,jdbcType=VARCHAR},
-            </if>
-            <if test="employerAddr != null">
-                EMPLOYER_ADDR = #{employerAddr,jdbcType=VARCHAR},
-            </if>
-            <if test="employerTelNo != null">
-                EMPLOYER_TEL_NO = #{employerTelNo,jdbcType=VARCHAR},
-            </if>
-            <if test="effectiveTimeLow != null">
-                EFFECTIVE_TIME_LOW = #{effectiveTimeLow,jdbcType=TIMESTAMP},
-            </if>
-            <if test="effectiveTimeHigh != null">
-                EFFECTIVE_TIME_HIGH = #{effectiveTimeHigh,jdbcType=TIMESTAMP},
-            </if>
-            <if test="affiliatedOrgCode != null">
-                AFFILIATED_ORG_CODE = #{affiliatedOrgCode,jdbcType=VARCHAR},
-            </if>
-            <if test="affiliatedOrgName != null">
-                AFFILIATED_ORG_NAME = #{affiliatedOrgName,jdbcType=VARCHAR},
-            </if>
-            <if test="msgId != null">
-                MSG_ID = #{msgId,jdbcType=VARCHAR},
-            </if>
-            <if test="assignedCode != null">
-                ASSIGNED_CODE = #{assignedCode,jdbcType=VARCHAR},
-            </if>
-            <if test="assignedName != null">
-                ASSIGNED_NAME = #{assignedName,jdbcType=VARCHAR},
-            </if>
-            <if test="assignedDeptCode != null">
-                ASSIGNED_DEPT_CODE = #{assignedDeptCode,jdbcType=VARCHAR},
-            </if>
-            <if test="assignedDeptName != null">
-                ASSIGNED_DEPT_NAME = #{assignedDeptName,jdbcType=VARCHAR},
-            </if>
-            <if test="assignedContactPerson != null">
-                ASSIGNED_CONTACT_PERSON = #{assignedContactPerson,jdbcType=VARCHAR},
-            </if>
-            <if test="statusCode != null">
-                STATUS_CODE = #{statusCode,jdbcType=VARCHAR},
-            </if>
-            <if test="creationTime != null">
-                CREATION_TIME = #{creationTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="state != null">
-                STATE = #{state,jdbcType=DECIMAL},
-            </if>
+            TECHNICAL_CODE = #{technicalCode,jdbcType=VARCHAR},
+
+            TECHNICAL_NAME = #{technicalName,jdbcType=VARCHAR},
+
+            EMPLOYER_ADDR = #{employerAddr,jdbcType=VARCHAR},
+
+            EMPLOYER_TEL_NO = #{employerTelNo,jdbcType=VARCHAR},
+
+            EFFECTIVE_TIME_LOW = #{effectiveTimeLow,jdbcType=TIMESTAMP},
+
+            EFFECTIVE_TIME_HIGH = #{effectiveTimeHigh,jdbcType=TIMESTAMP},
+
+            AFFILIATED_ORG_CODE = #{affiliatedOrgCode,jdbcType=VARCHAR},
+
+            AFFILIATED_ORG_NAME = #{affiliatedOrgName,jdbcType=VARCHAR},
+
+            MSG_ID = #{msgId,jdbcType=VARCHAR},
+
+            ASSIGNED_CODE = #{assignedCode,jdbcType=VARCHAR},
+
+            ASSIGNED_NAME = #{assignedName,jdbcType=VARCHAR},
+
+            ASSIGNED_DEPT_CODE = #{assignedDeptCode,jdbcType=VARCHAR},
+
+            ASSIGNED_DEPT_NAME = #{assignedDeptName,jdbcType=VARCHAR},
+
+            ASSIGNED_CONTACT_PERSON = #{assignedContactPerson,jdbcType=VARCHAR},
+
+            STATUS_CODE = #{statusCode,jdbcType=VARCHAR},
+
+            CREATION_TIME = #{creationTime,jdbcType=TIMESTAMP},
+
+            STATE = #{state,jdbcType=DECIMAL},
+
             MODIFY_AT=sysdate
         </set>
-        where id = #{id}
+        where
+        <choose>
+            <when test="id != null">
+                id = #{id,jdbcType=VARCHAR}
+            </when>
+        </choose>
+
     </update>
     <delete id="providerDelete" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
         delete from PHIP_MEDICAL_STAFF_INFO where ID in
@@ -88,33 +73,58 @@
 
     </delete>
     <select id="getStaff" parameterType="java.util.Map" resultMap="BaseResultMap">
-        SELECT * FROM PHIP_MEDICAL_STAFF_INFO PMSI
-        WHERE 1 = 1
-        <if test="_parameter.containsKey('extensionId')">
-            AND PMSI.EXTENSION_ID = #{extensionId,jdbcType=VARCHAR}
-        </if>
-        <if test="_parameter.containsKey('staffName')">
-            AND PMSI.NAME = #{staffName,jdbcType=VARCHAR}
-        </if>
-        <if test="_parameter.containsKey('genderCode')">
-            AND PMSI.GENDER_CODE = #{genderCode,jdbcType=VARCHAR}
-        </if>
-        <if test="_parameter.containsKey('birthDate')">
-            AND to_char(PMSI.BIRTH_TIME,'yyyyMMdd') = #{birthDate,jdbcType=VARCHAR}
-        </if>
+        SELECT PMSI.*,PODI.DEPT_NAME FROM PHIP_MEDICAL_STAFF_INFO PMSI,PHIP_ORG_DEPT_INFO PODI
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON PMSI.GENDER_CODE=S.CODE --性别
+        <where>
+            <if test="_parameter.containsKey('extensionId')">
+                AND PMSI.EXTENSION_ID = #{extensionId,jdbcType=VARCHAR}
+            </if>
+            <if test="_parameter.containsKey('staffName')">
+                AND PMSI.NAME = #{staffName,jdbcType=VARCHAR}
+            </if>
+            <if test="_parameter.containsKey('genderCode')">
+                AND PMSI.GENDER_CODE = #{genderCode,jdbcType=VARCHAR}
+            </if>
+            <if test="_parameter.containsKey('birthDate')">
+                AND to_char(PMSI.BIRTH_TIME,'yyyyMMdd') = #{birthDate,jdbcType=VARCHAR}
+            </if>
+            AND PMSI.AFFILIATED_ORG_CODE =PODI.DEPT_CODE
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
     </select>
 
-    <select id="getProvider" parameterType="java.lang.String" resultMap="BaseResultMap">
-        SELECT * FROM PHIP_MEDICAL_STAFF_INFO M WHERE M.ID=#{id} OR M.EXTENSION_ID=#{id} AND ROWNUM=1
+    <select id="getProvider" parameterType="java.lang.String" resultMap="MultiResultMap">
+        SELECT PMSI.*,S.NAME AS GENDER_NAME,D.DEPT_NAME AS ORG_NAME
+        FROM PHIP_MEDICAL_STAFF_INFO PMSI
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON PMSI.GENDER_CODE=S.CODE --性别
+        LEFT JOIN(
+        SELECT PODI.* FROM PHIP_ORG_DEPT_INFO PODI
+        ) D
+        ON PMSI.AFFILIATED_ORG_CODE =D.DEPT_CODE
+        WHERE PMSI.ID=#{id} OR PMSI.EXTENSION_ID=#{id}
+        AND ROWNUM=1
     </select>
 
     <select id="getProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
-        SELECT M.*,S.NAME AS GENDER_NAME FROM PHIP_MEDICAL_STAFF_INFO M
+        SELECT M.*,S.NAME AS GENDER_NAME,D.DEPT_NAME AS ORG_NAME
+        FROM PHIP_MEDICAL_STAFF_INFO M
         LEFT JOIN (
         <include refid="oidSelect">
             <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
         </include>
         ) S ON M.GENDER_CODE=S.CODE --性别
+        LEFT JOIN(
+        SELECT PODI.* FROM PHIP_ORG_DEPT_INFO PODI
+        ) D
+        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE
         <where>
             <if test="_parameter.containsKey('key') and _parameter.containsKey('key')!=''">
                 (UPPER(M.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(M.ID_NO) LIKE
@@ -130,17 +140,19 @@
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
     </select>
-    <!--
-    SELECT * FROM PHIP_MEDICAL_STAFF_INFO M
-    LEFT JOIN (SELECT PDI.CODE, PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS JOIN PHIP_DICT_CATALOG PDC ON PNS.DICT_CODE = PDC.CODE JOIN PHIP_DICT_ITEM PDI ON PDC.ID = PDI.FK_CATALOG_ID WHERE PNS.CODE_SYSTEM = '2.16.156.10011.2.3.3.4') S ON M.GENDER_CODE = S.CODE
-    -->
+
     <select id="getAllProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
-        SELECT M.*,S.NAME AS GENDER_NAME FROM PHIP_MEDICAL_STAFF_INFO M
+        SELECT M.*,S.NAME AS GENDER_NAME,D.DEPT_NAME AS ORG_NAME
+        FROM PHIP_MEDICAL_STAFF_INFO M
         LEFT JOIN (
         <include refid="oidSelect">
             <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
         </include>
         ) S ON M.GENDER_CODE=S.CODE --性别
+        LEFT JOIN(
+        SELECT PODI.* FROM PHIP_ORG_DEPT_INFO PODI
+        ) D
+        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE
         <where>
             <if test="_parameter.containsKey('key') and _parameter.containsKey('key')!=''">
                 (UPPER(M.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(M.ID_NO) LIKE
@@ -150,6 +162,22 @@
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>
 
+    </select>
+    <select id="getOrgProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT M.*,S.NAME AS GENDER_NAME,D.DEPT_NAME AS ORG_NAME
+        FROM PHIP_MEDICAL_STAFF_INFO M
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON M.GENDER_CODE=S.CODE --性别
+        LEFT JOIN(
+        SELECT PODI.* FROM PHIP_ORG_DEPT_INFO PODI
+        ) D
+        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE
+        WHERE AFFILIATED_ORG_CODE IN(
+        SELECT O.DEPT_CODE FROM PHIP_ORG_DEPT_INFO O
+        WHERE DEPT_TYPE_CODE=#{orgTypeCode,jdbcType=VARCHAR})
     </select>
 
     <sql id="oidSelect">

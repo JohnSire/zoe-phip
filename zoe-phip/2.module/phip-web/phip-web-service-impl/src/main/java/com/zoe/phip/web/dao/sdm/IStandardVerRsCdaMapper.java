@@ -7,8 +7,10 @@
 package com.zoe.phip.web.dao.sdm;
 
 import com.zoe.phip.module.service.mapper.IMyMapper;
+import com.zoe.phip.web.model.sdm.StCdaInfo;
 import com.zoe.phip.web.model.sdm.StandardVerRsCda;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,4 +21,6 @@ import java.util.Map;
 
 public interface IStandardVerRsCdaMapper extends IMyMapper<StandardVerRsCda> {
     int getSingle(Map<String, Object> map);
+
+    List<StCdaInfo> getCdaByFkVersionId(Map<String, Object> map);
 }

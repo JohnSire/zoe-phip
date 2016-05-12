@@ -179,8 +179,8 @@ public class PersonnelController extends BaseController {
     @RequestMapping(value = "/getMedStfList")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
-    public ServiceResultT<PageList<MedicalStaffInfo>> getMedStfList(String type, String keyWord, String deptCode) {
-        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), type, keyWord, deptCode, getQueryPage());
+    public ServiceResultT<PageList<MedicalStaffInfo>> getMedStfList(String type, String keyWord, String orgTypeCode, String deptCode) {
+        return ServiceFactory.getMedicalStaffRegisterIn().providerListQuery(ComSession.getUserInfo(), type, keyWord, orgTypeCode,deptCode, getQueryPage());
     }
 
     /**
