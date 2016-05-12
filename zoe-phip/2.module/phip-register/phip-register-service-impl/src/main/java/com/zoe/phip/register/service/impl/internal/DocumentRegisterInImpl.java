@@ -82,8 +82,11 @@ public class DocumentRegisterInImpl extends BaseInServiceImpl<XmanEhr, IEhrDataI
         xmanEhrContent.setModifyAt(new Date());
         xmanEhrContentMapper.insertSelective(xmanEhrContent);
 
-        xmanIndex.setEhrId(xmanEhr.getId());
-        return xmanIndex;
+        XmanIndex result = new XmanIndex();
+        result.setId(xmanIndex.getId());
+        result.setEhrId(xmanEhr.getId());
+        result.setMsgId(xmanIndex.getMsgId());
+        return result;
     }
 
     public XmanIndex documentRegistryQuery(String healthCardId, String identityId, String documentTitle) throws Exception {

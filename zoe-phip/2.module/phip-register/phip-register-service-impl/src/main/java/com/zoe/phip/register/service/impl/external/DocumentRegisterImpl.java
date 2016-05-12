@@ -2,6 +2,7 @@ package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.exception.BusinessException;
+import com.zoe.phip.infrastructure.util.DateUtil;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlBeanUtil;
@@ -15,10 +16,13 @@ import com.zoe.phip.register.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
 import com.zoe.phip.register.util.RegisterUtil;
 import org.dom4j.Document;
+import org.dom4j.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by zengjiyang on 2016/5/5.
@@ -47,6 +51,9 @@ public class DocumentRegisterImpl implements IDocumentRegister {
         }
 
         Document document = ProcessXmlUtil.load(message);
+        if (document.selectNodes("//RegistryPackage/SubmissionSet").size() > 1) {
+            return registerBatch(message);
+        }
         String errorMsg = "";
         XmanIndex xmanIndex = null;
         XmanEhr xmanEhr = null;
@@ -66,7 +73,7 @@ public class DocumentRegisterImpl implements IDocumentRegister {
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("注册成功");
             acknowledgement.setMsgId(StringUtil.getUUID());
-            xmanIndex.setAcknowledgement(acknowledgement);
+            result.setAcknowledgement(acknowledgement);
             return RegisterUtil.registerMessage(RegisterType.EHR_ADD_SUCCESS, result);
         } catch (BusinessException e) {
             errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, documentRegisterIn.getClass());
@@ -207,5 +214,96 @@ public class DocumentRegisterImpl implements IDocumentRegister {
      */
     private String registerFailed(XmanIndex xmanIndex, String errorMsg) {
         return RegisterUtil.responseFailed(xmanIndex, errorMsg, RegisterType.EHR_ADD_ERROR);
+    }
+
+    /**
+     * 批量提交档案
+     *
+     * @param message
+     * @return
+     */
+    private String registerBatch(String message) {
+        String strResult = ProcessXmlUtil.verifyMessage(message);
+        Acknowledgement acknowledgement = new Acknowledgement();
+        //xml格式错误
+        if (strResult.contains("error:传入的参数不符合xml格式")) {
+            acknowledgement.setTypeCode("AE");
+            acknowledgement.setText(strResult);
+            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+        }
+        Document document = ProcessXmlUtil.load(message);
+        String errorMsg = "";
+        XmanIndex xmanIndex = null;
+        XmanEhr xmanEhr = null;
+        XmanEhrContent xmanEhrContent = null;
+        try {
+            //XmanIndex/XmamEhr/XmanEhrContent
+            xmanIndex = XmlBeanUtil.toBean(document, XmanIndex.class, ProcessXmlUtil.getAdapterDom(xmanIndexAdapter));
+            xmanEhr = XmlBeanUtil.toBean(document, XmanEhr.class, ProcessXmlUtil.getAdapterDom(xmanEhrAdapter));
+            xmanEhrContent = XmlBeanUtil.toBean(document, XmanEhrContent.class, ProcessXmlUtil.getAdapterDom(xmanEhrContentAdapter));
+            //xml 验证错误
+            if (strResult.contains("error:数据集内容验证错误")) {
+                return RegisterUtil.responseFailed(xmanIndex, strResult, RegisterType.EHR_BATCHADD_ERROR);
+            }
+            //数据抽取，保存到数据库
+            XmanIndex result = documentRegisterIn.addDocumentRegistry(xmanIndex, xmanEhr, xmanEhrContent);
+            String registryResult = "";
+            List<Node> registryNodes = document.selectNodes("//RegistryPackage/SubmissionSet");
+            List<Node> documentNodes = document.selectNodes("//Document");
+            if (registryNodes.size() > 1) {
+                for (int i = 1; i < registryNodes.size(); i++) {
+                    xmanIndex.setId(null);
+                    xmanIndex.setComments(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/Comments").getText());
+                    xmanIndex.setTitle(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/Title").getText());
+                    xmanIndex.setServerOrgName(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/ServerOrganization").getText());
+                    xmanIndex.setAdmissionDepart(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/AdmissionDepart").getText());
+                    xmanIndex.setAdmissionDoctor(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/AdmissionDoctor").getText());
+                    xmanIndex.setAdmissionType(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/AdmissionType").getText());
+                    xmanIndex.setDiagnosisResult(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/DiagnosisResult").getText());
+                    xmanIndex.setAuthorName(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/Author/AuthorName").getText());
+                    xmanIndex.setAuthorInstitution(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/Author/AuthorInstitution").getText());
+                    xmanIndex.setAuthorSpecialty(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/Author/AuthorSpecialty").getText());
+                    xmanIndex.setAuthorRole(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/Author/AuthorRole").getText());
+                    xmanIndex.setStartTime(DateUtil.stringToDateTime(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/InTime").getText()));
+                    xmanIndex.setEndTime(DateUtil.stringToDateTime(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/OutTime").getText()));
+                    xmanIndex.setCreateTime(DateUtil.stringToDateTime(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/CreateTime").getText()));
+
+                    xmanEhr.setId(null);
+                    xmanEhr.setSourceId(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/SourceId").getText());
+                    xmanEhr.setEventNo(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/EpisodeID").getText());
+                    xmanEhr.setDocumentId(documentNodes.get(i).selectSingleNode("//Document/@id").getText());
+                    xmanEhr.setParentDocumentRelationship(documentNodes.get(i).selectSingleNode("//Document/@parentDocumentRelationship").getText());
+                    xmanEhr.setParentDocumentId(documentNodes.get(i).selectSingleNode("//Document/@parentDocumentId").getText());
+
+                    xmanEhrContent.setId(null);
+                    xmanEhrContent.setEventNo(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/EpisodeID").getText());
+                    xmanEhrContent.setContent(documentNodes.get(i).selectSingleNode("//Document/Content").getText());
+
+                    XmanIndex res = null;
+                    res = documentRegisterIn.addDocumentRegistry(xmanIndex, xmanEhr, xmanEhrContent);
+                    registryResult += "<Response id=\"Document." + (i + 1) + "\" documentUniqueId=\"" + res.getEhrId() + "\" repositoryId=\"" + res.getId() + "\" status=\"AA\" doumentUrl=\"\">\n" +
+                            "    <Detail>注册成功</Detail>\n" +
+                            "  </Response>\n";
+                }
+            }
+            //组装响应信息
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("注册成功");
+            acknowledgement.setMsgId(StringUtil.getUUID());
+            result.setAcknowledgement(acknowledgement);
+            strResult = RegisterUtil.registerMessage(RegisterType.EHR_BATCHADD_SUCCESS, result);
+            StringBuilder sb = new StringBuilder(strResult);
+            sb.insert(strResult.length() - 21, registryResult);
+            return sb.toString();
+        } catch (BusinessException e) {
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, documentRegisterIn.getClass());
+        } catch (Exception ex) {
+            logger.error("error:", ex);
+            errorMsg = ex.getMessage();
+        }
+        acknowledgement.setTypeCode("AE");
+        acknowledgement.setMsgId(StringUtil.getUUID());
+        xmanIndex.setAcknowledgement(acknowledgement);
+        return RegisterUtil.responseFailed(xmanIndex, errorMsg, RegisterType.EHR_BATCHADD_ERROR);
     }
 }

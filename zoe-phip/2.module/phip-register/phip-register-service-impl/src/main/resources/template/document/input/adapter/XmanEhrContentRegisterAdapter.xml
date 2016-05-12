@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <Id descr="健康档案ID" path="//HealthCardId"/>
     <IndexId descr="事件ID" path=""/>
     <XmanId descr="个人主索引" path=""/>
     <OrgCode descr="机构组织机构代码" path="//Organization/@id"/>
