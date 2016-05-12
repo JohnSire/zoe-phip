@@ -3,6 +3,7 @@ package com.zoe.phip.register.service.impl.external;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.util.XmlBeanUtil;
 import com.zoe.phip.register.model.AreaBaseInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
@@ -65,7 +66,9 @@ public class PatientRegisterImpl implements IPatientRegister {
         XmanBaseInfo baseInfo = null;
         try {
             baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, ProcessXmlUtil.getAdapterDom(adapterPath));
-
+            if(baseInfo!=null&& !StringUtil.isNullOrWhiteSpace(baseInfo.getValidateMessage())){
+                throw new Exception(baseInfo.getValidateMessage());
+            }
             //xml 验证错误
             if (strResult.contains("error:数据集内容验证错误")) {
                 return registerFailed(baseInfo, strResult);
@@ -111,6 +114,9 @@ public class PatientRegisterImpl implements IPatientRegister {
         try {
 
             baseInfo = XmlBeanUtil.toBean(document, XmanBaseInfo.class, ProcessXmlUtil.getAdapterDom(adapterPath));
+            if(baseInfo!=null&& !StringUtil.isNullOrWhiteSpace(baseInfo.getValidateMessage())){
+                throw new Exception(baseInfo.getValidateMessage());
+            }
             //xml 验证错误
             if (strResult.contains("error:数据集内容验证错误")) {
                 return updateFailed(baseInfo, strResult);
