@@ -2,7 +2,6 @@ package com.zoe.phip.register.service.impl;
 
 import com.zoe.phip.register.BaseTest;
 import com.zoe.phip.register.service.impl.external.DictRegisterImpl;
-import com.zoe.phip.register.service.impl.external.DocumentRegisterImpl;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
