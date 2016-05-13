@@ -25,9 +25,10 @@ var baseBodySection = {
     <ul class="y-layout-form clearfix">
         <li class="list">
 
-            <form id="fm_main" name="fm_main" method="post" action="../uploadXml" enctype="multipart/form-data">
+            <form id="fm_main" name="fm_main" method="post" action="/servlet/CdaUploadHandleServlet" enctype="multipart/form-data">
                 <p class="column">
                     <label class="label"><span style="color:red;"></span>Xml文件：</label>   </p>
+
                 <input type="file" id="choosefile" name="file" class="uploadlay">
                 <input type="text" class="text" name="" id="clientPath" readonly="readonly" datatype="*"
                        errormsg="请选择.xls或.xlsx类型的文件！" value='请选择样例Xml文件'>

@@ -9,6 +9,7 @@ import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.DataContext;
 import com.zoe.phip.web.context.ServiceFactory;
 import com.zoe.phip.web.controller.BaseController;
+import com.zoe.phip.web.model.UploadRes;
 import com.zoe.phip.web.model.sdm.StCdaInfo;
 import com.zoe.phip.web.model.sdm.StSetInfo;
 import org.apache.commons.fileupload.FileItem;
@@ -201,8 +202,11 @@ public class CdaController extends BaseController {
 
     @RequestMapping(value = "/uploadXml")
     @ResponseBody
-    public void uploadXml(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public  static ServiceResultT<UploadRes> uploadXml  (HttpServletRequest request, HttpServletResponse response)
+    {
+
+        ServiceResultT<UploadRes> serviceResultT=new ServiceResultT<UploadRes>();
+        UploadRes uploadRes=new UploadRes();
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
         String savePath = request.getServletContext().getRealPath("/WEB-INF/upload");
         File file = new File(savePath);
@@ -214,6 +218,7 @@ public class CdaController extends BaseController {
         }
         //消息提示
         String message = "";
+        String fileContent="";
         try{
             //使用Apache文件上传组件处理文件上传步骤：
             //1、创建一个DiskFileItemFactory工厂
@@ -225,7 +230,7 @@ public class CdaController extends BaseController {
             //3、判断提交上来的数据是否是上传表单的数据
             if(!ServletFileUpload.isMultipartContent(request)){
                 //按照传统方式获取数据
-                return;
+                return serviceResultT;
             }
             //4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
             List<FileItem> list = upload.parseRequest(request);
@@ -249,6 +254,7 @@ public class CdaController extends BaseController {
                     filename = filename.substring(filename.lastIndexOf("\\")+1);
                     //获取item中的上传文件的输入流
                     InputStream in = item.getInputStream();
+                    fileContent=   convertStreamToString(in);
                     //创建一个文件输出流
                     FileOutputStream out = new FileOutputStream(savePath + "\\" + filename);
                     //创建一个缓冲区
@@ -274,8 +280,52 @@ public class CdaController extends BaseController {
             e.printStackTrace();
 
         }
-        request.setAttribute("message",message);
-        request.getRequestDispatcher("/message.jsp").forward(request, response);
+
+
+        uploadRes.setMessage(message);
+        uploadRes.setFileContent(fileContent);
+        serviceResultT.setResult(uploadRes);
+
+        return serviceResultT;
+    }
+    public static String  convertStreamToString(InputStream is) {
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+        StringBuilder sb = new StringBuilder();
+
+        String line = null;
+
+        try {
+
+            while ((line = reader.readLine()) != null) {
+
+                sb.append(line + "/n");
+
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+
+                is.close();
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+
+            }
+
+        }
+
+
+
+        return sb.toString();
+
     }
     //endregion
 }
