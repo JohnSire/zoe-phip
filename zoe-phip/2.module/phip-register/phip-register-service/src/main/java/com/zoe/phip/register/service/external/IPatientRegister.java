@@ -1,9 +1,17 @@
 package com.zoe.phip.register.service.external;
 
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebService;
+import javax.xml.ws.BindingType;
+import javax.xml.ws.soap.SOAPBinding;
+
 /**
  * 病人注册服务
  * Created by zengjiyang on 2016/4/11.
  */
+@WebService
+@BindingType(value = SOAPBinding.SOAP12HTTP_BINDING)
 public interface IPatientRegister {
 
     /**
@@ -12,7 +20,8 @@ public interface IPatientRegister {
      * @param message
      * @return
      */
-    String addPatientRegistry(String message);
+    @WebMethod(action = "addPatientRegistry")
+    String addPatientRegistry(@WebParam(name="message")String message);
 
     /**
      * 个人信息更新
@@ -20,7 +29,8 @@ public interface IPatientRegister {
      * @param message
      * @return
      */
-    String updatePatientRegistry(String message);
+    @WebMethod(action = "updatePatientRegistry")
+    String updatePatientRegistry(@WebParam(name="message")String message);
 
     /**
      * 个人身份合并
@@ -28,7 +38,8 @@ public interface IPatientRegister {
      * @param message
      * @return
      */
-    String mergePatientRegistry(String message);
+    @WebMethod(action = "mergePatientRegistry")
+    String mergePatientRegistry(@WebParam(name="message")String message);
 
     /**
      * 个人基本信息查询
@@ -36,6 +47,7 @@ public interface IPatientRegister {
      * @param message
      * @return
      */
-    String patientRegistryQuery(String message);
+    @WebMethod(action = "patientRegistryQuery")
+    String patientRegistryQuery(@WebParam(name="message")String message);
 
 }

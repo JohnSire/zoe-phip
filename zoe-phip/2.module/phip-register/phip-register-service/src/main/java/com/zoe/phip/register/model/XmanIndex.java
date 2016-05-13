@@ -5,6 +5,9 @@
 
 package com.zoe.phip.register.model;
 
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateEmail;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateIDCard;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNumberPlusMinus;
 import com.zoe.phip.module.service.entity.base.RegisterEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -65,21 +68,25 @@ public class XmanIndex extends RegisterEntity {
      * 身份证号
      */
     @Column(name = "ID_NO")
+    @ValidateIDCard
     private String idNo;
     /**
      * 机构电话号码区号
      */
     @Column(name = "PHONE_CODE")
+    @ValidateNumberPlusMinus(message = "机构电话号码区号不符合规则")
     private String phoneCode;
     /**
      * 机构电话号码
      */
     @Column(name = "TEL_NO")
+    @ValidateNumberPlusMinus(message = "机构电话号码不符合规则")
     private String telNo;
     /**
      * 机构邮箱地址
      */
     @Column(name = "EMAIL_ADDRESS")
+    @ValidateEmail
     private String emailAddress;
     /**
      * 工作地址-省（自治区、直辖

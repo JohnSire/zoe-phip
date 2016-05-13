@@ -54,6 +54,14 @@ public final class RegisterType {
     public static final String EHR_GET_SUCCESS = "template/document/output/健康档案文档调阅服务响应信息-正向.tbl";
     public static final String EHR_GET_ERROR = "template/document/output/健康档案文档调阅服务响应信息-反向.tbl";
 
+    public static final String DICT_CATALOG_ADD_SUCCESS = "template/dict/output/字典分类注册服务响应信息-正向.tbl";
+    public static final String DICT_CATALOG_ADD_ERROR = "template/dict/output/字典分类注册服务响应信息-反向.tbl";
+
+    public static final String DICT_ITEM_ADD_SUCCESS = "template/dict/output/字典项注册服务响应信息-正向.tbl";
+    public static final String DICT_ITEM_ADD_ERROR = "template/dict/output/字典项注册服务响应信息-反向.tbl";
+
+    public static final String DICT_CATALOG_DELETE_SUCCESS = "template/dict/output/字典分类删除服务响应信息-正向.tbl";
+    public static final String DICT_ITEM_DELETE_SUCCESS = "template/dict/output/字典项删除服务响应信息-正向.tbl";
 
     public static final String MESSAGE = "template/响应消息结果.tbl";
 }

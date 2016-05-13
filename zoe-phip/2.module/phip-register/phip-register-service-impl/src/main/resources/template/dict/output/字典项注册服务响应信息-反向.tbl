@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+<DictItem>
+    <Id value="${Model.id}" descr="字典项ID"/>
+    <Detail value="${Model.acknowledgement.text}" descr="操作结果"/>
+</DictItem>
+</data>

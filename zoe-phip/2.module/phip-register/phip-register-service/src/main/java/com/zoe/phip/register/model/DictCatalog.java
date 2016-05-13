@@ -6,6 +6,7 @@
 package com.zoe.phip.register.model;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
+import com.zoe.phip.module.service.entity.base.RegisterEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
@@ -19,7 +20,7 @@ import java.util.List;
  * @date 2016-04-11
  */
 @Table(name = "PHIP_DICT_CATALOG")
-public class DictCatalog extends MasterEntity {
+public class DictCatalog extends RegisterEntity {
     /**
      * 字典分类编码
      */
