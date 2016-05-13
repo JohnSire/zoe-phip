@@ -16,21 +16,11 @@
             <if test="Pid != null">
                 PID = #{Pid,jdbcType=VARCHAR},
             </if>
-            <if test="buildTime != null">
                 BUILD_TIME = #{buildTime,jdbcType=DATE},
-            </if>
-            <if test="areaCancellationDate != null">
                 AREA_CANCELLATION_DATE = #{areaCancellationDate,jdbcType=DATE},
-            </if>
-            <if test="areaCancelReason != null">
                 AREA_CANCEL_REASON = #{areaCancelReason,jdbcType=VARCHAR},
-            </if>
-            <if test="historyAreaId != null">
                 HISTORY_AREA_ID = #{historyAreaId,jdbcType=VARCHAR},
-            </if>
-            <if test="state != null">
                 STATE = #{state,jdbcType=DECIMAL},
-            </if>
             MODIFY_AT=sysdate
         </set>
         where id = #{id}

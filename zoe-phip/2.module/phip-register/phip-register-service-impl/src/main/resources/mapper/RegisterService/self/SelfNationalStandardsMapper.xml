@@ -13,15 +13,9 @@
             <if test="name != null">
                 NAME = #{name,jdbcType=VARCHAR},
             </if>
-            <if test="codeSystem != null">
                 CODE_SYSTEM = #{codeSystem,jdbcType=VARCHAR},
-            </if>
-            <if test="standardCode != null">
                 STANDARD_CODE = #{standardCode,jdbcType=VARCHAR},
-            </if>
-            <if test="descr != null">
                 DESCR = #{descr,jdbcType=VARCHAR},
-            </if>
             <if test="state != null">
                 STATE = #{state,jdbcType=DECIMAL},
             </if>
