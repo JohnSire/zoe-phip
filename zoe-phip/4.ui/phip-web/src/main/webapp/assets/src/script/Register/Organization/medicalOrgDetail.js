@@ -4,11 +4,7 @@
 define(function (require, exports, module) {
     var internal = {
         selectList: require("{dir}/UtilityModule/SelectList/list"),
-        selProvince: null,//省下拉
-        selCity: null,//市下拉
-        selCounty: null,//区县下拉
-        selStreet: null,//乡镇
-        selNeighborhood: null,//街道
+        areaRelevance: require("{dir}/UtilityModule/AreaRelevance/area"),
         init: function () {
             var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
             var oidCodeConfig = require("{dir}/JsConfig/oidCodeConfig").oidCodeConfig;
@@ -52,103 +48,8 @@ define(function (require, exports, module) {
                         localData: true,
                         name: 'roleState'
                     });
-                    var req = new Request("area/getAreaTopNode")
-                    req.get({
-                        isTip: false,
-                        async: true,
-                        success: function (data) {
-                            var provincePid = data.result && data.result.id ? data.result.id : "";
-                            /*选择省份*/
-                            internal.selProvince = $("#selProvince").select({
-                                name: 'provinceCode',
-                                display: 'provinceCodeName',
-                                ajaxParam: {
-                                    url: 'area/getAreaListByPid',//url 请求的地址
-                                    data: {pid: provincePid},
-                                },
-                                value: 'code',//值
-                                text: 'name',//展示的内容
-                                onAfterSelected: function (item, newValue, oldValue) {
-                                    //if (newValue != oldValue) {
-                                    //    internal.selCity.reset({
-                                    //        ajaxParam: {
-                                    //            data: {pid: item ? item["id"] : ""},
-                                    //        }
-                                    //    });
-                                    //
-                                    //}
-                                }
-                            })
-                            /*选择市*/
-                            internal.selCity = $("#selCity").select({
-                                name: 'cityCode',
-                                display: 'cityCodeName',
-                                ajaxParam: {
-                                    url: 'area/getAreaListByPid',//url 请求的地址
-                                    data: {pid: 'F2565E55804540AD8E23C059E0E3D593'},
-                                },
-                                value: 'code',//值
-                                text: 'name',//展示的内容
-                                onAfterSelected: function (item, newValue, oldValue) {
-                                    //if (newValue != oldValue) {
-                                    //    internal.selCounty.reset();
-                                    //    //internal.selStreet.reset();
-                                    //    //internal.selNeighborhood.reset();
-                                    //}
-                                }
-                            })
-                            /*选择区县*/
-                            internal.selCounty = $("#selCounty").select({
-                                name: 'countyCode',
-                                display: 'countyCodeName',
-                                ajaxParam: {
-                                    url: 'area/getAreaListByPid',//url 请求的地址
-                                    data: {pid: '9BC2CEB4B2EE47488703F5A45EB998E0'},
-                                },
-                                value: 'code',//�
-                                text: 'name',//展示的内�
-                                onAfterSelected: function (item, newValue, oldValue) {
-                                    //if (newValue != oldValue) {
-                                    //    internal.selStreet.reset({
-                                    //        ajaxParam: {
-                                    //            data: {pid: item ? item["id"] : ""},
-                                    //        }
-                                    //    });
-                                    //}
-                                }
-                            })
-                            /*选择乡镇*/
-                            internal.selStreet = $("#selStreet").select({
-                                name: 'streetCode',
-                                display: 'streetCodeName',
-                                ajaxParam: {
-                                    url: 'area/getAreaListByPid',//url 请求的地址
-                                    //data: {pid: '95beeb26-1825-4f37-87b0-70fcc160f248'},
-                                },
-                                value: 'code',//值
-                                text: 'name',//展示的内容
-                                onAfterSelected: function (item, newValue, oldValue) {
-                                    //if (newValue != oldValue) {
-                                    //    internal.selNeighborhood.reset();
-                                    //}
-                                }
-                            })
-                            /*选择街道*/
-                            internal.selNeighborhood = $("#selNeighborhood").select({
-                                name: 'neighborhoodCode',
-                                display: 'neighborhoodCodeName',
-                                ajaxParam: {
-                                    url: 'area/getAreaListByPid',//url 请求的地址
-                                    data: {pid: 'e6bda006-95a6-44ae-8570-143856d310d3'},
-                                },
-                                value: 'code',//值
-                                text: 'name'//展示的内容
-
-                            })
-                        }
-                    });
-
-
+                    //地理区划提取公用部分，后端实体属性字段在各模块直接命名差异，前端需要做特殊配置，1代表配置第一种名称
+                    internal.areaRelevance.init("1");
                 },
                 beforeSaveEvent: function (data) {
                     data = $.extend(true, {}, data, {divisionRoot: oidCodeConfig.orgType})

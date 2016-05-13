@@ -24,7 +24,7 @@ define(function (require, exports, module) {
                         userPwd: $("#input-password").val(),
                         rememberPwd: rememberPwd
                     };
-                    var req = new Request("/frame/login/auth");
+                    var req = new Request("frame/login/auth");
                     req.post({
                         isTip: false,
                         data: param,
@@ -33,7 +33,7 @@ define(function (require, exports, module) {
                         },
                         success: function (data) {
                             if (data.isSuccess) {
-                                window.location.href = webRoot + "/frame/index";
+                                window.location.href = webRoot + "frame/index";
                             } else {
                                 if(data.messages[0]) {
                                     internal.showMsg(data.messages[0].content);
