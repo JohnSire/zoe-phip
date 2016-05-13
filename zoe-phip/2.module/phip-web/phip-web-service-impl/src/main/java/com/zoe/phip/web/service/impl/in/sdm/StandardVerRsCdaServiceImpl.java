@@ -30,20 +30,34 @@ import java.util.Map;
 @ErrorMessage(code = "001", message = "关系已经存在!")
 public class StandardVerRsCdaServiceImpl extends BaseInServiceImpl<StandardVerRsCda, IStandardVerRsCdaMapper> implements IStandardVerRsCdaMapper {
 
-    public int versionStandardStruct(String fkVersionId,List<StandardVerRsCda> fieldList) throws Exception {
-        Example cda = new Example(StandardVerRsCda.class);
-        cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
-        int i = super.addList(fieldList);
-        return i;
+    public boolean versionStandardStruct(String fkVersionId,List<StandardVerRsCda> fieldList) throws Exception {
+        List<StandardVerRsCda> info = getCdaRsByFkVersionId(fkVersionId);
+        if (info.size() == 0) {
+            Example cda = new Example(StandardVerRsCda.class);
+            cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
+            int i = super.addList(fieldList);
+            return i > 0;
+        } else {
+            Example cda = new Example(StandardVerRsCda.class);
+            cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
+            boolean b = super.updateList(fieldList);
+            return b;
+        }
     }
 
-//    public List<StandardVerRsCda> getVerRsCdaInfo(String fkVersionId) throws Exception {
-//        Example cda = new Example(StandardVerRsCda.class);
-//        Example.Criteria criteria = cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
-//        cda.or(criteria);
-//        return getMapper().selectByExample(cda);
-//    }
+    public List<StandardVerRsCda> getVerRsCda(String fkVersionId) throws Exception {
+        Example cda = new Example(StandardVerRsCda.class);
+        Example.Criteria criteria = cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
+        cda.or(criteria);
+        return getMapper().selectByExample(cda);
+    }
 
+    public List<StandardVerRsCda> getCdaRsByFkVersionId(String fkVersionId) throws Exception {
+        Map<String, Object> map = MapUtil.createMap(map1 -> {
+            map1.put("fkVersionId", fkVersionId);
+        });
+        return getCdaRsByFkVersionId(map);
+    }
 
     public List<StCdaInfo> getVerRsCdaInfo(String fkVersionId) throws Exception {
         Map<String, Object> map = MapUtil.createMap(map1 -> {
@@ -95,5 +109,10 @@ public class StandardVerRsCdaServiceImpl extends BaseInServiceImpl<StandardVerRs
     @Override
     public List<StCdaInfo> getCdaByFkVersionId(Map<String, Object> map) {
         return getMapper().getCdaByFkVersionId(map);
+    }
+
+    @Override
+    public List<StandardVerRsCda> getCdaRsByFkVersionId(Map<String, Object> map) {
+        return getMapper().getCdaRsByFkVersionId(map);
     }
 }

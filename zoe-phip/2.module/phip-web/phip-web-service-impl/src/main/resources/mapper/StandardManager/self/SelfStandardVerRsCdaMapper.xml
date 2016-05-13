@@ -25,12 +25,21 @@
             AND PSVRC.id != #{id, jdbcType=VARCHAR}
         </if>
     </select>
-    <select id="getCdaByFkVersionId" parameterType="java.util.Map" resultType="com.zoe.phip.web.model.sdm.StCdaInfo">
+    <select id="getCdaByFkVersionId" parameterType="java.util.Map"
+            resultMap="com.zoe.phip.web.dao.sdm.IStCdaInfoMapper.BaseResultMap">
         select i.*
         from Phip_St_Cda_Info i,Phip_Standard_Ver_Rs_Cda c
         where i.id=c.fk_cda_id
         <if test="_parameter.containsKey('fkVersionId')">
             and c.fk_version_id= #{fkVersionId,jdbcType=VARCHAR}
         </if>
+    </select>
+    <select id="getCdaRsByFkVersionId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT C.* FROM PHIP_STANDARD_VER_RS_CDA C
+        <where>
+            <if test="_parameter.containsKey('fkVersionId')">
+                C.FK_VERSION_ID=#{fkVersionId,jdbcType=VARCHAR}
+            </if>
+        </where>
     </select>
 </mapper>

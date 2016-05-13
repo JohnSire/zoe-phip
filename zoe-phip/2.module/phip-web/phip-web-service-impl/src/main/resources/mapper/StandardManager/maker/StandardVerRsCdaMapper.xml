@@ -10,14 +10,15 @@
     </resultMap>
     <insert id="addList" parameterType="com.zoe.phip.web.model.sdm.StandardVerRsCda">
         INSERT INTO PHIP_STANDARD_VER_RS_CDA (
+        ID,
         FK_VERSION_ID,
-        FK_CDA_ID,
-        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        FK_CDA_ID
+        )
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
+            #{item.id,jdbcType=VARCHAR},
             #{item.fkVersionId,jdbcType=VARCHAR},
-            #{item.fkCdaId,jdbcType=VARCHAR},
-            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
+            #{item.fkCdaId,jdbcType=VARCHAR}
             FROM DUAL
         </foreach>
     </insert>
@@ -54,7 +55,6 @@
                 <if test="item.fkCdaId != null">
                     FK_CDA_ID = #{item.fkCdaId,jdbcType=VARCHAR},
                 </if>
-                MODIFY_AT=sysdate
             </set>
             where id = #{item.id};
         </foreach>
