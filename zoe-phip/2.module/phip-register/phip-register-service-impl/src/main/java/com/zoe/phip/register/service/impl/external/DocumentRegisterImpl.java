@@ -318,7 +318,7 @@ public class DocumentRegisterImpl implements IDocumentRegister {
             }
             //数据抽取，保存到数据库
             XmanIndex result = documentRegisterIn.addDocumentRegistry(xmanIndex, xmanEhr, xmanEhrContent);
-            String registryResult = "";
+            StringBuffer registryResult = new StringBuffer();
             List<Node> registryNodes = document.selectNodes("//RegistryPackage/SubmissionSet");
             List<Node> documentNodes = document.selectNodes("//Document");
             if (registryNodes.size() > 1) {
@@ -352,9 +352,18 @@ public class DocumentRegisterImpl implements IDocumentRegister {
 
                     XmanIndex res = null;
                     res = documentRegisterIn.addDocumentRegistry(xmanIndex, xmanEhr, xmanEhrContent);
-                    registryResult += "<Response id=\"Document." + (i + 1) + "\" documentUniqueId=\"" + res.getEhrId() + "\" repositoryId=\"" + res.getId() + "\" status=\"AA\" doumentUrl=\"\">\n" +
+                    registryResult.append("<Response id=\"Document.");
+                    registryResult.append(i + 1);
+                    registryResult.append("\" documentUniqueId=\"");
+                    registryResult.append(res.getEhrId());
+                    registryResult.append("\" repositoryId=\"");
+                    registryResult.append(res.getId());
+                    registryResult.append("\" status=\"AA\" doumentUrl=\"\">\n");
+                    registryResult.append("    <Detail>注册成功</Detail>\n");
+                    registryResult.append("  </Response>\n");
+                    /*registryResult += "<Response id=\"Document." + (i + 1) + "\" documentUniqueId=\"" + res.getEhrId() + "\" repositoryId=\"" + res.getId() + "\" status=\"AA\" doumentUrl=\"\">\n" +
                             "    <Detail>注册成功</Detail>\n" +
-                            "  </Response>\n";
+                            "  </Response>\n";*/
                 }
             }
             //组装响应信息
@@ -364,7 +373,7 @@ public class DocumentRegisterImpl implements IDocumentRegister {
             result.setAcknowledgement(acknowledgement);
             strResult = RegisterUtil.registerMessage(RegisterType.EHR_BATCHADD_SUCCESS, result);
             StringBuilder sb = new StringBuilder(strResult);
-            sb.insert(strResult.length() - 21, registryResult);
+            sb.insert(strResult.length() - 21, registryResult.toString());
             return sb.toString();
         } catch (BusinessException e) {
             errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, documentRegisterIn.getClass());
