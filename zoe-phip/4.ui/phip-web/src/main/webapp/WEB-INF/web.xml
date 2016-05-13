@@ -49,13 +49,13 @@
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
     </listener>
     <servlet>
-        <servlet-name>UploadHandleServlet</servlet-name>
-        <servlet-class>com.zoe.phip.web.controller.StandardManage.UploadHandleServlet</servlet-class>
+        <servlet-name>CdaUploadHandleServlet</servlet-name>
+        <servlet-class>com.zoe.phip.web.controller.StandardManage.CdaUploadHandleServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>UploadHandleServlet</servlet-name>
-        <url-pattern>/servlet/UploadHandleServlet</url-pattern>
+        <servlet-name>CdaUploadHandleServlet</servlet-name>
+        <url-pattern>/servlet/CdaUploadHandleServlet</url-pattern>
     </servlet-mapping>
     <!-- Spring MVC servlet -->
     <servlet>

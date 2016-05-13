@@ -22,7 +22,7 @@ define(function (require, exports, module) {
                     $("#isNullable").btnSwitch({name: 'isNullable'});
                     internal.selectList.dialog('dataElement', {
                         target: $("#btnDataElement"),
-                        name: 'fkBaseElementId',
+                        name: 'fkElementId',
                         parentName: 'parentName',
                         valueField: 'id',
                         displayField: 'name',
