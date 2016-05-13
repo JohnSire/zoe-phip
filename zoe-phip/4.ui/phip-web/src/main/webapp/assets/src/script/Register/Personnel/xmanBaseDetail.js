@@ -60,7 +60,7 @@ define(function (require, exports, module) {
                         valueField: 'code',
                         selectParam: {
                             param: {"codeSystem": oidCodeConfig.national},//ajax参数
-                            multiselect: false,
+                            multiselect: false
                         }
                     });
                     //发卡机构
@@ -108,11 +108,68 @@ define(function (require, exports, module) {
                             multiselect: false
                         }
                     });
+                    //地理区划关联封装
+                    internal.areaRelevance.init("2", function () {
+                        var strAddress = "";
+                        //{name: 'stateCode', display: 'stateName'},
+                        //{name: 'cityCode', display: 'cityName'},
+                        //{name: 'areaCode', display: 'areaName'},
+                        //{name: 'streetCode', display: 'streetName'},
+                        //{name: 'committeeCode', display: 'committeeName'}
 
 
-                    internal.areaRelevance.init("2");
+                        var t1 = $('select[name="stateCode"]').val();
+                        var t2 = $('select[name="cityCode"]').val();
+                        var t3 = $('select[name="areaCode"]').val();
+                        var t4 = $('select[name="streetCode"]').val();
+                        var t5 = $('select[name="committeeCode"]').val();
 
+                        if (t1) {
+                            strAddress += $('select[name="stateCode"]').find("option[value='" + t1 + "']").text();
+                        }
+                        if (t2) {
+                            strAddress += $('select[name="cityCode"]').find("option[value='" + t2 + "']").text();
+                        }
+                        if (t3) {
+                            strAddress += $('select[name="areaCode"]').find("option[value='" + t3 + "']").text();
+                        }
+                        if (t4) {
+                            strAddress += $('select[name="streetCode"]').find("option[value='" + t4 + "']").text();
+                        }
+                        if (t4) {
+                            strAddress += $('select[name="committeeCode"]').find("option[value='" + t5 + "']").text();
+                        }
 
+                        $("input[name='address']").val(strAddress);
+
+                    });
+
+                    $('input[name="houseNumber"]').on("keyup", function () {
+                        var strAddress = "";
+                        var t1 = $('select[name="stateCode"]').val();
+                        var t2 = $('select[name="cityCode"]').val();
+                        var t3 = $('select[name="areaCode"]').val();
+                        var t4 = $('select[name="streetCode"]').val();
+                        var t5 = $('select[name="committeeCode"]').val();
+
+                        if (t1) {
+                            strAddress += $('select[name="stateCode"]').find("option[value='" + t1 + "']").text();
+                        }
+                        if (t2) {
+                            strAddress += $('select[name="cityCode"]').find("option[value='" + t2 + "']").text();
+                        }
+                        if (t3) {
+                            strAddress += $('select[name="areaCode"]').find("option[value='" + t3 + "']").text();
+                        }
+                        if (t4) {
+                            strAddress += $('select[name="streetCode"]').find("option[value='" + t4 + "']").text();
+                        }
+                        if (t4) {
+                            strAddress += $('select[name="committeeCode"]').find("option[value='" + t5 + "']").text();
+                        }
+                        strAddress += $(this).val();
+                        $("input[name='address']").val(strAddress);
+                    })
 
                 }
             })

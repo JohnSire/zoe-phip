@@ -34,6 +34,11 @@ define(function (require, exports, module) {
                                         }
                                     }
                                 });
+
+                                if (typeof(callback)) {
+                                    callback();
+                                }
+
                             }
                         }
                     })
@@ -58,6 +63,9 @@ define(function (require, exports, module) {
                                         }
                                     }
                                 });
+                                if (typeof(callback)) {
+                                    callback();
+                                }
                             }
                         }
                     })
@@ -80,6 +88,10 @@ define(function (require, exports, module) {
                                         }
                                     }
                                 });
+                                if (typeof(callback)) {
+                                    callback();
+                                }
+
                             }
                         }
                     })
@@ -102,6 +114,9 @@ define(function (require, exports, module) {
                                         }
                                     }
                                 });
+                                if (typeof(callback)) {
+                                    callback();
+                                }
                             }
                         }
                     })
@@ -114,8 +129,14 @@ define(function (require, exports, module) {
                             data: {pid: 'e6bda006-95a6-44ae-8570-143856d310d3'},
                         },
                         value: 'code',//值
-                        text: 'name'//展示的内容
-
+                        text: 'name',//展示的内容
+                        onAfterSelected: function (item, newValue, oldValue) {
+                            if (newValue != oldValue) {
+                                if (typeof(callback)) {
+                                    callback();
+                                }
+                            }
+                        }
                     })
                 }
             });
