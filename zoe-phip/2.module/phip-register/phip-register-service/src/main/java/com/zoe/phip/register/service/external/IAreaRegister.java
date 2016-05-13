@@ -1,9 +1,17 @@
 package com.zoe.phip.register.service.external;
 
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebService;
+import javax.xml.ws.BindingType;
+import javax.xml.ws.soap.SOAPBinding;
+
 /**
  * 行政区域注册服务
  * Created by zengjiyang on 2016/4/11.
  */
+@WebService
+@BindingType(value = SOAPBinding.SOAP12HTTP_BINDING)
 public interface IAreaRegister {
 
     /**
@@ -12,7 +20,8 @@ public interface IAreaRegister {
      * @param message
      * @return
      */
-    String addAreaRequest(String message);
+    @WebMethod(action = "addAreaRequest")
+    String addAreaRequest(@WebParam(name="message") String message);
 
 
     /**
@@ -21,7 +30,8 @@ public interface IAreaRegister {
      * @param message
      * @return
      */
-    String updateAreaRequest(String message);
+    @WebMethod(action = "updateAreaRequest")
+    String updateAreaRequest(@WebParam(name="message")String message);
 
     /**
      * 行政区域基本信息查询
@@ -29,7 +39,8 @@ public interface IAreaRegister {
      * @param message
      * @return
      */
-    String areaDetailQuery(String message);
+    @WebMethod(action = "areaDetailQuery")
+    String areaDetailQuery(@WebParam(name="message")String message);
 
     /**
      * 所辖行政区域信息查询
@@ -37,7 +48,8 @@ public interface IAreaRegister {
      * @param message
      * @return
      */
-    String areaChildrenRegistryQuery(String message);
+    @WebMethod(action = "areaChildrenRegistryQuery")
+    String areaChildrenRegistryQuery(@WebParam(name="message")String message);
 
     /**
      * 历史行政区域信息查询
@@ -45,5 +57,6 @@ public interface IAreaRegister {
      * @param message
      * @return
      */
-    String areaHistoryRegistryQuery(String message);
+    @WebMethod(action = "areaHistoryRegistryQuery")
+    String areaHistoryRegistryQuery(@WebParam(name="message")String message);
 }

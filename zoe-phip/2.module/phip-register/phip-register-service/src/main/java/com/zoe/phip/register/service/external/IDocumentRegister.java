@@ -1,8 +1,16 @@
 package com.zoe.phip.register.service.external;
 
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebService;
+import javax.xml.ws.BindingType;
+import javax.xml.ws.soap.SOAPBinding;
+
 /**
  * Created by zengjiyang on 2016/5/5.
  */
+@WebService
+@BindingType(value = SOAPBinding.SOAP12HTTP_BINDING)
 public interface IDocumentRegister {
 
     /**
@@ -10,26 +18,30 @@ public interface IDocumentRegister {
      * @param message
      * @return
      */
-    String provideAndRegisterDocumentSet(String message);
+    @WebMethod(action = "provideAndRegisterDocumentSet")
+    String provideAndRegisterDocumentSet(@WebParam(name="message")String message);
 
     /**
      * 档案预判服务
      * @param message
      * @return
      */
-    String documentExistence (String message);
+    @WebMethod(action = "documentExistence")
+    String documentExistence (@WebParam(name="message")String message);
 
     /**
      *档案检索服务
      * @param message
      * @return
      */
-    String getDocumentSetRetrieveInfo(String message);
+    @WebMethod(action = "getDocumentSetRetrieveInfo")
+    String getDocumentSetRetrieveInfo(@WebParam(name="message")String message);
 
     /**
      * 档案调阅服务
      * @param message
      * @return
      */
-    String retrieveDocumentSet (String message);
+    @WebMethod(action = "retrieveDocumentSet")
+    String retrieveDocumentSet (@WebParam(name="message")String message);
 }
