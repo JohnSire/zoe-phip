@@ -41,7 +41,7 @@ var birthDate = Model.birthTime;
         <subject1 typeCode="SBJ">
           <healthCareProvider classCode="PROV">
             <!--医务人员ID-->
-            <id root="2.16.156.10011.1.4" extension="${Model.staffId}" />
+            <id root="2.16.156.10011.1.4" extension="${Model.extensionId}" />
             <!--专业技术职务代码-->
             <code code="${Model.technicalCode}" displayName="${Model.technicalName}" codeSystem="2.16.156.10011.2.3.3.10" codeSystemName="专业技术职务代码( GB/T 8561)" />
             <healthCarePrincipalPerson classCode="PSN" determinerCode="INSTANCE">
@@ -52,7 +52,7 @@ var birthDate = Model.birthTime;
               <!--性别-->
               <administrativeGenderCode code="${Model.genderCode}" codeSystem="2.16.156.10011.2.3.3.4" displayName="${Model.genderName}" codeSystemName="生理性别代码表(GB/T 2261.1)" />
               <!--出生日期-->
-              <birthTime value="${birthDate,dateFormat="yyyyMMddHH"}" />
+              <birthTime value="${Model.BirthTime,dateFormat="yyyyMMddHH"}" />
               <!--出生地-->
               <birthplace classCode="BIRTHPL">
                 <addr>${Model.birthplaceAddr}</addr>
@@ -64,7 +64,7 @@ var birthDate = Model.birthTime;
         <author typeCode="AUT">
           <assignedEntity classCode="ASSIGNED">
             <!--医务人员ID-->
-            <id root="2.16.156.10011.1.4" extension="${Model.staffId}" />
+            <id root="2.16.156.10011.1.4" extension="${Model.extensionId}" />
             <assignedPerson classCode="PSN" determinerCode="INSTANCE">
               <name>${Model.assignedName}</name>
             </assignedPerson>
