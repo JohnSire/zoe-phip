@@ -162,15 +162,15 @@
         var internal = {
             selectValue: null,//选中的值
             preText: null,//提示显示内容（--请选择--）
-            localData: false,//是否本地数据
+
             defaultOptions: {
                 name: '',
                 display: '',
-                isAsync: true,//是否异步加载，点击时加载数据，如果已经请求过的就不在请求
+                localData: false,//是否本地数据
                 ajaxParam: {
                     type: "post",
                     url: '',//url 请求的地址
-                    data: [],
+                    data: {},
                     success: function (data) {
                     }
                 },
@@ -180,7 +180,6 @@
                 value: '',//值
                 text: '',//展示的内容
                 rows: 6,//显示几行，如果超过的则出现滚动条，如果少于不影响
-
                 //选择后事件
                 onAfterSelected: function (data, newValue, oldValue) {
 
@@ -188,6 +187,7 @@
             },
             //方法
             method: {
+                //重置
                 reset: function (self, param) {
                     self["param"] = $.extend(true, {}, self["param"], param || {});
                     internal.reset(self);
@@ -199,42 +199,44 @@
             },
             //渲染插件
             render: function (self) {
-                var name = self["param"]["name"];
-                var display = self["param"]["display"];
+                console.log(self["param"]["name"]);
+                var name = self["param"]["name"], display = self["param"]["display"];
                 if (!internal.preText) {
                     internal.preText = $(self).find("ul li:first-child").text();
                 }
                 $('select[name="' + name + '"]').on("setValue", function (event, argument) {
                     internal.selectValue = argument[name] || "";
+                    var jqSelect = $('select[name="' + name + '"]');
                     if (self["param"]["localData"]) {
-                        var jqSelect = $('select[name="' + name + '"]')
                         $(self).find("span").text($(jqSelect).find("option:selected").text());
                         if (!argument[name] && argument[name] != 0 && internal.preText) {
                             $(self).find("span").text(internal.preText);
                         }
                     } else {
-
                         $(self).find("span").text(argument[display]);
                         if (!argument[display] && internal.preText) {
                             $(self).find("span").text(internal.preText);
                         }
+                        var jqOptions = $("<option></option>").attr({"value": argument[name]}).text(argument[display]);
+                        jqSelect.append(jqOptions);
+                        jqSelect.val(argument[name]);
+
                     }
                 });
                 $(self).on("click", function (e) {
                     e.stopPropagation();
-                    var jqUl = $(self).find("ul");
-                    var jqSelect = $('select[name="' + name + '"]')
+                    var jqUl = $(self).find("ul"), jqSelect = $('select[name="' + name + '"]');
                     if (self["param"]["localData"]) {
                         $(jqUl).find("li").on("click", function () {
                             internal.selectValue = $(this).attr("value") || "";
                             $(self).find("span").text($(this).text());
                             $(jqSelect).val(internal.selectValue);
-                            if (typeof(self["param"]["onAfterSelected"]) == "function") {
-                                self["param"]["onAfterSelected"]();
-                            }
                         });
                     } else {
-                        if (!(self.isLoadData)) {
+
+
+                        //从服务端请求的数据处理方式
+                        if (!(self.isLoadData) || self.isFirstReset) {
                             jqUl.empty();
                             jqSelect.empty();
                             if (internal.preText) {
@@ -244,6 +246,9 @@
                                 jqUl.append(jqLi);
                                 var jqOptions = $("<option></option>");
                                 jqOptions.text(internal.preText);
+                            }
+                            if (typeof (self["param"]["ajaxParam"]["data"]) == "function") {
+                                self["param"]["ajaxParam"]["data"] = self["param"]["ajaxParam"]["data"]();
                             }
                             internal.req(self["param"], function (data) {
                                 data = self["param"]["renderData"](data);
@@ -260,11 +265,16 @@
                                         .text(item[text]);
                                     jqSelect.append(jqOptions);
                                 });
+
                                 $(jqSelect).val(internal.selectValue);
+
+
                                 self.isLoadData = true;
+
+                                self.isFirstReset ? jqSelect.val("") : "";
                                 $(jqUl).find("li").on("click", function () {
-                                    var oldValue = $(jqSelect).val();
                                     var jqLi = $(this);
+                                    var oldValue = jqSelect.val();
                                     internal.selectValue = $(this).attr("value") || "";
                                     var newValue = $(this).attr("value") || "";
                                     $(self).find("span").text($(this).text());
@@ -274,8 +284,11 @@
                                         self["param"]["onAfterSelected"](itemInfo, newValue, oldValue);
                                     }
                                 });
+
+                                self.isFirstReset = false;
                             });
                         }
+
                     }
                     if (jqUl.is(":hidden")) {
                         jqUl.show();
@@ -291,74 +304,25 @@
                 })
             },
             reset: function (self) {
+                self.isFirstReset = true;
                 var name = self["param"]["name"];
                 var display = self["param"]["display"];
-                internal.preText = null;
-                if (!internal.preText) {
-                    internal.preText = $(self).find("ul li:first-child").text();
+                var jqUl = $(self).find("ul");
+                var jqSelect = $('select[name="' + name + '"]');
+                self.preText = $(self).find("ul li:first-child").text();
+                $(self).find("span").text(self.preText);
+                jqSelect.val("");
+                jqSelect.empty();
+                jqUl.empty();
+                var jqLi = $("<li></li>");
+                jqLi.addClass("simulate-select-list").text(self.preText);
+                jqUl.append(jqLi);
+                var jqOptions = $("<option></option>").text(self.preText);
+                jqSelect.append(jqOptions);
+
+                if (typeof (self["param"]["onAfterSelected"]) == "function") {
+                    self["param"]["onAfterSelected"](null, "newValue", "oldValue");
                 }
-                $(self).find("span").text(internal.preText);
-                $(self).on("click", function (e) {
-                    var jqUl = $(self).find("ul");
-                    var jqSelect = $('select[name="' + name + '"]');
-                    $(jqUl).empty();
-                    $(jqSelect).empty();
-                    internal.req(self["param"], function (data) {
-                        $(jqUl).empty();
-                        $(jqSelect).empty();
-                        if (internal.preText) {
-                            var jqLi = $("<li></li>");
-                            jqLi.addClass("simulate-select-list")
-                                .text(internal.preText);
-                            jqUl.append(jqLi);
-                            var jqOptions = $("<option></option>");
-                            jqOptions.text(internal.preText);
-                        }
-
-                        data = self["param"]["renderData"](data);
-                        var value = self["param"]["value"];
-                        var text = self["param"]["text"];
-
-                        $.each(data, function (index, item) {
-                            var jqLi = $("<li></li>").data("itemInfo", item);
-                            jqLi.attr({"value": item[value]})
-                                .addClass("simulate-select-list")
-                                .text(item[text]);
-                            jqUl.append(jqLi);
-                            var jqOptions = $("<option></option>");
-                            jqOptions.attr({value: item[value]})
-                                .text(item[text]);
-                            jqSelect.append(jqOptions);
-                        });
-                        self.isLoadData = true;
-                        $(jqUl).find("li").on("click", function () {
-                            var oldValue = $(jqSelect).val();
-                            var jqLi = $(this);
-                            internal.selectValue = $(this).attr("value") || "";
-                            $(self).find("span").text($(this).text());
-                            $(jqSelect).val(newValue);
-                            if (typeof(self["param"]["onAfterSelected"]) == "function") {
-                                var itemInfo = jqLi.data("itemInfo");
-                                self["param"]["onAfterSelected"](itemInfo, newValue, oldValue);
-                            }
-                        });
-                        jqUl.show();
-                    });
-
-                    //if (jqUl.is(":hidden")) {
-                    //    jqUl.show();
-                    //} else {
-                    //    jqUl.hide();
-                    //}
-                });
-
-
-                $(document).on("click", function () {
-                    $(self).find("ul").hide();
-                });
-                $(self).hover(null, function () {
-                    $(self).find("ul").hide();
-                })
             },
 
             //ajax请求
@@ -366,6 +330,7 @@
             req: function (options, callback) {
                 options = $.extend(true, {}, options);
                 options["ajaxParam"]["isTip"] = false;
+                options["ajaxParam"]["async"] = true;
                 options["ajaxParam"]["success"] = function (data) {
                     if ($.isFunction(callback) && data.isSuccess) {
                         callback(data);

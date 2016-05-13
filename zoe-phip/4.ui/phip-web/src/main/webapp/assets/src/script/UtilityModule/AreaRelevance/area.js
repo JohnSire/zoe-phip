@@ -17,8 +17,8 @@ define(function (require, exports, module) {
                     var provincePid = data.result && data.result.id ? data.result.id : "";
                     /*选择省份*/
                     internal.selProvince = $("#selProvince").select({
-                        name: internal.config["1"][0]["name"],
-                        display: internal.config["1"][0]["display"],
+                        name: internal.config[index][0]["name"],
+                        display: internal.config[index][0]["display"],
                         ajaxParam: {
                             url: 'area/getAreaListByPid',//url 请求的地址
                             data: {pid: provincePid},
@@ -27,14 +27,20 @@ define(function (require, exports, module) {
                         text: 'name',//展示的内容
                         onAfterSelected: function (item, newValue, oldValue) {
                             if (newValue != oldValue) {
-                                internal.selCity.reset();
+                                internal.selCity.reset({
+                                    ajaxParam: {
+                                        data: function () {
+                                            return {pid: item ? item["id"] : ""}
+                                        }
+                                    }
+                                });
                             }
                         }
                     })
                     /*选择市*/
                     internal.selCity = $("#selCity").select({
-                        name: internal.config["1"][1]["name"],
-                        display: internal.config["1"][1]["display"],
+                        name: internal.config[index][1]["name"],
+                        display: internal.config[index][1]["display"],
                         ajaxParam: {
                             url: 'area/getAreaListByPid',//url 请求的地址
                             data: {
@@ -45,30 +51,42 @@ define(function (require, exports, module) {
                         text: 'name',//展示的内容
                         onAfterSelected: function (item, newValue, oldValue) {
                             if (newValue != oldValue) {
-                                internal.selCounty.reset();
+                                internal.selCounty.reset({
+                                    ajaxParam: {
+                                        data: function () {
+                                            return {pid: item ? item["id"] : ""}
+                                        }
+                                    }
+                                });
                             }
                         }
                     })
                     /*选择区县*/
                     internal.selCounty = $("#selCounty").select({
-                        name: internal.config["1"][2]["name"],
-                        display: internal.config["1"][2]["display"],
+                        name: internal.config[index][2]["name"],
+                        display: internal.config[index][2]["display"],
                         ajaxParam: {
                             url: 'area/getAreaListByPid',//url 请求的地址
                             data: {pid: '9BC2CEB4B2EE47488703F5A45EB998E0'},
                         },
-                        value: 'code',//�
+                        value: 'code',//名称
                         text: 'name',//展示的内�
                         onAfterSelected: function (item, newValue, oldValue) {
                             if (newValue != oldValue) {
-                                internal.selStreet.reset();
+                                internal.selStreet.reset({
+                                    ajaxParam: {
+                                        data: function () {
+                                            return {pid: item ? item["id"] : ""}
+                                        }
+                                    }
+                                });
                             }
                         }
                     })
                     /*选择乡镇*/
                     internal.selStreet = $("#selStreet").select({
-                        name: internal.config["1"][3]["name"],
-                        display: internal.config["1"][3]["display"],
+                        name: internal.config[index][3]["name"],
+                        display: internal.config[index][3]["display"],
                         ajaxParam: {
                             url: 'area/getAreaListByPid',//url 请求的地址
                             data: {pid: '95beeb26-1825-4f37-87b0-70fcc160f248'},
@@ -77,14 +95,20 @@ define(function (require, exports, module) {
                         text: 'name',//展示的内容
                         onAfterSelected: function (item, newValue, oldValue) {
                             if (newValue != oldValue) {
-                                internal.selNeighborhood.reset();
+                                internal.selNeighborhood.reset({
+                                    ajaxParam: {
+                                        data: function () {
+                                            return {pid: item ? item["id"] : ""}
+                                        }
+                                    }
+                                });
                             }
                         }
                     })
                     /*选择街道*/
                     internal.selNeighborhood = $("#selNeighborhood").select({
-                        name: internal.config["1"][4]["name"],
-                        display: internal.config["1"][4]["display"],
+                        name: internal.config[index][4]["name"],
+                        display: internal.config[index][4]["display"],
                         ajaxParam: {
                             url: 'area/getAreaListByPid',//url 请求的地址
                             data: {pid: 'e6bda006-95a6-44ae-8570-143856d310d3'},
@@ -103,6 +127,13 @@ define(function (require, exports, module) {
                 {name: 'countyCode', display: 'countyCodeName'},
                 {name: 'streetCode', display: 'streetCodeName'},
                 {name: 'neighborhoodCode', display: 'neighborhoodCodeName'}
+            ],
+            "2": [
+                {name: 'stateCode', display: 'stateName'},
+                {name: 'cityCode', display: 'cityName'},
+                {name: 'areaCode', display: 'areaName'},
+                {name: 'streetCode', display: 'streetName'},
+                {name: 'committeeCode', display: 'committeeName'}
             ]
 
         }

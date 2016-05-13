@@ -13,6 +13,10 @@ var styleSection = {
     .address-select .icon-grid {
         left: 125px;
     }
+
+    .address-select ul {
+        width: 144px;
+    }
 </style>
 <%};%>
 
@@ -107,7 +111,7 @@ var bodySection = {
             <li class="list">
                 <div class="column-one">
                     <label class="label" for="address">联系地址：</label>
-                    <div class="simulate-select address-select">
+                    <div class="simulate-select address-select" id="selProvince">
                         <span class="text" title="--请选择所在的省份--">--请选择所在的省份--</span>
                         <i class="icon-grid icon-grid-fold-gray"></i>
                         <ul class="simulate-select-lists" style="display:none;">
@@ -115,21 +119,21 @@ var bodySection = {
                         </ul>
                         <div class="clear"></div>
                     </div>
-                    <select name="marriageCode" style="display: none;">
+                    <select name="stateCode" style="display: none;">
                     </select>
 
-                    <div class="simulate-select address-select">
-                        <span class="text" title="--请选择所在的省份--">--请选择所在的城市--</span>
+                    <div class="simulate-select address-select" id="selCity">
+                        <span class="text" title="--请选择所在的城市--">--请选择所在的城市--</span>
                         <i class="icon-grid icon-grid-fold-gray"></i>
                         <ul class="simulate-select-lists" style="display:none;">
-                            <li class="simulate-select-list">--请选择所在的省份--</li>
+                            <li class="simulate-select-list">--请选择所在的城市--</li>
                         </ul>
                         <div class="clear"></div>
                     </div>
-                    <select name="marriageCode" style="display: none;">
+                    <select name="cityCode" style="display: none;">
                     </select>
 
-                    <div class="simulate-select address-select">
+                    <div class="simulate-select address-select" id="selCounty">
                         <span class="text" title="--请选择所在的县--">--请选择所在的县--</span>
                         <i class="icon-grid icon-grid-fold-gray"></i>
                         <ul class="simulate-select-lists" style="display:none;">
@@ -137,10 +141,10 @@ var bodySection = {
                         </ul>
                         <div class="clear"></div>
                     </div>
-                    <select name="marriageCode" style="display: none;">
+                    <select name="areaCode" style="display: none;">
                     </select>
 
-                    <div class="simulate-select address-select">
+                    <div class="simulate-select address-select" id="selStreet">
                         <span class="text" title="--请选择所在的乡、镇--">--请选择所在的乡、镇--</span>
                         <i class="icon-grid icon-grid-fold-gray"></i>
                         <ul class="simulate-select-lists" style="display:none;">
@@ -148,10 +152,10 @@ var bodySection = {
                         </ul>
                         <div class="clear"></div>
                     </div>
-                    <select name="marriageCode" style="display: none;">
+                    <select name="streetCode" style="display: none;">
                     </select>
 
-                    <div class="simulate-select address-select">
+                    <div class="simulate-select address-select" id="selNeighborhood">
                         <span class="text" title="--请选择所在的街道--">--请选择所在的街道--</span>
                         <i class="icon-grid icon-grid-fold-gray"></i>
                         <ul class="simulate-select-lists" style="display:none;">
@@ -159,11 +163,13 @@ var bodySection = {
                         </ul>
                         <div class="clear"></div>
                     </div>
-                    <select name="marriageCode" style="display: none;">
+                    <select name="committeeCode" style="display: none;">
                     </select>
                     <input type="text" name="" class="text" style="width: 85px"/>
                 </div>
             </li>
+
+
             <li class="list">
                 <p class="column-one">
                     <label class="label" for="address" style="visibility: hidden;">联系地址：</label>

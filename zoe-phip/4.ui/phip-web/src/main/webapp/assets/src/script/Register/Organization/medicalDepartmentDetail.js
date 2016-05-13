@@ -51,7 +51,7 @@ define(function (require, exports, module) {
                         name: 'roleState'
                     });
 
-                    //地理区划提取公用部分，后端实体属性字段在各模块直接命名差异，前端需要做特殊配置，1代表配置第一种名称
+                    //地理区划提取公用部分，后端实体属性字段在各模块实体属性命名差异，前端需要做特殊配置，1代表配置第一种名称
                     internal.areaRelevance.init("1");
 
                 },

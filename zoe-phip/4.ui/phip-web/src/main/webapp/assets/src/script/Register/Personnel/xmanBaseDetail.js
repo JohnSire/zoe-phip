@@ -4,6 +4,7 @@
 define(function (require, exports, module) {
     var internal = {
         selectList: require("{dir}/UtilityModule/SelectList/list"),
+        areaRelevance: require("{dir}/UtilityModule/AreaRelevance/area"),
         init: function () {
             var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
             var oidCodeConfig = require("{dir}/JsConfig/oidCodeConfig").oidCodeConfig;
@@ -109,7 +110,7 @@ define(function (require, exports, module) {
                     });
 
 
-
+                    internal.areaRelevance.init("2");
 
 
 
