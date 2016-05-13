@@ -71,6 +71,9 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
             staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class,  ProcessXmlUtil.getAdapterDom(filePath));
 
+            if (null != staffInfo && null != staffInfo.getValidateMessage()) {
+                throw new Exception(staffInfo.getValidateMessage());
+            }
             //xml 验证错误
             if (strResult.contains("error:数据集内容验证错误")) {
                 return RegisterUtil.responseFailed(staffInfo, strResult, RegisterType.DOCTOR_ADD_ERROR);
@@ -109,6 +112,10 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
         try {
             String filePath = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";
             staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class,  ProcessXmlUtil.getAdapterDom(filePath));
+
+            if (null != staffInfo && null != staffInfo.getValidateMessage()) {
+                throw new Exception(staffInfo.getValidateMessage());
+            }
             //数据是否存在判断
 //            if (!ifStaffIdExist(staffInfo.getStaffId())) {
 //                return RegisterUtil.responseFailed(staffInfo, "由于更新内容不存在，更新失败", RegisterType.DOCTOR_UPDATE_ERROR);
@@ -153,12 +160,12 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
         Date creationTime = DateUtil.stringToDateTime(document.selectSingleNode("//creationTime/@value").getText());
         String extensionId = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerID/value/@extension").getText();
         String genderCode = document.selectSingleNode("//controlActProcess/queryByParameterPayload/administrativeGender/value/@code").getText();
-        String staffName = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerName/value").getText();
+        String name = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerName/value").getText();
         String birthDate = document.selectSingleNode("//controlActProcess/queryByParameterPayload/dOB/value/@value").getText();
         try {
             Map<String, Object> map = new TreeMap<>();
             if (!StringUtil.isNullOrWhiteSpace(extensionId)) map.put("extensionId", extensionId);
-            if (!StringUtil.isNullOrWhiteSpace(staffName)) map.put("staffName", staffName);
+            if (!StringUtil.isNullOrWhiteSpace(name)) map.put("name", name);
             if (!StringUtil.isNullOrWhiteSpace(genderCode)) map.put("genderCode", genderCode);
             if (!StringUtil.isNullOrWhiteSpace(birthDate)) map.put("birthDate", birthDate);
             MedicalStaffInfo result = staffRegisterIn.providerDetailsQuery(map);

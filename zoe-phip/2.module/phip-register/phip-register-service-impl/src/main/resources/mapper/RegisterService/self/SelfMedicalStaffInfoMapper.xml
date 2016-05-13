@@ -74,28 +74,20 @@
 
     </delete>
     <select id="getStaff" parameterType="java.util.Map" resultMap="BaseResultMap">
-        SELECT PMSI.*,PODI.DEPT_NAME FROM PHIP_MEDICAL_STAFF_INFO PMSI,PHIP_ORG_DEPT_INFO PODI
-        LEFT JOIN (
-        <include refid="oidSelect">
-            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
-        </include>
-        ) S ON PMSI.GENDER_CODE=S.CODE --性别
-        <where>
-            <if test="_parameter.containsKey('extensionId')">
-                AND PMSI.EXTENSION_ID = #{extensionId,jdbcType=VARCHAR}
-            </if>
-            <if test="_parameter.containsKey('staffName')">
-                AND PMSI.NAME = #{staffName,jdbcType=VARCHAR}
-            </if>
-            <if test="_parameter.containsKey('genderCode')">
-                AND PMSI.GENDER_CODE = #{genderCode,jdbcType=VARCHAR}
-            </if>
-            <if test="_parameter.containsKey('birthDate')">
-                AND to_char(PMSI.BIRTH_TIME,'yyyyMMdd') = #{birthDate,jdbcType=VARCHAR}
-            </if>
-            AND PMSI.AFFILIATED_ORG_CODE =PODI.DEPT_CODE
-            <include refid="com.zoe.phip.module.service.selfWhere"/>
-        </where>
+        SELECT * FROM PHIP_MEDICAL_STAFF_INFO PMSI
+        WHERE 1 = 1
+        <if test="_parameter.containsKey('extensionId')">
+            AND PMSI.EXTENSION_ID = #{extensionId,jdbcType=VARCHAR}
+        </if>
+        <if test="_parameter.containsKey('name')">
+            AND PMSI.NAME = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="_parameter.containsKey('genderCode')">
+            AND PMSI.GENDER_CODE = #{genderCode,jdbcType=VARCHAR}
+        </if>
+        <if test="_parameter.containsKey('birthDate')">
+            AND to_char(PMSI.BIRTH_TIME,'yyyyMMdd') = #{birthDate,jdbcType=VARCHAR}
+        </if>
     </select>
 
     <select id="getProvider" parameterType="java.lang.String" resultMap="MultiResultMap">
