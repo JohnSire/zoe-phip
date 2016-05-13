@@ -8,8 +8,10 @@ package com.zoe.phip.web.service.sdm;
 
 
 import com.zoe.phip.infrastructure.entity.ServiceResult;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.entity.SystemData;
 import com.zoe.phip.module.service.service.in.IBaseInService;
+import com.zoe.phip.web.model.sdm.StCdaInfo;
 import com.zoe.phip.web.model.sdm.StandardVerRsCda;
 
 import java.util.List;
@@ -25,4 +27,12 @@ public interface IStandardVerRsCdaService extends IBaseInService<StandardVerRsCd
 
     ServiceResult versionStandardStruct(SystemData systemData, String fkVersionId, List<StandardVerRsCda> cdaList);
 
+    /**
+     * 通过标准版本ID获取CDA
+     *
+     * @param systemData
+     * @param fkVersionId
+     * @return
+     */
+    ServiceResultT<List<StCdaInfo>> getVerRsCdaInfo(SystemData systemData, String fkVersionId);
 }

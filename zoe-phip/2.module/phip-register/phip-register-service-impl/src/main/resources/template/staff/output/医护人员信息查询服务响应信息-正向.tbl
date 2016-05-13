@@ -121,7 +121,7 @@ var effLow = Model.effectiveTimeLow;
         <semanticsText>PrincipalPerson.birthTime</semanticsText>
       </dOB>
       <providerID>
-        <value root="2.16.156.10011.1.4" extension="${Model.staffId}" />
+        <value root="2.16.156.10011.1.4" extension="${Model.extensionId}" />
         <semanticsText>HealthCareProvider.id</semanticsText>
       </providerID>
       <providerName>

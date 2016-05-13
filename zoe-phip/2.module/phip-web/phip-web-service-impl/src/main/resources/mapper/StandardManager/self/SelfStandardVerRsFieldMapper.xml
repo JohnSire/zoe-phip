@@ -34,7 +34,7 @@
         </if>
     </select>
     <select id="getFieldByFkVersionId" parameterType="java.util.Map"
-            resultType="com.zoe.phip.web.model.sdm.StRsSetElementInfo">
+            resultMap="com.zoe.phip.web.dao.sdm.IStRsSetElementInfoMapper.BaseResultMap">
         SELECT C.*
         FROM PHIP_STANDARD_VER_RS_FIELD D
         LEFT JOIN (
