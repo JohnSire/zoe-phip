@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
+    <Id descr="字典分类ID" path="//Id/@value"/>
     <Code descr="字典分类编码" path="//Code/@value"/>
     <Name descr="字典分类名称" path="//Name/@value"/>
     <Pid descr="字典父分类ID" path="//ParentId/@value"/>
