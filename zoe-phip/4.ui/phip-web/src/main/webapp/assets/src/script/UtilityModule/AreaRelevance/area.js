@@ -47,10 +47,11 @@ define(function (require, exports, module) {
                         name: internal.config[index][1]["name"],
                         display: internal.config[index][1]["display"],
                         ajaxParam: {
-                            url: 'area/getAreaListByPid',//url 请求的地址
-                            data: {
-                                pid: 'F2565E55804540AD8E23C059E0E3D593'
-                            },
+                            url: 'area/getAreaListByCode',//url 请求的地址
+                            data: function () {
+                                var value = $("select[name='" + internal.config[index][0]["name"] + "']").val() || "";
+                                return {code: value}
+                            }
                         },
                         value: 'code',//值
                         text: 'name',//展示的内容
@@ -74,8 +75,11 @@ define(function (require, exports, module) {
                         name: internal.config[index][2]["name"],
                         display: internal.config[index][2]["display"],
                         ajaxParam: {
-                            url: 'area/getAreaListByPid',//url 请求的地址
-                            data: {pid: '9BC2CEB4B2EE47488703F5A45EB998E0'},
+                            url: 'area/getAreaListByCode',//url 请求的地址
+                            data: function () {
+                                var value = $("select[name='" + internal.config[index][1]["name"] + "']").val() || "";
+                                return {code: value}
+                            }
                         },
                         value: 'code',//名称
                         text: 'name',//展示的内�
@@ -100,8 +104,11 @@ define(function (require, exports, module) {
                         name: internal.config[index][3]["name"],
                         display: internal.config[index][3]["display"],
                         ajaxParam: {
-                            url: 'area/getAreaListByPid',//url 请求的地址
-                            data: {pid: '95beeb26-1825-4f37-87b0-70fcc160f248'},
+                            url: 'area/getAreaListByCode',//url 请求的地址
+                            data: function () {
+                                var value = $("select[name='" + internal.config[index][2]["name"] + "']").val() || "";
+                                return {code: value}
+                            }
                         },
                         value: 'code',//值
                         text: 'name',//展示的内容
@@ -125,8 +132,11 @@ define(function (require, exports, module) {
                         name: internal.config[index][4]["name"],
                         display: internal.config[index][4]["display"],
                         ajaxParam: {
-                            url: 'area/getAreaListByPid',//url 请求的地址
-                            data: {pid: 'e6bda006-95a6-44ae-8570-143856d310d3'},
+                            url: 'area/getAreaListByCode',//url 请求的地址
+                            data: function () {
+                                var value = $("select[name='" + internal.config[index][3]["name"] + "']").val() || "";
+                                return {code: value}
+                            }
                         },
                         value: 'code',//值
                         text: 'name',//展示的内容
