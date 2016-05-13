@@ -34,8 +34,8 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: 'dataSet/getRsSetColumn?id=' + common.getParamFromUrl("fkSetId"),
                     columns: [
-                        {display: '字段名称', name: 'elementName', width: 120, align: 'left'},
-                        {display: '字段编码', name: 'elementCode', width: 120, align: 'left'},
+                        {display: '字段名称', name: 'fieldName', width: 120, align: 'left'},
+                        {display: '字段编码', name: 'fieldCode', width: 120, align: 'left'},
                         {display: '数据元名称', name: 'baseElementName', width: 120, align: 'left'},
                         {display: '数据元编码', name: 'baseElementCode', width: 120, align: 'left'},
                         {display: '字典名称', name: 'dictName', width: 120, align: 'left'},

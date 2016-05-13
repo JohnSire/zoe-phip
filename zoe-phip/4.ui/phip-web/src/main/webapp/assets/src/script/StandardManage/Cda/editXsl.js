@@ -12,9 +12,19 @@ define(function (require, exports, module) {
         event: function () {
             //上传
             $("#uploadXsl").click(function () {
+                var path=$("#clientPath").val()
+                if(!path||path=="请选择Xsl文件"){
+                    common.jsmsgError("请选择Xsl文件");
+                    return;
+                }
                 var options = {
                     success: function (data) {
-
+                        if (data.isSuccess) {
+                            var fileContent=data.result.fileContent;
+                            fileContent = fileContent.replace(/</g, '&lt;');
+                            fileContent = fileContent.replace(/>/g, '&gt;');
+                            internal.editor.html(fileContent);
+                        }
                     }
                 };
                 $("#fm_main").ajaxSubmit(options);

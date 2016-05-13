@@ -4,11 +4,11 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
+import com.zoe.phip.module.service.entity.base.Acknowledgement;
 import com.zoe.phip.module.service.util.XmlBeanUtil;
 import com.zoe.phip.register.model.AreaBaseInfo;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.XmanCard;
-import com.zoe.phip.module.service.entity.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IPatientRegister;
 import com.zoe.phip.register.service.impl.internal.AreaRegisterInImpl;
 import com.zoe.phip.register.service.impl.internal.PatientRegisterInImpl;
@@ -252,9 +252,9 @@ public class PatientRegisterImpl implements IPatientRegister {
 
     private void baseInfoSetCode(XmanBaseInfo baseInfo){
         baseInfo.setCityCode(getAreaByName(baseInfo.getCityCode()));
-        baseInfo.setStateCode(getAreaByName(baseInfo.getStateCode()));
-        baseInfo.setAreaCode(getAreaByName(baseInfo.getAreaCode()));
-        baseInfo.setCommitteeCode(getAreaByName(baseInfo.getCommitteeCode()));
+        baseInfo.setProvinceCode(getAreaByName(baseInfo.getProvinceCode()));
+        baseInfo.setCountyCode(getAreaByName(baseInfo.getCountyCode()));
+        baseInfo.setNeighborhoodCode(getAreaByName(baseInfo.getNeighborhoodCode()));
         baseInfo.setStreetCode(getAreaByName(baseInfo.getStreetCode()));
     }
 
@@ -265,5 +265,4 @@ public class PatientRegisterImpl implements IPatientRegister {
         else
             return null;
     }
-
 }

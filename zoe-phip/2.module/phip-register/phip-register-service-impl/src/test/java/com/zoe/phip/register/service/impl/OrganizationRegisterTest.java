@@ -106,8 +106,8 @@ public class OrganizationRegisterTest extends BaseTest {
                 "</PRPM_IN401030UV01>";
 
 
-     //  String result = impl.addOrganization(patientInput);
-        String result = impl.updateOrganization(patientInput);
+      String result = impl.addOrganization(patientInput);
+        //String result = impl.updateOrganization(patientInput);
 
         System.out.println(result);
     }

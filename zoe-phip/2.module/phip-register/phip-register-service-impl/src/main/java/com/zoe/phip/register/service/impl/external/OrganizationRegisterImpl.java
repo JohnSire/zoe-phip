@@ -149,9 +149,6 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             map.put("deptCode", strDeptId);
             map.put("deptName", strDeptName);
             OrgDeptInfo result = organizationRegisterIn.organizationDetailQuery(map);
-            if(null!=result && null !=result.getValidateMessage()){
-                throw  new Exception(result.getValidateMessage());
-            }
        /*     if (deptInfo == null || StringUtil.isNullOrWhiteSpace(deptInfo.getCode())) {
                 deptInfo = new OrgDeptInfo();
                 deptInfo.setCreationTime(DateUtil.stringToDateTime(strCreateTime));

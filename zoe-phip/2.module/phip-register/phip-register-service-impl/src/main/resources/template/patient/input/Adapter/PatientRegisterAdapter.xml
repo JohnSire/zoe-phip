@@ -15,11 +15,11 @@
     <RelName descr = "联系人姓名" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/relationshipHolder1/name"/>
     <RelTelNo descr = "联系人电话" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/telecom/@value"/>
     <Address descr = "常住地址户籍" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetAddressLine"/>
-    <StateCode descr = "地址-省" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/state"/>
+    <ProvinceCode descr = "地址-省" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/state"/>
     <CityCode descr = "地址-市" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/city"/>
-    <AreaCode descr = "地址-县（区）" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/county"/>
+    <CountyCode descr = "地址-县（区）" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/county"/>
     <StreetCode descr = "地址-乡（镇、街道办事处）" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetNameBase"/>
-    <CommitteeCode descr = "地址-村（街、路、弄等）" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetName"/>
+    <NeighborhoodCode descr = "地址-村（街、路、弄等）" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetName"/>
     <HouseNumber descr = "地址-门牌号码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/houseNumber"/>
     <PostalCode descr = "邮政编码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/postalCode"/>
     <NationalityCode  descr = "民族代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/ethnicGroupCode/@code"/>

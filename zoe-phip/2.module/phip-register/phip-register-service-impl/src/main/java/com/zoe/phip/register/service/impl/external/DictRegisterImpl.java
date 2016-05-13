@@ -62,6 +62,7 @@ public class DictRegisterImpl implements IDictRegister {
         DictCatalog catalog = null;
         try {
             catalog = XmlBeanUtil.toBean(document, DictCatalog.class, ProcessXmlUtil.getAdapterDom(catalogAdapterPath));
+            catalog.setId(document.selectSingleNode("//Id/@value").getText().trim());
             DictCatalog result = dictRegisterIn.updateDictCatalogRequest(catalog);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("更新成功");
@@ -103,7 +104,7 @@ public class DictRegisterImpl implements IDictRegister {
         Document document = ProcessXmlUtil.load(message);
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
-        DictCatalog result = null;
+        DictCatalog result = new DictCatalog();
         try {
             String id = document.selectSingleNode("//Id/@value").getText().trim();//字典分类ID
             result.setId(id);
@@ -151,6 +152,7 @@ public class DictRegisterImpl implements IDictRegister {
         DictItem item = null;
         try {
             item = XmlBeanUtil.toBean(document, DictItem.class, ProcessXmlUtil.getAdapterDom(itemAdapterPath));
+            item.setId(document.selectSingleNode("//Id/@value").getText().trim());
             DictItem result = dictRegisterIn.updateDictItemRequest(item);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("更新成功");
@@ -192,7 +194,7 @@ public class DictRegisterImpl implements IDictRegister {
         Document document = ProcessXmlUtil.load(message);
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
-        DictItem result = null;
+        DictItem result = new DictItem();
         try {
             String id = document.selectSingleNode("//Id/@value").getText().trim();//字典项ID
             result.setId(id);

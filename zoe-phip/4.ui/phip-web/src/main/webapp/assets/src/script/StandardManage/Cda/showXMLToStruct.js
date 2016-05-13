@@ -47,6 +47,8 @@ define(function (require, exports, module) {
                 new Ext.Viewport({
                     items: [tree]
                 });
+                top.tree=tree;
+                // tree.setRootNode()
             });
         }
     }
