@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <Id descr="健康档案ID" path="//HealthCardId"/>
     <SourceId descr="源文档ID" path="//RegistryPackage/SubmissionSet/SourceId"/>
     <DocumentId descr="文档ID" path="//Document/@id"/>
     <ParentDocumentRelationship descr="上级文档关联关系" path="//Document/@parentDocumentRelationship"/>

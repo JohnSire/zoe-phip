@@ -1,18 +1,18 @@
 /**
- * Created by chenzhisen on 2016/5/6.
+ * Created by chenzhisen on 2016/5/12.
  */
 
 define(function (require, exports, module) {
     var internal = {
-        dataSet: {
-            winName: 'win_area_select_list',
-            title: '数据集选择列表',
+        sysDict: {
+            winName: 'win_sysDict_select_list',
+            title: '档案类别选择列表',
             selectParam: {
                 storage: [],
                 displayField: 'name',
                 valueField: 'id',
                 gridParam: {
-                    url: webRoot + 'dataSet/getSetList',
+                    url: webRoot + 'dict/getItemPageList',
                     columns: [
                         {display: '代码', name: 'code', width: 160, align: 'left'},
                         {display: '名称', name: 'name', width: 180, align: 'left'}
@@ -21,9 +21,9 @@ define(function (require, exports, module) {
                     height: 250
                 },
                 multiselect: false,//是否多选:true为多选，false为单选
-                winCallback: 'win_set_select_list_callback'
+                winCallback: 'win_sysDict_select_list_callback'
             }
         }
     }
-    exports.dataSet = internal.dataSet;
+    exports.sysDict = internal.sysDict;
 });

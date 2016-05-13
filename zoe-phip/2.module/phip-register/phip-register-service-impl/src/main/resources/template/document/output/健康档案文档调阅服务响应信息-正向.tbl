@@ -3,9 +3,9 @@
   <Id root="2.16.156.10011.0" extension="${Model.acknowledgement.msgId}" />
   <TargetId root="2.16.156.10011.0" extension="${Model.msgId}" />
   <DocumentResponse>
-    <RepositoryUniqueId>HSDA00.01</RepositoryUniqueId>
+    <RepositoryUniqueId>${Model.id}</RepositoryUniqueId>
     <DocumentUniqueId>${Model.ehrId}</DocumentUniqueId>
     <MimeType>text/xml</MimeType>
-    <Document>${Model.content}</Document>
+    <Document>${Model.context}</Document>
   </DocumentResponse>
 </RetrieveDocumentSetResponse>

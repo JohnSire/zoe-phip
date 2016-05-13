@@ -1,7 +1,7 @@
 package com.zoe.phip.infrastructure.myvalidator.annotation;
 
 
-import com.zoe.phip.infrastructure.myvalidator.actualize.MobileValidator;
+import com.zoe.phip.infrastructure.myvalidator.actualize.IDCardValidator;
 
 import javax.validation.Constraint;
 import javax.validation.OverridesAttribute;
@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 
 @Documented
-@Constraint(validatedBy = {MobileValidator.class})
+@Constraint(validatedBy = {IDCardValidator.class})
 @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
 @Retention(RUNTIME)
 @ReportAsSingleViolation
@@ -25,11 +25,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *
  * @author by hyf
  * @version 1.0
- *  @date 2016/5/12
- * bean验证：被注释的元素必须是手机号码
+ * @date 2016/5/12
+ * bean验证：被注释的元素必须是符合身份证号码规则
  */
-public @interface ValidateMobile {
-    String message() default "手机号码不符合规则";
+public @interface ValidateIDCard {
+    String message() default "身份证号码不符合规则";
 
     Class<?>[] groups() default {};
 
@@ -46,6 +46,6 @@ public @interface ValidateMobile {
     @Retention(RUNTIME)
     @Documented
     public @interface List {
-        ValidateMobile[] value();
+        ValidateIDCard[] value();
     }
 }

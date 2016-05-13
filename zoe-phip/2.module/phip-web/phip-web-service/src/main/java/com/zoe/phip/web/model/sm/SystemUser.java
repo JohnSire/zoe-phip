@@ -5,7 +5,9 @@
 package com.zoe.phip.web.model.sm;
 
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateEmail;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateIDCard;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateMobile;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNumberPlusMinus;
 import com.zoe.phip.module.service.entity.MasterEntity;
 
 import javax.persistence.Column;
@@ -33,6 +35,8 @@ public class SystemUser extends MasterEntity {
     //@ValidateEmail(message = "bu")
     @ValidateMobile
     @ValidateEmail
+    @ValidateIDCard(message = "你要是想改错误提示信息，可以随意改")
+    @ValidateNumberPlusMinus
     private String name;
 
     /**

@@ -82,8 +82,11 @@ public class DocumentRegisterInImpl extends BaseInServiceImpl<XmanEhr, IEhrDataI
         xmanEhrContent.setModifyAt(new Date());
         xmanEhrContentMapper.insertSelective(xmanEhrContent);
 
-        xmanIndex.setEhrId(xmanEhr.getId());
-        return xmanIndex;
+        XmanIndex result = new XmanIndex();
+        result.setId(xmanIndex.getId());
+        result.setEhrId(xmanEhr.getId());
+        result.setMsgId(xmanIndex.getMsgId());
+        return result;
     }
 
     public XmanIndex documentRegistryQuery(String healthCardId, String identityId, String documentTitle) throws Exception {
@@ -92,6 +95,17 @@ public class DocumentRegisterInImpl extends BaseInServiceImpl<XmanEhr, IEhrDataI
         paras.put("identityId", identityId);
         paras.put("documentTitle", documentTitle);
         XmanIndex xmanIndex = xmanIndexMapper.documentRegistryQuery(paras);
+        if(xmanIndex == null){
+            throw new BusinessException("003");
+        }
+        return xmanIndex;
+    }
+
+    public XmanIndex getDocumentInfo(String repositoryUniqueId,String documentUniqueId) throws Exception{
+        Map<String, Object> paras = new HashMap<String, Object>();
+        paras.put("repositoryUniqueId", repositoryUniqueId);
+        paras.put("documentUniqueId", documentUniqueId);
+        XmanIndex xmanIndex = xmanIndexMapper.getDocumentInfo(paras);
         if(xmanIndex == null){
             throw new BusinessException("003");
         }

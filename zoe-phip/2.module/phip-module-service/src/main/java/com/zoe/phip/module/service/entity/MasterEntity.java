@@ -13,19 +13,16 @@ public class MasterEntity extends BaseEntity {
     /**
      * 状态
      */
-    @ValidateNotNull(message = "状态不能为空")
     protected int state;
 
     /**
      * 修改人
      */
-    @ValidateNotBlank(message = "修改人不能为空")
     private String modifyBy;
 
     /**
      * 实体（数据记录）修改时间
      */
-    @ValidateNotNull(message = "修改时间不能为空")
     private Date modifyAt;
 
 

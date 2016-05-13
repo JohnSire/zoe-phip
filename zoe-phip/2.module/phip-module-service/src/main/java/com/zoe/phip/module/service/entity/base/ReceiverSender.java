@@ -1,4 +1,4 @@
-package com.zoe.phip.register.model.base;
+package com.zoe.phip.module.service.entity.base;
 
 /**
  * Created by zhangwenbin on 2016/4/18.

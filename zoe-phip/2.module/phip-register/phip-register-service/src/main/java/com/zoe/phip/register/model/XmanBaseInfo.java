@@ -6,7 +6,9 @@
 package com.zoe.phip.register.model;
 
 import com.zoe.phip.infrastructure.annotation.XPath;
-import com.zoe.phip.register.model.base.RegisterEntity;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateIDCard;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNumberPlusMinus;
+import com.zoe.phip.module.service.entity.base.RegisterEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -75,6 +77,7 @@ public class XmanBaseInfo extends RegisterEntity {
      */
     @XPath(defaultValue = "01")
     @Column(name = "ID_TYPE_CODE")
+    @ValidateIDCard
     private Integer idTypeCode;
 
     /**
@@ -107,6 +110,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 联系人电�
      */
     @Column(name = "REL_TEL_NO")
+    @ValidateNumberPlusMinus(message = "联系人电话不符合规则")
     private String relTelNo;
 
     /**
