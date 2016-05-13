@@ -4,7 +4,7 @@
   <TargetId root="2.16.156.10011.0" extension="${Model.msgId}" />
   <DocumentSet>
     <DocumentUniqueId>${Model.ehrId}</DocumentUniqueId>
-    <RepositoryUniqueId>HSDA00.01</RepositoryUniqueId>
+    <RepositoryUniqueId>${Model.id}</RepositoryUniqueId>
     <DocumentTitle>${Model.title}</DocumentTitle>
     <DocUrl></DocUrl>
   </DocumentSet>
