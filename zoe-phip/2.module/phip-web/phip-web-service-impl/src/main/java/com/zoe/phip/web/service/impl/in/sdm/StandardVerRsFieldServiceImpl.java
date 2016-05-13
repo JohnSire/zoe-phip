@@ -10,6 +10,7 @@ import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 
 import com.zoe.phip.web.dao.sdm.IStandardVerRsFieldMapper;
+import com.zoe.phip.web.model.sdm.StRsSetElementInfo;
 import com.zoe.phip.web.model.sdm.StandardVerRsDict;
 import com.zoe.phip.web.model.sdm.StandardVerRsField;
 import com.zoe.phip.web.service.sdm.IStandardVerRsFieldService;
@@ -35,6 +36,15 @@ public class StandardVerRsFieldServiceImpl extends BaseInServiceImpl<StandardVer
         cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
         int i = super.addList(fieldList);
         return i;
+    }
+
+    public List<StRsSetElementInfo> getVerRsFieldInfo(String fkVersionId,String fkCdaId,String fkSetId) throws Exception {
+        Map<String, Object> map = MapUtil.createMap(map1 -> {
+            map1.put("fkVersionId", fkVersionId);
+            map1.put("fkCdaId", fkCdaId);
+            map1.put("fkSetId", fkSetId);
+        });
+        return getFieldByFkVersionId(map);
     }
 
     public int deleteByVersionId(String fkVersionId) {
@@ -80,4 +90,10 @@ public class StandardVerRsFieldServiceImpl extends BaseInServiceImpl<StandardVer
     public int getSingle(Map<String, Object> map) {
         return getMapper().getSingle(map);
     }
+
+    @Override
+    public List<StRsSetElementInfo> getFieldByFkVersionId(Map<String, Object> map) {
+        return getMapper().getFieldByFkVersionId(map);
+    }
+
 }

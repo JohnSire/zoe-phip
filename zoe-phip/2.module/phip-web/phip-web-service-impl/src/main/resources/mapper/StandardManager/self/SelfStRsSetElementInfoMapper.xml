@@ -15,11 +15,11 @@
             <if test="fkSetId != null">
                 FK_SET_ID = #{fkSetId,jdbcType=VARCHAR},
             </if>
-            <if test="elementCode != null">
-                ELEMENT_CODE = #{elementCode,jdbcType=VARCHAR},
+            <if test="fieldCode != null">
+                FIELD_CODE = #{fieldCode,jdbcType=VARCHAR},
             </if>
-            <if test="elementName != null">
-                ELEMENT_NAME = #{elementName,jdbcType=VARCHAR},
+            <if test="fieldName != null">
+                FIELD_NAME = #{fieldName,jdbcType=VARCHAR},
             </if>
             <if test="isPrimaryKey != null">
                 IS_PRIMARY_KEY = #{isPrimaryKey,jdbcType=DECIMAL},
@@ -30,8 +30,8 @@
             <if test="isNullable != null">
                 IS_NULLABLE = #{isNullable,jdbcType=DECIMAL},
             </if>
-            <if test="fkBaseElementId != null">
-                FK_BASE_ELEMENT_ID = #{fkBaseElementId,jdbcType=VARCHAR},
+            <if test="fkElementId != null">
+                FK_ELEMENT_ID = #{fkElementId,jdbcType=VARCHAR},
             </if>
             <if test="fkDictId != null">
                 FK_DICT_ID = #{fkDictId,jdbcType=VARCHAR},
@@ -79,7 +79,7 @@
     <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
         SELECT COUNT (1) FROM PHIP_ST_RS_SET_ELEMENT_INFO PSRSEI
         WHERE FK_SET_ID = #{fkSetId,jdbcType=VARCHAR}
-        and ELEMENT_CODE =#{elementCode,jdbcType=VARCHAR}
+        and FIELD_CODE =#{fieldCode,jdbcType=VARCHAR}
         <if test="_parameter.containsKey('id')">
             AND PSRSEI.id != #{id, jdbcType=VARCHAR}
         </if>
@@ -89,7 +89,7 @@
         PSEI.CODE BASE_ELEMENT_CODE,PSEI.NAME BASE_ELEMENT_NAME
         FROM PHIP_ST_RS_SET_ELEMENT_INFO PSRSEI
         LEFT JOIN PHIP_DICT_CATALOG PDC ON PSRSEI.FK_DICT_ID = PDC.ID
-        LEFT JOIN PHIP_ST_ELEMENT_INFO PSEI ON PSEI.ID = PSRSEI.FK_BASE_ELEMENT_ID
+        LEFT JOIN PHIP_ST_ELEMENT_INFO PSEI ON PSEI.ID = PSRSEI.FK_ELEMENT_ID
         WHERE PSRSEI.FK_SET_ID = #{fkSetId,jdbcType=VARCHAR}
         <if test="_parameter.containsKey('key')">
             AND UPPER (CONCAT(PSRSEI.CODE,PSRSEI.NAME)) LIKE UPPER (#{key, jdbcType=VARCHAR})
@@ -102,9 +102,9 @@
         FROM PHIP_ST_RS_SET_ELEMENT_INFO PSRSEI
         INNER JOIN PHIP_ST_SET_INFO PSSI ON PSRSEI.FK_SET_ID = PSSI.ID
         LEFT JOIN PHIP_DICT_CATALOG PDC ON PSRSEI.FK_DICT_ID = PDC.ID
-        LEFT JOIN PHIP_ST_ELEMENT_INFO PSEI ON PSEI.ID = PSRSEI.FK_BASE_ELEMENT_ID
+        LEFT JOIN PHIP_ST_ELEMENT_INFO PSEI ON PSEI.ID = PSRSEI.FK_ELEMENT_ID
         WHERE UPPER(PSSI.CODE) = UPPER (#{setCode,jdbcType=VARCHAR})
-        AND UPPER (PSRSEI.ELEMENT_CODE) = UPPER (#{elementCode,jdbcType=VARCHAR})
+        AND UPPER (PSRSEI.FIELD_CODE) = UPPER (#{fieldCode,jdbcType=VARCHAR})
     </select>
 
 </mapper>

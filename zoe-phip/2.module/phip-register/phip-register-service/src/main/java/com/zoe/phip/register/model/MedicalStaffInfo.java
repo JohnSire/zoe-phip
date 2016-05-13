@@ -45,16 +45,16 @@ public class MedicalStaffInfo extends RegisterEntity {
 
 
     /**
-     * 隶属机构
+     * 隶属科室
      */
     @Transient
-    private String orgName;
+    private String deptName;
 
-    public String getOrgName() {
-        return orgName;
+    public String getDeptName() {
+        return deptName;
     }
-    public void setOrgName(String orgName) {
-        this.orgName = orgName;
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 
     /**
@@ -72,6 +72,7 @@ public class MedicalStaffInfo extends RegisterEntity {
      * 身份证号
      */
     @Column(name = "ID_NO")
+    //
     private String idNo;
     /**
      * 专业技术职务代码
@@ -94,6 +95,7 @@ public class MedicalStaffInfo extends RegisterEntity {
     /**
      * 工作联系电话
      */
+    //
     @Column(name = "EMPLOYER_TEL_NO")
     private String employerTelNo;
     /**
@@ -109,14 +111,15 @@ public class MedicalStaffInfo extends RegisterEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date effectiveTimeHigh;
     /**
-     * 科室号
+     * 机构编码
      */
     @Column(name = "AFFILIATED_ORG_CODE")
     private String affiliatedOrgCode;
     /**
-     * 科室名称
+     * 机构名称
      */
-    @Column(name = "AFFILIATED_ORG_NAME")
+//    @Column(name = "AFFILIATED_ORG_NAME")
+    @Transient
     private String affiliatedOrgName;
     /**
      * 消息id
@@ -142,7 +145,8 @@ public class MedicalStaffInfo extends RegisterEntity {
     /**
      * 申请者科室名称
      */
-    @Column(name = "ASSIGNED_DEPT_NAME")
+//    @Column(name = "ASSIGNED_DEPT_NAME")
+    @Transient
     private String assignedDeptName;
 
     public String getAssignedContactPerson() {

@@ -31,7 +31,9 @@
     </select>
     <select id="getSetByFkVersionId" parameterType="java.util.Map" resultType="com.zoe.phip.web.model.sdm.StSetInfo">
         SELECT I.*
-        FROM PHIP_ST_SET_INFO I,PHIP_STANDARD_VER_RS_SET S,PHIP_ST_RS_CDA_SET_INFO O
+        FROM PHIP_ST_SET_INFO I,
+        PHIP_STANDARD_VER_RS_SET S,
+        PHIP_ST_RS_CDA_SET_INFO O
         WHERE S.FK_CDA_ID = O.FK_CDA_ID
         AND I.ID = S.FK_SET_ID
         AND S.FK_SET_ID = O.FK_SET_ID

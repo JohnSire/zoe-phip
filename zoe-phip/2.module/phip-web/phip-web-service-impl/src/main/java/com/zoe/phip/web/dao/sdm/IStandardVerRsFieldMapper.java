@@ -7,9 +7,11 @@
 package com.zoe.phip.web.dao.sdm;
 
 import com.zoe.phip.module.service.mapper.IMyMapper;
+import com.zoe.phip.web.model.sdm.StRsSetElementInfo;
 import com.zoe.phip.web.model.sdm.StandardVerRsDict;
 import com.zoe.phip.web.model.sdm.StandardVerRsField;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,4 +21,6 @@ import java.util.Map;
  */
 public interface IStandardVerRsFieldMapper extends IMyMapper<StandardVerRsField> {
     int getSingle(Map<String, Object> map);
+
+    List<StRsSetElementInfo> getFieldByFkVersionId(Map<String, Object> map);
 }

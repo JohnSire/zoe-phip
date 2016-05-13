@@ -130,8 +130,8 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
             StSetInfo setInfo = getBySetCode(info.getSetCode());
             if (setInfo == null) continue;
             info.setFkSetId(setInfo.getId());
-            if (StringUtil.isNullOrWhiteSpace(info.getElementCode())) continue;
-            StRsSetElementInfo model = rsSetElementInfoService.getBySetCode(info.getSetCode(), info.getElementCode());
+            if (StringUtil.isNullOrWhiteSpace(info.getFieldCode())) continue;
+            StRsSetElementInfo model = rsSetElementInfoService.getBySetCode(info.getSetCode(), info.getFieldCode());
             if (model != null) {
                 ids = ids + model.getId() + ",";
                 info.setId(model.getId());
@@ -139,7 +139,7 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
             //获取基础数据元的Id
             if (!StringUtil.isNullOrWhiteSpace(info.getBaseElementCode())) {
                 StElementInfo e = elementInfoService.getOne(info.getBaseElementCode());
-                if (e != null) info.setFkBaseElementId(e.getId());
+                if (e != null) info.setFkElementId(e.getId());
             }
 
             /**
