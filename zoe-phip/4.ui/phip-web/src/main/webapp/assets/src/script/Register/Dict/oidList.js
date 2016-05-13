@@ -26,7 +26,7 @@ define(function (require, exports, module) {
                         {display: '编码', name: 'code', width: 100, align: 'left'},
                         {display: '代码', name: 'codeSystem', width: 200, align: 'left'},
                         {display: '名称', name: 'name', width: 200, align: 'left'},
-                        {display: '标准', name: 'dictCode', width: 120, align: 'left'},
+                        {display: '映射代码', name: 'dictCode', width: 120, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,

@@ -119,7 +119,7 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
      * @param queryPage
      * @return
      */
-    PageList<AreaBaseInfo> getAreaChildrenByCode(String code, QueryPage queryPage){
+    public PageList<AreaBaseInfo> getAreaChildrenByCode(String code, QueryPage queryPage){
         PageList<AreaBaseInfo> pageList = new PageList<>();
         queryPage.setOrderBy("T1.NAME");
         //分页
