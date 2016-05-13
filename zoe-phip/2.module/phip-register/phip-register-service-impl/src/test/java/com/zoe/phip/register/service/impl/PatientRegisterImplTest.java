@@ -21,7 +21,7 @@ public class PatientRegisterImplTest extends BaseTest {
                 "xmlns=\"urn:hl7-org:v3\"" +
                 ">\n" +
                 "  <id root=\"2.16.156.10011.0\" extension=\"22a0f9e0-4454-11dc-a6be-3603d6866807\"/>\n" +
-                "  <creationTime value=\"20070803130624\"/>\n" +
+                "  <creationTime value=\"20160803130624\"/>\n" +
                 "  <interactionId root=\"2.16.840.1.113883.1.6\" extension=\"PRPA_IN201311UV02\"/>\n" +
                 "  <processingCode code=\"P\"/>\n" +
                 "  <processingModeCode code=\"R\"/>\n" +
@@ -162,7 +162,7 @@ public class PatientRegisterImplTest extends BaseTest {
                 "</PRPA_IN201311UV02>";
 
 
-        String result = patientRegister.addPatientRegistry(patientInput);
+        String result = patientRegister.updatePatientRegistry(patientInput);
         System.out.println(result);
 
        /* SAXReader reader = new SAXReader();
