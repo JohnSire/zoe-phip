@@ -36,8 +36,6 @@
 
             AFFILIATED_ORG_CODE = #{affiliatedOrgCode,jdbcType=VARCHAR},
 
---             AFFILIATED_ORG_NAME = #{affiliatedOrgName,jdbcType=VARCHAR},
-
             MSG_ID = #{msgId,jdbcType=VARCHAR},
 
             ASSIGNED_CODE = #{assignedCode,jdbcType=VARCHAR},
@@ -45,8 +43,6 @@
             ASSIGNED_NAME = #{assignedName,jdbcType=VARCHAR},
 
             ASSIGNED_DEPT_CODE = #{assignedDeptCode,jdbcType=VARCHAR},
-
---             ASSIGNED_DEPT_NAME = #{assignedDeptName,jdbcType=VARCHAR},
 
             ASSIGNED_CONTACT_PERSON = #{assignedContactPerson,jdbcType=VARCHAR},
 
@@ -63,6 +59,9 @@
             <when test="id != null">
                 id = #{id,jdbcType=VARCHAR}
             </when>
+            <otherwise>
+                EXTENSION_ID = #{extensionId,jdbcType=VARCHAR}
+            </otherwise>
         </choose>
 
     </update>
