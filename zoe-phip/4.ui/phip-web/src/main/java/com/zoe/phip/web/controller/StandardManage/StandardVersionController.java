@@ -8,12 +8,14 @@ import com.zoe.phip.infrastructure.security.Permission;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 import com.zoe.phip.web.controller.BaseController;
+import com.zoe.phip.web.model.sdm.StSetInfo;
 import com.zoe.phip.web.model.sdm.StandardVersion;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by zhangxingcai on 2016/5/6 0006.
@@ -121,5 +123,23 @@ public class StandardVersionController extends BaseController {
     public ServiceResult delVersionList(String ids) {
         return ServiceFactory.getStandardVersionService().deleteByIds(ComSession.getUserInfo(), ids);
     }
+
     //endregion
+    //region 标准版本获取CDA、数据集接口
+
+    /**
+     * 通过标准版本ID和CDA的ID获取数据集
+     *
+     * @param systemData
+     * @param fkVersionId
+     * @param fkCdaId
+     * @return
+     */
+    @RequestMapping(value = "/getVerRsSetInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "通过标准版本ID和CDA的ID获取数据集")
+    public ServiceResultT<List<StSetInfo>> getVerRsSetInfo(String fkVersionId, String fkCdaId) {
+        return ServiceFactory.getStandardVerRsSetService().getVerRsSetInfo(ComSession.getUserInfo(), fkVersionId, fkCdaId);
+    }
+
 }

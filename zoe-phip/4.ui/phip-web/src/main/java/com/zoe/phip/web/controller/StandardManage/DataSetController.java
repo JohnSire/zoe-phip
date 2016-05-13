@@ -72,8 +72,8 @@ public class DataSetController extends BaseController {
     public ServiceResult getSetInfo(String id, HttpServletRequest request) {
         return ServiceFactory.getStSetInfoService().getById(ComSession.getUserInfo(), id);
     }
+
     /**
-     *
      * @param StSetInfo
      * @param request
      * @return
@@ -86,7 +86,6 @@ public class DataSetController extends BaseController {
     }
 
     /**
-     *
      * @param StSetInfo
      * @param request
      * @return
@@ -104,8 +103,8 @@ public class DataSetController extends BaseController {
     public ServiceResult getByChildSet(String pid) {
         return ServiceFactory.getStSetInfoService().getByPid(ComSession.getUserInfo(), pid);
     }
+
     /**
-     *
      * @param ids
      * @return
      */
@@ -115,6 +114,7 @@ public class DataSetController extends BaseController {
     public ServiceResult deleteSetList(String ids) {
         return ServiceFactory.getStSetInfoService().deleteByIds(ComSession.getUserInfo(), ids);
     }
+
     @RequestMapping(value = "/deleteSetInfo")
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "删除数据集")
@@ -127,8 +127,8 @@ public class DataSetController extends BaseController {
     @RequestMapping(value = "/getRsSetColumn")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询数据集字段列表")
-    public ServiceResult getRsSetColumn(String id,String keyWord) {
-        return ServiceFactory.getStRsSetElementInfoService().getDataPageList(ComSession.getUserInfo(), id,keyWord, getQueryPage());
+    public ServiceResult getRsSetColumn(String id, String keyWord) {
+        return ServiceFactory.getStRsSetElementInfoService().getDataPageList(ComSession.getUserInfo(), id, keyWord, getQueryPage());
     }
 
     @RequestMapping(value = "/getRsSetColumnById")
@@ -137,28 +137,32 @@ public class DataSetController extends BaseController {
     public ServiceResult getRsSetColumnById(String id) {
         return ServiceFactory.getStRsSetElementInfoService().getById(ComSession.getUserInfo(), id);
     }
+
     @RequestMapping(value = "/addRsSetColumn")
     @ResponseBody
     @AuthAction(permission = {Permission.Add}, name = "添加数据集字段")
-    public ServiceResult addRsSetColumn(StRsSetElementInfo model,String keyWord) {
+    public ServiceResult addRsSetColumn(StRsSetElementInfo model, String keyWord) {
         return ServiceFactory.getStRsSetElementInfoService().add(ComSession.getUserInfo(), model);
     }
+
     @RequestMapping(value = "/updateRsSetColumn")
     @ResponseBody
     @AuthAction(permission = {Permission.Update}, name = "更新数据集字段")
-    public ServiceResult updateRsSetColumn(StRsSetElementInfo model,String keyWord) {
+    public ServiceResult updateRsSetColumn(StRsSetElementInfo model, String keyWord) {
         return ServiceFactory.getStRsSetElementInfoService().update(ComSession.getUserInfo(), model);
     }
+
     @RequestMapping(value = "/deleteRsSetColumn")
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "删除数据集字段")
-    public ServiceResult deleteRsSetColumn(String id,String keyWord) {
+    public ServiceResult deleteRsSetColumn(String id, String keyWord) {
         return ServiceFactory.getStRsSetElementInfoService().deleteById(ComSession.getUserInfo(), id);
     }
+
     @RequestMapping(value = "/deleteRsSetColumnList")
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "批量删除数据集字段")
-    public ServiceResult deleteRsSetColumnList(String ids,String keyWord) {
+    public ServiceResult deleteRsSetColumnList(String ids, String keyWord) {
         return ServiceFactory.getStRsSetElementInfoService().deleteByIds(ComSession.getUserInfo(), ids);
     }
     //endregion
