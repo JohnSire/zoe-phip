@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+<DictItem>
+    <Id value="${Model.id}" descr="字典项Id"/>
+    <Code value="${Model.code}" descr="字典项编码"/>
+    <Name value="${Model.name}" descr="字典项名称"/>
+    <FkCatalogId value="${Model.fkCatalogId}" descr="字典Id"/>
+    <Detail value="${Model.acknowledgement.text}" descr="操作结果"/>
+</DictItem>
+</data>

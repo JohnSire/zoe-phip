@@ -2,6 +2,6 @@
 <root>
     <Code descr="字典分类编码" path="//Code/@value"/>
     <Name descr="字典分类名称" path="//Name/@value"/>
-    <ParentCode descr="字典父分类编码" path="//ParentCode/@value"/>
+    <Pid descr="字典父分类ID" path="//ParentId/@value"/>
     <Type descr="字典分类类别" path="//Type/@value"/>
 </root>
