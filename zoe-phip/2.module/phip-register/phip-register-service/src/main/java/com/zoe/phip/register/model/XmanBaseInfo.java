@@ -120,32 +120,32 @@ public class XmanBaseInfo extends RegisterEntity {
     private String address;
 
     /**
-     * 地址
+     * 省级编码
      */
     @Column(name = "STATE_CODE")
-    private String stateCode;
+    private String provinceCode;
 
     /**
-     * 地址
+     * 市级编码
      */
     @Column(name = "CITY_CODE")
     private String cityCode;
 
     /**
-     * 地址
+     * 县级编码
      */
     @Column(name = "AREA_CODE")
-    private String areaCode;
+    private String countyCode;
     /**
-     * 地址
+     * 街道编码
      */
     @Column(name = "STREET_CODE")
     private String streetCode;
     /**
-     *
+     * 居委会编码
      */
     @Column(name = "COMMITTEE_CODE")
-    private String committeeCode;
+    private String neighborhoodCode;
 
     /**
      * 门牌�
@@ -434,13 +434,13 @@ public class XmanBaseInfo extends RegisterEntity {
         this.address = address;
     }
 
-    public String getStateCode() {
-        return this.stateCode;
+    public String getProvinceCode() {
+        return this.provinceCode;
     }
 
 
-    public void setStateCode(String stateCode) {
-        this.stateCode = stateCode;
+    public void setProvinceCode(String provinceCode) {
+        this.provinceCode = provinceCode;
     }
 
     public String getCityCode() {
@@ -452,13 +452,13 @@ public class XmanBaseInfo extends RegisterEntity {
         this.cityCode = cityCode;
     }
 
-    public String getAreaCode() {
-        return this.areaCode;
+    public String getCountyCode() {
+        return this.countyCode;
     }
 
 
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode;
+    public void setCountyCode(String countyCode) {
+        this.countyCode = countyCode;
     }
 
     public String getStreetCode() {
@@ -470,13 +470,13 @@ public class XmanBaseInfo extends RegisterEntity {
         this.streetCode = streetCode;
     }
 
-    public String getCommitteeCode() {
-        return this.committeeCode;
+    public String getNeighborhoodCode() {
+        return this.neighborhoodCode;
     }
 
 
-    public void setCommitteeCode(String committeeCode) {
-        this.committeeCode = committeeCode;
+    public void setNeighborhoodCode(String neighborhoodCode) {
+        this.neighborhoodCode = neighborhoodCode;
     }
 
     public String getHouseNumber() {

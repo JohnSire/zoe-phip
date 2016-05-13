@@ -46,15 +46,15 @@
 
             ADDRESS = #{address,jdbcType=VARCHAR},
 
-            STATE_CODE = #{stateCode,jdbcType=VARCHAR},
+            PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
 
             CITY_CODE = #{cityCode,jdbcType=VARCHAR},
 
-            AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+            COUNTY_CODE = #{countyCode,jdbcType=VARCHAR},
 
             STREET_CODE = #{streetCode,jdbcType=VARCHAR},
 
-            COMMITTEE_CODE = #{committeeCode,jdbcType=VARCHAR},
+            NEIGHBORHOOD_CODE = #{neighborhoodCode,jdbcType=VARCHAR},
 
             HOUSE_NUMBER = #{houseNumber,jdbcType=VARCHAR},
 
@@ -177,19 +177,19 @@
         ) XC ON X.XC_ORG_CODE=XC.DEPT_CODE
         LEFT JOIN (
          <include refid="areaSelect"/>
-        ) ST ON P.STATE_CODE=ST.CODE
+        ) ST ON P.PROVINCE_CODE=ST.CODE
         LEFT JOIN (
         <include refid="areaSelect"/>
         ) CI ON P.CITY_CODE=CI.CODE
         LEFT JOIN(
          <include refid="areaSelect"/>
-        ) AR ON P.AREA_CODE=AR.CODE
+        ) AR ON P.COUNTY_CODE=AR.CODE
         LEFT JOIN (
         <include refid="areaSelect"/>
         ) SR ON P.STREET_CODE=SR.CODE
         LEFT JOIN(
         <include refid="areaSelect"/>
-        ) CO ON P.COMMITTEE_CODE=CO.CODE
+        ) CO ON P.NEIGHBORHOOD_CODE=CO.CODE
     </sql>
     <sql id="oidSelect">
         SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS

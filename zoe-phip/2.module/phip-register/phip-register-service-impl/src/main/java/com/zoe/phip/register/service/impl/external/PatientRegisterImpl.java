@@ -252,9 +252,9 @@ public class PatientRegisterImpl implements IPatientRegister {
 
     private void baseInfoSetCode(XmanBaseInfo baseInfo){
         baseInfo.setCityCode(getAreaByName(baseInfo.getCityCode()));
-        baseInfo.setStateCode(getAreaByName(baseInfo.getStateCode()));
-        baseInfo.setAreaCode(getAreaByName(baseInfo.getAreaCode()));
-        baseInfo.setCommitteeCode(getAreaByName(baseInfo.getCommitteeCode()));
+        baseInfo.setProvinceCode(getAreaByName(baseInfo.getProvinceCode()));
+        baseInfo.setCountyCode(getAreaByName(baseInfo.getCountyCode()));
+        baseInfo.setNeighborhoodCode(getAreaByName(baseInfo.getNeighborhoodCode()));
         baseInfo.setStreetCode(getAreaByName(baseInfo.getStreetCode()));
     }
 

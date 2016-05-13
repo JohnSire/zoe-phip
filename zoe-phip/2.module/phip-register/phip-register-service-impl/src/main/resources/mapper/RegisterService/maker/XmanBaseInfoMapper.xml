@@ -25,15 +25,15 @@
                 jdbcType="VARCHAR"/>
         <result column="ADDRESS" property="address" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="STATE_CODE" property="stateCode" javaType="java.lang.String"
+        <result column="PROVINCE_CODE" property="provinceCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="CITY_CODE" property="cityCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="AREA_CODE" property="areaCode" javaType="java.lang.String"
+        <result column="COUNTY_CODE" property="countyCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="STREET_CODE" property="streetCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="COMMITTEE_CODE" property="committeeCode" javaType="java.lang.String"
+        <result column="NEIGHBORHOOD_CODE" property="neighborhoodCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="HOUSE_NUMBER" property="houseNumber" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
@@ -87,11 +87,11 @@
         REL_NAME,
         REL_TEL_NO,
         ADDRESS,
-        STATE_CODE,
+        PROVINCE_CODE,
         CITY_CODE,
-        AREA_CODE,
+        COUNTY_CODE,
         STREET_CODE,
-        COMMITTEE_CODE,
+        NEIGHBORHOOD_CODE,
         HOUSE_NUMBER,
         POSTAL_CODE,
         NATIONALITY_CODE,
@@ -125,11 +125,11 @@
             #{item.relName,jdbcType=VARCHAR},
             #{item.relTelNo,jdbcType=VARCHAR},
             #{item.address,jdbcType=VARCHAR},
-            #{item.stateCode,jdbcType=VARCHAR},
+            #{item.provinceCode,jdbcType=VARCHAR},
             #{item.cityCode,jdbcType=VARCHAR},
-            #{item.areaCode,jdbcType=VARCHAR},
+            #{item.countyCode,jdbcType=VARCHAR},
             #{item.streetCode,jdbcType=VARCHAR},
-            #{item.committeeCode,jdbcType=VARCHAR},
+            #{item.neighborhoodCode,jdbcType=VARCHAR},
             #{item.houseNumber,jdbcType=VARCHAR},
             #{item.postalCode,jdbcType=VARCHAR},
             #{item.nationalityCode,jdbcType=INTEGER},
@@ -166,11 +166,11 @@
         REL_NAME,
         REL_TEL_NO,
         ADDRESS,
-        STATE_CODE,
+        PROVINCE_CODE,
         CITY_CODE,
-        AREA_CODE,
+        COUNTY_CODE,
         STREET_CODE,
-        COMMITTEE_CODE,
+        NEIGHBORHOOD_CODE,
         HOUSE_NUMBER,
         POSTAL_CODE,
         NATIONALITY_CODE,
@@ -204,11 +204,11 @@
         #{relName,jdbcType=VARCHAR},
         #{relTelNo,jdbcType=VARCHAR},
         #{address,jdbcType=VARCHAR},
-        #{stateCode,jdbcType=VARCHAR},
+        #{provinceCode,jdbcType=VARCHAR},
         #{cityCode,jdbcType=VARCHAR},
-        #{areaCode,jdbcType=VARCHAR},
+        #{countyCode,jdbcType=VARCHAR},
         #{streetCode,jdbcType=VARCHAR},
-        #{committeeCode,jdbcType=VARCHAR},
+        #{neighborhoodCode,jdbcType=VARCHAR},
         #{houseNumber,jdbcType=VARCHAR},
         #{postalCode,jdbcType=VARCHAR},
         #{nationalityCode,jdbcType=INTEGER},
@@ -280,20 +280,20 @@
                 <if test="item.address != null">
                     ADDRESS = #{item.address,jdbcType=VARCHAR},
                 </if>
-                <if test="item.stateCode != null">
-                    STATE_CODE = #{item.stateCode,jdbcType=VARCHAR},
+                <if test="item.provinceCode != null">
+                    PROVINCE_CODE = #{item.provinceCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.cityCode != null">
                     CITY_CODE = #{item.cityCode,jdbcType=VARCHAR},
                 </if>
-                <if test="item.areaCode != null">
-                    AREA_CODE = #{item.areaCode,jdbcType=VARCHAR},
+                <if test="item.countyCode != null">
+                    COUNTY_CODE = #{item.countyCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.streetCode != null">
                     STREET_CODE = #{item.streetCode,jdbcType=VARCHAR},
                 </if>
-                <if test="item.committeeCode != null">
-                    COMMITTEE_CODE = #{item.committeeCode,jdbcType=VARCHAR},
+                <if test="item.neighborhoodCode != null">
+                    NEIGHBORHOOD_CODE = #{item.neighborhoodCode,jdbcType=VARCHAR},
                 </if>
                 <if test="item.houseNumber != null">
                     HOUSE_NUMBER = #{item.houseNumber,jdbcType=VARCHAR},
