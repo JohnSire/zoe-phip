@@ -37,11 +37,23 @@ var creationTime = Model.creationTime;
       <queryResponseCode code="error" />
     </queryAck>
     <queryByParameterPayload>
-      <statusCode code="new"></statusCode>
-      <providerID>
-        <value root="2.16.156.10011.1.4" extension="${Model.staffId}"></value>
-        <semanticsText>HealthCareProvider.id</semanticsText>
-      </providerID>
-    </queryByParameterPayload>
+          <statusCode code="new" />
+          <administrativeGender>
+            <value code="${Model.genderCode}" codeSystem="2.16.156.10011.2.3.3.4" displayName="${Model.genderName}" />
+            <semanticsText>PrincipalPerson.administrativeGenderCode</semanticsText>
+          </administrativeGender>
+          <dOB>
+            <value value="${Model.birthTime}" />
+            <semanticsText>PrincipalPerson.birthTime</semanticsText>
+          </dOB>
+          <providerID>
+            <value root="2.16.156.10011.1.4" extension="${Model.extensionId}" />
+            <semanticsText>HealthCareProvider.id</semanticsText>
+          </providerID>
+          <providerName>
+            <value>${Model.name}</value>
+            <semanticsText>PrincipalPerson.name</semanticsText>
+          </providerName>
+        </queryByParameterPayload>
   </controlActProcess>
 </PRPM_IN306011UV01>

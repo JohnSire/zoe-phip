@@ -61,6 +61,9 @@ public class DocumentRegisterImpl implements IDocumentRegister {
         try {
             //XmanIndex/XmamEhr/XmanEhrContent
             xmanIndex = XmlBeanUtil.toBean(document, XmanIndex.class, ProcessXmlUtil.getAdapterDom(xmanIndexAdapter));
+            if(null != xmanIndex && null != xmanIndex.getValidateMessage()){
+                throw new Exception(xmanIndex.getValidateMessage());
+            }
             xmanEhr = XmlBeanUtil.toBean(document, XmanEhr.class, ProcessXmlUtil.getAdapterDom(xmanEhrAdapter));
             xmanEhrContent = XmlBeanUtil.toBean(document, XmanEhrContent.class, ProcessXmlUtil.getAdapterDom(xmanEhrContentAdapter));
 
@@ -304,6 +307,9 @@ public class DocumentRegisterImpl implements IDocumentRegister {
         try {
             //XmanIndex/XmamEhr/XmanEhrContent
             xmanIndex = XmlBeanUtil.toBean(document, XmanIndex.class, ProcessXmlUtil.getAdapterDom(xmanIndexAdapter));
+            if(null != xmanIndex && null != xmanIndex.getValidateMessage()){
+                throw new Exception(xmanIndex.getValidateMessage());
+            }
             xmanEhr = XmlBeanUtil.toBean(document, XmanEhr.class, ProcessXmlUtil.getAdapterDom(xmanEhrAdapter));
             xmanEhrContent = XmlBeanUtil.toBean(document, XmanEhrContent.class, ProcessXmlUtil.getAdapterDom(xmanEhrContentAdapter));
             //xml 验证错误

@@ -43,4 +43,14 @@ public interface IAreaRegisterIn extends IBaseInService<AreaBaseInfo> {
     ServiceResultT<AreaBaseInfo> areaHistoryRegistryQuery(SystemData systemData, String message);
 
     ServiceResultT<AreaBaseInfo> getTopAreaBaseInfo(SystemData systemData);
+
+
+    /**
+     * 根据code查询子节点
+     *
+     * @param code
+     * @return
+     */
+    ServiceResultT<PageList<AreaBaseInfo>> getAreaChildrenByCode(SystemData systemData, String code, QueryPage queryPage);
+
 }

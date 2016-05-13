@@ -43,6 +43,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 身份证件号码
      */
     @Column(name = "ID_NO")
+    @ValidateIDCard
     private String idNo;
 
     /**
@@ -77,7 +78,6 @@ public class XmanBaseInfo extends RegisterEntity {
      */
     @XPath(defaultValue = "01")
     @Column(name = "ID_TYPE_CODE")
-    @ValidateIDCard
     private Integer idTypeCode;
 
     /**
