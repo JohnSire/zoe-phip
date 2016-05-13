@@ -66,6 +66,14 @@ public class AreaController extends BaseController {
         return ServiceFactory.getAreaRegisterIn().getAreaChildrenRegistry(ComSession.getUserInfo(), pid, keyWord, getQueryPage());
     }
 
+    @RequestMapping(value = "/getAreaListByCode")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<AreaBaseInfo>> getAreaChildrenByCode(String code) {
+        return ServiceFactory.getAreaRegisterIn().getAreaChildrenByCode(ComSession.getUserInfo(), code, getQueryPage());
+    }
+
+
     /**
      * 行政区域基本信息查询
      *
