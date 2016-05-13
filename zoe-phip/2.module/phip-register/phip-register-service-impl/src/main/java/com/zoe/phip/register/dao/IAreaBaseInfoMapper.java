@@ -52,4 +52,11 @@ public interface IAreaBaseInfoMapper extends IServiceMapper<AreaBaseInfo> {
      */
     AreaBaseInfo getAreaInfoByName(String name);
 
+    /**
+     * 根据code获取子节点
+     * @param code
+     * @return
+     */
+    List<AreaBaseInfo> getChildrenByCode(String code);
+
 }

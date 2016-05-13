@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
@@ -112,6 +113,25 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
         return getAreaInfoByName(name);
     }
 
+    /**
+     * 根据Code获取子节点
+     * @param code
+     * @param queryPage
+     * @return
+     */
+    PageList<AreaBaseInfo> getAreaChildrenByCode(String code, QueryPage queryPage){
+        PageList<AreaBaseInfo> pageList = new PageList<>();
+        queryPage.setOrderBy("T1.NAME");
+        //分页
+        SqlHelper.startPage(queryPage);
+        List<AreaBaseInfo> result = getMapper().getChildrenByCode(code);
+        PageInfo<AreaBaseInfo> pageInfo = new PageInfo<>();
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(result);
+        return pageList;
+    }
+
+
 
     @Override
     public AreaBaseInfo getAreaBaseInfo(Map<String, Object> map) {
@@ -131,6 +151,11 @@ public class AreaRegisterInImpl extends BaseInServiceImpl<AreaBaseInfo, IAreaBas
     @Override
     public AreaBaseInfo getAreaInfoByName(String name) {
         return getMapper().getAreaInfoByName(name);
+    }
+
+    @Override
+    public List<AreaBaseInfo> getChildrenByCode(String code) {
+        return getMapper().getChildrenByCode(code);
     }
 
     @Override
