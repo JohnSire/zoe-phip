@@ -11,10 +11,11 @@ import java.text.SimpleDateFormat;
 public class UrlExpand {
 
     public static String staticPath;
+    public static String webRoot;
     public static String versionValue;
 
     // 通过配置文件注入值
-    public void setPath(String pathUrl) {
+    public void setStaticPath(String pathUrl) {
         staticPath = pathUrl;
     }
 
@@ -22,11 +23,16 @@ public class UrlExpand {
         versionValue = v;
     }
 
+    public void setWebRoot(String root) {
+        webRoot = root;
+    }
+
+
     //设置静态资源路径，
     public static String SetStaticRoot(String filePath) {
         String version = UrlExpand.GetVersion();
         String staticResourcePath = staticPath;//此静态资源路径从配置文件中获取
-        staticResourcePath += "/";
+//        staticResourcePath += "/";
         return staticResourcePath + filePath + "?Version=" + version;
     }
 

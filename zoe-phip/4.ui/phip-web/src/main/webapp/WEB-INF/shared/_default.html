@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${baseTitle}</title>
     <script type="text/javascript">
-        var webRoot = "http://localhost:8080/", seajsRoot = '/', version = '20160317';
+        var webRoot = "${@com.zoe.phip.web.context.UrlExpand.webRoot}", seajsRoot = '/', version = '20160317';
+        var staticWebUrl='${@com.zoe.phip.web.context.UrlExpand.staticPath}';
     </script>
     <!--静态资源样式部分-->
     <!--<link href='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/jqueryui/jquery-ui-1.11.4.custom/jquery-ui.min.css")}' rel="stylesheet"/>-->

@@ -4,7 +4,7 @@ seajs.config({
     // 变量配置
     vars: {
         'dir': seajsRoot + 'assets/src/script',
-        'staticDir':'http://localhost:8082/assets/src/script/'
+        'staticDir':staticWebUrl+'/assets/src/script/'
     },
     // 路径配置
     paths: {
