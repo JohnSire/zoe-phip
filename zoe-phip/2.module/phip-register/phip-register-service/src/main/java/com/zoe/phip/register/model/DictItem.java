@@ -6,6 +6,7 @@
 package com.zoe.phip.register.model;
 
 import com.zoe.phip.module.service.entity.MasterEntity;
+import com.zoe.phip.module.service.entity.base.RegisterEntity;
 
 import javax.persistence.*;
 
@@ -16,7 +17,7 @@ import javax.persistence.*;
  * @date 2016-04-11
  */
 @Table(name = "PHIP_DICT_ITEM")
-public class DictItem extends MasterEntity {
+public class DictItem extends RegisterEntity {
     /**
      * 字典项编码
      */
