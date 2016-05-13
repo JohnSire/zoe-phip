@@ -90,7 +90,7 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
         int count = getMapper().selectCountByExample(cda);
 
         int i = setServiceImpl.versionStandardStruct(fkVersionId, setList);
-        int j = cdaServiceImpl.versionStandardStruct(fkVersionId, cdaList);
+        boolean j = cdaServiceImpl.versionStandardStruct(fkVersionId, cdaList);
         int p = fieldServiceImpl.versionStandardStruct(fkVersionId, fieldList);
         return p;
     }
