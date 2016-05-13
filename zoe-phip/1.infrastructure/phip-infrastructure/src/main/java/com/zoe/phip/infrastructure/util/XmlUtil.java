@@ -4,7 +4,6 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
 import org.dom4j.io.OutputFormat;
-import org.dom4j.io.SAXReader;
 import org.dom4j.io.SAXValidator;
 import org.dom4j.io.XMLWriter;
 import org.dom4j.util.XMLErrorHandler;
@@ -81,10 +80,12 @@ public final class XmlUtil {
                 logger.error("XML文件通过XSD文件校验失败!");
                 writer.write(handler.getErrors());
                 String error = "";
+                StringBuffer buf = new StringBuffer();
                 for (Node node : handler.getErrors().content()) {
-                    error += node.asXML() + System.getProperty("line.separator");
+                    buf.append(node.asXML());
+                    buf.append(System.getProperty("line.separator"));
                 }
-                logger.error("错误:"+error);
+                logger.error("错误:"+buf.toString());
                 return error;
             } else {
                 logger.info("XML文件通过XSD文件校验成功!");
@@ -106,5 +107,16 @@ public final class XmlUtil {
         String awsNamespace = "urn:hl7-org:v3";
         String xmlnsStr = " xmlns=\"" + awsNamespace + "\"";
         return xmlString.replace(xmlnsStr, "");
+    }
+
+
+    public static void main(String[] args) {
+        StringBuffer buffer= new StringBuffer();
+        for(int i=0;i<10;i++){
+                buffer.append("jkjk");
+            buffer.append("-9-");
+        }
+        String s= "错误的：+"+buffer.toString();
+        System.out.println(s);
     }
 }

@@ -1,6 +1,5 @@
 package com.zoe.phip.infrastructure.myvalidator.validator;
 
-import com.alibaba.dubbo.common.utils.CollectionUtils;
 import com.zoe.phip.infrastructure.bean.BeanFactory;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import org.apache.log4j.Logger;
@@ -9,12 +8,14 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import javax.validation.groups.Default;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 /**
  * Created by huangyinfu on 2016/4/11.
+ * updated by hyf on 2016/5/13
  */
 public class ValidationAppendUtils {
     //private static Validator validator =  Validation.buildDefaultValidatorFactory().getValidator();
@@ -33,7 +34,7 @@ public class ValidationAppendUtils {
     public static <T> ValidationResult validateEntity(T obj) throws BusinessException {
         ValidationResult result = new ValidationResult();
         Set<ConstraintViolation<T>> set = validator.validate(obj, Default.class);
-        if (CollectionUtils.isNotEmpty(set)) {
+        if (isNotEmpty(set)) {
             result.setHasErrors(true);
             Map<String, String> errorMsg = new HashMap<String, String>();
             //    String s ="";
@@ -57,7 +58,7 @@ public class ValidationAppendUtils {
     public static <T> ValidationResult validateProperty(T obj, String propertyName) {
         ValidationResult result = new ValidationResult();
         Set<ConstraintViolation<T>> set = validator.validateProperty(obj, propertyName, Default.class);
-        if (CollectionUtils.isNotEmpty(set)) {
+        if (isNotEmpty(set)) {
             result.setHasErrors(true);
             Map<String, String> errorMsg = new HashMap<String, String>();
             for (ConstraintViolation<T> cv : set) {
@@ -73,7 +74,7 @@ public class ValidationAppendUtils {
         ValidationResult result = new ValidationResult();
 
         Set<ConstraintViolation<T>> set = validator.validate(obj, paramVarArgs);
-        if (CollectionUtils.isNotEmpty(set)) {
+        if (isNotEmpty(set)) {
             result.setHasErrors(true);
             Map<String, String> errorMsg = new HashMap<String, String>();
             //    String s ="";
@@ -92,5 +93,10 @@ public class ValidationAppendUtils {
             result.setErrorMessage(s.toString());
         }
         return result;
+    }
+
+
+    public static boolean isNotEmpty(Collection<?> collection) {
+        return collection != null && collection.size() > 0;
     }
 }

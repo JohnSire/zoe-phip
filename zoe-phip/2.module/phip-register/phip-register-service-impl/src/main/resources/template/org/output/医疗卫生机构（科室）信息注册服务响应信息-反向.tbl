@@ -35,17 +35,42 @@ var creationTime=Model.creationTime;
   <controlActProcess classCode="CACT" moodCode="EVN">
     <code code="PRPM_TE401011UV01" codeSystem="2.16.840.1.113883.1.6" />
     <subject typeCode="SUBJ">
-      <registrationRequest classCode="REG" moodCode="RQO">
-        <statusCode></statusCode>
-        <subject1 typeCode="SBJ">
-          <assignedEntity classCode="ASSIGNED"></assignedEntity>
-        </subject1>
-        <author typeCode="AUT">
-          <assignedEntity classCode="ASSIGNED">
-            <id></id>
-          </assignedEntity>
-        </author>
-      </registrationRequest>
+        <registrationRequest classCode="REG" moodCode="RQO">
+             <statusCode code="active" />
+             <subject1 typeCode="SBJ">
+               <assignedEntity classCode="ASSIGNED ">
+                 <!--医疗卫生机构（科室）标识-科室为例-->
+                 <id root="${Model.divisionRoot}" extension="${Model.deptCode}" />
+                 <!--医疗卫生机构（科室）类别-科室为例-->
+                 <code code="${Model.deptTypeCode}" displayName="${Model.deptTypeName}" codeSystem="2.16.156.10011.2.3.2.62" codeSystemName="医疗卫生机构业务科室分类与代码表" />
+                 <!--医疗卫生机构（科室）角色名称-->
+                 <name>${Model.deptRoleName}</name>
+                 <assignedPrincipalOrganization classCode="ORG" determinerCode="INSTANCE">
+                   <!--医疗卫生机构（科室）实体名称-->
+                   <name>${Model.deptName}</name>
+                 </assignedPrincipalOrganization>
+               </assignedEntity>
+             </subject1>
+             <author typeCode="AUT">
+               <assignedEntity classCode="ASSIGNED">
+                 <!--医务人员ID-->
+                 <id root="2.16.156.10011.1.4" extension="${Model.assignedCode}" />
+                 <assignedPerson classCode="PSN" determinerCode="INSTANCE">
+                   <name>${Model.assignedName}</name>
+                 </assignedPerson>
+                 <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+                   <!--科室号标识-->
+                   <id root="2.16.156.10011.1.26" extension="${Model.assignedDeptCode}" />
+                   <name>${Model.assignedDeptName}</name>
+                   <contactParty classCode="CON">
+                     <contactPerson classCode="PSN" determinerCode="INSTANCE">
+                       <name>${Model.assignedContactPerson}</name>
+                     </contactPerson>
+                   </contactParty>
+                 </representedOrganization>
+               </assignedEntity>
+             </author>
+           </registrationRequest>
     </subject>
   </controlActProcess>
 </PRPM_IN401031UV01>
