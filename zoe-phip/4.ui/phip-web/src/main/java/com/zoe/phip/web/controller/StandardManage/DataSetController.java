@@ -101,7 +101,7 @@ public class DataSetController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询数据集子级")
     public ServiceResult getByChildSet(String pid) {
-        return ServiceFactory.getStSetInfoService().getByPid(ComSession.getUserInfo(), pid);
+        return ServiceFactory.getStSetInfoService().getByPid(ComSession.getUserInfo(), pid, getQueryPage());
     }
 
     /**

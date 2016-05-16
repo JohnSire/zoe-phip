@@ -34,5 +34,10 @@ public class StandardVersionServiceImplTest extends BaseTest {
         PageList<StandardVersion> list = impl.getDataPageList("1", queryPage);
     }
 
+    @Test
+    public void testDelete() throws Exception {
+        int i = impl.deleteVersion("11");
+    }
+
 
 }

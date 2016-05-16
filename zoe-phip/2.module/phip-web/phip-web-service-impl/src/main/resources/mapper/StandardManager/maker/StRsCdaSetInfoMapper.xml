@@ -10,14 +10,16 @@
     </resultMap>
     <insert id="addList" parameterType="com.zoe.phip.web.model.sdm.StRsCdaSetInfo">
         INSERT INTO PHIP_ST_RS_CDA_SET_INFO (
+        ID,
         FK_CDA_ID,
-        FK_SET_ID,
-        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        FK_SET_ID
+        <!--<include refid="com.zoe.phip.module.service.baseEntityInsert"/>-->)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
+            #{item.id,jdbcType=VARCHAR},
             #{item.fkCdaId,jdbcType=VARCHAR},
-            #{item.fkSetId,jdbcType=VARCHAR},
-            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
+            #{item.fkSetId,jdbcType=VARCHAR}
+            <!--<include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>-->
             FROM DUAL
         </foreach>
     </insert>

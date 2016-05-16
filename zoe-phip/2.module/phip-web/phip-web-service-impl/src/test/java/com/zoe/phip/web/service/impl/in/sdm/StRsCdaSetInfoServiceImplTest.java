@@ -1,5 +1,6 @@
 package com.zoe.phip.web.service.impl.in.sdm;
 
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.web.model.sdm.StRsCdaSetInfo;
 import com.zoe.phip.web.service.impl.in.BaseTest;
 import org.junit.Test;
@@ -20,6 +21,14 @@ public class StRsCdaSetInfoServiceImplTest extends BaseTest {
     public void testUpdate() throws Exception {
         StRsCdaSetInfo info = new StRsCdaSetInfo();
         List<StRsCdaSetInfo> listInfo = new ArrayList<>();
-//        listInfo.add(info.)
+        info.setFkCdaId("2");
+        info.setFkSetId("223");
+        info.setId(StringUtil.getUUID());
+        listInfo.add(info);
+//        info.setFkCdaId("2");
+//        info.setFkSetId("123");
+//        info.setId(StringUtil.getUUID());
+//        listInfo.add(info);
+        int i = impl.updateByCdaId("2", listInfo);
     }
 }

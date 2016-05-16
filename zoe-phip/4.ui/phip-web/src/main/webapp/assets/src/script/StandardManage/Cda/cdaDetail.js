@@ -14,6 +14,18 @@ define(function (require, exports, module) {
                     addUrl: 'cda/addCdaInfo',//新增接口Url
                     updateUrl: 'cda/updateCdaInfo',//修改接口Url
                     loadPageEvent: function () {
+                        //数据来源
+                        $("#fkSourceId").select({
+                            name: 'code',
+                            display: 'name',
+                            ajaxParam: {
+                                url: 'source/getSourceList',//url 请求的地址
+                            },
+                            value: 'code',//值
+                            text: 'name'//展示的内容
+                        });
+
+                        //档案类别
                         internal.selectList.dialog('sysDict', {
 
                             target: $("#archivesType"),
@@ -25,9 +37,10 @@ define(function (require, exports, module) {
                             selectParam: {
                                 isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
                                 treeVaildMsg: '父级分类不能是其本身!',
-                                multiselect: false
+                                multiselect: false,
+                                param: {"categoryId": "CDA"}
                             },
-                            param: {"categoryId": "CDA"}
+
 
                         });
                     }

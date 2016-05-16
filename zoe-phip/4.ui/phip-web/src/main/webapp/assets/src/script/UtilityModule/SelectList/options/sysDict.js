@@ -6,7 +6,7 @@ define(function (require, exports, module) {
     var internal = {
         sysDict: {
             winName: 'win_sysDict_select_list',
-            title: '档案类别选择列表',
+            title: '类别选择列表',
             selectParam: {
                 storage: [],
                 displayField: 'name',

@@ -13,8 +13,8 @@ define(function (require, exports, module) {
                 gridParam: {
                     url: webRoot + '/dataSet/getRsSetColumn',
                     columns: [
-                        {display: '名称', name: 'elementName', width: 120, align: 'left'},
-                        {display: '编码', name: 'elementCode', width: 280, align: 'left'}
+                        {display: '名称', name: 'fieldName', width: 120, align: 'left'},
+                        {display: '编码', name: 'fieldCode', width: 280, align: 'left'}
                     ],
                     usePage: true,
 

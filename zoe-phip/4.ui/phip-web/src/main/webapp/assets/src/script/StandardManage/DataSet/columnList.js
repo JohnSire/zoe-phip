@@ -15,14 +15,14 @@ define(function (require, exports, module) {
                 },
                 tools: {
                     btnbox: {
-                        'custom': {
-                            text: "返回 数据集列表", click: function () {
-
-                                var top = common.getTopWindowDom();
-                                var link = webRoot + "dataSet/view/dataSetList";
-                                top.frames["mainframe"].location.href = link;
-                            }
-                        },
+                        //'custom': {
+                        //    text: "返回 数据集列表", click: function () {
+                        //
+                        //        var top = common.getTopWindowDom();
+                        //        var link = webRoot + "dataSet/view/dataSetList";
+                        //        top.frames["mainframe"].location.href = link;
+                        //    }
+                        //},
                         'add': true,
                         'del': true
                     },
@@ -71,8 +71,15 @@ define(function (require, exports, module) {
                 }
             })
             var name = decodeURI(common.getParamFromUrl("dataSetName"));
-            var html = "<p style='margin-top: 9px; '>" + "当前列表为数据集（" + name + "）下的字段</p>"
-            $("#gridTools").append(html)
+         //   var html = "<p style='margin-top: 9px; '>" + "当前列表为数据集（" + name + "）下的字段</p>"
+          var  html='<div op="custom" style="float:left;"><p class="y-layout-position" ><span class="icon-position"></span><a class="link" id="back">'+name+'</a><span class="arrow">&gt;</span><a class="link">字段</a></p></div>'
+            $("#gridTools").append(html);
+            $("#back").click(function(){
+                var top = common.getTopWindowDom();
+                var link=webRoot+"dataSet/view/dataSetList";
+                top. frames["mainframe"].location.href = link;
+
+            });
         }
 
     };
