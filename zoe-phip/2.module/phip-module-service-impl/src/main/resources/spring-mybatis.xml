@@ -76,7 +76,7 @@
 
     <!--mybatis 通用mapper-->
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.zoe.phip.web.dao,com.zoe.phip.register.dao"/>
+        <property name="basePackage" value="com.zoe.phip.web.dao,com.zoe.phip.register.dao,com.zoe.phip.repository.dao"/>
         <!-- 3.2.2版本新特性，markerInterface可以起到mappers配置的作用，详细情况需要看Marker接口类 -->
         <property name="markerInterface" value="com.zoe.phip.module.service.mapper.IMyMapper"/>
         <!-- 通用Mapper通过属性注入进行配置，默认不配置时会注册Mapper<T>接口
@@ -118,8 +118,10 @@
      <aop:config>
          <aop:pointcut id="registerPointcut" expression="execution(* com.zoe.phip.register.service.impl.internal.*.*(..))"/>
          <aop:pointcut id="webPointcut" expression="execution(* com.zoe.phip.web.service.impl.in.sm.*.*(..))"/>
+         <aop:pointcut id="repositoryPointcut" expression="execution(* com.zoe.phip.repository.service.impl.internal.*.*(..))"/>
          <aop:advisor advice-ref="txAdvice" pointcut-ref="registerPointcut"/>
          <aop:advisor advice-ref="txAdvice" pointcut-ref="webPointcut"/>
+         <aop:advisor advice-ref="txAdvice" pointcut-ref="repositoryPointcut"/>
      </aop:config>
     <!--设定哪些方法需要事务 如果有try-catch事务不起作用?-->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
@@ -170,6 +172,6 @@
         <property name="validationMessageSource" ref="messageSource"/>
     </bean>
 <!--    <bean id="urlExpand" class="com.zoe.phip.register.util.ProcessXmlUtil">
-        <property name="schemasPath" value="${schemasPath}"/>
+        <property name="schemasPath" value="${schemas.path}"/>
     </bean>-->
 </beans>

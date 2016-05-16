@@ -3,7 +3,7 @@
  * Since 2008 - 2016
  */
 
-package com.zoe.phip.register.model;
+package com.zoe.phip.repository.model;
 
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateEmail;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateIDCard;

@@ -7,11 +7,13 @@ var bodySection = {
             <li class="list">
                 <p class="column-one">
                     <label class="label"><span class="text-mark">*</span>名称:</label>
-                    <input type="text" class="text-big" name="name" value="" datatype="*1-60" errormsg="名称长度应为1-60位！"/>
+                    <input type="text" class="text-big" name="name" value="" datatype="*1-512"
+                           errormsg="名称长度应为1-512位！"/>
                 </p>
                 <p class="column-one">
                     <label class="label"><span class="text-mark">*</span>标识符:</label>
-                    <input type="text" class="text-big" name="code" value="" datatype="*1-16" errormsg="标识符长度应为1-16位！"/>
+                    <input type="text" class="text-big" name="code" value="" datatype="*1-512"
+                           errormsg="标识符长度应为1-512位！"/>
                 </p>
             </li>
             <div class="column-one">
@@ -33,6 +35,24 @@ var bodySection = {
                     <option value="0">数据集来源</option>
                 </select>
             </div>
+            <li class="list">
+                <div class="column-one">
+                    <label class="label" for="d">数据资源库类别：</label>
+                    <div class="simulate-select" id="fkSourceType">
+                        <span class="text" style="width:370px;">--请选择数据资源库类别---</span>
+                        <i class="icon-grid icon-grid-fold-gray" style="position: absolute;left: 370px;top: 1px;"></i>
+                        <ul class="simulate-select-lists" style="display:none;width: 388px">
+                            <li class="simulate-select-list">
+                                --请选择数据资源库类别--
+                            </li>
+                        </ul>
+                        <div class="clear" style="width: 380px"></div>
+                    </div>
+                    <select name="" style="display:none;">
+
+                    </select>
+                </div>
+            </li>
             <li class="list">
                 <p class="column-one">
                     <label class="label label-textarea">描述:</label>

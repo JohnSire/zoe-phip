@@ -1,4 +1,4 @@
-package com.zoe.phip.register.service.external;
+package com.zoe.phip.repository.service.external;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;

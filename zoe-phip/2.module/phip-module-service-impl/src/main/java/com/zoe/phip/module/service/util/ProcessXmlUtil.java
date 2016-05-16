@@ -1,4 +1,4 @@
-package com.zoe.phip.register.util;
+package com.zoe.phip.module.service.util;
 
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlUtil;
@@ -9,11 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.InputStream;
-import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * Created by zengjiyang on 2016/4/13.
  */

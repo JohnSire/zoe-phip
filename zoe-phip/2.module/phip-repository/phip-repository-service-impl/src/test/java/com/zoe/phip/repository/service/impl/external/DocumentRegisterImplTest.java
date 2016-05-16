@@ -1,7 +1,7 @@
-package com.zoe.phip.register.service.impl;
+package com.zoe.phip.repository.service.impl.external;
 
-import com.zoe.phip.register.BaseTest;
-import com.zoe.phip.register.service.impl.external.DocumentRegisterImpl;
+
+import com.zoe.phip.repository.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -105,8 +105,8 @@ public class DocumentRegisterImplTest extends BaseTest {
         String ehrInput = "<RetrieveDocumentSetRequest xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"urn:hl7-org:v3\" xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/RetrieveDocumentSetRequest.xsd\">\n" +
                 "  <ID root=\"2.16.156.10011.0\" extension=\"C193FE3B-E71F-4D81-8B8B-9462F35E8D38\"/>\n" +
                 "  <DocumentRequest>\n" +
-                "    <RepositoryUniqueId>5d8a0768141a4438a5fba61e41191e28</RepositoryUniqueId>\n" +
-                "    <DocumentUniqueId>1ebfb5af898b4f939cca7810eba9e776</DocumentUniqueId>\n" +
+                "    <RepositoryUniqueId>6f2981a5f90b409480c1b6e654e15197</RepositoryUniqueId>\n" +
+                "    <DocumentUniqueId>1ee3acc5d5b54cd38e1365ecccef7404</DocumentUniqueId>\n" +
                 "  </DocumentRequest>\n" +
                 "</RetrieveDocumentSetRequest>";
 

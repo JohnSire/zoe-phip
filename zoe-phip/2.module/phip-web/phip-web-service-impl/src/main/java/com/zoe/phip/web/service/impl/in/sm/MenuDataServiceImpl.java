@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.infrastructure.entity.SortOrder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
@@ -78,6 +79,10 @@ public class MenuDataServiceImpl extends BaseInServiceImpl<MenuData, IMenuDataMa
     public PageList<MenuData> getMenuList(String key, QueryPage queryPage) throws Exception {
         PageList<MenuData> pageList = new PageList<MenuData>();
         //分页
+        if(StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())){
+            queryPage.setOrderBy("SORT");
+            queryPage.setSortOrder(SortOrder.ASC);
+        }
         SqlHelper.startPage(queryPage);
         Map<String, Object> paras = new HashMap<String, Object>();
         paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));

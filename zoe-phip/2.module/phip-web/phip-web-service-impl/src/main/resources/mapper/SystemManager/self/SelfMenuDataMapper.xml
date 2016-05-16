@@ -46,8 +46,8 @@
     <select id="getMenuDataList" resultMap="BaseResultMap" parameterType="java.util.Map">
         select * from SYS_MENU_DATA
         <where>
-            <if test="key !=null and key !=''">AND (UPPER(NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(CODE) LIKE
-                #{key,jdbcType=VARCHAR} OR UPPER(ADDRESS) LIKE #{key,jdbcType=VARCHAR})
+            <if test="key !=null and key !=''">
+                AND (UPPER(NAME) || UPPER(CODE) || UPPER(ADDRESS)) LIKE #{key,jdbcType=VARCHAR}
             </if>
             <include refid="com.zoe.phip.module.service.selfWhere"/>
         </where>

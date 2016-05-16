@@ -1,7 +1,7 @@
-package com.zoe.phip.register.dao;
+package com.zoe.phip.repository.dao;
 
-import com.zoe.phip.register.mapper.IServiceMapper;
-import com.zoe.phip.register.model.XmanIndex;
+import com.zoe.phip.module.service.mapper.IServiceMapper;
+import com.zoe.phip.repository.model.XmanIndex;
 
 import java.util.Map;
 

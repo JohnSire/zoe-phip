@@ -19,6 +19,7 @@ define(function (require, exports, module) {
                         {display: '机构代码', name: 'deptCode', width: 150, align: 'left'},
                         {display: '机构名称', name: 'deptName', width: 280, align: 'left'}
                     ],
+
                     usePager: true,
                     height: 250
                 },

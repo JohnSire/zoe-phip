@@ -70,7 +70,8 @@ define(function (require, exports, module) {
                         displayField: 'deptName',
                         valueField: 'deptCode',
                         selectParam: {
-                            multiselect: false
+                            multiselect: false,
+                            param: {type: 0}
                         }
                     });
                     ////建档组织机构
@@ -81,7 +82,8 @@ define(function (require, exports, module) {
                         displayField: 'deptName',
                         valueField: 'deptCode',
                         selectParam: {
-                            multiselect: false
+                            multiselect: false,
+                            param: {type: 0}
                         }
                     });
                     //登记机构
@@ -92,7 +94,8 @@ define(function (require, exports, module) {
                         displayField: 'deptName',
                         valueField: 'deptCode',
                         selectParam: {
-                            multiselect: false
+                            multiselect: false,
+                            param: {type: 0}
                         }
                     });
                     //职业类别

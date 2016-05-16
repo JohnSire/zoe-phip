@@ -122,7 +122,7 @@ public class XmanBaseInfo extends RegisterEntity {
     /**
      * 省级编码
      */
-    @Column(name = "STATE_CODE")
+    @Column(name = "PROVINCE_CODE")
     private String provinceCode;
 
     /**
@@ -134,7 +134,7 @@ public class XmanBaseInfo extends RegisterEntity {
     /**
      * 县级编码
      */
-    @Column(name = "AREA_CODE")
+    @Column(name = "COUNTY_CODE")
     private String countyCode;
     /**
      * 街道编码
@@ -144,7 +144,7 @@ public class XmanBaseInfo extends RegisterEntity {
     /**
      * 居委会编码
      */
-    @Column(name = "COMMITTEE_CODE")
+    @Column(name = "NEIGHBORHOOD_CODE")
     private String neighborhoodCode;
 
     /**
@@ -676,71 +676,71 @@ public class XmanBaseInfo extends RegisterEntity {
      * 省
      */
     @Transient
-    private String stateName;
+    private String provinceCodeName;
 
     /**
      * 城市
      */
     @Transient
-    private String cityName;
+    private String cityCodeName;
 
     /**
      * 县
      */
     @Transient
-    private String areaName;
+    private String countyCodeName;
 
     /**
      * 地址-乡（镇、街道办事处）
      */
     @Transient
-    private String streetName;
+    private String streetCodeName;
 
     /**
      * 地址-村（街、路、弄等）
      */
     @Transient
-    private String committeeName;
+    private String neighborhoodCodeName;
 
 
-    public String getStateName() {
-        return stateName;
+    public String getProvinceCodeName() {
+        return provinceCodeName;
     }
 
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
+    public void setProvinceCodeName(String provinceCodeName) {
+        this.provinceCodeName = provinceCodeName;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getCityCodeName() {
+        return cityCodeName;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setCityCodeName(String cityCodeName) {
+        this.cityCodeName = cityCodeName;
     }
 
-    public String getAreaName() {
-        return areaName;
+    public String getCountyCodeName() {
+        return countyCodeName;
     }
 
-    public void setAreaName(String areaName) {
-        this.areaName = areaName;
+    public void setCountyCodeName(String countyCodeName) {
+        this.countyCodeName = countyCodeName;
     }
 
-    public String getStreetName() {
-        return streetName;
+    public String getStreetCodeName() {
+        return streetCodeName;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
+    public void setStreetCodeName(String streetCodeName) {
+        this.streetCodeName = streetCodeName;
     }
 
-    public String getCommitteeName() {
-        return committeeName;
+    public String getNeighborhoodCodeName() {
+        return neighborhoodCodeName;
     }
 
-    public void setCommitteeName(String committeeName) {
-        this.committeeName = committeeName;
+    public void setNeighborhoodCodeName(String neighborhoodCodeName) {
+        this.neighborhoodCodeName = neighborhoodCodeName;
     }
 
     //region 健康卡

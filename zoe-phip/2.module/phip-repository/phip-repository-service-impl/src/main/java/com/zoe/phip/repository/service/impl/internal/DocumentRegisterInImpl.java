@@ -1,4 +1,4 @@
-package com.zoe.phip.register.service.impl.internal;
+package com.zoe.phip.repository.service.impl.internal;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
@@ -6,13 +6,13 @@ import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.UtilString;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
-import com.zoe.phip.register.dao.IEhrDataInfoMapper;
-import com.zoe.phip.register.dao.IXmanEhrContentMapper;
-import com.zoe.phip.register.dao.IXmanIndexMapper;
-import com.zoe.phip.register.model.XmanEhr;
-import com.zoe.phip.register.model.XmanEhrContent;
-import com.zoe.phip.register.model.XmanIndex;
-import com.zoe.phip.register.service.internal.IDocumentRegisterIn;
+import com.zoe.phip.repository.dao.IXmanEhrMapper;
+import com.zoe.phip.repository.dao.IXmanEhrContentMapper;
+import com.zoe.phip.repository.dao.IXmanIndexMapper;
+import com.zoe.phip.repository.model.XmanEhr;
+import com.zoe.phip.repository.model.XmanEhrContent;
+import com.zoe.phip.repository.model.XmanIndex;
+import com.zoe.phip.repository.service.internal.IDocumentRegisterIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
@@ -30,7 +30,7 @@ import java.util.Map;
 @ErrorMessage(code = "001", message = "由于注册档案的患者基本信息不存在，注册失败")
 @ErrorMessage(code = "002", message = "由于注册档案内容已存在，注册失败")
 @ErrorMessage(code = "003", message = "由于调阅档案不存在，预判失败")
-public class DocumentRegisterInImpl extends BaseInServiceImpl<XmanEhr, IEhrDataInfoMapper> implements IEhrDataInfoMapper{
+public class DocumentRegisterInImpl extends BaseInServiceImpl<XmanEhr, IXmanEhrMapper> implements IXmanEhrMapper {
 
     @Autowired
     private IXmanIndexMapper xmanIndexMapper;
