@@ -1,13 +1,22 @@
 package com.zoe.phip.register.service.impl.internal;
 
+import com.zoe.phip.infrastructure.entity.PageList;
+import com.zoe.phip.infrastructure.entity.QueryPage;
+import com.zoe.phip.register.BaseTest;
+import com.zoe.phip.register.model.DictCatalog;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by zhangwenbin on 2016/4/28.
  */
-public class DictRegisterInImplTest {
+public class DictRegisterInImplTest extends BaseTest {
+
+    @Autowired
+    private DictRegisterInImpl dictInImpl;
+
     @Test
     public void addDictCatalogRequest() throws Exception {
 
@@ -78,4 +87,21 @@ public class DictRegisterInImplTest {
 
     }
 
+    @Test
+    public void testUpdateDictWithFkCatalog() {
+        int result = dictInImpl.updateDictWithFkCatalog("","");
+        System.out.println(result);
+    }
+
+    @Test
+    public void testDictCatalogTreeQuery(){
+        PageList<DictCatalog> result = dictInImpl.dictCatalogTreeQuery("");
+        System.out.println(result);
+    }
+
+    @Test
+    public void testDictListWithoutFkCatalog(){
+        PageList<DictCatalog> result = dictInImpl.dictListWithoutFkCatalog(new QueryPage(),"");
+        System.out.println(result);
+    }
 }

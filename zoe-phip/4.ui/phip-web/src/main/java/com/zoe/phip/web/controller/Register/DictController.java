@@ -216,7 +216,7 @@ public class DictController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResultT<PageList<DictCatalog>> getDictCatalogList() {
-        return ServiceFactory.getDictRegisterIn().dictCatalogTreeQuery(ComSession.getUserInfo());
+        return ServiceFactory.getDictRegisterIn().dictCatalogTreeQuery(ComSession.getUserInfo(),"");
     }
     //endregion
 
