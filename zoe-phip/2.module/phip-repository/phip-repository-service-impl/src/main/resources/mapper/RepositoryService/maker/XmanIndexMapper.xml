@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zoe.phip.register.dao.IXmanIndexMapper">
-    <resultMap id="BaseResultMap" type="com.zoe.phip.register.model.XmanIndex"
+<mapper namespace="com.zoe.phip.repository.dao.IXmanIndexMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.repository.model.XmanIndex"
                extends="com.zoe.phip.module.service.MasterEntityResultMap">
         <result column="AREA_CODE" property="areaCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
@@ -145,7 +145,7 @@
             FROM DUAL
         </foreach>
     </insert>
-    <insert id="defaultAdd" parameterType="com.zoe.phip.register.model.XmanIndex">
+    <insert id="defaultAdd" parameterType="com.zoe.phip.repository.model.XmanIndex">
         INSERT INTO PHIP_XMAN_INDEX (
         AREA_CODE,
         XMAN_ID,

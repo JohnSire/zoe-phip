@@ -1,5 +1,6 @@
 package com.zoe.phip.register.util;
 
+import com.zoe.phip.module.service.util.ProcessXmlUtil;
 import org.dom4j.Document;
 import org.dom4j.io.SAXReader;
 import org.junit.Test;

@@ -8,8 +8,7 @@ package com.zoe.phip.register.dao;
 
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.module.service.mapper.IMyMapper;
-import com.zoe.phip.register.mapper.IServiceMapper;
+import com.zoe.phip.module.service.mapper.IServiceMapper;
 import com.zoe.phip.register.model.XmanBaseInfo;
 import com.zoe.phip.register.model.XmanCard;
 

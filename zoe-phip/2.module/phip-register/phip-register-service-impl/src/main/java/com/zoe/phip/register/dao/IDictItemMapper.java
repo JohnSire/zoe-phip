@@ -6,7 +6,7 @@
 
 package com.zoe.phip.register.dao;
 
-import com.zoe.phip.register.mapper.IServiceMapper;
+import com.zoe.phip.module.service.mapper.IServiceMapper;
 import com.zoe.phip.register.model.DictItem;
 
 import java.util.List;

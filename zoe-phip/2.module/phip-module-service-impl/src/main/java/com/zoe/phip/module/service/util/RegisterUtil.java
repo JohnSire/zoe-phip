@@ -1,4 +1,4 @@
-package com.zoe.phip.register.util;
+package com.zoe.phip.module.service.util;
 
 import com.zoe.phip.infrastructure.bean.BeanFactory;
 import com.zoe.phip.infrastructure.parser.Parser;
