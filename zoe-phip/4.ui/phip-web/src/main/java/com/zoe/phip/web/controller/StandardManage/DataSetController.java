@@ -100,8 +100,8 @@ public class DataSetController extends BaseController {
     @RequestMapping(value = "/getByChildSet")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询数据集子级")
-    public ServiceResultT<PageList<StSetInfo>> getByChildSet(String pid,String Keyword) {
-        return ServiceFactory.getStSetInfoService().getByPid(ComSession.getUserInfo(), pid, Keyword,getQueryPage());
+    public ServiceResultT<PageList<StSetInfo>> getByChildSet(String pid,String keyWord) {
+        return ServiceFactory.getStSetInfoService().getByPid(ComSession.getUserInfo(), pid, keyWord,getQueryPage());
     }
 
     /**

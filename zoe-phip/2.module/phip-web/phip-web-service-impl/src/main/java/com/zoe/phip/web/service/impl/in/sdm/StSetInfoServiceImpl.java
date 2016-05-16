@@ -87,7 +87,7 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
         SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();
         if (!StringUtil.isNullOrWhiteSpace(key)) map.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
-        if (!StringUtil.isNullOrWhiteSpace(key)) map.put("pid", pid);
+        if (!StringUtil.isNullOrWhiteSpace(pid)) map.put("pid", pid);
         List<StSetInfo> infoList = getByPid(map);
         PageInfo<StSetInfo> pageInfo = new PageInfo<>(infoList);
         pageList.setTotal((int) pageInfo.getTotal());
