@@ -31,4 +31,5 @@ public final class Constant {
     public static final String STANDARD_RsSetElement_SERVICE="StRsSetElementInfoService";
     public static final String STANDARD_RsCdaSetInfo_SERVICE="StRsCdaSetInfoService";
     public static final String STANDARD_VER_RSSET_SERVICE="StandardVerRsSetService";
+    public static final String STANDARD_VERRSCDA_SERVICE="StandardVerRsCdaService";
 }
