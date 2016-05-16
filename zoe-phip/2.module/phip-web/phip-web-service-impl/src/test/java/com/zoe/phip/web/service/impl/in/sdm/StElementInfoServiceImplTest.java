@@ -18,6 +18,6 @@ public class StElementInfoServiceImplTest extends BaseTest {
     @Test
     public void getList() throws Exception {
 
-        PageList<StElementInfo> list = impl.getDataPageList("", "", new QueryPage());
+      //  PageList<StElementInfo> list = impl.getDataPageList("", "", new QueryPage());
     }
 }
