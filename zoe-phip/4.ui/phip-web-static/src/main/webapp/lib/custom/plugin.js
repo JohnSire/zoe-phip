@@ -15,7 +15,74 @@
         $("[edittype='date']").ligerDateEditor({
             format: "yyyy-MM-dd",
             cancelable: true,
-            absolute: true
+            absolute: true,
+            onChangeDate: function (value, jqDate) {
+                //alert(value);
+                //此处有修改ligerui的参数:value;obj;两个参数
+                var groupname = jqDate.attr("groupname");
+                var compare = jqDate.attr("compare");
+                var comparemsg = jqDate.attr("comparemsg");
+
+                var bigDate = "", smallDate = "";
+                if (groupname) {
+                    if (compare == "big") {
+                        bigDate = value;
+                        smallDate = $("input[groupname='" + groupname + "'][compare='small']").val();
+
+                        if (bigDate && smallDate) {
+                            smallDate = smallDate.replace(/-/g, '/');
+                            bigDate = bigDate.replace(/-/g, '/');
+                            var sDate = new Date(smallDate);
+                            var bDate = new Date(bigDate);
+                            if (Date.parse(sDate) >= Date.parse(bDate)) {
+                                jqDate.val("");
+                                common.jsmsgError(comparemsg)
+                            }
+                        }
+
+                    } else {
+                        smallDate = value;
+                        bigDate = $("input[groupname='" + groupname + "'][compare='big']").val();
+                        if (bigDate && smallDate) {
+                            smallDate = smallDate.replace(/-/g, '/');
+                            bigDate = bigDate.replace(/-/g, '/');
+                            var sDate = new Date(smallDate);
+                            var bDate = new Date(bigDate);
+                            if (Date.parse(sDate) >= Date.parse(bDate)) {
+                                common.jsmsgError(comparemsg)
+
+                            }
+                        }
+                    }
+
+
+                    //// 获取同一分组下的两个值
+                    //$("input[groupname='" + groupname + "']").each(function () {
+                    //    var compare = $(this).attr("compare");
+                    //    switch (compare) {
+                    //        case "big":
+                    //            bigDate = $(this).val();
+                    //            break;
+                    //        case "small":
+                    //            samllDate = $(this).val();
+                    //            break;
+                    //    }
+                    //});
+                    //if (smallDate && bigDate) {
+                    //    smallDate = smallDate.replace(/-/g, '/');
+                    //    bigDate = bigDate.replace(/-/g, '/');
+                    //    var sDate = new Date(smallDate);
+                    //    var bDate = new Date(bigDate);
+                    //    if (Date.parse(sDate) >= Date.parse(bDate)) {
+                    //        common.jsmsgError("日期大小不正确", function () {
+                    //            jqDate.val("");
+                    //        })
+                    //
+                    //    }
+                    //}
+                }
+
+            }
         });
     }
     //表单绑定值

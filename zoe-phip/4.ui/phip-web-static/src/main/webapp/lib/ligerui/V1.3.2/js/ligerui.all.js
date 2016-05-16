@@ -4359,7 +4359,10 @@
             };
             var formatVal = g.getFormatDate(newDate);
             g.inputText.val(formatVal);
-            g.trigger('changeDate', [formatVal]);
+
+            /*update by lqh*/
+            g.trigger('changeDate', [formatVal, g.inputText]);
+            //g.trigger('changeDate', [formatVal]);
             if ($(g.dateeditor).is(":visible"))
                 g.bulidContent();
         },
@@ -18162,9 +18165,15 @@
             treeWidth += p.nodeWidth;
             g.tree.width(treeWidth);
         },
-        _getChildNodeClassName: function () {
+        _getChildNodeClassName: function (superChildrenIcon) {
             var g = this, p = this.options;
-            return 'l-tree-icon-' + p.childIcon;
+            var childIcon = '';
+            if (superChildrenIcon) {
+                childIcon = 'l-tree-icon-' + superChildrenIcon;
+            } else {
+                childIcon = 'l-tree-icon-' + p.childIcon;
+            }
+            return childIcon;
         },
         _getParentNodeClassName: function (isOpen) {
             var g = this, p = this.options;
@@ -18208,6 +18217,7 @@
             else treehtmlarr.push("<ul class='l-children'>");
             for (var i = 0; i < data.length; i++) {
                 var o = data[i];
+                //alert(JSON.stringify(o));
                 var isFirst = i == 0;
                 var isLastCurrent = i == data.length - 1;
                 var delay = g._getDelay(o, outlineLevel);
@@ -18245,6 +18255,7 @@
                     if (isLast[k]) treehtmlarr.push('<div class="l-box"></div>');
                     else treehtmlarr.push('<div class="l-box l-line"></div>');
                 }
+
                 if (g.hasChildren(o)) {
                     if (isExpandCurrent) treehtmlarr.push('<div class="l-box l-expandable-open"></div>');
                     else treehtmlarr.push('<div class="l-box l-expandable-close"></div>');
@@ -18278,7 +18289,15 @@
                     if (p.childIcon) {
                         //node icon
                         treehtmlarr.push('<div class="l-box l-tree-icon ');
-                        treehtmlarr.push(g._getChildNodeClassName() + " ");
+
+
+                        //console.log(o["type"]);
+                        var superChildrenIcon = null;
+                        if (typeof(p["renderChildrenIcon"]) == "function") {
+                            superChildrenIcon = p["renderChildrenIcon"](o);
+                            console.log(superChildrenIcon);
+                        }
+                        treehtmlarr.push(g._getChildNodeClassName(superChildrenIcon) + " ");
                         if (p.iconFieldName && o[p.iconFieldName])
                             treehtmlarr.push('l-tree-icon-none');
                         treehtmlarr.push('">');

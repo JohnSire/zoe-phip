@@ -97,13 +97,15 @@ var bodySection = {
                 <p class="column-three">
                     <label class="label" for="effectiveTimeLow">有效期开始：</label>
                     <span class="text-line-outer">
-                    <input edittype="date" type="text" name="effectiveTimeLow" class="text"/>
+                    <input edittype="date" type="text" groupname="timeGroup" compare="small" comparemsg="有效开始时间不能大于有效结束时间!" name="effectiveTimeLow"
+                           class="text"/>
                     </span>
                 </p>
                 <p class="column-three">
                     <label class="label" for="effectiveTimeHigh">有效期结束：</label>
                     <span class="text-line-outer">
-                    <input edittype="date" type="text" name="effectiveTimeHigh" class="text"/>
+                    <input edittype="date" type="text" groupname="timeGroup" compare="big" comparemsg="有效结束时间不能小于有效开始时间!"
+                           name="effectiveTimeHigh" class="text"/>
                     </span>
                 </p>
                 <p class="column-three">

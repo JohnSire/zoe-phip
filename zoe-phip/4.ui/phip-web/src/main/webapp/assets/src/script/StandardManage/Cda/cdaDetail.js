@@ -52,7 +52,6 @@ define(function (require, exports, module) {
 
                         //档案类别
                         internal.selectList.dialog('sysDict', {
-
                             target: $("#archivesType"),
                             name: 'archivesType',
                             parentName: 'parentName',

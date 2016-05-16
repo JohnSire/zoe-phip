@@ -84,7 +84,7 @@ define(function (require, exports, module) {
                         {
                             display: '编辑科室', isSort: false, width: 150, align: 'center',
                             render: function (rowdata) {
-                                return "<a onclick='javascript:winEditDepartment(\"" + rowdata["deptCode"] + "\")'>编辑科室</a>"
+                                return "<a class='icon-grid icon-grid-setting' title='科室编辑' onclick='javascript:winEditDepartment(\"" + rowdata["deptCode"] + "\")'></a>"
                             }
                         }
                     ],

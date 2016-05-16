@@ -21,7 +21,6 @@ define(function (require, exports, module) {
                     extendParam = getExtendParam();
                 }
                 var ajaxParam = $.extend(true, {}, extendParam, param);
-
                 gridObj.set("page", 1);
                 gridObj.set("newPage", 1);
                 $.each(ajaxParam, function (index, item) {
@@ -60,8 +59,6 @@ define(function (require, exports, module) {
             $.each(ajaxParam, function (index, item) {
                 gridObj.setParm(index, item);
             });
-            gridObj.set("page", 1);
-            gridObj.set("newPage", 1);
             gridObj.reload();
         }
     })
