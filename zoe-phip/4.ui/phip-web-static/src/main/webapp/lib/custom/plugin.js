@@ -15,7 +15,7 @@
         $("[edittype='date']").ligerDateEditor({
             format: "yyyy-MM-dd",
             cancelable: true,
-            absolute: true,
+            absolute: false,
             onChangeDate: function (value, jqDate) {
                 //alert(value);
                 //此处有修改ligerui的参数:value;obj;两个参数
