@@ -170,6 +170,6 @@
         <property name="validationMessageSource" ref="messageSource"/>
     </bean>
 <!--    <bean id="urlExpand" class="com.zoe.phip.register.util.ProcessXmlUtil">
-        <property name="schemasPath" value="${schemasPath}"/>
+        <property name="schemasPath" value="${schemas.path}"/>
     </bean>-->
 </beans>
