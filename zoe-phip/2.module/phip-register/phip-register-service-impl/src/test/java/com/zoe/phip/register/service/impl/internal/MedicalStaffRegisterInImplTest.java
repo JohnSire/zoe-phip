@@ -20,7 +20,7 @@ public class MedicalStaffRegisterInImplTest extends BaseTest {
     @Test
     public void testProviderListQuery() throws Exception {
         PageList<MedicalStaffInfo> results =
-                medicalStaffRegisterIn.providerListQuery("2", "","A210", "", new QueryPage());
+                medicalStaffRegisterIn.providerListQuery("3", "","", "", new QueryPage());
     }
     @Test
     public void testProvicerDetailsQuery() throws Exception {
