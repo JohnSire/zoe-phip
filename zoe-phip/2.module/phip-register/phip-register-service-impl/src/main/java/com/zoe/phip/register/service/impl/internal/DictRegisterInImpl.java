@@ -144,9 +144,14 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public PageList<DictCatalog> dictCatalogTreeQuery() {
+    public PageList<DictCatalog> dictCatalogTreeQuery(String codes) {
         PageList<DictCatalog> pageList = new PageList<DictCatalog>();
-        List<DictCatalog> results = getMapper().getDictCatalogTree();
+        String[] array = UtilString.commaDelimitedListToStringArray(codes);
+        Map<String,Object> paras = new HashMap<String, Object>();
+        if(array.length > 0) {
+            paras.put("codes", array);
+        }
+        List<DictCatalog> results = getMapper().getDictCatalogTree(paras);
         PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(results);
@@ -154,9 +159,10 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public List<DictCatalog> getDictCatalogTree() {
-        return getMapper().getDictCatalogTree();
+    public List<DictCatalog> getDictCatalogTree(Map<String, Object> args) {
+        return getMapper().getDictCatalogTree(args);
     }
+
 
     @Override
     public PageList<DictCatalog> dictCatalogListQueryPage(QueryPage queryPage, String key) {
@@ -263,9 +269,12 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public int updateDictWithFkCatalog(String pId, String catalogIds) {
         String[] ids = UtilString.commaDelimitedListToStringArray(catalogIds);
         Map<String, Object> paras = new HashMap<String, Object>();
-        paras.put("catalogIds", ids);
-        paras.put("pId", pId);
-        return getMapper().updateDictWithFkCatalog(paras);
+        if(ids.length > 0) {
+            paras.put("catalogIds", ids);
+            paras.put("pId", pId);
+            return getMapper().updateDictWithFkCatalog(paras);
+        }
+        return 0;
     }
 
     @Override
