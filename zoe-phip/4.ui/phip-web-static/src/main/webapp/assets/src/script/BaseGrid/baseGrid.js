@@ -65,7 +65,6 @@ define(function (require, exports, module) {
             gridObj.set("page", 1);
             gridObj.set("newPage", 1);
             gridObj.reload();
-            //extendParam={};
         }
     })
     module.exports = baseGrid;
