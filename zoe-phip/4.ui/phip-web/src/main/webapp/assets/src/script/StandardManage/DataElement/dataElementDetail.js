@@ -36,7 +36,7 @@ define(function (require, exports, module) {
                             text: 'name'//展示的内容
                         });
                         //分类
-                        $("#fkTypeId").select({
+                       /* $("#fkTypeId").select({
                             name: 'code',
                             display: 'name',
                             ajaxParam: {
@@ -46,6 +46,9 @@ define(function (require, exports, module) {
                             renderData: function (data) {
                                 return data.result;
                             },
+                            value: 'code',//值
+                            text: 'name'//展示的内容
+                        });*/
                         internal.selectList.dialog('sysDict', {
                             target: $("#fkTypeId"),
                             name: 'dictCode',//绑定value值
