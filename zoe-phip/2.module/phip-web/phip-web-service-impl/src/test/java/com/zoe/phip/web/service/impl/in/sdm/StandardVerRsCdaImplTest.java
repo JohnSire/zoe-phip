@@ -28,4 +28,12 @@ public class StandardVerRsCdaImplTest extends BaseTest {
 //        boolean b = impl.versionStandardStruct("1112", info);
         List<StandardVerRsCda> info = impl.getCdaRsByFkVersionId("1111");
     }
+
+    @Test
+    public void testAddCdaRs() throws Exception {
+        StandardVerRsCda entity = new StandardVerRsCda();
+        entity.setFkCdaId("3");
+        entity.setFkVersionId("1111");
+        int add = impl.add(entity);
+    }
 }

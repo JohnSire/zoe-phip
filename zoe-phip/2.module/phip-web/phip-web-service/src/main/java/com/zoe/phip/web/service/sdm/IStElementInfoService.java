@@ -23,6 +23,7 @@ import java.util.List;
 public interface IStElementInfoService extends IBaseInService<StElementInfo> {
 
 
+    ServiceResultT<StElementInfo> getDataById(SystemData systemData, String id);
 
     ServiceResultT<PageList<StElementInfo>> getDataPageList(SystemData systemData, String key, QueryPage queryPage);
 

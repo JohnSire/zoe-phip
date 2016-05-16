@@ -25,5 +25,6 @@ public interface IStNormSourceInfoService extends IBaseInService<StNormSourceInf
 
     ServiceResultT<PageList<StNormSourceInfo>> getDataPageList(SystemData systemData, String key, QueryPage queryPage);
 
+
     ServiceResultT<PageList<StNormSourceInfo>> getDataPageByTypeList(SystemData systemData, String type,String key, QueryPage queryPage);
 }

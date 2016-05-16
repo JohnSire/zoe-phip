@@ -57,6 +57,23 @@
         </set>
         where id = #{id}
     </update>
+    <select id="getDataById" parameterType="java.lang.String" resultMap="MultiResultMap">
+        SELECT PSEI.*,
+        PSNSI.NAME SOURCE_NAME,
+        SSDI.NAME TYPE_NAME,
+        PDC.NAME DICT_NAME,
+        PDC.CODE DICT_CODE
+        FROM PHIP_ST_ELEMENT_INFO PSEI
+        LEFT JOIN
+        PHIP_ST_NORM_SOURCE_INFO PSNSI
+        ON PSEI.FK_SOURCE_ID = PSNSI.ID
+        LEFT JOIN SYS_SYSTEM_DICT_ITEM SSDI
+        ON SSDI.ID = PSEI.FK_TYPE_ID
+        LEFT JOIN PHIP_DICT_CATALOG PDC
+        ON PSEI.FK_DICT_ID = PDC.ID
+        WHERE 1=1
+        AND PSEI.ID=#{id, jdbcType=VARCHAR}
+    </select>
     <select id="getDataPageList" parameterType="java.util.Map" resultMap="MultiResultMap">
         SELECT PSEI.*,
         PSNSI.NAME SOURCE_NAME,
@@ -103,6 +120,13 @@
     <select id="getDictId" parameterType="java.lang.String" resultType="java.lang.String">
         SELECT ID from PHIP_DICT_CATALOG PDC
         WHERE UPPER (PDC.CODE) = UPPER (#{code, jdbcType=VARCHAR})
+    </select>
+    <select id="getRelationById" parameterType="java.util.Map" resultMap="MultiResultMap">
+        SELECT PSEI.*, PSNSI.NAME SOURCE_NAME
+        FROM PHIP_ST_ELEMENT_INFO PSEI
+        LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
+        ON PSEI.FK_SOURCE_ID = PSNSI.ID
+        WHERE PSEI.id =   #{id, jdbcType=VARCHAR}
     </select>
 
 </mapper>

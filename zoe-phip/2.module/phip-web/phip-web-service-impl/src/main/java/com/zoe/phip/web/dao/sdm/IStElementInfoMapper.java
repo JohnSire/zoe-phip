@@ -28,4 +28,8 @@ public interface IStElementInfoMapper extends IMyMapper<StElementInfo> {
 
 
     String getDictId(String code);
+
+    StElementInfo getRelationById(String id);
+
+    StElementInfo getDataById(String id);
 }

@@ -48,9 +48,12 @@ public class StandardVerRsCdaServiceImpl extends BaseInServiceImpl<StandardVerRs
 
     }
 
-    public int versionStandardRsAdd(String fkVersionId,List<StandardVerRsCda> fieldList) throws Exception {
-        return 0;
-    }
+//    public int versionStandardRsAdd(String fkVersionId,List<StandardVerRsCda> fieldList) throws Exception {
+//        Example cda = new Example(StandardVerRsCda.class);
+//        cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
+//        int i = super.addList(fieldList);
+//        return i;
+//    }
 
     public List<StandardVerRsCda> getVerRsCda(String fkVersionId) throws Exception {
         Example cda = new Example(StandardVerRsCda.class);
