@@ -20,16 +20,21 @@ define(function (require, exports, module) {
                 loadPageEvent: function () {
 
                     //数据来源
-                    $("#fkSourceId").select({
-                        name: 'code',
-                        display: 'name',
-                        ajaxParam: {
-                            url: 'source/getSourceList',//url 请求的地址
-                        },
-                        value: 'code',//值
-                        text: 'name'//展示的内容
-                    });
+                    internal.selectList.dialog('source', {
 
+                        target: $("#fkSourceId"),
+                        name: 'fkSourceId',
+                        parentName: 'parentName',
+                        valueField: 'id',
+                        displayField: 'name',
+                        fkNullContent: '无',
+                        selectParam: {
+                            isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
+                            treeVaildMsg: '父级分类不能是其本身!',
+                            multiselect: false,
+                            param: {"type":1}
+                        }
+                    });
                     //业务时间列
                     internal.selectList.dialog('dataSetColumn', {
                         target: $("#btnBusinessColumn"),
@@ -47,7 +52,23 @@ define(function (require, exports, module) {
                         },
 
                     });
+//数据更新时间列
+                    internal.selectList.dialog('dataSetColumn', {
+                        target: $("#updateTimeFieldId"),
+                        name: 'updateTimeFieldId',
+                        parentName: 'parentName',
+                        valueField: 'id',
+                        displayField: 'name',
+                        fkNullContent: '--请选择业务时间列--',
+                        selectParam: {
+                            isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
+                            treeVaildMsg: '父级分类不能是其本身!',
+                            multiselect: false,
+                            param: {"id": id}
 
+                        },
+
+                    });
                     //父级数据集
                     internal.selectList.dialog('dataSet', {
                         target: $("#btnDataSet"),
