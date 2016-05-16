@@ -32,6 +32,7 @@ public class StandardVerRsCdaServiceImpl extends BaseInServiceImpl<StandardVerRs
 
     public boolean versionStandardStruct(String fkVersionId,List<StandardVerRsCda> fieldList) throws Exception {
         List<StandardVerRsCda> info = getCdaRsByFkVersionId(fkVersionId);
+        //版本未关联CDA关联表
         if (info.size() == 0) {
             Example cda = new Example(StandardVerRsCda.class);
             cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
@@ -43,6 +44,8 @@ public class StandardVerRsCdaServiceImpl extends BaseInServiceImpl<StandardVerRs
             boolean b = super.updateList(fieldList);
             return b;
         }
+
+
     }
 
     public List<StandardVerRsCda> getVerRsCda(String fkVersionId) throws Exception {
