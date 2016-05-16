@@ -16,36 +16,45 @@ define(function (require, exports, module) {
                     loadPageEvent: function () {
                         //值域选择
                         internal.selectList.dialog('domain', {
-                            target: $("#fkdictName"),
-                            name: 'dictCode',//绑定value值
+                            target: $("#fkDictId"),
+                            name: 'fkDictId',//绑定value值
                             parentName: 'dictName',//绑定name值
                             displayField: 'name',
-                            valueField: 'code',
+                            valueField: 'id',
                             selectParam: {
                                 multiselect: false
                             }
                         });
-                        //标准来源
-                        $("#fkSourceId").select({
-                            name: 'code',
-                            display: 'name',
-                            ajaxParam: {
-                                url: 'source/getSourceList',//url 请求的地址
-                            },
-                            value: 'code',//值
-                            text: 'name'//展示的内容
+                        //数据来源
+                        internal.selectList.dialog('source', {
+
+                            target: $("#fkSourceId"),
+                            name: 'fkSourceId',
+                            parentName: 'parentName',
+
+                            displayField: 'name',
+                            valueField: 'id',
+                            fkNullContent: '无',
+                            selectParam: {
+                                isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
+                                treeVaildMsg: '父级分类不能是其本身!',
+                                multiselect: false,
+                                param: {"type":0}
+                            }
                         });
-                        //分类
-                        $("#fkTypeId").select({
-                            name: 'code',
-                            display: 'name',
-                            ajaxParam: {
-                                url: 'dict/getItemList ',//url 请求的地址
-                                data: {catalogCode: sysDictConfig.elementType}
-                            },
-                            value: 'code',//值
-                            text: 'name'//展示的内容
+                        //16个分类
+                        internal.selectList.dialog('sysDict', {
+                            target: $("#fkTypeId"),
+                            name: 'fkTypeId',//绑定value值
+                            parentName: 'dictName',//绑定name值
+                            displayField: 'name',
+                            valueField: 'Id',
+                            selectParam: {
+                                multiselect: false,
+                                param: {"categoryId": "4D01A80C08CB4ACA88679457A3358A94"}
+                            }
                         });
+
                     }
                 }
             );

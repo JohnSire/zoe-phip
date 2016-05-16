@@ -15,16 +15,16 @@ define(function (require, exports, module) {
                 },
                 tools: {
                     btnbox: {
-                        'custom': {
-                            text: "返回 CDA列表", click: function () {
-
-                                var top = common.getTopWindowDom();
-                                var link = webRoot + "cda/view/cdaList";
-                                top.frames["mainframe"].location.href = link;
-                            }
-
-
-                        },
+                        //'custom': {
+                        //    text: "返回 CDA列表", click: function () {
+                        //
+                        //        var top = common.getTopWindowDom();
+                        //        var link = webRoot + "cda/view/cdaList";
+                        //        top.frames["mainframe"].location.href = link;
+                        //    }
+                        //
+                        //
+                        //},
 
 
                         'add': true,
@@ -65,8 +65,19 @@ define(function (require, exports, module) {
                 }
             })
             var name = decodeURI(common.getParamFromUrl("cdaName"));
-            var html = "<p style='margin-top: 9px; '>" + "当前列表为CDA（" + name + "）下的数据集</p>"
+            //var html = "<p style='margin-top: 9px; '>" + "当前列表为CDA（" + name + "）下的数据集</p>"
+            //$("#gridTools").append(html);
+            var html = '<div op="custom" style="float:left;"><p class="y-layout-position" ><span class="icon-position"></span><a class="link" id="back">' + name + '</a><span class="arrow">&gt;</span><a class="link">关联数据集</a></p></div>'
             $("#gridTools").append(html);
+
+            $("#back").click(function(){
+                var top = common.getTopWindowDom();
+                var link = webRoot + "cda/view/cdaList";
+                top. frames["mainframe"].location.href = link;
+
+            });
+
+
             $(".btn-add").parent().unbind();
             internal.selectList.dialog('dataSet', {
                 target: $(".btn-add"),

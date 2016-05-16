@@ -5,8 +5,8 @@ define(function (require, exports, module) {
     var internal = {
         selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
-            var id=common.getParamFromUrl("id");
-            if(id){
+            var id = common.getParamFromUrl("id");
+            if (id) {
                 $("#column").show();
             }
 
@@ -18,6 +18,24 @@ define(function (require, exports, module) {
                 addUrl: 'dataSet/addSetInfo',//新增接口Url
                 updateUrl: 'dataSet/updateSetInfo',//修改接口Url
                 loadPageEvent: function () {
+
+                    //数据来源
+                    internal.selectList.dialog('source', {
+
+                        target: $("#fkSourceId"),
+                        name: 'fkSourceId',
+                        parentName: 'parentName',
+                        valueField: 'id',
+                        displayField: 'name',
+                        fkNullContent: '无',
+                        selectParam: {
+                            isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
+                            treeVaildMsg: '父级分类不能是其本身!',
+                            multiselect: false,
+                            param: {"type":1}
+                        }
+                    });
+                    //业务时间列
                     internal.selectList.dialog('dataSetColumn', {
                         target: $("#btnBusinessColumn"),
                         name: 'bussTimeFieldId',
@@ -28,31 +46,30 @@ define(function (require, exports, module) {
                         selectParam: {
                             isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
                             treeVaildMsg: '父级分类不能是其本身!',
-                            multiselect: false
-                        },
-                        param: {"id": id}
-                    });
-                    //internal.selectList.dialog('dataSetColumn', {
-                    //    target: $("#btnDataUpdateColumn"),
-                    //    name: 'pid',
-                    //    parentName: 'parentName',
-                    //    valueField: 'id',
-                    //    displayField: 'name',
-                    //    fkNullContent: '根级节点',
-                    //    selectParam: {
-                    //        isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
-                    //        treeVaildMsg: '父级分类不能是其本身!',
-                    //        multiselect: false
-                    //    },
-                    //    buttonsExtend: [{
-                    //        text: '根级节点', onclick: function (item, dialog) {
-                    //            $('input[name="pid"]').val(0);
-                    //            $("#btnParentCatalog").find(".text-line-content").text("根级节点");
-                    //            dialog.close();
-                    //        }
-                    //    }]
-                    //});
+                            multiselect: false,
+                            param: {"id": id}
 
+                        },
+
+                    });
+//数据更新时间列
+                    internal.selectList.dialog('dataSetColumn', {
+                        target: $("#updateTimeFieldId"),
+                        name: 'updateTimeFieldId',
+                        parentName: 'parentName',
+                        valueField: 'id',
+                        displayField: 'name',
+                        fkNullContent: '--请选择业务时间列--',
+                        selectParam: {
+                            isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
+                            treeVaildMsg: '父级分类不能是其本身!',
+                            multiselect: false,
+                            param: {"id": id}
+
+                        },
+
+                    });
+                    //父级数据集
                     internal.selectList.dialog('dataSet', {
                         target: $("#btnDataSet"),
                         name: 'pid',
