@@ -95,11 +95,11 @@ define(function (require, exports, module) {
 
 
     var xsl = {
-        show: function () {
+        show: function (id) {
             var dialogParam =
             {
                 title: "xsl编辑",
-                url: 'cda/view/editXsl',
+                url: 'cda/view/editXsl?id='+id,
                 width: 680,
                 height: 480,
                 buttons: [
@@ -109,6 +109,7 @@ define(function (require, exports, module) {
                         verifySubmit: true,
                         submitText: '提交中...',
                         onclick: function (item, dialog, submited) {
+                            item;
                         }
                     },
                     {
@@ -125,11 +126,11 @@ define(function (require, exports, module) {
 
     }
     var xml = {
-        show: function () {
+        show: function (id) {
             var dialogParam =
             {
                 title: "xml编辑",
-                url: 'cda/view/editXml',
+                url: 'cda/view/editXml?id='+id,
                 width: 680,
                 height: 480,
                 buttons: [
@@ -139,7 +140,9 @@ define(function (require, exports, module) {
                         verifySubmit: true,
                         submitText: '提交中...',
                         onclick: function (item, dialog, submited) {
+                            item;
                         }
+
                     },
                     {
                         text: "取消",

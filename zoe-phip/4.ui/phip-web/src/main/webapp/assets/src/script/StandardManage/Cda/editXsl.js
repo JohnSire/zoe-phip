@@ -4,7 +4,7 @@
 
 define(function (require, exports, module) {
     var internal = {
-
+        xslType:"ToHtml",
         init: function () {
             internal.event();
             internal.showEditor();
@@ -12,15 +12,15 @@ define(function (require, exports, module) {
         event: function () {
             //上传
             $("#uploadXsl").click(function () {
-                var path=$("#clientPath").val()
-                if(!path||path=="请选择Xsl文件"){
+                var path = $("#clientPath").val()
+                if (!path || path == "请选择Xsl文件") {
                     common.jsmsgError("请选择Xsl文件");
                     return;
                 }
                 var options = {
                     success: function (data) {
                         if (data.isSuccess) {
-                            var fileContent=data.result.fileContent;
+                            var fileContent = data.result.fileContent;
                             fileContent = fileContent.replace(/</g, '&lt;');
                             fileContent = fileContent.replace(/>/g, '&gt;');
                             internal.editor.html(fileContent);
@@ -42,12 +42,14 @@ define(function (require, exports, module) {
                 internal.xslToStruct();
 
             });
-
+            // xsl Tab
             $("#xsltab .list").click(function () {
-
+                internal.xslType =$(this).attr("type");
                 $("#xsltab .list").removeClass("active");
                 $(this).addClass("active");
             });
+
+            //选择文件
             $("#choosefile").change(function (e) {
                 var src = e.target || window.event.srcElement; //获取事件源，兼容chrome/IE
                 var arr = $(this).val().split('\\');
