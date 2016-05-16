@@ -122,7 +122,7 @@ public class XmanBaseInfo extends RegisterEntity {
     /**
      * 省级编码
      */
-    @Column(name = "STATE_CODE")
+    @Column(name = "PROVINCE_CODE")
     private String provinceCode;
 
     /**
@@ -134,7 +134,7 @@ public class XmanBaseInfo extends RegisterEntity {
     /**
      * 县级编码
      */
-    @Column(name = "AREA_CODE")
+    @Column(name = "COUNTY_CODE")
     private String countyCode;
     /**
      * 街道编码
@@ -144,7 +144,7 @@ public class XmanBaseInfo extends RegisterEntity {
     /**
      * 居委会编码
      */
-    @Column(name = "COMMITTEE_CODE")
+    @Column(name = "NEIGHBORHOOD_CODE")
     private String neighborhoodCode;
 
     /**
