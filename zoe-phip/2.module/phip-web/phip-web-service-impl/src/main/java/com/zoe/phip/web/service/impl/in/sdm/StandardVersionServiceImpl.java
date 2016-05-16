@@ -100,6 +100,12 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
         return p;
     }
 
+    public int versionStandardRsAdd(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsDict> fieldList) {
+
+        return 0;
+    }
+
+
 
 
     public int versionDictUpdate(String fkVersionId, List<StandardVerRsDict> infoList) throws Exception {
