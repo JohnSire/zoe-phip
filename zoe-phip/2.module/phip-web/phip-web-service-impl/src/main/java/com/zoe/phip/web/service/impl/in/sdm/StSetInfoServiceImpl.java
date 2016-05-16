@@ -80,6 +80,16 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
         return pageList;
     }
 
+    public PageList<StSetInfo> getByPid(String pid, QueryPage queryPage) {
+        PageList<StSetInfo> pageList = new PageList<>();
+        SqlHelper.startPage(queryPage);
+        List<StSetInfo> infoList = getByPid(pid);
+        PageInfo<StSetInfo> pageInfo = new PageInfo<>(infoList);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(infoList);
+        return pageList;
+    }
+
     @Override
     public List<StSetInfo> getDataPageList(Map<String, Object> map) {
         return getMapper().getDataPageList(map);
