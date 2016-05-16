@@ -30,7 +30,7 @@ define(function (require, exports, module) {
 
                             target: $("#fkSourceId"),
                             name: 'fkSourceId',
-                            parentName: 'parentName',
+                            parentName: 'sourceName',
 
                             displayField: 'name',
                             valueField: 'id',
@@ -39,7 +39,7 @@ define(function (require, exports, module) {
                                 isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
                                 treeVaildMsg: '父级分类不能是其本身!',
                                 multiselect: false,
-                                param: {"type":0}
+                                param: {"type":1}
                             }
                         });
                         //16个分类
