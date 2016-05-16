@@ -94,4 +94,16 @@
         SELECT ID from PHIP_DICT_CATALOG PDC
         WHERE UPPER (PDC.CODE) = UPPER (#{code, jdbcType=VARCHAR})
     </select>
+
+    <select id="getRelationById" parameterType="java.util.Map" resultMap="MultiResultMap">
+        SELECT PSSI.*, PSNSI.NAME SOURCE_NAME
+        FROM PHIP_ST_SET_INFO PSSI
+        LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
+        ON PSSI.FK_NORM_SOURCE_ID = PSNSI.ID
+        WHERE PSSI.id =   #{id, jdbcType=VARCHAR}
+    </select>
+
+
+
+
 </mapper>

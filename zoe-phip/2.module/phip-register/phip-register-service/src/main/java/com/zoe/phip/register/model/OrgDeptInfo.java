@@ -202,12 +202,12 @@ public class OrgDeptInfo extends RegisterEntity {
      * 维度
      */
     @Column(name = "G_LATITUDE")
-    private double glatitude;
+    private Double glatitude;
     /**
      * 经度
      */
     @Column(name = "G_LONGITUDE")
-    private double glongitude;
+    private Double glongitude;
     /**
      * 省份编码
      */
@@ -415,19 +415,19 @@ public class OrgDeptInfo extends RegisterEntity {
         this.streetCode = streetCode;
     }
 
-    public double getGlongitude() {
+    public Double getGlongitude() {
         return glongitude;
     }
 
-    public void setGlongitude(double glongitude) {
+    public void setGlongitude(Double glongitude) {
         this.glongitude = glongitude;
     }
 
-    public double getGlatitude() {
+    public Double getGlatitude() {
         return glatitude;
     }
 
-    public void setGlatitude(double glatitude) {
+    public void setGlatitude(Double glatitude) {
         this.glatitude = glatitude;
     }
 

@@ -40,6 +40,9 @@
         <if test="_parameter.containsKey('key')">
             AND UPPER (CONCAT(PSNSI.CODE,PSNSI.name) ) LIKE UPPER (CONCAT(CONCAT('%', #{key, jdbcType=VARCHAR}),'%'))
         </if>
+        <if test="_parameter.containsKey('type')">
+            AND PSNSI.STANDARD_TYPE= #{type, jdbcType=DECIMAL}
+        </if>
     </select>
 
 </mapper>

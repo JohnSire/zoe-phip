@@ -34,11 +34,9 @@ define(function (require, exports, module) {
                                         }
                                     }
                                 });
-
                                 if (typeof(callback) == "function") {
                                     callback();
                                 }
-
                             }
                         }
                     })

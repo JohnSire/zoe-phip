@@ -50,7 +50,6 @@ define(function (require, exports, module) {
                         text: 'name'//展示的内容
 
                     });
-
                     //民族
                     internal.selectList.dialog('dictItem', {
                         target: $("#btnFkNationality"),
@@ -109,70 +108,41 @@ define(function (require, exports, module) {
                         }
                     });
                     //地理区划关联封装
-                    internal.areaRelevance.init("2", function () {
-                        var strAddress = "";
-                        //{name: 'stateCode', display: 'stateName'},
-                        //{name: 'cityCode', display: 'cityName'},
-                        //{name: 'areaCode', display: 'areaName'},
-                        //{name: 'streetCode', display: 'streetName'},
-                        //{name: 'committeeCode', display: 'committeeName'}
-
-
-                        var t1 = $('select[name="stateCode"]').val();
-                        var t2 = $('select[name="cityCode"]').val();
-                        var t3 = $('select[name="areaCode"]').val();
-                        var t4 = $('select[name="streetCode"]').val();
-                        var t5 = $('select[name="committeeCode"]').val();
-
-                        if (t1) {
-                            strAddress += $('select[name="stateCode"]').find("option[value='" + t1 + "']").text();
-                        }
-                        if (t2) {
-                            strAddress += $('select[name="cityCode"]').find("option[value='" + t2 + "']").text();
-                        }
-                        if (t3) {
-                            strAddress += $('select[name="areaCode"]').find("option[value='" + t3 + "']").text();
-                        }
-                        if (t4) {
-                            strAddress += $('select[name="streetCode"]').find("option[value='" + t4 + "']").text();
-                        }
-                        if (t4) {
-                            strAddress += $('select[name="committeeCode"]').find("option[value='" + t5 + "']").text();
-                        }
-
-                        $("input[name='address']").val(strAddress);
-
-                    });
-
+                    internal.areaRelevance.init(function () {
+                        internal.setAddress();
+                    })
+                    //门牌号改变地址更新
                     $('input[name="houseNumber"]').on("keyup", function () {
-                        var strAddress = "";
-                        var t1 = $('select[name="stateCode"]').val();
-                        var t2 = $('select[name="cityCode"]').val();
-                        var t3 = $('select[name="areaCode"]').val();
-                        var t4 = $('select[name="streetCode"]').val();
-                        var t5 = $('select[name="committeeCode"]').val();
-
-                        if (t1) {
-                            strAddress += $('select[name="stateCode"]').find("option[value='" + t1 + "']").text();
-                        }
-                        if (t2) {
-                            strAddress += $('select[name="cityCode"]').find("option[value='" + t2 + "']").text();
-                        }
-                        if (t3) {
-                            strAddress += $('select[name="areaCode"]').find("option[value='" + t3 + "']").text();
-                        }
-                        if (t4) {
-                            strAddress += $('select[name="streetCode"]').find("option[value='" + t4 + "']").text();
-                        }
-                        if (t4) {
-                            strAddress += $('select[name="committeeCode"]').find("option[value='" + t5 + "']").text();
-                        }
-                        strAddress += $(this).val();
-                        $("input[name='address']").val(strAddress);
+                        internal.setAddress();
                     })
 
                 }
             })
+        },
+        setAddress: function () {
+            var strAddress = "";
+            var t1 = $('select[name="provinceCode"]').val();
+            var t2 = $('select[name="cityCode"]').val();
+            var t3 = $('select[name="countyCode"]').val();
+            var t4 = $('select[name="streetCode"]').val();
+            var t5 = $('select[name="neighborhoodCode"]').val();
+            if (t1) {
+                strAddress += $('select[name="provinceCode"]').find("option[value='" + t1 + "']").text();
+            }
+            if (t2) {
+                strAddress += $('select[name="cityCode"]').find("option[value='" + t2 + "']").text();
+            }
+            if (t3) {
+                strAddress += $('select[name="countyCode"]').find("option[value='" + t3 + "']").text();
+            }
+            if (t4) {
+                strAddress += $('select[name="streetCode"]').find("option[value='" + t4 + "']").text();
+            }
+            if (t4) {
+                strAddress += $('select[name="neighborhoodCode"]').find("option[value='" + t5 + "']").text();
+            }
+            strAddress += $('input[name="houseNumber"]').val();
+            $("input[name='address']").val(strAddress);
         }
     }
     exports.init = function () {
