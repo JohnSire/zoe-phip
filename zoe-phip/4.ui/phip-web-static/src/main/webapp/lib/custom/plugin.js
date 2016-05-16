@@ -199,7 +199,6 @@
             },
             //渲染插件
             render: function (self) {
-                console.log(self["param"]["name"]);
                 var name = self["param"]["name"], display = self["param"]["display"];
                 if (!internal.preText) {
                     internal.preText = $(self).find("ul li:first-child").text();
@@ -233,8 +232,6 @@
                             $(jqSelect).val(internal.selectValue);
                         });
                     } else {
-
-
                         //从服务端请求的数据处理方式
                         if (!(self.isLoadData) || self.isFirstReset) {
                             jqUl.empty();

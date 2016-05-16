@@ -43,6 +43,9 @@ define(function (require, exports, module) {
                                 url: 'dict/getItemList ',//url 请求的地址
                                 data: {catalogCode: sysDictConfig.elementType}
                             },
+                            renderData: function (data) {
+                                return data.result;
+                            },
                             value: 'code',//值
                             text: 'name'//展示的内容
                         });
