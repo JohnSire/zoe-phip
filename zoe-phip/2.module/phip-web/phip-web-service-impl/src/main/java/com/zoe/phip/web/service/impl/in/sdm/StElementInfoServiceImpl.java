@@ -34,7 +34,7 @@ import java.util.TreeMap;
  * @date 2016-05-03
  */
 @Repository("stElementInfoService")
-@Service(interfaceClass = IStElementInfoService.class,protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStElementInfoService.class, protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
 @ErrorMessage(code = "001", message = "数据元标识({0})已经存在!")
 public class StElementInfoServiceImpl extends BaseInServiceImpl<StElementInfo, IStElementInfoMapper> implements IStElementInfoMapper {
 

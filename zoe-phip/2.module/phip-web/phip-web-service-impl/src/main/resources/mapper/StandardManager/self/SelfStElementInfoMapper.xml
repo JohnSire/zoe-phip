@@ -64,7 +64,8 @@
         PDC.NAME DICT_NAME,
         PDC.CODE DICT_CODE
         FROM PHIP_ST_ELEMENT_INFO PSEI
-        LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
+        LEFT JOIN
+        PHIP_ST_NORM_SOURCE_INFO PSNSI
         ON PSEI.FK_SOURCE_ID = PSNSI.ID
         LEFT JOIN SYS_SYSTEM_DICT_ITEM SSDI
         ON SSDI.ID = PSEI.FK_TYPE_ID
@@ -83,6 +84,9 @@
         <if test="_parameter.containsKey('fkDictId')">
             AND PSEI.FK_DICT_ID = (#{fkDictId, jdbcType=VARCHAR})
         </if>
+        <!--<if test="_parameter.containsKey('type')">
+            AND PSNSI.STANDARD_TYPE = (#{type, jdbcType=VARCHAR})
+        </if>-->
     </select>
 
     <select id="getOne" parameterType="java.lang.String" resultMap="BaseResultMap">

@@ -6,9 +6,7 @@
 
 package com.zoe.phip.web.dao.sdm;
 
-import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.module.service.mapper.IMyMapper;
-import com.zoe.phip.web.model.sdm.StElementInfo;
 import com.zoe.phip.web.model.sdm.StSetInfo;
 
 import java.util.List;
@@ -50,5 +48,7 @@ public interface IStSetInfoMapper extends IMyMapper<StSetInfo> {
     List<StSetInfo> getByPid(String pid);
 
     String getDictId(String code);
+
+    StSetInfo getRelationById(String id);
 
 }

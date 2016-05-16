@@ -4,6 +4,7 @@
 */
 package com.zoe.phip.web.service.impl.in.sdm;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
@@ -12,11 +13,8 @@ import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.web.dao.sdm.IStNormSourceInfoMapper;
 import com.zoe.phip.web.model.sdm.StNormSourceInfo;
-import com.zoe.phip.web.model.sm.MenuData;
 import com.zoe.phip.web.service.sdm.IStNormSourceInfoService;
 import org.springframework.stereotype.Repository;
-import com.alibaba.dubbo.config.annotation.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.Map;
@@ -43,6 +41,24 @@ public class StNormSourceInfoServiceImpl extends BaseInServiceImpl<StNormSourceI
         pageList.setRows(results);
         return pageList;
     }
+
+    public PageList<StNormSourceInfo> getDataPageList(String type,String key, QueryPage queryPage) {
+        PageList<StNormSourceInfo> pageList = new PageList<>();
+        SqlHelper.startPage(queryPage);
+        Map<String, Object> map = new TreeMap<>();
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            map.put("key", key);
+        }
+        if (!StringUtil.isNullOrWhiteSpace(type)) {
+            map.put("type", type);
+        }
+        List<StNormSourceInfo> results = getMapper().getDataPageList(map);
+        PageInfo<StNormSourceInfo> pageInfo = new PageInfo<>(results);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(results);
+        return pageList;
+    }
+
 
 
     @Override
