@@ -59,7 +59,7 @@ public interface IDictRegisterIn extends IBaseInService<DictCatalog> {
      * @param systemData
      * @return
      */
-    ServiceResultT<PageList<DictCatalog>> dictCatalogTreeQuery(SystemData systemData);
+    ServiceResultT<PageList<DictCatalog>> dictCatalogTreeQuery(SystemData systemData, String codes);
 
     /**
      * 7)	字典分类列表查询(不包含字典)
