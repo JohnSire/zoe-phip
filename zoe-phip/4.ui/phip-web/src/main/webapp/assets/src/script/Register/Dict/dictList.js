@@ -36,6 +36,12 @@ define(function (require, exports, module) {
                     textFieldName: 'name',
                     checkbox: false,
                     nodeWidth: 180,
+                    renderChildrenIcon: function (nodeData) {
+                        //重写子节点（如果子节点是分类，则显示文件假）
+                        if (nodeData["type"] == 0) {
+                            return "folder";
+                        }
+                    },
                     //选择
                     onSelect: function (data) {
                         internal.catalogId = data["data"]["id"];

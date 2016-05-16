@@ -15,7 +15,6 @@ define(function (require, exports, module) {
                     updateUrl: 'cda/updateCdaInfo',//修改接口Url
                     loadPageEvent: function () {
                         internal.selectList.dialog('sysDict', {
-
                             target: $("#archivesType"),
                             name: 'archivesType',
                             parentName: 'parentName',

@@ -459,6 +459,9 @@
             g.inputText.change(function ()
             {
                 g.onTextChange();
+
+
+
             }).blur(function ()
             {
                 g.text.removeClass("l-text-focus");

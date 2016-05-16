@@ -13,6 +13,7 @@ import com.zoe.phip.web.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -93,7 +94,7 @@ public class AreaController extends BaseController {
      * @param areaBaseInfo
      * @return
      */
-    @RequestMapping(value = "/addAreaInfo")
+    @RequestMapping(value = "/addAreaInfo", method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Add}, name = "新增")
     public ServiceResult addAreaInfo(AreaBaseInfo areaBaseInfo, HttpServletRequest request) {
@@ -106,7 +107,7 @@ public class AreaController extends BaseController {
      * @param areaBaseInfo
      * @return
      */
-    @RequestMapping(value = "/updateAreaInfo")
+    @RequestMapping(value = "/updateAreaInfo", method = RequestMethod.POST)
     @ResponseBody
     @AuthAction(permission = {Permission.Update}, name = "更新")
     public ServiceResult updateAreaInfo(AreaBaseInfo areaBaseInfo, HttpServletRequest request) {
