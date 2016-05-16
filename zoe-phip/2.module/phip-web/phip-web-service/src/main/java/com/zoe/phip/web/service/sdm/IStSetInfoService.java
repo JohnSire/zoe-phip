@@ -45,4 +45,9 @@ public interface IStSetInfoService extends IBaseInService<StSetInfo> {
 
     ServiceResult importRsSetElementInfo(SystemData systemData, List<StRsSetElementInfo> infoList);
 
+    /**
+     * 获取数据集详情关联（标准来源表）
+     * @return
+     */
+    ServiceResult getRelationById(String id );
 }

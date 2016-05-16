@@ -205,4 +205,11 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
     public String getDictId(String code) {
         return getMapper().getDictId(code);
     }
+
+    @Override
+    public StSetInfo getRelationById(String id) {
+        return getMapper().getRelationById(id);
+    }
+
+
 }
