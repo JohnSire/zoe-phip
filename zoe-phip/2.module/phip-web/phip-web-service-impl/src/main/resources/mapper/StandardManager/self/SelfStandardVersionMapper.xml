@@ -53,6 +53,13 @@
             AND UPPER (CONCAT(PSV.CODE,PSV.NAME) ) LIKE UPPER (CONCAT(CONCAT('%', #{key, jdbcType=VARCHAR}),'%'))
         </if>
     </select>
+    <select id="getPid" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT COUNT (*) FROM PHIP_STANDARD_VERSION PSV
+        WHERE 1=1
+        <if test="_parameter.containsKey('pid')">
+            AND PSV.PID != #{pid, jdbcType=VARCHAR}
+        </if>
+    </select>
 
 
 </mapper>

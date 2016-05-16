@@ -34,6 +34,7 @@ import java.util.Map;
 @Repository("standardVersionService")
 @Service(interfaceClass = IStandardVersionService.class,protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
 @ErrorMessage(code = "001", message = "标准版本标识({0})已经存在!")
+@ErrorMessage(code = "002", message = "当前版本标识({0})存在子版本，不允许删除!")
 public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersion, IStandardVersionMapper> implements IStandardVersionMapper {
 
     @Autowired
@@ -82,6 +83,10 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
         return getMapper().getDataPageList(map);
     }
 
+    @Override
+    public int getPid(Map<String, Object> map) {
+        return getMapper().getPid(map);
+    }
 
 
     public int versionStandardStruct(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList) throws Exception {
@@ -96,9 +101,6 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
     }
 
 
-    public int getVersionInfo(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList) throws Exception {
-        return 0;
-    }
 
     public int versionDictUpdate(String fkVersionId, List<StandardVerRsDict> infoList) throws Exception {
         return dictServiceImpl.versionDictUpdate(fkVersionId, infoList);
@@ -118,5 +120,16 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
         pageList.setRows(results);
         return pageList;
     }
+
+    public int deleteVersion(String id) throws Exception{
+        Map<String, Object> map = MapUtil.createMap(m -> {
+            m.put("pid", id);
+        });
+        if (getPid(map) > 0) {
+            throw new BusinessException("002", id);
+        }
+        return super.deleteById(id);
+    }
+
 
 }

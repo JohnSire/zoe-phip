@@ -26,6 +26,12 @@ public interface IStElementInfoService extends IBaseInService<StElementInfo> {
     ServiceResultT<PageList<StElementInfo>> getDataPageList(SystemData systemData, String key, QueryPage queryPage);
 
 
+    /**
+     * 导出数据元
+     * @param systemData
+     * @param fkSourceId
+     * @return
+     */
     ServiceResultT<List<StElementInfo>> exportElement(SystemData systemData, String fkSourceId);
 
     /**

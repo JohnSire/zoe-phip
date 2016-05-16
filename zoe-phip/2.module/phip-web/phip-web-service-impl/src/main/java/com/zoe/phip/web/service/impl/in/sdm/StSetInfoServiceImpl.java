@@ -34,7 +34,7 @@ import java.util.TreeMap;
  * @date 2016-05-03
  */
 @Repository("stSetInfoService")
-@Service(interfaceClass = IStSetInfoService.class, protocol = {"dubbo"},proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStSetInfoService.class, protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
 @ErrorMessage(code = "001", message = "数据集标识({0})已经存在,新增失败!")
 @ErrorMessage(code = "002", message = "数据集标识({0})已经存在,更新失败!")
 public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInfoMapper> implements IStSetInfoMapper {
@@ -63,14 +63,21 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
     }
 
 
-    public List<StSetInfo> getByCdaId(String fkCdaId, String key) {
+    public PageList<StSetInfo> getByCdaId(String fkCdaId, String key, QueryPage queryPage) {
+        queryPage.setOrderBy("PSSI.CODE");
+        queryPage.setSortOrder(SortOrder.ASC);
+        PageList<StSetInfo> pageList = new PageList<>();
+        SqlHelper.startPage(queryPage);
         Map<String, Object> map = MapUtil.createMap(m -> {
             m.put("fkCdaId", fkCdaId);
-            if (!StringUtil.isNullOrWhiteSpace(key)) m.put("key", key);
+            if (!StringUtil.isNullOrWhiteSpace(key)) m.put("key", SqlHelper.getLikeStr(key));
         });
         List<StSetInfo> infoList = getMapper().getByCdaId(map);
+        PageInfo<StSetInfo> pageInfo = new PageInfo<>(infoList);
+        pageList.setTotal((int) pageInfo.getTotal());
+        pageList.setRows(infoList);
         super.dispose(map);
-        return infoList;
+        return pageList;
     }
 
     @Override

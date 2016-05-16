@@ -23,4 +23,6 @@ public interface IStandardVerRsFieldMapper extends IMyMapper<StandardVerRsField>
     int getSingle(Map<String, Object> map);
 
     List<StRsSetElementInfo> getFieldByFkVersionId(Map<String, Object> map);
+
+    
 }

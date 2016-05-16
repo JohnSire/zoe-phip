@@ -43,6 +43,7 @@ public interface IStandardVersionService extends IBaseInService<StandardVersion>
      */
     ServiceResult versionStandardStruct(SystemData systemData, String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsDict> fieldList);
 
+
     ServiceResult updateVersion(SystemData systemData, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsDict> fieldList);
 
 
@@ -54,4 +55,12 @@ public interface IStandardVersionService extends IBaseInService<StandardVersion>
      * @return
      */
     ServiceResult versionDictUpdate(SystemData systemData, String fkVersionId, List<StandardVerRsField> infoList);
+
+    /**
+     * 删除版本信息
+     * @param systemData
+     * @param id
+     * @return
+     */
+    ServiceResult deleteVersion(SystemData systemData, String id);
 }

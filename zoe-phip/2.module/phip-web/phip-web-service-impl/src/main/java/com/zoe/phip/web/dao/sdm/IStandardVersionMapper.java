@@ -23,6 +23,7 @@ public interface IStandardVersionMapper extends IMyMapper<StandardVersion> {
 
     List<StandardVersion> getDataPageList(Map<String, Object> map);
 
+    int getPid(Map<String, Object> map);
 
 
 }
