@@ -57,6 +57,10 @@ public class StElementInfoServiceImpl extends BaseInServiceImpl<StElementInfo, I
         return pageList;
     }
 
+    public StElementInfo getDataById(String id) {
+        return getMapper().getDataById(id);
+    }
+
     /**
      * 导入数据元
      *
@@ -142,4 +146,11 @@ public class StElementInfoServiceImpl extends BaseInServiceImpl<StElementInfo, I
     public String getDictId(String code) {
         return getMapper().getDictId(code);
     }
+
+    @Override
+    public StElementInfo getRelationById(String id) {
+        return getMapper().getRelationById(id);
+    }
+
+
 }
