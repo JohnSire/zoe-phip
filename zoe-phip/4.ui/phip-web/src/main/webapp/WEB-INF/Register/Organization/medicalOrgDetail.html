@@ -99,11 +99,11 @@ var bodySection = {
                 </p>
                 <p class="column-three">
                     <label class="label" for="glongitude">经度：</label>
-                    <input type="text" name="glongitude" class="text"/>
+                    <input type="text" name="glongitude" class="text" dataType="/^(\d+(\.\d{0,15})?)?$/" errormsg="经度只能填写数字！"/>
                 </p>
                 <p class="column-three">
                     <label class="label" for="glatitude">纬度：</label>
-                    <input type="text" name="glatitude" class="text"/>
+                    <input type="text" name="glatitude" class="text" dataType="/^(\d+(\.\d{0,15})?)?$/" errormsg="纬度只能填写数字！"/>
                 </p>
 
             <li class="list">
