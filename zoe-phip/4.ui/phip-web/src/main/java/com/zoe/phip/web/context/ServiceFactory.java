@@ -98,4 +98,8 @@ public final class ServiceFactory {
     public static IStandardVerRsSetService getStandardVerRsSetService() {
         return BeanFactory.getBean(Constant.STANDARD_VER_RSSET_SERVICE);
     }
+
+    public static IStandardVerRsCdaService getStandardVerRsCdaService() {
+        return BeanFactory.getBean(Constant.STANDARD_VERRSCDA_SERVICE);
+    }
 }

@@ -58,5 +58,8 @@
                      url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStRsCdaSetInfoService"/>
     <dubbo:reference id="StandardVerRsSetService" interface="com.zoe.phip.web.service.sdm.IStandardVerRsSetService"
                      url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStandardVerRsSetService"/>
+    <dubbo:reference id="StandardVerRsCdaService" interface="com.zoe.phip.web.service.sdm.IStandardVerRsCdaService"
+                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStandardVerRsCdaService"/>
+
 
 </beans>

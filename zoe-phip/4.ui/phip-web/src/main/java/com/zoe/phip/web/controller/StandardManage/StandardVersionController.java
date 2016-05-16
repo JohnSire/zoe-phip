@@ -8,6 +8,7 @@ import com.zoe.phip.infrastructure.security.Permission;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 import com.zoe.phip.web.controller.BaseController;
+import com.zoe.phip.web.model.sdm.StCdaInfo;
 import com.zoe.phip.web.model.sdm.StSetInfo;
 import com.zoe.phip.web.model.sdm.StandardVersion;
 import org.springframework.stereotype.Controller;
@@ -125,7 +126,7 @@ public class StandardVersionController extends BaseController {
     }
 
     //endregion
-    //region 标准版本获取CDA、数据集接口
+    //region 标准版本
 
     /**
      * 通过标准版本ID和CDA的ID获取数据集
@@ -140,6 +141,19 @@ public class StandardVersionController extends BaseController {
     @AuthAction(permission = {Permission.Query}, name = "通过标准版本ID和CDA的ID获取数据集")
     public ServiceResultT<List<StSetInfo>> getVerRsSetInfo(String fkVersionId, String fkCdaId) {
         return ServiceFactory.getStandardVerRsSetService().getVerRsSetInfo(ComSession.getUserInfo(), fkVersionId, fkCdaId);
+    }
+
+    /**
+     * 通过标准版本ID获取CDA
+     *
+     * @param fkVersionId
+     * @return
+     */
+    @RequestMapping(value = "/getVerRsCdaInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "通过标准版本ID获取CDA")
+    public ServiceResultT<List<StCdaInfo>> getVerRsCdaInfo(String fkVersionId) {
+        return ServiceFactory.getStandardVerRsCdaService().getVerRsCdaInfo(ComSession.getUserInfo(), fkVersionId);
     }
 
 }
