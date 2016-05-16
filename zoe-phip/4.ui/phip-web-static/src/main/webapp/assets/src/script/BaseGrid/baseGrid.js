@@ -24,8 +24,6 @@ define(function (require, exports, module) {
 
                 gridObj.set("page", 1);
                 gridObj.set("newPage", 1);
-
-
                 $.each(ajaxParam, function (index, item) {
                     gridObj.setParm(index, item);
                 });

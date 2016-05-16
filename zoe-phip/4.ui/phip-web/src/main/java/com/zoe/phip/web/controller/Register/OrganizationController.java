@@ -1,4 +1,4 @@
-package com.zoe.phip.web.controller.Register;
+    package com.zoe.phip.web.controller.Register;
 
 import com.zoe.phip.infrastructure.annotation.AuthAction;
 import com.zoe.phip.infrastructure.entity.*;
