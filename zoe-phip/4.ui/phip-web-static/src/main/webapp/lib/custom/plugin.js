@@ -246,6 +246,7 @@
                                 jqUl.append(jqLi);
                                 var jqOptions = $("<option></option>");
                                 jqOptions.text(internal.preText);
+                                jqSelect.append(jqOptions);
                             }
                             if (typeof (self["param"]["ajaxParam"]["data"]) == "function") {
                                 self["param"]["ajaxParam"]["data"] = self["param"]["ajaxParam"]["data"]();

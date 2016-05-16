@@ -35,15 +35,15 @@
                             type: 'date',
                             format: 'yyyy-MM-dd'
                         },
-                        {display: '创建人', name: 'createBy', width: 260, align: 'left'},
+                        //{display: '创建人', name: 'createBy', width: 260, align: 'left'},
                         {
                             display: '状态',
                             name: 'state',
                             width: 80,
                             align: 'center',
-                            icons: ['switch'],
+                            icons: ['btnSwitch'],
                             iconsParam: {
-                                'switch': {
+                                'btnSwitch': {
                                     switchOff: 0,
                                     switchOn: 1,
                                     confirmMeg: '确认修改菜单状态？',

@@ -96,9 +96,6 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
     }
 
 
-    public int getVersionInfo(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList) throws Exception {
-        return 0;
-    }
 
     public int versionDictUpdate(String fkVersionId, List<StandardVerRsDict> infoList) throws Exception {
         return dictServiceImpl.versionDictUpdate(fkVersionId, infoList);
