@@ -96,7 +96,7 @@
             AND UPPER(CONCAT(PSSI.CODE,PSSI.NAME)) LIKE UPPER (#{key, jdbcType=VARCHAR})
         </if>
         <if test="_parameter.containsKey('pid')">
-            PSSI.PID =   #{pid, jdbcType=VARCHAR}
+           and  PSSI.PID =   #{pid, jdbcType=VARCHAR}
         </if>
     </select>
 
