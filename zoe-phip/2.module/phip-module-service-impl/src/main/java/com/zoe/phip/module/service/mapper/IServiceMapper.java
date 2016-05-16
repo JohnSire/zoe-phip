@@ -1,4 +1,4 @@
-package com.zoe.phip.register.mapper;
+package com.zoe.phip.module.service.mapper;
 
 import com.zoe.phip.module.service.entity.BaseEntity;
 import com.zoe.phip.module.service.mapper.IMyMapper;

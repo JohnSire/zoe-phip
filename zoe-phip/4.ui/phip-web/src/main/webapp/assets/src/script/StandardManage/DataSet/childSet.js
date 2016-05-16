@@ -16,16 +16,16 @@ define(function (require, exports, module) {
                 },
                 tools: {
                     btnbox: {
-                        'custom': {
-                            text: "返回 数据集列表", click: function () {
-
-                                var top = common.getTopWindowDom();
-                                var link=webRoot+"dataSet/view/dataSetList";
-                                top. frames["mainframe"].location.href = link;
-                            }
-                        },
-                        'add': true,
-                        'del': true
+                        //'custom': {
+                        //    text: "返回 数据集列表", click: function () {
+                        //
+                        //        var top = common.getTopWindowDom();
+                        //        var link=webRoot+"dataSet/view/dataSetList";
+                        //        top. frames["mainframe"].location.href = link;
+                        //    }
+                        //},
+                        'add': false,
+                        'del': false
                     },
                     searchbox: [
                         {label: '关键字', name: 'keyWord', type: 'text'}
@@ -33,14 +33,14 @@ define(function (require, exports, module) {
                 },
                 // reqInfoKey:'patientId',
                 gridParam: {
-                    url: 'dataSet/getByChildSet?pid='+common.getParamFromUrl("fkSetId"),
+                    url: 'dataSet/getByChildSet?pid=' + common.getParamFromUrl("fkSetId"),
                     columns: [
                         {display: '编码', name: 'code', width: 180, align: 'left'},
                         {display: '名称', name: 'name', width: 180, align: 'left'},
                         //{display: '标准来源名称', name: 'sexCodeName', width: 120, align: 'left'},
-                        {display: '描述', name: 'descr', width: 120, align: 'left'},
+                        {display: '描述', name: 'descr', width: 120, align: 'left'}
 
-                        {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
+                        //{display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
                     usePage: true,
                     width: $("body").innerWidth() - 2,
@@ -61,9 +61,17 @@ define(function (require, exports, module) {
                     }
                 }
             })
-            var name=decodeURI(common.getParamFromUrl("dataSetName"));
-            var html="<p style='margin-top: 9px; '>"+"当前列表为数据集（"+name+"）下的子数据集</p>"
+            var name = decodeURI(common.getParamFromUrl("dataSetName"));
+            //  var html="<p style='margin-top: 9px; '>"+"当前列表为数据集（"+name+"）下的子数据集</p>"
+            var html = '<div op="custom" style="float:left;"><p class="y-layout-position" ><span class="icon-position"></span><a class="link" id="back">' + name + '</a><span class="arrow">&gt;</span><a class="link">子数据集</a></p></div>'
             $("#gridTools").append(html);
+
+            $("#back").click(function(){
+                        var top = common.getTopWindowDom();
+                        var link=webRoot+"dataSet/view/dataSetList";
+                        top. frames["mainframe"].location.href = link;
+
+            });
             $(".btn-add").parent().unbind();
             internal.selectList.dialog('dataSet', {
                 target: $(".btn-add"),

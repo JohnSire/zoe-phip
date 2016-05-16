@@ -46,7 +46,7 @@ define(function (require, exports, module) {
                     return treeData;
                 },
                 treeParam: {
-                    nodeWidth: 200,
+                    nodeWidth: 180,
                     idFieldName: 'id',
                     textFieldName: 'deptName',
                     checkbox: false,

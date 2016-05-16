@@ -8,7 +8,7 @@ package com.zoe.phip.register.dao;
 
 import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.register.mapper.IServiceMapper;
+import com.zoe.phip.module.service.mapper.IServiceMapper;
 import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.model.NationalStandards;
 import com.zoe.phip.register.model.OrgDeptInfo;

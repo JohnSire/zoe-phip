@@ -79,7 +79,7 @@ define(function (require, exports, module) {
                 var str = "<a class='icon-grid icon-grid-del' title='删除' onclick='javascript:winDeleteGridRow(\"" + rowdata.id + "\")'></a> ";
                 return str;
             },
-            switch: function (rowdata, iconParam, columnInfo) {
+            btnSwitch: function (rowdata, iconParam, columnInfo) {
                 var b = new Base64();
                 var url = b.encode(iconParam["url"]);
                 if (rowdata[columnInfo["name"]] == iconParam["switchOn"]) {

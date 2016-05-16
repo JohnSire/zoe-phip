@@ -79,8 +79,8 @@ define(function (require, exports, module) {
                     edit: {title: "编辑Cda"},
                     common: {
                         url: 'cda/view/cdaDetail',
-                        width: 450,
-                        height: 320
+                        width: 560,
+                        height: 450
                     }
                 }
             })

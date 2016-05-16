@@ -12,11 +12,11 @@
         <result column="XC_ORG_CODE" property="xcOrgCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="XC_ORG_NAME" property="xcOrgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="HEALTH_RECORD_ORG_NAME" property="healthRecordOrgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="STATE_NAME" property="stateName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="CITY_NAME" property="cityName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="AREA_NAME" property="areaName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="STREET_NAME" property="streetName" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        <result column="COMMITTEE_NAME" property="committeeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="PROVINCE_NAME" property="provinceCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CITY_NAME" property="cityCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="COUNTY_NAME" property="countyCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="STREET_NAME" property="streetCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="NEIGHBORHOOD_NAME" property="neighborhoodCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.XmanBaseInfo">
         update PHIP_XMAN_BASE_INFO
@@ -137,8 +137,8 @@
         SELECT P.*,S.NAME AS SEX_CODE_NAME,N.NAME AS NATIONALITY_NAME,OC.NAME AS OCCUPATION_NAME,
         M.NAME AS MARRIAGE_NAME,C.NAME AS CODE_SYS_NAME,X.XC_CARD_CODE,O.DEPT_NAME AS ORG_NAME,
         R.DEPT_NAME AS HEALTH_RECORD_ORG_NAME,X.XC_ORG_CODE,XC.DEPT_NAME AS XC_ORG_NAME,
-        ST.NAME AS STATE_NAME,CI.NAME AS CITY_NAME,AR.NAME AS AREA_NAME,SR.NAME AS STREET_NAME,
-        CO.NAME AS COMMITTEE_NAME
+        ST.NAME AS PROVINCE_NAME,CI.NAME AS CITY_NAME,AR.NAME AS COUNTY_NAME,SR.NAME AS STREET_NAME,
+        CO.NAME AS NEIGHBORHOOD_NAME
         FROM PHIP_XMAN_BASE_INFO P
         LEFT JOIN (
         <include refid="oidSelect">

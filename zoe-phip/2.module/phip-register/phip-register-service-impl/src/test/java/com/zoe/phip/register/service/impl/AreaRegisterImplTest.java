@@ -5,7 +5,7 @@ import com.zoe.phip.register.model.AreaBaseInfo;
 import com.zoe.phip.register.service.external.IAreaRegister;
 import com.zoe.phip.register.service.impl.external.AreaRegisterImpl;
 import com.zoe.phip.register.util.RegisterType;
-import com.zoe.phip.register.util.RegisterUtil;
+import com.zoe.phip.module.service.util.RegisterUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
