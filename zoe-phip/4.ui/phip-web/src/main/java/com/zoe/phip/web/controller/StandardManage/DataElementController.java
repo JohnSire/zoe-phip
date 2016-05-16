@@ -61,7 +61,7 @@ public class DataElementController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResult getElementInfo(String id) {
-        return ServiceFactory.getStElementService().getById(ComSession.getUserInfo(), id);
+        return ServiceFactory.getStElementService().getDataById(ComSession.getUserInfo(), id);
     }
 
     /**
