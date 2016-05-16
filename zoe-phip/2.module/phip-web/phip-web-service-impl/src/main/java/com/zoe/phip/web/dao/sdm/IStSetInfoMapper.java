@@ -45,7 +45,7 @@ public interface IStSetInfoMapper extends IMyMapper<StSetInfo> {
 
     StSetInfo getBySetCode(String code);
 
-    List<StSetInfo> getByPid(String pid);
+    List<StSetInfo> getByPid(Map<String, Object> map);
 
     String getDictId(String code);
 

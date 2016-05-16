@@ -31,7 +31,7 @@ public interface IStSetInfoService extends IBaseInService<StSetInfo> {
      */
     ServiceResultT<PageList<StSetInfo>> getDataPageList(SystemData systemData, String key, QueryPage queryPage);
 
-    ServiceResultT<PageList<StSetInfo>> getByPid(SystemData systemData, String pid, QueryPage queryPage);
+    ServiceResultT<PageList<StSetInfo>> getByPid(SystemData systemData, String pid,String Keyword, QueryPage queryPage);
 
     ServiceResultT<PageList<StSetInfo>> getByCdaId(SystemData systemData, String fkCdaId, String key, QueryPage queryPage);
 

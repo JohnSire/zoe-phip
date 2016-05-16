@@ -10,6 +10,7 @@ import com.zoe.phip.web.context.ServiceFactory;
 import com.zoe.phip.web.controller.BaseController;
 import com.zoe.phip.web.model.sdm.StRsSetElementInfo;
 import com.zoe.phip.web.model.sdm.StSetInfo;
+import javassist.compiler.ast.Keyword;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -99,8 +100,8 @@ public class DataSetController extends BaseController {
     @RequestMapping(value = "/getByChildSet")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询数据集子级")
-    public ServiceResultT<PageList<StSetInfo>> getByChildSet(String pid) {
-        return ServiceFactory.getStSetInfoService().getByPid(ComSession.getUserInfo(), pid,getQueryPage());
+    public ServiceResultT<PageList<StSetInfo>> getByChildSet(String pid,String keyWord) {
+        return ServiceFactory.getStSetInfoService().getByPid(ComSession.getUserInfo(), pid, keyWord,getQueryPage());
     }
 
     /**
