@@ -91,8 +91,15 @@
         FROM PHIP_ST_SET_INFO PSSI
         LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
         ON PSSI.FK_NORM_SOURCE_ID = PSNSI.ID
-        WHERE PSSI.PID =   #{pid, jdbcType=VARCHAR}
+        where 1=1
+        <if test="_parameter.containsKey('key')">
+            AND UPPER(CONCAT(PSSI.CODE,PSSI.NAME)) LIKE UPPER (#{key, jdbcType=VARCHAR})
+        </if>
+        <if test="_parameter.containsKey('pid')">
+            PSSI.PID =   #{pid, jdbcType=VARCHAR}
+        </if>
     </select>
+
     <select id="getDictId" parameterType="java.lang.String" resultType="java.lang.String">
         SELECT ID from PHIP_DICT_CATALOG PDC
         WHERE UPPER (PDC.CODE) = UPPER (#{code, jdbcType=VARCHAR})
