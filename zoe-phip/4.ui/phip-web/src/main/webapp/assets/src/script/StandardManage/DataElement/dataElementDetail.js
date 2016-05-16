@@ -46,7 +46,7 @@ define(function (require, exports, module) {
                         internal.selectList.dialog('sysDict', {
                             target: $("#fkTypeId"),
                             name: 'fkTypeId',//绑定value值
-                            parentName: 'dictName',//绑定name值
+                            parentName: 'typeName',//绑定name值
                             displayField: 'name',
                             valueField: 'Id',
                             selectParam: {
