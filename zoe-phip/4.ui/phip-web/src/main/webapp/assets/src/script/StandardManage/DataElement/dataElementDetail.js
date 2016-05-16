@@ -16,11 +16,11 @@ define(function (require, exports, module) {
                     loadPageEvent: function () {
                         //值域选择
                         internal.selectList.dialog('domain', {
-                            target: $("#fkdictName"),
-                            name: 'dictCode',//绑定value值
+                            target: $("#fkDictId"),
+                            name: 'fkDictId',//绑定value值
                             parentName: 'dictName',//绑定name值
                             displayField: 'name',
-                            valueField: 'code',
+                            valueField: 'id',
                             selectParam: {
                                 multiselect: false
                             }
@@ -31,8 +31,9 @@ define(function (require, exports, module) {
                             target: $("#fkSourceId"),
                             name: 'fkSourceId',
                             parentName: 'parentName',
-                            valueField: 'id',
+
                             displayField: 'name',
+                            valueField: 'id',
                             fkNullContent: '无',
                             selectParam: {
                                 isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
@@ -44,10 +45,10 @@ define(function (require, exports, module) {
                         //16个分类
                         internal.selectList.dialog('sysDict', {
                             target: $("#fkTypeId"),
-                            name: 'dictCode',//绑定value值
+                            name: 'fkTypeId',//绑定value值
                             parentName: 'dictName',//绑定name值
                             displayField: 'name',
-                            valueField: 'code',
+                            valueField: 'Id',
                             selectParam: {
                                 multiselect: false,
                                 param: {"categoryId": "4D01A80C08CB4ACA88679457A3358A94"}

@@ -45,6 +45,12 @@ public class StandardSourceController extends BaseController {
         return ServiceFactory.getStNormSourceService().getDataPageList(ComSession.getUserInfo(), keyWord, getQueryPage());
     }
 
+    @RequestMapping(value = "/getDataPageByTypeList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<StNormSourceInfo>> getDataPageByTypeList(String keyWord,String type) {
+        return ServiceFactory.getStNormSourceService().getDataPageByTypeList(ComSession.getUserInfo(),type, keyWord, getQueryPage());
+    }
     /**
      * 查询数据来源基本信息
      *

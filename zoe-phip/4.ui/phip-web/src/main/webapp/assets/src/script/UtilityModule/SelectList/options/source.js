@@ -11,7 +11,7 @@ define(function (require, exports, module) {
                 displayField: 'name',
                 valueField: 'id',
                 gridParam: {
-                    url: webRoot + 'source/getSourceList',
+                    url: webRoot + 'source/getDataPageByTypeList',
                     columns: [
                         {display: '代码', name: 'code', width: 160, align: 'left'},
                         {display: '名称', name: 'name', width: 180, align: 'left'}
