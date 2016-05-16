@@ -36,15 +36,26 @@ define(function (require, exports, module) {
                             text: 'name'//展示的内容
                         });
                         //分类
-                        $("#fkTypeId").select({
-                            name: 'code',
-                            display: 'name',
-                            ajaxParam: {
-                                url: 'dict/getItemList ',//url 请求的地址
-                                data: {catalogCode: sysDictConfig.elementType}
-                            },
-                            value: 'code',//值
-                            text: 'name'//展示的内容
+                        //$("#fkTypeId").select({
+                        //    name: 'code',
+                        //    display: 'name',
+                        //    ajaxParam: {
+                        //        url: 'dict/getItemList ',//url 请求的地址
+                        //        data: {catalogCode: sysDictConfig.elementType}
+                        //    },
+                        //    value: 'code',//值
+                        //    text: 'name'//展示的内容
+                        //});
+                        internal.selectList.dialog('sysDict', {
+                            target: $("#fkTypeId"),
+                            name: 'dictCode',//绑定value值
+                            parentName: 'dictName',//绑定name值
+                            displayField: 'name',
+                            valueField: 'code',
+                            selectParam: {
+                                multiselect: false,
+                                param: {"categoryId": "4D01A80C08CB4ACA88679457A3358A94"}
+                            }
                         });
                     }
                 }

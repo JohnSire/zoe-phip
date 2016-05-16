@@ -64,8 +64,8 @@ define(function (require, exports, module) {
                     edit: {title: "编辑数据集"},
                     common: {
                         url: 'dataSet/view/dataSetDetail',
-                        width: 680,
-                        height: 350
+                        width: 560,
+                        height: 450
                     }
                 }
             })
