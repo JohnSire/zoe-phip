@@ -37,6 +37,9 @@
             <if test="state != null">
                 STATE = #{state,jdbcType=DECIMAL},
             </if>
+            <if test="updateTimeFiledId != null">
+                UPDATE_TIME_FIELD_ID = #{updateTimeFiledId,jdbcType=VARCHAR},
+            </if>
             MODIFY_AT=sysdate
         </set>
         where id = #{id}
@@ -96,14 +99,17 @@
     </select>
 
     <select id="getRelationById" parameterType="java.util.Map" resultMap="MultiResultMap">
-        SELECT PSSI.*, PSNSI.NAME SOURCE_NAME
+        SELECT PSSI.*, PSNSI.NAME SOURCE_NAME,P.NAME pName,PSRSEI.NAME BUSS_TIME_NAME,B.NAME UPDATE_TIME_NAME
         FROM PHIP_ST_SET_INFO PSSI
         LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
         ON PSSI.FK_NORM_SOURCE_ID = PSNSI.ID
+        left join PHIP_ST_SET_INFO P
+        on PSSI.PID=P.ID
+        left join PHIP_ST_RS_SET_ELEMENT_INFO PSRSEI
+        on PSSI.BUSS_TIME_FIELD_ID=PSRSEI.ID
+        left join PHIP_ST_RS_SET_ELEMENT_INFO B
+        on PSSI.UPDATE_TIME_FIELD_ID=B.ID
         WHERE PSSI.id =   #{id, jdbcType=VARCHAR}
     </select>
-
-
-
 
 </mapper>

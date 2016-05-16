@@ -25,6 +25,8 @@
                 jdbcType="DECIMAL"/>
         <result column="DESCR" property="descr" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
+        <result column="UPDATE_TIME_FIELD_ID" property="updateTimeFiledId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="com.zoe.phip.web.model.sdm.StSetInfo">
         INSERT INTO PHIP_ST_SET_INFO (
@@ -39,6 +41,7 @@
         END_TIME,
         VERSION,
         DESCR,
+        UPDATE_TIME_FIELD_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
@@ -53,6 +56,7 @@
             #{item.endTime,jdbcType=DATE},
             #{item.version,jdbcType=DECIMAL},
             #{item.descr,jdbcType=VARCHAR},
+            #{item.updateTimeFiledId,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -70,6 +74,7 @@
         END_TIME,
         VERSION,
         DESCR,
+        UPDATE_TIME_FIELD_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES(
         #{code,jdbcType=VARCHAR},
@@ -83,6 +88,7 @@
         #{endTime,jdbcType=DATE},
         #{version,jdbcType=DECIMAL},
         #{descr,jdbcType=VARCHAR},
+        #{updateTimeFiledId,jdbcType=VARCHAR},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
@@ -137,6 +143,9 @@
                 </if>
                 <if test="item.state != null">
                     STATE = #{item.state,jdbcType=DECIMAL},
+                </if>
+                <if test="item.updateTimeFiledId != null">
+                    UPDATE_TIME_FIELD_ID = #{item.updateTimeFiledId,jdbcType=DECIMAL},
                 </if>
                 MODIFY_AT=sysdate
             </set>

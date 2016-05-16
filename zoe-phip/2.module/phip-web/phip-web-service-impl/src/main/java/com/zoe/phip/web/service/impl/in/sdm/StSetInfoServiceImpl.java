@@ -82,6 +82,8 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
 
     public PageList<StSetInfo> getByPid(String pid, QueryPage queryPage) {
         PageList<StSetInfo> pageList = new PageList<>();
+        queryPage.setOrderBy("PSSI.CREATE_AT");
+        queryPage.setSortOrder(SortOrder.DESC);
         SqlHelper.startPage(queryPage);
         List<StSetInfo> infoList = getByPid(pid);
         PageInfo<StSetInfo> pageInfo = new PageInfo<>(infoList);

@@ -8,7 +8,6 @@ import com.zoe.phip.infrastructure.security.Permission;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 import com.zoe.phip.web.controller.BaseController;
-import com.zoe.phip.web.model.sdm.StElementInfo;
 import com.zoe.phip.web.model.sdm.StRsSetElementInfo;
 import com.zoe.phip.web.model.sdm.StSetInfo;
 import org.springframework.stereotype.Controller;
@@ -100,8 +99,8 @@ public class DataSetController extends BaseController {
     @RequestMapping(value = "/getByChildSet")
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询数据集子级")
-    public ServiceResult getByChildSet(String pid) {
-        return ServiceFactory.getStSetInfoService().getByPid(ComSession.getUserInfo(), pid);
+    public ServiceResultT<PageList<StSetInfo>> getByChildSet(String pid) {
+        return ServiceFactory.getStSetInfoService().getByPid(ComSession.getUserInfo(), pid,getQueryPage());
     }
 
     /**

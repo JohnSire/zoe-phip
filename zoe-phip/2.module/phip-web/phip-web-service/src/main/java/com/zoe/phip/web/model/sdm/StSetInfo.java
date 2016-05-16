@@ -5,10 +5,11 @@
 
 package com.zoe.phip.web.model.sdm;
 
-import javax.persistence.*;
-
 import com.zoe.phip.module.service.entity.MasterEntity;
 
+import javax.persistence.Column;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Date;
 
 
@@ -80,10 +81,23 @@ public class StSetInfo extends MasterEntity {
     @Column(name = "DESCR")
     private String descr;
 
+    /**
+     * 业务时间对应的字段
+     */
+    @Column(name = "UPDATE_TIME_FIELD_ID")
+    private String updateTimeFiledId;
+
     public String getCode() {
         return this.code;
     }
 
+    public String getUpdateTimeFiledId() {
+        return updateTimeFiledId;
+    }
+
+    public void setUpdateTimeFiledId(String updateTimeFiledId) {
+        this.updateTimeFiledId = updateTimeFiledId;
+    }
 
     public void setCode(String code) {
         this.code = code;

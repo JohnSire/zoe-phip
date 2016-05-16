@@ -1,8 +1,5 @@
 package com.zoe.phip.web.service.impl.in.sdm;
 
-import com.zoe.phip.infrastructure.entity.PageList;
-import com.zoe.phip.infrastructure.entity.QueryPage;
-import com.zoe.phip.web.model.sdm.StElementInfo;
 import com.zoe.phip.web.service.impl.in.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +15,6 @@ public class StElementInfoServiceImplTest extends BaseTest {
     @Test
     public void getList() throws Exception {
 
-        PageList<StElementInfo> list = impl.getDataPageList("", "", new QueryPage());
+    //    PageList<StElementInfo> list = impl.getDataPageList("", "", new QueryPage());
     }
 }
