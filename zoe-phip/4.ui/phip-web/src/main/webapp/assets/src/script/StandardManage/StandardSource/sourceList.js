@@ -34,6 +34,8 @@ define(function (require, exports, module) {
                                         return "数据元来源";
                                     case 0:
                                         return "数据集来源";
+                                    case 2:
+                                        return "CDA来源";
                                 }
                             }
                         },

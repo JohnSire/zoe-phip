@@ -42,7 +42,7 @@ public class StNormSourceInfoServiceImpl extends BaseInServiceImpl<StNormSourceI
         return pageList;
     }
 
-    public PageList<StNormSourceInfo> getDataPageList(String type,String key, QueryPage queryPage) {
+    public PageList<StNormSourceInfo> getDataPageByTypeList(String type,String key, QueryPage queryPage) {
         PageList<StNormSourceInfo> pageList = new PageList<>();
         SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();

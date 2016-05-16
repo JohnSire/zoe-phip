@@ -24,15 +24,16 @@ define(function (require, exports, module) {
 
                         target: $("#fkSourceId"),
                         name: 'fkSourceId',
-                        parentName: 'parentName',
-                        valueField: 'id',
+                        parentName: 'sourceName',
+
                         displayField: 'name',
+                        valueField: 'id',
                         fkNullContent: '无',
                         selectParam: {
                             isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
                             treeVaildMsg: '父级分类不能是其本身!',
                             multiselect: false,
-                            param: {"type":1}
+                            param: {"type":0}
                         }
                     });
                     //业务时间列
@@ -52,7 +53,7 @@ define(function (require, exports, module) {
                         },
 
                     });
-//数据更新时间列
+                    //数据更新时间列
                     internal.selectList.dialog('dataSetColumn', {
                         target: $("#updateTimeFieldId"),
                         name: 'updateTimeFieldId',
