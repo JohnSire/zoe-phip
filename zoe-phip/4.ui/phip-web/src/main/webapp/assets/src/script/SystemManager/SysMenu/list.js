@@ -35,7 +35,7 @@
                             type: 'date',
                             format: 'yyyy-MM-dd'
                         },
-                        {display: '创建人', name: 'createBy', width: 260, align: 'left'},
+                        //{display: '创建人', name: 'createBy', width: 260, align: 'left'},
                         {
                             display: '状态',
                             name: 'state',
