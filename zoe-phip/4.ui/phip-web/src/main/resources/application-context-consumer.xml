@@ -6,60 +6,60 @@
 	   http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 	   ">
     <dubbo:application name="zoe-phip-consumer"/>
-    <dubbo:consumer timeout="6000000"/>
+    <dubbo:consumer timeout="${dubbo.timeout}"/>
     <dubbo:registry address="N/A"/>
 
     <!--地址：本地测试时用localhost 部署时要换成Ip地址-->
     <!--web服务-->
     <dubbo:reference id="SystemUserService" interface="com.zoe.phip.web.service.sm.ISystemUserService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sm.ISystemUserService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sm.ISystemUserService"/>
     <dubbo:reference id="SystemDictCategoryService" interface="com.zoe.phip.web.service.sm.ISystemDictCategoryService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sm.ISystemDictCategoryService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sm.ISystemDictCategoryService"/>
     <dubbo:reference id="SystemDictItemService" interface="com.zoe.phip.web.service.sm.ISystemDictItemService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sm.ISystemDictItemService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sm.ISystemDictItemService"/>
     <dubbo:reference id="MenuDataService" interface="com.zoe.phip.web.service.sm.IMenuDataService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sm.IMenuDataService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sm.IMenuDataService"/>
     <dubbo:reference id="SystemParameterService" interface="com.zoe.phip.web.service.sm.ISystemParameterService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sm.ISystemParameterService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sm.ISystemParameterService"/>
     <dubbo:reference id="UserCompetenceService" interface="com.zoe.phip.web.service.sm.IUserCompetenceService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sm.IUserCompetenceService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sm.IUserCompetenceService"/>
     <dubbo:reference id="MenuCompetenceService" interface="com.zoe.phip.web.service.sm.IMenuCompetenceService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sm.sm.IMenuCompetenceService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sm.sm.IMenuCompetenceService"/>
     <!--注册服务-->
     <dubbo:reference id="NationalStandardsService"
                      interface="com.zoe.phip.register.service.internal.INationalStandardsService"
-                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.INationalStandardsService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.register.service.internal.INationalStandardsService"/>
     <dubbo:reference id="AreaRegisterIn" interface="com.zoe.phip.register.service.internal.IAreaRegisterIn"
-                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IAreaRegisterIn"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.register.service.internal.IAreaRegisterIn"/>
     <dubbo:reference id="DictRegisterIn" interface="com.zoe.phip.register.service.internal.IDictRegisterIn"
-                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IDictRegisterIn"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.register.service.internal.IDictRegisterIn"/>
     <dubbo:reference id="MedicalStaffRegisterIn"
                      interface="com.zoe.phip.register.service.internal.IMedicalStaffRegisterIn"
-                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IMedicalStaffRegisterIn"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.register.service.internal.IMedicalStaffRegisterIn"/>
     <dubbo:reference id="OrganizationRegisterIn"
                      interface="com.zoe.phip.register.service.internal.IOrganizationRegisterIn"
-                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IOrganizationRegisterIn"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.register.service.internal.IOrganizationRegisterIn"/>
     <dubbo:reference id="PatientRegisterIn" interface="com.zoe.phip.register.service.internal.IPatientRegisterIn"
-                     url="dubbo://localhost:20080/com.zoe.phip.register.service.internal.IPatientRegisterIn"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.register.service.internal.IPatientRegisterIn"/>
     <!--标准管理-->
     <dubbo:reference id="StNormSourceInfoService" interface="com.zoe.phip.web.service.sdm.IStNormSourceInfoService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStNormSourceInfoService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sdm.IStNormSourceInfoService"/>
     <dubbo:reference id="StElementInfoService" interface="com.zoe.phip.web.service.sdm.IStElementInfoService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStElementInfoService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sdm.IStElementInfoService"/>
     <dubbo:reference id="StandardVersionService" interface="com.zoe.phip.web.service.sdm.IStandardVersionService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStandardVersionService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sdm.IStandardVersionService"/>
     <dubbo:reference id="StSetInfoService" interface="com.zoe.phip.web.service.sdm.IStSetInfoService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStSetInfoService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sdm.IStSetInfoService"/>
     <dubbo:reference id="StCdaInfoService" interface="com.zoe.phip.web.service.sdm.IStCdaInfoService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStCdaInfoService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sdm.IStCdaInfoService"/>
     <dubbo:reference id="StRsSetElementInfoService" interface="com.zoe.phip.web.service.sdm.IStRsSetElementInfoService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStRsSetElementInfoService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sdm.IStRsSetElementInfoService"/>
     <dubbo:reference id="StRsCdaSetInfoService" interface="com.zoe.phip.web.service.sdm.IStRsCdaSetInfoService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStRsCdaSetInfoService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sdm.IStRsCdaSetInfoService"/>
     <dubbo:reference id="StandardVerRsSetService" interface="com.zoe.phip.web.service.sdm.IStandardVerRsSetService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStandardVerRsSetService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sdm.IStandardVerRsSetService"/>
     <dubbo:reference id="StandardVerRsCdaService" interface="com.zoe.phip.web.service.sdm.IStandardVerRsCdaService"
-                     url="dubbo://localhost:20080/com.zoe.phip.web.service.sdm.IStandardVerRsCdaService"/>
+                     url="dubbo://${dubbo.url}/com.zoe.phip.web.service.sdm.IStandardVerRsCdaService"/>
 
 
 </beans>
