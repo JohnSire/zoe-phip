@@ -160,7 +160,7 @@ define(function (require, exports, module) {
     }
     function toDataSetList(id, name) {
         var top = common.getTopWindowDom();
-        var link = webRoot + "cda/view/dataSetList?cdaName=" + name;
+        var link = webRoot + "cda/view/dataSetList?fkCdaId="+id+"&cdaName=" + name;
         top.frames["mainframe"].location.href = link;
     }
 });

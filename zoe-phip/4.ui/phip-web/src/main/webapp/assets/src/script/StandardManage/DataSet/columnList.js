@@ -15,14 +15,7 @@ define(function (require, exports, module) {
                 },
                 tools: {
                     btnbox: {
-                        //'custom': {
-                        //    text: "返回 数据集列表", click: function () {
-                        //
-                        //        var top = common.getTopWindowDom();
-                        //        var link = webRoot + "dataSet/view/dataSetList";
-                        //        top.frames["mainframe"].location.href = link;
-                        //    }
-                        //},
+
                         'add': true,
                         'del': true
                     },

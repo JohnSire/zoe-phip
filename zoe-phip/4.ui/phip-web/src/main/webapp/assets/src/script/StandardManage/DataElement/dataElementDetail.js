@@ -45,6 +45,7 @@ define(function (require, exports, module) {
                         });
                         //16个分类
                         internal.selectList.dialog('sysDict', {
+                            stroage:{"name":"czs"},
                             target: $("#fkTypeId"),
                             name: 'fkTypeId',//绑定value值
                             parentName: 'typeName',//绑定name值
