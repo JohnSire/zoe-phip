@@ -1,6 +1,7 @@
 package com.zoe.phip.repository.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.config.PropertyPlaceholder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.DateUtil;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
@@ -153,10 +154,10 @@ public class DocumentRegisterImpl implements IDocumentRegister {
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
         Document document = ProcessXmlUtil.load(message);
-        String msgId = document.selectSingleNode("//GetDocumentStroedInfoRequest/Id/@extension").getText().trim();//请求消息ID
-        String healthCardId = document.selectSingleNode("//GetDocumentStroedInfoRequest/HealthCardId").getText().trim();//居民健康卡号
-        String identityId = document.selectSingleNode("//GetDocumentStroedInfoRequest/IdentityId").getText().trim(); //居民身份证号
-        String documentTitle = document.selectSingleNode("//GetDocumentStroedInfoRequest/DocumentTitle").getText().trim(); //标题
+        String msgId = document.selectSingleNode(PropertyPlaceholder.getProperty("getDocInfo.msgId")).getText().trim();//请求消息ID
+        String healthCardId = document.selectSingleNode(PropertyPlaceholder.getProperty("getDocInfo.healthId")).getText().trim();//居民健康卡号
+        String identityId = document.selectSingleNode(PropertyPlaceholder.getProperty("getDocInfo.identityId")).getText().trim(); //居民身份证号
+        String documentTitle = document.selectSingleNode(PropertyPlaceholder.getProperty("getDocInfo.title")).getText().trim(); //标题
         XmanIndex xmanIndex=null;
         if (strResult != "success:数据集内容验证正确")
         {
@@ -201,9 +202,9 @@ public class DocumentRegisterImpl implements IDocumentRegister {
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
         Document document = ProcessXmlUtil.load(message);
-        String msgId = document.selectSingleNode("//RetrieveDocumentSetRequest/ID/@extension").getText().trim();//请求消息ID
-        String repositoryUniqueId = document.selectSingleNode("//RetrieveDocumentSetRequest/DocumentRequest/RepositoryUniqueId").getText().trim();
-        String documentUniqueId = document.selectSingleNode("//RetrieveDocumentSetRequest/DocumentRequest/DocumentUniqueId").getText().trim();
+        String msgId = document.selectSingleNode(PropertyPlaceholder.getProperty("retrieveDoc.msgId")).getText().trim();//请求消息ID
+        String repositoryUniqueId = document.selectSingleNode(PropertyPlaceholder.getProperty("retrieveDoc.repId")).getText().trim();
+        String documentUniqueId = document.selectSingleNode(PropertyPlaceholder.getProperty("retrieveDoc.docId")).getText().trim();
         XmanIndex xmanIndex=null;
         if (strResult != "success:数据集内容验证正确")
         {

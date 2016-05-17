@@ -87,6 +87,44 @@ public class StSetInfo extends MasterEntity {
     @Column(name = "UPDATE_TIME_FIELD_ID")
     private String updateTimeFiledId;
 
+    @Transient
+    private String sourceName;
+
+    @Transient
+    private String pName;
+
+    public String getpName() {
+        return pName;
+    }
+
+    public void setpName(String pName) {
+        this.pName = pName;
+    }
+
+    public String getBUSS_TIME_NAME() {
+        return BUSS_TIME_NAME;
+    }
+
+    public void setBUSS_TIME_NAME(String BUSS_TIME_NAME) {
+        this.BUSS_TIME_NAME = BUSS_TIME_NAME;
+    }
+
+    public String getUPDATE_TIME_NAME() {
+        return UPDATE_TIME_NAME;
+    }
+
+    public void setUPDATE_TIME_NAME(String UPDATE_TIME_NAME) {
+        this.UPDATE_TIME_NAME = UPDATE_TIME_NAME;
+    }
+
+    @Transient
+    private String BUSS_TIME_NAME;
+
+    @Transient
+    private String UPDATE_TIME_NAME;
+
+
+
     public String getCode() {
         return this.code;
     }
@@ -192,8 +230,7 @@ public class StSetInfo extends MasterEntity {
         this.descr = descr;
     }
 
-    @Transient
-    private String sourceName;
+
 
     public String getSourceName() {
         return sourceName;
