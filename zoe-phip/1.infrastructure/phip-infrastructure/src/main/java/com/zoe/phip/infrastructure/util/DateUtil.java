@@ -34,4 +34,15 @@ public final class DateUtil {
             return new Date();
         }
     }
+
+    public static String dateTimeToString(Date date){
+        return dateTimeToString(date,"yyyy-MM-dd");
+    }
+
+    public static String dateTimeToString(Date date,String format){
+        SimpleDateFormat sdf=new SimpleDateFormat(format);
+        String str=sdf.format(date);
+        return str;
+    }
+
 }

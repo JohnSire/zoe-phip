@@ -55,15 +55,15 @@
                ${Model.address}
                </streetAddressLine>
                <!--地址-省（自治区、直辖市） -->
-               <state language="CH">${Model.provinceCode}</state>
+               <state language="CH">${Model.provinceCodeName}</state>
                <!--地址-市（地区） -->
-               <city>${Model.cityCode}</city>
+               <city>${Model.cityCodeName}</city>
                <!--地址-县（区） -->
-               <county>${Model.countyCode}</county>
+               <county>${Model.countyCodeName}</county>
                <!-- 地址-乡（镇、街道办事处） -->
-               <streetNameBase>${Model.streetCode}</streetNameBase>
+               <streetNameBase>${Model.streetCodeName}</streetNameBase>
                <!-- 地址-村（街、路、弄等） -->
-               <streetName>${Model.neighborhoodCode}</streetName>
+               <streetName>${Model.neighborhoodCodeName}</streetName>
                <!-- 地址-门牌号码 -->
                <houseNumber>${Model.houseNumber}</houseNumber>
                <!-- 邮政编码-->
