@@ -42,6 +42,7 @@ define(function (require, exports, module) {
                         {display: '描述', name: 'descr', width: 380, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
+                    frozen: false,
                     usePage: true,
                     width: $("body").innerWidth() - 2,
                     height: $("body").innerHeight() - $("#gridTools").outerHeight() - 38//500

@@ -1,5 +1,6 @@
 package com.zoe.phip.module.service.util;
 
+import com.zoe.phip.infrastructure.config.PropertyPlaceholder;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.infrastructure.util.XmlUtil;
 import org.dom4j.*;
@@ -15,12 +16,6 @@ import java.io.InputStream;
 public class ProcessXmlUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(ProcessXmlUtil.class);
-
-    private static String schemasPath;
-
-    public void setSchemasPath(String schemas) {
-        schemasPath = schemas;
-    }
 
 
     /**
@@ -65,7 +60,7 @@ public class ProcessXmlUtil {
         String xsdPath = "multicacheschemas/" + rootName + ".xsd";
         String xsdFilePath = ProcessXmlUtil.class.getClassLoader().getResource(xsdPath).getPath();
         if(xsdFilePath.contains("jar")){
-            xsdFilePath=schemasPath + rootName + ".xsd";
+            xsdFilePath= PropertyPlaceholder.getProperty("schemas.path") + rootName + ".xsd";
         }
         String result = "success:数据集内容验证正确";
         String strMessage = XmlUtil.validateXsd(xsdFilePath, strXml);
