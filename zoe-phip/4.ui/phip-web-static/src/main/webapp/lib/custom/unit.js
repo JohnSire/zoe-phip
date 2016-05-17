@@ -33,6 +33,20 @@
                 return results[1];
             }
         },
+        parseUrlParam2Json: function (url) {
+            var url = url || window.location.href;
+            var reg_url = /^[^\?]+\?([\w\W]+)$/,
+                reg_para = /([^&=]+)=([\w\W]*?)(&|$|#)/g,
+                arr_url = reg_url.exec(url),
+                ret = {};
+            if (arr_url && arr_url[1]) {
+                var str_para = arr_url[1], result;
+                while ((result = reg_para.exec(str_para)) != null) {
+                    ret[result[1]] = result[2];
+                }
+            }
+            return ret;
+        },
         //判断是否数字
         isNumber: function () {
             return /^[(-?\d+\.\d+)|(-?\d+)|(-?\.\d+)]+$/.test(val + '');
@@ -93,7 +107,7 @@
         vaildform: function (jqform) {
             jqform = jqform || $("#baseAttrForm");
             validformObj = $(jqform).Validform({
-                ignoreHidden:true,
+                ignoreHidden: true,
                 tiptype: function (msg, o, cssctl) {
                     //msg：提示信息;
                     //o:{obj:*,type:*,curform:*}, obj指向的是当前验证的表单元素（或表单对象），type指示提示的状态，值为1、2、3、4， 1：正在检测/提交数据，2：通过验证，3：验证失败，4：提示ignore状态, curform为当前form对象;

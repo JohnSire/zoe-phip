@@ -16,6 +16,14 @@ define(function (require, exports, module) {
             internal.dictTree();
         },
         dictTree: function () {
+            var urlParam = common.parseUrlParam2Json();
+            var code = "";
+            if (urlParam) {
+                $.each(urlParam, function (index, item) {
+                    code += item + ",";
+                });
+                code = code.substring(0, code.length - 1)
+            }
             var treeObj = new BaseTree({
                 treeId: 'tree',
                 btnBox: 'treeBtns',
@@ -24,7 +32,7 @@ define(function (require, exports, module) {
                     btns: {'add': true, 'edit': true, 'del': true}
                 },
                 url: {
-                    getTreeList: 'dict/dictCatalogTreeQuery',
+                    getTreeList: 'dict/dictCatalogTreeQuery?code=' + code,
                     delTreeInfo: 'dict/delDictCatalogInfo',
                 },
                 renderData: function (data) {

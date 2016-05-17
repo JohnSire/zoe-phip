@@ -8,5 +8,14 @@ Date.prototype.weekBefore = function (num, type) {
 
 }
 
+//截取长度
+String.prototype.cut = function (strLength, cutLenght) {
+    if (this.length > strLength) {
+        return this.substring(0, cutLenght) + "...";
+    } else {
+        return this;
+    }
+};
+
 
 

@@ -97,6 +97,7 @@ define(function (require, exports, module) {
         var reqInfoKey = internal.param["reqInfoKey"];
         var editParam = $.extend(true, {}, internal.param["dialogParam"]["common"], internal.param["dialogParam"]["edit"]);
         if (titleDescr) {
+            titleDescr = titleDescr.cut(16, 12);
             editParam["title"] = editParam["title"] + "--" + titleDescr;
         }
         editParam["url"] = editParam["url"] + "?state=edit&&" + reqInfoKey + "=" + id;
@@ -108,7 +109,6 @@ define(function (require, exports, module) {
             });
         }
         editParam["url"] = editParam["url"] + urlParam;
-
         //submited(提交非进行时状态改变方法）
         editParam.buttons[0]["onclick"] = function (item, dialog, submited) {
             var top = common.getTopWindowDom();
@@ -134,7 +134,6 @@ define(function (require, exports, module) {
     };
     window.gridChangeSwitch = function (primaryKeyName, primaryKeyValue, switchName, switchValue, url, confirmMeg) {
         common.confirm(confirmMeg, function () {
-
             var b = new Base64();
             var ajaxUrl = b.decode(url);
             var param = {};
@@ -156,7 +155,6 @@ define(function (require, exports, module) {
                 }
             });
         });
-
     };
     exports.grid = {
         build: internal.build,
