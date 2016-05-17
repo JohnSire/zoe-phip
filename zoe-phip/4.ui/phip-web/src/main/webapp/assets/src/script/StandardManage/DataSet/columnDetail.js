@@ -5,7 +5,7 @@ define(function (require, exports, module) {
     var internal = {
         selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
-            internal.event();
+
             var fkSetId = common.getParamFromUrl("fkSetId");
             $("#fkSetId").val(fkSetId);
 
@@ -68,8 +68,25 @@ define(function (require, exports, module) {
                         $("#dataLength").addClass("Validform_error");
                     }
                     return check;
+                },
+                beforeBindEvent:function(data){
+                 internal.showLength(data.dataType);
                 }
             })
+            internal.event();
+
+
+        },
+        event: function () {
+            $("#dataType").change(function () {
+                $("#vaildDataLength").hide().removeClass("Validform_wrong");
+                $("#show_dataLength").hide();
+                $("#show_dataAccuracy").hide();
+                $("#dataLength").val("");
+                $("#dataAccuracy").val("");
+                var type = $("#dataType").val();
+                internal.showLength(type);
+            });
             $("#dataLength").unbind();
             $("#dataLength").focus(function () {
                 var msg = $(this).attr("msg");
@@ -97,20 +114,8 @@ define(function (require, exports, module) {
                 }
             })
         },
-        event: function () {
-            $("#dataType").change(function () {
-                $("#vaildDataLength").hide().removeClass("Validform_wrong");
-                $("#show_dataLength").hide();
-                $("#show_dataAccuracy").hide();
-                $("#dataLength").val("");
-                $("#dataAccuracy").val("");
-
-                internal.showLength();
-            });
-
-        },
         showLength:function(type){
-            var type = $("#dataType").val();
+
             switch (type) {
                 case "CHAR":
                 case "NVARCHAR2":
