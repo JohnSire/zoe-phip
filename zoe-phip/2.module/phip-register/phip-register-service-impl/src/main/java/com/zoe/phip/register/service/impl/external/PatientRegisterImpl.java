@@ -60,11 +60,10 @@ public class PatientRegisterImpl implements IPatientRegister {
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
-            acknowledgement.setTypeCode("AE");
-            acknowledgement.setText(strResult);
-            acknowledgement.setId(StringUtil.getUUID());
-            acknowledgement.setCreateTime(DateUtil.dateTimeToString(new Date(),"yyyyMMddHHmmss"));
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            XmanBaseInfo xmanBaseInfo=new XmanBaseInfo();
+            xmanBaseInfo.setMsgId(StringUtil.getUUID());
+            xmanBaseInfo.setCreateTime(new Date());
+            return registerFailed(xmanBaseInfo, strResult);
         }
 
         Document document = ProcessXmlUtil.load(message);
@@ -110,9 +109,10 @@ public class PatientRegisterImpl implements IPatientRegister {
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             // TODO: 2016/4/14
-            acknowledgement.setTypeCode("AE");
-            acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            XmanBaseInfo xmanBaseInfo=new XmanBaseInfo();
+            xmanBaseInfo.setMsgId(StringUtil.getUUID());
+            xmanBaseInfo.setCreateTime(new Date());
+            return updateFailed(xmanBaseInfo, strResult);
         }
         Document document = ProcessXmlUtil.load(message);
         XmanBaseInfo baseInfo = null;
@@ -167,7 +167,9 @@ public class PatientRegisterImpl implements IPatientRegister {
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            acknowledgement.setMsgId(StringUtil.getUUID());
+            acknowledgement.setCreateTime(DateUtil.dateTimeToString(new Date(),"yyyyMMddHHmmss"));
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
         }
         try {
             Document document = ProcessXmlUtil.load(message);
@@ -206,7 +208,9 @@ public class PatientRegisterImpl implements IPatientRegister {
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            acknowledgement.setMsgId(StringUtil.getUUID());
+            acknowledgement.setCreateTime(DateUtil.dateTimeToString(new Date(),"yyyyMMddHHmmss"));
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
         }
         try {
             Document document = ProcessXmlUtil.load(message);

@@ -27,6 +27,7 @@
       <text>${Model.Acknowledgement.Text}</text>
     </acknowledgementDetail>
   </acknowledgement>
+  <%if(Model.patientId!=null){%>
   <controlActProcess classCode="CACT" moodCode="EVN">
     <subject typeCode="SUBJ">
       <registrationRequest classCode="REG" moodCode="RQO">
@@ -140,4 +141,5 @@
       </registrationRequest>
     </subject>
   </controlActProcess>
+  <%}%>
 </PRPA_IN201316UV02>
