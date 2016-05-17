@@ -52,7 +52,7 @@ public class DocumentRegisterImpl implements IDocumentRegister {
         }
 
         Document document = ProcessXmlUtil.load(message);
-        if (document.selectNodes("//RegistryPackage/SubmissionSet").size() > 1) {
+        if (document.selectNodes(PropertyPlaceholder.getProperty("provideDoc.submissionSet")).size() > 1) {
             return registerBatch(message);
         }
         String errorMsg = "";
@@ -105,10 +105,10 @@ public class DocumentRegisterImpl implements IDocumentRegister {
         String errorMsg = "";
         try {
             Document document = ProcessXmlUtil.load(message);
-            String msgId = document.selectSingleNode("//Id/@extension").getText();
-            String healthCardId = document.selectSingleNode("//HealthCardId").getText();
-            String identityId = document.selectSingleNode("//IdentityId").getText();
-            String documentTitle = document.selectSingleNode("//DocumentTitle").getText();
+            String msgId = document.selectSingleNode(PropertyPlaceholder.getProperty("getDocInfo.msgId")).getText().trim();
+            String healthCardId = document.selectSingleNode(PropertyPlaceholder.getProperty("getDocInfo.healthId")).getText().trim();
+            String identityId = document.selectSingleNode(PropertyPlaceholder.getProperty("getDocInfo.identityId")).getText().trim();
+            String documentTitle = document.selectSingleNode(PropertyPlaceholder.getProperty("getDocInfo.title")).getText().trim();
             acknowledgement.setId(msgId);
             if (strResult.contains("error:数据集内容验证错误")) {
                 acknowledgement.setTypeCode("AE");
@@ -320,36 +320,38 @@ public class DocumentRegisterImpl implements IDocumentRegister {
             //数据抽取，保存到数据库
             XmanIndex result = documentRegisterIn.addDocumentRegistry(xmanIndex, xmanEhr, xmanEhrContent);
             StringBuffer registryResult = new StringBuffer();
-            List<Node> registryNodes = document.selectNodes("//RegistryPackage/SubmissionSet");
-            List<Node> documentNodes = document.selectNodes("//Document");
+            List<Node> registryNodes = document.selectNodes(PropertyPlaceholder.getProperty("provideDoc.submissionSet"));
+            List<Node> documentNodes = document.selectNodes(PropertyPlaceholder.getProperty("provideDoc.document"));
             if (registryNodes.size() > 1) {
                 for (int i = 1; i < registryNodes.size(); i++) {
+                    Document doc = ProcessXmlUtil.load(registryNodes.get(i).asXML());
+                    Document doc2 = ProcessXmlUtil.load(documentNodes.get(i).asXML());
                     xmanIndex.setId(null);
-                    xmanIndex.setComments(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/Comments").getText());
-                    xmanIndex.setTitle(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/Title").getText());
-                    xmanIndex.setServerOrgName(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/ServerOrganization").getText());
-                    xmanIndex.setAdmissionDepart(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/AdmissionDepart").getText());
-                    xmanIndex.setAdmissionDoctor(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/AdmissionDoctor").getText());
-                    xmanIndex.setAdmissionType(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/AdmissionType").getText());
-                    xmanIndex.setDiagnosisResult(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/DiagnosisResult").getText());
-                    xmanIndex.setAuthorName(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/Author/AuthorName").getText());
-                    xmanIndex.setAuthorInstitution(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/Author/AuthorInstitution").getText());
-                    xmanIndex.setAuthorSpecialty(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/Author/AuthorSpecialty").getText());
-                    xmanIndex.setAuthorRole(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/Author/AuthorRole").getText());
-                    xmanIndex.setStartTime(DateUtil.stringToDateTime(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/InTime").getText()));
-                    xmanIndex.setEndTime(DateUtil.stringToDateTime(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/OutTime").getText()));
-                    xmanIndex.setCreateTime(DateUtil.stringToDateTime(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/CreateTime").getText()));
+                    xmanIndex.setComments(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.comments")).getText().trim());
+                    xmanIndex.setTitle(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.title")).getText().trim());
+                    xmanIndex.setServerOrgName(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.serverOrgName")).getText().trim());
+                    xmanIndex.setAdmissionDepart(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.admissionDepart")).getText().trim());
+                    xmanIndex.setAdmissionDoctor(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.admissionDoctor")).getText().trim());
+                    xmanIndex.setAdmissionType(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.admissionType")).getText().trim());
+                    xmanIndex.setDiagnosisResult(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.diagnosisResult")).getText().trim());
+                    xmanIndex.setAuthorName(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.authorName")).getText().trim());
+                    xmanIndex.setAuthorInstitution(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.authorInstitution")).getText().trim());
+                    xmanIndex.setAuthorSpecialty(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.authorSpecialty")).getText().trim());
+                    xmanIndex.setAuthorRole(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.authorRole")).getText().trim());
+                    xmanIndex.setStartTime(DateUtil.stringToDateTime(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.startTime")).getText().trim()));
+                    xmanIndex.setEndTime(DateUtil.stringToDateTime(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.endTime")).getText().trim()));
+                    xmanIndex.setCreateTime(DateUtil.stringToDateTime(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.createTime")).getText().trim()));
 
                     xmanEhr.setId(null);
-                    xmanEhr.setSourceId(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/SourceId").getText());
-                    xmanEhr.setEventNo(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/EpisodeID").getText());
-                    xmanEhr.setDocumentId(documentNodes.get(i).selectSingleNode("//Document/@id").getText());
-                    xmanEhr.setParentDocumentRelationship(documentNodes.get(i).selectSingleNode("//Document/@parentDocumentRelationship").getText());
-                    xmanEhr.setParentDocumentId(documentNodes.get(i).selectSingleNode("//Document/@parentDocumentId").getText());
+                    xmanEhr.setSourceId(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.sourceId")).getText().trim());
+                    xmanEhr.setEventNo(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.eventNo")).getText().trim());
+                    xmanEhr.setDocumentId(doc2.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.documentId")).getText().trim());
+                    xmanEhr.setParentDocumentRelationship(doc2.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.parentDocRelationship")).getText().trim());
+                    xmanEhr.setParentDocumentId(doc2.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.parentDocId")).getText().trim());
 
                     xmanEhrContent.setId(null);
-                    xmanEhrContent.setEventNo(registryNodes.get(i).selectSingleNode("//RegistryPackage/SubmissionSet/EpisodeID").getText());
-                    xmanEhrContent.setContent(documentNodes.get(i).selectSingleNode("//Document/Content").getText());
+                    xmanEhrContent.setEventNo(doc.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.eventNo")).getText().trim());
+                    xmanEhrContent.setContent(doc2.selectSingleNode(PropertyPlaceholder.getProperty("provideDoc.content")).getText().trim());
 
                     XmanIndex res = null;
                     res = documentRegisterIn.addDocumentRegistry(xmanIndex, xmanEhr, xmanEhrContent);
