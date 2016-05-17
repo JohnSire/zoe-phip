@@ -90,23 +90,11 @@ public class StandardVersionServiceImpl extends BaseInServiceImpl<StandardVersio
 
 
     public int versionStandardStruct(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsField> fieldList) throws Exception {
-        Example cda = new Example(StandardVerRsCda.class);
-        cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
-        int count = getMapper().selectCountByExample(cda);
-
         int i = setServiceImpl.versionStandardStruct(fkVersionId, setList);
-        boolean j = cdaServiceImpl.versionStandardStruct(fkVersionId, cdaList);
+        int j = cdaServiceImpl.versionStandardStruct(fkVersionId, cdaList);
         int p = fieldServiceImpl.versionStandardStruct(fkVersionId, fieldList);
         return p;
     }
-
-    public int versionStandardRsAdd(String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsDict> fieldList) {
-
-        return 0;
-    }
-
-
-
 
     public int versionDictUpdate(String fkVersionId, List<StandardVerRsDict> infoList) throws Exception {
         return dictServiceImpl.versionDictUpdate(fkVersionId, infoList);
