@@ -23,7 +23,7 @@
                 jdbcType="CLOB" typeHandler="com.zoe.phip.module.service.support.OracleClobTypeHandler"/>
         <result column="QUESTION_HTML" property="questionHtml" javaType="java.lang.String"
                 jdbcType="CLOB" typeHandler="com.zoe.phip.module.service.support.OracleClobTypeHandler"/>
-        <result column="ARCHIVES_TYPE" property="archivesType" javaType="java.lang.String"
+        <result column="FK_ARCHIVES_ID" property="fkArchivesId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="DESCR" property="descr" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
@@ -40,7 +40,7 @@
         SAMPLE_XML,
         FORM_XML,
         QUESTION_HTML,
-        ARCHIVES_TYPE,
+        FK_ARCHIVES_ID,
         DESCR,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
@@ -55,7 +55,7 @@
             #{item.sampleXml,jdbcType=CLOB},
             #{item.formXml,jdbcType=CLOB},
             #{item.questionHtml,jdbcType=CLOB},
-            #{item.archivesType,jdbcType=VARCHAR},
+            #{item.fkArchivesId,jdbcType=VARCHAR},
             #{item.descr,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
@@ -73,7 +73,7 @@
         SAMPLE_XML,
         FORM_XML,
         QUESTION_HTML,
-        ARCHIVES_TYPE,
+        FK_ARCHIVES_ID,
         DESCR,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES(
@@ -87,7 +87,7 @@
         #{sampleXml,jdbcType=CLOB},
         #{formXml,jdbcType=CLOB},
         #{questionHtml,jdbcType=CLOB},
-        #{archivesType,jdbcType=VARCHAR},
+        #{fkArchivesId,jdbcType=VARCHAR},
         #{descr,jdbcType=VARCHAR},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
@@ -138,8 +138,8 @@
                 <if test="item.questionHtml != null">
                     QUESTION_HTML = #{item.questionHtml,jdbcType=CLOB},
                 </if>
-                <if test="item.archivesType != null">
-                    ARCHIVES_TYPE = #{item.archivesType,jdbcType=VARCHAR},
+                <if test="item.fkArchivesId != null">
+                    FK_ARCHIVES_ID = #{item.fkArchivesId,jdbcType=VARCHAR},
                 </if>
                 <if test="item.descr != null">
                     DESCR = #{item.descr,jdbcType=VARCHAR},

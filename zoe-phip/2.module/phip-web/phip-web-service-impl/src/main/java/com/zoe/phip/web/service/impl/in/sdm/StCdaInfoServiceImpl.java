@@ -5,6 +5,7 @@
 
 package com.zoe.phip.web.service.impl.in.sdm;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageInfo;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.entity.PageList;
@@ -17,13 +18,10 @@ import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.module.service.util.SqlHelper;
 import com.zoe.phip.web.dao.sdm.IStCdaInfoMapper;
 import com.zoe.phip.web.model.sdm.StCdaInfo;
-import com.zoe.phip.web.model.sdm.StElementInfo;
 import com.zoe.phip.web.model.sdm.StRsCdaSetInfo;
 import com.zoe.phip.web.service.sdm.IStCdaInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.alibaba.dubbo.config.annotation.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.Map;
@@ -112,6 +110,16 @@ public class StCdaInfoServiceImpl extends BaseInServiceImpl<StCdaInfo, IStCdaInf
         });
         if (getSingle(map) > 0) throw new BusinessException("001", entity.getCode());
         return super.update(entity);
+    }
+
+    @Override
+    public StCdaInfo getPrimaryKeyId(String id) {
+        return getMapper().getPrimaryKeyId(id);
+    }
+
+    @Override
+    public StCdaInfo getById(String id){
+        return getPrimaryKeyId(id);
     }
 
 
