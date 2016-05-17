@@ -61,7 +61,7 @@ public class StandardSourceController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Query}, name = "查询")
     public ServiceResult getSourceInfo(String id) {
-        return ServiceFactory.getStNormSourceService().getById(ComSession.getUserInfo(), id);
+        return ServiceFactory.getStNormSourceService().getNormById(ComSession.getUserInfo(), id);
     }
 
     /**
@@ -75,7 +75,7 @@ public class StandardSourceController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Add}, name = "新增")
     public ServiceResult addSourceInfo(StNormSourceInfo stNormSourceInfo, HttpServletRequest request) {
-        return ServiceFactory.getStNormSourceService().add(ComSession.getUserInfo(), stNormSourceInfo);
+        return ServiceFactory.getStNormSourceService().addNormSource(ComSession.getUserInfo(), stNormSourceInfo);
     }
 
     /**
