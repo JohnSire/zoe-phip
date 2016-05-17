@@ -3,9 +3,28 @@
  */
 
 define(function (require, exports, module) {
+    var ajaxStore = {
+        getCDA: function (id,callback) {
+            var req = new Request("cda/getCdaInfo");
+            req.get({
+                isTip: false,//是否有请求结果消息提示（成功||失败）
+                data:{"id":id},
+                success: function (data) {
+                    if (typeof (callback) == "function") {
+                        callback(data);
+                    }
+                }
+            })
+        }
+    }
+
     var internal = {
 
         init: function () {
+            var id=common.getParamFromUrl("id");
+            ajaxStore.getCDA(id, function (data) {
+
+            })
             internal.event();
             internal.showEditor();
         },
