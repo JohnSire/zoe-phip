@@ -234,4 +234,15 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
     }
 
 
+    @Override
+    public StSetInfo getPrimaryKeyId(String id) {
+        return getMapper().getPrimaryKeyId(id);
+    }
+
+    @Override
+    public StSetInfo getById(String id){
+        return getPrimaryKeyId(id);
+    }
+
+
 }

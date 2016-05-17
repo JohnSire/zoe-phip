@@ -51,4 +51,6 @@ public interface IStSetInfoMapper extends IMyMapper<StSetInfo> {
 
     StSetInfo getRelationById(String id);
 
+    StSetInfo getPrimaryKeyId(String id);
+
 }
