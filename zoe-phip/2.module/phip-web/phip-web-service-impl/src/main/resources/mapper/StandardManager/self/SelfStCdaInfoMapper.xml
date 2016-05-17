@@ -14,11 +14,13 @@
                 jdbcType="VARCHAR"/>
         <result column="DEFINE" property="define" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="ARCHIVES_TYPE" property="archivesType" javaType="java.lang.String"
+        <result column="FK_ARCHIVES_ID" property="fkArchivesId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="DESCR" property="descr" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="SOURCE_NAME" property="sourceName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ARCHIVE_NAME" property="archiveName" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
     </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StCdaInfo">
@@ -54,8 +56,8 @@
             <if test="questionHtml != null">
                 QUESTION_HTML = #{questionHtml,jdbcType=CLOB},
             </if>
-            <if test="archivesType != null">
-                ARCHIVES_TYPE = #{archivesType,jdbcType=VARCHAR},
+            <if test="fkArchivesId != null">
+                FK_ARCHIVES_ID = #{fkArchivesId,jdbcType=VARCHAR},
             </if>
             <if test="descr != null">
                 DESCR = #{descr,jdbcType=VARCHAR},
@@ -74,12 +76,12 @@
         PSCI.NAME,
         PSCI.FK_NORM_SOURCE_ID,
         PSCI.DEFINE,
-        PSCI.ARCHIVES_TYPE,
+        PSCI.FK_ARCHIVES_ID,
         PSCI.DESCR,
         ssdi.NAME DA_NAME
         FROM PHIP_ST_CDA_INFO PSCI
         LEFT JOIN SYS_SYSTEM_DICT_ITEM SSDI
-        ON PSCI.ARCHIVES_TYPE = SSDI.ID
+        ON PSCI.FK_ARCHIVES_ID = SSDI.ID
         LEFT join PHIP_ST_NORM_SOURCE_INFO PSNSI
         on PSCI.FK_NORM_SOURCE_ID = PSNSI.ID
         WHERE 1 = 1
@@ -97,6 +99,15 @@
         <if test="_parameter.containsKey('id')">
             and PSCI.id != #{id, jdbcType=VARCHAR}
         </if>
+    </select>
+
+    <select id="getPrimaryKeyId" parameterType="java.lang.String" resultMap="SqlResultMap">
+        SELECT PSCI.*,PSNSI.name SOURCE_NAME,SSDI.name ARCHIVE_NAME from PHIP_ST_CDA_INFO PSCI
+        LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
+        on PSCI.FK_NORM_SOURCE_ID=PSNSI.id
+        left join  SYS_SYSTEM_DICT_ITEM SSDI
+        on PSCI.FK_ARCHIVES_ID=SSDI.id
+        where PSCI.id = #{id, jdbcType=VARCHAR}
     </select>
 
 

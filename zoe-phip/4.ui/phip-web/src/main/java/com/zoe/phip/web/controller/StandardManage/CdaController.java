@@ -6,32 +6,16 @@ import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
 import com.zoe.phip.web.context.ComSession;
-import com.zoe.phip.web.context.DataContext;
 import com.zoe.phip.web.context.ServiceFactory;
 import com.zoe.phip.web.controller.BaseController;
-import com.zoe.phip.web.model.UploadRes;
 import com.zoe.phip.web.model.sdm.StCdaInfo;
 import com.zoe.phip.web.model.sdm.StSetInfo;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadBase;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.xpath.operations.Bool;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by chenzhisen on 2016/5/6.
@@ -156,7 +140,7 @@ public class CdaController extends BaseController {
      */
     @RequestMapping(value = "/delCdaInfo")
     @ResponseBody
-    @AuthAction(permission = {Permission.Update}, name = "更新")
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult delCdaInfo(String id) {
         return ServiceFactory.getStCdaInfoService().deleteById(ComSession.getUserInfo(), id);
     }
@@ -169,10 +153,39 @@ public class CdaController extends BaseController {
      */
     @RequestMapping(value = "/delCdaList")
     @ResponseBody
-    @AuthAction(permission = {Permission.Update}, name = "更新")
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult delCdaList(String ids) {
         return ServiceFactory.getStCdaInfoService().deleteByIds(ComSession.getUserInfo(), ids);
     }
+
+
+    /**
+     * 删除Cda数据集关系
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delRsCdaInfo")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult delRsCdaInfo(String id) {
+        return ServiceFactory.getStRsCdaSetInfoService().deleteById(ComSession.getUserInfo(), id);
+    }
+
+    /**
+     * 批量删除Cda数据集关系
+     *
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/delRsCdaList")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Delete}, name = "删除")
+    public ServiceResult delRsCdaList(String ids) {
+        return ServiceFactory.getStRsCdaSetInfoService().deleteByIds(ComSession.getUserInfo(), ids);
+    }
+
+
 
     /**
      * 根据标准来源和关键字查询CDA信息
@@ -188,11 +201,20 @@ public class CdaController extends BaseController {
     }
     //endregion
 
-    //region CDA 与数据集 JSon
-//    public ServiceResultT<List<StSetInfo>> getSetList(String keyWord, String fkCdaId) {
-//        return ServiceFactory.getStSetInfoService().getByCdaId(ComSession.getUserInfo(), fkCdaId,keyWord);
-//    }
-    //endregion
+
+
+    /**
+     * CDA 与数据集 JSon
+     * @param keyWord
+     * @param fkCdaId
+     * @return
+     */
+    @RequestMapping(value = "/getSetList")
+    @ResponseBody
+   public ServiceResultT<PageList<StSetInfo>> getSetList(String keyWord, String fkCdaId) {
+        return ServiceFactory.getStSetInfoService().getByCdaId(ComSession.getUserInfo(), fkCdaId,keyWord,getQueryPage());
+  }
+
 
     //region xsl 与 xml
     @RequestMapping(value = "/uploadXsl")
