@@ -40,7 +40,7 @@ define(function (require, exports, module) {
                     internal.selectList.dialog('dataSetColumn', {
                         target: $("#btnBusinessColumn"),
                         name: 'bussTimeFieldId',
-                        parentName: 'bussTimeFieldId',
+                        parentName: 'bUSS_TIME_NAME',
                         valueField: 'id',
                         displayField: 'fieldName',
                         fkNullContent: '--请选择业务时间列--',
@@ -56,8 +56,8 @@ define(function (require, exports, module) {
                     //数据更新时间列
                     internal.selectList.dialog('dataSetColumn', {
                         target: $("#btnupdateTimeFieldId"),
-                        name: 'updateTimeFieldId',
-                        parentName: 'updateTimeFieldId',
+                        name: 'updateTimeFiledId',
+                        parentName: 'uPDATE_TIME_NAME',
                         valueField: 'id',
                         displayField: 'fieldName',
                         fkNullContent: '--请选择数据更新时间列--',
@@ -74,7 +74,7 @@ define(function (require, exports, module) {
                     internal.selectList.dialog('dataSet', {
                         target: $("#btnDataSet"),
                         name: 'pid',
-                        parentName: 'parentName',
+                        parentName: 'pName',
                         valueField: 'id',
                         displayField: 'name',
                         fkNullContent: '--请选择父级数据集--',
