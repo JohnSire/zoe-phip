@@ -19,10 +19,10 @@ define(function (require, exports, module) {
                             }),
                                 //数据资源库类别
                                 $("#fkSourceType").select({
-                                    name: 'code',
-                                    display: 'name',
+                                    name: 'fkSourceType',
+                                    display: 'fkSourceType',
                                     ajaxParam: {
-                                        url: 'dict/getItemList ',//url 请求的地址
+                                        url: 'dict/getDictItemsByCategoryCode ',//url 请求的地址
                                         data: {catalogCode: sysDictConfig.sourceType}
                                     },
                                     value: 'code',//值

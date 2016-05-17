@@ -23,7 +23,7 @@ define(function (require, exports, module) {
                     internal.selectList.dialog('dataElement', {
                         target: $("#btnDataElement"),
                         name: 'fkElementId',
-                        parentName: 'parentName',
+                        parentName: 'baseElementName',
                         valueField: 'id',
                         displayField: 'name',
                         fkNullContent: '无',
@@ -36,7 +36,7 @@ define(function (require, exports, module) {
                     internal.selectList.dialog('dict', {
                         target: $("#btnDict"),
                         name: 'fkDictId',
-                        parentName: 'parentName',
+                        parentName: 'dictName',
                         valueField: 'id',
                         displayField: 'name',
                         fkNullContent: '无',
@@ -105,27 +105,30 @@ define(function (require, exports, module) {
                 $("#dataLength").val("");
                 $("#dataAccuracy").val("");
 
-                var type = $("#dataType").val();
-                switch (type) {
-                    case "CHAR":
-                    case "NVARCHAR2":
-                        $("#dataLength").attr("msg", "数据长度1-2000");
-                        $("#show_dataLength").show();
-                        break;
-                    case "VARCHAR2":
-                        $("#dataLength").attr("msg", "数据长度1-4000");
-                        $("#show_dataLength").show();
-                        break;
-
-
-                    case "NUMBER":
-                        $("#dataLength").attr("msg", "数据长度1-38");
-                        $("#show_dataLength").show();
-                        $("#show_dataAccuracy").show();
-                        break;
-                }
+                internal.showLength();
             });
 
+        },
+        showLength:function(type){
+            var type = $("#dataType").val();
+            switch (type) {
+                case "CHAR":
+                case "NVARCHAR2":
+                    $("#dataLength").attr("msg", "数据长度1-2000");
+                    $("#show_dataLength").show();
+                    break;
+                case "VARCHAR2":
+                    $("#dataLength").attr("msg", "数据长度1-4000");
+                    $("#show_dataLength").show();
+                    break;
+
+
+                case "NUMBER":
+                    $("#dataLength").attr("msg", "数据长度1-38");
+                    $("#show_dataLength").show();
+                    $("#show_dataAccuracy").show();
+                    break;
+            }
         }
     }
 
