@@ -68,15 +68,27 @@ public class StCdaInfo extends MasterEntity {
     @Column(name = "QUESTION_HTML")
     private String questionHtml;
     /**
-     * 档案类型
+     * fk档案
      */
-    @Column(name = "ARCHIVES_TYPE")
-    private String archivesType;
+    @Column(name = "FK_ARCHIVES_ID")
+    private String fkArchivesId;
     /**
      *
      */
     @Column(name = "DESCR")
     private String descr;
+
+
+    /**
+     * 档案类别名称
+     */
+    @Transient
+    private String archiveName;
+    /**
+     * 标准来源名称
+     */
+    @Transient
+    private String sourceName;
 
     public String getCode() {
         return this.code;
@@ -168,13 +180,12 @@ public class StCdaInfo extends MasterEntity {
         this.questionHtml = questionHtml;
     }
 
-    public String getArchivesType() {
-        return this.archivesType;
+    public String getFkArchivesId() {
+        return fkArchivesId;
     }
 
-
-    public void setArchivesType(String archivesType) {
-        this.archivesType = archivesType;
+    public void setFkArchivesId(String fkArchivesId) {
+        this.fkArchivesId = fkArchivesId;
     }
 
     public String getDescr() {
@@ -186,11 +197,7 @@ public class StCdaInfo extends MasterEntity {
         this.descr = descr;
     }
 
-    /**
-     * 档案类别名称
-     */
-    @Transient
-    private String archiveName;
+
 
     public String getArchiveName() {
         return archiveName;
@@ -200,11 +207,7 @@ public class StCdaInfo extends MasterEntity {
         this.archiveName = archiveName;
     }
 
-    /**
-     * 标准来源名称
-     */
-    @Transient
-    private String sourceName;
+
 
     public String getSourceName() {
         return sourceName;

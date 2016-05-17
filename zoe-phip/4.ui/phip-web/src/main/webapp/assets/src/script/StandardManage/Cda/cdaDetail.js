@@ -37,7 +37,7 @@ define(function (require, exports, module) {
                         //档案类别
                         internal.selectList.dialog('sysDict', {
                             target: $("#archivesType"),
-                            name: 'archivesType',
+                            name: 'fkArchivesId',
                             parentName: 'archiveName',
                             valueField: 'id',
                             displayField: 'name',

@@ -22,5 +22,6 @@ public interface IStCdaInfoMapper extends IMyMapper<StCdaInfo> {
 
     int getSingle(Map<String, Object> map);
 
+    StCdaInfo getPrimaryKeyId(String id);
 
 }

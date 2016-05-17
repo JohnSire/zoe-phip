@@ -63,6 +63,7 @@ define(function (require, exports, module) {
                         },
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
+                    frozen: false,
                     usePage: true,
                     width: $("body").innerWidth() - 2,
                     height: $("body").innerHeight() - $("#gridTools").outerHeight() - 38//500
@@ -115,7 +116,7 @@ define(function (require, exports, module) {
                 title: "平台标准版本",
                 url: 'version/view/versionSetRs',
                 width: 720,
-                height:450,
+                height: 450,
                 buttons: [
                     {
                         //verifySubmit自己的验证提交状态

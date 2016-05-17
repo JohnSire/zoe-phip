@@ -17,6 +17,8 @@
                 jdbcType="DATE"/>
         <result column="DESCR" property="descr" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
+        <result column="FK_DICT_ID" property="fkDictId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="com.zoe.phip.web.model.sdm.StNormSourceInfo">
         INSERT INTO PHIP_ST_NORM_SOURCE_INFO (
@@ -27,6 +29,7 @@
         START_TIME,
         END_TIME,
         DESCR,
+        FK_DICT_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
@@ -37,6 +40,7 @@
             #{item.startTime,jdbcType=DATE},
             #{item.endTime,jdbcType=DATE},
             #{item.descr,jdbcType=VARCHAR},
+            #{item.fkDictId,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -50,6 +54,7 @@
         START_TIME,
         END_TIME,
         DESCR,
+        FK_DICT_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES(
         #{code,jdbcType=VARCHAR},
@@ -59,6 +64,7 @@
         #{startTime,jdbcType=DATE},
         #{endTime,jdbcType=DATE},
         #{descr,jdbcType=VARCHAR},
+        #{item.fkDictId,jdbcType=VARCHAR},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
@@ -98,6 +104,9 @@
                 </if>
                 <if test="item.descr != null">
                     DESCR = #{item.descr,jdbcType=VARCHAR},
+                </if>
+                <if test="item.fkDictId != null">
+                    DESCR = #{item.fkDictId,jdbcType=VARCHAR},
                 </if>
                 <if test="item.state != null">
                     STATE = #{item.state,jdbcType=DECIMAL},

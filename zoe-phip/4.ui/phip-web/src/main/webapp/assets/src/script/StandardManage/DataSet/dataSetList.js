@@ -5,8 +5,8 @@
 define(function (require, exports, module) {
     var internal = {
         init: function () {
-            window.toColumnList=toColumnList;
-            window.toChildSet=toChildSet;
+            window.toColumnList = toColumnList;
+            window.toChildSet = toChildSet;
 
             var BaseGrid = require("{staticDir}/BaseGrid/baseGrid");
             var baseGrid = new BaseGrid({
@@ -34,22 +34,29 @@ define(function (require, exports, module) {
                         {display: '名称', name: 'name', width: 250, align: 'left'},
                         //{display: '标准来源名称', name: 'sexCodeName', width: 120, align: 'left'},
                         {display: '描述', name: 'descr', width: 250, align: 'left'},
-                        {display: '关联字段',  width: 120,render:function(rowdata, rowindex, value){
+                        {
+                            display: '关联字段', width: 120, render: function (rowdata, rowindex, value) {
                             var h = "";
                             h += "<a class='icon-grid icon-grid-setting' title='配置'"
-                            + " onclick='javascript:toColumnList(\"" + rowdata.id + "\",\"" + rowdata.name + "\")'></a>";;
+                                + " onclick='javascript:toColumnList(\"" + rowdata.id + "\",\"" + rowdata.name + "\")'></a>";
+                            ;
 
                             return h;
-                        }},
-                        {display: '子级数据集',  width: 120,render:function(rowdata, rowindex, value){
+                        }
+                        },
+                        {
+                            display: '子级数据集', width: 120, render: function (rowdata, rowindex, value) {
                             var h = "";
                             h += "<a class='icon-grid icon-grid-search' title='查看'"
-                            + " onclick='javascript:toChildSet(\"" + rowdata.id + "\",\"" + rowdata.name + "\")'></a>";;
+                                + " onclick='javascript:toChildSet(\"" + rowdata.id + "\",\"" + rowdata.name + "\")'></a>";
+                            ;
 
                             return h;
-                        }},
+                        }
+                        },
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
+                    frozen: false,
                     usePage: true,
                     width: $("body").innerWidth() - 2,
                     height: $("body").innerHeight() - $("#gridTools").outerHeight() - 38//500
@@ -64,24 +71,26 @@ define(function (require, exports, module) {
                     edit: {title: "编辑数据集"},
                     common: {
                         url: 'dataSet/view/dataSetDetail',
-                        width: 560,
-                        height: 450
+                        width: 680,
+                        height: 300
                     }
                 }
             })
         }
 
     };
-    function toColumnList(id,name){
+
+    function toColumnList(id, name) {
         var top = common.getTopWindowDom();
-        var link=webRoot+"dataSet/view/columnList?fkSetId="+id+"&dataSetName="+name;
-        top. frames["mainframe"].location.href = link;
+        var link = webRoot + "dataSet/view/columnList?fkSetId=" + id + "&dataSetName=" + name;
+        top.frames["mainframe"].location.href = link;
 
     }
-    function toChildSet(id,name){
+
+    function toChildSet(id, name) {
         var top = common.getTopWindowDom();
-        var link=webRoot+"dataSet/view/childSet?fkSetId="+id+"&dataSetName="+name;
-        top. frames["mainframe"].location.href = link;
+        var link = webRoot + "dataSet/view/childSet?fkSetId=" + id + "&dataSetName=" + name;
+        top.frames["mainframe"].location.href = link;
 
     }
 

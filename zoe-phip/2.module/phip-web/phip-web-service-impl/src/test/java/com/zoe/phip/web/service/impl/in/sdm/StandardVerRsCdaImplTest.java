@@ -40,6 +40,14 @@ public class StandardVerRsCdaImplTest extends BaseTest {
         int i = impl.versionStandardStruct("1111", list);
     }
 
+    @Test
+    public void testAddCda() throws Exception {
+        StandardVerRsCda rsCda = new StandardVerRsCda();
+        rsCda.setFkVersionId("1111");
+        rsCda.setFkCdaId("2");
+        int add = impl.add(rsCda);
+    }
+
 
 
 

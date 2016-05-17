@@ -65,6 +65,7 @@ define(function (require, exports, module) {
                         },
                         {display: '操作', isSort: false, width: 120, icons: ['edit', 'del']}
                     ],
+                    frozen:false,
                     usePage: true,
                     width: $("body").innerWidth() - 2,
                     height: $("body").innerHeight() - $("#gridTools").outerHeight() - 38//500
@@ -79,8 +80,8 @@ define(function (require, exports, module) {
                     edit: {title: "编辑Cda"},
                     common: {
                         url: 'cda/view/cdaDetail',
-                        width: 560,
-                        height: 450
+                        width: 680,
+                        height: 300
                     }
                 }
             })
@@ -159,7 +160,7 @@ define(function (require, exports, module) {
     }
     function toDataSetList(id, name) {
         var top = common.getTopWindowDom();
-        var link = webRoot + "cda/view/dataSetList?cdaName=" + name;
+        var link = webRoot + "cda/view/dataSetList?fkCdaId="+id+"&cdaName=" + name;
         top.frames["mainframe"].location.href = link;
     }
 });
