@@ -1,6 +1,7 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.config.PropertyPlaceholder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.DateUtil;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
@@ -152,21 +153,29 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
         }
         Document document;
         String errorMsg = "";
-
+        String msgId="";
+        String creationTime="";
+        String extensionId="";
+        String name="";
+        String birthDate="";
         document = ProcessXmlUtil.load(message);
-        String rootModeCode = document.getRootElement().getName();
-        String msgId = document.selectSingleNode("//id/@extension").getText();
-        String idRoot = document.selectSingleNode("//id/@root").getText(); //消息IDroot属性
-        Date creationTime = DateUtil.stringToDateTime(document.selectSingleNode("//creationTime/@value").getText());
-        String extensionId = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerID/value/@extension").getText();
-        String genderCode = document.selectSingleNode("//controlActProcess/queryByParameterPayload/administrativeGender/value/@code").getText();
-        String name = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerName/value").getText();
-        String birthDate = document.selectSingleNode("//controlActProcess/queryByParameterPayload/dOB/value/@value").getText();
+//        String rootModeCode = document.getRootElement().getName();
+//        String msgId = document.selectSingleNode("//id/@extension").getText();
+//        String idRoot = document.selectSingleNode("//id/@root").getText(); //消息IDroot属性
+//        Date creationTime = DateUtil.stringToDateTime(document.selectSingleNode("//creationTime/@value").getText());
+//        String extensionId = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerID/value/@extension").getText();
+//        String genderCode = document.selectSingleNode("//controlActProcess/queryByParameterPayload/administrativeGender/value/@code").getText();
+//        String name = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerName/value").getText();
+//        String birthDate = document.selectSingleNode("//controlActProcess/queryByParameterPayload/dOB/value/@value").getText();
         try {
+            msgId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryStaff.msgId")).getText();
+            creationTime = document.selectSingleNode(PropertyPlaceholder.getProperty("queryStaff.creationTime")).getText();
+            extensionId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryStaff.extensionId")).getText();
+            name = document.selectSingleNode(PropertyPlaceholder.getProperty("queryStaff.name")).getText();
+            birthDate = document.selectSingleNode(PropertyPlaceholder.getProperty("queryStaff.birthDate")).getText();
             Map<String, Object> map = new TreeMap<>();
             if (!StringUtil.isNullOrWhiteSpace(extensionId)) map.put("extensionId", extensionId);
             if (!StringUtil.isNullOrWhiteSpace(name)) map.put("name", name);
-            if (!StringUtil.isNullOrWhiteSpace(genderCode)) map.put("genderCode", genderCode);
             if (!StringUtil.isNullOrWhiteSpace(birthDate)) map.put("birthDate", birthDate);
             MedicalStaffInfo result = staffRegisterIn.providerDetailsQuery(map);
 
@@ -181,8 +190,15 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             errorMsg = ex.getMessage();
             logger.error("error:", ex);
         }
+
+        MedicalStaffInfo info = new MedicalStaffInfo();
+        info.setName(name);
+        info.setMsgId(msgId);
+        info.setCreationTime(DateUtil.stringToDateTime(creationTime));
+        info.setExtensionId(extensionId);
+        info.setBirthTime(DateUtil.stringToDateTime(birthDate));
         acknowledgement.setText(errorMsg);
-        return RegisterUtil.registerMessage(RegisterType.DOCTOR_QUERY_ERROR, acknowledgement);
+        return RegisterUtil.registerMessage(RegisterType.DOCTOR_QUERY_ERROR, info);
     }
 
 

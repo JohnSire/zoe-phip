@@ -224,6 +224,7 @@ public class PatientRegisterImpl implements IPatientRegister {
             errorMsg = ex.getMessage();
             logger.error("error:", ex);
         }
+
         acknowledgement.setText(errorMsg);
         return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
     }

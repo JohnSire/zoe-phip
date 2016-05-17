@@ -42,7 +42,12 @@ public class StNormSourceInfoServiceImpl extends BaseInServiceImpl<StNormSourceI
         return pageList;
     }
 
-    public PageList<StNormSourceInfo> getDataPageByTypeList(String type,String key, QueryPage queryPage) {
+    @Override
+    public int add(StNormSourceInfo entity) throws Exception {
+        return super.add(entity);
+    }
+
+    public PageList<StNormSourceInfo> getDataPageByTypeList(String type, String key, QueryPage queryPage) {
         PageList<StNormSourceInfo> pageList = new PageList<>();
         SqlHelper.startPage(queryPage);
         Map<String, Object> map = new TreeMap<>();
@@ -65,4 +70,15 @@ public class StNormSourceInfoServiceImpl extends BaseInServiceImpl<StNormSourceI
     public List<StNormSourceInfo> getDataPageList(Map<String, Object> map) {
         return getMapper().getDataPageList(map);
     }
+
+    @Override
+    public int addNormSource(StNormSourceInfo stNormSourceInfo) {
+        return getMapper().addNormSource(stNormSourceInfo);
+    }
+
+    @Override
+    public StNormSourceInfo getNormById(String id) {
+        return getMapper().getNormById(id);
+    }
+
 }

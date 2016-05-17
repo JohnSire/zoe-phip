@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.web.dao.sdm.IStandardVersionMapper">
 <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StandardVersion" extends="BaseResultMap">
-
 </resultMap>
     <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StandardVersion">
     update PHIP_STANDARD_VERSION

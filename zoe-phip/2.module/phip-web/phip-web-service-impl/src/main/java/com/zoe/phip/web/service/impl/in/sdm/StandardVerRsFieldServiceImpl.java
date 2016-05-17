@@ -32,8 +32,7 @@ public class StandardVerRsFieldServiceImpl extends BaseInServiceImpl<StandardVer
 
 
     public int versionStandardStruct(String fkVersionId,List<StandardVerRsField> fieldList) throws Exception {
-        Example cda = new Example(StandardVerRsField.class);
-        cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
+        deleteByVersionId(fkVersionId);
         int i = super.addList(fieldList);
         return i;
     }

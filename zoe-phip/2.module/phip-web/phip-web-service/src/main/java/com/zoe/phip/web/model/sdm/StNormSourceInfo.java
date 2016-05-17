@@ -55,6 +55,34 @@ public class StNormSourceInfo extends MasterEntity {
     @Column(name = "DESCR")
     private String descr;
 
+    public String getDictName() {
+        return dictName;
+    }
+
+    public void setDictName(String dictName) {
+        this.dictName = dictName;
+    }
+
+    public String getFkDictId() {
+        return fkDictId;
+    }
+
+    public void setFkDictId(String fkDictId) {
+        this.fkDictId = fkDictId;
+    }
+
+    /**
+     * 系统字典关联ID
+     */
+    @Column(name = "FK_DICT_ID")
+    private String fkDictId;
+
+    /**
+     * 字典名称
+     */
+    @Transient
+    private String dictName;
+
     public String getCode() {
         return this.code;
     }
