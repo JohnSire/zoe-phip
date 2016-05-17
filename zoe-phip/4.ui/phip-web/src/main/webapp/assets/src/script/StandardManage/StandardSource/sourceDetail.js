@@ -13,21 +13,24 @@ define(function (require, exports, module) {
                         addUrl: 'source/addSourceInfo',//新增接口Url
                         updateUrl: 'source/updateSourceInfo',//修改接口Url/修改的接口Url
                         loadPageEvent: function () {
-                            $("#selstandardType").select({
+                            $("#selStandardType").select({
                                 localData: true,
                                 name: 'standardType'
-                            }),
-                                //数据资源库类别
-                                $("#fkSourceType").select({
-                                    name: 'code',
-                                    display: 'name',
-                                    ajaxParam: {
-                                        url: 'dict/getItemList ',//url 请求的地址
-                                        data: {catalogCode: sysDictConfig.sourceType}
-                                    },
-                                    value: 'code',//值
-                                    text: 'name'//展示的内容
-                                });
+                            });
+                            //数据资源库类别
+                            $("#fkSourceType").select({
+                                name: 'code',
+                                display: 'name',
+                                value: 'code',//值
+                                text: 'name',//展示的内容
+                                renderData: function (data) {
+                                    return data.result;
+                                },
+                                ajaxParam: {
+                                    url: 'dict/getItemList ',//url 请求的地址
+                                    data: {catalogCode: sysDictConfig.sourceType}
+                                }
+                            });
                         }
 
                     }

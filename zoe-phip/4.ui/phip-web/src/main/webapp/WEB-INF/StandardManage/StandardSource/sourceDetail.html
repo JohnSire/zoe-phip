@@ -18,19 +18,19 @@ var bodySection = {
             </li>
             <div class="column-one">
                 <label class="label" for="standardType">标准类型：</label>
-                <div class="simulate-select" id="selstandardType" style="width:380px;">
+                <div class="simulate-select" id="selStandardType" style="width:380px;">
                     <span class="text" style="width:370px;">--请选择标准类型--</span>
                     <i class="icon-grid icon-grid-fold-gray" style="position: absolute;left: 370px;top: 1px;"></i>
                     <ul class="simulate-select-lists" style="display:none; width:388px;">
-                        <li class="simulate-select-list" value="-1">--请选择标准类型--</li>
-                        <li class="simulate-select-list" value="1">数据元来源</li>
+                        <li class="simulate-select-list">--请选择标准类型--</li>
                         <li class="simulate-select-list" value="0">数据集来源</li>
+                        <li class="simulate-select-list" value="1">数据元来源</li>
                         <li class="simulate-select-list" value="2">CDA来源</li>
                     </ul>
                     <div class="clear"></div>
                 </div>
                 <select name="standardType" style="display: none;">
-                    <option value="-1">--请选择标准类型--</option>
+                    <option value="">--请选择标准类型--</option>
                     <option value="1">数据元来源</option>
                     <option value="0">数据集来源</option>
                     <option value="2">CDA来源</option>
@@ -38,18 +38,16 @@ var bodySection = {
             </div>
             <li class="list">
                 <div class="column-one">
-                    <label class="label" for="d">数据资源库类别：</label>
+                    <label class="label" for="fkSourceType">数据资源库：</label>
                     <div class="simulate-select" id="fkSourceType">
-                        <span class="text" style="width:370px;">--请选择数据资源库类别---</span>
+                        <span class="text" style="width:370px;">--请选择数据资源库---</span>
                         <i class="icon-grid icon-grid-fold-gray" style="position: absolute;left: 370px;top: 1px;"></i>
                         <ul class="simulate-select-lists" style="display:none;width: 388px">
-                            <li class="simulate-select-list">
-                                --请选择数据资源库类别--
-                            </li>
+                            <li class="simulate-select-list">--请选择数据资源库--</li>
                         </ul>
                         <div class="clear" style="width: 380px"></div>
                     </div>
-                    <select name="" style="display:none;">
+                    <select name="dbLink" style="display:none;">
 
                     </select>
                 </div>
