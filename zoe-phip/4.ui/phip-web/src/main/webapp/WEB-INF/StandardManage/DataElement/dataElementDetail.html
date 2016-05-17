@@ -1,4 +1,14 @@
 <%
+var styleSection={
+%>
+<style type="text/css">
+    .text-line-outer{
+        width: 300px;
+    }
+</style>
+<%};%>
+
+<%
 var bodySection = {
 %>
 <div class="y-dialog-content" style="float: none">
@@ -21,7 +31,7 @@ var bodySection = {
                     <label class="label">标准来源：</label>
                         <span class="text-line-outer" id="fkSourceId">
                             <input type="text" name="fkSourceId" class="text-line"/>
-                            <span class="text-line-setting" >
+                            <span class="text-line-setting">
                                 <span class="icon-grid icon-grid-setting" title="选择"></span>
                                 <span class="text-line-content"></span>
                             </span>
@@ -47,7 +57,7 @@ var bodySection = {
                     <label class="label">值域：</label>
                         <span class="text-line-outer" id="fkDictId">
                             <input type="text" name="fkDictId" class="text-line"/>
-                            <span class="text-line-setting" >
+                            <span class="text-line-setting">
                                 <span class="icon-grid icon-grid-setting" title="选择"></span>
                                 <span class="text-line-content"></span>
                             </span>
@@ -87,5 +97,5 @@ var scriptSection={
 </script>
 <%};%>
 <%
-include("/WEB-INF/shared/_baseAttr.html",{title:"数据元详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+include("/WEB-INF/shared/_baseAttr.html",{title:"数据元详细信息",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
 %>
