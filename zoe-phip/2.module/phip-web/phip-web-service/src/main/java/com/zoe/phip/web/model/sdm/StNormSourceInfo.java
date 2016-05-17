@@ -55,6 +55,20 @@ public class StNormSourceInfo extends MasterEntity {
     @Column(name = "DESCR")
     private String descr;
 
+    public String getRepositoryCode() {
+        return repositoryCode;
+    }
+
+    public void setRepositoryCode(String repositoryCode) {
+        this.repositoryCode = repositoryCode;
+    }
+
+    /**
+     * 字典名称
+     */
+    @Transient
+    private String repositoryCode;
+
     public String getCode() {
         return this.code;
     }
