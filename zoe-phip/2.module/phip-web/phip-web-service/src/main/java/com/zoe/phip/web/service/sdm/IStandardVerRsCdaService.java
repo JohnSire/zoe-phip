@@ -35,4 +35,6 @@ public interface IStandardVerRsCdaService extends IBaseInService<StandardVerRsCd
      * @return
      */
     ServiceResultT<List<StCdaInfo>> getVerRsCdaInfo(SystemData systemData, String fkVersionId);
+
+
 }

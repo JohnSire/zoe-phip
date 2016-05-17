@@ -1,5 +1,6 @@
 package com.zoe.phip.web.context;
 
+import com.zoe.phip.infrastructure.config.PropertyPlaceholder;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,23 +11,9 @@ import java.text.SimpleDateFormat;
  */
 public class UrlExpand {
 
-    public static String staticPath;
-    public static String webRoot;
-    public static String versionValue;
-
-    // 通过配置文件注入值
-    public void setStaticPath(String pathUrl) {
-        staticPath = pathUrl;
-    }
-
-    public void setVersion(String v) {
-        versionValue = v;
-    }
-
-    public void setWebRoot(String root) {
-        webRoot = root;
-    }
-
+    public static String staticPath= PropertyPlaceholder.getProperty("static-web.url");
+    public static String webRoot=PropertyPlaceholder.getProperty("web.url");
+    public static String versionValue=PropertyPlaceholder.getProperty("web.version");
 
     //设置静态资源路径，
     public static String SetStaticRoot(String filePath) {

@@ -20,7 +20,7 @@
     <context:annotation-config/>
     <!-- 引入配置文件 -->
     <bean id="propertyConfigurer"
-          class="com.zoe.phip.infrastructure.config.CustomPropertyPlaceholder">
+          class="com.zoe.phip.infrastructure.config.PropertyPlaceholder">
         <property name="ignoreResourceNotFound" value="true"/>
         <property name="locations">
             <list>
@@ -171,7 +171,4 @@
         <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
         <property name="validationMessageSource" ref="messageSource"/>
     </bean>
-<!--    <bean id="urlExpand" class="com.zoe.phip.register.util.ProcessXmlUtil">
-        <property name="schemasPath" value="${schemas.path}"/>
-    </bean>-->
 </beans>

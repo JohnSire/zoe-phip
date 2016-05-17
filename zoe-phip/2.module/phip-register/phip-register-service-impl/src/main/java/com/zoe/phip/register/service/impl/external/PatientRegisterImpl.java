@@ -1,6 +1,7 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.config.PropertyPlaceholder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
@@ -165,11 +166,11 @@ public class PatientRegisterImpl implements IPatientRegister {
         }
         try {
             Document document = ProcessXmlUtil.load(message);
-            String oldPatientId = document.selectSingleNode("//controlActProcess/subject/registrationEvent/replacementOf/priorRegistration/subject1/priorRegisteredRole/id/@extension").getText();
-            String newPatientId = document.selectSingleNode("//controlActProcess/subject/registrationEvent/subject1/patient/id/@extension").getText();
-            String msgId = document.selectSingleNode("//id/@extension").getText();
+            String oldPatientId = document.selectSingleNode(PropertyPlaceholder.getProperty("mergePatient.oldPatientId")).getText();
+            String newPatientId = document.selectSingleNode(PropertyPlaceholder.getProperty("mergePatient.newPatientId")).getText();
+            String msgId = document.selectSingleNode(PropertyPlaceholder.getProperty("mergePatient.msgId")).getText();
             acknowledgement.setMsgId(msgId);
-            String createTime = document.selectSingleNode("//creationTime/@value").getText();
+            String createTime = document.selectSingleNode(PropertyPlaceholder.getProperty("mergePatient.createTime")).getText();
             acknowledgement.setCreateTime(createTime);
             if (strResult.contains("error:数据集内容验证错误")) {
                 acknowledgement.setTypeCode("AE");
@@ -204,10 +205,10 @@ public class PatientRegisterImpl implements IPatientRegister {
         }
         try {
             Document document = ProcessXmlUtil.load(message);
-            String patientId = document.selectSingleNode("//controlActProcess/queryByParameter/parameterList/livingSubjectId/value/@extension").getText();
-            String msgId = document.selectSingleNode("//id/@extension").getText();
+            String patientId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryPatient.patientId")).getText();
+            String msgId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryPatient.msgId")).getText();
             acknowledgement.setMsgId(msgId);
-            String createTime = document.selectSingleNode("//creationTime/@value").getText();
+            String createTime = document.selectSingleNode(PropertyPlaceholder.getProperty("queryPatient.createTime")).getText();
             acknowledgement.setCreateTime(createTime);
             if (strResult.contains("error:数据集内容验证错误")) {
                 acknowledgement.setTypeCode("AE");

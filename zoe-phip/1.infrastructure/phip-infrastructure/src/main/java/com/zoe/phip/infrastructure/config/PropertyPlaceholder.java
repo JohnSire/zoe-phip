@@ -11,15 +11,15 @@ import java.util.Properties;
 /**
  * Created by zengjiyang on 2016/5/16.
  */
-public final class CustomPropertyPlaceholder extends PropertyPlaceholderConfigurer {
-    private static Map<String, Object> ctxPropertiesMap;
+public final class PropertyPlaceholder extends PropertyPlaceholderConfigurer {
+    private static Map<String, String> ctxPropertiesMap;
 
     @Override
     protected void processProperties(
             ConfigurableListableBeanFactory beanFactoryToProcess,
             Properties props) throws BeansException {
         super.processProperties(beanFactoryToProcess, props);
-        ctxPropertiesMap = new HashMap<String, Object>();
+        ctxPropertiesMap = new HashMap<String, String>();
         for (Object key : props.keySet()) {
             String keyStr = key.toString();
             String value = props.getProperty(keyStr);
@@ -27,7 +27,7 @@ public final class CustomPropertyPlaceholder extends PropertyPlaceholderConfigur
         }
     }
 
-    public static Object getContextProperty(String name) {
+    public static String getProperty(String name) {
         return ctxPropertiesMap.get(name);
     }
 }

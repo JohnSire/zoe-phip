@@ -1,6 +1,7 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.config.PropertyPlaceholder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.DateUtil;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
@@ -138,12 +139,12 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
        String strDivisionRoot="";
         try {
             document = ProcessXmlUtil.load(message);
-             strDeptId = document.selectSingleNode("//controlActProcess/queryByParameterPayload/organizationID/value/@extension").getText();
-            strDivisionRoot = document.selectSingleNode("//controlActProcess/queryByParameterPayload/organizationID/value/@root").getText();
-             strDeptName = document.selectSingleNode("//controlActProcess/queryByParameterPayload/organizationName/value").getText();
-             strMsgId = document.selectSingleNode("//id/@extension").getText();
-             strIdRoot = document.selectSingleNode("//id/@root").getText();
-             strCreateTime = document.selectSingleNode("//creationTime/@value").getText();
+             strDeptId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strDeptId")).getText();
+            strDivisionRoot = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strDivisionRoot")).getText();
+             strDeptName = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strDeptName")).getText();
+             strMsgId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strMsgId")).getText();
+             strIdRoot = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strIdRoot")).getText();
+             strCreateTime = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strCreateTime")).getText();
             Map<String, Object> map = new TreeMap<>();
             map.clear();
             map.put("deptCode", strDeptId);

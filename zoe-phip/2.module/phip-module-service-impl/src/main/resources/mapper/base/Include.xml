@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.module.service">
+    <resultMap id="SimpleEntityResultMap" type="com.zoe.phip.module.service.entity.SimpleEntity">
+        <id column="ID" property="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
     <resultMap id="BaseEntityResultMap" type="com.zoe.phip.module.service.entity.BaseEntity">
         <id column="ID" property="id" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="CREATE_AT" property="createAt" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
@@ -11,6 +14,9 @@
         <result column="MODIFY_BY" property="modifyBy" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="STATE" property="state" javaType="java.lang.Integer" jdbcType="INTEGER"/>
     </resultMap>
+    <sql id="simpleEntitySelect">
+        #{item.id,jdbcType=VARCHAR}
+    </sql>
     <sql id="baseEntitySelect">
          #{item.id,jdbcType=VARCHAR},
          #{item.createAt,jdbcType=TIMESTAMP},
@@ -22,6 +28,7 @@
          #{item.modifyBy,jdbcType=VARCHAR},
          #{item.state,jdbcType=INTEGER}
     </sql>
+    <sql id="simpleEntityInsert">ID</sql>
     <sql id="baseEntityInsert">ID,CREATE_AT,CREATE_BY</sql>
     <sql id="baseMasterEntityInsert">
         <include refid="com.zoe.phip.module.service.baseEntityInsert"/>,
