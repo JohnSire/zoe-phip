@@ -5,9 +5,11 @@
 
 package com.zoe.phip.web.model.sdm;
 
-import javax.persistence.*;
-
 import com.zoe.phip.module.service.entity.MasterEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 /**
@@ -300,26 +302,31 @@ public class StRsSetElementInfo extends MasterEntity {
     /**
      * 字典代码
      */
+    @Transient
     private String dictCode;
 
     /**
      * 字典名称
      */
+    @Transient
     private String dictName;
 
     /**
      * 数据集代码
      */
+    @Transient
     private String setCode;
 
     /**
      * 基础数据元代码
      */
+    @Transient
     private String baseElementCode;
 
     /**
      * 基础数据元名称
      */
+    @Transient
     private String baseElementName;
 
     public String getDictCode() {

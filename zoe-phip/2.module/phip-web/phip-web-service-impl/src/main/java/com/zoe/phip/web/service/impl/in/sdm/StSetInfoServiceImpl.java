@@ -80,12 +80,15 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
         return pageList;
     }
 
-    public PageList<StSetInfo> getByPid(String pid, QueryPage queryPage) {
+    public PageList<StSetInfo> getByPid(String pid,String key, QueryPage queryPage) {
         PageList<StSetInfo> pageList = new PageList<>();
         queryPage.setOrderBy("PSSI.CREATE_AT");
         queryPage.setSortOrder(SortOrder.DESC);
         SqlHelper.startPage(queryPage);
-        List<StSetInfo> infoList = getByPid(pid);
+        Map<String, Object> map = new TreeMap<>();
+        if (!StringUtil.isNullOrWhiteSpace(key)) map.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        if (!StringUtil.isNullOrWhiteSpace(pid)) map.put("pid", pid);
+        List<StSetInfo> infoList = getByPid(map);
         PageInfo<StSetInfo> pageInfo = new PageInfo<>(infoList);
         pageList.setTotal((int) pageInfo.getTotal());
         pageList.setRows(infoList);
@@ -184,8 +187,8 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
     }
 
     @Override
-    public List<StSetInfo> getByPid(String pid) {
-        return getMapper().getByPid(pid);
+    public List<StSetInfo> getByPid(Map<String, Object> map) {
+        return getMapper().getByPid(map);
     }
 
     @Override
@@ -228,6 +231,17 @@ public class StSetInfoServiceImpl extends BaseInServiceImpl<StSetInfo, IStSetInf
     @Override
     public StSetInfo getRelationById(String id) {
         return getMapper().getRelationById(id);
+    }
+
+
+    @Override
+    public StSetInfo getPrimaryKeyId(String id) {
+        return getMapper().getPrimaryKeyId(id);
+    }
+
+    @Override
+    public StSetInfo getById(String id){
+        return getPrimaryKeyId(id);
     }
 
 

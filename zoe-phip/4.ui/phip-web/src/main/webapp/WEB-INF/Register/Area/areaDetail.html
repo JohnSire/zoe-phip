@@ -22,13 +22,13 @@ var bodySection = {
                 <p class="column-two">
                     <label class="label" for="buildTime">成立时间：</label>
                     <span class="text-line-outer">
-                    <input edittype="date" type="text" name="buildTime" class="text"/>
+                    <input edittype="date" type="text" name="buildTime" groupname="timeGroup" compare="small" comparemsg="成立时间不能大于有注销时间！" class="text"/>
                     </span>
                 </p>
                 <p class="column-two">
                     <label class="label" for="areaCancellationDate">注销时间：</label>
                     <span class="text-line-outer">
-                    <input edittype="date" type="text" name="areaCancellationDate" class="text"/>
+                    <input edittype="date" type="text" name="areaCancellationDate" groupname="timeGroup" compare="big" comparemsg="注销时间不能小于注销时间！" class="text"/>
                     </span>
                 </p>
             </li>

@@ -91,15 +91,22 @@
         FROM PHIP_ST_SET_INFO PSSI
         LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
         ON PSSI.FK_NORM_SOURCE_ID = PSNSI.ID
-        WHERE PSSI.PID =   #{pid, jdbcType=VARCHAR}
+        where 1=1
+        <if test="_parameter.containsKey('key')">
+            AND UPPER(CONCAT(PSSI.CODE,PSSI.NAME)) LIKE UPPER (#{key, jdbcType=VARCHAR})
+        </if>
+        <if test="_parameter.containsKey('pid')">
+           and  PSSI.PID =   #{pid, jdbcType=VARCHAR}
+        </if>
     </select>
+
     <select id="getDictId" parameterType="java.lang.String" resultType="java.lang.String">
         SELECT ID from PHIP_DICT_CATALOG PDC
         WHERE UPPER (PDC.CODE) = UPPER (#{code, jdbcType=VARCHAR})
     </select>
 
-    <select id="getRelationById" parameterType="java.util.Map" resultMap="MultiResultMap">
-        SELECT PSSI.*, PSNSI.NAME SOURCE_NAME,P.NAME pName,PSRSEI.NAME BUSS_TIME_NAME,B.NAME UPDATE_TIME_NAME
+    <select id="getRelationById" parameterType="java.lang.String" resultMap="MultiResultMap">
+        SELECT PSSI.*, PSNSI.NAME SOURCE_NAME,P.NAME pName,PSRSEI.FIELD_NAME BUSS_TIME_NAME,B.FIELD_NAME UPDATE_TIME_NAME
         FROM PHIP_ST_SET_INFO PSSI
         LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
         ON PSSI.FK_NORM_SOURCE_ID = PSNSI.ID
@@ -111,5 +118,24 @@
         on PSSI.UPDATE_TIME_FIELD_ID=B.ID
         WHERE PSSI.id =   #{id, jdbcType=VARCHAR}
     </select>
+
+
+
+    <select id="getPrimaryKeyId" parameterType="java.lang.String" resultMap="MultiResultMap">
+        SELECT PSSI.*, PSNSI.NAME SOURCE_NAME,P.NAME pName,PSRSEI.FIELD_NAME BUSS_TIME_NAME,B.FIELD_NAME UPDATE_TIME_NAME
+        FROM PHIP_ST_SET_INFO PSSI
+        LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
+        ON PSSI.FK_NORM_SOURCE_ID = PSNSI.ID
+        left join PHIP_ST_SET_INFO P
+        on PSSI.PID=P.ID
+        left join PHIP_ST_RS_SET_ELEMENT_INFO PSRSEI
+        on PSSI.BUSS_TIME_FIELD_ID=PSRSEI.ID
+        left join PHIP_ST_RS_SET_ELEMENT_INFO B
+        on PSSI.UPDATE_TIME_FIELD_ID=B.ID
+        WHERE PSSI.id =   #{id, jdbcType=VARCHAR}
+    </select>
+
+
+
 
 </mapper>

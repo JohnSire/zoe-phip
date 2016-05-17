@@ -3,6 +3,7 @@
  */
 define(function (require, exports, module) {
     var internal = {
+
         selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
             var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
@@ -30,7 +31,7 @@ define(function (require, exports, module) {
 
                             target: $("#fkSourceId"),
                             name: 'fkSourceId',
-                            parentName: 'parentName',
+                            parentName: 'sourceName',
 
                             displayField: 'name',
                             valueField: 'id',
@@ -39,19 +40,19 @@ define(function (require, exports, module) {
                                 isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
                                 treeVaildMsg: '父级分类不能是其本身!',
                                 multiselect: false,
-                                param: {"type":0}
+                                param: {"type":1}
                             }
                         });
                         //16个分类
                         internal.selectList.dialog('sysDict', {
                             target: $("#fkTypeId"),
                             name: 'fkTypeId',//绑定value值
-                            parentName: 'dictName',//绑定name值
+                            parentName: 'typeName',//绑定name值
                             displayField: 'name',
                             valueField: 'Id',
                             selectParam: {
                                 multiselect: false,
-                                param: {"categoryId": "4D01A80C08CB4ACA88679457A3358A94"}
+                                param: {"catalogCode":sysDictConfig.elementType}
                             }
                         });
 
