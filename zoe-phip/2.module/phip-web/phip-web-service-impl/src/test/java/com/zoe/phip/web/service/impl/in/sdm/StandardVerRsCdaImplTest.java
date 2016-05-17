@@ -24,16 +24,23 @@ public class StandardVerRsCdaImplTest extends BaseTest {
 
     @Test
     public void testUpdateCda() throws Exception {
-//        List<StandardVerRsCda> info = impl.getCdaRsByFkVersionId("1111");
-//        boolean b = impl.versionStandardStruct("1112", info);
-        List<StandardVerRsCda> info = impl.getCdaRsByFkVersionId("1111");
+        List<StandardVerRsCda> list = new ArrayList<>();
+        StandardVerRsCda rsCda = new StandardVerRsCda();
+        rsCda.setFkVersionId("1111");
+        rsCda.setFkCdaId("4");
+        list.add(rsCda);
+        rsCda = new StandardVerRsCda();
+        rsCda.setFkVersionId("1111");
+        rsCda.setFkCdaId("2");
+        list.add(rsCda);
+        rsCda = new StandardVerRsCda();
+        rsCda.setFkVersionId("1111");
+        rsCda.setFkCdaId("1");
+        list.add(rsCda);
+        int i = impl.versionStandardStruct("1111", list);
     }
 
-    @Test
-    public void testAddCdaRs() throws Exception {
-        StandardVerRsCda entity = new StandardVerRsCda();
-        entity.setFkCdaId("3");
-        entity.setFkVersionId("1111");
-        int add = impl.add(entity);
-    }
+
+
+
 }

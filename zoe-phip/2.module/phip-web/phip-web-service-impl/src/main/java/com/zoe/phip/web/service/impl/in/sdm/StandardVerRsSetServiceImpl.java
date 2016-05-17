@@ -30,8 +30,7 @@ import java.util.Map;
 public class StandardVerRsSetServiceImpl extends BaseInServiceImpl<StandardVerRsSet, IStandardVerRsSetMapper> implements IStandardVerRsSetMapper {
 
     public int versionStandardStruct(String fkVersionId, List<StandardVerRsSet> setList) throws Exception {
-        Example example = new Example(StandardVerRsSet.class);
-        example.createCriteria().andEqualTo("fkVersionId", fkVersionId);
+        deleteByVersionId(fkVersionId);
         int i = super.addList(setList);
         return i;
     }

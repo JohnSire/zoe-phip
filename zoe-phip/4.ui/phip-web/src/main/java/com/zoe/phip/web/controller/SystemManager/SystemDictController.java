@@ -156,6 +156,14 @@ public class SystemDictController extends BaseController {
         String catalog = request.getParameter("catalogCode");
         return ServiceFactory.getDictItemService().getDictItemsByCategoryCode(ComSession.getUserInfo(), catalog);
     }
+    @RequestMapping(value = "/getDictItemsByCategoryCode")
+    @ResponseBody
+    @AuthAction(permission = {Permission.Query}, name = "查询")
+    public ServiceResultT<PageList<SystemDictItem>> getDictItemsByCategoryCode(HttpServletRequest request) {
+        String catalog = request.getParameter("catalogCode");
+        return ServiceFactory.getDictItemService().getDictItemsByCategoryCode(ComSession.getUserInfo(), catalog,getQueryPage());
+    }
+
 
     @RequestMapping(value = "/getSysDictItemInfo")
     @ResponseBody

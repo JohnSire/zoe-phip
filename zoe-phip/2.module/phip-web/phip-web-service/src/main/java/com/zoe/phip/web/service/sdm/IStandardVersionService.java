@@ -64,14 +64,4 @@ public interface IStandardVersionService extends IBaseInService<StandardVersion>
      */
     ServiceResult deleteVersion(SystemData systemData, String id);
 
-    /**
-     * 标准版本新增关联
-     * @param systemData
-     * @param fkVersionId
-     * @param cdaList
-     * @param setList
-     * @param fieldList
-     * @return
-     */
-    ServiceResult versionStandardRsAdd(SystemData systemData, String fkVersionId, List<StandardVerRsCda> cdaList, List<StandardVerRsSet> setList, List<StandardVerRsDict> fieldList);
-}
+    }
