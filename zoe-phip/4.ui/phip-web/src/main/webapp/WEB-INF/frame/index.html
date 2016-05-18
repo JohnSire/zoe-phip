@@ -2,6 +2,7 @@
 var styleSection = {
 %>
 <link href='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/dist/style/layout.css")}' rel="stylesheet"/>
+<link href='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/dist/style/menu.css")}' rel="stylesheet"/>
 <%};%>
 <%
 var bodySection = {
@@ -19,18 +20,68 @@ var bodySection = {
     </div>
     <!--/全局菜单-->
     <div class="header" id="header">
-
-        <div class="logo-outer">
+        <div class="logo-outer" style="float: left">
             <a class="logo-outer"><img alt="logo" class="img-logo" src="/assets/dist/images/logo-operation.png"/></a>
+        </div>
+        <div class="menu-top" id="topMenu">
+            <ul class="nav selc" id="nav">
+                <li class="hover">
+                    <a class="sjzh">
+                        <span class="icon">
+                            <span class="nav_name">核心配置中心
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <img alt="" class="left" src="/assets/dist/images/nav_fg.png">
+                <li>
+                    <a class="ysjgl">
+                        <span class="icon">
+                            <span class="nav_name">注册管理中心
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <img alt="" class="left" src="/assets/dist/images/nav_fg.png">
+                <li>
+                    <a class="ywjk">
+                        <span class="icon">
+                            <span class="nav_name">数据管理中心
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <img alt="" class="left" src="/assets/dist/images/nav_fg.png">
+                <li>
+                    <a class="xtgl">
+                        <span class="icon">
+                        <span class="nav_name">资源管理中心
+                        </span>
+                        </span>
+                    </a>
+                </li>
+                <img alt="" class="left" src="/assets/dist/images/nav_fg.png">
+                <li>
+                    <a class="zygl">
+                        <span class="icon">
+                            <span class="nav_name">运行管控中心
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <img alt="" class="left" src="/assets/dist/images/nav_fg.png">
+            </ul>
         </div>
         <div class="user-info">
             <p class="user-info-inner">
-                <a title="修改密码"><span id="LoginName" class="name">${userInfo.userName}</span></a>
+                <a title="修改密码">
+                    <span id="LoginName" class="name"></span></a>
                 <a class="user-info-mail"><span class="user-info-radio">0</span></a>
                 <a id="exit" class="link" href="#">安全退出</a>
             </p>
         </div>
     </div>
+    <div style="clear: both;"></div>
     <div class="container" id="container">
         <div class="container-inner clearfix">
             <div class="y-layout-subnav">
