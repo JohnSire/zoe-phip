@@ -23,7 +23,7 @@
                 STATE = #{state,jdbcType=DECIMAL},
             MODIFY_AT=sysdate
         </set>
-        where id = #{id}
+        where id = #{id,jdbcType=VARCHAR}
     </update>
 
     <select id="getAreaBaseInfo" resultMap="BaseResultMap" parameterType="java.util.Map">
@@ -55,13 +55,13 @@ AND ROWNUM=1
     </select>
 
     <select id="getAreaInfoByName" resultMap="BaseResultMap" parameterType="java.lang.String">
-        SELECT CODE,NAME FROM PHIP_AREA_BASE_INFO WHERE NAME=#{NAME} AND ROWNUM=1
+        SELECT CODE,NAME FROM PHIP_AREA_BASE_INFO WHERE NAME=#{name,jdbcType=VARCHAR} AND ROWNUM=1
     </select>
 
     <select id="getChildrenByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
         SELECT T1.ID,T1.CODE,T1.NAME,T1.PID FROM PHIP_AREA_BASE_INFO T1
         LEFT JOIN PHIP_AREA_BASE_INFO T2 ON T1.PID=T2.ID
-        WHERE T2.CODE=#{code}
+        WHERE T2.CODE=#{code,jdbcType=VARCHAR}
     </select>
 
 </mapper>

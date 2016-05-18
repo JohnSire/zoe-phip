@@ -21,7 +21,7 @@
             </if>
             MODIFY_AT=sysdate
         </set>
-        where id = #{id}
+        where id = #{id,jdbcType=VARCHAR}
     </update>
     <select id="getDataPageList" parameterType="java.util.Map" resultMap="BaseResultMap">
         SELECT * from PHIP_NATIONAL_STANDARDS PNS WHERE

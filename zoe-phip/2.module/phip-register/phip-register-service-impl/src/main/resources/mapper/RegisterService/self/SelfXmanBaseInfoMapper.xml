@@ -106,7 +106,7 @@
     </update>
     <select id="getPatient" parameterType="java.lang.String" resultMap="MultiResultMap">
         <include refid="patientSelect"/>
-        WHERE P.PATIENT_ID=#{id} OR P.HEALTH_RECORD_NO=#{id} AND ROWNUM=1
+        WHERE P.PATIENT_ID=#{id,jdbcType=VARCHAR} OR P.HEALTH_RECORD_NO=#{id,jdbcType=VARCHAR} AND ROWNUM=1
     </select>
     <select id="getPatientList" resultMap="MultiResultMap" parameterType="java.util.Map">
         SELECT B.*,C.XC_CARD_CODE,S.NAME AS SEX_CODE_NAME FROM PHIP_XMAN_BASE_INFO B
@@ -127,7 +127,7 @@
 
     <select id="getPatientByPrimaryKey" parameterType="java.lang.String" resultMap="MultiResultMap">
         <include refid="patientSelect"/>
-        WHERE P.ID=#{id}
+        WHERE P.ID=#{id,jdbcType=VARCHAR}
     </select>
     <sql id="patientSelect">
         SELECT P.*,S.NAME AS SEX_CODE_NAME,N.NAME AS NATIONALITY_NAME,OC.NAME AS OCCUPATION_NAME,
