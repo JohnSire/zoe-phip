@@ -21,7 +21,7 @@ define(function (require, exports, module) {
                         parentName: 'deptTypeName',//绑定name值
                         displayField: 'name',
                         valueField: 'code',
-
+                        isAllowEmptySelect: true,
                         selectParam: {
                             multiselect: false,
                             param: {"codeSystem": oidCodeConfig.department},//ajax参数

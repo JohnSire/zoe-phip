@@ -199,9 +199,14 @@
     }
 
     $.fn.lockScreen = function (options) {
+
         var internal = {
             maskList: [],
+            defaultOption: {
+                sumbit: function (data) {
 
+                },
+            },
             init: function (self) {
                 internal.build(self);
                 internal.show(self);
