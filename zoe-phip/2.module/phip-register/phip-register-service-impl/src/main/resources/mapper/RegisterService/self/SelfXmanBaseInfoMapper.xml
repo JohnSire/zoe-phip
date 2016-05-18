@@ -62,10 +62,6 @@
 
             NATIONALITY_CODE = #{nationalityCode,jdbcType=VARCHAR},
 
-            ABO_CODE = #{aboCode,jdbcType=DECIMAL},
-
-            RH_CODE = #{rhCode,jdbcType=DECIMAL},
-
             EDUCATION_CODE = #{educationCode,jdbcType=DECIMAL},
 
             OCCUPATION_CODE = #{occupationCode,jdbcType=VARCHAR},
