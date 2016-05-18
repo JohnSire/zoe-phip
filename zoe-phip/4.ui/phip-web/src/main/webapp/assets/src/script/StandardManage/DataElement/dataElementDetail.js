@@ -22,7 +22,7 @@ define(function (require, exports, module) {
                             parentName: 'dictName',//绑定name值
                             displayField: 'name',
                             valueField: 'id',
-                         
+                            //isTextbox: false,
                             selectParam: {
                                 //stroage: [{'name': '111', id: '2222'}, {name: '2222', id: '3333'}],
                                 multiselect: false

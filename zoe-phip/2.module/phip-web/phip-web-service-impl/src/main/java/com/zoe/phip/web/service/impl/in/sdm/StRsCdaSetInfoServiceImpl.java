@@ -30,11 +30,12 @@ import java.util.Map;
 @ErrorMessage(code = "001", message = "关系已经存在!")
 public class StRsCdaSetInfoServiceImpl extends BaseInServiceImpl<StRsCdaSetInfo, IStRsCdaSetInfoMapper> implements IStRsCdaSetInfoMapper {
 
-    public void updateByCdaId(String fkCdaId, List<StRsCdaSetInfo> infoList) throws Exception {
+    public boolean updateByCdaId(String fkCdaId, List<StRsCdaSetInfo> infoList) throws Exception {
         deleteByCdaId(fkCdaId);
         if(null!=infoList){
             super.addList(infoList);
         }
+        return true;
     }
 
     public int deleteByCdaId(String fkCdaId) {
