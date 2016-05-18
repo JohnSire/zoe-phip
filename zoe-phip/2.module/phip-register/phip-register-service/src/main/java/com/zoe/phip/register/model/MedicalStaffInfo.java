@@ -175,6 +175,7 @@ public class MedicalStaffInfo extends RegisterEntity {
     //@Transient
     @Column(name = "CREATION_TIME")
     @DateTimeFormat(pattern = "yyyy-MM-dd ")
+    @ValidateNotBlank(message = "建档时间不为空")
     private Date creationTime;
 
 

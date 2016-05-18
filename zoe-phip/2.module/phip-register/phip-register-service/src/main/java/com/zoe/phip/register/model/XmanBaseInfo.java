@@ -94,6 +94,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 工作单位联系方式
      */
     @Column(name = "EMPLOYER_TEL_NO")
+    @ValidateNumberPlusMinus(message = "工作单位联系方式不合法！")
     private String employerTelNo;
 
 
@@ -101,6 +102,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 联系电话
      */
     @Column(name = "TEL_NO")
+    @ValidateNumberPlusMinus(message = "联系电话不合法！")
     private String telNo;
 
     /**
@@ -249,6 +251,7 @@ public class XmanBaseInfo extends RegisterEntity {
      */
     @Column(name = "CREATE_TIME")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @ValidateNotBlank(message = "建档时间不为空！")
     private Date createTime;
 
 

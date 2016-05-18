@@ -99,10 +99,11 @@ public class OrgDeptInfo extends RegisterEntity {
     private String employerTelNo;
 
     /**
-     * 创建时间
+     * 建档时间
      */
     @Column(name = "CREATION_TIME")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @ValidateNotBlank(message = "建档时间不为空")
     private Date creationTime;
 
     /**
@@ -114,7 +115,7 @@ public class OrgDeptInfo extends RegisterEntity {
      * 申请者代码
      */
     @Column(name = "ASSIGNED_CODE")
-    @ValidateNotBlank(message = "申请者代码！")
+    @ValidateNotBlank(message = "申请者代码不为空！")
     private String assignedCode;
     /**
      * 申请者名称
@@ -167,6 +168,7 @@ public class OrgDeptInfo extends RegisterEntity {
      * 负责人电话
      */
     @Column(name = "CHARGE_INFO_TEL")
+    @ValidateNumberPlusMinus(message = "负责人电话不合法！")
     private String chargeInfoTel;
 
 
@@ -174,6 +176,7 @@ public class OrgDeptInfo extends RegisterEntity {
      * 投诉电话
      */
     @Column(name = "COMPLAINTS_HOTLINE")
+    @ValidateNumberPlusMinus(message = "投诉电话不合法！")
     private String complaintsHotline;
 
     /**
