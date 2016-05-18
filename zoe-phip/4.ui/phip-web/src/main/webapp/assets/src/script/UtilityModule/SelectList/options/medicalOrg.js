@@ -10,7 +10,7 @@ define(function (require, exports, module) {
             winName: 'win_medical_org_select_list',
             title: '机构选择列表',
             selectParam: {
-                storage: [],
+                stroage: [],
                 displayField: 'deptName',
                 valueField: 'deptCode',
                 gridParam: {

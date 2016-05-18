@@ -22,7 +22,9 @@ define(function (require, exports, module) {
                             parentName: 'dictName',//绑定name值
                             displayField: 'name',
                             valueField: 'id',
+                         
                             selectParam: {
+                                //stroage: [{'name': '111', id: '2222'}, {name: '2222', id: '3333'}],
                                 multiselect: false
                             }
                         });
@@ -32,20 +34,19 @@ define(function (require, exports, module) {
                             target: $("#fkSourceId"),
                             name: 'fkSourceId',
                             parentName: 'sourceName',
-
+                            isTextbox: false,
                             displayField: 'name',
                             valueField: 'id',
-                            fkNullContent: '无',
+                            fkNullContent: '',
                             selectParam: {
-                                isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
-                                treeVaildMsg: '父级分类不能是其本身!',
-                                multiselect: false,
-                                param: {"type":1}
+                                isTreeVaild: false,//如果是树节点，父节点不能是其本身验证
+                                multiselect: true,
+                                param: {"type": 1}
                             }
                         });
                         //16个分类
                         internal.selectList.dialog('sysDict', {
-                            stroage:{"name":"czs"},
+                            stroage: {"name": "czs"},
                             target: $("#fkTypeId"),
                             name: 'fkTypeId',//绑定value值
                             parentName: 'typeName',//绑定name值
@@ -53,7 +54,7 @@ define(function (require, exports, module) {
                             valueField: 'Id',
                             selectParam: {
                                 multiselect: false,
-                                param: {"catalogCode":sysDictConfig.elementType}
+                                param: {"catalogCode": sysDictConfig.elementType}
                             }
                         });
 

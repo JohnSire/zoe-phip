@@ -7,7 +7,7 @@ define(function (require, exports, module) {
             winName: 'win_medical_dept_select_list',
             title: '科室选择列表',
             selectParam: {
-                storage: [],
+                stroage: [],
                 displayField: 'deptName',
                 valueField: 'deptCode',
                 gridParam: {

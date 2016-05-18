@@ -7,7 +7,7 @@ define(function (require, exports, module) {
             winName: 'win_dict_catalog_select_list',
             title: '字典分类选择列表',
             selectParam: {
-                storage: [],
+                stroage: [],
                 displayField: 'name',
                 valueField: 'id',
                 gridParam: {

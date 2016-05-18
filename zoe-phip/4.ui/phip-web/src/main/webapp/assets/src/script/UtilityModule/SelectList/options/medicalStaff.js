@@ -13,7 +13,7 @@ define(function (require, exports, module) {
             winName: 'win_medical_staff_select_list',
             title: '医护人员选择列表',
             selectParam: {
-                storage: [],
+                stroage: [],
                 displayField: 'name',
                 valueField: 'deptCode',
                 gridParam: {

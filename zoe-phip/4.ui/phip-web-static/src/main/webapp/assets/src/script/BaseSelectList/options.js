@@ -18,6 +18,7 @@ define(function (require, exports, module) {
             return {"keyWord": value};
         },
         winCallback: ''
+
     }
     exports.defaultOptions = options;
 })
