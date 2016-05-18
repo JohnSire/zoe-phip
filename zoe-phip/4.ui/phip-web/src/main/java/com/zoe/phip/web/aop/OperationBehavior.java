@@ -24,7 +24,7 @@ public class OperationBehavior {
 
     private static final Logger logger = LoggerFactory.getLogger(OperationBehavior.class);
 
-    @Pointcut("execution(* com.zoe.phip.web.controller.*.*(..))")
+    @Pointcut("execution(* com.zoe.phip.web.controller..*.*(..))")
     private void pointCutMethod() {
     }
 
@@ -62,7 +62,26 @@ public class OperationBehavior {
         Object result;
         try {
             result = joinPoint.proceed();
-        } catch (Throwable e) {
+        }
+        catch (RpcException e){
+            logger.error("error:", e);
+            ServiceResult executeResult;
+            if (cl == ServiceResult.class) {
+                executeResult = new ServiceResult();
+            } else {
+                executeResult = new ServiceResultT();
+            }
+            if(e.getCode()==2){
+                executeResult.addMessage("", "后台连接超时，请重新操作!");
+            }else {
+                executeResult.addMessage("", e.toString());
+            }
+            executeResult.addLogData(e.toString());
+            executeResult.addLogData(SafeExecuteUtil.getStackMsg(e));
+            executeResult.setIsSuccess(false);
+            return executeResult;
+        }
+        catch (Throwable e) {
             logger.error("error:", e);
             ServiceResult executeResult;
             if (cl == ServiceResult.class) {
