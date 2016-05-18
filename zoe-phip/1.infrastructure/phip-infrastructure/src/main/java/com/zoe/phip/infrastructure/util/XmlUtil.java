@@ -79,14 +79,13 @@ public final class XmlUtil {
             if (handler.getErrors().hasContent()) {
                 logger.error("XML文件通过XSD文件校验失败!");
                 writer.write(handler.getErrors());
-                String error = "";
                 StringBuffer buf = new StringBuffer();
                 for (Node node : handler.getErrors().content()) {
                     buf.append(node.asXML());
                     buf.append(System.getProperty("line.separator"));
                 }
                 logger.error("错误:"+buf.toString());
-                return error;
+                return buf.toString();
             } else {
                 logger.info("XML文件通过XSD文件校验成功!");
             }

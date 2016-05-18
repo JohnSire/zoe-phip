@@ -174,7 +174,7 @@ public class CdaController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult delRsCdaInfo(String id) {
-        return ServiceFactory.getStRsCdaSetInfoService().deleteById(ComSession.getUserInfo(), id);
+        return ServiceFactory.getStRsCdaSetInfoService().deleteByFkSetId(ComSession.getUserInfo(), id);
     }
 
     /**
@@ -187,7 +187,7 @@ public class CdaController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult delRsCdaList(String ids) {
-        return ServiceFactory.getStRsCdaSetInfoService().deleteByIds(ComSession.getUserInfo(), ids);
+        return ServiceFactory.getStRsCdaSetInfoService().deleteByFkSetIds(ComSession.getUserInfo(), ids);
     }
 
 

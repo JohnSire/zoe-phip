@@ -5,6 +5,7 @@ import com.zoe.phip.infrastructure.config.PropertyPlaceholder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.DateUtil;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.util.XmlBeanUtil;
 import com.zoe.phip.register.model.OrgDeptInfo;
 import com.zoe.phip.module.service.entity.base.Acknowledgement;
@@ -19,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -49,6 +51,8 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             // TODO: 2016/4/14
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
+            acknowledgement.setMsgId(StringUtil.getUUID());
+            acknowledgement.setCreateTime(DateUtil.dateTimeToString(new Date(),"yyyyMMddHHmmss"));
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
         Document document = ProcessXmlUtil.load(message);
@@ -87,6 +91,8 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             // TODO: 2016/4/14
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
+            acknowledgement.setMsgId(StringUtil.getUUID());
+            acknowledgement.setCreateTime(DateUtil.dateTimeToString(new Date(),"yyyyMMddHHmmss"));
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
         Document document = ProcessXmlUtil.load(message);
@@ -126,6 +132,8 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             // TODO: 2016/4/14
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
+            acknowledgement.setMsgId(StringUtil.getUUID());
+            acknowledgement.setCreateTime(DateUtil.dateTimeToString(new Date(),"yyyyMMddHHmmss"));
             return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
         }
         Document document;
@@ -145,6 +153,15 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
              strMsgId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strMsgId")).getText();
              strIdRoot = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strIdRoot")).getText();
              strCreateTime = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strCreateTime")).getText();
+            acknowledgement.setMsgId(strMsgId);
+            acknowledgement.setCreateTime(strCreateTime);
+            if (strResult.contains("error:数据集内容验证错误")) {
+                acknowledgement.setTypeCode("AE");
+                acknowledgement.setText(strResult + ",查询失败");
+                return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, acknowledgement);
+            }
+
+
             Map<String, Object> map = new TreeMap<>();
             map.clear();
             map.put("deptCode", strDeptId);
@@ -176,7 +193,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
         OrgDeptInfo orgDeptInfo= new OrgDeptInfo();
         orgDeptInfo.setCreationTime(DateUtil.stringToDateTime(strCreateTime));
         orgDeptInfo.setDivisionRoot(strDivisionRoot);
-        orgDeptInfo.setId(strIdRoot);
+       // orgDeptInfo.setId(strIdRoot);
         orgDeptInfo.setMsgId(strMsgId);
         orgDeptInfo.setDeptCode(strDeptId);
         orgDeptInfo.setDeptName(strDeptName);

@@ -6,6 +6,7 @@
 package com.zoe.phip.register.model;
 
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateEmail;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotBlank;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNumberPlusMinus;
 import com.zoe.phip.infrastructure.util.XmlUtil;
 import com.zoe.phip.module.service.entity.base.RegisterEntity;
@@ -31,6 +32,7 @@ public class OrgDeptInfo extends RegisterEntity {
      * 医疗卫生机构（科室）标识：xml的id的extension的值
      */
     @Column(name = "DEPT_CODE")
+    @ValidateNotBlank(message = "机构（科室）标识不能为空！")
     private String deptCode;
 
 
@@ -45,6 +47,7 @@ public class OrgDeptInfo extends RegisterEntity {
      * 医疗卫生机构（科室）实体名称
      */
     @Column(name = "DEPT_NAME")
+    @ValidateNotBlank(message = "机构（科室）实体名称不能为空！")
     private String deptName;
     /**
      * 医疗卫生机构（科室）类别代码
@@ -111,6 +114,7 @@ public class OrgDeptInfo extends RegisterEntity {
      * 申请者代码
      */
     @Column(name = "ASSIGNED_CODE")
+    @ValidateNotBlank(message = "申请者代码！")
     private String assignedCode;
     /**
      * 申请者名称
