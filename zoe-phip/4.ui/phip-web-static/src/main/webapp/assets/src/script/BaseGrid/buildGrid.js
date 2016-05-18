@@ -48,7 +48,11 @@ define(function (require, exports, module) {
             var ids = "";
             if (selectRows.length > 0) {
                 $.each(selectRows, function (index, item) {
-                    ids += "," + item["id"] + ""
+                    var column="id";
+                    if(options["deleteListColumn"]){
+                        column=columnInfo["deleteListColumn"];
+                    }
+                    ids += "," + item[column] + ""
                 });
                 if (ids.length > 0) {
                     ids = ids.substr(1, ids.length);
@@ -57,6 +61,9 @@ define(function (require, exports, module) {
                     var gridId = options["gridId"];
                     var gridObj = common.getGrid(gridId);
                     gridObj.reload();
+                    if(typeof(options["afterDelCallBack"]) == "function"){
+                        options["afterDelCallBack"]();
+                    }
                 });
             } else {
                 common.jsmsgError("请选择要删除的记录！");
@@ -75,8 +82,13 @@ define(function (require, exports, module) {
                 var str = "<a class='icon-grid icon-grid-edit' title='编辑' onclick='javascript:winEditGridRow(\"" + reqInfoValue + "\",\"" + titleDescr + "\")'></a> ";
                 return str;
             },
-            del: function (rowdata) {
-                var str = "<a class='icon-grid icon-grid-del' title='删除' onclick='javascript:winDeleteGridRow(\"" + rowdata.id + "\")'></a> ";
+            del: function (rowdata, iconParam, columnInfo) {
+                var column="id";
+                //自定义列
+                if(columnInfo["deleteInfoColumn"]){
+                    column=columnInfo["deleteInfoColumn"];
+                }
+                var str = "<a class='icon-grid icon-grid-del' title='删除' onclick='javascript:winDeleteGridRow(\"" + rowdata[column] + "\")'></a> ";
                 return str;
             },
             btnSwitch: function (rowdata, iconParam, columnInfo) {
@@ -130,7 +142,12 @@ define(function (require, exports, module) {
             var gridId = internal.param["gridId"];
             var gridObj = common.getGrid(gridId);
             gridObj.reload();
-        })
+            if(typeof( internal.param["afterDelCallBack"]) == "function"){
+                internal.param["afterDelCallBack"]();
+            }
+        });
+
+
     };
     window.gridChangeSwitch = function (primaryKeyName, primaryKeyValue, switchName, switchValue, url, confirmMeg) {
         common.confirm(confirmMeg, function () {

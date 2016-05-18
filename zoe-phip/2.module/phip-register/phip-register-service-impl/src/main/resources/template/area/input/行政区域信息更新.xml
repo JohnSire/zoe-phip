@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+    <Id value=""></Id>
+    <Code value=""></Code>
+    <Name value=""></Name>
+    <Pid value=""></Pid>
+    <BuildTime value=""></BuildTime>
+    <AreaCancellationDate value=""></AreaCancellationDate>
+    <AreaCancelReason value=""></AreaCancelReason>
+    <HistoryAreaId value=""></HistoryAreaId>
+</data>

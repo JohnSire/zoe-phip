@@ -30,6 +30,7 @@ var creationTime = Model.creationTime;
       <text>${Model.acknowledgement.text}</text>
     </acknowledgementDetail>
   </acknowledgement>
+  <%if(Model.extensionId!=null){%>
   <controlActProcess classCode="CACT" moodCode="EVN">
     <code code="PRPM_TE306110UV01" codeSystem="2.16.840.1.113883.1.6" />
     <queryAck>
@@ -56,4 +57,5 @@ var creationTime = Model.creationTime;
           </providerName>
         </queryByParameterPayload>
   </controlActProcess>
+  <%}%>
 </PRPM_IN306011UV01>

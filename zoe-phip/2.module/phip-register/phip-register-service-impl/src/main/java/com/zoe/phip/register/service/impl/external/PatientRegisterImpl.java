@@ -56,7 +56,7 @@ public class PatientRegisterImpl implements IPatientRegister {
     @Override
     public String addPatientRegistry(String message) {
 
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("patient.register"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
@@ -104,7 +104,7 @@ public class PatientRegisterImpl implements IPatientRegister {
     @Override
     public String updatePatientRegistry(String message) {
 
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("patient.update"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
@@ -160,7 +160,7 @@ public class PatientRegisterImpl implements IPatientRegister {
      */
     @Override
     public String mergePatientRegistry(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("patient.merger"));
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
         //xml格式错误
@@ -201,7 +201,7 @@ public class PatientRegisterImpl implements IPatientRegister {
 
     @Override
     public String patientRegistryQuery(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("patient.query"));
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
         //xml格式错误

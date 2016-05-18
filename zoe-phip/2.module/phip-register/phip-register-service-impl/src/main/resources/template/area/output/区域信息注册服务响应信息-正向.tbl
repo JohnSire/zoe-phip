@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
 <AreaBaseInfo>
+    <Id value="${Model.id}" descr="区域ID"/>
     <Code value="${Model.code}" descr="区域代码"/>
     <Name value="${Model.name}" descr="区域名称"/>
     <Pid value="${Model.pid}" descr="父级区域"/>
@@ -8,6 +9,7 @@
     <AreaCancellationDate value="${Model.areaCancellationDate}" descr="注销日期"/>
     <AreaCancelReason value="${Model.areaCancelReason}" descr="注销原因"/>
     <HistoryAreaId value="${Model.historyAreaId}" descr="注销前区域信息，用以做历史沿革关联"/>
+    <Detail value="${Model.acknowledgement.text}" descr="操作结果"/>
 </AreaBaseInfo>
 </data>
 

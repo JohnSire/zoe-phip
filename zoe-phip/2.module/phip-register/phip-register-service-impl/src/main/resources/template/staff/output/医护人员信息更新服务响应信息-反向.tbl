@@ -34,6 +34,7 @@ var creationTime = Model.creationTime;
       </text>
     </acknowledgementDetail>
   </acknowledgement>
+  <%if(Model.extensionId!=null){%>
   <controlActProcess classCode="ACTN" moodCode="APT">
     <subject typeCode="SUBJ">
       <registrationRequest classCode="REG" moodCode="RQO">
@@ -83,4 +84,5 @@ var creationTime = Model.creationTime;
             </registrationRequest>
     </subject>
   </controlActProcess>
+  <%}%>
 </PRPM_IN303011UV01>

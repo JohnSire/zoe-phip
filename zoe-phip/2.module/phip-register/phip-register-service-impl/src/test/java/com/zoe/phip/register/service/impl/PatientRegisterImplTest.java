@@ -162,7 +162,7 @@ public class PatientRegisterImplTest extends BaseTest {
                 "</PRPA_IN201311UV02>";
 
 
-        String result = patientRegister.updatePatientRegistry(patientInput);
+        String result = patientRegister.addPatientRegistry(patientInput);
         System.out.println(result);
 
        /* SAXReader reader = new SAXReader();

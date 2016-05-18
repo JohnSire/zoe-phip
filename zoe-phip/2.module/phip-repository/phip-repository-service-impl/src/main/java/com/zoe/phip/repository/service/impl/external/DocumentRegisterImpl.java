@@ -42,7 +42,7 @@ public class DocumentRegisterImpl implements IDocumentRegister {
     @Override
     public String provideAndRegisterDocumentSet(String message) {
 
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("doc.register"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
@@ -93,7 +93,7 @@ public class DocumentRegisterImpl implements IDocumentRegister {
 
     @Override
     public String documentExistence(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("doc.prognosis"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
@@ -143,7 +143,7 @@ public class DocumentRegisterImpl implements IDocumentRegister {
      */
     @Override
     public String getDocumentSetRetrieveInfo(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("doc.query"));
         Acknowledgement acknowledgement = new Acknowledgement();
         acknowledgement.setMsgId(StringUtil.getUUID());
         String errorMsg = "";
@@ -191,7 +191,7 @@ public class DocumentRegisterImpl implements IDocumentRegister {
      */
     @Override
     public String retrieveDocumentSet(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("doc.get"));
         Acknowledgement acknowledgement = new Acknowledgement();
         acknowledgement.setMsgId(StringUtil.getUUID());
         String errorMsg = "";
@@ -292,7 +292,7 @@ public class DocumentRegisterImpl implements IDocumentRegister {
      * @return
      */
     private String registerBatch(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("doc.register"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {

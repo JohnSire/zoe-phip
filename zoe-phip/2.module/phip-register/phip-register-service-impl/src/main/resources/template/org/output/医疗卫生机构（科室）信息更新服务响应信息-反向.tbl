@@ -23,7 +23,7 @@ var creationTime = Model.creationTime;
   <acknowledgement typeCode="AE">
     <targetMessage>
       <!--请求的消息ID-->
-      <id root="${Model.id}" extension="${Model.msgId}" />
+      <id root="040CD76A-ED0E-400B-9FD3-60387BCDE0EB" extension="${Model.msgId}" />
     </targetMessage>
     <acknowledgementDetail>
       <!--处理结果说明-->

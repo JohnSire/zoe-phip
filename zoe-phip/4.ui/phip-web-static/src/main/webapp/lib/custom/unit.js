@@ -153,7 +153,6 @@
             var sortFun = new Function('a', 'b', 'return a.' + sortBy + ordAlpah + 'b.' + sortBy + '?1:-1');
             return sortFun;
         },
-
         //将线性结构转成树形结构的:data为要转换的数据，idKey，为pidKey的关联键， pid是为线性结构标识key，children为转成层级结构后的编码
         pidToChildren: function (data, idKey, pidKey, childrenKey) {
             //筛选出顶级节点的数据
@@ -162,8 +161,6 @@
                 var isExist = false;
                 $.each(data, function (index1, item1) {
                     //如果这个的父级节点存在，说明它不是顶级节点
-
-
                     if (item[pidKey] == item1[idKey]) {
                         isExist = true;
                     }

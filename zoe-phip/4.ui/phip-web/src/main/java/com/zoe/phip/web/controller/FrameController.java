@@ -13,8 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
+import javax.jms.Session;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by zengjiyang on 2016/3/11.
@@ -26,8 +30,15 @@ public class FrameController extends BaseController {
 
     //平台首页
     @RequestMapping("/index")
-    public String ToIndex(HttpServletRequest request, Model model) {
-        return "/frame/index";
+    public ModelAndView ToIndex(HttpServletRequest request, Model model) {
+
+        SystemData systemData = ComSession.getUserInfo();
+
+        ModelAndView view = new ModelAndView("/frame/index");
+        view.addObject("userInfo", systemData);
+        return view;
+
+//        return "/frame/index";
     }
 
     //管理中心

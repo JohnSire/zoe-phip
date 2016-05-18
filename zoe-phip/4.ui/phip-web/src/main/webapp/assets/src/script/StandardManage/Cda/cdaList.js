@@ -3,6 +3,7 @@
  */
 
 define(function (require, exports, module) {
+    var top = common.getTopWindowDom();
     var internal = {
         init: function () {
             window.toDataSetList = toDataSetList;
@@ -110,7 +111,7 @@ define(function (require, exports, module) {
                         verifySubmit: true,
                         submitText: '提交中...',
                         onclick: function (item, dialog, submited) {
-                            item;
+                         top.saveXsl(submited);
                         }
                     },
                     {
@@ -141,7 +142,7 @@ define(function (require, exports, module) {
                         verifySubmit: true,
                         submitText: '提交中...',
                         onclick: function (item, dialog, submited) {
-                            item;
+                            top.saveXMl(submited);
                         }
 
                     },

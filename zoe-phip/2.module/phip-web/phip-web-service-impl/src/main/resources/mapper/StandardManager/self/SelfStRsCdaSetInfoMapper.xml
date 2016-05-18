@@ -25,4 +25,11 @@
             AND PSRCSI.id != #{id, jdbcType=VARCHAR}
         </if>
     </select>
+
+    <delete id="deleteByFkSetIds" parameterType="java.lang.String">
+        delete from PHIP_ST_RS_CDA_SET_INFO where FK_SET_ID in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>

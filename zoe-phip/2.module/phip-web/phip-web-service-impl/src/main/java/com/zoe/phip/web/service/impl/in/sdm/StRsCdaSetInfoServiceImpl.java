@@ -44,6 +44,18 @@ public class StRsCdaSetInfoServiceImpl extends BaseInServiceImpl<StRsCdaSetInfo,
         return super.deleteByExample(example);
     }
 
+    public int deleteByFkSetId(String fkSetId) {
+        Example example = new Example(StRsCdaSetInfo.class);
+        example.createCriteria().andEqualTo("fkSetId", fkSetId);
+        return super.deleteByExample(example);
+    }
+
+    public int deleteByFkSetIds(String fkSetIds) {
+
+        return deleteByFkSetIds(fkSetIds.split(","));
+    }
+
+
     @Override
     public int add(StRsCdaSetInfo entity) throws Exception {
         Map<String, Object> map = MapUtil.createMap(map1 -> {
@@ -76,5 +88,10 @@ public class StRsCdaSetInfoServiceImpl extends BaseInServiceImpl<StRsCdaSetInfo,
     @Override
     public int getSingle(Map<String, Object> map) {
         return getMapper().getSingle(map);
+    }
+
+    @Override
+    public int deleteByFkSetIds(String[] fkSetIds) {
+        return getMapper().deleteByFkSetIds(fkSetIds);
     }
 }

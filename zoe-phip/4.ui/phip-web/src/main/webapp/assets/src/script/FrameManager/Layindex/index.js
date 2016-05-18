@@ -5,6 +5,7 @@ define(function (require, exports, module) {
         req: require("./req.js").req,
         menu: require("./menu.js"),
         updatePwd: require("./userUpdatePwd.js"),
+        topMenu: require("./topMenu.js"),
         dataMenu: null,
         init: function () {
             internal.getMenuList();
@@ -12,13 +13,10 @@ define(function (require, exports, module) {
             internal.SafeExit();
             internal.togglePopMenu();
             internal.UpdateUserPwd();
+            internal.topMenu.init();
             internal.top.msgTip = function (msgContext, msgCss) {
                 common.jsmsg(msgContext, msgCss);
             };
-
-            $(".img-logo").on("click", function () {
-                $("body").lockScreen({});
-            });
 
         },
         //获取菜单数据

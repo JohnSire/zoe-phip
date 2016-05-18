@@ -53,15 +53,18 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
     @Override
     public String addProvider(String message) {
 
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message, PropertyPlaceholder.getProperty("staff.register"));
         //Acknowledgement
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             // TODO: 2016/4/14
-            acknowledgement.setTypeCode("AE");
-            acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            MedicalStaffInfo medicalStaffInfo = new MedicalStaffInfo();
+            medicalStaffInfo.setCreationTime(new Date());
+            medicalStaffInfo.setId(StringUtil.getUUID());
+            medicalStaffInfo.setMsgId(StringUtil.getUUID());
+            return RegisterUtil.responseFailed(medicalStaffInfo, strResult, RegisterType.DOCTOR_ADD_ERROR);
+
         }
         Document document = ProcessXmlUtil.load(message);
         String errorMsg = "";
@@ -70,7 +73,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
             SAXReader reader = new SAXReader();
             String filePath = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";
             Document parserDoc = reader.read(this.getClass().getResourceAsStream(filePath));
-            staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class,  ProcessXmlUtil.getAdapterDom(filePath));
+            staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class, ProcessXmlUtil.getAdapterDom(filePath));
 
             if (null != staffInfo && null != staffInfo.getValidateMessage()) {
                 throw new Exception(staffInfo.getValidateMessage());
@@ -98,21 +101,23 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
 
     @Override
     public String updateProvider(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message, PropertyPlaceholder.getProperty("staff.update"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
-            // TODO: 2016/4/14
-            acknowledgement.setTypeCode("AE");
-            acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            MedicalStaffInfo medicalStaffInfo = new MedicalStaffInfo();
+            medicalStaffInfo.setCreationTime(new Date());
+            medicalStaffInfo.setMsgId(StringUtil.getUUID());
+            medicalStaffInfo.setId(StringUtil.getUUID());
+            return RegisterUtil.responseFailed(medicalStaffInfo, strResult, RegisterType.DOCTOR_UPDATE_ERROR);
+
         }
         Document document = ProcessXmlUtil.load(message);
         MedicalStaffInfo staffInfo = null;
         String errorMsg = "";
         try {
             String filePath = "/template/staff/input/Adapter/MedicalStaffRegisterAdapter.xml";
-            staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class,  ProcessXmlUtil.getAdapterDom(filePath));
+            staffInfo = XmlBeanUtil.toBean(document, MedicalStaffInfo.class, ProcessXmlUtil.getAdapterDom(filePath));
 
             if (null != staffInfo && null != staffInfo.getValidateMessage()) {
                 throw new Exception(staffInfo.getValidateMessage());
@@ -143,30 +148,27 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
 
     @Override
     public String providerDetailsQuery(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message, PropertyPlaceholder.getProperty("staff.query"));
         Acknowledgement acknowledgement = new Acknowledgement();
         if (strResult.contains("error:传入的参数不符合xml格式")) {
-            // TODO: 2016/4/14
+            MedicalStaffInfo medicalStaffInfo=new MedicalStaffInfo();
+            medicalStaffInfo.setMsgId(StringUtil.getUUID());
+            medicalStaffInfo.setId(StringUtil.getUUID());
+            medicalStaffInfo.setCreationTime(new Date());
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            medicalStaffInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.DOCTOR_QUERY_ERROR, medicalStaffInfo);
+
         }
         Document document;
         String errorMsg = "";
-        String msgId="";
-        String creationTime="";
-        String extensionId="";
-        String name="";
-        String birthDate="";
+        String msgId = "";
+        String creationTime = "";
+        String extensionId = "";
+        String name = "";
+        String birthDate = "";
         document = ProcessXmlUtil.load(message);
-//        String rootModeCode = document.getRootElement().getName();
-//        String msgId = document.selectSingleNode("//id/@extension").getText();
-//        String idRoot = document.selectSingleNode("//id/@root").getText(); //消息IDroot属性
-//        Date creationTime = DateUtil.stringToDateTime(document.selectSingleNode("//creationTime/@value").getText());
-//        String extensionId = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerID/value/@extension").getText();
-//        String genderCode = document.selectSingleNode("//controlActProcess/queryByParameterPayload/administrativeGender/value/@code").getText();
-//        String name = document.selectSingleNode("//controlActProcess/queryByParameterPayload/providerName/value").getText();
-//        String birthDate = document.selectSingleNode("//controlActProcess/queryByParameterPayload/dOB/value/@value").getText();
         try {
             msgId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryStaff.msgId")).getText();
             creationTime = document.selectSingleNode(PropertyPlaceholder.getProperty("queryStaff.creationTime")).getText();

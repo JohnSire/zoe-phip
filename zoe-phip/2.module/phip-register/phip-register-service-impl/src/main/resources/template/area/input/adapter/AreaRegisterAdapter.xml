@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <AreaBaseInfo>
+    <Id path="//Id/@value" descr="区域ID"/>
     <Code path="//Code/@value" descr="区域代码"/>
     <Name path="//Name/@value" descr="区域名称"/>
     <Pid path="//Pid/@value" descr="父级区域"/>

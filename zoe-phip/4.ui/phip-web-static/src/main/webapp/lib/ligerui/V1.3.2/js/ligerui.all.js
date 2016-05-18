@@ -4136,7 +4136,7 @@
                 }
             }
             else {
-                var textHeight=18;//update by lqh 此处bug抛出 textHeight undefined默认给此一个值
+                var textHeight = 18;//update by lqh 此处bug抛出 textHeight undefined默认给此一个值
                 if (g.text.offset().top + 4 > g.dateeditor.height() && g.text.offset().top + g.dateeditor.height() + textHeight + 4 - $(window).scrollTop() > $(window).height()) {
                     g.dateeditor.css("marginTop", -1 * (g.dateeditor.height() + textHeight + 5));
                     g.showOnTop = true;
@@ -8400,12 +8400,12 @@
                     }
                 },
                 success: function (data) {
-                    //if (!data.isSuccess) {
-                    //    if (data.Message && data.Message.length > 0 && data.Message[0]["Content"]) {
-                    //        common.jsmsgError(data.Message[0]["Content"]);
-                    //    }
-                    //    return;
-                    //}
+
+                    /*update by lqh 如果session 丢失，退回登录页*/
+                    if (!data.isSuccess && data.messages && data.messages.length && data.messages[0]["id"] == "1001") {
+                        parent.window.location.href = webRoot + "frame/login";
+                    }
+
 
                     //2015年10月27日 by lqh data.result 在SQL下返回的是字符串
                     if (typeof (data.result) == "string") {

@@ -48,47 +48,54 @@
                 var ct = (url.indexOf("?") == -1 ? "?" : "&");
                 url += ct + (new Date()).toUTCString();
                 var onSuccess = null;
+                var successObj = $.extend(true, {}, {success: arguments[0].success});
+
+
+                //arguments[0].success = sessionFn;
+
                 if (this.param.isTip) {
-                    var successObj = $.extend(true, {}, {success: arguments[0].success});
                     var success = function (data) {
-                        var msgCss = data.isSuccess ? "Success" : "Error";
-                        var msgContext = "";
-
-                        if (data.isSuccess && (data.messages && data.messages.length == 0)) {
-                            msgContext = "操作成功!"
+                        if (!data.isSuccess && data.messages && data.messages.length && data.messages[0]["id"] == "1001") {
+                            //common.getTopWindowDom().$("body").$("body").lockScreen({});
+                            var top = common.getTopWindowDom();
+                            top.location.href = webRoot + "frame/login";
+                        } else {
+                            var msgCss = data.isSuccess ? "Success" : "Error";
+                            var msgContext = "";
+                            if (data.isSuccess && (data.messages && data.messages.length == 0)) {
+                                msgContext = "操作成功!"
+                            }
+                            if (!data.isSuccess && data.messages && data.messages.length > 0) {
+                                $.each(data.messages, function (index, item) {
+                                    msgContext += item["content"]
+                                });
+                            }
+                            common.getTopWindowDom().common.jsmsg(msgContext, msgCss, function () {
+                                successObj.success(data);
+                            })
                         }
-
-
-                        if (!data.isSuccess && data.messages && data.messages.length > 0) {
-                            $.each(data.messages, function (index, item) {
-                                msgContext += item["content"]
-                            });
-                        }
-                        common.getTopWindowDom().common.jsmsg(msgContext, msgCss, function () {
-                            successObj.success(data);
-                        })
                     };
                     arguments[0].success = success;
-
-                    //新增脚本超时处理
-                    var complete = this.param.complete;
-                    arguments[0].complete = function (xhr, status) {
-                        var sessionStatus = xhr.getResponseHeader('sessionstatus');
-                        //null为手动清空cookie时；timeout为超时session 丢失
-                        if (sessionStatus == 'timeout' || sessionStatus == null) {
-                            //var top = common.getTopWindowDom(); top.location.href = webRoot + "Frame/Login"
+                } else {
+                    var success = function (data) {
+                        if (!data.isSuccess && data.messages && data.messages.length && data.messages[0]["id"] == "1001") {
+                            // common.getTopWindowDom().$("body").lockScreen({});
+                            var top = common.getTopWindowDom();
+                            top.location.href = webRoot + "frame/login";
                         } else {
-                            if ($.isFunction(complete)) {
-                                complete();
-                            }
+                            successObj.success(data);
                         }
                     }
+                    arguments[0].success = success;
                 }
+
+
                 this.param = $.extend(true, this.param, {url: url}, arguments[0]);
                 this.request = $.ajax(this.param);
 
             }
-        },
+        }
+        ,
         // 重载
         reload: function () {
             /// <summary>重载</summary>

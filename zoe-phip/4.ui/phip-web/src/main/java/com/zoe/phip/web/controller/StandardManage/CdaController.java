@@ -12,12 +12,21 @@ import com.zoe.phip.web.controller.BaseController;
 import com.zoe.phip.web.model.sdm.StCdaInfo;
 import com.zoe.phip.web.model.sdm.StRsCdaSetInfo;
 import com.zoe.phip.web.model.sdm.StSetInfo;
+import org.dom4j.Document;
+import org.dom4j.io.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.transform.*;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -174,7 +183,7 @@ public class CdaController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult delRsCdaInfo(String id) {
-        return ServiceFactory.getStRsCdaSetInfoService().deleteById(ComSession.getUserInfo(), id);
+        return ServiceFactory.getStRsCdaSetInfoService().deleteByFkSetId(ComSession.getUserInfo(), id);
     }
 
     /**
@@ -187,7 +196,7 @@ public class CdaController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult delRsCdaList(String ids) {
-        return ServiceFactory.getStRsCdaSetInfoService().deleteByIds(ComSession.getUserInfo(), ids);
+        return ServiceFactory.getStRsCdaSetInfoService().deleteByFkSetIds(ComSession.getUserInfo(), ids);
     }
 
 
@@ -272,5 +281,74 @@ public class CdaController extends BaseController {
         return ServiceFactory.getStCdaInfoService().update(ComSession.getUserInfo(), model);
 
     }
+
+    /**
+     * 将xml以xsl样式转化为html字符串
+     * @param xmlString xml字符串
+     * @param xslPath xsl路径
+     * @return
+     */
+    public String getHtmlString(String xmlString,String xslPath){
+      //  log.info("开始执行getHtmlString(...)方法");
+        String returnDocStr = "";
+        try {
+            SAXReader reader = new SAXReader();
+            ByteArrayInputStream bais = new ByteArrayInputStream(xmlString.getBytes());
+            Document doc = reader.read(bais);
+            Document transformDoc = this.transformDocument(doc,xslPath);
+            returnDocStr = this.write2String(transformDoc);
+           // log.info("getHtmlString(...)执行成功!");
+        } catch (Exception e) {
+           // log.info("getHtmlString(...)方法执行失败,提示信息["+e.getMessage()+"]");
+        }
+        return returnDocStr;
+    }
+
+    /**
+     * 通过xsl将xml数据文件转化doc对象
+     * @param doc xml文档对象
+     * @param xslPath xls文件路径
+     * @return
+     */
+    private Document transformDocument(Document doc,String xslPath){
+    //    log.info("开始执行 transformDocument(...)方法");
+        TransformerFactory factory = TransformerFactory.newInstance();
+        Document transformerDoc = null;
+        try {
+            Transformer transformer = factory.newTransformer(new StreamSource(xslPath));
+            DocumentSource docSource = new DocumentSource(doc);
+            DocumentResult docResult = new DocumentResult();
+            transformer.transform(docSource, docResult);
+            transformerDoc = docResult.getDocument();
+          //  log.info("transformDocument(...)执行成功!");
+        } catch (Exception e) {
+          //  log.info("transformDocument(...)方法执行失败,提示信息["+e.getMessage()+"]");
+        }
+        return transformerDoc;
+    }
+
+    /**
+     * 将doc文档对象转化为html字符串
+     * @param transformDoc doc文档
+     * @return
+     */
+    private String write2String(Document transformDoc){
+       // log.info("开始执行 write2String(...)方法");
+        StringWriter strWriter = new StringWriter();
+        OutputFormat format = OutputFormat.createPrettyPrint();
+        format.setEncoding("GBK");
+        format.setXHTML(true);
+        HTMLWriter htmlWriter = new HTMLWriter(strWriter,format);
+        format.setExpandEmptyElements(false);
+        try {
+            htmlWriter.write(transformDoc);
+            htmlWriter.flush();
+           // log.info("write2String(...)执行成功!");
+        } catch (IOException e) {
+          //  log.info("write2String(...)方法执行失败,提示信息["+e.getMessage()+"]");
+        }
+        return strWriter.toString();
+    }
+
     //endregion
 }

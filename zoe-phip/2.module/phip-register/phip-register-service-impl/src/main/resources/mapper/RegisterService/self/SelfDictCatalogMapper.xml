@@ -120,15 +120,23 @@
     </select>
 
     <select id="getDictCatalogTree" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT * FROM (
         SELECT DISTINCT *
         FROM PHIP_DICT_CATALOG
         <if test="codes != null">
             START WITH CODE in
             <foreach item="item" index="index" collection="codes" open="(" separator="," close=")">
-                #{item}
+                #{item,jdbcType=VARCHAR}
             </foreach>
             CONNECT BY PRIOR ID = PID
         </if>
+        )
+        <where>
+            <if test="key !=null and key !=''">
+                (UPPER(NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(CODE) LIKE #{key,jdbcType=VARCHAR})
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
         ORDER BY TYPE, CREATE_AT
     </select>
 
@@ -144,7 +152,7 @@
         </set>
         WHERE id IN
         <foreach collection="catalogIds" item="item" index="index" open="(" separator="," close=")">
-            #{item}
+            #{item,jdbcType=VARCHAR}
         </foreach>
     </update>
 </mapper>
