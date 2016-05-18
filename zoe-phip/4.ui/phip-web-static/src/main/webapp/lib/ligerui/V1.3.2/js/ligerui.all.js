@@ -4136,6 +4136,7 @@
                 }
             }
             else {
+                var textHeight=18;//update by lqh 此处bug抛出 textHeight undefined默认给此一个值
                 if (g.text.offset().top + 4 > g.dateeditor.height() && g.text.offset().top + g.dateeditor.height() + textHeight + 4 - $(window).scrollTop() > $(window).height()) {
                     g.dateeditor.css("marginTop", -1 * (g.dateeditor.height() + textHeight + 5));
                     g.showOnTop = true;
