@@ -57,6 +57,7 @@ define(function (require, exports, module) {
                         parentName: 'nationalityName',//绑定name值
                         displayField: 'name',
                         valueField: 'code',
+                        isAllowEmptySelect: true,
                         selectParam: {
                             param: {"codeSystem": oidCodeConfig.national},//ajax参数
                             multiselect: false
@@ -69,6 +70,7 @@ define(function (require, exports, module) {
                         parentName: 'xcOrgName',
                         displayField: 'deptName',
                         valueField: 'deptCode',
+                        isAllowEmptySelect: true,
                         selectParam: {
                             multiselect: false,
                             param: {type: 0}
@@ -81,6 +83,7 @@ define(function (require, exports, module) {
                         parentName: 'healthRecordOrgName',
                         displayField: 'deptName',
                         valueField: 'deptCode',
+                        isAllowEmptySelect: true,
                         selectParam: {
                             multiselect: false,
                             param: {type: 0}
@@ -93,6 +96,7 @@ define(function (require, exports, module) {
                         parentName: 'orgName',//绑定name值
                         displayField: 'deptName',
                         valueField: 'deptCode',
+                        isAllowEmptySelect: true,
                         selectParam: {
                             multiselect: false,
                             param: {type: 0}
@@ -105,6 +109,7 @@ define(function (require, exports, module) {
                         parentName: 'occupationName',//绑定name值
                         displayField: 'name',
                         valueField: 'code',
+                        isAllowEmptySelect: true,
                         selectParam: {
                             param: {"codeSystem": oidCodeConfig.occupation},//ajax参数
                             multiselect: false

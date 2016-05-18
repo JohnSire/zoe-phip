@@ -26,6 +26,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/dict")
+
 @AuthController(code = MenuCode.SystemDict)
 public class SystemDictController extends BaseController {
 

@@ -56,6 +56,7 @@ define(function (require, exports, module) {
                         parentName: 'assignedDeptName',
                         displayField: 'name',
                         valueField: 'code',
+                        isAllowEmptySelect: true,
                         selectParam: {
                             multiselect: false,
                             param: function () {
@@ -67,7 +68,6 @@ define(function (require, exports, module) {
                             }
                         }
                     });
-
                     internal.selectList.dialog('dictItem', {
                         target: $('#btnFkTechnical'),
                         name: 'technicalCode',
