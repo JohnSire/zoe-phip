@@ -18,4 +18,6 @@ import java.util.Map;
  */
 public interface IStRsCdaSetInfoMapper extends IMyMapper<StRsCdaSetInfo> {
     int getSingle(Map<String, Object> map);
+
+    int deleteByFkSetIds(String[] fkSetIds);
 }
