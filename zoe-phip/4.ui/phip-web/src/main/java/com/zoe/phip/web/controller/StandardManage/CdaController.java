@@ -191,7 +191,6 @@ public class CdaController extends BaseController {
     }
 
 
-
     /**
      * 根据标准来源和关键字查询CDA信息
      *
@@ -207,38 +206,39 @@ public class CdaController extends BaseController {
     //endregion
 
 
-
     /**
      * CDA 与数据集 JSon
+     *
      * @param keyWord
      * @param fkCdaId
      * @return
      */
     @RequestMapping(value = "/getSetList")
     @ResponseBody
-   public ServiceResultT<PageList<StSetInfo>> getSetList(String keyWord, String fkCdaId) {
-        return ServiceFactory.getStSetInfoService().getByCdaId(ComSession.getUserInfo(), fkCdaId,keyWord,getQueryPage());
-  }
+    public ServiceResultT<PageList<StSetInfo>> getSetList(String keyWord, String fkCdaId) {
+        return ServiceFactory.getStSetInfoService().getByCdaId(ComSession.getUserInfo(), fkCdaId, keyWord, getQueryPage());
+    }
 
     @RequestMapping(value = "/updateByCdaId")
     @ResponseBody
     public ServiceResult updateByCdaId(String fkCdaId, String setIds) {
-        String[] ids=setIds.split(",");
+        String[] ids = setIds.split(",");
 
-        List<StRsCdaSetInfo> list=null;
-        if(!StringUtil.isNullOrWhiteSpace(setIds)){
-            list=new ArrayList<StRsCdaSetInfo>();
-            StRsCdaSetInfo model=new StRsCdaSetInfo();
-            for (String fkSetId:ids
+        List<StRsCdaSetInfo> list = null;
+        if (!StringUtil.isNullOrWhiteSpace(setIds)) {
+            list = new ArrayList<StRsCdaSetInfo>();
+            StRsCdaSetInfo model = new StRsCdaSetInfo();
+            for (String fkSetId : ids
                     ) {
                 model.setId(UUID.randomUUID().toString());
                 model.setFkCdaId(fkCdaId);
                 model.setFkSetId(fkSetId);
                 list.add(model);
             }
-        };
+        }
+        ;
 
-        return ServiceFactory.getStCdaInfoService().updateByCdaId(ComSession.getUserInfo(), fkCdaId,list);
+        return ServiceFactory.getStRsCdaSetInfoService().updateByCdaId(ComSession.getUserInfo(), fkCdaId, list);
     }
 
 
@@ -258,13 +258,13 @@ public class CdaController extends BaseController {
     public ServiceResult saveXsl(String id, String xsl, String type) {
         StCdaInfo model = ServiceFactory.getStCdaInfoService().getById(ComSession.getUserInfo(), id).getResult();
         switch (type) {
-            case  "ToHtml" ://显示
+            case "ToHtml"://显示
                 model.setToHtmlXsl(xsl);
                 break;
-            case  "ToSummary" ://摘要
+            case "ToSummary"://摘要
                 model.setToSummaryXsl(xsl);
                 break;
-            case  "ToSet" ://解析
+            case "ToSet"://解析
                 model.setToSetXsl(xsl);
                 break;
         }
