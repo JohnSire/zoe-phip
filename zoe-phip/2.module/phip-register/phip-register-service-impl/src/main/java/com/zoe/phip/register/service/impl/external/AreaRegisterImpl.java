@@ -108,6 +108,7 @@ public class AreaRegisterImpl implements IAreaRegister {
         String errorMsg = "";
         try {
             String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryArea.areaId")).getText();
+            areaBaseInfo.setId(id);
             areaBaseInfo = areaRegisterIn.getAreaBaseInfo(id);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("查询成功");
@@ -150,6 +151,7 @@ public class AreaRegisterImpl implements IAreaRegister {
         String errorMsg = "";
         try {
             String historyId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryAreaHistory.areaId")).getText();
+            areaBaseInfo.setId(historyId);
             areaBaseInfo = areaRegisterIn.areaHistoryRegistryQuery(historyId);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("查询成功");

@@ -95,6 +95,7 @@ public class DictRegisterImpl implements IDictRegister {
         DictCatalog result = new DictCatalog();
         try {
             String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictCatalog.catalogId")).getText().trim();//字典分类ID
+            result.setId(id);
             result = dictRegisterIn.dictCatalogDetailQueryById(id);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("查询成功");
@@ -193,6 +194,7 @@ public class DictRegisterImpl implements IDictRegister {
         DictItem result = new DictItem();
         try {
             String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictItem.itemId")).getText().trim();//字典项ID
+            result.setId(id);
             result = dictRegisterIn.dictItemDetailQueryById(id);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("查询成功");

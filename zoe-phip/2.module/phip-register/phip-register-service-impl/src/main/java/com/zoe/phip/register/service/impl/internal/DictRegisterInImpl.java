@@ -382,7 +382,7 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public PageList<DictItem> dictItemListQueryByCatalogCode(String catalogCode, QueryPage queryPage, String key) {
         PageList<DictItem> pageList = new PageList<DictItem>();
         if (StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())) {
-            queryPage.setOrderBy(" pdi.CREATE_AT ");
+            queryPage.setOrderBy(" pdi.CODE ");
         }
         //分页
         SqlHelper.startPage(queryPage);
@@ -402,7 +402,7 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public PageList<DictItem> dictItemListQueryByCatalogId(String catalogId, QueryPage queryPage, String key) {
         PageList<DictItem> pageList = new PageList<DictItem>();
         if (StringUtil.isNullOrWhiteSpace(queryPage.getOrderBy())) {
-            queryPage.setOrderBy(" pdi.CREATE_AT ");
+            queryPage.setOrderBy(" pdi.CODE ");
         }
         //分页
         SqlHelper.startPage(queryPage);
