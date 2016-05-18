@@ -3,6 +3,7 @@ package com.zoe.phip.register.service.impl.external;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.zoe.phip.infrastructure.config.PropertyPlaceholder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
+import com.zoe.phip.infrastructure.util.DateUtil;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.entity.base.Acknowledgement;
@@ -21,6 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
 
 /**
  * Created by zengjiyang on 2016/4/11.
@@ -57,9 +60,10 @@ public class PatientRegisterImpl implements IPatientRegister {
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
-            acknowledgement.setTypeCode("AE");
-            acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            XmanBaseInfo xmanBaseInfo=new XmanBaseInfo();
+            xmanBaseInfo.setMsgId(StringUtil.getUUID());
+            xmanBaseInfo.setCreateTime(new Date());
+            return registerFailed(xmanBaseInfo, strResult);
         }
 
         Document document = ProcessXmlUtil.load(message);
@@ -105,9 +109,10 @@ public class PatientRegisterImpl implements IPatientRegister {
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             // TODO: 2016/4/14
-            acknowledgement.setTypeCode("AE");
-            acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            XmanBaseInfo xmanBaseInfo=new XmanBaseInfo();
+            xmanBaseInfo.setMsgId(StringUtil.getUUID());
+            xmanBaseInfo.setCreateTime(new Date());
+            return updateFailed(xmanBaseInfo, strResult);
         }
         Document document = ProcessXmlUtil.load(message);
         XmanBaseInfo baseInfo = null;
@@ -162,7 +167,9 @@ public class PatientRegisterImpl implements IPatientRegister {
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            acknowledgement.setMsgId(StringUtil.getUUID());
+            acknowledgement.setCreateTime(DateUtil.dateTimeToString(new Date(),"yyyyMMddHHmmss"));
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_UNION_ERROR, acknowledgement);
         }
         try {
             Document document = ProcessXmlUtil.load(message);
@@ -201,7 +208,9 @@ public class PatientRegisterImpl implements IPatientRegister {
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            acknowledgement.setMsgId(StringUtil.getUUID());
+            acknowledgement.setCreateTime(DateUtil.dateTimeToString(new Date(),"yyyyMMddHHmmss"));
+            return RegisterUtil.registerMessage(RegisterType.PATIENT_QUERY_ERROR, acknowledgement);
         }
         try {
             Document document = ProcessXmlUtil.load(message);
@@ -253,11 +262,11 @@ public class PatientRegisterImpl implements IPatientRegister {
     }
 
     private void baseInfoSetCode(XmanBaseInfo baseInfo){
-        baseInfo.setCityCode(getAreaByName(baseInfo.getCityCode()));
-        baseInfo.setProvinceCode(getAreaByName(baseInfo.getProvinceCode()));
-        baseInfo.setCountyCode(getAreaByName(baseInfo.getCountyCode()));
-        baseInfo.setNeighborhoodCode(getAreaByName(baseInfo.getNeighborhoodCode()));
-        baseInfo.setStreetCode(getAreaByName(baseInfo.getStreetCode()));
+        baseInfo.setCityCode(getAreaByName(baseInfo.getCityCodeName()));
+        baseInfo.setProvinceCode(getAreaByName(baseInfo.getProvinceCodeName()));
+        baseInfo.setCountyCode(getAreaByName(baseInfo.getCountyCodeName()));
+        baseInfo.setNeighborhoodCode(getAreaByName(baseInfo.getNeighborhoodCodeName()));
+        baseInfo.setStreetCode(getAreaByName(baseInfo.getStreetCodeName()));
     }
 
     private String getAreaByName(String name){

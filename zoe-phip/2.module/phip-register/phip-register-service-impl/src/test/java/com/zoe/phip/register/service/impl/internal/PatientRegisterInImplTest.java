@@ -31,7 +31,7 @@ public class PatientRegisterInImplTest extends BaseTest {
 
     @Test
     public void testGetPatient() throws Exception {
-        XmanBaseInfo result = patientRegister.getPatient("123456789");
+        int result = patientRegister.deleteById("3e3a46c835cb4aa3b83ba0cf4aab716f");
 
     }
 }

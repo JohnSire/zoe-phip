@@ -7,10 +7,11 @@
         <result column="ADDRESS" property="address" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="FK_PARENT_MENU_ID" property="fkParentMenuId" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result column="SORT" property="sort" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result column="IMAGE_URL" property="imageUrl" javaType="java.lang.String" jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="java.util.List">
         INSERT INTO SYS_MENU_DATA
-        (NAME,CODE,ADDRESS,FK_PARENT_MENU_ID,SORT,
+        (NAME,CODE,ADDRESS,FK_PARENT_MENU_ID,SORT,IMAGE_URL,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
@@ -19,6 +20,7 @@
             #{item.address,jdbcType=VARCHAR},
             #{item.fkParentMenuId,jdbcType=VARCHAR},
             #{item.sort,jdbcType=INTEGER},
+            #{item.imageUrl,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -61,6 +63,9 @@
             </if>
             <if test="item.sort != null">
                 SORT = #{item.sort,jdbcType=INTEGER},
+            </if>
+            <if test="item.imageUrl != null">
+                IMAGE_URL = #{item.imageUrl,jdbcType=VARCHAR},
             </if>
             MODIFY_AT=sysdate
         </set>
