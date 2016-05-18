@@ -144,12 +144,15 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     }
 
     @Override
-    public PageList<DictCatalog> dictCatalogTreeQuery(String codes) {
+    public PageList<DictCatalog> dictCatalogTreeQuery(String codes, String key) {
         PageList<DictCatalog> pageList = new PageList<DictCatalog>();
         String[] array = UtilString.commaDelimitedListToStringArray(codes);
         Map<String,Object> paras = new HashMap<String, Object>();
         if(array.length > 0) {
             paras.put("codes", array);
+        }
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
         }
         List<DictCatalog> results = getMapper().getDictCatalogTree(paras);
         PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
@@ -252,7 +255,9 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public PageList<DictCatalog> dictListWithoutFkCatalog(QueryPage queryPage, String key) {
         PageList<DictCatalog> pageList = new PageList<DictCatalog>();
         Map<String, Object> paras = new HashMap<String, Object>();
-        paras.put("key", key);
+        if (!StringUtil.isNullOrWhiteSpace(key)) {
+            paras.put("key", SqlHelper.getLikeStr(key.toUpperCase()));
+        }
         List<DictCatalog> results = getMapper().dictListWithoutFkCatalog(paras);
         PageInfo<DictCatalog> pageInfo = new PageInfo<DictCatalog>(results);
         pageList.setTotal((int) pageInfo.getTotal());
