@@ -66,7 +66,7 @@ var effLow = Model.effectiveTimeLow;
                <administrativeGenderCode code="${Model.genderCode}"
                codeSystem="2.16.156.10011.2.3.3.4" displayName="${Model.genderName}" codeSystemName="生理性别代码表(GB/T 2261.1)"/>
               <!--出生日期-->
-              <birthTime value="${birthDate,dateFormat="yyyyMMddd"}" />
+              <birthTime value="${birthDate,dateFormat="yyyyMMdd"}" />
               <!--隶属-->
               <asAffiliate classCode="AFFL">
                 <code />

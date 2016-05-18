@@ -50,7 +50,7 @@ var creationTime = Model.creationTime;
                    <!--性别-->
                    <administrativeGenderCode code="${Model.genderCode}" codeSystem="2.16.156.10011.2.3.3.4" displayName="${Model.genderName}" codeSystemName="生理性别代码表(GB/T 2261.1)" />
                    <!--出生日期-->
-                   <birthTime value="${birthDate,dateFormat="yyyyMMddHH"}" />
+                   <birthTime value="${birthDate,dateFormat="yyyyMMdd"}" />
                    <!--出生地-->
                    <birthplace classCode="BIRTHPL">
                      <addr>${Model.birthplaceAddr}</addr>
