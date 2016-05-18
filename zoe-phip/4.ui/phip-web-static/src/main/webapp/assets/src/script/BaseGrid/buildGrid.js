@@ -57,6 +57,9 @@ define(function (require, exports, module) {
                     var gridId = options["gridId"];
                     var gridObj = common.getGrid(gridId);
                     gridObj.reload();
+                    if(typeof(options["afterDelCallBack"]) == "function"){
+                        options["afterDelCallBack"]();
+                    }
                 });
             } else {
                 common.jsmsgError("请选择要删除的记录！");
@@ -130,7 +133,12 @@ define(function (require, exports, module) {
             var gridId = internal.param["gridId"];
             var gridObj = common.getGrid(gridId);
             gridObj.reload();
-        })
+            if(typeof( internal.param["afterDelCallBack"]) == "function"){
+                internal.param["afterDelCallBack"]();
+            }
+        });
+
+
     };
     window.gridChangeSwitch = function (primaryKeyName, primaryKeyValue, switchName, switchValue, url, confirmMeg) {
         common.confirm(confirmMeg, function () {

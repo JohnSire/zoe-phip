@@ -53,7 +53,12 @@ define(function (require, exports, module) {
                         {label: '关键字', name: 'keyWord', type: 'text'}
                     ]
                 },
+                afterDelCallBack:function(){
+                    ajaxStore.getSetList(fkCdaId, function (data) {
+                        setList = data.result.rows;
 
+                    })
+                },
                 gridParam: {
                     url: 'cda/getSetList?fkCdaId=' + fkCdaId,
                     columns: [
@@ -99,8 +104,7 @@ define(function (require, exports, module) {
 
             $(".btn-add").parent().unbind();
 
-            top.setList = setList;
-            window.setList = setList;
+
             ajaxStore.getSetList(fkCdaId, function (data) {
                 setList = data.result.rows;
 
