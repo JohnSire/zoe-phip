@@ -230,6 +230,7 @@ public class CdaController extends BaseController {
             StRsCdaSetInfo model = new StRsCdaSetInfo();
             for (String fkSetId : ids
                     ) {
+                model = new StRsCdaSetInfo();
                 model.setId(UUID.randomUUID().toString());
                 model.setFkCdaId(fkCdaId);
                 model.setFkSetId(fkSetId);
