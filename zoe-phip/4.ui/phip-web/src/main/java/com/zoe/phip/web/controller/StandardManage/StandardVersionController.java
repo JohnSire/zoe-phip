@@ -109,7 +109,7 @@ public class StandardVersionController extends BaseController {
     @ResponseBody
     @AuthAction(permission = {Permission.Delete}, name = "删除")
     public ServiceResult delVersionInfo(String id) {
-        return ServiceFactory.getStandardVersionService().deleteById(ComSession.getUserInfo(), id);
+        return ServiceFactory.getStandardVersionService().deleteVersion(ComSession.getUserInfo(), id);
     }
 
     /**
