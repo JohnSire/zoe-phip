@@ -62,8 +62,7 @@ public class OperationBehavior {
         Object result;
         try {
             result = joinPoint.proceed();
-        }
-        catch (RpcException e){
+        } catch (RpcException e) {
             logger.error("error:", e);
             ServiceResult executeResult;
             if (cl == ServiceResult.class) {
@@ -71,17 +70,16 @@ public class OperationBehavior {
             } else {
                 executeResult = new ServiceResultT();
             }
-            if(e.getCode()==2){
+            if (e.getCode() == 2) {
                 executeResult.addMessage("", "后台连接超时，请重新操作!");
-            }else {
+            } else {
                 executeResult.addMessage("", e.toString());
             }
             executeResult.addLogData(e.toString());
             executeResult.addLogData(SafeExecuteUtil.getStackMsg(e));
             executeResult.setIsSuccess(false);
             return executeResult;
-        }
-        catch (Throwable e) {
+        } catch (Throwable e) {
             logger.error("error:", e);
             ServiceResult executeResult;
             if (cl == ServiceResult.class) {

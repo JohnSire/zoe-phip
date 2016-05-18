@@ -101,6 +101,11 @@ public class DynamicProxyInvoker<T> extends AbstractProxyInvoker<T> {
         if (!methodName.equals("login")) {
             if (isFirstSystemDataClass) {
                 SystemData token = (SystemData) firstData;
+                if(token==null){
+                    ServiceResult result = new ServiceResult();
+                    result.addMessage(ErrorCode.SESSION_EXPIRED, "Session过期,请重新登录!");
+                    return result;
+                }
                 ((IBaseInService) instance).setSystemData(token);
                 boolean isAuth = SystemCredential.checkCredential(token.getUserId(), token.getUserName(), token.getCredential());
                 if (!isAuth) {
