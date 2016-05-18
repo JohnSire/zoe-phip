@@ -1,8 +1,10 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.config.PropertyPlaceholder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.util.XmlBeanUtil;
 import com.zoe.phip.register.model.AreaBaseInfo;
 import com.zoe.phip.module.service.entity.base.Acknowledgement;
@@ -44,6 +46,10 @@ public class AreaRegisterImpl implements IAreaRegister {
         String errorMsg = "";
         try {
             areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class, ProcessXmlUtil.getAdapterDom(adapterPath));
+            if(StringUtil.isNullOrWhiteSpace(areaBaseInfo.getCode()) || StringUtil.isNullOrWhiteSpace(areaBaseInfo.getName())){
+                errorMsg = "必填字段值为空，注册失败";
+                return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
+            }
             if (ifCodeExist(areaBaseInfo.getCode())) {
                 errorMsg = "由于注册内容编码已存在，注册失败";
                 return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
@@ -70,7 +76,11 @@ public class AreaRegisterImpl implements IAreaRegister {
         String errorMsg = "";
         try {
             areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class, ProcessXmlUtil.getAdapterDom(adapterPath));
-            areaBaseInfo.setId(document.selectSingleNode("//Id/@value").getText());
+            areaBaseInfo.setId(document.selectSingleNode(PropertyPlaceholder.getProperty("queryArea.areaId")).getText());
+            if(StringUtil.isNullOrWhiteSpace(areaBaseInfo.getCode()) || StringUtil.isNullOrWhiteSpace(areaBaseInfo.getName())){
+                errorMsg = "必填字段值为空，更新失败";
+                return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
+            }
             if (ifCodeExist(areaBaseInfo.getCode())) {
                 errorMsg = "由于更新内容编码已存在，更新失败!";
                 areaBaseInfo.setAcknowledgement(acknowledgement);
@@ -97,7 +107,7 @@ public class AreaRegisterImpl implements IAreaRegister {
         AreaBaseInfo areaBaseInfo = null;
         String errorMsg = "";
         try {
-            String id = document.selectSingleNode("//Id/@value").getText();
+            String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryArea.areaId")).getText();
             areaBaseInfo = areaRegisterIn.getAreaBaseInfo(id);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("查询成功");
@@ -118,7 +128,7 @@ public class AreaRegisterImpl implements IAreaRegister {
         AreaBaseInfo areaBaseInfo = null;
         String errorMsg = "";
         try {
-            String id = document.selectSingleNode("//Id/@value").getText();
+            String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryAreaChildren.areaId")).getText();
             Map<String, Object> map = new TreeMap<>();
             map.put("id", id);
             List<AreaBaseInfo> baseInfoList = areaRegisterIn.getChildren(map);
@@ -139,7 +149,7 @@ public class AreaRegisterImpl implements IAreaRegister {
         AreaBaseInfo areaBaseInfo = null;
         String errorMsg = "";
         try {
-            String historyId = document.selectSingleNode("//Id/@value").getText();
+            String historyId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryAreaHistory.areaId")).getText();
             areaBaseInfo = areaRegisterIn.areaHistoryRegistryQuery(historyId);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("查询成功");

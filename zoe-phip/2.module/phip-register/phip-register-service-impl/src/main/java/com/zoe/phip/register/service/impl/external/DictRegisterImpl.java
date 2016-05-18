@@ -1,8 +1,10 @@
 package com.zoe.phip.register.service.impl.external;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.zoe.phip.infrastructure.config.PropertyPlaceholder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.entity.base.Acknowledgement;
 import com.zoe.phip.module.service.util.XmlBeanUtil;
 import com.zoe.phip.register.model.DictCatalog;
@@ -40,6 +42,10 @@ public class DictRegisterImpl implements IDictRegister {
         DictCatalog catalog = null;
         try {
             catalog = XmlBeanUtil.toBean(document, DictCatalog.class, ProcessXmlUtil.getAdapterDom(catalogAdapterPath));
+            if(StringUtil.isNullOrWhiteSpace(catalog.getCode()) || StringUtil.isNullOrWhiteSpace(catalog.getName())){
+                errorMsg = "必填字段值为空，注册失败";
+                return RegisterUtil.responseFailed(catalog, errorMsg, RegisterType.DICT_CATALOG_ADD_ERROR);
+            }
             DictCatalog result = dictRegisterIn.addDictCatalogRequest(catalog);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("注册成功");
@@ -62,7 +68,11 @@ public class DictRegisterImpl implements IDictRegister {
         DictCatalog catalog = null;
         try {
             catalog = XmlBeanUtil.toBean(document, DictCatalog.class, ProcessXmlUtil.getAdapterDom(catalogAdapterPath));
-            catalog.setId(document.selectSingleNode("//Id/@value").getText().trim());
+            catalog.setId(document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictCatalog.catalogId")).getText().trim());
+            if(StringUtil.isNullOrWhiteSpace(catalog.getCode()) || StringUtil.isNullOrWhiteSpace(catalog.getName())){
+                errorMsg = "必填字段值为空，更新失败";
+                return RegisterUtil.responseFailed(catalog, errorMsg, RegisterType.DICT_CATALOG_ADD_ERROR);
+            }
             DictCatalog result = dictRegisterIn.updateDictCatalogRequest(catalog);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("更新成功");
@@ -84,7 +94,7 @@ public class DictRegisterImpl implements IDictRegister {
         String errorMsg = "";
         DictCatalog result = null;
         try {
-            String id = document.selectSingleNode("//Id/@value").getText().trim();//字典分类ID
+            String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictCatalog.catalogId")).getText().trim();//字典分类ID
             result = dictRegisterIn.dictCatalogDetailQueryById(id);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("查询成功");
@@ -106,7 +116,7 @@ public class DictRegisterImpl implements IDictRegister {
         String errorMsg = "";
         DictCatalog result = new DictCatalog();
         try {
-            String id = document.selectSingleNode("//Id/@value").getText().trim();//字典分类ID
+            String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictCatalog.catalogId")).getText().trim();//字典分类ID
             result.setId(id);
             dictRegisterIn.dictCatalogDetailDelete(id);
             acknowledgement.setTypeCode("AA");
@@ -130,6 +140,10 @@ public class DictRegisterImpl implements IDictRegister {
         DictItem item = null;
         try {
             item = XmlBeanUtil.toBean(document, DictItem.class, ProcessXmlUtil.getAdapterDom(itemAdapterPath));
+            if(StringUtil.isNullOrWhiteSpace(item.getCode()) || StringUtil.isNullOrWhiteSpace(item.getName())){
+                errorMsg = "必填字段值为空，注册失败";
+                return RegisterUtil.responseFailed(item, errorMsg, RegisterType.DICT_ITEM_ADD_ERROR);
+            }
             DictItem result = dictRegisterIn.addDictItemRequest(item);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("注册成功");
@@ -152,7 +166,11 @@ public class DictRegisterImpl implements IDictRegister {
         DictItem item = null;
         try {
             item = XmlBeanUtil.toBean(document, DictItem.class, ProcessXmlUtil.getAdapterDom(itemAdapterPath));
-            item.setId(document.selectSingleNode("//Id/@value").getText().trim());
+            item.setId(document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictItem.itemId")).getText().trim());
+            if(StringUtil.isNullOrWhiteSpace(item.getCode()) || StringUtil.isNullOrWhiteSpace(item.getName())){
+                errorMsg = "必填字段值为空，更新失败";
+                return RegisterUtil.responseFailed(item, errorMsg, RegisterType.DICT_ITEM_ADD_ERROR);
+            }
             DictItem result = dictRegisterIn.updateDictItemRequest(item);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("更新成功");
@@ -174,7 +192,7 @@ public class DictRegisterImpl implements IDictRegister {
         String errorMsg = "";
         DictItem result = null;
         try {
-            String id = document.selectSingleNode("//Id/@value").getText().trim();//字典项ID
+            String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictItem.itemId")).getText().trim();//字典项ID
             result = dictRegisterIn.dictItemDetailQueryById(id);
             acknowledgement.setTypeCode("AA");
             acknowledgement.setText("查询成功");
@@ -196,7 +214,7 @@ public class DictRegisterImpl implements IDictRegister {
         String errorMsg = "";
         DictItem result = new DictItem();
         try {
-            String id = document.selectSingleNode("//Id/@value").getText().trim();//字典项ID
+            String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictItem.itemId")).getText().trim();//字典项ID
             result.setId(id);
             dictRegisterIn.dictItemDetailDelete(id);
             acknowledgement.setTypeCode("AA");
