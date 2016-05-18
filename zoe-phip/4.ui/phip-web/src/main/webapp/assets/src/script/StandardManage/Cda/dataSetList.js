@@ -20,7 +20,7 @@ define(function (require, exports, module) {
         updateByCdaId: function (data, callback) {
             var req = new Request("cda/updateByCdaId");
             req.post({
-              //  isTip: true,//是否有请求结果消息提示（成功||失败）
+               isTip: true,//是否有请求结果消息提示（成功||失败）
                 data: data,
                 success: function (data) {
                     if (typeof (callback) == "function") {
