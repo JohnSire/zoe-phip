@@ -42,7 +42,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
      */
     @Override
     public String addOrganization(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("org.register"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
@@ -80,7 +80,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
 
     @Override
     public String updateOrganization(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("org.update"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
@@ -119,7 +119,7 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
 
     @Override
     public String organizationDetailQuery(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("org.query"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {

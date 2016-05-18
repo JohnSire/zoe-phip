@@ -53,7 +53,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
     @Override
     public String addProvider(String message) {
 
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("staff.register"));
         //Acknowledgement
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
@@ -98,7 +98,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
 
     @Override
     public String updateProvider(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("staff.update"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
@@ -143,7 +143,7 @@ public class MedicalStaffRegisterImpl implements IMedicalStaffRegister {
 
     @Override
     public String providerDetailsQuery(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message,PropertyPlaceholder.getProperty("staff.query"));
         Acknowledgement acknowledgement = new Acknowledgement();
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             // TODO: 2016/4/14
