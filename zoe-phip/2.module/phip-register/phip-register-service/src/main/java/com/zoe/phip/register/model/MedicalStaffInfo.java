@@ -6,6 +6,7 @@
 package com.zoe.phip.register.model;
 
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateIDCard;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotBlank;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNumberPlusMinus;
 import com.zoe.phip.module.service.entity.base.RegisterEntity;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -74,6 +75,7 @@ public class MedicalStaffInfo extends RegisterEntity {
      */
     @Column(name = "ID_NO")
     @ValidateIDCard
+    @ValidateNotBlank(message = "身份证号码不能为空！")
     private String idNo;
     /**
      * 专业技术职务代码
@@ -132,6 +134,7 @@ public class MedicalStaffInfo extends RegisterEntity {
      * 申请者代码
      */
     @Column(name = "ASSIGNED_CODE")
+    @ValidateNotBlank(message = "申请者代码不能为空！")
     private String assignedCode;
     /**
      * 申请者名称
