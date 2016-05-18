@@ -30,6 +30,7 @@ import java.util.TreeMap;
 public class AreaRegisterImpl implements IAreaRegister {
 
     private static final Logger logger = LoggerFactory.getLogger(AreaRegisterImpl.class);
+    private final String adapterPath = "/template/area/input/adapter/AreaRegisterAdapter.xml";
 
     @Autowired
     private AreaRegisterInImpl areaRegisterIn;
@@ -42,11 +43,9 @@ public class AreaRegisterImpl implements IAreaRegister {
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
         try {
-            areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class, null);
+            areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class, ProcessXmlUtil.getAdapterDom(adapterPath));
             if (ifCodeExist(areaBaseInfo.getCode())) {
-                acknowledgement.setTypeCode("AE");
-                acknowledgement.setText("由于注册内容编码已存在，注册失败");
-                areaBaseInfo.setAcknowledgement(acknowledgement);
+                errorMsg = "由于注册内容编码已存在，注册失败";
                 return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
             }
             areaRegisterIn.add(areaBaseInfo);
@@ -70,10 +69,10 @@ public class AreaRegisterImpl implements IAreaRegister {
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
         try {
-            areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class, null);
+            areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class, ProcessXmlUtil.getAdapterDom(adapterPath));
+            areaBaseInfo.setId(document.selectSingleNode("//Id/@value").getText());
             if (ifCodeExist(areaBaseInfo.getCode())) {
-                acknowledgement.setTypeCode("AE");
-                acknowledgement.setText("由于更新内容编码已存在，更新失败!");
+                errorMsg = "由于更新内容编码已存在，更新失败!";
                 areaBaseInfo.setAcknowledgement(acknowledgement);
                 return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
             }
@@ -155,7 +154,7 @@ public class AreaRegisterImpl implements IAreaRegister {
 
     private boolean ifCodeExist(String Code) {
         Example example = new Example(AreaBaseInfo.class);
-        example.createCriteria().andEqualTo("Code", Code);
+        example.createCriteria().andEqualTo("code", Code);
         int count = areaRegisterIn.selectCountByExample(example);
         return count > 0;
     }

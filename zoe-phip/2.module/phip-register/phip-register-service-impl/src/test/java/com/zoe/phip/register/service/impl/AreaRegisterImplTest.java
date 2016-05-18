@@ -22,9 +22,9 @@ public class AreaRegisterImplTest extends BaseTest {
     @Autowired
     private AreaRegisterImpl areaRegister;
 
-    @org.junit.Test
+    @Test
     public void testAddAreaRequest() throws Exception {
-        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("application-context-consumer.xml");
+        /*ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("application-context-consumer.xml");
         classPathXmlApplicationContext.start();
 
         IAreaRegister helloService = (IAreaRegister) classPathXmlApplicationContext.getBean("AreaRegister");
@@ -32,48 +32,66 @@ public class AreaRegisterImplTest extends BaseTest {
 
         System.out.println("=====================================");
         System.out.println(world);
-        System.out.println("=====================================");
+        System.out.println("=====================================");*/
+
+        String doc = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" +
+                "<data>\n" +
+                "    <Code value=\"test01\"></Code>\n" +
+                "    <Name value=\"test01\"></Name>\n" +
+                "    <Pid value=\"\"></Pid>\n" +
+                "    <BuildTime value=\"\"></BuildTime>\n" +
+                "    <AreaCancellationDate value=\"\"></AreaCancellationDate>\n" +
+                "    <AreaCancelReason value=\"\"></AreaCancelReason>\n" +
+                "    <HistoryAreaId value=\"\"></HistoryAreaId>\n" +
+                "</data>";
+        String result = areaRegister.addAreaRequest(doc);
+        System.out.println(result);
     }
 
     @Test
     public void testUpdateAreaRequest() throws Exception {
-        String doc = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<root>\n" +
-                "    <code value=\"xiamen\"/>\n" +
-                "\t<name value=\"厦门\"/>\n" +
-                "\t<pareaId value=\"\"/>\n" +
-                "\t<buildTime value=\"20160415\"/>\n" +
-                "\t<areaCancellationDate value=\"\"/>\n" +
-                "\t<areaCancelReson value=\"\"/>\n" +
-                "\t<historyAreaId value=\"\"/>\n" +
-                "</root>";
-        areaRegister.addAreaRequest(doc);
-
+        String doc = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" +
+                "<data>\n" +
+                "    <Id value=\"873f7f0e-3b77-413c-a2b3-9a91f8928554\"></Id>\n" +
+                "    <Code value=\"test01\"></Code>\n" +
+                "    <Name value=\"test01\"></Name>\n" +
+                "    <Pid value=\"\"></Pid>\n" +
+                "    <BuildTime value=\"\"></BuildTime>\n" +
+                "    <AreaCancellationDate value=\"\"></AreaCancellationDate>\n" +
+                "    <AreaCancelReason value=\"\"></AreaCancelReason>\n" +
+                "    <HistoryAreaId value=\"9BC2CEB4B2EE47488703F5A45EB998E0\"></HistoryAreaId>\n" +
+                "</data>";
+        String result = areaRegister.updateAreaRequest(doc);
+        System.out.println(result);
     }
 
     @Test
     public void testAreaDetailQuery() throws Exception {
-
+        String doc = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" +
+                "<data>\n" +
+                "    <Id value=\"873f7f0e-3b77-413c-a2b3-9a91f8928554\"></Id>\n" +
+                "</data>";
+        String result = areaRegister.areaDetailQuery(doc);
+        System.out.println(result);
     }
 
     @Test
     public void testAreaChildrenRegistryQuery() throws Exception {
-        List<AreaBaseInfo> baseInfoList = new ArrayList<>();
-
-        AreaBaseInfo b1 = new AreaBaseInfo();
-        b1.setCode("351000");
-        baseInfoList.add(b1);
-
-        AreaBaseInfo b2 = new AreaBaseInfo();
-        b2.setCode("351008");
-        baseInfoList.add(b2);
-        String message = RegisterUtil.registerMessage(RegisterType.AREA_QUERY_CHILDREN, baseInfoList);
-
-        System.out.println(message);
+        String doc = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" +
+                "<data>\n" +
+                "    <Id value=\"9BC2CEB4B2EE47488703F5A45EB998E0\"></Id>\n" +
+                "</data>";
+        String result = areaRegister.areaChildrenRegistryQuery(doc);
+        System.out.println(result);
     }
 
     @Test
     public void testAreaHistoryRegistryQuery() throws Exception {
-
+        String doc = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" +
+                "<data>\n" +
+                "    <Id value=\"9BC2CEB4B2EE47488703F5A45EB998E0\"></Id>\n" +
+                "</data>";
+        String result = areaRegister.areaHistoryRegistryQuery(doc);
+        System.out.println(result);
     }
 }

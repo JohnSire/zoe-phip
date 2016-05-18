@@ -126,7 +126,7 @@
         <if test="codes != null">
             START WITH CODE in
             <foreach item="item" index="index" collection="codes" open="(" separator="," close=")">
-                #{item}
+                #{item,jdbcType=VARCHAR}
             </foreach>
             CONNECT BY PRIOR ID = PID
         </if>
@@ -152,7 +152,7 @@
         </set>
         WHERE id IN
         <foreach collection="catalogIds" item="item" index="index" open="(" separator="," close=")">
-            #{item}
+            #{item,jdbcType=VARCHAR}
         </foreach>
     </update>
 </mapper>
