@@ -5,10 +5,12 @@ import com.zoe.phip.infrastructure.entity.PageList;
 import com.zoe.phip.infrastructure.entity.ServiceResult;
 import com.zoe.phip.infrastructure.entity.ServiceResultT;
 import com.zoe.phip.infrastructure.security.Permission;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.web.context.ComSession;
 import com.zoe.phip.web.context.ServiceFactory;
 import com.zoe.phip.web.controller.BaseController;
 import com.zoe.phip.web.model.sdm.StCdaInfo;
+import com.zoe.phip.web.model.sdm.StRsCdaSetInfo;
 import com.zoe.phip.web.model.sdm.StSetInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by chenzhisen on 2016/5/6.
@@ -215,13 +220,30 @@ public class CdaController extends BaseController {
         return ServiceFactory.getStSetInfoService().getByCdaId(ComSession.getUserInfo(), fkCdaId,keyWord,getQueryPage());
   }
 
+    @RequestMapping(value = "/updateByCdaId")
+    @ResponseBody
+    public ServiceResult updateByCdaId(String fkCdaId, String setIds) {
+        String[] ids=setIds.split(",");
+
+        List<StRsCdaSetInfo> list=null;
+        if(!StringUtil.isNullOrWhiteSpace(setIds)){
+            list=new ArrayList<StRsCdaSetInfo>();
+            StRsCdaSetInfo model=new StRsCdaSetInfo();
+            for (String fkSetId:ids
+                    ) {
+                model.setId(UUID.randomUUID().toString());
+                model.setFkCdaId(fkCdaId);
+                model.setFkSetId(fkSetId);
+                list.add(model);
+            }
+        };
+
+        return ServiceFactory.getStCdaInfoService().updateByCdaId(ComSession.getUserInfo(), fkCdaId,list);
+    }
+
 
     //region xsl 与 xml
-    @RequestMapping(value = "/uploadXsl")
-    @ResponseBody
-    public ServiceResultT<String> uploadXsl(String keyWord, String fkCdaId) {
-        return new ServiceResultT<String>();
-    }
+
 
     @RequestMapping(value = "/saveXml")
     @ResponseBody

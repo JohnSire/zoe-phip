@@ -8,7 +8,7 @@ define(function (require, exports, module) {
             title: '数据集字段选择列表',
             selectParam: {
                 storage: [],
-                displayField: 'elementName',
+                displayField: 'fieldName',
                 valueField: 'id',
                 gridParam: {
                     url: webRoot + '/dataSet/getRsSetColumn',

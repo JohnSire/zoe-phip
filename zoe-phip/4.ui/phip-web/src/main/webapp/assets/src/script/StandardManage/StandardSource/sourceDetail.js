@@ -19,13 +19,13 @@ define(function (require, exports, module) {
                             }),
                                 //数据资源库类别
                                 $("#fkSourceType").select({
-                                    name: 'code',
-                                    display: 'name',
+                                    name: 'fkDictId',
+                                    display: 'dictName',
                                     ajaxParam: {
-                                        url: 'dict/getItemList ',//url 请求的地址
+                                        url: 'dict/getDictItemsByCategoryCode ',//url 请求的地址
                                         data: {catalogCode: sysDictConfig.sourceType}
                                     },
-                                    value: 'code',//值
+                                    value: 'id',//值
                                     text: 'name'//展示的内容
                                 });
                         }

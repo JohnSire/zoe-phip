@@ -154,7 +154,7 @@
                 "zIndex": 9999,
                 "display": "block",
                 "text": "数据加载中......",
-                "loadingImg": 'http://localhost:1663/Assets/Src/Images/icon_onload.gif'
+                "loadingImg": 'http://localhost:8080/Assets/dict/Images/icon_onload.gif'
             },
             init: function (self) {
                 internal.build(self);
@@ -223,6 +223,95 @@
             internal.init(self);
         })
     }
+
+    $.fn.lockScreen = function (options) {
+        var internal = {
+            maskList: [],
+            defaultOptions: {
+                "textAlign": 'center',
+                "linheight": '400px',
+                "position": 'absolute',
+                "left": 0,
+                "top": 0,
+                "width": "100%",
+                "height": "100%",
+                "filter": "alpha(opacity=90)",
+                "opacity": "0.9",
+                "background": "#ccc",
+                "overflow": "hidden",
+                "zoom": "1",
+                "zIndex": 9999,
+                "display": "block",
+                "text": "数据加载中......",
+                "loadingImg": 'http://localhost:8080/Assets/dict/Images/icon_onload.gif'
+            },
+            init: function (self) {
+                internal.build(self);
+                internal.show(self);
+            },
+            getId: function (remark) {
+                remark = remark || 'mask';
+                var id = remark + (Math.round(Math.random() * 10000));
+                return id;
+            },
+            build: function (self) {
+                var dom_span = $("<span></span>"),
+                    div_mask = $("<div></div>").addClass("panelMask").css({
+                        "text-align": self.options.textAlign,
+                        "line-height": self.options.lineHeight,
+                        "position": self.options.position,
+                        "left": self.options.left,
+                        "top": self.options.top,
+                        "width": self.options.width,
+                        "height": self.options.height,
+                        "filter": self.options.filter,
+                        "opacity": self.options.opacity,
+                        "background": self.options.background,
+                        "overflow": self.options.overflow,
+                        "font-size": self.options.fontSize,
+                        "*zoom": self.options.zoom,
+                        "z-index": self.options.zIndex,
+                        "display": self.options.display
+                    }).append(dom_span);//遮罩层添加提示
+                self.div_mask = div_mask;
+                self.div_mask.attr("mask_id", internal.getId());
+                internal.maskList.push(self.div_mask);//保存当前遮罩层
+            },
+            show: function (self) {
+                var elem = self.div_mask;
+                var maskId = $(elem).attr("mask_id");
+                var maskElem = internal.getMask(maskId);
+                elem.css({
+                    "width": $(self).innerWidth() + "px",
+                    "height": $(self).innerHeight() + "px",
+                    "line-height": $(self).innerHeight() + "px",
+                    "top": 0,//target.offset().top,
+                    "left": 0 //target.offset().left
+                });
+                if ($(".panelMask", self).length == 0)
+                    $(self).append(elem);
+                $(maskElem).css("display", "block");
+            },
+            remove: function () {
+
+            },
+            getMask: function (maskId) {
+
+            },
+            layout: function () {
+
+            }
+        };
+
+        var target = this;
+        $(target).each(function () {
+            self = this;
+            self.options = $.extend(true, {}, internal.defaultOptions, options);
+            internal.init(self);
+        })
+    }
+
+
     //select 选择封装
     $.fn.select = function (options) {
 

@@ -5,32 +5,29 @@ var bodySection = {
     <div class="y-dialog-form form-little">
         <ul class="y-dialog-lists clearfix">
             <li class="list">
-                <p class="column">
+                <p class="column-two">
                     <label class="label"><span class="text-mark">*</span>名称：</label>
-                    <input type="text" class="text-middle" name="name" datatype="*1-256"
-                           errormsg="名称长度应为1-256位！" style="width:352px"/>
+                    <input type="text" class="text" name="name" datatype="*1-256"
+                           errormsg="名称长度应为1-256位！"/>
                 </p>
-                <p class="column">
+                <p class="column-two">
                     <label class="label"><span class="text-mark">*</span>编码：</label>
-                    <input type="text" class="text-middle" name="code" datatype="*1-60" errormsg="编码长度应为1-60位！"
-                           style="width:352px"/>
+                    <input type="text" class="text" name="code" datatype="*1-60" errormsg="编码长度应为1-60位！"
+                    />
                 </p>
             </li>
             <li class="list">
-                <p class="column">
+                <p class="column-two">
                     <label class="label">标准来源：</label>
                         <span class="text-line-outer" id="fkSourceId">
                             <input type="text" name="fkSourceId" class="text-line"/>
-                            <span class="text-line-setting" >
+                            <span class="text-line-setting">
                                 <span class="icon-grid icon-grid-setting" title="选择"></span>
                                 <span class="text-line-content"></span>
                             </span>
                         </span>
                 </p>
-
-            </li>
-            <li class="list">
-                <p class="column">
+                <p class="column-two">
                     <label class="label">分类：</label>
                         <span class="text-line-outer" id="fkTypeId">
                             <input type="text" name="fkTypeId" class="text-line"/>
@@ -43,32 +40,31 @@ var bodySection = {
 
             </li>
             <li class="list">
-                <p class="column">
+                <p class="column-two">
                     <label class="label">值域：</label>
                         <span class="text-line-outer" id="fkDictId">
                             <input type="text" name="fkDictId" class="text-line"/>
-                            <span class="text-line-setting" >
+                            <span class="text-line-setting">
                                 <span class="icon-grid icon-grid-setting" title="选择"></span>
                                 <span class="text-line-content"></span>
                             </span>
                         </span>
                 </p>
-            </li>
-            <li class="list">
-                <p class="column">
+
+                <p class="column-two">
                     <label class="label">数据类型：</label>
-                    <input type="text" class="text-middle" name="dataType" value="" style="width:352px"/>
+                    <input type="text" class="text" name="dataType" value=""/>
                 </p>
                 <p class="column">
                     <label class="label">表示格式：</label>
-                    <input type="text" class="text-middle" name="dataFormat" value="" style="width:352px"/>
+                    <input type="text" class="text" name="dataFormat" value=""/>
                 </p>
             </li>
 
             <li class="list">
                 <p class="column">
                     <label class="label label-textarea">定义：</label>
-                    <textarea rows="3" class="textarea" style="width:357px;" name="define"></textarea>
+                    <textarea rows="3" class="textarea" style="width:505px;height: 60px" name="define"></textarea>
                 </p>
             </li>
         </ul>

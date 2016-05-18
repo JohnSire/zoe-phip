@@ -78,6 +78,11 @@ public class MenuData extends MasterEntity {
     @Transient
     private String parentName;
 
+    /**
+     * 菜单图标地址
+     */
+    @Column(name = "IMAGE_URL")
+    private String imageUrl;
 
     @Transient
     @JSONField(serialize = false)
@@ -187,5 +192,13 @@ public class MenuData extends MasterEntity {
 
     public void setParentName(String parentName) {
         this.parentName = parentName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

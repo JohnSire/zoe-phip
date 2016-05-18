@@ -163,6 +163,22 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
         return pageList;
     }
 
+
+    /**
+     * 删除，还要同时删除xmancard表中数据
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int deleteById(String id) throws Exception {
+        if (StringUtil.isNullOrWhiteSpace(id))
+            throw new BusinessException("删除参数不能为空");
+        cardMapper.deleteByXmanId(id);
+        return getMapper().deleteByPrimaryKey(id);
+    }
+
+
     /**
      * 将旧实体的值，赋到新实体上
      *
@@ -218,5 +234,6 @@ public class PatientRegisterInImpl extends BaseInServiceImpl<XmanBaseInfo, IXman
     public XmanBaseInfo getPatientByPrimaryKey(String id) {
         return getMapper().getPatientByPrimaryKey(id);
     }
+
     //endregion
 }

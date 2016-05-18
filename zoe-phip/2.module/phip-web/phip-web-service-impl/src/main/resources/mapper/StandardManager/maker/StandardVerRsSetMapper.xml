@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zoe.phip.web.dao.sdm.IStandardVerRsSetMapper">
     <resultMap id="BaseResultMap" type="com.zoe.phip.web.model.sdm.StandardVerRsSet"
-               extends="com.zoe.phip.module.service.MasterEntityResultMap">
+               extends="com.zoe.phip.module.service.SimpleEntityResultMap">
         <result column="FK_VERSION_ID" property="fkVersionId" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
         <result column="FK_CDA_ID" property="fkCdaId" javaType="java.lang.String"
@@ -15,13 +15,13 @@
         FK_VERSION_ID,
         FK_CDA_ID,
         FK_SET_ID,
-        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        <include refid="com.zoe.phip.module.service.simpleEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
             #{item.fkVersionId,jdbcType=VARCHAR},
             #{item.fkCdaId,jdbcType=VARCHAR},
             #{item.fkSetId,jdbcType=VARCHAR},
-            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
+            <include refid="com.zoe.phip.module.service.simpleEntitySelect"/>
             FROM DUAL
         </foreach>
     </insert>

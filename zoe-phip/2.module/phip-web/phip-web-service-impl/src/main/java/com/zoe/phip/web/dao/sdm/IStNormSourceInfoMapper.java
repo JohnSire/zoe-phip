@@ -19,4 +19,8 @@ import java.util.Map;
  */
 public interface IStNormSourceInfoMapper extends IMyMapper<StNormSourceInfo> {
     List<StNormSourceInfo> getDataPageList(Map<String, Object> map);
+
+    int addNormSource(StNormSourceInfo stNormSourceInfo);
+
+    StNormSourceInfo getNormById(String id);
 }

@@ -24,4 +24,11 @@ public interface IXmanCardMapper extends IServiceMapper<XmanCard> {
      */
     XmanCard getXmanCard(String baseInfoId);
 
+    /**
+     * 通过xmanId删除卡信息
+     * @param xmanId
+     * @return
+     */
+    int deleteByXmanId(String xmanId);
+
 }

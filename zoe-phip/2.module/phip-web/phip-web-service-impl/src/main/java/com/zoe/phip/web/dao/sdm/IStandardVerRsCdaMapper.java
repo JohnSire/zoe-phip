@@ -25,4 +25,5 @@ public interface IStandardVerRsCdaMapper extends IMyMapper<StandardVerRsCda> {
     List<StCdaInfo> getCdaByFkVersionId(Map<String, Object> map);
 
     List<StandardVerRsCda> getCdaRsByFkVersionId(Map<String, Object> map);
+
 }

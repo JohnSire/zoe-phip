@@ -61,7 +61,7 @@
                                         <exclude>META-INF/*.RSA</exclude>
                                         <!--打包时排除掉数据库连接串和相关配置文件，从外部读取 todo 包含log4j？-->
                                         <exclude>jdbc.properties</exclude>
-                                        <exclude>*.config.properties</exclude>
+                                        <exclude>module.config.properties</exclude>
                                     </excludes>
                                 </filter>
                             </filters>

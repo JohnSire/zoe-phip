@@ -3,6 +3,7 @@
  */
 define(function (require, exports, module) {
     var internal = {
+
         selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
             var BaseAttr = require("{staticDir}/BaseAttr/baseAttr");
@@ -44,6 +45,7 @@ define(function (require, exports, module) {
                         });
                         //16个分类
                         internal.selectList.dialog('sysDict', {
+                            stroage:{"name":"czs"},
                             target: $("#fkTypeId"),
                             name: 'fkTypeId',//绑定value值
                             parentName: 'typeName',//绑定name值
@@ -51,7 +53,7 @@ define(function (require, exports, module) {
                             valueField: 'Id',
                             selectParam: {
                                 multiselect: false,
-                                param: {"categoryId": "4D01A80C08CB4ACA88679457A3358A94"}
+                                param: {"catalogCode":sysDictConfig.elementType}
                             }
                         });
 

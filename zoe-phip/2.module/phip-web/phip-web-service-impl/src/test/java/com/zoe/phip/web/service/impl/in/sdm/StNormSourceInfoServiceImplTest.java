@@ -32,7 +32,8 @@ public class StNormSourceInfoServiceImplTest extends BaseTest {
         info.setCode("0107");
         info.setName("决策指标体系");
         info.setDescr("决策指标体系");
-        impl.add(info);
+        info.setFkDictId("b083430ad1f64a809dfffcf4b143bc39");
+        impl.addNormSource(info);
     }
 
     @Test
@@ -43,6 +44,11 @@ public class StNormSourceInfoServiceImplTest extends BaseTest {
         PageList<StNormSourceInfo> pageList =impl.getDataPageList(key,queryPage);
         System.out.println();
         System.out.println(JSON.toJSON(pageList));
+    }
+
+    @Test
+    public void getById() throws Exception {
+        StNormSourceInfo normById = impl.getNormById("9c6fc1ef-a047-485a-a309-614fc5e601f0");
     }
 
 }

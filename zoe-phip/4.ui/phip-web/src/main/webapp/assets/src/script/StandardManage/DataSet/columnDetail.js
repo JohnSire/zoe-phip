@@ -5,7 +5,7 @@ define(function (require, exports, module) {
     var internal = {
         selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
-            internal.event();
+
             var fkSetId = common.getParamFromUrl("fkSetId");
             $("#fkSetId").val(fkSetId);
 
@@ -23,7 +23,7 @@ define(function (require, exports, module) {
                     internal.selectList.dialog('dataElement', {
                         target: $("#btnDataElement"),
                         name: 'fkElementId',
-                        parentName: 'parentName',
+                        parentName: 'baseElementName',
                         valueField: 'id',
                         displayField: 'name',
                         fkNullContent: '无',
@@ -36,7 +36,7 @@ define(function (require, exports, module) {
                     internal.selectList.dialog('dict', {
                         target: $("#btnDict"),
                         name: 'fkDictId',
-                        parentName: 'parentName',
+                        parentName: 'dictName',
                         valueField: 'id',
                         displayField: 'name',
                         fkNullContent: '无',
@@ -68,8 +68,25 @@ define(function (require, exports, module) {
                         $("#dataLength").addClass("Validform_error");
                     }
                     return check;
+                },
+                beforeBindEvent:function(data){
+                 internal.showLength(data.dataType);
                 }
             })
+            internal.event();
+
+
+        },
+        event: function () {
+            $("#dataType").change(function () {
+                $("#vaildDataLength").hide().removeClass("Validform_wrong");
+                $("#show_dataLength").hide();
+                $("#show_dataAccuracy").hide();
+                $("#dataLength").val("");
+                $("#dataAccuracy").val("");
+                var type = $("#dataType").val();
+                internal.showLength(type);
+            });
             $("#dataLength").unbind();
             $("#dataLength").focus(function () {
                 var msg = $(this).attr("msg");
@@ -97,35 +114,26 @@ define(function (require, exports, module) {
                 }
             })
         },
-        event: function () {
-            $("#dataType").change(function () {
-                $("#vaildDataLength").hide().removeClass("Validform_wrong");
-                $("#show_dataLength").hide();
-                $("#show_dataAccuracy").hide();
-                $("#dataLength").val("");
-                $("#dataAccuracy").val("");
+        showLength:function(type){
 
-                var type = $("#dataType").val();
-                switch (type) {
-                    case "CHAR":
-                    case "NVARCHAR2":
-                        $("#dataLength").attr("msg", "数据长度1-2000");
-                        $("#show_dataLength").show();
-                        break;
-                    case "VARCHAR2":
-                        $("#dataLength").attr("msg", "数据长度1-4000");
-                        $("#show_dataLength").show();
-                        break;
+            switch (type) {
+                case "CHAR":
+                case "NVARCHAR2":
+                    $("#dataLength").attr("msg", "数据长度1-2000");
+                    $("#show_dataLength").show();
+                    break;
+                case "VARCHAR2":
+                    $("#dataLength").attr("msg", "数据长度1-4000");
+                    $("#show_dataLength").show();
+                    break;
 
 
-                    case "NUMBER":
-                        $("#dataLength").attr("msg", "数据长度1-38");
-                        $("#show_dataLength").show();
-                        $("#show_dataAccuracy").show();
-                        break;
-                }
-            });
-
+                case "NUMBER":
+                    $("#dataLength").attr("msg", "数据长度1-38");
+                    $("#show_dataLength").show();
+                    $("#show_dataAccuracy").show();
+                    break;
+            }
         }
     }
 

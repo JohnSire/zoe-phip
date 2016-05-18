@@ -8,6 +8,7 @@ package com.zoe.phip.web.service.impl.in.sdm;
 import com.zoe.phip.infrastructure.annotation.ErrorMessage;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.MapUtil;
+import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.impl.in.BaseInServiceImpl;
 import com.zoe.phip.web.dao.sdm.IStandardVerRsCdaMapper;
 import com.zoe.phip.web.model.sdm.StCdaInfo;
@@ -26,34 +27,16 @@ import java.util.Map;
  * @date 2016-05-05
  */
 @Repository("standardVerRsCdaService")
-@Service(interfaceClass = IStandardVerRsCdaService.class,protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
+@Service(interfaceClass = IStandardVerRsCdaService.class, protocol = {"dubbo"}, proxy = "sdpf", dynamic = true)
 @ErrorMessage(code = "001", message = "关系已经存在!")
 public class StandardVerRsCdaServiceImpl extends BaseInServiceImpl<StandardVerRsCda, IStandardVerRsCdaMapper> implements IStandardVerRsCdaMapper {
 
-    public boolean versionStandardStruct(String fkVersionId,List<StandardVerRsCda> fieldList) throws Exception {
-        List<StandardVerRsCda> info = getCdaRsByFkVersionId(fkVersionId);
-        //版本未关联CDA关联表
-        if (info.size() == 0) {
-            Example cda = new Example(StandardVerRsCda.class);
-            cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
-            int i = super.addList(fieldList);
-            return i > 0;
-        } else {
-            Example cda = new Example(StandardVerRsCda.class);
-            cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
-            boolean b = super.updateList(fieldList);
-            return b;
-        }
-
-
+    public int versionStandardStruct(String fkVersionId, List<StandardVerRsCda> cdaList) throws Exception {
+        deleteByVersionId(fkVersionId);
+        int i = super.addList(cdaList);
+        return i;
     }
 
-//    public int versionStandardRsAdd(String fkVersionId,List<StandardVerRsCda> fieldList) throws Exception {
-//        Example cda = new Example(StandardVerRsCda.class);
-//        cda.createCriteria().andEqualTo("fkVersionId", fkVersionId);
-//        int i = super.addList(fieldList);
-//        return i;
-//    }
 
     public List<StandardVerRsCda> getVerRsCda(String fkVersionId) throws Exception {
         Example cda = new Example(StandardVerRsCda.class);
@@ -95,6 +78,7 @@ public class StandardVerRsCdaServiceImpl extends BaseInServiceImpl<StandardVerRs
         dispose(map);
         return super.add(entity);
     }
+
 
     @Override
     public int update(StandardVerRsCda entity) throws Exception {
