@@ -7,7 +7,7 @@ define(function (require, exports, module) {
             winName: 'win_menu_select_list',
             title: '菜单选择列表',
             selectParam: {
-                storage: [],
+                stroage: [],
                 displayField: 'name',
                 valueField: 'id',
                 gridParam: {

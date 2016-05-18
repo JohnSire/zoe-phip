@@ -8,7 +8,7 @@ define(function (require, exports, module) {
             winName: 'win_sysDict_select_list',
             title: '类别选择列表',
             selectParam: {
-                storage: [],
+                stroage: [],
                 displayField: 'name',
                 valueField: 'id',
                 gridParam: {

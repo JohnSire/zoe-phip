@@ -7,7 +7,7 @@ define(function (require, exports, module) {
             winName: 'win_source_select_list',
             title: '标准来源选择列表',
             selectParam: {
-                storage: [],
+                stroage: [],
                 displayField: 'name',
                 valueField: 'id',
                 gridParam: {

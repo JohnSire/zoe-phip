@@ -7,7 +7,7 @@ define(function (require, exports, module) {
             winName: 'win_organization_select_list',
             title: '机构选择列表',
             selectParam: {
-                storage: [],
+                stroage: [],
                 displayField: 'deptName',
                 valueField: 'id',
                 gridParam: {

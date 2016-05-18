@@ -8,7 +8,7 @@ define(function (require, exports, module) {
             winName: 'win_set_select_list',
             title: '数据集选择列表',
             selectParam: {
-                storage: [],
+                stroage: [],
                 displayField: 'name',
                 valueField: 'id',
                 gridParam: {

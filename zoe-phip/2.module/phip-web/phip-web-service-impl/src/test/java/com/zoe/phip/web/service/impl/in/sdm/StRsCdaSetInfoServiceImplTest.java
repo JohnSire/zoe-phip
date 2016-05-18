@@ -29,6 +29,6 @@ public class StRsCdaSetInfoServiceImplTest extends BaseTest {
 //        info.setFkSetId("123");
 //        info.setId(StringUtil.getUUID());
 //        listInfo.add(info);
-   //     int i = impl.updateByCdaId("2", listInfo);
+       // int i = impl.updateByCdaId("2", listInfo);
     }
 }

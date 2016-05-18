@@ -7,7 +7,7 @@ define(function (require, exports, module) {
             winName: 'win_domain_select_list',
             title: '值域选择列表',
             selectParam: {
-                storage: [],
+                stroage: [],
                 displayField: 'name',
                 valueField: 'id',
                 gridParam: {

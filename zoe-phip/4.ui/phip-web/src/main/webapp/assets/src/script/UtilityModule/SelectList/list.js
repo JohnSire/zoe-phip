@@ -8,6 +8,7 @@ define(function (require, exports, module) {
         top: common.getTopWindowDom(),
         defaultParam: {
             winName: '',
+            isTextbox: true,
             title: '',
             width: 560,
             height: 600,
@@ -85,20 +86,22 @@ define(function (require, exports, module) {
                     var options = $(self).data("options");
                     options = $.extend(true, {}, internal.defaultParam, internal["fn"][fnName], options);
                     var selectParam = $.extend(true, {}, internal["fn"][fnName]["selectParam"], options["selectParam"]);
-                    selectParam["stroage"] = function () {
-                        var data = [];
-                        var value = $('input[name="' + name + '"]').val();
-                        var text = $(targetObj).find(".text-line-content").text();
-                        if (value && text) {
-                            var dataInfo = {};
-                            var valueField = selectParam["valueField"];
-                            var displayField = selectParam["displayField"];
-                            dataInfo[valueField] = value;
-                            dataInfo[displayField] = text;
-                            data.push(dataInfo);
-                        }
-                        return data;
-                    }();
+                    if (options["isTextbox"]) {
+                        selectParam["stroage"] = function () {
+                            var data = [];
+                            var value = $('input[name="' + name + '"]').val();
+                            var text = $(targetObj).find(".text-line-content").text();
+                            if (value && text) {
+                                var dataInfo = {};
+                                var valueField = selectParam["valueField"];
+                                var displayField = selectParam["displayField"];
+                                dataInfo[valueField] = value;
+                                dataInfo[displayField] = text;
+                                data.push(dataInfo);
+                            }
+                            return data;
+                        }();
+                    }
 
                     internal.top["win_select_list_param"] = selectParam;
                     var buttonsExtend = options["buttonsExtend"] || [];
