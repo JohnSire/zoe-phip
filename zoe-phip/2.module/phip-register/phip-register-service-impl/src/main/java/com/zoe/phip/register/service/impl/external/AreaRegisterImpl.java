@@ -41,7 +41,7 @@ public class AreaRegisterImpl implements IAreaRegister {
     @Override
     public String addAreaRequest(String message) {
         Document document = ProcessXmlUtil.load(message);
-        AreaBaseInfo areaBaseInfo = null;
+        AreaBaseInfo areaBaseInfo = new AreaBaseInfo();
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
         try {
@@ -71,7 +71,7 @@ public class AreaRegisterImpl implements IAreaRegister {
     @Override
     public String updateAreaRequest(String message) {
         Document document = ProcessXmlUtil.load(message);
-        AreaBaseInfo areaBaseInfo = null;
+        AreaBaseInfo areaBaseInfo = new AreaBaseInfo();
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
         try {
@@ -104,7 +104,7 @@ public class AreaRegisterImpl implements IAreaRegister {
     public String areaDetailQuery(String message) {
         Document document = ProcessXmlUtil.load(message);
         Acknowledgement acknowledgement = new Acknowledgement();
-        AreaBaseInfo areaBaseInfo = null;
+        AreaBaseInfo areaBaseInfo = new AreaBaseInfo();
         String errorMsg = "";
         try {
             String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryArea.areaId")).getText();
@@ -125,7 +125,7 @@ public class AreaRegisterImpl implements IAreaRegister {
     @Override
     public String areaChildrenRegistryQuery(String message) {
         Document document = ProcessXmlUtil.load(message);
-        AreaBaseInfo areaBaseInfo = null;
+        AreaBaseInfo areaBaseInfo = new AreaBaseInfo();
         String errorMsg = "";
         try {
             String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryAreaChildren.areaId")).getText();
@@ -146,7 +146,7 @@ public class AreaRegisterImpl implements IAreaRegister {
     public String areaHistoryRegistryQuery(String message) {
         Document document = ProcessXmlUtil.load(message);
         Acknowledgement acknowledgement = new Acknowledgement();
-        AreaBaseInfo areaBaseInfo = null;
+        AreaBaseInfo areaBaseInfo = new AreaBaseInfo();
         String errorMsg = "";
         try {
             String historyId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryAreaHistory.areaId")).getText();

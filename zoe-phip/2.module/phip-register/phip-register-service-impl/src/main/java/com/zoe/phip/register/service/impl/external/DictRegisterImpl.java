@@ -39,7 +39,7 @@ public class DictRegisterImpl implements IDictRegister {
         Document document = ProcessXmlUtil.load(message);
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
-        DictCatalog catalog = null;
+        DictCatalog catalog = new DictCatalog();
         try {
             catalog = XmlBeanUtil.toBean(document, DictCatalog.class, ProcessXmlUtil.getAdapterDom(catalogAdapterPath));
             if(StringUtil.isNullOrWhiteSpace(catalog.getCode()) || StringUtil.isNullOrWhiteSpace(catalog.getName())){
@@ -65,7 +65,7 @@ public class DictRegisterImpl implements IDictRegister {
         Document document = ProcessXmlUtil.load(message);
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
-        DictCatalog catalog = null;
+        DictCatalog catalog = new DictCatalog();
         try {
             catalog = XmlBeanUtil.toBean(document, DictCatalog.class, ProcessXmlUtil.getAdapterDom(catalogAdapterPath));
             catalog.setId(document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictCatalog.catalogId")).getText().trim());
@@ -92,7 +92,7 @@ public class DictRegisterImpl implements IDictRegister {
         Document document = ProcessXmlUtil.load(message);
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
-        DictCatalog result = null;
+        DictCatalog result = new DictCatalog();
         try {
             String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictCatalog.catalogId")).getText().trim();//字典分类ID
             result = dictRegisterIn.dictCatalogDetailQueryById(id);
@@ -137,7 +137,7 @@ public class DictRegisterImpl implements IDictRegister {
         Document document = ProcessXmlUtil.load(message);
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
-        DictItem item = null;
+        DictItem item = new DictItem();
         try {
             item = XmlBeanUtil.toBean(document, DictItem.class, ProcessXmlUtil.getAdapterDom(itemAdapterPath));
             if(StringUtil.isNullOrWhiteSpace(item.getCode()) || StringUtil.isNullOrWhiteSpace(item.getName())){
@@ -163,7 +163,7 @@ public class DictRegisterImpl implements IDictRegister {
         Document document = ProcessXmlUtil.load(message);
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
-        DictItem item = null;
+        DictItem item = new DictItem();
         try {
             item = XmlBeanUtil.toBean(document, DictItem.class, ProcessXmlUtil.getAdapterDom(itemAdapterPath));
             item.setId(document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictItem.itemId")).getText().trim());
@@ -190,7 +190,7 @@ public class DictRegisterImpl implements IDictRegister {
         Document document = ProcessXmlUtil.load(message);
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
-        DictItem result = null;
+        DictItem result = new DictItem();
         try {
             String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictItem.itemId")).getText().trim();//字典项ID
             result = dictRegisterIn.dictItemDetailQueryById(id);

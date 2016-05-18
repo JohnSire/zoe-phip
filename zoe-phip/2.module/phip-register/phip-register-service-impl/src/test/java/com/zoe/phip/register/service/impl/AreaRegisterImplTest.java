@@ -89,7 +89,7 @@ public class AreaRegisterImplTest extends BaseTest {
     public void testAreaHistoryRegistryQuery() throws Exception {
         String doc = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" +
                 "<data>\n" +
-                "    <Id value=\"9BC2CEB4B2EE47488703F5A45EB998E0\"></Id>\n" +
+                "    <HistoryId value=\"9BC2CEB4B2EE47488703F5A45EB998E0\"></HistoryId>\n" +
                 "</data>";
         String result = areaRegister.areaHistoryRegistryQuery(doc);
         System.out.println(result);
