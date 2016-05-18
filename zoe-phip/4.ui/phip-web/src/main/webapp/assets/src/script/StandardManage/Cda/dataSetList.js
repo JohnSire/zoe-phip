@@ -3,12 +3,13 @@
  */
 
 define(function (require, exports, module) {
+    var top = common.getTopWindowDom();
     var ajaxStore = {
-        getSetList: function (fkCdaId,callback) {
+        getSetList: function (fkCdaId, callback) {
             var req = new Request("cda/getSetList");
             req.post({
                 isTip: true,//是否有请求结果消息提示（成功||失败）
-                data:{"fkCdaId":fkCdaId,"keyWord":""},
+                data: {"fkCdaId": fkCdaId, "keyWord": ""},
                 success: function (data) {
                     if (typeof (callback) == "function") {
                         callback(data);
@@ -16,11 +17,11 @@ define(function (require, exports, module) {
                 }
             })
         },
-        updateByCdaId: function (data,callback) {
+        updateByCdaId: function (data, callback) {
             var req = new Request("cda/updateByCdaId");
             req.post({
                 isTip: true,//是否有请求结果消息提示（成功||失败）
-                data:data,
+                data: data,
                 success: function (data) {
                     if (typeof (callback) == "function") {
                         callback(data);
@@ -53,7 +54,7 @@ define(function (require, exports, module) {
                 },
 
                 gridParam: {
-                    url: 'cda/getSetList',
+                    url: 'cda/getSetList?fkCdaId='+fkCdaId,
                     columns: [
                         {display: '数据集标识', name: 'code', width: 120, align: 'left'},
                         {display: '数据集名称', name: 'name', width: 120, align: 'left'},
@@ -88,15 +89,17 @@ define(function (require, exports, module) {
             var html = '<div op="custom" style="float:left;"><p class="y-layout-position" ><span class="icon-position"></span><a class="link" id="back">' + name + '</a><span class="arrow">&gt;</span><a class="link">关联数据集</a></p></div>'
             $("#gridTools").append(html);
 
-            $("#back").click(function(){
+            $("#back").click(function () {
                 var top = common.getTopWindowDom();
                 var link = webRoot + "cda/view/cdaList";
-                top. frames["mainframe"].location.href = link;
+                top.frames["mainframe"].location.href = link;
 
             });
 
             $(".btn-add").parent().unbind();
-
+            var setList = [{'name': '111', id: '2222'}, {name: '2222', id: '3333'}];
+            top.setList = setList;
+            window.setList=setList;
             internal.selectList.dialog('dataSet', {
                 target: $(".btn-add"),
                 name: 'pid',
@@ -104,25 +107,26 @@ define(function (require, exports, module) {
                 valueField: 'id',
                 displayField: 'name',
                 fkNullContent: '根级节点',
+                isTextbox: false,
                 selectParam: {
-
+                    stroage:setList,
                     isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
                     treeVaildMsg: '父级分类不能是其本身!',
                     multiselect: true
                 },
-                callback:function(data){
-                    var postdata={"fkCdaId":fkCdaId};
-                    var setIds="";
+                callback: function (data) {
+                    var postdata = {"fkCdaId": fkCdaId};
+                    var setIds = "";
 
-                    $.each(data,function(index,item){
-                        if(index==data.length-1){
-                            setIds+=item.id;
-                        }else{
-                            setIds+=item.id+",";
+                    $.each(data, function (index, item) {
+                        if (index == data.length - 1) {
+                            setIds += item.id;
+                        } else {
+                            setIds += item.id + ",";
                         }
                     })
-                    postdata.setIds=setIds;
-                    ajaxStore.updateByCdaId(postdata,function(data){
+                    postdata.setIds = setIds;
+                    ajaxStore.updateByCdaId(postdata, function (data) {
 
                     });
                 }
