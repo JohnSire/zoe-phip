@@ -8,7 +8,7 @@ define(function (require, exports, module) {
         getSetList: function (fkCdaId, callback) {
             var req = new Request("cda/getSetList");
             req.post({
-                isTip: true,//是否有请求结果消息提示（成功||失败）
+                isTip: false,//是否有请求结果消息提示（成功||失败）
                 data: {"fkCdaId": fkCdaId, "keyWord": ""},
                 success: function (data) {
                     if (typeof (callback) == "function") {
@@ -20,7 +20,7 @@ define(function (require, exports, module) {
         updateByCdaId: function (data, callback) {
             var req = new Request("cda/updateByCdaId");
             req.post({
-                isTip: true,//是否有请求结果消息提示（成功||失败）
+              //  isTip: true,//是否有请求结果消息提示（成功||失败）
                 data: data,
                 success: function (data) {
                     if (typeof (callback) == "function") {
@@ -31,6 +31,7 @@ define(function (require, exports, module) {
         }
     }
     var fkCdaId = common.getParamFromUrl("fkCdaId");
+    var setList = [];
     var internal = {
         selectList: require("{dir}/UtilityModule/SelectList/list"),
         init: function () {
@@ -54,7 +55,7 @@ define(function (require, exports, module) {
                 },
 
                 gridParam: {
-                    url: 'cda/getSetList?fkCdaId='+fkCdaId,
+                    url: 'cda/getSetList?fkCdaId=' + fkCdaId,
                     columns: [
                         {display: '数据集标识', name: 'code', width: 120, align: 'left'},
                         {display: '数据集名称', name: 'name', width: 150, align: 'left'},
@@ -97,9 +98,18 @@ define(function (require, exports, module) {
             });
 
             $(".btn-add").parent().unbind();
-            var setList = [];
+
             top.setList = setList;
-            window.setList=setList;
+            window.setList = setList;
+            ajaxStore.getSetList(fkCdaId, function (data) {
+                setList = data.result.rows;
+
+                internal.selectSet();
+            })
+
+
+        },
+        selectSet: function () {
             internal.selectList.dialog('dataSet', {
                 target: $(".btn-add"),
                 name: 'pid',
@@ -109,12 +119,15 @@ define(function (require, exports, module) {
                 fkNullContent: '根级节点',
                 isTextbox: false,
                 selectParam: {
-                    stroage:setList,
+                    stroage: function(){
+                        return setList;
+                    },
                     isTreeVaild: true,//如果是树节点，父节点不能是其本身验证
                     treeVaildMsg: '父级分类不能是其本身!',
                     multiselect: true
                 },
                 callback: function (data) {
+                    var newSetList = data;
                     var postdata = {"fkCdaId": fkCdaId};
                     var setIds = "";
 
@@ -126,8 +139,10 @@ define(function (require, exports, module) {
                         }
                     })
                     postdata.setIds = setIds;
+
                     ajaxStore.updateByCdaId(postdata, function (data) {
-$(".btn-search").click();
+                        setList = newSetList;
+                        $(".btn-search").click();
                     });
                 }
 
