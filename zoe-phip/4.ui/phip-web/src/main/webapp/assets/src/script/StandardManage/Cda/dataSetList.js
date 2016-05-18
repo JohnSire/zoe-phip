@@ -59,13 +59,16 @@ define(function (require, exports, module) {
 
                     })
                 },
+               // deleteListColumn:"rsId",
                 gridParam: {
                     url: 'cda/getSetList?fkCdaId=' + fkCdaId,
                     columns: [
                         {display: '数据集标识', name: 'code', width: 120, align: 'left'},
                         {display: '数据集名称', name: 'name', width: 150, align: 'left'},
                         {display: '描述', name: 'descr', width: 120, align: 'left'},
-                        {display: '操作', isSort: false, width: 120, icons: ['del']}
+                        {display: '操作', isSort: false, width: 120, icons: ['del'],
+                            //deleteInfoColumn:"rsId"
+                        }
                     ],
                     usePage: true,
                     width: $("body").innerWidth() - 2,

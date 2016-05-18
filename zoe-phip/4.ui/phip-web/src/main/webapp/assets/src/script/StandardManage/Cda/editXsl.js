@@ -3,13 +3,45 @@
  */
 
 define(function (require, exports, module) {
+    var ajaxStore = {
+        getCDA: function (id,callback) {
+            var req = new Request("cda/getCdaInfo");
+            req.get({
+                isTip: false,//是否有请求结果消息提示（成功||失败）
+                data:{"id":id},
+                success: function (data) {
+                    if (typeof (callback) == "function") {
+                        callback(data);
+                    }
+                }
+            })
+        },
+        saveXsl: function (xsl,callback) {
+            var req = new Request("cda/saveXsl");
+            req.post({
+                isTip: true,//是否有请求结果消息提示（成功||失败）
+                data:{"id":id,"xsl":xsl,"type":internal.xslType},
+                success: function (data) {
+                    if (typeof (callback) == "function") {
+                        callback(data);
+                    }
+                }
+            })
+        }
+    }
+    var top=common.getTopWindowDom();
+    var id=common.getParamFromUrl("id");
+
     var internal = {
         xslType:"ToHtml",
         init: function () {
             internal.event();
             internal.showEditor();
+
+
         },
         event: function () {
+            top.saveXsl=internal.saveXsl;
             //上传
             $("#uploadXsl").click(function () {
                 var path = $("#clientPath").val()
@@ -33,20 +65,29 @@ define(function (require, exports, module) {
 
             //预览
             $("#xslToPreview").click(function () {
+                var xsl=internal.editor.html();
+                $.cookie(internal.xslType,xsl);
                 internal.xslToPreview();
 
             });
 
             //结构化
             $("#xslToStruct").click(function () {
+                var xsl=internal.editor.html();
+                $.cookie(internal.xslType,xsl);
                 internal.xslToStruct();
 
             });
             // xsl Tab
             $("#xsltab .list").click(function () {
+                var oldxsl=internal.editor.html();
+                $.cookie(internal.xslType,oldxsl);
+
                 internal.xslType =$(this).attr("type");
                 $("#xsltab .list").removeClass("active");
                 $(this).addClass("active");
+                var xsl=$.cookie(internal.xslType);
+                internal.editor.html(xsl);
             });
 
             //选择文件
@@ -56,6 +97,15 @@ define(function (require, exports, module) {
                 var fileName = arr[arr.length - 1];
                 $("#clientPath").val(fileName);
             });
+        },
+        saveXsl:function(submited){
+            var xsl=internal.editor.html();
+            $.cookie(internal.xslType,xsl);
+            ajaxStore.saveXsl(xsl,function(data){
+
+                submited();
+            })
+
         },
         xslToPreview: function () {
             var dialogParam =
@@ -105,7 +155,17 @@ define(function (require, exports, module) {
                     minHeight: 295,
                     resizeType: 0
                 });
+                ajaxStore.getCDA(id, function (data) {
+                    var ToHtml=data.result.toHtmlXsl;
+                    var ToSummary=data.result.toSummaryXsl;
+                    var ToSet=data.result.toSetXsl;
 
+                    $.cookie("ToHtml",ToHtml);
+                    $.cookie("ToSummary",ToSummary);
+                    $.cookie("ToSet",ToSet);
+
+                    internal.editor.html(ToHtml);
+                })
             });
         }
 
