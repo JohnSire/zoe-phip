@@ -242,8 +242,8 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
                 "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\"\n" +
                 "xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN306010UV01.xsd\">\n" +
                 "  <id root=\"1ee83ff1-08ab-4fe7-b573-ea777e9bad51\"\n" +
-                "  extension=\"9D73520B-D489-4B70-8F4B-7B5C2D7961B5\"/>\n" +
-                "  <creationTime value=\"20080625141610\"/>\n" +
+                "  extension=\"8D73520B-D489-4B70-8F4B-7B5C2D7961B5\"/>\n" +
+                "  <creationTime value=\"20130116112855\"/>\n" +
                 "  <versionCode code=\"V3-2007-05\"/>\n" +
                 "  <interactionId extension=\"PRPM_IN306010UV01\" root=\"2.16.840.1.113883.1.6\"\n" +
                 "  displayable=\"true\"/>\n" +
