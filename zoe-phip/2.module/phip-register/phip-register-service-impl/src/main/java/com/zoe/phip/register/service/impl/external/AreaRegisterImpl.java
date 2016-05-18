@@ -38,101 +38,119 @@ public class AreaRegisterImpl implements IAreaRegister {
     @Override
     public String addAreaRequest(String message) {
         Document document = ProcessXmlUtil.load(message);
-        AreaBaseInfo areaBaseInfo;
+        AreaBaseInfo areaBaseInfo = null;
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
         try {
             areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class, null);
             if (ifCodeExist(areaBaseInfo.getCode())) {
                 acknowledgement.setTypeCode("AE");
-                acknowledgement.setText("由于内容重复注册，注册失败");
-                return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+                acknowledgement.setText("由于注册内容编码已存在，注册失败");
+                areaBaseInfo.setAcknowledgement(acknowledgement);
+                return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
             }
             areaRegisterIn.add(areaBaseInfo);
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("注册成功");
+            areaBaseInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.AREA_QUERY_SUCCESS, areaBaseInfo);
         } catch (BusinessException e) {
             errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, areaRegisterIn.getClass());
         } catch (Exception ex) {
             logger.error("error", ex);
-            return "false:" + ex.getMessage();
+            errorMsg = ex.getMessage();
         }
-        return "success:新增区域信息成功!";
+        return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
     }
 
     @Override
     public String updateAreaRequest(String message) {
         Document document = ProcessXmlUtil.load(message);
-        AreaBaseInfo areaBaseInfo;
+        AreaBaseInfo areaBaseInfo = null;
         Acknowledgement acknowledgement = new Acknowledgement();
         String errorMsg = "";
         try {
             areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class, null);
             if (ifCodeExist(areaBaseInfo.getCode())) {
                 acknowledgement.setTypeCode("AE");
-                acknowledgement.setText("由于更新内容不存在，更新失败!");
-                return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+                acknowledgement.setText("由于更新内容编码已存在，更新失败!");
+                areaBaseInfo.setAcknowledgement(acknowledgement);
+                return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
             }
             areaRegisterIn.update(areaBaseInfo);
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("更新成功");
+            areaBaseInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.AREA_QUERY_SUCCESS, areaBaseInfo);
         } catch (BusinessException e) {
             errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, areaRegisterIn.getClass());
         } catch (Exception ex) {
             logger.error("error", ex);
-            return "false:" + ex.getMessage();
+            errorMsg = ex.getMessage();
         }
-        return "success:更新区域信息成功!";
+        return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
     }
 
     @Override
     public String areaDetailQuery(String message) {
-        Document document = null;
+        Document document = ProcessXmlUtil.load(message);
+        Acknowledgement acknowledgement = new Acknowledgement();
+        AreaBaseInfo areaBaseInfo = null;
+        String errorMsg = "";
         try {
-            document = ProcessXmlUtil.load(message);
-            String code = document.selectSingleNode("//code/@value").getText();
-            Map<String, Object> map = new TreeMap<>();
-            map.put("code", code);
-            AreaBaseInfo baseInfo = areaRegisterIn.getAreaBaseInfo(map);
-            map.clear();
-            map = null;
-            return RegisterUtil.registerMessage(RegisterType.AREA_QUERY, baseInfo);
+            String id = document.selectSingleNode("//Id/@value").getText();
+            areaBaseInfo = areaRegisterIn.getAreaBaseInfo(id);
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("查询成功");
+            areaBaseInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.AREA_QUERY_SUCCESS, areaBaseInfo);
+        } catch (BusinessException e) {
+            errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, areaRegisterIn.getClass());
         } catch (Exception ex) {
             logger.error("error", ex);
-            return "false:" + ex.getMessage();
+            errorMsg = ex.getMessage();
         }
+        return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
     }
 
     @Override
     public String areaChildrenRegistryQuery(String message) {
-        Document document = null;
+        Document document = ProcessXmlUtil.load(message);
+        AreaBaseInfo areaBaseInfo = null;
+        String errorMsg = "";
         try {
-            document = ProcessXmlUtil.load(message);
-            String code = document.selectSingleNode("//code/@value").getText();
+            String id = document.selectSingleNode("//Id/@value").getText();
             Map<String, Object> map = new TreeMap<>();
-            map.put("code", code);
+            map.put("id", id);
             List<AreaBaseInfo> baseInfoList = areaRegisterIn.getChildren(map);
             map.clear();
             map = null;
             return RegisterUtil.registerMessage(RegisterType.AREA_QUERY_CHILDREN, baseInfoList);
         } catch (Exception ex) {
             logger.error("error", ex);
-            return "false:" + ex.getMessage();
+            errorMsg = ex.getMessage();
         }
+        return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
     }
 
     @Override
     public String areaHistoryRegistryQuery(String message) {
-        Document document = null;
+        Document document = ProcessXmlUtil.load(message);
+        Acknowledgement acknowledgement = new Acknowledgement();
+        AreaBaseInfo areaBaseInfo = null;
+        String errorMsg = "";
         try {
-            document = ProcessXmlUtil.load(message);
-            String historyId = document.selectSingleNode("//code/@value").getText();
-            Map<String, Object> map = new TreeMap<>();
-            map.put("historyId", historyId);
-            AreaBaseInfo baseInfo = areaRegisterIn.getAreaBaseInfo(map);
-            map.clear();
-            map = null;
-            return RegisterUtil.registerMessage(RegisterType.AREA_QUERY, baseInfo);
+            String historyId = document.selectSingleNode("//Id/@value").getText();
+            areaBaseInfo = areaRegisterIn.areaHistoryRegistryQuery(historyId);
+            acknowledgement.setTypeCode("AA");
+            acknowledgement.setText("查询成功");
+            areaBaseInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.AREA_QUERY_SUCCESS, areaBaseInfo);
         } catch (Exception ex) {
             logger.error("error", ex);
-            return "false:" + ex.getMessage();
+            errorMsg = ex.getMessage();
         }
+        return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
     }
 
     private boolean ifCodeExist(String Code) {

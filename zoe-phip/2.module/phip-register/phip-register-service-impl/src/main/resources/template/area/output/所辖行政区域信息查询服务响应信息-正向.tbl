@@ -4,6 +4,7 @@
 for(m in Model){
 %>
 <AreaBaseInfo>
+    <Id value="${m.id}" descr="区域ID"/>
     <Code value="${m.code}" descr="区域代码"/>
     <Name value="${m.name}" descr="区域名称"/>
     <Pid value="${m.pid}" descr="父级区域"/>
