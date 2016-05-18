@@ -54,32 +54,6 @@
                             }
                         }
                     }
-
-
-                    //// 获取同一分组下的两个值
-                    //$("input[groupname='" + groupname + "']").each(function () {
-                    //    var compare = $(this).attr("compare");
-                    //    switch (compare) {
-                    //        case "big":
-                    //            bigDate = $(this).val();
-                    //            break;
-                    //        case "small":
-                    //            samllDate = $(this).val();
-                    //            break;
-                    //    }
-                    //});
-                    //if (smallDate && bigDate) {
-                    //    smallDate = smallDate.replace(/-/g, '/');
-                    //    bigDate = bigDate.replace(/-/g, '/');
-                    //    var sDate = new Date(smallDate);
-                    //    var bDate = new Date(bigDate);
-                    //    if (Date.parse(sDate) >= Date.parse(bDate)) {
-                    //        common.jsmsgError("日期大小不正确", function () {
-                    //            jqDate.val("");
-                    //        })
-                    //
-                    //    }
-                    //}
                 }
 
             }
@@ -218,7 +192,7 @@
 
         var target = this;
         $(target).each(function () {
-            self = this;
+            var self = this;
             self.options = $.extend(true, {}, internal.defaultOptions, options);
             internal.init(self);
         })
@@ -227,24 +201,7 @@
     $.fn.lockScreen = function (options) {
         var internal = {
             maskList: [],
-            defaultOptions: {
-                "textAlign": 'center',
-                "linheight": '400px',
-                "position": 'absolute',
-                "left": 0,
-                "top": 0,
-                "width": "100%",
-                "height": "100%",
-                "filter": "alpha(opacity=90)",
-                "opacity": "0.9",
-                "background": "#ccc",
-                "overflow": "hidden",
-                "zoom": "1",
-                "zIndex": 9999,
-                "display": "block",
-                "text": "数据加载中......",
-                "loadingImg": 'http://localhost:8080/Assets/dict/Images/icon_onload.gif'
-            },
+
             init: function (self) {
                 internal.build(self);
                 internal.show(self);
@@ -255,24 +212,33 @@
                 return id;
             },
             build: function (self) {
-                var dom_span = $("<span></span>"),
-                    div_mask = $("<div></div>").addClass("panelMask").css({
-                        "text-align": self.options.textAlign,
-                        "line-height": self.options.lineHeight,
-                        "position": self.options.position,
-                        "left": self.options.left,
-                        "top": self.options.top,
-                        "width": self.options.width,
-                        "height": self.options.height,
-                        "filter": self.options.filter,
-                        "opacity": self.options.opacity,
-                        "background": self.options.background,
-                        "overflow": self.options.overflow,
-                        "font-size": self.options.fontSize,
-                        "*zoom": self.options.zoom,
-                        "z-index": self.options.zIndex,
-                        "display": self.options.display
-                    }).append(dom_span);//遮罩层添加提示
+                var div_mask = $("<div></div>").addClass("lock-screen");
+                var jqUserCode = $("<span></span>").text("当前帐号：admin").addClass("user-code"),
+                    jqUserPwd = $("<input/>").attr({
+                        type: 'password',
+                        name: 'password',
+                        placeholder: '请输入密码'
+                    }).addClass("user-pwd"),
+                    jqBtnLogin = $("<input/>").attr({
+                        value: '登录',
+                        type: 'button'
+                    }).addClass("lbtn").on("click", function () {
+                        alert("登录");
+                    }),
+                    jqTip = $("<span></span>")
+                        .text("由于您太长时间未操作，需要重新输入密码，才能继续操作")
+                        .addClass("tip");
+
+                var jqUl = $("<ul></ul>");
+
+                var jqLi1 = $("<li></li>").append(jqUserCode),
+                    jqLi2 = $("<li></li>").append(jqUserPwd),
+                    jqLi3 = $("<li></li>").append(jqBtnLogin),
+                    jqLi4 = $("<li></li>").append(jqTip);
+
+                jqUl.append(jqLi1).append(jqLi2).append(jqLi3).append(jqLi4);
+                div_mask.append(jqUl);
+
                 self.div_mask = div_mask;
                 self.div_mask.attr("mask_id", internal.getId());
                 internal.maskList.push(self.div_mask);//保存当前遮罩层
@@ -284,11 +250,10 @@
                 elem.css({
                     "width": $(self).innerWidth() + "px",
                     "height": $(self).innerHeight() + "px",
-                    "line-height": $(self).innerHeight() + "px",
-                    "top": 0,//target.offset().top,
-                    "left": 0 //target.offset().left
+                    "top": 0,
+                    "left": 0
                 });
-                if ($(".panelMask", self).length == 0)
+                if ($(".lock-screen", self).length == 0)
                     $(self).append(elem);
                 $(maskElem).css("display", "block");
             },
@@ -305,7 +270,7 @@
 
         var target = this;
         $(target).each(function () {
-            self = this;
+            var self = this;
             self.options = $.extend(true, {}, internal.defaultOptions, options);
             internal.init(self);
         })

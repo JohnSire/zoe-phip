@@ -15,6 +15,11 @@ define(function (require, exports, module) {
             internal.top.msgTip = function (msgContext, msgCss) {
                 common.jsmsg(msgContext, msgCss);
             };
+
+            $(".img-logo").on("click", function () {
+                $("body").lockScreen({});
+            });
+
         },
         //获取菜单数据
         getMenuList: function () {
