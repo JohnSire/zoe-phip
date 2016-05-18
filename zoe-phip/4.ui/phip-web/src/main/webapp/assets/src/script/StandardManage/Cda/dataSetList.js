@@ -57,7 +57,7 @@ define(function (require, exports, module) {
                     url: 'cda/getSetList?fkCdaId='+fkCdaId,
                     columns: [
                         {display: '数据集标识', name: 'code', width: 120, align: 'left'},
-                        {display: '数据集名称', name: 'name', width: 120, align: 'left'},
+                        {display: '数据集名称', name: 'name', width: 150, align: 'left'},
                         {display: '描述', name: 'descr', width: 120, align: 'left'},
                         {display: '操作', isSort: false, width: 120, icons: ['del']}
                     ],
@@ -97,7 +97,7 @@ define(function (require, exports, module) {
             });
 
             $(".btn-add").parent().unbind();
-            var setList = [{'name': '111', id: '2222'}, {name: '2222', id: '3333'}];
+            var setList = [];
             top.setList = setList;
             window.setList=setList;
             internal.selectList.dialog('dataSet', {
@@ -127,7 +127,7 @@ define(function (require, exports, module) {
                     })
                     postdata.setIds = setIds;
                     ajaxStore.updateByCdaId(postdata, function (data) {
-
+$(".btn-search").click();
                     });
                 }
 
