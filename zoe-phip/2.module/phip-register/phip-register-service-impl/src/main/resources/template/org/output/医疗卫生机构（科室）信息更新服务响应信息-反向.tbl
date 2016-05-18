@@ -9,14 +9,14 @@ var creationTime = Model.creationTime;
   <processingCode code="P" />
   <processingModeCode code="I" />
   <acceptAckCode code="AL" />
-  <receiver typeCode="RCV">
+ <receiver typeCode="RCV">
     <device classCode="DEV" determinerCode="INSTANCE">
       <id root="1.2.840.114350.1.13.999.234" />
     </device>
   </receiver>
   <sender typeCode="SND">
     <device classCode="DEV" determinerCode="INSTANCE">
-    <id root="1.2.840.114350.1.13.999.567" />
+      <id root="1.2.840.114350.1.13.999.567" />
     </device>
   </sender>
   <!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->

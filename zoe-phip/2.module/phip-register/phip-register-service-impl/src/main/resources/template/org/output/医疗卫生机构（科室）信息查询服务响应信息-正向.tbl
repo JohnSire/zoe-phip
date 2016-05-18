@@ -9,7 +9,7 @@ var creationTime=Model.creationTime;
   <processingCode code="P" />
   <processingModeCode code="I" />
   <acceptAckCode code="AL" />
-  <receiver typeCode="RCV">
+ <receiver typeCode="RCV">
     <device classCode="DEV" determinerCode="INSTANCE">
       <id root="1.2.840.114350.1.13.999.234" />
     </device>
