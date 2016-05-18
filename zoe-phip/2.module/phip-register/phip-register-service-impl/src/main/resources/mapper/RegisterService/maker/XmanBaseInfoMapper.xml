@@ -41,10 +41,6 @@
                 jdbcType="VARCHAR"/>
         <result column="NATIONALITY_CODE" property="nationalityCode" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
-        <result column="ABO_CODE" property="aboCode" javaType="java.lang.Integer"
-                jdbcType="INTEGER"/>
-        <result column="RH_CODE" property="rhCode" javaType="java.lang.Integer"
-                jdbcType="INTEGER"/>
         <result column="EDUCATION_CODE" property="educationCode" javaType="java.lang.Integer"
                 jdbcType="INTEGER"/>
         <result column="OCCUPATION_CODE" property="occupationCode" javaType="java.lang.String"
@@ -95,8 +91,6 @@
         HOUSE_NUMBER,
         POSTAL_CODE,
         NATIONALITY_CODE,
-        ABO_CODE,
-        RH_CODE,
         EDUCATION_CODE,
         OCCUPATION_CODE,
         MARRIAGE_CODE,
@@ -133,8 +127,6 @@
             #{item.houseNumber,jdbcType=VARCHAR},
             #{item.postalCode,jdbcType=VARCHAR},
             #{item.nationalityCode,jdbcType=INTEGER},
-            #{item.aboCode,jdbcType=INTEGER},
-            #{item.rhCode,jdbcType=INTEGER},
             #{item.educationCode,jdbcType=INTEGER},
             #{item.occupationCode,jdbcType=VARCHAR},
             #{item.marriageCode,jdbcType=INTEGER},
@@ -174,8 +166,6 @@
         HOUSE_NUMBER,
         POSTAL_CODE,
         NATIONALITY_CODE,
-        ABO_CODE,
-        RH_CODE,
         EDUCATION_CODE,
         OCCUPATION_CODE,
         MARRIAGE_CODE,
@@ -212,8 +202,6 @@
         #{houseNumber,jdbcType=VARCHAR},
         #{postalCode,jdbcType=VARCHAR},
         #{nationalityCode,jdbcType=INTEGER},
-        #{aboCode,jdbcType=INTEGER},
-        #{rhCode,jdbcType=INTEGER},
         #{educationCode,jdbcType=INTEGER},
         #{occupationCode,jdbcType=VARCHAR},
         #{marriageCode,jdbcType=INTEGER},
@@ -303,12 +291,6 @@
                 </if>
                 <if test="item.nationalityCode != null">
                     NATIONALITY_CODE = #{item.nationalityCode,jdbcType=VARCHAR},
-                </if>
-                <if test="item.aboCode != null">
-                    ABO_CODE = #{item.aboCode,jdbcType=INTEGER},
-                </if>
-                <if test="item.rhCode != null">
-                    RH_CODE = #{item.rhCode,jdbcType=INTEGER},
                 </if>
                 <if test="item.educationCode != null">
                     EDUCATION_CODE = #{item.educationCode,jdbcType=INTEGER},

@@ -174,20 +174,6 @@ public class XmanBaseInfo extends RegisterEntity {
 
 
     /**
-     * abo血型代�
-     */
-    @XPath(descr = "5")
-    @Column(name = "ABO_CODE")
-    private Integer aboCode;
-
-    /**
-     * rh血型代�
-     */
-    @XPath(descr = "3")
-    @Column(name = "RH_CODE")
-    private Integer rhCode;
-
-    /**
      * 学历代码
      */
     @XPath(defaultValue = "90")
@@ -512,24 +498,6 @@ public class XmanBaseInfo extends RegisterEntity {
 
     public void setNationalityName(String nationalityName) {
         this.nationalityName = nationalityName;
-    }
-
-    public Integer getAboCode() {
-        return this.aboCode;
-    }
-
-
-    public void setAboCode(Integer aboCode) {
-        this.aboCode = aboCode;
-    }
-
-    public Integer getRhCode() {
-        return this.rhCode;
-    }
-
-
-    public void setRhCode(Integer rhCode) {
-        this.rhCode = rhCode;
     }
 
     public Integer getEducationCode() {
