@@ -39,7 +39,7 @@ public interface IDictCatalogMapper extends IServiceMapper<DictCatalog> {
 
     int selectChildCountById(Map<String, Object> args);
 
-    PageList<DictCatalog> dictCatalogTreeQuery(String codes);
+    PageList<DictCatalog> dictCatalogTreeQuery(String codes, String key);
 
     List<DictCatalog> getDictCatalogTree(Map<String, Object> args);
 
