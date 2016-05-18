@@ -180,7 +180,7 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
                 "            <healthCarePrincipalPerson classCode=\"PSN\"\n" +
                 "            determinerCode=\"INSTANCE\">\n" +
                 "              <!--身份证号-->\n" +
-                "              <id root=\"2.16.156.10011.1.3\" extension=\"\"/>\n" +
+                "              <id root=\"2.16.156.10011.1.3\" extension=\"120109197706015518\"/>\n" +
                 "              <!--姓名-->\n" +
                 "              <name use=\"L\">李医生</name>\n" +
                 "              <!--性别-->\n" +
