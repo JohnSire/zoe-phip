@@ -25,7 +25,7 @@
 
     <select id="getMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
         SELECT T1.*,T2.NAME AS PARENT_NAME FROM SYS_MENU_DATA T1 LEFT JOIN SYS_MENU_DATA T2 ON T2.ID=T1.FK_PARENT_MENU_ID
-        WHERE T1.ID=#{id}
+        WHERE T1.ID=#{id,jdbcType=VARCHAR}
     </select>
 
 

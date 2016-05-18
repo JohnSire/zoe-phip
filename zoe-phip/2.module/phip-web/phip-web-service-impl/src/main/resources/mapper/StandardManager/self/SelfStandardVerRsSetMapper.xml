@@ -18,7 +18,7 @@
             </if>
             MODIFY_AT=sysdate
         </set>
-        where id = #{id}
+        where id = #{id,jdbcType=VARCHAR}
     </update>
     <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
         SELECT COUNT (1) FROM PHIP_STANDARD_VER_RS_SET PSVRS
