@@ -7,7 +7,7 @@
     text-align: center;
     width: 1600px;
     height: 799px;
-    opacity: 0.9;
+    /*opacity: 0.9;*/
     overflow: hidden;
     z-index: 999999;
     background: rgb(204, 204, 204);
