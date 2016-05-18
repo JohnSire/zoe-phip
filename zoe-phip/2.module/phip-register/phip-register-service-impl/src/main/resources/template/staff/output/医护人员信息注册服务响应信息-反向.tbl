@@ -29,9 +29,10 @@ var creationTime = Model.creationTime;
     </targetMessage>
     <acknowledgementDetail>
       <!--处理结果说明-->
-      <text>由于内容重复注册，注册失败</text>
+      <text>${Model.Acknowledgement.Text}</text>
     </acknowledgementDetail>
   </acknowledgement>
+  <%if(Model.extensionId!=null){%>
   <controlActProcess classCode="ACTN" moodCode="APT">
     <subject typeCode="SUBJ">
       <registrationRequest classCode="REG" moodCode="RQO">
@@ -82,4 +83,5 @@ var creationTime = Model.creationTime;
            </registrationRequest>
     </subject>
   </controlActProcess>
+  <%}%>
 </PRPM_IN301011UV01>
