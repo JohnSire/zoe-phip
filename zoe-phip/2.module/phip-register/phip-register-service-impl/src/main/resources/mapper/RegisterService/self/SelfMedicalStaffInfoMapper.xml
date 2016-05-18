@@ -114,7 +114,7 @@
         <include refid="deptSelect"/>
         ) C
         ON PMSI.ASSIGNED_DEPT_CODE =C.DEPT_CODE --科室
-        WHERE PMSI.ID=#{id} OR PMSI.EXTENSION_ID=#{id}
+        WHERE PMSI.ID=#{id,jdbcType=VARCHAR} OR PMSI.EXTENSION_ID=#{id,jdbcType=VARCHAR}
         AND ROWNUM=1
     </select>
 

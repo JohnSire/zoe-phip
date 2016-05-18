@@ -21,7 +21,7 @@
             </if>
             MODIFY_AT=sysdate
         </set>
-        where id = #{id}
+        where id = #{id,jdbcType=VARCHAR}
     </update>
 
     <select id="getDictItemListByCatalogCode" resultMap="MultiResultMap" parameterType="java.util.Map">

@@ -101,6 +101,8 @@ define(function (require, exports, module) {
                             }
                             return data;
                         }();
+                    }else{
+                        selectParam["stroage"]= selectParam["stroage"]();
                     }
 
                     internal.top["win_select_list_param"] = selectParam;

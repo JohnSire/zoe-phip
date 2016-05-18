@@ -34,7 +34,7 @@
         </choose>
     </update>
     <select id="getXmanCard" parameterType="java.lang.String" resultMap="BaseResultMap">
-        SELECT * FROM PHIP_XMAN_CARD T WHERE T.XC_XMAN_ID=#{baseInfoId} AND ROWNUM=1
+        SELECT * FROM PHIP_XMAN_CARD T WHERE T.XC_XMAN_ID=#{baseInfoId,jdbcType=VARCHAR} AND ROWNUM=1
     </select>
 
     <delete id="deleteByXmanId" parameterType="java.lang.String">

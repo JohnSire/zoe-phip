@@ -106,7 +106,7 @@
 
     <select id="getDepartmentByPrimaryKey" parameterType="java.lang.String" resultMap="MultiResultMap">
         <include refid="departmentSelect"/>
-        WHERE PODI.ID=#{id}
+        WHERE PODI.ID=#{id,jdbcType=VARCHAR}
     </select>
     <sql id="departmentSelect">
         SELECT PODI.*,p.NAME AS dept_type_name,a.name as PROVINCE_CODE_NAME ,b.name as CITY_CODE_NAME,c.name as COUNTY_CODE_NAME,
@@ -127,7 +127,7 @@
 
     <select id="getOrgDeptByPrimaryKey" parameterType="java.lang.String" resultMap="MultiResultMap">
         <include refid="orgDeptSelect"/>
-        WHERE PODI.ID=#{id}
+        WHERE PODI.ID=#{id,jdbcType=VARCHAR}
     </select>
     <sql id="orgDeptSelect">
         SELECT PODI.*,p.NAME AS dept_type_name,a.name as PROVINCE_CODE_NAME ,b.name as CITY_CODE_NAME,c.name as COUNTY_CODE_NAME,
