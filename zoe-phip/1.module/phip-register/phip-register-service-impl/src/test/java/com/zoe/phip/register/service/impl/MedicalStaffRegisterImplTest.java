@@ -143,13 +143,13 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
                 "  <processingModeCode code=\"I\"/>\n" +
                 "  <acceptAckCode code=\"AL\"/>\n" +
                 "  <receiver typeCode=\"RCV\">\n" +
-                "    <telecom/>\n" +
+                "    <telecom value=\"13812345678\"/>\n" +
                 "    <device classCode=\"DEV\" determinerCode=\"INSTANCE\">\n" +
                 "      <id root=\"1.2.840.114350.1.13.999.567\"/>\n" +
                 "    </device>\n" +
                 "  </receiver>\n" +
                 "  <sender typeCode=\"SND\">\n" +
-                "    <telecom/>\n" +
+                "    <telecom value=\"13812345678\"/>\n" +
                 "    <device classCode=\"DEV\" determinerCode=\"INSTANCE\">\n" +
                 "      <id root=\"1.2.840.114350.1.13.999.234\"/>\n" +
                 "    </device>\n" +
@@ -169,7 +169,7 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
                 "            <!--工作地址-->\n" +
                 "            <addr/>\n" +
                 "            <!--工作联系方式：电话、邮箱地址等-->\n" +
-                "            <telecom/>\n" +
+                "            <telecom value=\"13812345678\"/>\n" +
                 "            <!--角色状态RoleStatus-->\n" +
                 "            <statusCode code=\"active\"/>\n" +
                 "            <!--角色有效期间-->\n" +

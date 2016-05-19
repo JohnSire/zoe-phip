@@ -35,7 +35,7 @@
                         <!--工作地址-->
                         <addr/>
                         <!--工作联系方式：电话、邮箱地址等-->
-                        <telecom/>
+                        <telecom value=""/>
                         <!--角色状态RoleStatus-->
                         <statusCode code="active"/>
                         <!--角色有效期间-->

@@ -11,13 +11,13 @@ var birthDate = Model.birthTime;
   <processingModeCode code="I" />
   <acceptAckCode code="AL" />
   <receiver typeCode="RCV">
-    <telecom></telecom>
+    <telecom value="${Model.employerTelNo}"></telecom>
     <device classCode="DEV" determinerCode="INSTANCE">
       <id root="1.2.840.114350.1.13.999.234" />
     </device>
   </receiver>
   <sender typeCode="SND">
-    <telecom></telecom>
+    <telecom value="${Model.employerTelNo}"></telecom>
     <device classCode="DEV" determinerCode="INSTANCE">
       <id root="1.2.840.114350.1.13.999.567" />
     </device>
@@ -64,7 +64,7 @@ var birthDate = Model.birthTime;
              <author typeCode="AUT">
                <assignedEntity classCode="ASSIGNED">
                  <!--医务人员ID-->
-                 <id root="2.16.156.10011.1.4" extension="{Model.assignedCode}" />
+                 <id root="2.16.156.10011.1.4" extension="${Model.assignedCode}" />
                  <assignedPerson classCode="PSN" determinerCode="INSTANCE">
                    <name>${Model.assignedName}</name>
                  </assignedPerson>

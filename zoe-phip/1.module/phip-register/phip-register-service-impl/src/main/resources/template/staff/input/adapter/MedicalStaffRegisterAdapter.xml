@@ -12,7 +12,7 @@
     <EmployerAddr descr="工作地址" path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/addr"/>
 
     <EmployerTelNo descr="工作联系电话"
-                   path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/telecom"/>
+                   path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/telecom/@value"/>
 
     <RoleStatus descr="角色状态"
                 path="//controlActProcess/subject/registrationRequest/subject1/healthCareProvider/statusCode"/>

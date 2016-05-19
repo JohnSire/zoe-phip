@@ -11,13 +11,13 @@ var birthDate = Model.birthTime;
   <processingModeCode code="I" />
   <acceptAckCode code="AL" />
   <receiver typeCode="RCV">
-    <telecom />
+    <telecom value="${Model.employerTelNo}"/>
     <device classCode="DEV" determinerCode="INSTANCE">
       <id root="1.2.840.114350.1.13.999.234" />
     </device>
   </receiver>
   <sender typeCode="SND">
-    <telecom />
+    <telecom value="${Model.employerTelNo}"/>
     <device classCode="DEV" determinerCode="INSTANCE">
       <id root="1.2.840.114350.1.13.999.567" />
     </device>
