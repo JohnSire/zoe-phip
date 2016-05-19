@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
 <AreaBaseInfo>
+    <%if(Model.id!=null){%>
     <Id value="${Model.id}" descr="区域ID"/>
+    <%}%>
     <Detail value="${Model.acknowledgement.text}" descr="操作结果"/>
 </AreaBaseInfo>
 </data>

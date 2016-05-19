@@ -5,14 +5,14 @@ import com.zoe.phip.infrastructure.config.PropertyPlaceholder;
 import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
+import com.zoe.phip.module.service.entity.base.Acknowledgement;
+import com.zoe.phip.module.service.util.ProcessXmlUtil;
+import com.zoe.phip.module.service.util.RegisterUtil;
 import com.zoe.phip.module.service.util.XmlBeanUtil;
 import com.zoe.phip.register.model.AreaBaseInfo;
-import com.zoe.phip.module.service.entity.base.Acknowledgement;
 import com.zoe.phip.register.service.external.IAreaRegister;
 import com.zoe.phip.register.service.impl.internal.AreaRegisterInImpl;
-import com.zoe.phip.module.service.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
-import com.zoe.phip.module.service.util.RegisterUtil;
 import org.dom4j.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -46,7 +47,7 @@ public class AreaRegisterImpl implements IAreaRegister {
         String errorMsg = "";
         try {
             areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class, ProcessXmlUtil.getAdapterDom(adapterPath));
-            if(StringUtil.isNullOrWhiteSpace(areaBaseInfo.getCode()) || StringUtil.isNullOrWhiteSpace(areaBaseInfo.getName())){
+            if (StringUtil.isNullOrWhiteSpace(areaBaseInfo.getCode()) || StringUtil.isNullOrWhiteSpace(areaBaseInfo.getName())) {
                 errorMsg = "必填字段值为空，注册失败";
                 return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
             }
@@ -77,7 +78,7 @@ public class AreaRegisterImpl implements IAreaRegister {
         try {
             areaBaseInfo = XmlBeanUtil.toBean(document, AreaBaseInfo.class, ProcessXmlUtil.getAdapterDom(adapterPath));
             areaBaseInfo.setId(document.selectSingleNode(PropertyPlaceholder.getProperty("queryArea.areaId")).getText());
-            if(StringUtil.isNullOrWhiteSpace(areaBaseInfo.getCode()) || StringUtil.isNullOrWhiteSpace(areaBaseInfo.getName())){
+            if (StringUtil.isNullOrWhiteSpace(areaBaseInfo.getCode()) || StringUtil.isNullOrWhiteSpace(areaBaseInfo.getName())) {
                 errorMsg = "必填字段值为空，更新失败";
                 return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
             }
@@ -127,18 +128,24 @@ public class AreaRegisterImpl implements IAreaRegister {
     public String areaChildrenRegistryQuery(String message) {
         Document document = ProcessXmlUtil.load(message);
         AreaBaseInfo areaBaseInfo = new AreaBaseInfo();
+        List<AreaBaseInfo> baseInfoList = new ArrayList<>();
         String errorMsg = "";
+        String id = "";
         try {
-            String id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryAreaChildren.areaId")).getText();
+            id = document.selectSingleNode(PropertyPlaceholder.getProperty("queryAreaChildren.areaId")).getText();
             Map<String, Object> map = new TreeMap<>();
             map.put("id", id);
-            List<AreaBaseInfo> baseInfoList = areaRegisterIn.getChildren(map);
+            baseInfoList = areaRegisterIn.getChildren(map);
             map.clear();
             map = null;
             return RegisterUtil.registerMessage(RegisterType.AREA_QUERY_CHILDREN, baseInfoList);
         } catch (Exception ex) {
             logger.error("error", ex);
             errorMsg = ex.getMessage();
+            if (baseInfoList == null) {
+                areaBaseInfo.setId(id);
+                errorMsg = "由于查询内容不存在，查询失败";
+            }
         }
         return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
     }
@@ -149,8 +156,9 @@ public class AreaRegisterImpl implements IAreaRegister {
         Acknowledgement acknowledgement = new Acknowledgement();
         AreaBaseInfo areaBaseInfo = new AreaBaseInfo();
         String errorMsg = "";
+        String historyId = "";
         try {
-            String historyId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryAreaHistory.areaId")).getText();
+            historyId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryAreaHistory.areaId")).getText();
             areaBaseInfo.setId(historyId);
             areaBaseInfo = areaRegisterIn.areaHistoryRegistryQuery(historyId);
             acknowledgement.setTypeCode("AA");
@@ -160,6 +168,11 @@ public class AreaRegisterImpl implements IAreaRegister {
         } catch (Exception ex) {
             logger.error("error", ex);
             errorMsg = ex.getMessage();
+            if (areaBaseInfo == null) {
+                errorMsg = "由于查询内容不存在，查询失败";
+                areaBaseInfo = new AreaBaseInfo();
+                areaBaseInfo.setId(historyId);
+            }
         }
         return RegisterUtil.responseFailed(areaBaseInfo, errorMsg, RegisterType.AREA_QUERY_ERROR);
     }

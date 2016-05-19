@@ -20,8 +20,8 @@ public class DictRegisterImplTest extends BaseTest {
                 "<data>\n" +
                 "    <Code value=\"test00101\"/>\n" +
                 "    <Name value=\"test00101\"/>\n" +
-                "    <ParentId value=\"4ca5537e98984af481d4cae70aa5ab39\"/>\n" +
-                "    <Type value=\"1\"/>\n" +
+                "    <ParentId value=\"\"/>\n" +
+                "    <Type value=\"0\"/>\n" +
                 "</data>";
 
         String result = dictRegister.addDictCatalogRequest(input);
