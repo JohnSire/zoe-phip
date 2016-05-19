@@ -52,4 +52,11 @@ public interface IStCdaInfoService extends IBaseInService<StCdaInfo> {
      */
     ServiceResultT<PageList<StCdaInfo>> getBySourceId(SystemData systemData,String fkSourceId,String key, QueryPage queryPage);
 
+    /**
+     * 标准预览
+     * @param systemData
+     * @param id
+     * @return
+     */
+    ServiceResultT<String> getHtmlString(SystemData systemData,String id);
 }
