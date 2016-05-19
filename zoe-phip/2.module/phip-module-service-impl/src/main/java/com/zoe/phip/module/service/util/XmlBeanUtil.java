@@ -61,8 +61,6 @@ public final class XmlBeanUtil {
                     value = valueNode.getText();
                 }
             }
-            System.out.println(path);//todo 删除这句代码
-            System.out.println(value);//todo 删除这句代码
             if (value == "") {
                 continue;
             }

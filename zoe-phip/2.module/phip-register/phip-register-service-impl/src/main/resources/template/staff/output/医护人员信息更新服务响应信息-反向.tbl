@@ -1,4 +1,4 @@
-﻿<%
+<%
 var creationTime = Model.creationTime;
 var birthDate = Model.birthTime;
 %>

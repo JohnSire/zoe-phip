@@ -1,4 +1,4 @@
-﻿<%
+<%
 var createTime = Model.createTime;
 var inTime = Model.startTime;
 var outTime = Model.endTime;

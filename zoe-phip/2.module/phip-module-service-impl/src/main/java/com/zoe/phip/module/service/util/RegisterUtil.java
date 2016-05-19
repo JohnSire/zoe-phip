@@ -5,6 +5,9 @@ import com.zoe.phip.infrastructure.parser.Parser;
 import com.zoe.phip.infrastructure.util.MapUtil;
 import com.zoe.phip.module.service.entity.base.Acknowledgement;
 import com.zoe.phip.module.service.entity.base.RegisterEntity;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
@@ -22,6 +25,14 @@ public final class RegisterUtil {
         String result = getParser().parseByResource(template, map);
         map.clear();
         map = null;
+        //删除属性为空的节点
+        Document xd;
+        try {
+            xd = DocumentHelper.parseText(result);
+            ProcessXmlUtil.deleteNullAttributes(xd.getRootElement());
+            return xd.asXML();
+        } catch (DocumentException ex) {
+        }
         return result;
     }
 
