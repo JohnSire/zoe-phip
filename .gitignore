@@ -8,3 +8,4 @@ target/
 *.log*
 zoe-phip/3.ui/phip-web/src/main/webapp/_build
 zoe-tools/zoe-phip-code-generator/generator-output/
+us.stackdump
