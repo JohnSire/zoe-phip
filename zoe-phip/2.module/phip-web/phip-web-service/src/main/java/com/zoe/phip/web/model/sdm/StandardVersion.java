@@ -44,7 +44,7 @@ public class StandardVersion extends MasterEntity {
     @Column(name = "PID")
     private String pid;
     /**
-     * 版本标识
+     * 版本标识(0:父级平台 1:本级平台)
      */
     @Column(name = "IDENTIFICATION")
     private Integer identification;
