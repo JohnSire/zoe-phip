@@ -27,6 +27,7 @@
       <text>由于查询内容不存在，查询失败</text>
     </acknowledgementDetail>
   </acknowledgement>
+  <%if(Model.deptCode!=null){%>
   <controlActProcess classCode="CACT" moodCode="EVN">
     <code code="PRPM_TE406110UV01" codeSystem="2.16.840.1.113883.1.6" />
     <queryAck>
@@ -51,4 +52,5 @@
       </status>
     </queryByParameterPayload>
   </controlActProcess>
+  <%}%>
 </PRPM_IN406110UV01>

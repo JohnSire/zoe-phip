@@ -194,7 +194,7 @@ public class OrganizationRegisterTest extends BaseTest {
 
 
       //String result = impl.addOrganization(add);
-        String result = impl.updateOrganization(update);
+        String result = impl.organizationDetailQuery("123");
 
         System.out.println(result);
     }

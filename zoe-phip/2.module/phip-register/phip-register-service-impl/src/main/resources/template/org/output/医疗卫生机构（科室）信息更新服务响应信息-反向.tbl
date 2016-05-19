@@ -32,6 +32,7 @@ var creationTime = Model.creationTime;
       </text>
     </acknowledgementDetail>
   </acknowledgement>
+  <%if(Model.deptCode!=null){%>
   <controlActProcess classCode="CACT" moodCode="EVN">
     <code code="PRPM_TE401011UV01" codeSystem="2.16.840.1.113883.1.6" />
     <subject typeCode="SUBJ">
@@ -73,4 +74,5 @@ var creationTime = Model.creationTime;
            </registrationRequest>
     </subject>
   </controlActProcess>
+  <%}%>
 </PRPM_IN403011UV01>

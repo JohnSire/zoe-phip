@@ -11,6 +11,7 @@ import javax.persistence.*;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.zoe.phip.infrastructure.annotation.XPath;
 import com.zoe.phip.module.service.entity.MasterEntity;
+import com.zoe.phip.module.service.entity.base.RegisterEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -22,7 +23,7 @@ import java.util.Date;
  * @date 2016-04-11
  */
 @Table(name = "PHIP_AREA_BASE_INFO")
-public class AreaBaseInfo extends MasterEntity {
+public class AreaBaseInfo extends RegisterEntity {
     /**
      * 区域代码
      */

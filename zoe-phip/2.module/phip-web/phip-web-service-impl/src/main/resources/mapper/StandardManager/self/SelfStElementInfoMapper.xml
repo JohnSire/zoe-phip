@@ -55,7 +55,7 @@
             </if>
             MODIFY_AT=sysdate
         </set>
-        where id = #{id}
+        where id = #{id,jdbcType=VARCHAR}
     </update>
     <select id="getDataById" parameterType="java.lang.String" resultMap="MultiResultMap">
         SELECT PSEI.*,

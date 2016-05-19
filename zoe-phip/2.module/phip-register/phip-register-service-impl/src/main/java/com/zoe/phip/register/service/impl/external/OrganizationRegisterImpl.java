@@ -44,25 +44,24 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
      */
     @Override
     public String addOrganization(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message, PropertyPlaceholder.getProperty("org.register"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
-            // TODO: 2016/4/14
-            acknowledgement.setTypeCode("AE");
-            acknowledgement.setText(strResult);
-            acknowledgement.setMsgId(StringUtil.getUUID());
-            acknowledgement.setCreateTime(DateUtil.dateTimeToString(new Date(),"yyyyMMddHHmmss"));
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            OrgDeptInfo orgDeptInfo = new OrgDeptInfo();
+            orgDeptInfo.setCreationTime(new Date());
+            orgDeptInfo.setMsgId(StringUtil.getUUID());
+            orgDeptInfo.setId(StringUtil.getUUID());
+            return registerFailed(orgDeptInfo, strResult);
+
         }
         Document document = ProcessXmlUtil.load(message);
         OrgDeptInfo baseInfo = null;
         try {
             baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, ProcessXmlUtil.getAdapterDom(adapter));
-            if(null!=baseInfo && null !=baseInfo.getValidateMessage()){
-                throw  new Exception(baseInfo.getValidateMessage());
+            if (null != baseInfo && null != baseInfo.getValidateMessage()) {
+                throw new Exception(baseInfo.getValidateMessage());
             }
-            //xml 验证错误  todo 打开验证功能
             if (strResult.contains("error:数据集内容验证错误")) {
                 return registerFailed(baseInfo, strResult);
             }
@@ -84,26 +83,24 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
 
     @Override
     public String updateOrganization(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message, PropertyPlaceholder.getProperty("org.update"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
-            // TODO: 2016/4/14
-            acknowledgement.setTypeCode("AE");
-            acknowledgement.setText(strResult);
-            acknowledgement.setMsgId(StringUtil.getUUID());
-            acknowledgement.setCreateTime(DateUtil.dateTimeToString(new Date(),"yyyyMMddHHmmss"));
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            OrgDeptInfo orgDeptInfo = new OrgDeptInfo();
+            orgDeptInfo.setCreationTime(new Date());
+            orgDeptInfo.setMsgId(StringUtil.getUUID());
+            orgDeptInfo.setId(StringUtil.getUUID());
+            return updateFailed(orgDeptInfo, strResult);
         }
         Document document = ProcessXmlUtil.load(message);
         OrgDeptInfo baseInfo = null;
         try {
             baseInfo = XmlBeanUtil.toBean(document, OrgDeptInfo.class, ProcessXmlUtil.getAdapterDom(adapter));
-            if(null!=baseInfo && null !=baseInfo.getValidateMessage()){
-                throw  new Exception(baseInfo.getValidateMessage());
+            if (null != baseInfo && null != baseInfo.getValidateMessage()) {
+                throw new Exception(baseInfo.getValidateMessage());
             }
 
-            //xml 验证错误  todo 打开验证功能
             if (strResult.contains("error:数据集内容验证错误")) {
                 return registerFailed(baseInfo, strResult);
             }
@@ -125,34 +122,36 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
 
     @Override
     public String organizationDetailQuery(String message) {
-        String strResult = ProcessXmlUtil.verifyMessage(message);
+        String strResult = ProcessXmlUtil.verifyMessage(message, PropertyPlaceholder.getProperty("org.query"));
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
-            // TODO: 2016/4/14
-            acknowledgement.setTypeCode("AE");
+            OrgDeptInfo orgDeptInfo = new OrgDeptInfo();
+            orgDeptInfo.setCreationTime(new Date());
+            orgDeptInfo.setMsgId(StringUtil.getUUID());
+            orgDeptInfo.setId(StringUtil.getUUID());
+
             acknowledgement.setText(strResult);
-            acknowledgement.setMsgId(StringUtil.getUUID());
-            acknowledgement.setCreateTime(DateUtil.dateTimeToString(new Date(),"yyyyMMddHHmmss"));
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            orgDeptInfo.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, orgDeptInfo);
         }
         Document document;
         OrgDeptInfo deptInfo = null;
-        String strDeptId="";
-        String strDeptName="";
-        String strMsgId="";
-        String strIdRoot="";
-        String strCreateTime="";
+        String strDeptId = "";
+        String strDeptName = "";
+        String strMsgId = "";
+        String strIdRoot = "";
+        String strCreateTime = "";
         String errorMsg = "";
-       String strDivisionRoot="";
+        String strDivisionRoot = "";
         try {
             document = ProcessXmlUtil.load(message);
-             strDeptId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strDeptId")).getText();
+            strDeptId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strDeptId")).getText();
             strDivisionRoot = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strDivisionRoot")).getText();
-             strDeptName = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strDeptName")).getText();
-             strMsgId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strMsgId")).getText();
-             strIdRoot = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strIdRoot")).getText();
-             strCreateTime = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strCreateTime")).getText();
+            strDeptName = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strDeptName")).getText();
+            strMsgId = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strMsgId")).getText();
+            strIdRoot = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strIdRoot")).getText();
+            strCreateTime = document.selectSingleNode(PropertyPlaceholder.getProperty("queryOrg.strCreateTime")).getText();
             acknowledgement.setMsgId(strMsgId);
             acknowledgement.setCreateTime(strCreateTime);
             if (strResult.contains("error:数据集内容验证错误")) {
@@ -160,43 +159,28 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
                 acknowledgement.setText(strResult + ",查询失败");
                 return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, acknowledgement);
             }
-
-
             Map<String, Object> map = new TreeMap<>();
             map.clear();
             map.put("deptCode", strDeptId);
             map.put("deptName", strDeptName);
             OrgDeptInfo result = organizationRegisterIn.organizationDetailQuery(map);
-       /*     if (deptInfo == null || StringUtil.isNullOrWhiteSpace(deptInfo.getCode())) {
-                deptInfo = new OrgDeptInfo();
-                deptInfo.setCreationTime(DateUtil.stringToDateTime(strCreateTime));
-                deptInfo.setId(strIdRoot);
-                deptInfo.setMsgId(strMsgId);
-                deptInfo.setCode(strDeptId);
-                deptInfo.setDeptName(strDeptName);
-                return RegisterUtil.responseFailed(deptInfo, "由于查询内容不存在，查询失败", RegisterType.ORG_QUERY_ERROR);
-            } else {
-                return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_SUCCESS, deptInfo);
-            }*/
 
             return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_SUCCESS, result);
         } catch (BusinessException e) {
             errorMsg = SafeExecuteUtil.getBusinessExceptionMsg(e, organizationRegisterIn.getClass());
-           // acknowledgement.setText(msg);
-           // return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, acknowledgement);
 
         } catch (Exception ex) {
-           // return RegisterUtil.responseFailed(deptInfo, ex.getMessage(), RegisterType.ORG_QUERY_ERROR);
             errorMsg = ex.getMessage();
             logger.error("error:", ex);
         }
-        OrgDeptInfo orgDeptInfo= new OrgDeptInfo();
+        OrgDeptInfo orgDeptInfo = new OrgDeptInfo();
         orgDeptInfo.setCreationTime(DateUtil.stringToDateTime(strCreateTime));
         orgDeptInfo.setDivisionRoot(strDivisionRoot);
-       // orgDeptInfo.setId(strIdRoot);
         orgDeptInfo.setMsgId(strMsgId);
         orgDeptInfo.setDeptCode(strDeptId);
         orgDeptInfo.setDeptName(strDeptName);
+        acknowledgement.setText(errorMsg);
+        orgDeptInfo.setAcknowledgement(acknowledgement);
         return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, orgDeptInfo);
     }
 

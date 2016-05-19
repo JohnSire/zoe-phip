@@ -1,0 +1,53 @@
+.lock-screen {
+    font: 12px Arial, SimSun, Tahoma, Helvetica, sans-serif;
+    color: #2b2c2b;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    text-align: center;
+    /*width: 1600px;*/
+    /*height: 799px;*/
+    opacity: 0.9;
+    overflow: hidden;
+    z-index: 999999;
+    background: rgb(204, 204, 204);
+}
+
+.lock-screen ul {
+    margin: 0 auto;
+    padding-top: 200px;
+}
+
+.lock-screen ul li {
+    text-align: center;
+    list-style-type: none;
+    padding-top: 10px;
+}
+
+.lock-screen .user-code {
+    font-size: 15px;
+    line-height: 15px;
+}
+
+.lock-screen .user-pwd {
+    width: 254px;
+    height: 28px;
+    line-height: 28px;
+    padding-left: 4px;
+}
+
+.lock-screen .tip {
+    font-size: 12px;
+    color: red;
+}
+
+.lock-screen .lbtn {
+    background-color: #18a689;
+    /*background-color: #3d9ced;*/
+    color: #FFFFFF;
+    border: 0;
+    width: 260px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+}

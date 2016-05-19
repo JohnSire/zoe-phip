@@ -4,11 +4,35 @@
 
 define(function (require, exports, module) {
     var ajaxStore = {
-        getCDA: function (id,callback) {
+        getCDA: function (id, callback) {
             var req = new Request("cda/getCdaInfo");
             req.get({
                 isTip: false,//是否有请求结果消息提示（成功||失败）
-                data:{"id":id},
+                data: {"id": id},
+                success: function (data) {
+                    if (typeof (callback) == "function") {
+                        callback(data);
+                    }
+                }
+            })
+        },
+        saveXml: function (xml, callback) {
+            var req = new Request("cda/saveXml");
+            req.post({
+                isTip: true,//是否有请求结果消息提示（成功||失败）
+                data: {"id": id, "xml": xml},
+                success: function (data) {
+                    if (typeof (callback) == "function") {
+                        callback(data);
+                    }
+                }
+            })
+        },
+        getHtmlString: function (callback) {
+            var req = new Request("cda/getHtmlString");
+            req.post({
+                isTip: true,//是否有请求结果消息提示（成功||失败）
+                data: null,
                 success: function (data) {
                     if (typeof (callback) == "function") {
                         callback(data);
@@ -17,30 +41,34 @@ define(function (require, exports, module) {
             })
         }
     }
-
+    var top = common.getTopWindowDom();
+    var id = common.getParamFromUrl("id");
     var internal = {
 
         init: function () {
-            var id=common.getParamFromUrl("id");
+            ajaxStore.getHtmlString("", "");
             ajaxStore.getCDA(id, function (data) {
-
+                var xml = data.result.sampleXml;
+                $.cookie("xml", xml);
             })
             internal.event();
             internal.showEditor();
         },
         event: function () {
+
+            top.saveXMl = internal.saveXMl;
             //上传
             $("#uploadXml").click(function () {
-                var path=$("#clientPath").val()
-                if(!path||path=="请选择样例Xml文件"){
+                var path = $("#clientPath").val()
+                if (!path || path == "请选择样例Xml文件") {
                     common.jsmsgError("请选择样例Xml文件");
                     return;
                 }
                 var options = {
-                    dataType:'json',
+                    dataType: 'json',
                     success: function (data) {
                         if (data.isSuccess) {
-                            var fileContent=data.result.fileContent;
+                            var fileContent = data.result.fileContent;
                             fileContent = fileContent.replace(/</g, '&lt;');
                             fileContent = fileContent.replace(/>/g, '&gt;');
                             internal.editor.html(fileContent);
@@ -53,6 +81,8 @@ define(function (require, exports, module) {
 
             //结构化
             $("#xslToStruct").click(function () {
+                var xml = internal.editor.html();
+                $.cookie("xml", xml);
                 internal.xslToStruct();
 
             });
@@ -63,7 +93,14 @@ define(function (require, exports, module) {
                 $("#clientPath").val(fileName);
             });
         },
+        saveXMl: function (submited) {
+            var xml = internal.editor.html();
+            $.cookie("xml", xml);
+            ajaxStore.saveXml(xml, function (data) {
+                submited();
+            })
 
+        },
         xslToStruct: function () {
             var dialogParam =
             {

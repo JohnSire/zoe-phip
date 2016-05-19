@@ -60,7 +60,7 @@
             </if>
             MODIFY_AT=sysdate
         </set>
-        where id = #{id}
+        where id = #{id,jdbcType=VARCHAR}
     </update>
     <select id="getDataPageList" parameterType="java.util.Map" resultMap="BaseResultMap">
         SELECT * FROM PHIP_ST_NORM_SOURCE_INFO PSNSI
@@ -78,7 +78,7 @@
         LEFT JOIN (
         <include refid="dictSelect"/>
         ) T ON T.ID =I.FK_DICT_ID
-        WHERE I.ID = #{id}
+        WHERE I.ID = #{id,jdbcType=VARCHAR}
     </select>
     <sql id="dictSelect">
         SELECT S.ID, S.NAME

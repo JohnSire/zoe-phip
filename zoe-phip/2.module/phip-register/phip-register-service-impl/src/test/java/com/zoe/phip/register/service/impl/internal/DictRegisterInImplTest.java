@@ -95,7 +95,7 @@ public class DictRegisterInImplTest extends BaseTest {
 
     @Test
     public void testDictCatalogTreeQuery(){
-        PageList<DictCatalog> result = dictInImpl.dictCatalogTreeQuery("");
+        PageList<DictCatalog> result = dictInImpl.dictCatalogTreeQuery("test01","");
         System.out.println(result);
     }
 

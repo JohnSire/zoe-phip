@@ -47,7 +47,7 @@ public class ProcessXmlUtil {
      * @param strXml
      * @return
      */
-    public static String verifyMessage(String strXml) {
+    public static String verifyMessage(String strXml,String rootName) {
         Document xd;
         //校验字符串是否符合xml格式
         try {
@@ -56,7 +56,6 @@ public class ProcessXmlUtil {
             logger.error("error:", ex);
             return "error:传入的参数不符合xml格式。" + ex.getMessage();
         }
-        String rootName = xd.getRootElement().getName();
         String xsdPath = "multicacheschemas/" + rootName + ".xsd";
         String xsdFilePath = ProcessXmlUtil.class.getClassLoader().getResource(xsdPath).getPath();
         if(xsdFilePath.contains("jar")){
