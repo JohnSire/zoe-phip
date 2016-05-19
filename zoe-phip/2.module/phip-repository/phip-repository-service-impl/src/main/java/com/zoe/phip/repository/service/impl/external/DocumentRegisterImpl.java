@@ -46,9 +46,12 @@ public class DocumentRegisterImpl implements IDocumentRegister {
         Acknowledgement acknowledgement = new Acknowledgement();
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
-            acknowledgement.setTypeCode("AE");
-            acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            XmanIndex index=new XmanIndex();
+            acknowledgement.setMsgId(StringUtil.getUUID());
+            index.setMsgId(StringUtil.getUUID());
+            index.setAcknowledgement(acknowledgement);
+            return registerFailed(index, strResult);
+
         }
 
         Document document = ProcessXmlUtil.load(message);
@@ -100,7 +103,8 @@ public class DocumentRegisterImpl implements IDocumentRegister {
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
             acknowledgement.setMsgId(StringUtil.getUUID());
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            acknowledgement.setId(StringUtil.getUUID());
+            return RegisterUtil.registerMessage(RegisterType.EHR_ANTICIPATION_ERROR, acknowledgement);
         }
         String errorMsg = "";
         try {
@@ -151,7 +155,11 @@ public class DocumentRegisterImpl implements IDocumentRegister {
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            acknowledgement.setMsgId(StringUtil.getUUID());
+            XmanIndex index=new XmanIndex();
+            index.setMsgId(StringUtil.getUUID());
+            index.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.EHR_SEARCH_SUCCESS, index);
         }
         Document document = ProcessXmlUtil.load(message);
         String msgId = document.selectSingleNode(PropertyPlaceholder.getProperty("getDocInfo.msgId")).getText().trim();//请求消息ID
@@ -197,9 +205,10 @@ public class DocumentRegisterImpl implements IDocumentRegister {
         String errorMsg = "";
         //xml格式错误
         if (strResult.contains("error:传入的参数不符合xml格式")) {
-            acknowledgement.setTypeCode("AE");
-            acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            XmanIndex index=new XmanIndex();
+            index.setEhrId(StringUtil.getUUID());
+            return docGetFailed(index,acknowledgement,StringUtil.getUUID(),strResult);
+
         }
         Document document = ProcessXmlUtil.load(message);
         String msgId = document.selectSingleNode(PropertyPlaceholder.getProperty("retrieveDoc.msgId")).getText().trim();//请求消息ID
@@ -298,7 +307,11 @@ public class DocumentRegisterImpl implements IDocumentRegister {
         if (strResult.contains("error:传入的参数不符合xml格式")) {
             acknowledgement.setTypeCode("AE");
             acknowledgement.setText(strResult);
-            return RegisterUtil.registerMessage(RegisterType.MESSAGE, acknowledgement);
+            acknowledgement.setMsgId(StringUtil.getUUID());
+            XmanIndex index=new XmanIndex();
+            index.setMsgId(StringUtil.getUUID());
+            index.setAcknowledgement(acknowledgement);
+            return RegisterUtil.registerMessage(RegisterType.EHR_BATCHADD_ERROR, index);
         }
         Document document = ProcessXmlUtil.load(message);
         String errorMsg = "";
