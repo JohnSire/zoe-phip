@@ -8,8 +8,8 @@ define(function (require, exports, module) {
         },
         topMenu: function () {
             $("#nav li").click(function () {
-                $("#nav li").removeClass("hover");
-                $(this).addClass("hover");
+                $("#nav li").removeClass("active");
+                $(this).addClass("active");
                 var index = $(this).index() / 2;
             });
         }
