@@ -19,6 +19,8 @@
                 jdbcType="DECIMAL"/>
         <result column="DESCR" property="descr" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
+        <result column="IS_NEW" property="isNew" javaType="java.lang.Integer"
+                jdbcType="DECIMAL"/>
     </resultMap>
     <insert id="addList" parameterType="com.zoe.phip.web.model.sdm.StandardVersion">
         INSERT INTO PHIP_STANDARD_VERSION (
@@ -30,6 +32,7 @@
         IDENTIFICATION,
         UPLOAD_STATUS,
         DESCR,
+        IS_NEW,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
@@ -41,6 +44,7 @@
             #{item.identification,jdbcType=DECIMAL},
             #{item.uploadStatus,jdbcType=DECIMAL},
             #{item.descr,jdbcType=VARCHAR},
+            #{item.isNew,jdbcType=DECIMAL},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -55,6 +59,7 @@
         IDENTIFICATION,
         UPLOAD_STATUS,
         DESCR,
+        IS_NEW,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES(
         #{code,jdbcType=VARCHAR},
@@ -65,6 +70,7 @@
         #{identification,jdbcType=DECIMAL},
         #{uploadStatus,jdbcType=DECIMAL},
         #{descr,jdbcType=VARCHAR},
+        #{isNew,jdbcType=DECIMAL},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
@@ -110,6 +116,9 @@
                 </if>
                 <if test="item.state != null">
                     STATE = #{item.state,jdbcType=DECIMAL},
+                </if>
+                <if test="item.isNew != null">
+                    IS_NEW = #{item.isNew,jdbcType=DECIMAL},
                 </if>
                 MODIFY_AT=sysdate
             </set>

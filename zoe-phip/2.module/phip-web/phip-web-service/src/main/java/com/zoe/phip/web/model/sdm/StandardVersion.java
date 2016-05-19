@@ -44,7 +44,7 @@ public class StandardVersion extends MasterEntity {
     @Column(name = "PID")
     private String pid;
     /**
-     * 版本标识
+     * 版本标识(0:父级平台 1:本级平台)
      */
     @Column(name = "IDENTIFICATION")
     private Integer identification;
@@ -58,6 +58,20 @@ public class StandardVersion extends MasterEntity {
      */
     @Column(name = "DESCR")
     private String descr;
+
+    public Integer getIsNew() {
+        return isNew;
+    }
+
+    public void setIsNew(Integer isNew) {
+        this.isNew = isNew;
+    }
+
+    /**
+     * 0:新增 1:更新
+     */
+    @Column(name = "IS_NEW")
+    private Integer isNew;
 
     public String getCode() {
         return this.code;
