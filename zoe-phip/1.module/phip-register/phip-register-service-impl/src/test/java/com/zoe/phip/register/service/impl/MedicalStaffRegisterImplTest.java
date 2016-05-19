@@ -135,7 +135,7 @@ public class MedicalStaffRegisterImplTest extends BaseTest {
         String add = "<PRPM_IN301010UV01 xmlns=\"urn:hl7-org:v3\"\n" +
                 "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ITSVersion=\"XML_1.0\"\n" +
                 "xsi:schemaLocation=\"urn:hl7-org:v3 ../multicacheschemas/PRPM_IN301010UV01.xsd\">\n" +
-                "  <id root=\"040CD76A-ED0E-400B-9FD3-60387BCDE0EB\"\n" +
+                "  <id root=\"2.16.156.10011.0\"\n" +
                 "  extension=\"8D73520B-D489-4B70-8F4B-7B5C2D7961B5\"/>\n" +
                 "  <creationTime value=\"20130116112855\"/>\n" +
                 "  <interactionId root=\"2.16.840.1.113883.1.6\" extension=\"PRPM_IN301010UV01\"/>\n" +
