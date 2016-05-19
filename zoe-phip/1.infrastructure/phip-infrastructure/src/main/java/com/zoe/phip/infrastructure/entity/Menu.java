@@ -13,12 +13,12 @@ public class Menu {
     private String name;
     private Menu parent;
 
-    public Menu(String name, String uri, MenuCode code, int order,Menu parent) {
+    public Menu(String name, String uri, MenuCode code, int order, Menu parent) {
         this.parent = parent;
         this.uri = uri;
         this.code = code;
         this.order = order;
-        this.name=name;
+        this.name = name;
     }
 
     public String getUri() {

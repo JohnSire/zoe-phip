@@ -1,0 +1,14 @@
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/StandardManage/DataElement/dataElementList', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseGrid.html",{title:"数据元管理",styleSection:null,bodySection:null,scriptSection:scriptSection}){}
+%>

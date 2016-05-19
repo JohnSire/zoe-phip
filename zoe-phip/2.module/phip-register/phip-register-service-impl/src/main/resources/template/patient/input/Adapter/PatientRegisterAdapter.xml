@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <OrgName descr = "机构名称" path="//controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/name"/>
+    <OrgCode descr = "机构编码" path="//controlActProcess/subject/registrationRequest/subject1/patient/providerOrganization/id/@extension"/>
+    <XmanId descr = "注册用户索引" path=""/>
+    <IdNo descr = "身份证件号码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/id/@extension"/>
+    <Name descr = "本人姓名" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/name"/>
+    <SexCode descr = "性别代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@code"/>
+    <SexCodeName descr = "性别名称" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/administrativeGenderCode/@displayName"/>
+    <BirthDate descr = "出生日期" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/birthTime/@value"/>
+    <IdTypeCode path=""/>
+    <EmployerName descr = "工作单位名称" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asEmployee/employerOrganization/name"/>
+    <EmployerTelNo descr = "工作单位联系方式" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asEmployee/employerOrganization/contactParty/telecom/@value"/>
+    <TelNo descr = "本人电话号码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/telecom/@value"/>
+    <RelName descr = "联系人姓名" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/relationshipHolder1/name"/>
+    <RelTelNo descr = "联系人电话" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/personalRelationship/telecom/@value"/>
+    <Address descr = "常住地址户籍" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetAddressLine"/>
+    <ProvinceCodeName descr = "地址-省" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/state"/>
+    <CityCodeName descr = "地址-市" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/city"/>
+    <CountyCodeName descr = "地址-县（区）" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/county"/>
+    <StreetCodeName descr = "地址-乡（镇、街道办事处）" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetNameBase"/>
+    <NeighborhoodCodeName descr = "地址-村（街、路、弄等）" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/streetName"/>
+    <HouseNumber descr = "地址-门牌号码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/houseNumber"/>
+    <PostalCode descr = "邮政编码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/addr/postalCode"/>
+    <NationalityCode  descr = "民族代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/ethnicGroupCode/@code"/>
+    <NationalityName  descr = "民族名称" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/ethnicGroupCode/@displayName"/>
+    <AboCode descr="abo血型代码" path=""/>
+    <RhCode descr="rh血型代码" path=""/>
+    <EducationCode descr="学历代码" path=""/>
+    <OccupationCode descr="职业类别代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asEmployee/occupationCode/@code"/>
+    <OccupationName descr="职业类别代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asEmployee/occupationCode/@displayName"/>
+    <MarriageCode descr="婚姻状况代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/maritalStatusCode/@code"/>
+    <MarriageName descr="婚姻状况名称" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/maritalStatusCode/@displayName"/>
+    <CodeSysCode descr="医疗保险类别代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/coveredPartyOf/coverageRecord/beneficiary/beneficiary/code/@code"/>
+    <CodeSysName descr="医疗保险类别名称" path="//controlActProcess/subject/registrationRequest/subject1/patient/coveredPartyOf/coverageRecord/beneficiary/beneficiary/code/@displayName"/>
+    <AssignedPersonCode descr="作者职工代码" path="//controlActProcess/subject/registrationRequest/author/assignedEntity/id/@extension"/>
+    <AssignedPersonName descr="作者姓名" path="//controlActProcess/subject/registrationRequest/author/assignedEntity/assignedPerson/name"/>
+    <CreateTime descr="建档时间" path="//creationTime/@value"/>
+    <EffectiveTime descr="患者登记时间" path="//controlActProcess/subject/registrationRequest/subject1/patient/effectiveTime/@value"/>
+    <HealthRecordNo descr="城乡居民健康档案编号" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/@extension"/>
+    <HealthRecordOrgCode descr="建档医疗机构组织机构代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.2']/following-sibling::*/id[@root='2.16.156.10011.1.5']/@extension"/>
+    <CardCode descr = "健康卡号" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.19']/@extension"/>
+    <XcOrgCode descr = "健康卡发放机构代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.19']/following-sibling::*/id[@root='2.16.156.10011.1.5']/@extension"/>
+    <PatientId descr="病人ID" path="//controlActProcess/subject/registrationRequest/subject1/patient/id/@extension"/>
+    <MsgId descr="消息ID" path="//id/@extension"/>
+    <StatusCode descr="状态" path="//controlActProcess/subject/registrationRequest/statusCode/@code"/>
+</root>

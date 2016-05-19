@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStandardVerRsSetMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StandardVerRsSet" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StandardVerRsSet">
+        update PHIP_STANDARD_VER_RS_SET
+        <set>
+            <if test="fkVersionId != null">
+                FK_VERSION_ID = #{fkVersionId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkCdaId != null">
+                FK_CDA_ID = #{fkCdaId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkSetId != null">
+                FK_SET_ID = #{fkSetId,jdbcType=VARCHAR},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT (1) FROM PHIP_STANDARD_VER_RS_SET PSVRS
+        WHERE PSVRS.FK_VERSION_ID = #{fkVersionId,jdbcType=VARCHAR}
+        AND PSVRS.FK_CDA_ID = #{fkCdaId,jdbcType=VARCHAR}
+        AND PSVRS.FK_SET_ID = #{fkSetId,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('id')">
+            AND PSVRS.id != #{id, jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="getSetByFkVersionId" parameterType="java.util.Map"
+            resultMap="com.zoe.phip.web.dao.sdm.IStSetInfoMapper.BaseResultMap">
+        SELECT I.*
+        FROM PHIP_ST_SET_INFO I,
+        PHIP_STANDARD_VER_RS_SET S,
+        PHIP_ST_RS_CDA_SET_INFO O
+        WHERE S.FK_CDA_ID = O.FK_CDA_ID
+        AND I.ID = S.FK_SET_ID
+        AND S.FK_SET_ID = O.FK_SET_ID
+        AND S.FK_VERSION_ID = #{fkVersionId, jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('fkCdaId')">
+            AND S.FK_CDA_ID = #{fkCdaId, jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.register.dao.IXmanBaseInfoMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.XmanBaseInfo" extends="BaseResultMap">
+        <result column="ORG_NAME" property="orgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="XC_CARD_CODE" property="cardCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="SEX_CODE_NAME" property="sexCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="NATIONALITY_NAME" property="nationalityName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="OCCUPATION_NAME" property="occupationName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="MARRIAGE_NAME" property="marriageName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CODE_SYS_NAME" property="codeSysName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="XC_ORG_CODE" property="xcOrgCode" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="XC_ORG_NAME" property="xcOrgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="HEALTH_RECORD_ORG_NAME" property="healthRecordOrgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="PROVINCE_NAME" property="provinceCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CITY_NAME" property="cityCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="COUNTY_NAME" property="countyCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="STREET_NAME" property="streetCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="NEIGHBORHOOD_NAME" property="neighborhoodCodeName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.XmanBaseInfo">
+        update PHIP_XMAN_BASE_INFO
+        <set>
+            <if test="orgCode != null">
+                ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="idNo != null">
+            ID_NO = #{idNo,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            SEX_CODE = #{sexCode,jdbcType=VARCHAR},
+
+            BIRTH_DATE = #{birthDate,jdbcType=TIMESTAMP},
+
+            ID_TYPE_CODE = #{idTypeCode,jdbcType=DECIMAL},
+
+            EMPLOYER_NAME = #{employerName,jdbcType=VARCHAR},
+
+            TEL_NO = #{telNo,jdbcType=VARCHAR},
+
+            REL_NAME = #{relName,jdbcType=VARCHAR},
+
+            REL_TEL_NO = #{relTelNo,jdbcType=VARCHAR},
+
+            ADDRESS = #{address,jdbcType=VARCHAR},
+
+            PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+
+            CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+
+            COUNTY_CODE = #{countyCode,jdbcType=VARCHAR},
+
+            STREET_CODE = #{streetCode,jdbcType=VARCHAR},
+
+            NEIGHBORHOOD_CODE = #{neighborhoodCode,jdbcType=VARCHAR},
+
+            HOUSE_NUMBER = #{houseNumber,jdbcType=VARCHAR},
+
+            POSTAL_CODE = #{postalCode,jdbcType=VARCHAR},
+
+            NATIONALITY_CODE = #{nationalityCode,jdbcType=VARCHAR},
+
+            EDUCATION_CODE = #{educationCode,jdbcType=DECIMAL},
+
+            OCCUPATION_CODE = #{occupationCode,jdbcType=VARCHAR},
+
+            MARRIAGE_CODE = #{marriageCode,jdbcType=VARCHAR},
+
+            CODE_SYS_CODE = #{codeSysCode,jdbcType=VARCHAR},
+
+            ASSIGNED_PERSON_CODE = #{assignedPersonCode,jdbcType=VARCHAR},
+
+            ASSIGNED_PERSON_NAME = #{assignedPersonName,jdbcType=VARCHAR},
+
+            CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            <if test="healthRecordOrgCode != null">
+                HEALTH_RECORD_ORG_CODE = #{healthRecordOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="patientId != null">
+                PATIENT_ID = #{patientId,jdbcType=VARCHAR},
+            </if>
+            <if test="msgId != null">
+                MSG_ID = #{msgId,jdbcType=VARCHAR},
+            </if>
+            STATE = #{state,jdbcType=DECIMAL},
+
+            STATUS_CODE = #{statusCode,jdbcType=VARCHAR},
+
+            EFFECTIVE_TIME = #{effectiveTime,jdbcType=TIMESTAMP},
+
+            EMPLOYER_TEL_NO = #{employerTelNo,jdbcType=VARCHAR},
+
+            MODIFY_AT=sysdate
+        </set>
+        WHERE
+        <choose>
+            <when test="id != null">
+                ID = #{id,jdbcType=VARCHAR}
+            </when>
+            <otherwise>
+                HEALTH_RECORD_NO = #{healthRecordNo,jdbcType=VARCHAR}
+            </otherwise>
+        </choose>
+    </update>
+    <select id="getPatient" parameterType="java.lang.String" resultMap="MultiResultMap">
+        <include refid="patientSelect"/>
+        WHERE P.PATIENT_ID=#{id,jdbcType=VARCHAR} OR P.HEALTH_RECORD_NO=#{id,jdbcType=VARCHAR} AND ROWNUM=1
+    </select>
+    <select id="getPatientList" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT B.*,C.XC_CARD_CODE,S.NAME AS SEX_CODE_NAME FROM PHIP_XMAN_BASE_INFO B
+        LEFT JOIN PHIP_XMAN_CARD C ON B.ID=C.XC_XMAN_ID
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON B.SEX_CODE=S.CODE --性别
+        <where>
+            <if test="_parameter.containsKey('key') and _parameter.containsKey('key')!=''">
+                (UPPER(B.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(B.HEALTH_RECORD_NO) LIKE
+                #{key,jdbcType=VARCHAR} OR UPPER(C.XC_CARD_CODE) LIKE #{key,jdbcType=VARCHAR})
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+    </select>
+
+    <select id="getPatientByPrimaryKey" parameterType="java.lang.String" resultMap="MultiResultMap">
+        <include refid="patientSelect"/>
+        WHERE P.ID=#{id,jdbcType=VARCHAR}
+    </select>
+    <sql id="patientSelect">
+        SELECT P.*,S.NAME AS SEX_CODE_NAME,N.NAME AS NATIONALITY_NAME,OC.NAME AS OCCUPATION_NAME,
+        M.NAME AS MARRIAGE_NAME,C.NAME AS CODE_SYS_NAME,X.XC_CARD_CODE,O.DEPT_NAME AS ORG_NAME,
+        R.DEPT_NAME AS HEALTH_RECORD_ORG_NAME,X.XC_ORG_CODE,XC.DEPT_NAME AS XC_ORG_NAME,
+        ST.NAME AS PROVINCE_NAME,CI.NAME AS CITY_NAME,AR.NAME AS COUNTY_NAME,SR.NAME AS STREET_NAME,
+        CO.NAME AS NEIGHBORHOOD_NAME
+        FROM PHIP_XMAN_BASE_INFO P
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON P.SEX_CODE=S.CODE --性别
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.3"/>
+        </include>
+        ) N ON P.NATIONALITY_CODE=N.CODE --民族
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.7"/>
+        </include>
+        ) OC ON P.OCCUPATION_CODE=OC.CODE --职业
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.5"/>
+        </include>
+        ) M ON P.MARRIAGE_CODE=M.CODE --婚姻状况
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.1.248"/>
+        </include>
+        ) C ON P.CODE_SYS_CODE=C.CODE
+        LEFT JOIN PHIP_XMAN_CARD X ON P.ID=X.XC_XMAN_ID --医疗保险类别
+        LEFT JOIN (
+        <include refid="deptSelect"/>
+        ) O ON P.ORG_CODE=O.DEPT_CODE
+        LEFT JOIN (
+        <include refid="deptSelect"/>
+        ) R ON P.HEALTH_RECORD_ORG_CODE=R.DEPT_CODE
+        LEFT JOIN (
+        <include refid="deptSelect"/>
+        ) XC ON X.XC_ORG_CODE=XC.DEPT_CODE
+        LEFT JOIN (
+         <include refid="areaSelect"/>
+        ) ST ON P.PROVINCE_CODE=ST.CODE
+        LEFT JOIN (
+        <include refid="areaSelect"/>
+        ) CI ON P.CITY_CODE=CI.CODE
+        LEFT JOIN(
+         <include refid="areaSelect"/>
+        ) AR ON P.COUNTY_CODE=AR.CODE
+        LEFT JOIN (
+        <include refid="areaSelect"/>
+        ) SR ON P.STREET_CODE=SR.CODE
+        LEFT JOIN(
+        <include refid="areaSelect"/>
+        ) CO ON P.NEIGHBORHOOD_CODE=CO.CODE
+    </sql>
+    <sql id="oidSelect">
+        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
+        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
+        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
+        WHERE PNS.CODE_SYSTEM = '${oidValue}'
+    </sql>
+    <sql id="deptSelect">
+         SELECT DEPT_CODE,DEPT_NAME FROM PHIP_ORG_DEPT_INFO
+         WHERE DIVISION_ROOT = '2.16.156.10011.1.5'
+    </sql>
+    <sql id="areaSelect">
+        SELECT CODE, NAME FROM PHIP_AREA_BASE_INFO T
+    </sql>
+</mapper>

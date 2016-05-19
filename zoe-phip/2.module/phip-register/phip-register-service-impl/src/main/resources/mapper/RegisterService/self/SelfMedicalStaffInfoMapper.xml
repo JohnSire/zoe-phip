@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.register.dao.IMedicalStaffInfoMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.MedicalStaffInfo" extends="BaseResultMap">
+        <result column="GENDER_NAME" property="genderName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="DEPT_NAME" property="deptName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="TECHNICAL_NAME" property="technicalName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="ASSIGNED_DEPT_NAME" property="assignedDeptName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="AFFILIATED_ORG_NAME" property="affiliatedOrgName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
+        update PHIP_MEDICAL_STAFF_INFO
+        <set>
+
+            EXTENSION_ID = #{extensionId,jdbcType=VARCHAR},
+
+            NAME = #{name,jdbcType=VARCHAR},
+
+            GENDER_CODE = #{genderCode,jdbcType=VARCHAR},
+
+            BIRTH_TIME = #{birthTime,jdbcType=TIMESTAMP},
+
+            BIRTHPLACE_ADDR = #{birthplaceAddr,jdbcType=VARCHAR},
+            <if test="idNo != null">
+                ID_NO = #{idNo,jdbcType=VARCHAR},
+            </if>
+            TECHNICAL_CODE = #{technicalCode,jdbcType=VARCHAR},
+
+            EMPLOYER_ADDR = #{employerAddr,jdbcType=VARCHAR},
+
+            EMPLOYER_TEL_NO = #{employerTelNo,jdbcType=VARCHAR},
+
+            EFFECTIVE_TIME_LOW = #{effectiveTimeLow,jdbcType=TIMESTAMP},
+
+            EFFECTIVE_TIME_HIGH = #{effectiveTimeHigh,jdbcType=TIMESTAMP},
+
+            AFFILIATED_ORG_CODE = #{affiliatedOrgCode,jdbcType=VARCHAR},
+
+            MSG_ID = #{msgId,jdbcType=VARCHAR},
+
+            ASSIGNED_CODE = #{assignedCode,jdbcType=VARCHAR},
+
+            ASSIGNED_NAME = #{assignedName,jdbcType=VARCHAR},
+
+            ASSIGNED_DEPT_CODE = #{assignedDeptCode,jdbcType=VARCHAR},
+
+            ASSIGNED_CONTACT_PERSON = #{assignedContactPerson,jdbcType=VARCHAR},
+
+            STATUS_CODE = #{statusCode,jdbcType=VARCHAR},
+
+            CREATION_TIME = #{creationTime,jdbcType=TIMESTAMP},
+
+            STATE = #{state,jdbcType=DECIMAL},
+
+            MODIFY_AT=sysdate
+        </set>
+        where
+        <choose>
+            <when test="id != null">
+                id = #{id,jdbcType=VARCHAR}
+            </when>
+            <otherwise>
+                EXTENSION_ID = #{extensionId,jdbcType=VARCHAR}
+            </otherwise>
+        </choose>
+
+    </update>
+    <delete id="providerDelete" parameterType="com.zoe.phip.register.model.MedicalStaffInfo">
+        delete from PHIP_MEDICAL_STAFF_INFO where ID in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </delete>
+    <select id="getStaff" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT * FROM PHIP_MEDICAL_STAFF_INFO PMSI
+        WHERE 1 = 1
+        <if test="_parameter.containsKey('extensionId')">
+            AND PMSI.EXTENSION_ID = #{extensionId,jdbcType=VARCHAR}
+        </if>
+        <if test="_parameter.containsKey('name')">
+            AND PMSI.NAME = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="_parameter.containsKey('birthDate')">
+            AND to_char(PMSI.BIRTH_TIME,'yyyyMMdd') = #{birthDate,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getProvider" parameterType="java.lang.String" resultMap="MultiResultMap">
+        SELECT PMSI.*,S.NAME AS GENDER_NAME,
+        O.DEPT_NAME AS ASSIGNED_DEPT_NAME,
+        T.NAME AS TECHNICAL_NAME,
+        D.DEPT_NAME AS AFFILIATED_ORG_NAME
+        FROM PHIP_MEDICAL_STAFF_INFO PMSI
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON PMSI.GENDER_CODE=S.CODE --性别
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.10"/>
+        </include>
+        ) T ON PMSI.TECHNICAL_CODE=T.CODE --职务
+        LEFT JOIN(
+        <include refid="orgSelect"/>
+        ) D
+        ON PMSI.AFFILIATED_ORG_CODE =D.DEPT_CODE --机构
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) O
+        ON PMSI.ASSIGNED_DEPT_CODE = O.DEPT_CODE --申请者科室
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) C
+        ON PMSI.ASSIGNED_DEPT_CODE =C.DEPT_CODE --科室
+        WHERE PMSI.ID=#{id,jdbcType=VARCHAR} OR PMSI.EXTENSION_ID=#{id,jdbcType=VARCHAR}
+        AND ROWNUM=1
+    </select>
+
+    <select id="getProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT M.*,S.NAME AS GENDER_NAME,
+        O.DEPT_NAME AS ASSIGNED_DEPT_NAME,
+        T.NAME AS TECHNICAL_NAME,
+        D.DEPT_NAME AS AFFILIATED_ORG_NAME
+        FROM PHIP_MEDICAL_STAFF_INFO M
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON M.GENDER_CODE=S.CODE --性别
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.10"/>
+        </include>
+        ) T ON M.TECHNICAL_CODE=T.CODE --职务
+        LEFT JOIN(
+        <include refid="orgSelect"/>
+        ) D
+        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE --机构
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) O
+        ON M.ASSIGNED_DEPT_CODE = O.DEPT_CODE --申请者科室
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) C
+        ON M.ASSIGNED_DEPT_CODE =C.DEPT_CODE --科室
+        LEFT JOIN(
+        SELECT PODI.* FROM PHIP_ORG_DEPT_INFO PODI
+        ) D
+        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE
+        AND M.ASSIGNED_DEPT_CODE =D.DEPT_CODE
+        <where>
+            <if test="_parameter.containsKey('key') and _parameter.containsKey('key')!=''">
+                (UPPER(M.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(M.ID_NO) LIKE
+                #{key,jdbcType=VARCHAR})
+            </if>
+            AND M.AFFILIATED_ORG_CODE IN (
+            SELECT DEPT_CODE
+            FROM PHIP_ORG_DEPT_INFO
+            <if test="deptCode !=null and deptCode !=''">
+                START WITH DEPT_CODE=#{deptCode,jdbcType=VARCHAR}
+            </if>
+            CONNECT BY PRIOR DEPT_CODE = DEPT_PARENT_CODE)
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+    </select>
+
+    <select id="getAllProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT M.*,S.NAME AS GENDER_NAME,
+        O.DEPT_NAME AS ASSIGNED_DEPT_NAME,
+        T.NAME AS TECHNICAL_NAME,
+        D.DEPT_NAME AS AFFILIATED_ORG_NAME
+        FROM PHIP_MEDICAL_STAFF_INFO M
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON M.GENDER_CODE=S.CODE --性别
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.10"/>
+        </include>
+        ) T ON M.TECHNICAL_CODE=T.CODE --职务
+        LEFT JOIN(
+        <include refid="orgSelect"/>
+        ) D
+        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE --机构
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) O
+        ON M.ASSIGNED_DEPT_CODE = O.DEPT_CODE --申请者科室
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) C
+        ON M.ASSIGNED_DEPT_CODE =C.DEPT_CODE --科室
+        LEFT JOIN(
+        SELECT PODI.* FROM PHIP_ORG_DEPT_INFO PODI
+        ) D
+        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE
+        AND M.ASSIGNED_DEPT_CODE =D.DEPT_CODE
+        <where>
+            <if test="_parameter.containsKey('key') and _parameter.containsKey('key')!=''">
+                (UPPER(M.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(M.ID_NO) LIKE
+                #{key,jdbcType=VARCHAR})
+            </if>
+
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+
+    </select>
+    <select id="getOrgProviderList" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT M.*,S.NAME AS GENDER_NAME,
+        O.DEPT_NAME AS ASSIGNED_DEPT_NAME,
+        T.NAME AS TECHNICAL_NAME,
+        D.DEPT_NAME AS AFFILIATED_ORG_NAME
+        FROM PHIP_MEDICAL_STAFF_INFO M
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.4"/>
+        </include>
+        ) S ON M.GENDER_CODE=S.CODE --性别
+        LEFT JOIN (
+        <include refid="oidSelect">
+            <property name="oidValue" value="2.16.156.10011.2.3.3.10"/>
+        </include>
+        ) T ON M.TECHNICAL_CODE=T.CODE --职务
+        LEFT JOIN(
+        <include refid="orgSelect"/>
+        ) D
+        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE --机构
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) O
+        ON M.ASSIGNED_DEPT_CODE = O.DEPT_CODE --申请者科室
+        LEFT JOIN(
+        <include refid="deptSelect"/>
+        ) C
+        ON M.ASSIGNED_DEPT_CODE =C.DEPT_CODE --科室
+        LEFT JOIN(
+        SELECT PODI.* FROM PHIP_ORG_DEPT_INFO PODI
+        ) D
+        ON M.AFFILIATED_ORG_CODE =D.DEPT_CODE
+        AND M.ASSIGNED_DEPT_CODE =D.DEPT_CODE
+        WHERE AFFILIATED_ORG_CODE IN(
+        SELECT O.DEPT_CODE FROM PHIP_ORG_DEPT_INFO O
+        WHERE DEPT_TYPE_CODE=#{orgTypeCode,jdbcType=VARCHAR})
+    </select>
+
+    <sql id="oidSelect">
+        SELECT PDI.CODE,PDI.NAME FROM PHIP_NATIONAL_STANDARDS PNS
+        JOIN PHIP_DICT_CATALOG PDC  ON PNS.DICT_CODE= PDC.CODE
+        JOIN PHIP_DICT_ITEM PDI  ON PDC.ID =PDI.FK_CATALOG_ID
+        WHERE PNS.CODE_SYSTEM = '${oidValue}'
+    </sql>
+    <sql id="orgSelect">
+        SELECT DEPT_CODE,DEPT_NAME FROM PHIP_ORG_DEPT_INFO
+        WHERE DIVISION_ROOT = '2.16.156.10011.1.5'
+    </sql>
+    <sql id="deptSelect">
+        SELECT DEPT_CODE,DEPT_NAME FROM PHIP_ORG_DEPT_INFO
+        WHERE DIVISION_ROOT = '2.16.156.10011.1.26'
+    </sql>
+</mapper>

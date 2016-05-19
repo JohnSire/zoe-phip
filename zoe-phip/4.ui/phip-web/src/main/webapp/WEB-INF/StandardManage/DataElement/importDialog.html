@@ -1,0 +1,62 @@
+
+<%
+var baseStyleSection = {
+%>
+<link href='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/dist/style/layout.css")}' rel="stylesheet"/>
+<style>
+    .uploadlay {
+        position: absolute;
+        border: 1px green solid;
+        width: 240px;
+        height: 22px;
+        opacity: 0;
+        filter: alpha(opacity:0);
+        z-index: 999;
+    }
+
+
+
+</style>
+<%};%>
+<%
+var baseBodySection = {
+%>
+<form id="baseAttrForm" method="post" action="/servlet/DataElementUploadHandleServlet" enctype="multipart/form-data">
+    <span class="text-up-tips tips-error" style="display:none;"><i class="text-up-tips-arrow arrow-red"></i><span
+            class="msg"></span></span>
+    <div class="y-dialog-content">
+        <div class="y-dialog-form form-little">
+            <ul class="y-dialog-lists clearfix">
+                <li class="list">
+
+
+                    <p class="column">
+                        <label class="label"><span class="text-mark">*</span>文件：</label>  </p>
+                    <input type="file" id="choosefile" name="file" class="uploadlay">
+                    <input type="text" class="text" name="" id="clientPath" readonly="readonly" datatype="*"
+                           errormsg="请选择文件！" value='请选择文件'>
+                    <input type="button" class="btn-dialog-gray" id="openFile" value="浏览">
+
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
+<%};%>
+<%
+var baseScriptSection={
+%>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/jquery/jquery.form.js")}'></script>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/StandardManage/DataElement/importDialog', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/Shared/_default.html",{baseTitle:"xsl",baseStyleSection:baseStyleSection,baseBodySection:baseBodySection,baseScriptSection:baseScriptSection}){}
+%>
+

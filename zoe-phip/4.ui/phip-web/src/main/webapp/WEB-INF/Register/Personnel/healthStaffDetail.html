@@ -1,0 +1,96 @@
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="NAME"><span class="text-mark">*</span>姓名：</label>
+                    <input type="text" name="NAME" class="text" datatype="*1-20" errormsg="姓名名称长度应为1~20位！"
+                           nullmsg="请填写姓名！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="GENDER">性别：</label>
+                    <label><input name="sex" type="radio"/>男 </label>
+                    <label><input name="sex" type="radio"/>女 </label>
+                    <label><input name="sex" type="radio"/>未知 </label>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="BIRTHDAY">出生日期：</label>
+                       <span class="text-line-outer">
+                    <input edittype="date" type="text" name="APPLICANT_ID" class="text"/>
+                    </span>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="ID_NO"><span class="text-mark">*</span>身份证件号：</label>
+                    <input type="text" name="ID_NO" class="text" datatype="*1-18" errormsg="身份证件号长度应为1~18位！"
+                           nullmsg="请填写身份证件号！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="EFFECTIVE_TIME_LOW">角色有效期开始：</label>
+                    <span class="text-line-outer">
+                    <input edittype="date" type="text" name="APPLICANT_ID" class="text"/>
+                    </span>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="EFFECTIVE_TIME_HIGH">角色有效期结束：</label>
+                        <span class="text-line-outer">
+                    <input edittype="date" type="text" name="APPLICANT_ID" class="text"/>
+                    </span>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="PARENT_ID">联系电话：</label>
+                    <input type="text" name="PARENT_ID" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="EMPLOYER_ADDR">工作地址：</label>
+                    <input type="text" name="EMPLOYER_ADDR" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="EMAIL">电子邮件：</label>
+                    <input type="text" name="EMAIL" class="text"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="PARENT_ID">工作机构：</label>
+                    <input type="text" name="PARENT_ID" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="AFFILIATED_ORG_NAME">所在科室：</label>
+                    <input type="text" name="AFFILIATED_ORG_NAME" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="EFFECTIVE_HIGH">岗位：</label>
+                    <input type="text" name="EFFECTIVE_HIGH" class="text"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label label-textarea">备注：</label>
+                    <textarea rows="3" class="textarea" style="width:508px;height:60px;" name="Descr"></textarea>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Personnel/healthStaffDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"卫生管理机构人员详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

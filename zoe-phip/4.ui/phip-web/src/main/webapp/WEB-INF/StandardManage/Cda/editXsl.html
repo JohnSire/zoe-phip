@@ -1,0 +1,93 @@
+
+<%
+var baseStyleSection = {
+%>
+<link href='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/dist/style/layout.css")}' rel="stylesheet"/>
+<style>
+    .uploadlay {
+        position: absolute;
+        border: 1px green solid;
+        width: 190px;
+        height: 22px;
+        opacity: 0;
+        filter: alpha(opacity:0);
+        z-index: 999;
+    }
+
+
+
+</style>
+<%};%>
+<%
+var baseBodySection = {
+%>
+<div class="section-display">
+    <ul class="y-layout-form clearfix">
+        <li class="list">
+
+            <form id="fm_main" name="fm_main" method="post" action="/servlet/CdaUploadHandleServlet" enctype="multipart/form-data">
+                <p class="column">
+                    <label class="label"><span style="color:red;"></span>Xsl文件：</label>   </p>
+                <input type="file" id="choosefile" name="file" class="uploadlay">
+                <input type="text" class="text" name="" id="clientPath" readonly="readonly" datatype="*"
+                       errormsg="请选择.xls或.xlsx类型的文件！" value='请选择Xsl文件'>
+                <input type="button" class="btn-dialog-gray" id="openFile" value="浏览">
+            </form>
+
+
+
+        </li>
+        <li class="list" id="uploadXsl">
+            <a class="btn-little btn-little-blue">
+                <span class="text-outer">导入Xsl<span class="text-inner">导入Xsl</span></span>
+            </a>
+        </li>
+        <li class="list" id="xslToPreview">
+            <a class="btn-little btn-little-blue">
+                <span class="text-outer">预览<span class="text-inner">预览</span></span>
+            </a>
+        </li>
+        <li class="list" id="xslToStruct">
+            <a class="btn-little btn-little-blue">
+                <span class="text-outer">结构化视图<span class="text-inner">结构化视图</span></span>
+            </a>
+        </li>
+    </ul>
+</div>
+<form id="baseAttrForm" onsubmit="return false;">
+    <span class="text-up-tips tips-error" style="display:none;"><i class="text-up-tips-arrow arrow-red"></i><span
+            class="msg"></span></span>
+
+
+    <div class="y-dialog-tabs">
+        <ul class="lists" id="xsltab">
+            <li class="list active" type="ToHtml"><a class="link">显示Xsl</a></li>
+            <li class="list" type="ToSummary"><a class="link">摘要Xsl</a></li>
+            <li class="list" type="ToSet"><a class="link">解析Xsl</a></li>
+        </ul>
+        <li>
+
+            <div style="width:500px;height:300px"><div id="editor_id"></div></div>
+        </li>
+    </div>
+</form>
+<%};%>
+<%
+var baseScriptSection={
+%>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/kindeditor/V4.1.7/kindeditor-all.js")}'></script>
+<script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/jquery/jquery.form.js")}'></script>
+
+<script type="text/javascript">
+
+    $(function () {
+        seajs.use('{dir}/StandardManage/Cda/editXsl', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/Shared/_default.html",{baseTitle:"xsl",baseStyleSection:baseStyleSection,baseBodySection:baseBodySection,baseScriptSection:baseScriptSection}){}
+%>
+

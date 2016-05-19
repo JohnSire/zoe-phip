@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <ReceiverId descr = "" path="//receiver/device/id/@root"/>
+    <ReceiverExtension descr = "" path="//receiver/device/id/@extension"/>
+    <SenderId descr = "" path="//sender/device/id/@root"/>
+    <SenderExtension descr = "" path="//sender/device/id/@extension"/>
+</root>

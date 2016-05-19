@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStandardVerRsDictMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StandardVerRsDict" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StandardVerRsDict">
+        update PHIP_STANDARD_VER_RS_DICT
+        <set>
+            <if test="fkVersionId != null">
+                FK_VERSION_ID = #{fkVersionId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkDictId != null">
+                FK_DICT_ID = #{fkDictId,jdbcType=VARCHAR},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT (1) FROM PHIP_STANDARD_VER_RS_DICT PSVRD
+        WHERE PSVRD.FK_VERSION_ID = #{fkVersionId,jdbcType=VARCHAR}
+        and PSVRD.FK_DICT_ID =#{fkDictId,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('id')">
+            AND PSVRD.id != #{id, jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

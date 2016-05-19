@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.register.dao.IDictItemMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.DictItem" extends="BaseResultMap">
+        <result column="CATALOG_NAME" property="fkCatalogName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.DictItem">
+        update PHIP_DICT_ITEM
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="fkCatalogId != null">
+                FK_CATALOG_ID = #{fkCatalogId,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="getDictItemListByCatalogCode" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT pdi.*,pdc.NAME CATALOG_NAME FROM(
+        SELECT pdi.* FROM PHIP_DICT_ITEM pdi
+        <where>
+            <if test="key !=null and key !=''">
+                AND (UPPER(pdi.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(pdi.CODE) LIKE #{key,jdbcType=VARCHAR})
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+        ) pdi
+        INNER JOIN SELECT pdc.* FROM PHIP_DICT_CATALOG pdc WHERE pdc.CODE = #{fkCatalogCode,jdbcType=VARCHAR}
+        ON pdi.FK_CATALOG_ID = pdc.ID
+    </select>
+
+    <select id="getDictItemListByCatalogId" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT pdi.*,pdc.NAME PARENT_NAME FROM (
+        SELECT * FROM PHIP_DICT_ITEM pdi
+        <where>
+            pdi.FK_CATALOG_ID IN (
+            SELECT ID
+            FROM PHIP_DICT_CATALOG
+            START WITH ID = #{id,jdbcType=VARCHAR}
+            CONNECT BY PRIOR ID = PID
+            )
+            <if test="key !=null and key !=''">
+                AND (UPPER(pdi.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(pdi.CODE) LIKE #{key,jdbcType=VARCHAR})
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+        ) pdi
+        LEFT JOIN PHIP_DICT_CATALOG pdc
+        ON pdi.FK_CATALOG_ID = pdc.ID
+    </select>
+
+
+    <select id="getDictItemOrgList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select * from PHIP_DICT_ITEM PDIT
+        <where>
+            <if test="pid !=null and pid !=''">
+                AND PDIT.FK_CATALOG_ID in (select id from phip_dict_catalog where pid= #{pid,jdbcType=VARCHAR})
+            </if>
+
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+    </select>
+
+
+    <select id="dictItemExist" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT COUNT(1) FROM　PHIP_DICT_ITEM WHERE ID != #{id,jdbcType=VARCHAR}
+        AND CODE = #{code,jdbcType=VARCHAR}
+        AND FK_CATALOG_ID IN (
+        SELECT FK_CATALOG_ID FROM PHIP_DICT_ITEM WHERE ID = #{id,jdbcType=VARCHAR}
+        )
+    </select>
+    <select id="getDictItemNewOrgTree" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select pdi.* from Phip_National_Standards pns join phip_dict_catalog pdc on pns.dict_code= pdc.code join
+        phip_dict_item pdi on pdc.id =pdi.fk_catalog_id
+        <where>
+            <if test="codeSystem !=null and codeSystem !=''">
+                AND pns.code_system = #{codeSystem,jdbcType=VARCHAR}
+            </if>
+            <if test="dictCode !=null and dictCode !=''">
+                AND pns.dict_code = #{dictCode,jdbcType=VARCHAR}
+            </if>
+            <if test="key !=null and key !=''">AND ( UPPER(pdi.CODE) LIKE
+                #{key,jdbcType=VARCHAR} OR UPPER(pdi.NAME) LIKE #{key,jdbcType=VARCHAR})
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+    </select>
+    <select id="getDictItemById" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT pdi.*,pdc.NAME CATALOG_NAME FROM (
+        SELECT * FROM PHIP_DICT_ITEM pdi WHERE pdi.ID = #{id,jdbcType=VARCHAR}) pdi
+        LEFT JOIN PHIP_DICT_CATALOG pdc
+        ON pdi.FK_CATALOG_ID = pdc.ID
+    </select>
+
+</mapper>

@@ -1,0 +1,14 @@
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Personnel/xmanBaseList', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseGrid.html",{title:"个人信息管理",styleSection:null,bodySection:null,scriptSection:scriptSection}){}
+%>

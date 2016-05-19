@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sm.IMenuDataMapper">
+    <resultMap id="MultiBaseResultMap" type="com.zoe.phip.web.model.sm.MenuData" extends="BaseResultMap">
+        <result column="PARENT_NAME" property="parentName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <!--<association property="parentMenu" column="FK_PARENT_MENU_ID" select="getParentMenuById" fetchType="lazy"/>-->
+    </resultMap>
+
+    <!--<select id="getMenusByParentId" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
+        SELECT *
+        FROM SYS_MENU_DATA
+        WHERE STATE=1 AND FK_PARENT_MENU_ID=#{id,jdbcType=VARCHAR}
+    </select>-->
+
+    <select id="getCompetenceMenuByUser" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
+        SELECT DISTINCT t.ID, t.NAME, t.CODE,t.SORT, t.ADDRESS, t.FK_PARENT_MENU_ID, t.CREATE_AT, t.CREATE_BY, t.MODIFY_AT,
+        t.MODIFY_BY, t.STATE,t.IMAGE_URL, NULL COMPETENCE_ID, NULL NAME_PATH
+        FROM SYS_MENU_DATA t
+        INNER JOIN SYS_MENU_COMPETENCE MC ON MC.FK_MENU_ID = T.ID
+        INNER JOIN SYS_USER_COMPETENCE UC ON UC.FK_COMPETENCE_CATEGORY_ID = MC.FK_COMPETENCE_CATEGORY_ID
+        INNER JOIN SYS_SYSTEM_USER U ON U.ID = UC.FK_USER_ID
+        WHERE t.STATE = 1 AND U.STATE = 1 AND UC.FK_USER_ID = #{userId}
+        order by t.SORT ASC
+    </select>
+
+    <select id="getMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
+        SELECT T1.*,T2.NAME AS PARENT_NAME FROM SYS_MENU_DATA T1 LEFT JOIN SYS_MENU_DATA T2 ON T2.ID=T1.FK_PARENT_MENU_ID
+        WHERE T1.ID=#{id,jdbcType=VARCHAR}
+    </select>
+
+
+   <!-- <select id="getParentMenuById" parameterType="java.lang.String" resultMap="MultiBaseResultMap">
+        SELECT *
+        from SYS_MENU_DATA t
+        WHERE t.ID=#{id}
+    </select>-->
+    <select id="getMenuPages" parameterType="java.lang.String" resultMap="BaseResultMap">
+--         SELECT *
+--         FROM SYS_MENU_DATA t
+--         where 1=1 and UPPER (t.ADDRESS) LIKE UPPER (CONCAT(CONCAT('%',#{key,jdbcType=VARCHAR}),'%'))
+--
+      SELECT * FROM SYS_MENU_DATA t
+      where regexp_like(t.address,'+#{key,jdbcType=VARCHAR}+','i')
+
+    </select>
+    <select id="getMenuDataList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select * from SYS_MENU_DATA
+        <where>
+            <if test="key !=null and key !=''">
+                AND (UPPER(NAME) || UPPER(CODE) || UPPER(ADDRESS)) LIKE #{key,jdbcType=VARCHAR}
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+    </select>
+
+    <insert id="insertMenuData" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="begin" close="end;">
+            insert into SYS_MENU_DATA(ID,NAME,CODE,ADDRESS,STATE,SORT)
+            values(
+            #{item.id,jdbcType=VARCHAR},
+            #{item.name,jdbcType=VARCHAR},
+            #{item.code,jdbcType=VARCHAR},
+            #{item.address,jdbcType=VARCHAR},
+            #{item.state,jdbcType=INTEGER},
+            #{item.sort,jdbcType=INTEGER}
+            );
+            <foreach collection="item.children" item="detail" index="index">
+                insert into SYS_MENU_DATA(ID,NAME ,CODE,ADDRESS,STATE,SORT,FK_PARENT_MENU_ID)
+                values(
+                #{detail.id,jdbcType=VARCHAR},
+                #{detail.name,jdbcType=VARCHAR},
+                #{detail.code,jdbcType=VARCHAR},
+                #{detail.address,jdbcType=VARCHAR},
+                #{detail.state,jdbcType=INTEGER},
+                #{detail.sort,jdbcType=INTEGER},
+                #{item.id,jdbcType=VARCHAR}
+                );
+            </foreach>
+        </foreach>
+    </insert>
+
+</mapper>

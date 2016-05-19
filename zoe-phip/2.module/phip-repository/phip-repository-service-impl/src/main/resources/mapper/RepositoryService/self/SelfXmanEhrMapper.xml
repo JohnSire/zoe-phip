@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.repository.dao.IXmanEhrMapper">
+<resultMap id="MultiResultMap" type="com.zoe.phip.repository.model.XmanEhr" extends="BaseResultMap">
+
+</resultMap>
+<update id="defaultUpdate" parameterType="com.zoe.phip.repository.model.XmanEhr">
+    update PHIP_XMAN_EHR
+    <set>
+        <if test="sourceId != null">
+            SOURCE_ID = #{sourceId,jdbcType=VARCHAR},
+        </if>
+        <if test="documentId != null">
+            DOCUMENT_ID = #{documentId,jdbcType=VARCHAR},
+        </if>
+        <if test="parentDocumentRelationship != null">
+            PARENT_DOCUMENT_RELATIONSHIP = #{parentDocumentRelationship,jdbcType=VARCHAR},
+        </if>
+        <if test="parentDocumentId != null">
+            PARENT_DOCUMENT_ID = #{parentDocumentId,jdbcType=VARCHAR},
+        </if>
+        <if test="indexId != null">
+            INDEX_ID = #{indexId,jdbcType=VARCHAR},
+        </if>
+        <if test="xmanId != null">
+            XMAN_ID = #{xmanId,jdbcType=VARCHAR},
+        </if>
+        <if test="orgCode != null">
+            ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+        </if>
+        <if test="patientId != null">
+            PATIENT_ID = #{patientId,jdbcType=VARCHAR},
+        </if>
+        <if test="eventNo != null">
+            EVENT_NO = #{eventNo,jdbcType=VARCHAR},
+        </if>
+        <if test="eventType != null">
+            EVENT_TYPE = #{eventType,jdbcType=VARCHAR},
+        </if>
+        <if test="catalogCode != null">
+            CATALOG_CODE = #{catalogCode,jdbcType=VARCHAR},
+        </if>
+        MODIFY_AT=sysdate
+</set>
+        where id = #{id,jdbcType=VARCHAR}
+        </update>
+</mapper>

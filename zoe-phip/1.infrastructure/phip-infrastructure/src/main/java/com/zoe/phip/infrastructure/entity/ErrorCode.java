@@ -10,4 +10,7 @@ public class ErrorCode {
     //session 过期
     public static final String SESSION_EXPIRED = "1001";
 
+    public static final String VALIDATOR_ERROR = "8001";
+
+
 }

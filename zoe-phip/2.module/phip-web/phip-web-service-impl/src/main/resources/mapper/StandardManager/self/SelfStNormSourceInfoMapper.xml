@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStNormSourceInfoMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StNormSourceInfo" extends="BaseResultMap">
+        <result column="DICT_NAME" property="dictName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="addNormSource" parameterType="java.util.List">
+        INSERT INTO PHIP_ST_NORM_SOURCE_INFO (
+        CODE,
+        NAME,
+        DB_LINK,
+        STANDARD_TYPE,
+        START_TIME,
+        END_TIME,
+        DESCR,
+        FK_DICT_ID,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES(
+        #{code,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR},
+        #{dbLink,jdbcType=VARCHAR},
+        #{standardType,jdbcType=DECIMAL},
+        #{startTime,jdbcType=DATE},
+        #{endTime,jdbcType=DATE},
+        #{descr,jdbcType=VARCHAR},
+        #{fkDictId,jdbcType=VARCHAR},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StNormSourceInfo">
+        update PHIP_ST_NORM_SOURCE_INFO
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="dbLink != null">
+                DB_LINK = #{dbLink,jdbcType=VARCHAR},
+            </if>
+            <if test="standardType != null">
+                STANDARD_TYPE = #{standardType,jdbcType=DECIMAL},
+            </if>
+            <if test="startTime != null">
+                START_TIME = #{startTime,jdbcType=DATE},
+            </if>
+            <if test="endTime != null">
+                END_TIME = #{endTime,jdbcType=DATE},
+            </if>
+            <if test="descr != null">
+                DESCR = #{descr,jdbcType=VARCHAR},
+            </if>
+            <if test="fkDictId != null">
+                FK_DICT_ID = #{fkDictId,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="getDataPageList" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT * FROM PHIP_ST_NORM_SOURCE_INFO PSNSI
+        WHERE 1 = 1
+        <if test="_parameter.containsKey('key')">
+            AND UPPER (CONCAT(PSNSI.CODE,PSNSI.name) ) LIKE UPPER (CONCAT(CONCAT('%', #{key, jdbcType=VARCHAR}),'%'))
+        </if>
+        <if test="_parameter.containsKey('type')">
+            AND PSNSI.STANDARD_TYPE= #{type, jdbcType=DECIMAL}
+        </if>
+    </select>
+    <select id="getNormById" resultMap="MultiResultMap" parameterType="java.lang.String">
+        SELECT I.*, T.NAME AS DICT_NAME
+        FROM PHIP_ST_NORM_SOURCE_INFO I
+        LEFT JOIN (
+        <include refid="dictSelect"/>
+        ) T ON T.ID =I.FK_DICT_ID
+        WHERE I.ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <sql id="dictSelect">
+        SELECT S.ID, S.NAME
+        FROM SYS_SYSTEM_DICT_ITEM S
+        WHERE S.FK_SYSTEM_DICT_CATEGORY_ID = '6'
+    </sql>
+</mapper>

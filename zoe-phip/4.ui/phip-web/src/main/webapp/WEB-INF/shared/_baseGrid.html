@@ -1,0 +1,39 @@
+<%
+var baseTitle={
+%>
+${title}
+<%};%>
+<%
+var baseStyleSection = {
+%>
+<link href='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/dist/style/layout.css")}' rel="stylesheet"/>
+${styleSection}
+<%};%>
+<%
+var baseBodySection = {
+%>
+${bodySection}
+<!--工具栏-->
+<div class="y-layout-header">
+    <div id="gridTools" class="y-layout-form clearfix">
+        <ul op="btns" style="float:left;"></ul>
+        <div op="custom" style="float:left;"></div>
+        <ul op="search" style="float:right;padding-right: 20px;"></ul>
+    </div>
+
+</div>
+<!--工具栏-->
+<!--主要内容-->
+<div>
+    <div id="grid" style="border:0;"></div>
+</div>
+<!--主要内容-->
+<%};%>
+<%
+var baseScriptSection={
+%>
+${scriptSection}
+<%};%>
+<%
+include("/WEB-INF/Shared/_default.html",{baseTitle:baseTitle,baseStyleSection:baseStyleSection,baseBodySection:baseBodySection,baseScriptSection:baseScriptSection}){}
+%>

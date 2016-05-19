@@ -1,0 +1,101 @@
+<%
+var creationTime=Model.creationTime;
+%>
+<?xml version="1.0" encoding="UTF-8" ?>
+<PRPM_IN406110UV01 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\multicacheschemas\PRPM_IN406110UV01.xsd" ITSVersion="XML_1.0">
+  <id root="040CD76A-ED0E-400B-9FD3-60387BCDE0EB" extension="${Model.msgId}" />
+  <creationTime value="${creationTime,dateFormat="yyyyMMddHHmmss"}" />
+  <interactionId root="2.16.840.1.113883.1.6" extension="PRPM_IN406110UV01" />
+  <processingCode code="P" />
+  <processingModeCode code="I" />
+  <acceptAckCode code="AL" />
+ <receiver typeCode="RCV">
+    <device classCode="DEV" determinerCode="INSTANCE">
+      <id root="1.2.840.114350.1.13.999.234" />
+    </device>
+  </receiver>
+  <sender typeCode="SND">
+    <device classCode="DEV" determinerCode="INSTANCE">
+      <id root="1.2.840.114350.1.13.999.567" />
+    </device>
+  </sender>
+  <!--typeCode 为处理结果，AA 表示成功 AE 表示失败-->
+  <acknowledgement typeCode="AA">
+    <targetMessage>
+      <!--请求的消息ID-->
+      <id root="040CD76A-ED0E-400B-9FD3-60387BCDE0EB" extension="${Model.msgId}" />
+    </targetMessage>
+    <acknowledgementDetail>
+      <!--处理结果说明-->
+      <text>查询成功</text>
+    </acknowledgementDetail>
+  </acknowledgement>
+  <controlActProcess classCode="CACT" moodCode="EVN">
+    <code code="PRPM_TE406110UV01" codeSystem="2.16.840.1.113883.1.6" />
+    <subject typeCode="SUBJ">
+      <registrationEvent classCode="REG" moodCode="EVN">
+        <statusCode code="active" />
+        <subject1 typeCode="SBJ">
+          <assignedEntity classCode="ASSIGNED ">
+            <!--医疗卫生机构（科室）标识-科室为例-->
+            <id  root="${Model.divisionRoot}" extension="${Model.deptCode}" />
+            <!--医疗卫生机构（科室）类别-科室为例-->
+            <code code="${Model.deptTypeCode}" displayName="${Model.deptTypeName}" codeSystem="2.16.156.10011.2.3.2.62" codeSystemName="医疗卫生机构业务科室分类与代码表" />
+            <!--医疗卫生机构（科室）角色名称-->
+            <name>${Model.deptRoleName}</name>
+            <!--工作地址-->
+            <addr>${Model.employerAddr}</addr>
+            <!--工作联系方式：电话、邮箱地址等-->
+            <telecom>${Model.employerTelNo}</telecom>
+            <!--角色状态RoleStatus-->
+            <statusCode code="active" />
+            <assignedPrincipalOrganization classCode="ORG" determinerCode="INSTANCE">
+              <!--医疗卫生机构（科室）实体名称-->
+              <name>${Model.deptName}</name>
+            </assignedPrincipalOrganization>
+          </assignedEntity>
+        </subject1>
+        <custodian typeCode="CST">
+          <assignedEntity classCode="ASSIGNED">
+            <!--医务人员ID-->
+            <id root="2.16.156.10011.1.4" extension="${Model.assignedCode}" />
+            <assignedPerson classCode="PSN" determinerCode="INSTANCE">
+              <name>${Model.assignedName}</name>
+            </assignedPerson>
+            <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+              <!--科室号标识-->
+              <id root="2.16.156.10011.1.26" extension="${Model.assignedDeptCode}" />
+              <name>${Model.assignedDeptName}</name>
+              <contactParty classCode="CON">
+                <contactPerson classCode="PSN" determinerCode="INSTANCE">
+                  <name>${Model.assignedContactPerson}</name>
+                </contactPerson>
+              </contactParty>
+            </representedOrganization>
+          </assignedEntity>
+        </custodian>
+      </registrationEvent>
+    </subject>
+    <queryAck>
+      <queryResponseCode code="OK" />
+    </queryAck>
+    <queryByParameterPayload>
+      <!--查询事件的状态-->
+      <statusCode code="new" />
+      <!--医疗卫生机构（科室）ID-->
+      <organizationID>
+        <value root="2.16.156.10011.1.26" extension="${Model.deptCode}" />
+        <semanticsText>AssignedEntity.id</semanticsText>
+      </organizationID>
+      <!--医疗卫生机构（科室）实体名称-->
+      <organizationName>
+        <value>${Model.deptName}</value>
+        <semanticsText>PrincipalOrganization.name</semanticsText>
+      </organizationName>
+      <!--医疗卫生机构（科室）状态AssignedEntity.statusCode-->
+      <status>
+        <value code="active" />
+      </status>
+    </queryByParameterPayload>
+  </controlActProcess>
+</PRPM_IN406110UV01>

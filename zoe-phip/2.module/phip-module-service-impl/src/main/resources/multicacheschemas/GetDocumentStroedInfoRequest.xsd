@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:xs="urn:hl7-org:v3" targetNamespace="urn:hl7-org:v3" elementFormDefault="qualified">
+	<element name="GetDocumentStroedInfoRequest">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="Id" type="xs:II">
+					<annotation>
+						<documentation>消息标识</documentation>
+					</annotation>
+				</element>
+				<element name="HealthCardId" type="s:string" minOccurs="0">
+					<annotation>
+						<documentation>患者健康卡号</documentation>
+					</annotation>
+				</element>
+				<element name="IdentityId" type="s:string">
+					<annotation>
+						<documentation>患者身份证号</documentation>
+					</annotation>
+				</element>
+				<element name="DocumentTitle" type="s:string" minOccurs="0">
+					<annotation>
+						<documentation>文档标题</documentation>
+					</annotation>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="II">
+		<attribute name="root" type="s:string">
+			<annotation>
+				<documentation>标识符根</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="extension" type="s:string">
+			<annotation>
+				<documentation>根下唯一标识</documentation>
+			</annotation>
+		</attribute>
+	</complexType>
+</schema>

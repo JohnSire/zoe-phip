@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+<DictCatalog>
+    <Id value="${Model.id}" descr="字典分类Id"/>
+    <Code value="${Model.code}" descr="字典分类编码"/>
+    <Name value="${Model.name}" descr="字典分类名称"/>
+    <ParentId value="${Model.pid}" descr="父级分类Id"/>
+    <Type value="${Model.type}" descr="类别"/>
+    <Detail value="${Model.acknowledgement.text}" descr="操作结果"/>
+</DictCatalog>
+</data>

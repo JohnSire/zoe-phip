@@ -1,0 +1,72 @@
+<%
+var bodySection = {
+%>
+<body style="height:343px;">
+<div class="y-dialog-menu">
+    <ul class="lists" style="width: 100%">
+        <li class="list active" style="width: 150px"><a class="link">平台标准版本--数据集</a></li>
+        <li class="list" style="width: 150px"><a class="link">平台标准版本--字典</a></li>
+    </ul>
+
+    <div class="y-dialog-menu-wrapper">
+        <!--平台标准版本--数据集-->
+        <div class="y-dialog-menu-content" style="display:block;">
+            <div class="y-dialog-menu-inner" style="height:100%;">
+                <div class="y-layout-sidebar" style="height:100%;">
+                    <div class="y-layout-tree" style="border:0;">
+                        <ul id="dataTree"></ul>
+                    </div>
+                </div>
+                <!--左边栏end-->
+                <!--右边栏begin-->
+                <div class="y-layout-main-two">
+                    <div class="y-layout-content">
+                        <!--主要内容-->
+                        <div>
+                            <div id="dataGrid" style="border:0;"></div>
+                        </div>
+                        <!--主要内容-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--平台标准版本--字典-->
+        <div class="y-dialog-menu-content">
+            <div class="y-dialog-menu-inner" style="height: 100%">
+                <div class="y-layout-sidebar">
+                    <div class="y-layout-tree" style="border:0;">
+                        <ul id="dictTree"></ul>
+                    </div>
+                </div>
+                <!--左边栏end-->
+                <!--右边栏begin-->
+                <div class="y-layout-main-two">
+                    <div class="y-layout-content">
+                        <!--主要内容-->
+                        <div>
+                            <div id="dictGrid" style="border:0;"></div>
+                        </div>
+                        <!--主要内容-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--存储脚本集合-->
+    </div>
+</div>
+</body>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/StandardManage/StandardVersion/versionSetRs', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"版本管理-关联设置",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

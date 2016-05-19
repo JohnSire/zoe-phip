@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.register.dao.IDictCatalogMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.DictCatalog" extends="BaseResultMap">
+        <result column="PARENT_NAME" property="parentName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.DictCatalog">
+        update PHIP_DICT_CATALOG
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="parentCode != null">
+                PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                TYPE = #{type,jdbcType=DECIMAL},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="getDictCatalogListPage" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT pdc.*,ppdc.NAME PARENT_NAME FROM(
+        SELECT pdc.* FROM PHIP_DICT_CATALOG pdc
+        <where>
+            pdc.TYPE = #{type,jdbcType=VARCHAR}
+            <if test="key !=null and key !=''">
+                AND (UPPER(pdc.NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(pdc.CODE) LIKE #{key,jdbcType=VARCHAR})
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+        ) pdc
+        LEFT JOIN PHIP_DICT_CATALOG ppdc
+        ON pdc.PID = ppdc.ID
+    </select>
+
+    <select id="selectChildCountById" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT COUNT(1) COUNT
+        FROM (SELECT PDC.ID, PDC.CODE
+          FROM (SELECT PDC.ID, PDC.CODE, PDC.NAME
+                  FROM PHIP_DICT_CATALOG PDC
+                 WHERE PDC.ID = #{id,jdbcType=VARCHAR}) PDC
+         INNER JOIN PHIP_DICT_CATALOG PPDC
+            ON PDC.ID = PPDC.PID
+        UNION ALL
+        SELECT PDC.ID, PDC.CODE
+          FROM (SELECT PDC.ID, PDC.CODE, PDC.NAME
+                  FROM PHIP_DICT_CATALOG PDC
+                 WHERE PDC.ID = #{id,jdbcType=VARCHAR}) PDC
+         INNER JOIN PHIP_DICT_ITEM PDI
+            ON PDC.ID = PDI.FK_CATALOG_ID)
+    </select>
+
+    <select id="getDictCatalogById" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT pdc.*, ppdc.NAME PARENT_NAME FROM(
+        SELECT pdc.* FROM PHIP_DICT_CATALOG pdc WHERE pdc.ID = #{id,jdbcType=VARCHAR}) pdc
+        LEFT JOIN PHIP_DICT_CATALOG ppdc
+        ON pdc.PID = ppdc.ID
+    </select>
+
+    <select id="getDictCatalogListByPIdPage" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT pdc.*,ppdc.NAME PARENT_NAME FROM(
+        SELECT pdc.* FROM PHIP_DICT_CATALOG pdc WHERE pdc.PID = #{pid,jdbcType=VARCHAR}
+        ) pdc
+        LEFT JOIN PHIP_DICT_CATALOG ppdc
+        ON pdc.PID = ppdc.ID
+    </select>
+
+    <select id="getDictCategoryOrg" resultMap="BaseResultMap" parameterType="java.util.Map">
+
+
+        select pdc.* from sys_system_dict_item sdi join sys_system_dict_category sdc
+        on sdi.FK_SYSTEM_DICT_CATEGORY_ID = sdc.id
+        join phip_dict_catalog pdc on sdi.name = pdc.code
+
+
+        <where>
+            <if test="sdiCode !=null and sdiCode !=''">
+                and sdi.code= #{sdiCode,jdbcType=VARCHAR}
+            </if>
+
+            <if test="sdcCode !=null and sdcCode !=''">
+                and sdc.code= #{sdcCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="getDictCatalogAndItemListByCode" resultMap="MultiResultMap" parameterType="java.util.Map">
+        WITH CATALOG_LIST AS (SELECT ID, CODE, NAME, PID
+        FROM PHIP_DICT_CATALOG
+        START WITH CODE = #{code,jdbcType=VARCHAR}
+        CONNECT BY PRIOR ID = PID)
+        SELECT T1.*, T2.NAME PARENTNAME
+        FROM CATALOG_LIST T1
+        LEFT JOIN PHIP_DICT_CATALOG T2
+        ON T1.PID = T2.ID
+        UNION ALL
+        SELECT PDI.ID, PDI.CODE, PDI.NAME, PDC.ID PID, PDC.NAME PARENTNAME
+        FROM (SELECT PDI.ID, PDI.CODE, PDI.NAME, PDI.FK_CATALOG_ID
+        FROM PHIP_DICT_ITEM PDI) PDI
+        INNER JOIN CATALOG_LIST PDC
+        ON PDI.FK_CATALOG_ID = PDC.ID
+    </select>
+
+    <select id="dictCatalogExist" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT COUNT(1) FROM　PHIP_DICT_CATALOG
+        WHERE ID != #{id,jdbcType=VARCHAR}
+        AND CODE = #{code,jdbcType=VARCHAR}
+        AND TYPE IN (SELECT TYPE
+                    FROM PHIP_DICT_CATALOG
+                   WHERE ID = #{id,jdbcType=VARCHAR})
+    </select>
+
+    <select id="getDictCatalogTree" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT * FROM (
+        SELECT DISTINCT *
+        FROM PHIP_DICT_CATALOG
+        <if test="codes != null">
+            START WITH CODE in
+            <foreach item="item" index="index" collection="codes" open="(" separator="," close=")">
+                #{item,jdbcType=VARCHAR}
+            </foreach>
+            CONNECT BY PRIOR ID = PID
+        </if>
+        )
+        <where>
+            <if test="key !=null and key !=''">
+                (UPPER(NAME) LIKE #{key,jdbcType=VARCHAR} OR UPPER(CODE) LIKE #{key,jdbcType=VARCHAR})
+            </if>
+            <include refid="com.zoe.phip.module.service.selfWhere"/>
+        </where>
+        ORDER BY TYPE, CREATE_AT
+    </select>
+
+    <select id="dictListWithoutFkCatalog" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT * FROM PHIP_DICT_CATALOG WHERE TYPE = '1' AND PID IS NULL
+    </select>
+
+    <update id="updateDictWithFkCatalog" parameterType="java.util.Map">
+        UPDATE PHIP_DICT_CATALOG
+        <set>
+            PID = #{pId,jdbcType=VARCHAR},
+            MODIFY_AT=sysdate
+        </set>
+        WHERE id IN
+        <foreach collection="catalogIds" item="item" index="index" open="(" separator="," close=")">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </update>
+</mapper>

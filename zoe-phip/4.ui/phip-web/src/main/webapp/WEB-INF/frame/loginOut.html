@@ -1,0 +1,11 @@
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    var top = common.getTopWindowDom();
+    top.location.href = webRoot + "/frame/login";
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_default.html",{baseTitle:"skip",baseStyleSection:null,baseBodySection:null,baseScriptSection:scriptSection}){}
+%>

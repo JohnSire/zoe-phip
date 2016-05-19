@@ -1,0 +1,55 @@
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
+                    <input type="text" name="code" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"
+                           nullmsg="请填写编码！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="codeSystem"><span class="text-mark">*</span>代码：</label>
+                    <input type="text" name="codeSystem" class="text" datatype="*1-128" errormsg="代码长度应为1~128位！"
+                           nullmsg="请填写代码！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="name"><span class="text-mark">*</span>名称：</label>
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！"
+                           nullmsg="请填写名称！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="dictCode"><span class="text-mark">*</span>“映射代码”：</label>
+                    <input type="text" name="dictCode" class="text" datatype="*1-128" errormsg="映射代码长度应为1~128位"
+                           nullmsg="请填写标准！"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-one">
+                    <label class="label label-textarea">备注：</label>
+                    <textarea rows="3" class="textarea" style="width:505px;height:60px;" datatype="*0-512"
+                              errormsg="备注代码长度应为216个字" name="descr"></textarea>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Dict/oidDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"OID详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStSetInfoMapper">
+    <resultMap id="BaseResultMap" type="com.zoe.phip.web.model.sdm.StSetInfo"
+               extends="com.zoe.phip.module.service.MasterEntityResultMap">
+        <result column="CODE" property="code" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="PID" property="pid" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="ALIAS" property="alias" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="FK_NORM_SOURCE_ID" property="fkNormSourceId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="XPATH" property="xpath" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="BUSS_TIME_FIELD_ID" property="bussTimeFieldId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="START_TIME" property="startTime" javaType="java.sql.Date"
+                jdbcType="DATE"/>
+        <result column="END_TIME" property="endTime" javaType="java.sql.Date"
+                jdbcType="DATE"/>
+        <result column="VERSION" property="version" javaType="java.math.BigDecimal"
+                jdbcType="DECIMAL"/>
+        <result column="DESCR" property="descr" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="UPDATE_TIME_FIELD_ID" property="updateTimeFiledId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="addList" parameterType="com.zoe.phip.web.model.sdm.StSetInfo">
+        INSERT INTO PHIP_ST_SET_INFO (
+        CODE,
+        NAME,
+        PID,
+        ALIAS,
+        FK_NORM_SOURCE_ID,
+        XPATH,
+        BUSS_TIME_FIELD_ID,
+        START_TIME,
+        END_TIME,
+        VERSION,
+        DESCR,
+        UPDATE_TIME_FIELD_ID,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
+            SELECT
+            #{item.code,jdbcType=VARCHAR},
+            #{item.name,jdbcType=VARCHAR},
+            #{item.pid,jdbcType=VARCHAR},
+            #{item.alias,jdbcType=VARCHAR},
+            #{item.fkNormSourceId,jdbcType=VARCHAR},
+            #{item.xpath,jdbcType=VARCHAR},
+            #{item.bussTimeFieldId,jdbcType=VARCHAR},
+            #{item.startTime,jdbcType=DATE},
+            #{item.endTime,jdbcType=DATE},
+            #{item.version,jdbcType=DECIMAL},
+            #{item.descr,jdbcType=VARCHAR},
+            #{item.updateTimeFiledId,jdbcType=VARCHAR},
+            <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
+            FROM DUAL
+        </foreach>
+    </insert>
+    <insert id="defaultAdd" parameterType="java.util.List">
+        INSERT INTO PHIP_ST_SET_INFO (
+        CODE,
+        NAME,
+        PID,
+        ALIAS,
+        FK_NORM_SOURCE_ID,
+        XPATH,
+        BUSS_TIME_FIELD_ID,
+        START_TIME,
+        END_TIME,
+        VERSION,
+        DESCR,
+        UPDATE_TIME_FIELD_ID,
+        <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
+        VALUES(
+        #{code,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR},
+        #{pid,jdbcType=VARCHAR},
+        #{alias,jdbcType=VARCHAR},
+        #{fkNormSourceId,jdbcType=VARCHAR},
+        #{xpath,jdbcType=VARCHAR},
+        #{bussTimeFieldId,jdbcType=VARCHAR},
+        #{startTime,jdbcType=DATE},
+        #{endTime,jdbcType=DATE},
+        #{version,jdbcType=DECIMAL},
+        #{descr,jdbcType=VARCHAR},
+        #{updateTimeFiledId,jdbcType=VARCHAR},
+        <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
+        )
+    </insert>
+    <delete id="deleteByIds" parameterType="java.lang.String">
+        delete from PHIP_ST_SET_INFO where ID in
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <delete id="deleteByList" parameterType="java.util.List">
+        delete from PHIP_ST_SET_INFO where ID in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </delete>
+    <update id="updateList" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
+            update PHIP_ST_SET_INFO
+            <set>
+                <if test="item.code != null">
+                    CODE = #{item.code,jdbcType=VARCHAR},
+                </if>
+                <if test="item.name != null">
+                    NAME = #{item.name,jdbcType=VARCHAR},
+                </if>
+                <if test="item.pid != null">
+                    PID = #{item.pid,jdbcType=VARCHAR},
+                </if>
+                <if test="item.alias != null">
+                    ALIAS = #{item.alias,jdbcType=VARCHAR},
+                </if>
+                <if test="item.fkNormSourceId != null">
+                    FK_NORM_SOURCE_ID = #{item.fkNormSourceId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.xpath != null">
+                    XPATH = #{item.xpath,jdbcType=VARCHAR},
+                </if>
+                <if test="item.bussTimeFieldId != null">
+                    BUSS_TIME_FIELD_ID = #{item.bussTimeFieldId,jdbcType=VARCHAR},
+                </if>
+                <if test="item.startTime != null">
+                    START_TIME = #{item.startTime,jdbcType=DATE},
+                </if>
+                <if test="item.endTime != null">
+                    END_TIME = #{item.endTime,jdbcType=DATE},
+                </if>
+                <if test="item.version != null">
+                    VERSION = #{item.version,jdbcType=DECIMAL},
+                </if>
+                <if test="item.descr != null">
+                    DESCR = #{item.descr,jdbcType=VARCHAR},
+                </if>
+                <if test="item.state != null">
+                    STATE = #{item.state,jdbcType=DECIMAL},
+                </if>
+                <if test="item.updateTimeFiledId != null">
+                    UPDATE_TIME_FIELD_ID = #{item.updateTimeFiledId,jdbcType=DECIMAL},
+                </if>
+                MODIFY_AT=sysdate
+            </set>
+            where id = #{item.id};
+        </foreach>
+    </update>
+
+</mapper>

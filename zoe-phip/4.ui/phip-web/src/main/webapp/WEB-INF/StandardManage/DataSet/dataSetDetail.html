@@ -1,0 +1,92 @@
+<%
+var bodySection = {
+
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="name"><span class="text-mark">*</span>名称：</label>
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！"
+                           nullmsg="请填写名称！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="code"><span class="text-mark">*</span>编码：</label>
+                    <input type="text" name="code" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"
+                           nullmsg="请填写编码！"/>
+                </p>
+
+            </li>
+
+
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="fkNormSourceId">标准来源：</label>
+                        <span class="text-line-outer" id="fkNormSourceId">
+                            <input type="text" name="fkNormSourceId" class="text-line"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
+                </p>
+
+                <p class="column-two">
+                    <label class="label">父级数据集：</label>
+                        <span class="text-line-outer" id="btnDataSet">
+                            <input type="text" name="pid" class="text-line"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
+                </p>
+
+            </li>
+            <li class="list" style="display: none;" id="column">
+                <p class="column-two">
+                    <label class="label">业务时间列：</label>
+                        <span class="text-line-outer" id="btnBusinessColumn">
+                            <input type="text" name="bussTimeFieldId" class="text-line"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
+                </p>
+                <p class="column-two">
+                    <label class="label">数据更新时间列：</label>
+                        <span class="text-line-outer" id="btnupdateTimeFieldId">
+                            <input type="text" name="updateTimeFiledId" class="text-line"/>
+                            <span class="text-line-setting">
+                                <span class="icon-grid icon-grid-setting" title="选择"></span>
+                                <span class="text-line-content"></span>
+                            </span>
+                        </span>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column">
+                    <label class="label label-textarea">备注：</label>
+                    <textarea rows="3" class="textarea" style="width:505px;height:60px;" name="descr"></textarea>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/StandardManage/DataSet/dataSetDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"数据集详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

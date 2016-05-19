@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStElementInfoMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StElementInfo" extends="BaseResultMap">
+        <result column="SOURCE_NAME" property="sourceName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DICT_CODE" property="dictCode" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="DICT_NAME" property="dictName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+        <result column="TYPE_NAME" property="typeName" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StElementInfo">
+        update PHIP_ST_ELEMENT_INFO
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="fkSourceId != null">
+                FK_SOURCE_ID = #{fkSourceId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkTypeId != null">
+                FK_TYPE_ID = #{fkTypeId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkDictId != null">
+                FK_DICT_ID = #{fkDictId,jdbcType=VARCHAR},
+            </if>
+            <if test="dataType != null">
+                DATA_TYPE = #{dataType,jdbcType=VARCHAR},
+            </if>
+            <if test="dataFormat != null">
+                DATA_FORMAT = #{dataFormat,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                START_TIME = #{startTime,jdbcType=DATE},
+            </if>
+            <if test="endTime != null">
+                END_TIME = #{endTime,jdbcType=DATE},
+            </if>
+            <if test="allowValue != null">
+                ALLOW_VALUE = #{allowValue,jdbcType=VARCHAR},
+            </if>
+            <if test="define != null">
+                DEFINE = #{define,jdbcType=VARCHAR},
+            </if>
+            <if test="descr != null">
+                DESCR = #{descr,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="getDataById" parameterType="java.lang.String" resultMap="MultiResultMap">
+        SELECT PSEI.*,
+        PSNSI.NAME SOURCE_NAME,
+        SSDI.NAME TYPE_NAME,
+        PDC.NAME DICT_NAME,
+        PDC.CODE DICT_CODE
+        FROM PHIP_ST_ELEMENT_INFO PSEI
+        LEFT JOIN
+        PHIP_ST_NORM_SOURCE_INFO PSNSI
+        ON PSEI.FK_SOURCE_ID = PSNSI.ID
+        LEFT JOIN SYS_SYSTEM_DICT_ITEM SSDI
+        ON SSDI.ID = PSEI.FK_TYPE_ID
+        LEFT JOIN PHIP_DICT_CATALOG PDC
+        ON PSEI.FK_DICT_ID = PDC.ID
+        WHERE 1=1
+        AND PSEI.ID=#{id, jdbcType=VARCHAR}
+    </select>
+    <select id="getDataPageList" parameterType="java.util.Map" resultMap="MultiResultMap">
+        SELECT PSEI.*,
+        PSNSI.NAME SOURCE_NAME,
+        SSDI.NAME TYPE_NAME,
+        PDC.NAME DICT_NAME,
+        PDC.CODE DICT_CODE
+        FROM PHIP_ST_ELEMENT_INFO PSEI
+        LEFT JOIN
+        PHIP_ST_NORM_SOURCE_INFO PSNSI
+        ON PSEI.FK_SOURCE_ID = PSNSI.ID
+        LEFT JOIN SYS_SYSTEM_DICT_ITEM SSDI
+        ON SSDI.ID = PSEI.FK_TYPE_ID
+        LEFT JOIN PHIP_DICT_CATALOG PDC
+        ON PSEI.FK_DICT_ID = PDC.ID
+        WHERE 1=1
+        <if test="_parameter.containsKey('key')">
+            AND UPPER(CONCAT(PSEI.CODE,PSEI.NAME)) LIKE UPPER (#{key, jdbcType=VARCHAR})
+        </if>
+        <if test="_parameter.containsKey('fkSourceId')">
+            AND PSEI.FK_SOURCE_ID = (#{fkSourceId, jdbcType=VARCHAR})
+        </if>
+        <if test="_parameter.containsKey('fkTypeId')">
+            AND PSEI.FK_TYPE_ID = (#{fkTypeId, jdbcType=VARCHAR})
+        </if>
+        <if test="_parameter.containsKey('fkDictId')">
+            AND PSEI.FK_DICT_ID = (#{fkDictId, jdbcType=VARCHAR})
+        </if>
+        <!--<if test="_parameter.containsKey('type')">
+            AND PSNSI.STANDARD_TYPE = (#{type, jdbcType=VARCHAR})
+        </if>-->
+    </select>
+
+    <select id="getOne" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT PSEI.* from PHIP_ST_ELEMENT_INFO PSEI
+        WHERE UPPER (PSEI.CODE) = UPPER (#{code, jdbcType=VARCHAR})
+    </select>
+    <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT (1) from PHIP_ST_ELEMENT_INFO PSEI
+        WHERE UPPER (PSEI.CODE) = UPPER (#{code, jdbcType=VARCHAR})
+        <if test="_parameter.containsKey('id')">
+            AND PSEI.id != #{id, jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="getDictId" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT ID from PHIP_DICT_CATALOG PDC
+        WHERE UPPER (PDC.CODE) = UPPER (#{code, jdbcType=VARCHAR})
+    </select>
+    <select id="getRelationById" parameterType="java.util.Map" resultMap="MultiResultMap">
+        SELECT PSEI.*, PSNSI.NAME SOURCE_NAME
+        FROM PHIP_ST_ELEMENT_INFO PSEI
+        LEFT JOIN PHIP_ST_NORM_SOURCE_INFO PSNSI
+        ON PSEI.FK_SOURCE_ID = PSNSI.ID
+        WHERE PSEI.id =   #{id, jdbcType=VARCHAR}
+    </select>
+
+</mapper>

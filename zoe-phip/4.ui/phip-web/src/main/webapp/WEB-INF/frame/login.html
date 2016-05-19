@@ -1,0 +1,91 @@
+<%
+var styleSection = {
+%>
+<link href='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/dist/style/login.css")}' rel="stylesheet"/>
+<%};%>
+<%
+var bodySection = {
+%>
+<div class="wrapper">
+    <div class="header">
+        <div class="header-msg right">
+            <span class="help"><a href="javascript;" class="link">帮助</a></span>
+            <span class="help">|</span>
+            <span class="help"><a href="javascript;" class="link">关于系统</a></span>
+        </div>
+        <div class="header-logo left">
+            <a href="#">
+                <img class="img-login-logo" src="/assets/dist/images/login/logo.png"/>
+            </a>
+        </div>
+    </div>
+    <div class="moduletable-banner">
+        <ul class="slides" id="slides">
+            <li class="one">
+                <div class="one-bg">
+                    <div class="static-bg">
+                        <div class="dynamic-bg">
+                            <div class="text">
+                                <img class="img-login-logo" src="/assets/dist/images/login/text.png" alt="简介"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="content-inner">
+            <!--登录窗口-->
+            <div class="login">
+                <div class="tit">
+                    <span class="bq"><img src="/assets/dist/images/login/yy.png"/></span>
+                </div>
+                <div class="form-login">
+                    <div class="form-login-inner">
+                        <p class="bd-text login-icon">
+                            <input id="input-username" type="text" class="inp-yh" placeholder="请输入用户名"/>
+                        </p>
+                        <p class="bd-text icon-suo">
+                            <input id="input-password" type="password" class="inp-yh" placeholder="请输入密码"/>
+                        </p>
+
+                        <p class="tips">
+                                <span class="tips-span">
+                                    <input id="remember-password" class="tips-input" type="checkbox" value=""/>
+                                </span>
+                            <span class="tips-span">7天内免登录</span>
+                        </p>
+                        <p class="warnning">
+                            <span class="warnning layout-msg" id="span-msg"></span>
+                        </p>
+                        <p class="bd-login">
+                            <input class="dl" id="btn-login" type="button" value=""
+                                   onmouseout="this.className ='dl'" onmouseover="this.className ='dl-hover'"/>
+                        </p>
+                    </div>
+                </div>
+                <div class="login-foot"></div>
+            </div>
+            <!--登录窗口结束-->
+        </div>
+    </div>
+    <div class="footer">
+        <div class="copyright">Copyright © 2016 Zoe Software. All rights reserved.</div>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/FrameManager/Login/login', function (a) {
+            a.init();
+        });
+    });
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_default.html",{baseTitle:"人口信息基础平台--用户登录",baseStyleSection:styleSection,baseBodySection:bodySection,baseScriptSection:scriptSection}){}
+%>

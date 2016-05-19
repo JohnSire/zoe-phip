@@ -13,6 +13,7 @@ import java.lang.annotation.*;
 public @interface AuthControllers {
     /**
      * 菜单编码
+     *
      * @return
      */
     AuthController[] value();

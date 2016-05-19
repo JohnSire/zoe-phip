@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStandardVerRsCdaMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StandardVerRsCda" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StandardVerRsCda">
+        update PHIP_STANDARD_VER_RS_CDA
+        <set>
+            <if test="fkVersionId != null">
+                FK_VERSION_ID = #{fkVersionId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkCdaId != null">
+                FK_CDA_ID = #{fkCdaId,jdbcType=VARCHAR},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT (1) FROM PHIP_STANDARD_VER_RS_CDA PSVRC
+        WHERE PSVRC.FK_VERSION_ID = #{fkVersionId,jdbcType=VARCHAR}
+        and PSVRC.FK_CDA_ID =#{fkCdaId,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('id')">
+            AND PSVRC.id != #{id, jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="getCdaByFkVersionId" parameterType="java.util.Map"
+            resultMap="com.zoe.phip.web.dao.sdm.IStCdaInfoMapper.BaseResultMap">
+        select i.*
+        from Phip_St_Cda_Info i,Phip_Standard_Ver_Rs_Cda c
+        where i.id=c.fk_cda_id
+        <if test="_parameter.containsKey('fkVersionId')">
+            and c.fk_version_id= #{fkVersionId,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="getCdaRsByFkVersionId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT C.* FROM PHIP_STANDARD_VER_RS_CDA C
+        <where>
+            <if test="_parameter.containsKey('fkVersionId')">
+                C.FK_VERSION_ID=#{fkVersionId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

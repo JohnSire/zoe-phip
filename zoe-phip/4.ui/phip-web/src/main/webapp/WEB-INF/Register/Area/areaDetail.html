@@ -1,0 +1,64 @@
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="code"><span class="text-mark">*</span>区域代码：</label>
+                    <input type="text" name="code" class="text" datatype="*1-30" errormsg="名称长度应为1-30位！"
+                           nullmsg="请填写名称！"/>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="name"><span class="text-mark">*</span>区域名称：</label>
+                    <input type="text" name="name" class="text" datatype="*1-30" errormsg="名称长度应为1-30位！"
+                           nullmsg="请填写名称！"/>
+                </p>
+
+            </li>
+
+            <li class="list">
+                <p class="column-two">
+                    <label class="label" for="buildTime">成立时间：</label>
+                    <span class="text-line-outer">
+                    <input edittype="date" type="text" name="buildTime" groupname="timeGroup" compare="small" comparemsg="成立时间不能大于有注销时间！" class="text"/>
+                    </span>
+                </p>
+                <p class="column-two">
+                    <label class="label" for="areaCancellationDate">注销时间：</label>
+                    <span class="text-line-outer">
+                    <input edittype="date" type="text" name="areaCancellationDate" groupname="timeGroup" compare="big" comparemsg="注销时间不能小于注销时间！" class="text"/>
+                    </span>
+                </p>
+            </li>
+            <li class="list">
+
+
+                <p class="column-one">
+                    <label class="label label-textarea">注销原因：</label>
+                    <textarea rows="3" class="textarea" style="width:508px;height:60px;"
+                              name="areaCancelReason"></textarea>
+                </p>
+            </li>
+
+
+        </ul>
+    </div>
+
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Area/areaDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"行政区划详情",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

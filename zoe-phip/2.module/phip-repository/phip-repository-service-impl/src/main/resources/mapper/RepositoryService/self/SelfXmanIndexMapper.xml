@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.repository.dao.IXmanIndexMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.repository.model.XmanIndex" extends="BaseResultMap">
+        <result column="EHR_ID" property="ehrId" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result column="CONTENT" property="context" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.repository.model.XmanIndex">
+        update PHIP_XMAN_INDEX
+        <set>
+            <if test="areaCode != null">
+                AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="xmanId != null">
+                XMAN_ID = #{xmanId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgCode != null">
+                ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null">
+                ORG_NAME = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="eventNo != null">
+                EVENT_NO = #{eventNo,jdbcType=VARCHAR},
+            </if>
+            <if test="eventType != null">
+                EVENT_TYPE = #{eventType,jdbcType=VARCHAR},
+            </if>
+            <if test="patientName != null">
+                PATIENT_NAME = #{patientName,jdbcType=VARCHAR},
+            </if>
+            <if test="healthCardId != null">
+                HEALTH_CARD_ID = #{healthCardId,jdbcType=VARCHAR},
+            </if>
+            <if test="idNo != null">
+                ID_NO = #{idNo,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneCode != null">
+                PHONE_CODE = #{phoneCode,jdbcType=VARCHAR},
+            </if>
+            <if test="telNo != null">
+                TEL_NO = #{telNo,jdbcType=VARCHAR},
+            </if>
+            <if test="emailAddress != null">
+                EMAIL_ADDRESS = #{emailAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="addressCity != null">
+                ADDRESS_CITY = #{addressCity,jdbcType=VARCHAR},
+            </if>
+            <if test="addressCountry != null">
+                ADDRESS_COUNTRY = #{addressCountry,jdbcType=VARCHAR},
+            </if>
+            <if test="addressPostal != null">
+                ADDRESS_POSTAL = #{addressPostal,jdbcType=VARCHAR},
+            </if>
+            <if test="addressState != null">
+                ADDRESS_STATE = #{addressState,jdbcType=VARCHAR},
+            </if>
+            <if test="addressStreet != null">
+                ADDRESS_STREET = #{addressStreet,jdbcType=VARCHAR},
+            </if>
+            <if test="streetNumber != null">
+                STREET_NUMBER = #{streetNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="comments != null">
+                COMMENTS = #{comments,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                TITLE = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="serverOrgName != null">
+                SERVER_ORG_NAME = #{serverOrgName,jdbcType=VARCHAR},
+            </if>
+            <if test="admissionDepart != null">
+                ADMISSION_DEPART = #{admissionDepart,jdbcType=VARCHAR},
+            </if>
+            <if test="admissionDoctor != null">
+                ADMISSION_DOCTOR = #{admissionDoctor,jdbcType=VARCHAR},
+            </if>
+            <if test="admissionType != null">
+                ADMISSION_TYPE = #{admissionType,jdbcType=VARCHAR},
+            </if>
+            <if test="diagnosisResult != null">
+                DIAGNOSIS_RESULT = #{diagnosisResult,jdbcType=VARCHAR},
+            </if>
+            <if test="authorName != null">
+                AUTHOR_NAME = #{authorName,jdbcType=VARCHAR},
+            </if>
+            <if test="authorInstitution != null">
+                AUTHOR_INSTITUTION = #{authorInstitution,jdbcType=VARCHAR},
+            </if>
+            <if test="authorSpecialty != null">
+                AUTHOR_SPECIALTY = #{authorSpecialty,jdbcType=VARCHAR},
+            </if>
+            <if test="authorRole != null">
+                AUTHOR_ROLE = #{authorRole,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                START_TIME = #{startTime,jdbcType=DATE},
+            </if>
+            <if test="endTime != null">
+                END_TIME = #{endTime,jdbcType=DATE},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=DATE},
+            </if>
+            <if test="patientId != null">
+                PATIENT_ID = #{patientId,jdbcType=VARCHAR},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="getXmanId" resultType="java.lang.String" parameterType="java.util.Map">
+        SELECT ID FROM PHIP_XMAN_BASE_INFO PXBI
+        <where>
+            <if test="idNo != null">
+                AND PXBI.ID_NO = #{idNo,jdbcType=VARCHAR}
+            </if>
+            <if test="patientId != null">
+                AND PXBI.PATIENT_ID = #{patientId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="getDocumentInfo" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT T.ID,X.CONTENT, X.ID AS EHR_ID
+        FROM PHIP_XMAN_INDEX T
+        LEFT JOIN PHIP_XMAN_EHR_CONTENT X
+        ON T.ID = X.INDEX_ID
+        <where>
+            <if test="repositoryUniqueId != null">
+                AND T.ID = #{repositoryUniqueId,jdbcType=VARCHAR}
+            </if>
+            <if test="documentUniqueId != null">
+                AND X.ID = #{documentUniqueId,jdbcType=VARCHAR}
+            </if>
+            AND ROWNUM = 1
+        </where>
+    </select>
+
+    <select id="documentRegistryQuery" resultMap="MultiResultMap" parameterType="java.util.Map">
+        SELECT PXE.ID EHR_ID,
+        PXE.SOURCE_ID,
+        PXI.*
+        FROM(
+        SELECT * FROM PHIP_XMAN_INDEX PXI
+        <where>
+            <if test="healthCardId != null">
+                AND PXI.HEALTH_CARD_ID = #{healthCardId,jdbcType=VARCHAR}
+            </if>
+            <if test="identityId != null">
+                AND PXI.ID_NO = #{identityId,jdbcType=VARCHAR}
+            </if>
+            <if test="documentTitle != null">
+                AND PXI.TITLE = #{documentTitle,jdbcType=VARCHAR}
+            </if>
+        </where>
+        ) PXI
+        LEFT JOIN PHIP_XMAN_EHR PXE
+        ON PXI.ID = PXE.INDEX_ID
+        WHERE ROWNUM = 1
+    </select>
+</mapper>

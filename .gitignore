@@ -4,7 +4,7 @@
 *.iws
 .idea/
 target/
-zoe-phip/6.tools/zoe-phip-code-generator/generator-output/
 *.log
 *.log*
-
+zoe-phip/4.ui/phip-web/src/main/webapp/_build
+zoe-phip/5.tools/zoe-phip-code-generator/generator-output/

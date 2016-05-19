@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <DeptCode descr = "医疗卫生机构（科室）标识" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/id/@extension"/>
+    <DivisionRoot descr = "区别机构还是科室的" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/id/@root"/>
+    <DeptName descr = "医疗卫生机构（科室）实体名称" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/assignedPrincipalOrganization/name"/>
+    <DeptTypeCode descr = "医疗卫生机构（科室）类别代码" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/code/@code"/>
+    <DeptTypeName descr = "医疗卫生机构（科室）类别名称" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/code/@displayName"/>
+    <DeptRoleName descr = "医疗卫生机构（科室）角色名称" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/name"/>
+    <DeptParentCode descr = "上级机构（科室）号标识" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/assignedPrincipalOrganization/asAffiliate/scoper2/id/@extension"/>
+    <DeptParentName descr = "上级科室名称" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/assignedPrincipalOrganization/asAffiliate/scoper2/name"/>
+    <EffectiveTimeLow descr = "角色有效期间(起始日期)" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/effectiveTime/low/@value"/>
+    <EffectiveTimeHigh  descr="角色有效期间(截止日期)" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/effectiveTime/high/@value"/>
+    <EmployerAddr descr = "工作地址" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/addr"/>
+    <EmployerTelNo descr = "工作联系电话" path="//controlActProcess/subject/registrationRequest/subject1/assignedEntity/telecom"/>
+    <CreationTime descr = "创建时间" path="//creationTime/@value"/>
+    <MsgId descr = "消息id" path="//id/@extension"/>
+    <AssignedCode descr = "申请者代码" path="//controlActProcess/subject/registrationRequest/author/assignedEntity/id/@extension"/>
+    <AssignedName descr = "申请者名称" path="//controlActProcess/subject/registrationRequest/author/assignedEntity/assignedPerson/name"/>
+    <AssignedDeptCode descr = "申请者科室代码" path="//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/id/@extension"/>
+    <AssignedDeptName descr = "申请者科室名称" path="//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/name"/>
+    <AssignedContactPerson descr = "申请联系人" path="//controlActProcess/subject/registrationRequest/author/assignedEntity/representedOrganization/contactParty/contactPerson/name"/>
+    <CreationTime descr="建档时间" path="//creationTime/@value"/>
+</root>

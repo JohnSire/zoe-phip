@@ -1,0 +1,150 @@
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-title">
+        <h1 class="title">基本信息</h1>
+    </div>
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="name"><span class="text-mark">*</span>姓名：</label>
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="姓名长度应为1~128位！"
+                           nullmsg="请填写姓名！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="extensionId"><span class="text-mark">*</span>医护人员编码：</label>
+                    <span class="text-line-outer">
+                    <input type="text" name="extensionId" class="text" datatype="*1-128" errormsg="医护人员编码长度不超过128个字符！"/>
+                    </span>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="idNo"><span class="text-mark">*</span>身份证件号：</label>
+                    <input type="text" name="idNo" datatype="/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/" errormsg="请填写有效的身份证号码！" class="text"/>
+                </p>
+            </li>
+            <li class="list">
+                <div class="column-three">
+                    <label class="label" for="genderCode">性别：</label>
+                    <div class="simulate-select" id="selSex">
+                        <span class="text">--请选择性别--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择性别--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="genderCode" style="display: none;">
+                    </select>
+                </div>
+                <p class="column-three">
+                    <label class="label" for="employerTelNo">联系电话：</label>
+                    <input type="text" name="employerTelNo" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="technicalCode">职务：</label>
+                    <!--<input type="text" name="technicalName" class="text"/>-->
+                     <span class="text-line-outer" id="btnFkTechnical">
+                        <input type="text" name="technicalCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="职务"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
+                </p>
+
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="birthTime">出生日期：</label>
+                    <span class="text-line-outer">
+                    <input edittype="date" type="text" name="birthTime" class="text"/>
+                    </span>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="affiliatedOrgCode">隶属机构：</label>
+                    <span class="text-line-outer" id="btnFkOrganization">
+                        <input type="text" name="affiliatedOrgCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="配置"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
+                </p>
+            </li>
+
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="birthplaceAddr">出生地：</label>
+                    <input type="text" name="birthplaceAddr" class="text" style="width:830px;height:20px;"/>
+                </p>
+            </li>
+
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="employerAddr">工作地址：</label>
+                    <input type="text" name="employerAddr" class="text" style="width:830px;height:20px;"/>
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="y-dialog-title">
+        <h1 class="title">详细信息</h1>
+    </div>
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="effectiveTimeLow">有效期开始：</label>
+                    <span class="text-line-outer">
+                    <input edittype="date" type="text" groupname="timeGroup" compare="small" comparemsg="有效开始时间不能大于有效结束时间!" name="effectiveTimeLow"
+                           class="text"/>
+                    </span>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="effectiveTimeHigh">有效期结束：</label>
+                    <span class="text-line-outer">
+                    <input edittype="date" type="text" groupname="timeGroup" compare="big" comparemsg="有效结束时间不能小于有效开始时间!"
+                           name="effectiveTimeHigh" class="text"/>
+                    </span>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="assignedName">申请人：</label>
+                    <input type="text" name="assignedName" class="text"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="assignedDeptName">申请人所属科室：</label>
+                    <span class="text-line-outer" id="btnFkAssignedDept">
+                        <input type="text" name="assignedDeptCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="配置"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="assignedContactPerson">联系人：</label>
+                    <input type="text" name="assignedContactPerson" class="text"/>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Personnel/medicalStaffDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"医护人员详细信息",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

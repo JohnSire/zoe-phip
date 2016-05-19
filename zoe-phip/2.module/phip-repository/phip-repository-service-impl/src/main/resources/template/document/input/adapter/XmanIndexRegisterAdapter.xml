@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <MsgId descr="请求消息ID" path="//ID/@extension"/>
+    <AreaCode descr="档案地区编码" path=""/>
+    <XmanId descr="患者标识" path=""/>
+    <OrgCode descr="机构组织机构代码" path="//Organization/@id"/>
+    <OrgName descr="机构名称" path="//Organization/Name"/>
+    <EventNo descr="活动服务编号(如住院号、就诊号、会诊号等)" path="//RegistryPackage/SubmissionSet/EpisodeID"/>
+    <EventType descr="事件类型" path=""/>
+    <PatientId descr="患者ID" path="//SourcePatientID"/>
+    <PatientName descr="患者姓名" path="//SourcePatientName"/>
+    <HealthCardId descr="健康卡号" path="//HealthCardId"/>
+    <IdNo descr="居民身份证号" path="//IdentityId"/>
+    <PhoneCode descr="上级机构电话号码区号" path="//Organization/TelephoneNumber/@areaCode"/>
+    <TelNo descr="机构电话号码" path="//Organization/TelephoneNumber/@number"/>
+    <EmailAddress descr="机构邮箱地址" path="//Organization/EmailAddress/@address"/>
+    <AddressCity descr="工作地址-省（自治区、直辖市）" path="//Organization/Address/@city"/>
+    <AddressCountry descr="工作地址-市（地区）" path="//Organization/Address/@country"/>
+    <AddressPostal descr="工作地址-县（区）" path="//Organization/Address/@postalCode"/>
+    <AddressState descr="工作地址-乡（镇、街道办事处）" path="//Organization/Address/@stateOrProvince"/>
+    <AddressStreet descr="工作地址-村（街、路、弄等）" path="//Organization/Address/@street"/>
+    <StreetNumber descr="工作地址-门牌号码" path="//Organization/Address/@streetNumber"/>
+    <Comments descr="备注" path="//RegistryPackage/SubmissionSet/Comments"/>
+    <Title descr="标题" path="//RegistryPackage/SubmissionSet/Title"/>
+    <ServerOrgName descr="服务机构名称" path="//RegistryPackage/SubmissionSet/ServerOrganization"/>
+    <AdmissionDepart descr="负责人所属科室名称" path="//RegistryPackage/SubmissionSet/AdmissionDepart"/>
+    <AdmissionDoctor descr="负责人姓名" path="//RegistryPackage/SubmissionSet/AdmissionDoctor"/>
+    <AdmissionType descr="活动类型描述" path="//RegistryPackage/SubmissionSet/AdmissionType"/>
+    <DiagnosisResult descr="活动服务结果类型描述" path="//RegistryPackage/SubmissionSet/DiagnosisResult"/>
+    <AuthorName descr="数据记录者姓名" path="//RegistryPackage/SubmissionSet/Author/AuthorName"/>
+    <AuthorInstitution descr="数据记录者所属机构名称" path="//RegistryPackage/SubmissionSet/Author/AuthorInstitution"/>
+    <AuthorSpecialty descr="数据记录者所属科室名称" path="//RegistryPackage/SubmissionSet/Author/AuthorSpecialty"/>
+    <AuthorRole descr="数据记录者级别" path="//RegistryPackage/SubmissionSet/Author/AuthorRole"/>
+    <StartTime descr="活动服务开始时间" path="//RegistryPackage/SubmissionSet/InTime"/>
+    <EndTime descr="活动服务结束时间" path="//RegistryPackage/SubmissionSet/OutTime"/>
+    <CreateTime descr="创建时间" path="//RegistryPackage/SubmissionSet/CreateTime"/>
+</root>

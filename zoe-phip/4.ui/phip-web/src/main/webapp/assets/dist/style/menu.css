@@ -1,0 +1,119 @@
+@charset "utf-8";
+/* CSS Document */
+#wrapper .header .menu-top ul.nav {
+    float: left;
+    height: 63px;
+    padding-top: 21px;
+}
+
+#wrapper .header .menu-top ul.nav li {
+    float: left;
+    font-size: 14px;
+}
+
+#wrapper .header .menu-top ul.nav li a {
+    float: left;
+    height: 63px;
+    cursor: pointer;
+}
+
+#wrapper .header .menu-top ul.nav li a:hover {
+    background: url(/assets/dist/images/menu/nav_hover_bg.png) no-repeat bottom;
+}
+
+#wrapper .header .menu-top ul.nav li a span.icon {
+    float: left;
+    height: 23px;
+    padding: 40px 15px 0 15px;
+    text-align: center;
+}
+
+#wrapper .header .menu-top ul.nav li a .nav_name {
+    display: block;
+    color: #fff;
+    position: relative;
+}
+
+#wrapper .header .menu-top ul.nav li a .nav_name .nav_name_b {
+    display: block;
+    color: #FFF;
+    position: absolute;
+    top: -1px;
+    left: 0;
+}
+
+#wrapper .header .menu-top ul.nav li a.sjzh span.icon {
+    background: url(/assets/dist/images/menu/iocn_hxpz.png) no-repeat center 0;
+}
+
+#wrapper .header .menu-top ul.nav li a.ywjk span.icon {
+    background: url(/assets/dist/images/menu/iocn_aqkz.png) no-repeat center 0;
+}
+
+#wrapper .header .menu-top ul.nav li a.ysjgl span.icon {
+    background: url(/assets/dist/images/menu/iocn_yhgl.png) no-repeat center 0;
+}
+
+#wrapper .header .menu-top ul.nav li a.zygl span.icon {
+    background: url(/assets/dist/images/menu/iocn_zygl.png) no-repeat center 0;
+}
+
+#wrapper .header .menu-top ul.nav li a.xtgl span.icon {
+    background: url(/assets/dist/images/menu/iocn_yxgk.png) no-repeat center 0;
+}
+
+#wrapper .header .menu-top ul.nav li.active {
+    border-top: 1px #1567a3 solid;
+}
+
+#wrapper .header .menu-top ul.nav li.active a {
+    background: url(/assets/dist/images/menu/nav_xz_bg.gif) repeat-x;
+    border-left: 1px #FFF solid;
+    border-right: 1px #FFF solid;
+}
+
+#wrapper .header .menu-top ul.nav li.active a:hover {
+    background: url(/assets/dist/images/menu/nav_xz_bg.gif) repeat-x;
+}
+
+#wrapper .header .menu-top ul.nav li.active a .nav_name {
+    display: block;
+    color: #146f9c;
+    position: relative;
+    font-weight: bold;
+}
+
+#wrapper .header .menu-top ul.nav li.active a .nav_name .nav_name_b {
+    display: block;
+    color: #146f9c;
+    position: absolute;
+    top: -1px;
+    left: 0;
+    font-weight: bold;
+}
+
+#wrapper .header .menu-top ul.nav li.active a.sjzh span.icon {
+    background: url(/assets/dist/images/menu/iocn_hxpz.png) no-repeat center -60px;
+}
+
+#wrapper .header .menu-top ul.nav li.active a.ywjk span.icon {
+    background: url(/assets/dist/images/menu/iocn_aqkz.png) no-repeat center -60px;
+}
+
+#wrapper .header .menu-top ul.nav li.active a.ysjgl span.icon {
+    background: url(/assets/dist/images/menu/iocn_yhgl.png) no-repeat center -60px;
+}
+
+#wrapper .header .menu-top ul.nav li.active a.zygl span.icon {
+    background: url(/assets/dist/images/menu/iocn_zygl.png) no-repeat center -60px;
+}
+
+#wrapper .header .menu-top ul.nav li.active a.xtgl span.icon {
+    background: url(/assets/dist/images/menu/iocn_yxgk.png) no-repeat center -60px;
+}
+
+#wrapper .header .menu-top ul.nav li a .nav_name {
+    display: block;
+    color: #fff;
+    position: relative;
+}

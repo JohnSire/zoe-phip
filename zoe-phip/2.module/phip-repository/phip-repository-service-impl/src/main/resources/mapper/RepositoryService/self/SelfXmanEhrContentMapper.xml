@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.repository.dao.IXmanEhrContentMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.repository.model.XmanEhrContent" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.repository.model.XmanEhrContent">
+        update PHIP_XMAN_EHR_CONTENT
+        <set>
+            <if test="indexId != null">
+                INDEX_ID = #{indexId,jdbcType=VARCHAR},
+            </if>
+            <if test="xmanId != null">
+                XMAN_ID = #{xmanId,jdbcType=VARCHAR},
+            </if>
+            <if test="orgCode != null">
+                ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="patientId != null">
+                PATIENT_ID = #{patientId,jdbcType=VARCHAR},
+            </if>
+            <if test="eventNo != null">
+                EVENT_NO = #{eventNo,jdbcType=VARCHAR},
+            </if>
+            <if test="eventType != null">
+                EVENT_TYPE = #{eventType,jdbcType=VARCHAR},
+            </if>
+            <if test="catalogCode != null">
+                CATALOG_CODE = #{catalogCode,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                CONTENT = #{content,jdbcType=CLOB},
+            </if>
+            <if test="flowType != null">
+                FLOW_TYPE = #{flowType,jdbcType=DECIMAL},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

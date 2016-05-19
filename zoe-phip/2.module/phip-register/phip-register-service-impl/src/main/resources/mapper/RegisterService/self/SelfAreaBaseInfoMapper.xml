@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.register.dao.IAreaBaseInfoMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.register.model.AreaBaseInfo" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.register.model.AreaBaseInfo">
+        update PHIP_AREA_BASE_INFO
+        <set>
+            <if test="code != null">
+                CODE = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="Pid != null">
+                PID = #{Pid,jdbcType=VARCHAR},
+            </if>
+                BUILD_TIME = #{buildTime,jdbcType=DATE},
+                AREA_CANCELLATION_DATE = #{areaCancellationDate,jdbcType=DATE},
+                AREA_CANCEL_REASON = #{areaCancelReason,jdbcType=VARCHAR},
+                HISTORY_AREA_ID = #{historyAreaId,jdbcType=VARCHAR},
+                STATE = #{state,jdbcType=DECIMAL},
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="getAreaBaseInfo" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT * FROM PHIP_AREA_BASE_INFO PABI WHERE 1 =1
+        <if test="_parameter.containsKey('code')">
+            AND PABI.CODE = #{code,jdbcType=VARCHAR}
+        </if>
+        <if test="_parameter.containsKey('historyId')">
+            AND PABI.HISTORY_AREA_ID = #{historyId,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="getTopAreaBaseInfo" resultMap="BaseResultMap">
+      select * from PHIP_AREA_BASE_INFO t WHERE NVL(t.PID,'0') ='0'
+AND ROWNUM=1
+    </select>
+
+    <select id="getChildren" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT * FROM PHIP_AREA_BASE_INFO PABI WHERE PABI.PID = #{id,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('key')">
+            AND UPPER(CONCAT(PABI.CODE,PABI.NAME )) LIKE UPPER (CONCAT(CONCAT('%',#{key,jdbcType=VARCHAR}),'%'))
+        </if>
+    </select>
+
+    <select id="getDataList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT * FROM PHIP_AREA_BASE_INFO PABI WHERE 1 =1
+        <if test="_parameter.containsKey('key')">
+            AND UPPER(CONCAT(PABI.CODE,PABI.NAME )) LIKE UPPER (CONCAT(CONCAT('%',#{key,jdbcType=VARCHAR}),'%'))
+        </if>
+    </select>
+
+    <select id="getAreaInfoByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT CODE,NAME FROM PHIP_AREA_BASE_INFO WHERE NAME=#{name,jdbcType=VARCHAR} AND ROWNUM=1
+    </select>
+
+    <select id="getChildrenByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT T1.ID,T1.CODE,T1.NAME,T1.PID FROM PHIP_AREA_BASE_INFO T1
+        LEFT JOIN PHIP_AREA_BASE_INFO T2 ON T1.PID=T2.ID
+        WHERE T2.CODE=#{code,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

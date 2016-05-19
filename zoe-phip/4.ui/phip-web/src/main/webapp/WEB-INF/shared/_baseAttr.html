@@ -1,0 +1,29 @@
+<%
+var baseTitle={
+%>
+${title}
+<%};%>
+<%
+var baseStyleSection = {
+%>
+<link href='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/dist/style/layout.css")}' rel="stylesheet"/>
+${styleSection}
+<%};%>
+<%
+var baseBodySection = {
+%>
+<form id="baseAttrForm" onsubmit="return false;">
+    <span class="text-up-tips tips-error" style="display:none;"><i class="text-up-tips-arrow arrow-red"></i><span
+            class="msg"></span></span>
+    ${bodySection}
+</form>
+<%};%>
+<%
+var baseScriptSection={
+%>
+${scriptSection}
+<%};%>
+<%
+include("/WEB-INF/Shared/_default.html",{baseTitle:baseTitle,baseStyleSection:baseStyleSection,baseBodySection:baseBodySection,baseScriptSection:baseScriptSection}){}
+%>
+

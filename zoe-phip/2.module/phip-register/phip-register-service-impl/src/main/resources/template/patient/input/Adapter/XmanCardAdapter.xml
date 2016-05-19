@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <XcCardCode descr = "健康卡号" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.19']/@extension"/>
+    <XcCardType descr = "卡类型" path=""/>
+    <XcOrgCode descr = "健康卡发放机构代码" path="//controlActProcess/subject/registrationRequest/subject1/patient/patientPerson/asOtherIDs/id[@root='2.16.156.10011.1.19']/following-sibling::*/id[@root='2.16.156.10011.1.5']/@extension"/>
+</root>

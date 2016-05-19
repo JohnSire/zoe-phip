@@ -1,0 +1,257 @@
+<%
+var styleSection = {
+%>
+<style type="text/css">
+    .address-select {
+        width: 165px;
+    }
+
+    .address-select .text {
+        width: 143px;
+    }
+
+    .address-select .icon-grid {
+        left: 143px;
+    }
+
+    .address-select .simulate-select-lists {
+        width: 162px;
+    }
+</style>
+<%};%>
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-title">
+        <h1 class="title">基本信息</h1>
+    </div>
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="deptName"><span class="text-mark">*</span>名称：</label>
+                    <input type="text" name="deptName" class="text" datatype="*1-128" errormsg="名称长度应为1~128位！"
+                           nullmsg="请填写名称！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="deptCode"><span class="text-mark">*</span>编码：</label>
+                    <input type="text" name="deptCode" class="text" datatype="*1-128" errormsg="编码长度应为1~128位！"
+                           nullmsg="请填写编码！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="employerTelNo">联系电话：</label>
+                    <input type="text" name="employerTelNo" class="text"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="deptTypeCode">类别：</label>
+                    <span class="text-line-outer" id="btnDeptType">
+                        <input type="text" name="deptTypeCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="选择"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
+
+                </p>
+                <p>
+            </li>
+
+        </ul>
+    </div>
+    <div class="y-dialog-title">
+        <h1 class="title">详细信息</h1>
+    </div>
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="chargeInfoPerson">信息负责人：</label>
+                    <input type="text" name="chargeInfoPerson" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="chargeInfoTel">负责人电话：</label>
+                    <input type="text" name="chargeInfoTel" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="complaintsHotline">投诉电话：</label>
+                    <input type="text" name="complaintsHotline" class="text"/>
+                </p>
+            </li>
+            <li>
+                <p class="column-three">
+                    <label class="label" for="legalRepresentative">法人代表：</label>
+                    <input type="text" name="legalRepresentative" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="webUrl">网址：</label>
+                    <input type="text" name="webUrl" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="email">电子邮件：</label>
+                    <input type="text" name="email" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="postcode">邮政编码：</label>
+                    <input type="text" name="postcode" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="glongitude">经度：</label>
+                    <input type="text" name="glongitude" class="text" dataType="/^(\d+(\.\d{0,15})?)?$/" errormsg="经度只能填写数字！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="glatitude">纬度：</label>
+                    <input type="text" name="glatitude" class="text" dataType="/^(\d+(\.\d{0,15})?)?$/" errormsg="纬度只能填写数字！"/>
+                </p>
+
+            <li class="list">
+                <div class="column-one">
+                    <label class="label">地理区划：</label>
+                    <div class="simulate-select address-select" id="selProvince">
+                        <span class="text" title="--请选择所在的省份--">--请选择所在的省份--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择所在的省份--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="provinceCode" style="display: none;">
+                    </select>
+
+                    <div class="simulate-select address-select" id="selCity">
+                        <span class="text" title="--请选择所在的市--">--请选择所在的市--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择所在的市--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="cityCode" style="display: none;">
+                    </select>
+
+                    <div class="simulate-select address-select" id="selCounty">
+                        <span class="text" title="--请选择所在的区县--">--请选择所在的区县--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择所在的区县--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="countyCode" style="display: none;">
+                    </select>
+
+                    <div class="simulate-select address-select" id="selStreet">
+                        <span class="text" title="--请选择所在的乡、镇--">--请选择所在的乡、镇--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择所在的乡、镇--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="streetCode" style="display: none;">
+                    </select>
+
+                    <div class="simulate-select address-select" id="selNeighborhood">
+                        <span class="text" title="--请选择所在的街道--">--请选择所在的街道--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择所在的街道--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="neighborhoodCode" style="display: none;">
+                    </select>
+
+                </div>
+            </li>
+
+            <p class="column-three">
+                <label class="label" for="assignedName">申请人名称：</label>
+                <input type="text" name="assignedName" class="text"/>
+
+            </p>
+            <p class="column-three">
+                <label class="label" for="assignedCode">申请人标识：</label>
+                <input type="text" name="assignedCode" class="text"/>
+            </p>
+            <p class="column-three">
+                <label class="label" for="assignedDeptCode">申请人所属科室：</label>
+                <input type="text" name="assignedDeptCode" class="text"/>
+                <!--<span class="text-line-outer" id="btnFkAssignedDept">-->
+                            <!--<input type="text" name="assignedDeptCode" class="text-line"/>-->
+                            <!--<span class="text-line-setting">-->
+                                <!--<span class="icon-grid icon-grid-setting" title="选择"></span>-->
+                                <!--<span class="text-line-content"></span>-->
+                            <!--</span>-->
+                        <!--</span>-->
+            </p>
+            <p class="column-three">
+                <label class="label" for="roleName">角色名称：</label>
+                <input type="text" name="roleName" class="text"/>
+            </p>
+
+
+            <div class="column-three">
+                <label class="label" for="roleState">角色状态：</label>
+
+                <div class="simulate-select" id="selRoleState">
+                    <span class="text">--请选择角色状态--</span>
+                    <i class="icon-grid icon-grid-fold-gray"></i>
+                    <ul class="simulate-select-lists" style="display:none;">
+                        <li class="simulate-select-list">--请选择角色状态--</li>
+                        <li class="simulate-select-list" value="active">激活</li>
+                        <li class="simulate-select-list" value="unactive">禁用</li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <select name="roleState" style="display: none;">
+                    <option>--请选择角色状态--</option>
+                    <option value="active">激活</option>
+                    <option value="unactive">禁用</option>
+                </select>
+
+            </div>
+            <!--</p>-->
+            </li>
+
+
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="assignedContactPerson">联系人：</label>
+                    <input type="text" name="assignedContactPerson" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="effectiveTimeLow">有效期开始：</label>
+                    <span class="text-line-outer">
+                    <input edittype="date" type="text" name="effectiveTimeLow" groupname="timeGroup" compare="small" comparemsg="有效开始时间不能大于有效结束时间！" class="text"/>
+                    </span>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="effectiveTimeHigh">有效期结束：</label>
+                    <span class="text-line-outer">
+                    <input edittype="date" type="text" name="effectiveTimeHigh" groupname="timeGroup" compare="big" comparemsg="有效结束时间不能小于有效开始时间!" class="text"/>
+                    </span>
+                </p>
+
+            </li>
+
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Organization/medicalOrgDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"医疗机构(科室)管理详细信息",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

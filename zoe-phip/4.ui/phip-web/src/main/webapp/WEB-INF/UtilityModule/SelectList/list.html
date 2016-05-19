@@ -1,0 +1,26 @@
+<%
+var bodySection = {
+%>
+<ul class="y-layout-form clearfix">
+    <li class="list">
+        <label class="label" style="margin-right:-1px;">关键字：</label>
+        <input type="text" id="txtKey" class="text" style="width:312px"/>
+        <input type="button" id="btnSearch" class="btn btn-search" value="搜索"/>
+    </li>
+</ul>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/UtilityModule/SelectList/list', function (a) {
+            a.init();
+        });
+    })
+</script>
+
+<%};%>
+<%
+include("/WEB-INF/shared/_baseSelectList.html",{title:"用户搜索",styleSection:null,bodySection:bodySection,scriptSection:scriptSection}){}
+%>

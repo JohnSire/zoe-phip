@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+<DictCatalog>
+    <%if(Model.id!=null){%>
+    <Id value="${Model.id}" descr="字典分类ID"/>
+    <%}%>
+    <Detail value="${Model.acknowledgement.text}" descr="操作结果"/>
+</DictCatalog>
+</data>

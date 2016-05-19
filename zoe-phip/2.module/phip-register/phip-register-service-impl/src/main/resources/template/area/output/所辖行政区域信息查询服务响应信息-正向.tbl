@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+<%
+for(m in Model){
+%>
+<AreaBaseInfo>
+    <Id value="${m.id}" descr="区域ID"/>
+    <Code value="${m.code}" descr="区域代码"/>
+    <Name value="${m.name}" descr="区域名称"/>
+    <Pid value="${m.pid}" descr="父级区域"/>
+    <BuildTime value="${m.buildTime}" descr="成立时间"/>
+    <AreaCancellationDate value="${m.areaCancellationDate}" descr="注销日期"/>
+    <AreaCancelReason value="${m.areaCancelReason}" descr="注销原因"/>
+    <HistoryAreaId value="${m.historyAreaId}" descr="注销前区域信息，用以做历史沿革关联"/>
+</AreaBaseInfo>
+<%}%>
+</data>
+

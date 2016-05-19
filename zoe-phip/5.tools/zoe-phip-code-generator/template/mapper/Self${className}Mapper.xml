@@ -1,0 +1,37 @@
+<#assign className = table.className>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${basepackage}.dao.这里要自己改.mapper.I${className}Mapper">
+<resultMap id="MultiResultMap" type="${basepackage}.这里要自己改.model.${className}" extends="BaseResultMap">
+
+</resultMap>
+<update id="defaultUpdate" parameterType="${basepackage}.这里要自己改">
+    update ${table.sqlName}
+    /*可以为空字段要去掉条件判断 一般字典关联字段*/
+    <set>
+        <#list table.columns as field>
+        <#if field.entityName?uncap_first!="id"&&field.entityName?uncap_first!="modifyAt"
+        &&field.entityName?uncap_first!="createBy"&&field.entityName?uncap_first!="createAt"&&
+        field.entityName?uncap_first!="modifyBy">
+        <if test="${field.entityName?uncap_first} != null">
+            ${field.sqlName} = ${r'#'}{${field.entityName?uncap_first},jdbcType=${field.jdbcType?upper_case}},
+        </if>
+    </#if>
+</#list>
+        MODIFY_AT=sysdate
+    </set>
+        WHERE
+        <choose>
+        <when test="id != null">
+            ID = ${r'#'}{id,jdbcType=VARCHAR}
+        </when>
+        <otherwise>
+            /*
+            另一个更新条件根据需要自己改
+            HEALTH_RECORD_NO = ${r'#'}{healthRecordNo,jdbcType=VARCHAR}
+            */
+            ID = ${r'#'}{id,jdbcType=VARCHAR}
+        </otherwise>
+        </choose>
+        </update>
+</mapper>

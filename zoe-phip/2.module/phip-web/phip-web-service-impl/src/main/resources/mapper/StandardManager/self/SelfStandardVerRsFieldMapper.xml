@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zoe.phip.web.dao.sdm.IStandardVerRsFieldMapper">
+    <resultMap id="MultiResultMap" type="com.zoe.phip.web.model.sdm.StandardVerRsField" extends="BaseResultMap">
+
+    </resultMap>
+    <update id="defaultUpdate" parameterType="com.zoe.phip.web.model.sdm.StandardVerRsField">
+        update PHIP_STANDARD_VER_RS_FIELD
+        <set>
+            <if test="fkVersionId != null">
+                FK_VERSION_ID = #{fkVersionId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkCdaId != null">
+                FK_CDA_ID = #{fkCdaId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkSetId != null">
+                FK_SET_ID = #{fkSetId,jdbcType=VARCHAR},
+            </if>
+            <if test="fkFieldId != null">
+                FK_FIELD_ID = #{fkFieldId,jdbcType=VARCHAR},
+            </if>
+            MODIFY_AT=sysdate
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="getSingle" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT (1) FROM PHIP_STANDARD_VER_RS_FIELD PSVRF
+        WHERE PSVRF.FK_VERSION_ID = #{fkVersionId,jdbcType=VARCHAR}
+        AND PSVRF.FK_CDA_ID = #{fkCdaId,jdbcType=VARCHAR}
+        AND PSVRF.FK_SET_ID = #{fkSetId,jdbcType=VARCHAR}
+        AND PSVRF.FK_FIELD_ID =#{fkFieldId,jdbcType=VARCHAR}
+        <if test="_parameter.containsKey('id')">
+            AND PSVRF.id != #{id, jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="getFieldByFkVersionId" parameterType="java.util.Map"
+            resultMap="com.zoe.phip.web.dao.sdm.IStRsSetElementInfoMapper.BaseResultMap">
+        SELECT C.*
+        FROM PHIP_STANDARD_VER_RS_FIELD D
+        LEFT JOIN (
+        SELECT PSRCSI.* FROM PHIP_ST_RS_CDA_SET_INFO PSRCSI
+        <if test="_parameter.containsKey('fkCdaId')">
+        WHERE PSRCSI.FK_CDA_ID = #{fkCdaId,jdbcType=VARCHAR}
+        </if>
+        ) S
+        ON D.FK_CDA_ID = S.FK_CDA_ID
+        LEFT JOIN (
+        SELECT PSRSEI.* FROM PHIP_ST_RS_SET_ELEMENT_INFO PSRSEI
+        <if test="_parameter.containsKey('fkSetId')">
+        WHERE PSRSEI.FK_SET_ID=#{fkSetId, jdbcType=VARCHAR}
+        </if>
+        ) C
+        ON D.FK_SET_ID = C.FK_SET_ID
+        AND D.FK_FIELD_ID = C.ID
+        AND D.FK_VERSION_ID=#{fkVersionId, jdbcType=VARCHAR}
+    </select>
+</mapper>

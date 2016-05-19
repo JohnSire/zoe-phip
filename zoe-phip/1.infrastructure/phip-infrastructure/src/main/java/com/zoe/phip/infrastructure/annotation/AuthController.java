@@ -14,6 +14,7 @@ import java.lang.annotation.*;
 public @interface AuthController {
     /**
      * 菜单编码
+     *
      * @return
      */
     MenuCode code();

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <Id descr="字典ID" path="//Id/@value"/>
+    <Code descr="字典项编码" path="//Code/@value"/>
+    <Name descr="字典项名称" path="//Name/@value"/>
+    <FkCatalogId descr="字典分类ID" path="//FkCatalogId/@value"/>
+</root>

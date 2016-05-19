@@ -1,0 +1,118 @@
+﻿<%
+var styleSection = {
+%>
+<link href='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/dist/style/layout.css")}' rel="stylesheet"/>
+<link href='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/dist/style/menu.css")}' rel="stylesheet"/>
+<%};%>
+<%
+var bodySection = {
+%>
+<div class="wrapper" id="wrapper">
+    <!--全局菜单-->
+    <a class="btn-paograms" id="btnPaograms"></a>
+    <div class="pop-menu" id="popMenu">
+        <div class="pop-box" style="width:640px;">
+            <h1 class="pop-title"><i class="icon-pop-title"></i>导航菜单</h1>
+            <i class="close" id="btnPopClose">关闭</i>
+            <div class="list-box"></div>
+        </div>
+        <i class="arrow">箭头</i>
+    </div>
+    <!--/全局菜单-->
+    <div class="header" id="header">
+        <div class="logo-outer" style="float: left">
+            <a class="logo-outer"><img alt="logo" class="img-logo" src="/assets/dist/images/logo-operation.png"/></a>
+        </div>
+        <div class="menu-top" id="topMenu">
+            <ul class="nav selc" id="nav">
+                <li class="active">
+                    <a class="sjzh">
+                        <span class="icon">
+                            <span class="nav_name">核心配置中心
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <img alt="" class="left" src="/assets/dist/images/nav_fg.png">
+                <li>
+                    <a class="ysjgl">
+                        <span class="icon">
+                            <span class="nav_name">注册管理中心
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <img alt="" class="left" src="/assets/dist/images/nav_fg.png">
+                <li>
+                    <a class="ywjk">
+                        <span class="icon">
+                            <span class="nav_name">数据管理中心
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <img alt="" class="left" src="/assets/dist/images/nav_fg.png">
+                <li>
+                    <a class="xtgl">
+                        <span class="icon">
+                        <span class="nav_name">资源管理中心
+                        </span>
+                        </span>
+                    </a>
+                </li>
+                <img alt="" class="left" src="/assets/dist/images/nav_fg.png">
+                <li>
+                    <a class="zygl">
+                        <span class="icon">
+                            <span class="nav_name">运行管控中心
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <img alt="" class="left" src="/assets/dist/images/nav_fg.png">
+            </ul>
+        </div>
+        <div class="user-info">
+            <p class="user-info-inner">
+                <a title="修改密码">
+                    <span id="LoginName" class="name"></span></a>
+                <a class="user-info-mail"><span class="user-info-radio">0</span></a>
+                <a id="exit" class="link" href="#">安全退出</a>
+            </p>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="container" id="container">
+        <div class="container-inner clearfix">
+            <div class="y-layout-subnav">
+                <ul class="lists clearfix" id="mainNav"></ul>
+            </div>
+            <div class="y-layout-sidebar" id="sidebarNav">
+                <div class="sidebar-nav"></div>
+            </div>
+            <div class="y-layout-main" id="main">
+                <iframe id="mainframe" name="mainframe" width="100%" height="100%" frameborder="0"
+                        scrolling="no"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="footer" id="footer">
+        <p class="copyright">版权所有&copy;智业软件股份有限公司</p>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/FrameManager/Layindex/index', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_default.html",{baseTitle:"人口健康信息基础平台",baseStyleSection:styleSection,baseBodySection:bodySection,baseScriptSection:scriptSection}){}
+%>
+

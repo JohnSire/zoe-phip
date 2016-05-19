@@ -1,0 +1,26 @@
+﻿<%
+var styleSection = {
+%>
+<link href='${@com.zoe.phip.web.context.UrlExpand.SetWebRoot("assets/dist/style/layout.css")}' rel="stylesheet"/>
+<%};%>
+<%
+var bodySection={
+%>
+<ul id="tree" class="ztree"></ul>
+<%};%>
+
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/SystemManager/SysMenu/menuTree', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+
+<%
+include("/WEB-INF/shared/_default.html",{baseTitle:"菜单树",baseStyleSection:styleSection,baseBodySection:bodySection,baseScriptSection:scriptSection}){}
+%>

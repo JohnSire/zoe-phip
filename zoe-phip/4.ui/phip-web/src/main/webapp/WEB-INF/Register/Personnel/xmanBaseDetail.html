@@ -1,0 +1,290 @@
+<%
+var styleSection = {
+%>
+<style type="text/css">
+    .address-select {
+        width: 145px;
+    }
+
+    .address-select .text {
+        width: 125px;
+    }
+
+    .address-select .icon-grid {
+        left: 125px;
+    }
+
+    .address-select ul {
+        width: 144px;
+    }
+</style>
+<%};%>
+
+<%
+var bodySection = {
+%>
+<div class="y-dialog-content">
+    <div class="y-dialog-title">
+        <h1 class="title">基本信息</h1>
+    </div>
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="name"><span class="text-mark">*</span>姓名：</label>
+                    <input type="text" name="name" class="text" datatype="*1-128" errormsg="姓名长度应为1~128位！"
+                           nullmsg="请填写姓名！"/>
+                </p>
+                <div class="column-three">
+                    <label class="label" for="sexCode">性别：</label>
+                    <div class="simulate-select" id="selSex">
+                        <span class="text">--请选择性别--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择性别--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="sexCode" style="display: none;">
+                    </select>
+                </div>
+                <p class="column-three">
+                    <label class="label" for="birthDate">出生日期：</label>
+                    <span class="text-line-outer">
+                    <input edittype="date" type="text" name="birthDate" class="text"/>
+                    </span>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="idNo">身份证件号：</label>
+                    <input type="text" name="idNo" class="text"
+                           nullmsg="请填写编码！"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="idNo"><span class="text-mark">*</span>编码：</label>
+                    <input type="text" name="patientId" datatype="*1-20" errormsg="请填写编码，编码最长20个字！" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="cardCode">健康卡号：</label>
+                    <input type="text" name="cardCode" class="text"/>
+                </p>
+            </li>
+            <li class="list">
+
+                <div class="column-three">
+                    <label class="label" for="marriageCode">婚姻状况：</label>
+                    <div class="simulate-select" id="selMarriage">
+                        <span class="text" title="--婚姻状况--">--婚姻状况--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--婚姻状况--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="marriageCode" style="display: none;">
+                    </select>
+                </div>
+
+                <p class="column-three">
+                    <label class="label" for="nationalityCode">民族：</label>
+                    <span class="text-line-outer" id="btnFkNationality">
+                        <input type="text" name="nationalityCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="配置"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="healthRecordNo">健康档案编号：</label>
+                    <input type="text" name="healthRecordNo" class="text"/>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="telNo">联系电话：</label>
+                    <input type="text" name="telNo" class="text"/>
+                </p>
+            </li>
+            <li class="list">
+                <div class="column-one">
+                    <label class="label" for="address">联系地址：</label>
+                    <div class="simulate-select address-select" id="selProvince">
+                        <span class="text" title="--请选择所在的省份--">--请选择所在的省份--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择所在的省份--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="provinceCode" style="display: none;">
+                    </select>
+
+                    <div class="simulate-select address-select" id="selCity">
+                        <span class="text" title="--请选择所在的城市--">--请选择所在的城市--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择所在的城市--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="cityCode" style="display: none;">
+                    </select>
+
+                    <div class="simulate-select address-select" id="selCounty">
+                        <span class="text" title="--请选择所在的县--">--请选择所在的县--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择所在的县--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="countyCode" style="display: none;">
+                    </select>
+
+                    <div class="simulate-select address-select" id="selStreet">
+                        <span class="text" title="--请选择所在的乡、镇--">--请选择所在的乡、镇--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择所在的乡、镇--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="streetCode" style="display: none;">
+                    </select>
+
+                    <div class="simulate-select address-select" id="selNeighborhood">
+                        <span class="text" title="--请选择所在的街道--">--请选择所在的街道--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择所在的街道--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="neighborhoodCode" style="display: none;">
+                    </select>
+                    <input type="text" name="houseNumber" class="text" style="width: 85px"/>
+                </div>
+            </li>
+
+
+            <li class="list">
+                <p class="column-one">
+                    <label class="label" for="address" style="visibility: hidden;">联系地址：</label>
+                    <input type="text" name="address" class="text" readonly style="width: 826px"/>
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="y-dialog-title">
+        <h1 class="title">详细信息</h1>
+    </div>
+    <div class="y-dialog-form form-little">
+        <ul class="y-dialog-lists clearfix">
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="employerName">工作单位：</label>
+                    <input type="text" name="employerName" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="employerTelNo">工作联系电话：</label>
+                    <input type="text" name="employerTelNo" class="text"/>
+                </p>
+                <div class="column-three">
+                    <label class="label" for="codeSysCode">医保类型：</label>
+                    <!--<input type="text" name="codeSysName" class="text"/>-->
+                    <div class="simulate-select" id="selCodeSys">
+                        <span class="text">--请选择医保类型--</span>
+                        <i class="icon-grid icon-grid-fold-gray"></i>
+                        <ul class="simulate-select-lists" style="display:none;">
+                            <li class="simulate-select-list">--请选择医保类型--</li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <select name="codeSysCode" style="display: none;">
+                    </select>
+
+                </div>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="postalCode">邮政编码：</label>
+                    <input type="text" name="postalCode" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="xcOrgCode">卡发放机构：</label>
+                     <span class="text-line-outer" id="btnFkXcOrg">
+                        <input type="text" name="xcOrgCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="健康卡发放机构"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="healthRecordOrgCode">建档组织机构：</label>
+                    <span class="text-line-outer" id="btnFkHealthRecordOrg">
+                        <input type="text" name="healthRecordOrgCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="建档组织机构机构"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="relName">联系人：</label>
+                    <input type="text" name="relName" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="relTelNo">联系人电话：</label>
+                    <input type="text" name="relTelNo" class="text"/>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="occupationName">职业类别：</label>
+                      <span class="text-line-outer" id="btnFkOccupation">
+                        <input type="text" name="occupationCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="配置"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
+                </p>
+            </li>
+            <li class="list">
+                <p class="column-three">
+                    <label class="label" for="orgCode">登记机构：</label>
+                     <span class="text-line-outer" id="btnFkOrg">
+                        <input type="text" name="orgCode" class="text-line"/>
+                        <span class="text-line-setting">
+                            <span class="icon-grid icon-grid-setting" title="选择登记机构"></span>
+                            <span class="text-line-content"></span>
+                        </span>
+                    </span>
+                </p>
+                <p class="column-three">
+                    <label class="label" for="assignedPersonName">作者人：</label>
+                    <input type="text" name="assignedPersonName" class="text"
+                           nullmsg="请填写作者人！"/>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+<%};%>
+<%
+var scriptSection={
+%>
+<script type="text/javascript">
+    $(function () {
+        seajs.use('{dir}/Register/Personnel/xmanBaseDetail', function (a) {
+            a.init();
+        });
+    })
+</script>
+<%};%>
+<%
+include("/WEB-INF/shared/_baseAttr.html",{title:"个人详细信息",styleSection:styleSection,bodySection:bodySection,scriptSection:scriptSection}){}
+%>
