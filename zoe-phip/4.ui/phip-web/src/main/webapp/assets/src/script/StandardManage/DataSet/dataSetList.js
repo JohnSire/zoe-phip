@@ -3,6 +3,7 @@
  */
 
 define(function (require, exports, module) {
+    var top = common.getTopWindowDom();
     var internal = {
         init: function () {
             window.toColumnList = toColumnList;
@@ -75,9 +76,41 @@ define(function (require, exports, module) {
                         height: 300
                     }
                 }
-            })
-        }
+            });
+            internal.event();
 
+        },
+        event:function(){
+            $(".btn-import").click(function () {
+                var dialogParam =
+                {
+                    title: "数据集导入",
+                    url: 'dataSet/view/import',
+                    width: 400,
+                    height: 280,
+                    buttons: [
+                        {
+                            //verifySubmit自己的验证提交状态
+                            text: "确定",
+                            verifySubmit: true,
+                            submitText: '提交中...',
+                            onclick: function (item, dialog, submited) {
+                                top.upload(submited);
+                            }
+
+                        },
+                        {
+                            text: "取消",
+                            onclick: function (item, dialog) {
+                                dialog.close();
+                            }
+                        }
+                    ]
+                }
+
+                top["show"] = common.dialog(dialogParam);
+            });
+        }
     };
 
     function toColumnList(id, name) {

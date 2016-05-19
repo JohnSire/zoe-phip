@@ -56,6 +56,11 @@ public class DataSetController extends BaseController {
     public String ToColumnDetail(HttpServletRequest request, Model model) {
         return "/StandardManage/DataSet/columnDetail";
     }
+    @RequestMapping("view/import")
+    public String ToImportDialog() {
+        return "StandardManage/DataSet/importDialog";
+    }
+
     //endregion
 
     //region 数据集 Json

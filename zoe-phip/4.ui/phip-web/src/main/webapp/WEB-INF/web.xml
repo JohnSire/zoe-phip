@@ -57,6 +57,24 @@
         <servlet-name>CdaUploadHandleServlet</servlet-name>
         <url-pattern>/servlet/CdaUploadHandleServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DataSetUploadHandleServlet</servlet-name>
+        <servlet-class>com.zoe.phip.web.controller.StandardManage.DataSetUploadHandleServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DataSetUploadHandleServlet</servlet-name>
+        <url-pattern>/servlet/DataSetUploadHandleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DataElementUploadHandleServlet</servlet-name>
+        <servlet-class>com.zoe.phip.web.controller.StandardManage.DataElementUploadHandleServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DataElementUploadHandleServlet</servlet-name>
+        <url-pattern>/servlet/DataElementUploadHandleServlet</url-pattern>
+    </servlet-mapping>
     <!-- Spring MVC servlet -->
     <servlet>
         <servlet-name>SpringMVC</servlet-name>
