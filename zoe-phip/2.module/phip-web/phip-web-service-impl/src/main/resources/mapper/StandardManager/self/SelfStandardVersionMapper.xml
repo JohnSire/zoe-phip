@@ -33,9 +33,6 @@
         <if test="state != null">
             STATE = #{state,jdbcType=DECIMAL},
         </if>
-        <if test="isNew != null">
-            IS_NEW = #{isNew,jdbcType=DECIMAL},
-        </if>
         MODIFY_AT=sysdate
 </set>
         where id = #{id,jdbcType=VARCHAR}
