@@ -43,6 +43,8 @@
                 jdbcType="VARCHAR"/>
         <result column="VERSION" property="version" javaType="java.lang.String"
                 jdbcType="VARCHAR"/>
+        <result column="FK_SOURCE_ID" property="fkSourceId" javaType="java.lang.String"
+                jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="addList" parameterType="com.zoe.phip.web.model.sdm.StRsSetElementInfo">
         INSERT INTO PHIP_ST_RS_SET_ELEMENT_INFO (
@@ -66,6 +68,7 @@
         STANDARD_CODE,
         DATA_ALLOW_VALUE,
         VERSION,
+        FK_SOURCE_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         <foreach collection="list" item="item" index="index" close="" open="" separator="union all">
             SELECT
@@ -89,6 +92,7 @@
             #{item.standardCode,jdbcType=VARCHAR},
             #{item.dataAllowValue,jdbcType=VARCHAR},
             #{item.version,jdbcType=VARCHAR},
+            #{item.fkSourceId,jdbcType=VARCHAR},
             <include refid="com.zoe.phip.module.service.baseMasterEntitySelect"/>
             FROM DUAL
         </foreach>
@@ -115,6 +119,7 @@
         STANDARD_CODE,
         DATA_ALLOW_VALUE,
         VERSION,
+        FK_SOURCE_ID,
         <include refid="com.zoe.phip.module.service.baseMasterEntityInsert"/>)
         VALUES(
         #{fkSetId,jdbcType=VARCHAR},
@@ -137,6 +142,7 @@
         #{standardCode,jdbcType=VARCHAR},
         #{dataAllowValue,jdbcType=VARCHAR},
         #{version,jdbcType=VARCHAR},
+        #{fkSourceId,jdbcType=VARCHAR},
         <include refid="com.zoe.phip.module.service.baseMasterEntitySelectDefault"/>
         )
     </insert>
@@ -215,6 +221,12 @@
                 </if>
                 <if test="item.version != null">
                     VERSION = #{item.version,jdbcType=VARCHAR},
+                </if>
+                <if test="item.state != null">
+                    STATE = #{item.state,jdbcType=DECIMAL},
+                </if>
+                <if test="item.fkSourceId != null">
+                    FK_SOURCE_ID = #{item.fkSourceId,jdbcType=VARCHAR},
                 </if>
                 MODIFY_AT=sysdate
             </set>

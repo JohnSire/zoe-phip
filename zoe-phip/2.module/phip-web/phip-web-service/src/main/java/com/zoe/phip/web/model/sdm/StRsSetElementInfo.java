@@ -120,9 +120,21 @@ public class StRsSetElementInfo extends MasterEntity {
     @Column(name = "VERSION")
     private String version;
 
+    public String getFkSourceId() {
+        return fkSourceId;
+    }
+
+    public void setFkSourceId(String fkSourceId) {
+        this.fkSourceId = fkSourceId;
+    }
+
+    @Column(name = "FK_SOURCE_ID")
+    private String fkSourceId;
+
     public String getFkSetId() {
         return this.fkSetId;
     }
+
 
 
     public void setFkSetId(String fkSetId) {

@@ -14,6 +14,6 @@ public class GeneratorTest {
         GeneratorFacade facade = new GeneratorFacade();
         facade.getGenerator().addTemplateRootDir(new File("template"));
         facade.deleteOutRootDir();
-        facade.generateByTable("PHIP_STANDARD_VERSION");
+        facade.generateByTable("PHIP_ST_RS_SET_ELEMENT_INFO");
     }
 }

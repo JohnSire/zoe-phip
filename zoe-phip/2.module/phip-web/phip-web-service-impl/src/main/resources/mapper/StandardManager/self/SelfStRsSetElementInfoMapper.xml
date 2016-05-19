@@ -72,6 +72,9 @@
             <if test="version != null">
                 VERSION = #{version,jdbcType=VARCHAR},
             </if>
+            <if test="fkSourceId != null">
+                FK_SOURCE_ID = #{fkSourceId,jdbcType=VARCHAR},
+            </if>
             MODIFY_AT=sysdate
         </set>
         where id = #{id,jdbcType=VARCHAR}

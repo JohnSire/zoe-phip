@@ -3,15 +3,19 @@ package com.zoe.phip.infrastructure.util;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.SAXValidator;
-import org.dom4j.io.XMLWriter;
+import org.dom4j.io.*;
 import org.dom4j.util.XMLErrorHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.*;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.StringWriter;
 
 /**
  * Created by zhangwenbin on 2016/4/12.
@@ -62,12 +66,8 @@ public final class XmlUtil {
             //创建一个读取工具
             //获取要校验xml文档实例
             Document document = DocumentHelper.parseText(xmlString);
-            parser.setProperty(
-                    "http://java.sun.com/xml/jaxp/properties/schemaLanguage",
-                    "http://www.w3.org/2001/XMLSchema");
-            parser.setProperty(
-                    "http://java.sun.com/xml/jaxp/properties/schemaSource",
-                    "file:" + xsdFileName);
+            parser.setProperty("http://java.sun.com/xml/jaxp/properties/schemaLanguage", "http://www.w3.org/2001/XMLSchema");
+            parser.setProperty("http://java.sun.com/xml/jaxp/properties/schemaSource", "file:" + xsdFileName);
             //创建一个SAXValidator校验工具，并设置校验工具的属性
             SAXValidator validator = new SAXValidator(parser.getXMLReader());
             //设置校验工具的错误处理器，当发生错误时，可以从处理器对象中得到错误信息。
@@ -84,7 +84,7 @@ public final class XmlUtil {
                     buf.append(node.asXML());
                     buf.append(System.getProperty("line.separator"));
                 }
-                logger.error("错误:"+buf.toString());
+                logger.error("错误:" + buf.toString());
                 return buf.toString();
             } else {
                 logger.info("XML文件通过XSD文件校验成功!");
@@ -110,12 +110,44 @@ public final class XmlUtil {
 
 
     public static void main(String[] args) {
-        StringBuffer buffer= new StringBuffer();
-        for(int i=0;i<10;i++){
-                buffer.append("jkjk");
+        StringBuffer buffer = new StringBuffer();
+        for (int i = 0; i < 10; i++) {
+            buffer.append("jkjk");
             buffer.append("-9-");
         }
-        String s= "错误的：+"+buffer.toString();
+        String s = "错误的：+" + buffer.toString();
         System.out.println(s);
+    }
+
+    public static String getHtmlString(String xmlString, String xslString) throws Exception {
+        SAXReader reader = new SAXReader();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(xmlString.getBytes());
+        Document document = reader.read(inputStream);
+        Document transformerDoc = transformerDocument(document, xslString);
+        return write2String(transformerDoc);
+    }
+
+    private static Document transformerDocument(Document document, String xslString) throws Exception {
+        TransformerFactory factory = TransformerFactory.newInstance();
+        Document transformerDoc = null;
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(xslString.getBytes());
+        Transformer transformer = factory.newTransformer(new StreamSource(inputStream));
+        DocumentSource docSource = new DocumentSource(document);
+        DocumentResult docResult = new DocumentResult();
+        transformer.transform(docSource, docResult);
+        transformerDoc = docResult.getDocument();
+        return transformerDoc;
+    }
+
+    private static String write2String(Document transformDoc) throws Exception {
+        StringWriter writer = new StringWriter();
+        OutputFormat format = OutputFormat.createPrettyPrint();
+        format.setEncoding("UTF-8");
+        format.setXHTML(true);
+        HTMLWriter htmlWriter = new HTMLWriter(writer, format);
+        format.setExpandEmptyElements(false);
+        htmlWriter.write(transformDoc);
+        htmlWriter.flush();
+        return writer.toString();
     }
 }
