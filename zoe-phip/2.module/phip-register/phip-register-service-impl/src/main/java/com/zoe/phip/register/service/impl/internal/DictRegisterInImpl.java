@@ -31,10 +31,10 @@ import java.util.Map;
 @Service(interfaceClass = IDictRegisterIn.class, proxy = "sdpf", protocol = {"dubbo"}, dynamic = true)
 @ErrorMessage(code = "001", message = "由于内容重复注册，注册失败")
 @ErrorMessage(code = "002", message = "由于更新内容不存在，更新失败")
-@ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败！")
-@ErrorMessage(code = "004", message = "由于删除字典分类（字典）存在下级分类（字典项），删除失败！")
-@ErrorMessage(code = "005", message = "由于删除内容不存在，删除失败！")
-@ErrorMessage(code = "006", message = "由于更新内容的编码已存在，更新失败！")
+@ErrorMessage(code = "003", message = "由于查询内容不存在，查询失败")
+@ErrorMessage(code = "004", message = "由于删除字典分类（字典）存在下级分类（字典项），删除失败")
+@ErrorMessage(code = "005", message = "由于删除内容不存在，删除失败")
+@ErrorMessage(code = "006", message = "由于更新内容的编码已存在，更新失败")
 public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCatalogMapper> implements IDictCatalogMapper {
 
     @Autowired
@@ -147,8 +147,8 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public PageList<DictCatalog> dictCatalogTreeQuery(String codes, String key) {
         PageList<DictCatalog> pageList = new PageList<DictCatalog>();
         String[] array = UtilString.commaDelimitedListToStringArray(codes);
-        Map<String,Object> paras = new HashMap<String, Object>();
-        if(array.length > 0) {
+        Map<String, Object> paras = new HashMap<String, Object>();
+        if (array.length > 0) {
             paras.put("codes", array);
         }
         if (!StringUtil.isNullOrWhiteSpace(key)) {
@@ -274,7 +274,7 @@ public class DictRegisterInImpl extends BaseInServiceImpl<DictCatalog, IDictCata
     public int updateDictWithFkCatalog(String pId, String catalogIds) {
         String[] ids = UtilString.commaDelimitedListToStringArray(catalogIds);
         Map<String, Object> paras = new HashMap<String, Object>();
-        if(ids.length > 0) {
+        if (ids.length > 0) {
             paras.put("catalogIds", ids);
             paras.put("pId", pId);
             return getMapper().updateDictWithFkCatalog(paras);

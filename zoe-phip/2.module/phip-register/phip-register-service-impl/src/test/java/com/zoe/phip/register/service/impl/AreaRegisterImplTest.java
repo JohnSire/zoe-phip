@@ -1,17 +1,9 @@
 package com.zoe.phip.register.service.impl;
 
 import com.zoe.phip.register.BaseTest;
-import com.zoe.phip.register.model.AreaBaseInfo;
-import com.zoe.phip.register.service.external.IAreaRegister;
 import com.zoe.phip.register.service.impl.external.AreaRegisterImpl;
-import com.zoe.phip.register.util.RegisterType;
-import com.zoe.phip.module.service.util.RegisterUtil;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by zengjiyang on 2016/4/11.
@@ -89,7 +81,7 @@ public class AreaRegisterImplTest extends BaseTest {
     public void testAreaHistoryRegistryQuery() throws Exception {
         String doc = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" +
                 "<data>\n" +
-                "    <HistoryId value=\"9BC2CEB4B2EE47488703F5A45EB998E0\"></HistoryId>\n" +
+                "    <HistoryId value=\"9BC2CEB4B2EE47488703F5A45EB998E1\"></HistoryId>\n" +
                 "</data>";
         String result = areaRegister.areaHistoryRegistryQuery(doc);
         System.out.println(result);

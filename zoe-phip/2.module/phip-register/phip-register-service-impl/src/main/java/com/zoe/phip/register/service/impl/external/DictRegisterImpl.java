@@ -6,14 +6,14 @@ import com.zoe.phip.infrastructure.exception.BusinessException;
 import com.zoe.phip.infrastructure.util.SafeExecuteUtil;
 import com.zoe.phip.infrastructure.util.StringUtil;
 import com.zoe.phip.module.service.entity.base.Acknowledgement;
+import com.zoe.phip.module.service.util.ProcessXmlUtil;
+import com.zoe.phip.module.service.util.RegisterUtil;
 import com.zoe.phip.module.service.util.XmlBeanUtil;
 import com.zoe.phip.register.model.DictCatalog;
 import com.zoe.phip.register.model.DictItem;
 import com.zoe.phip.register.service.external.IDictRegister;
 import com.zoe.phip.register.service.impl.internal.DictRegisterInImpl;
-import com.zoe.phip.module.service.util.ProcessXmlUtil;
 import com.zoe.phip.register.util.RegisterType;
-import com.zoe.phip.module.service.util.RegisterUtil;
 import org.dom4j.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +42,7 @@ public class DictRegisterImpl implements IDictRegister {
         DictCatalog catalog = new DictCatalog();
         try {
             catalog = XmlBeanUtil.toBean(document, DictCatalog.class, ProcessXmlUtil.getAdapterDom(catalogAdapterPath));
-            if(StringUtil.isNullOrWhiteSpace(catalog.getCode()) || StringUtil.isNullOrWhiteSpace(catalog.getName())){
+            if (StringUtil.isNullOrWhiteSpace(catalog.getCode()) || StringUtil.isNullOrWhiteSpace(catalog.getName())) {
                 errorMsg = "必填字段值为空，注册失败";
                 return RegisterUtil.responseFailed(catalog, errorMsg, RegisterType.DICT_CATALOG_ADD_ERROR);
             }
@@ -69,7 +69,7 @@ public class DictRegisterImpl implements IDictRegister {
         try {
             catalog = XmlBeanUtil.toBean(document, DictCatalog.class, ProcessXmlUtil.getAdapterDom(catalogAdapterPath));
             catalog.setId(document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictCatalog.catalogId")).getText().trim());
-            if(StringUtil.isNullOrWhiteSpace(catalog.getCode()) || StringUtil.isNullOrWhiteSpace(catalog.getName())){
+            if (StringUtil.isNullOrWhiteSpace(catalog.getCode()) || StringUtil.isNullOrWhiteSpace(catalog.getName())) {
                 errorMsg = "必填字段值为空，更新失败";
                 return RegisterUtil.responseFailed(catalog, errorMsg, RegisterType.DICT_CATALOG_ADD_ERROR);
             }
@@ -141,7 +141,7 @@ public class DictRegisterImpl implements IDictRegister {
         DictItem item = new DictItem();
         try {
             item = XmlBeanUtil.toBean(document, DictItem.class, ProcessXmlUtil.getAdapterDom(itemAdapterPath));
-            if(StringUtil.isNullOrWhiteSpace(item.getCode()) || StringUtil.isNullOrWhiteSpace(item.getName())){
+            if (StringUtil.isNullOrWhiteSpace(item.getCode()) || StringUtil.isNullOrWhiteSpace(item.getName())) {
                 errorMsg = "必填字段值为空，注册失败";
                 return RegisterUtil.responseFailed(item, errorMsg, RegisterType.DICT_ITEM_ADD_ERROR);
             }
@@ -168,7 +168,7 @@ public class DictRegisterImpl implements IDictRegister {
         try {
             item = XmlBeanUtil.toBean(document, DictItem.class, ProcessXmlUtil.getAdapterDom(itemAdapterPath));
             item.setId(document.selectSingleNode(PropertyPlaceholder.getProperty("queryDictItem.itemId")).getText().trim());
-            if(StringUtil.isNullOrWhiteSpace(item.getCode()) || StringUtil.isNullOrWhiteSpace(item.getName())){
+            if (StringUtil.isNullOrWhiteSpace(item.getCode()) || StringUtil.isNullOrWhiteSpace(item.getName())) {
                 errorMsg = "必填字段值为空，更新失败";
                 return RegisterUtil.responseFailed(item, errorMsg, RegisterType.DICT_ITEM_ADD_ERROR);
             }
