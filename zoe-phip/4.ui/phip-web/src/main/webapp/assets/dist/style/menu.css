@@ -62,28 +62,28 @@
     background: url(/assets/dist/images/menu/iocn_yxgk.png) no-repeat center 0;
 }
 
-#wrapper .header .menu-top ul.nav li.hover {
+#wrapper .header .menu-top ul.nav li.active {
     border-top: 1px #1567a3 solid;
 }
 
-#wrapper .header .menu-top ul.nav li.hover a {
+#wrapper .header .menu-top ul.nav li.active a {
     background: url(/assets/dist/images/menu/nav_xz_bg.gif) repeat-x;
     border-left: 1px #FFF solid;
     border-right: 1px #FFF solid;
 }
 
-#wrapper .header .menu-top ul.nav li.hover a:hover {
+#wrapper .header .menu-top ul.nav li.active a:hover {
     background: url(/assets/dist/images/menu/nav_xz_bg.gif) repeat-x;
 }
 
-#wrapper .header .menu-top ul.nav li.hover a .nav_name {
+#wrapper .header .menu-top ul.nav li.active a .nav_name {
     display: block;
     color: #146f9c;
     position: relative;
     font-weight: bold;
 }
 
-#wrapper .header .menu-top ul.nav li.hover a .nav_name .nav_name_b {
+#wrapper .header .menu-top ul.nav li.active a .nav_name .nav_name_b {
     display: block;
     color: #146f9c;
     position: absolute;
@@ -92,23 +92,23 @@
     font-weight: bold;
 }
 
-#wrapper .header .menu-top ul.nav li.hover a.sjzh span.icon {
+#wrapper .header .menu-top ul.nav li.active a.sjzh span.icon {
     background: url(/assets/dist/images/menu/iocn_hxpz.png) no-repeat center -60px;
 }
 
-#wrapper .header .menu-top ul.nav li.hover a.ywjk span.icon {
+#wrapper .header .menu-top ul.nav li.active a.ywjk span.icon {
     background: url(/assets/dist/images/menu/iocn_aqkz.png) no-repeat center -60px;
 }
 
-#wrapper .header .menu-top ul.nav li.hover a.ysjgl span.icon {
+#wrapper .header .menu-top ul.nav li.active a.ysjgl span.icon {
     background: url(/assets/dist/images/menu/iocn_yhgl.png) no-repeat center -60px;
 }
 
-#wrapper .header .menu-top ul.nav li.hover a.zygl span.icon {
+#wrapper .header .menu-top ul.nav li.active a.zygl span.icon {
     background: url(/assets/dist/images/menu/iocn_zygl.png) no-repeat center -60px;
 }
 
-#wrapper .header .menu-top ul.nav li.hover a.xtgl span.icon {
+#wrapper .header .menu-top ul.nav li.active a.xtgl span.icon {
     background: url(/assets/dist/images/menu/iocn_yxgk.png) no-repeat center -60px;
 }
 
