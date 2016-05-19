@@ -155,14 +155,34 @@ public class OrganizationRegisterImpl implements IOrganizationRegister {
             acknowledgement.setMsgId(strMsgId);
             acknowledgement.setCreateTime(strCreateTime);
             if (strResult.contains("error:数据集内容验证错误")) {
-                acknowledgement.setTypeCode("AE");
                 acknowledgement.setText(strResult + ",查询失败");
-                return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, acknowledgement);
+                OrgDeptInfo orgDeptInfo = new OrgDeptInfo();
+                orgDeptInfo.setCreationTime(DateUtil.stringToDateTime(strCreateTime));
+                orgDeptInfo.setDivisionRoot(strDivisionRoot);
+                orgDeptInfo.setMsgId(strMsgId);
+                orgDeptInfo.setDeptCode(strDeptId);
+                orgDeptInfo.setDeptName(strDeptName);
+                orgDeptInfo.setAcknowledgement(acknowledgement);
+                return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, orgDeptInfo);
             }
             Map<String, Object> map = new TreeMap<>();
             map.clear();
-            map.put("deptCode", strDeptId);
-            map.put("deptName", strDeptName);
+            if(!StringUtil.isNullOrWhiteSpace(strDeptId))
+                map.put("deptCode", strDeptId);
+            if(!StringUtil.isNullOrWhiteSpace(strDeptName))
+                map.put("deptName", strDeptName);
+            if(StringUtil.isNullOrWhiteSpace(strDeptId)&&StringUtil.isNullOrWhiteSpace(strDeptName)){
+                acknowledgement.setText("机构名称和机构代码为空！");
+                OrgDeptInfo orgDeptInfo = new OrgDeptInfo();
+                orgDeptInfo.setCreationTime(DateUtil.stringToDateTime(strCreateTime));
+                orgDeptInfo.setDivisionRoot(strDivisionRoot);
+                orgDeptInfo.setMsgId(strMsgId);
+                orgDeptInfo.setDeptCode(strDeptId);
+                orgDeptInfo.setDeptName(strDeptName);
+                orgDeptInfo.setAcknowledgement(acknowledgement);
+                return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_ERROR, orgDeptInfo);
+            }
+
             OrgDeptInfo result = organizationRegisterIn.organizationDetailQuery(map);
 
             return RegisterUtil.registerMessage(RegisterType.ORG_QUERY_SUCCESS, result);

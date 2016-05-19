@@ -45,7 +45,7 @@ public class OrganizationRegisterTest extends BaseTest {
                 "        <subject1 typeCode=\"SBJ\">\n" +
                 "          <assignedEntity classCode=\"ASSIGNED \">\n" +
                 "            <!--医疗卫生机构（科室）标识-科室为例-->\n" +
-                "            <id root=\"2.16.156.10011.1.26\" extension=\"1234567890\"/>\n" +
+                "            <id root=\"2.16.156.10011.1.26\" extension=\"12345678900\"/>\n" +
                 "            <!--医疗卫生机构（科室）类别-科室为例-->\n" +
                 "            <code code=\"A03.01\" displayName=\" 呼吸内科专业\"\n" +
                 "            codeSystem=\"2.16.156.10011.2.3.2.62\" codeSystemName=\"医疗卫生机构业务科室分类与代码表\"/>\n" +
@@ -65,7 +65,7 @@ public class OrganizationRegisterTest extends BaseTest {
                 "            <assignedPrincipalOrganization classCode=\"ORG\"\n" +
                 "            determinerCode=\"INSTANCE\">\n" +
                 "              <!--医疗卫生机构（科室）实体名称-->\n" +
-                "              <name></name>\n" +
+                "              <name>fgtttf</name>\n" +
                 "              <asAffiliate classCode=\"AFFL\">\n" +
                 "                <code/>\n" +
                 "                <effectiveTime/>\n" +
@@ -193,8 +193,11 @@ public class OrganizationRegisterTest extends BaseTest {
                 "</PRPM_IN403010UV01>";
 
 
-      //String result = impl.addOrganization(add);
-        String result = impl.organizationDetailQuery("123");
+    //  String result = impl.addOrganization(add);
+
+        String result = impl.updateOrganization(update);
+
+     //   String result = impl.organizationDetailQuery(update);
 
         System.out.println(result);
     }

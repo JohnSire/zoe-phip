@@ -24,7 +24,7 @@
     </targetMessage>
     <acknowledgementDetail>
       <!--处理结果说明-->
-      <text>由于查询内容不存在，查询失败</text>
+      <text> ${Model.acknowledgement.text}</text>
     </acknowledgementDetail>
   </acknowledgement>
   <%if(Model.deptCode!=null){%>
