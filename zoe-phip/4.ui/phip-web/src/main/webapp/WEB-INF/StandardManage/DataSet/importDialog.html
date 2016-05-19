@@ -21,7 +21,7 @@ var baseStyleSection = {
 <%
 var baseBodySection = {
 %>
-<form id="baseAttrForm" method="post" action="/servlet/DataElementUploadHandleServlet" enctype="multipart/form-data">
+<form id="baseAttrForm" method="post" action="/servlet/DataSetUploadHandleServlet" enctype="multipart/form-data">
     <span class="text-up-tips tips-error" style="display:none;"><i class="text-up-tips-arrow arrow-red"></i><span
             class="msg"></span></span>
     <div class="y-dialog-content">
@@ -30,12 +30,12 @@ var baseBodySection = {
                 <li class="list">
 
 
-                    <p class="column">
-                        <label class="label"><span class="text-mark">*</span>文件：</label>  </p>
-                    <input type="file" id="choosefile" name="file" class="uploadlay">
-                    <input type="text" class="text" name="" id="clientPath" readonly="readonly" datatype="*"
-                           errormsg="请选择文件！" value='请选择文件'>
-                    <input type="button" class="btn-dialog-gray" id="openFile" value="浏览">
+                        <p class="column">
+                            <label class="label"><span class="text-mark">*</span>文件：</label>  </p>
+                        <input type="file" id="choosefile" name="file" class="uploadlay">
+                        <input type="text" class="text" name="" id="clientPath" readonly="readonly" datatype="*"
+                               errormsg="请选择文件！" value='请选择文件'>
+                        <input type="button" class="btn-dialog-gray" id="openFile" value="浏览">
 
 
                 </li>
@@ -50,7 +50,7 @@ var baseScriptSection={
 <script src='${@com.zoe.phip.web.context.UrlExpand.SetStaticRoot("lib/jquery/jquery.form.js")}'></script>
 <script type="text/javascript">
     $(function () {
-        seajs.use('{dir}/StandardManage/DataElement/importDialog', function (a) {
+        seajs.use('{dir}/StandardManage/DataSet/importDialog', function (a) {
             a.init();
         });
     })
