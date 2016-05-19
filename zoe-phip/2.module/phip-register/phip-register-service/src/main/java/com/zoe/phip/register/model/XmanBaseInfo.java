@@ -293,6 +293,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 病人ID
      */
     @Column(name = "PATIENT_ID")
+    @ValidateNotBlank(message = "病人ID不能为空！")
     private String patientId;
 
     /**
