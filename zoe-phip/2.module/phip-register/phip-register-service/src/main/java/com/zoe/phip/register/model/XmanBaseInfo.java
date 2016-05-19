@@ -7,6 +7,7 @@ package com.zoe.phip.register.model;
 
 import com.zoe.phip.infrastructure.annotation.XPath;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateIDCard;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotBlank;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNumberPlusMinus;
 import com.zoe.phip.module.service.entity.base.RegisterEntity;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,6 +31,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 注册机构编码
      */
     @Column(name = "ORG_CODE")
+    @ValidateNotBlank(message = "注册机构编码不能为空！")
     private String orgCode;
 
     /**
@@ -50,6 +52,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 本人姓名
      */
     @Column(name = "NAME")
+    @ValidateNotBlank(message = "本人姓名不能为空！")
     private String name;
 
     /**
@@ -91,6 +94,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 工作单位联系方式
      */
     @Column(name = "EMPLOYER_TEL_NO")
+    @ValidateNumberPlusMinus(message = "工作单位联系方式不合法！")
     private String employerTelNo;
 
 
@@ -98,6 +102,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 联系电话
      */
     @Column(name = "TEL_NO")
+    @ValidateNumberPlusMinus(message = "联系电话不合法！")
     private String telNo;
 
     /**
@@ -232,6 +237,7 @@ public class XmanBaseInfo extends RegisterEntity {
      * 作者职工代�
      */
     @Column(name = "ASSIGNED_PERSON_CODE")
+    @ValidateNotBlank(message = "作者职工代码不能为空！")
     private String assignedPersonCode;
 
     /**
@@ -245,6 +251,7 @@ public class XmanBaseInfo extends RegisterEntity {
      */
     @Column(name = "CREATE_TIME")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @ValidateNotBlank(message = "建档时间不为空！")
     private Date createTime;
 
 
@@ -253,6 +260,7 @@ public class XmanBaseInfo extends RegisterEntity {
      */
     @Column(name = "EFFECTIVE_TIME")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @ValidateNotBlank(message = "患者登记时间不为空！")
     private Date effectiveTime;
 
     public Date getEffectiveTime() {
