@@ -8,6 +8,7 @@ package com.zoe.phip.register.model;
 import com.zoe.phip.infrastructure.annotation.XPath;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateIDCard;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotBlank;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotNull;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNumberPlusMinus;
 import com.zoe.phip.module.service.entity.base.RegisterEntity;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -251,7 +252,7 @@ public class XmanBaseInfo extends RegisterEntity {
      */
     @Column(name = "CREATE_TIME")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @ValidateNotBlank(message = "建档时间不为空！")
+    @ValidateNotNull(message = "建档时间不为空！")
     private Date createTime;
 
 
@@ -260,7 +261,7 @@ public class XmanBaseInfo extends RegisterEntity {
      */
     @Column(name = "EFFECTIVE_TIME")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @ValidateNotBlank(message = "患者登记时间不为空！")
+    @ValidateNotNull(message = "患者登记时间不为空！")
     private Date effectiveTime;
 
     public Date getEffectiveTime() {

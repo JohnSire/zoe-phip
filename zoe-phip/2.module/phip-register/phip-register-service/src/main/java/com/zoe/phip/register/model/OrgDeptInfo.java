@@ -7,6 +7,7 @@ package com.zoe.phip.register.model;
 
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateEmail;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotBlank;
+import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNotNull;
 import com.zoe.phip.infrastructure.myvalidator.annotation.ValidateNumberPlusMinus;
 import com.zoe.phip.infrastructure.util.XmlUtil;
 import com.zoe.phip.module.service.entity.base.RegisterEntity;
@@ -103,7 +104,7 @@ public class OrgDeptInfo extends RegisterEntity {
      */
     @Column(name = "CREATION_TIME")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @ValidateNotBlank(message = "建档时间不为空")
+    @ValidateNotNull(message = "建档时间不为空")
     private Date creationTime;
 
     /**
